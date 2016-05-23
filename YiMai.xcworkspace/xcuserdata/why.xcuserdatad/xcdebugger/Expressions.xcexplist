@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "PagePersonalBodyView.(DrawAnOperationPanel in _5FB8C994EA2930BDEF9C8AA24CEB93A2)(String, icon : String, title : String) -&gt; YMTouchableView:PagePersonalBodyView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "icon">
+            </PersistentString>
+            <PersistentString
+               value = "rightArrow.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PagePersonalBodyView.(DrawAnOperationPanel in _5FB8C994EA2930BDEF9C8AA24CEB93A2)(String, iconName : String, title : String) -&gt; YMTouchableView:PagePersonalBodyView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "iconName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static YMLayout.GetStoryboardControllerByName(String) -&gt; UIViewController?:YMLayout.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "storyboardName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PageIndexBodyView.(InitContactButtons in _1757D75444C82828C50EDE6B254445EC)() -&gt; ():PageIndexBodyView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ContactArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PagePersonalBodyView.(DrawOperations in _5FB8C994EA2930BDEF9C8AA24CEB93A2)() -&gt; ():PagePersonalBodyView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "BodyTopPadding">
+            </PersistentString>
+            <PersistentString
+               value = "OperationArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PageLoginActions.PageJumpTo(YMButton) -&gt; ():PageLoginActions.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.NavController">
+            </PersistentString>
+            <PersistentString
+               value = "sender.UserStringData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

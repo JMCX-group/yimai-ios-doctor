@@ -1,0 +1,6 @@
+framework module Pods_YiMai {
+  umbrella header "Pods-YiMai-umbrella.h"
+
+  export *
+  module * { export * }
+}

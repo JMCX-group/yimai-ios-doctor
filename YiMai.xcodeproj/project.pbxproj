@@ -1,0 +1,1185 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		674EEDC634635DB13AEB3300 /* Pods_YiMai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A556489D24098750735AC565 /* Pods_YiMai.framework */; };
+		960606FA1CE591CC00AAFC07 /* YMAPIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */; };
+		960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */; };
+		960606FC1CE591CC00AAFC07 /* YMNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */; };
+		960607001CE97CC500AAFC07 /* YMModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606FF1CE97CC500AAFC07 /* YMModelView.swift */; };
+		9612DB3C1CC8B5DB00262D2E /* PageIndex.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9612DB3E1CC8B5DB00262D2E /* PageIndex.storyboard */; };
+		9612DB401CC8B75300262D2E /* PageIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB3F1CC8B75300262D2E /* PageIndexViewController.swift */; };
+		9612DB421CC8B7C500262D2E /* PageIndexTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB411CC8B7C500262D2E /* PageIndexTopView.swift */; };
+		9612DB441CC8B86400262D2E /* PageIndexBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB431CC8B86400262D2E /* PageIndexBodyView.swift */; };
+		9612DB461CC8B96B00262D2E /* PageIndexActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB451CC8B96B00262D2E /* PageIndexActions.swift */; };
+		9612DB481CC9D65C00262D2E /* PageCommonBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB471CC9D65C00262D2E /* PageCommonBottomView.swift */; };
+		9612DB4A1CC9EA8600262D2E /* YMCurrentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB491CC9EA8600262D2E /* YMCurrentPage.swift */; };
+		9612DB5F1CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB511CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift */; };
+		9612DB601CC9F71F00262D2E /* PageRegisterInputHospital.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9612DB521CC9F71F00262D2E /* PageRegisterInputHospital.storyboard */; };
+		9612DB611CC9F71F00262D2E /* PageRegisterInputHospitalBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB551CC9F71F00262D2E /* PageRegisterInputHospitalBodyView.swift */; };
+		9612DB621CC9F71F00262D2E /* PageRegisterInputHospitalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB561CC9F71F00262D2E /* PageRegisterInputHospitalViewController.swift */; };
+		9612DB631CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB591CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift */; };
+		9612DB641CC9F71F00262D2E /* PageRegisterPersonalInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9612DB5A1CC9F71F00262D2E /* PageRegisterPersonalInfo.storyboard */; };
+		9612DB651CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB5D1CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift */; };
+		9612DB661CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB5E1CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift */; };
+		9612DB6D1CC9F75300262D2E /* PagePersonal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9612DB6F1CC9F75300262D2E /* PagePersonal.storyboard */; };
+		9612DB711CC9F76600262D2E /* PagePersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB701CC9F76600262D2E /* PagePersonalViewController.swift */; };
+		9612DB731CC9F7FA00262D2E /* PagePersonalBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB721CC9F7FA00262D2E /* PagePersonalBodyView.swift */; };
+		9612DB751CC9F85900262D2E /* PagePersonalTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB741CC9F85900262D2E /* PagePersonalTopView.swift */; };
+		9612DB771CC9F88600262D2E /* PagePersonalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB761CC9F88600262D2E /* PagePersonalActions.swift */; };
+		9619EF511CC1DB9600F69CBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF501CC1DB9600F69CBC /* AppDelegate.swift */; };
+		9619EF531CC1DB9600F69CBC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF521CC1DB9600F69CBC /* ViewController.swift */; };
+		9619EF561CC1DB9600F69CBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9619EF541CC1DB9600F69CBC /* Main.storyboard */; };
+		9619EF591CC1DB9600F69CBC /* YiMai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF571CC1DB9600F69CBC /* YiMai.xcdatamodeld */; };
+		9619EF5B1CC1DB9600F69CBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9619EF5A1CC1DB9600F69CBC /* Assets.xcassets */; };
+		9619EF5E1CC1DB9600F69CBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9619EF5C1CC1DB9600F69CBC /* LaunchScreen.storyboard */; };
+		9619EF781CC1FF0400F69CBC /* YMCommonStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF771CC1FF0400F69CBC /* YMCommonStrings.swift */; };
+		9619EF7A1CC1FF1500F69CBC /* YMLoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF791CC1FF1500F69CBC /* YMLoginStrings.swift */; };
+		9619EF7C1CC1FF2400F69CBC /* YMIndexStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF7B1CC1FF2400F69CBC /* YMIndexStrings.swift */; };
+		9619EF7E1CC1FF3A00F69CBC /* YMRegisterStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF7D1CC1FF3A00F69CBC /* YMRegisterStrings.swift */; };
+		9619EF801CC1FF4E00F69CBC /* YMLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF7F1CC1FF4E00F69CBC /* YMLayout.swift */; };
+		961FE8C41CEEF6D0002785B9 /* PageYiMai.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 961FE8C61CEEF6D0002785B9 /* PageYiMai.storyboard */; };
+		961FE8C81CEEF6F7002785B9 /* PageYiMaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FE8C71CEEF6F7002785B9 /* PageYiMaiViewController.swift */; };
+		961FE8CA1CEEF768002785B9 /* PageYiMaiTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FE8C91CEEF768002785B9 /* PageYiMaiTopView.swift */; };
+		961FE8CC1CEEFAE6002785B9 /* PageYiMaiActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FE8CB1CEEFAE6002785B9 /* PageYiMaiActions.swift */; };
+		962076D01CC5ECA9002083FA /* PageRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 962076D21CC5ECA9002083FA /* PageRegister.storyboard */; };
+		962076D41CC5ECCA002083FA /* PageRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962076D31CC5ECCA002083FA /* PageRegisterViewController.swift */; };
+		962076D61CC5F196002083FA /* PageRegisterBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962076D51CC5F196002083FA /* PageRegisterBodyView.swift */; };
+		962076D81CC6024F002083FA /* PageRegisterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962076D71CC6024F002083FA /* PageRegisterActions.swift */; };
+		962076EF1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962076EE1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift */; };
+		962076F01CC72598002083FA /* PageRegisterSelectHospital.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 962076F21CC72598002083FA /* PageRegisterSelectHospital.storyboard */; };
+		962076F41CC72788002083FA /* YMRegisterSelectHospitalStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962076F31CC72788002083FA /* YMRegisterSelectHospitalStrings.swift */; };
+		962076F61CC7291C002083FA /* PageRegisterSelectHospitalBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962076F51CC7291C002083FA /* PageRegisterSelectHospitalBodyView.swift */; };
+		962076F81CC7292D002083FA /* PageRegisterSelectHospitalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962076F71CC7292D002083FA /* PageRegisterSelectHospitalActions.swift */; };
+		9624936D1CED5CAA007A9556 /* YMValueValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9624936C1CED5CAA007A9556 /* YMValueValidator.swift */; };
+		9624936F1CED7235007A9556 /* YMCoreDataKeyStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9624936E1CED7235007A9556 /* YMCoreDataKeyStrings.swift */; };
+		96331AF21CC7729900E53125 /* YMRegisterInputSelectorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331AF11CC7729900E53125 /* YMRegisterInputSelectorStrings.swift */; };
+		96331B091CC8762600E53125 /* YMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B041CC8762600E53125 /* YMButton.swift */; };
+		96331B0B1CC8762600E53125 /* YMClassesAndProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */; };
+		96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B071CC8762600E53125 /* YMTextInput.swift */; };
+		96637A721CC206A900DBD1CF /* PageLoginActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A711CC206A900DBD1CF /* PageLoginActions.swift */; };
+		96637A751CC22DE000DBD1CF /* YMSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A741CC22DE000DBD1CF /* YMSizes.swift */; };
+		96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A771CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift */; };
+		96637A7A1CC240C800DBD1CF /* YMColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A791CC240C800DBD1CF /* YMColors.swift */; };
+		96637A7D1CC24A6100DBD1CF /* PageLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96637A7F1CC24A6100DBD1CF /* PageLogin.storyboard */; };
+		96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A821CC24B4F00DBD1CF /* PageLoginViewController.swift */; };
+		96637A851CC24BCD00DBD1CF /* PageLoginBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A841CC24BCD00DBD1CF /* PageLoginBodyView.swift */; };
+		96637A871CC24D3300DBD1CF /* PageCommonTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A861CC24D3300DBD1CF /* PageCommonTopView.swift */; };
+		96637A8A1CC2515E00DBD1CF /* YMCommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A891CC2515E00DBD1CF /* YMCommonActions.swift */; };
+		9672FB0C1CCDD72400BC7E40 /* YMTouchableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB0B1CCDD72400BC7E40 /* YMTouchableView.swift */; };
+		9672FB131CCF133C00BC7E40 /* PageFace2FaceInfoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB121CCF133C00BC7E40 /* PageFace2FaceInfoInputViewController.swift */; };
+		9672FB141CCF136B00BC7E40 /* PageFace2FaceInfoInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9672FB161CCF136B00BC7E40 /* PageFace2FaceInfoInput.storyboard */; };
+		9672FB1A1CCF22F300BC7E40 /* PageFace2FaceInfoInputActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB191CCF22F300BC7E40 /* PageFace2FaceInfoInputActions.swift */; };
+		9672FB1C1CCF276A00BC7E40 /* PageFace2FaceInfoInputBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB1B1CCF276A00BC7E40 /* PageFace2FaceInfoInputBodyView.swift */; };
+		9672FB1E1CCF4D3100BC7E40 /* YMFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB1D1CCF4D3100BC7E40 /* YMFonts.swift */; };
+		9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB1F1CCF5E8400BC7E40 /* YMSelectors.swift */; };
+		9672FB271CD0610200BC7E40 /* PageFace2FaceQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB261CD0610200BC7E40 /* PageFace2FaceQRViewController.swift */; };
+		9672FB281CD0623100BC7E40 /* PageFace2FaceQR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9672FB2A1CD0623100BC7E40 /* PageFace2FaceQR.storyboard */; };
+		9672FB2C1CD067A300BC7E40 /* PageFace2FaceQRActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB2B1CD067A300BC7E40 /* PageFace2FaceQRActions.swift */; };
+		9672FB2E1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB2D1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift */; };
+		9672FB341CD1C2BE00BC7E40 /* PageMessageList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9672FB361CD1C2BE00BC7E40 /* PageMessageList.storyboard */; };
+		9672FB381CD1C2EC00BC7E40 /* PageMessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB371CD1C2EC00BC7E40 /* PageMessageListViewController.swift */; };
+		9672FB3A1CD1C31B00BC7E40 /* PageMessageListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB391CD1C31B00BC7E40 /* PageMessageListActions.swift */; };
+		9672FB3C1CD1C35500BC7E40 /* PageMessageListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB3B1CD1C35500BC7E40 /* PageMessageListBodyView.swift */; };
+		9672FB421CD2222200BC7E40 /* PageMyAdmissionsList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9672FB441CD2222200BC7E40 /* PageMyAdmissionsList.storyboard */; };
+		9672FB461CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB451CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift */; };
+		9672FB481CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB471CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift */; };
+		9672FB4A1CD222C100BC7E40 /* PageMyAdmissionsListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */; };
+		9672FB4C1CD3439400BC7E40 /* YMDatetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.debug.xcconfig"; sourceTree = "<group>"; };
+		35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.release.xcconfig"; sourceTree = "<group>"; };
+		960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAPIUtility.swift; sourceTree = "<group>"; };
+		960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCoreDataEngine.swift; sourceTree = "<group>"; };
+		960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMNetworkUtility.swift; sourceTree = "<group>"; };
+		960606FF1CE97CC500AAFC07 /* YMModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMModelView.swift; sourceTree = "<group>"; };
+		9612DB3D1CC8B5DB00262D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageIndex.storyboard; sourceTree = "<group>"; };
+		9612DB3F1CC8B75300262D2E /* PageIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndexViewController.swift; sourceTree = "<group>"; };
+		9612DB411CC8B7C500262D2E /* PageIndexTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndexTopView.swift; sourceTree = "<group>"; };
+		9612DB431CC8B86400262D2E /* PageIndexBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndexBodyView.swift; sourceTree = "<group>"; };
+		9612DB451CC8B96B00262D2E /* PageIndexActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndexActions.swift; sourceTree = "<group>"; };
+		9612DB471CC9D65C00262D2E /* PageCommonBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCommonBottomView.swift; sourceTree = "<group>"; };
+		9612DB491CC9EA8600262D2E /* YMCurrentPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCurrentPage.swift; sourceTree = "<group>"; };
+		9612DB511CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterInputHospitalActions.swift; sourceTree = "<group>"; };
+		9612DB531CC9F71F00262D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageRegisterInputHospital.storyboard; sourceTree = "<group>"; };
+		9612DB551CC9F71F00262D2E /* PageRegisterInputHospitalBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterInputHospitalBodyView.swift; sourceTree = "<group>"; };
+		9612DB561CC9F71F00262D2E /* PageRegisterInputHospitalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterInputHospitalViewController.swift; sourceTree = "<group>"; };
+		9612DB591CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterPersonalInfoActions.swift; sourceTree = "<group>"; };
+		9612DB5B1CC9F71F00262D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageRegisterPersonalInfo.storyboard; sourceTree = "<group>"; };
+		9612DB5D1CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterPersonalInfoBodyView.swift; sourceTree = "<group>"; };
+		9612DB5E1CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterPersonalInfoViewController.swift; sourceTree = "<group>"; };
+		9612DB6E1CC9F75300262D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PagePersonal.storyboard; sourceTree = "<group>"; };
+		9612DB701CC9F76600262D2E /* PagePersonalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalViewController.swift; sourceTree = "<group>"; };
+		9612DB721CC9F7FA00262D2E /* PagePersonalBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalBodyView.swift; sourceTree = "<group>"; };
+		9612DB741CC9F85900262D2E /* PagePersonalTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalTopView.swift; sourceTree = "<group>"; };
+		9612DB761CC9F88600262D2E /* PagePersonalActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalActions.swift; sourceTree = "<group>"; };
+		9619EF4D1CC1DB9600F69CBC /* YiMai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YiMai.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9619EF501CC1DB9600F69CBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9619EF521CC1DB9600F69CBC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9619EF551CC1DB9600F69CBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9619EF581CC1DB9600F69CBC /* YiMai.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YiMai.xcdatamodel; sourceTree = "<group>"; };
+		9619EF5A1CC1DB9600F69CBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9619EF5D1CC1DB9600F69CBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9619EF5F1CC1DB9600F69CBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9619EF771CC1FF0400F69CBC /* YMCommonStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCommonStrings.swift; sourceTree = "<group>"; };
+		9619EF791CC1FF1500F69CBC /* YMLoginStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMLoginStrings.swift; sourceTree = "<group>"; };
+		9619EF7B1CC1FF2400F69CBC /* YMIndexStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMIndexStrings.swift; sourceTree = "<group>"; };
+		9619EF7D1CC1FF3A00F69CBC /* YMRegisterStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMRegisterStrings.swift; sourceTree = "<group>"; };
+		9619EF7F1CC1FF4E00F69CBC /* YMLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMLayout.swift; sourceTree = "<group>"; };
+		961FE8C51CEEF6D0002785B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageYiMai.storyboard; sourceTree = "<group>"; };
+		961FE8C71CEEF6F7002785B9 /* PageYiMaiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiViewController.swift; sourceTree = "<group>"; };
+		961FE8C91CEEF768002785B9 /* PageYiMaiTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiTopView.swift; sourceTree = "<group>"; };
+		961FE8CB1CEEFAE6002785B9 /* PageYiMaiActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiActions.swift; sourceTree = "<group>"; };
+		962076D11CC5ECA9002083FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageRegister.storyboard; sourceTree = "<group>"; };
+		962076D31CC5ECCA002083FA /* PageRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterViewController.swift; sourceTree = "<group>"; };
+		962076D51CC5F196002083FA /* PageRegisterBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterBodyView.swift; sourceTree = "<group>"; };
+		962076D71CC6024F002083FA /* PageRegisterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterActions.swift; sourceTree = "<group>"; };
+		962076EE1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterSelectHospitalViewController.swift; sourceTree = "<group>"; };
+		962076F11CC72598002083FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageRegisterSelectHospital.storyboard; sourceTree = "<group>"; };
+		962076F31CC72788002083FA /* YMRegisterSelectHospitalStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMRegisterSelectHospitalStrings.swift; sourceTree = "<group>"; };
+		962076F51CC7291C002083FA /* PageRegisterSelectHospitalBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterSelectHospitalBodyView.swift; sourceTree = "<group>"; };
+		962076F71CC7292D002083FA /* PageRegisterSelectHospitalActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRegisterSelectHospitalActions.swift; sourceTree = "<group>"; };
+		9624936C1CED5CAA007A9556 /* YMValueValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMValueValidator.swift; sourceTree = "<group>"; };
+		9624936E1CED7235007A9556 /* YMCoreDataKeyStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCoreDataKeyStrings.swift; sourceTree = "<group>"; };
+		96331AF11CC7729900E53125 /* YMRegisterInputSelectorStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMRegisterInputSelectorStrings.swift; sourceTree = "<group>"; };
+		96331B041CC8762600E53125 /* YMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMButton.swift; sourceTree = "<group>"; };
+		96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMClassesAndProtocols.swift; sourceTree = "<group>"; };
+		96331B071CC8762600E53125 /* YMTextInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTextInput.swift; sourceTree = "<group>"; };
+		96637A711CC206A900DBD1CF /* PageLoginActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLoginActions.swift; sourceTree = "<group>"; };
+		96637A741CC22DE000DBD1CF /* YMSizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMSizes.swift; sourceTree = "<group>"; };
+		96637A771CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMBasicTypeExtensionForLayout.swift; sourceTree = "<group>"; };
+		96637A791CC240C800DBD1CF /* YMColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMColors.swift; sourceTree = "<group>"; };
+		96637A7E1CC24A6100DBD1CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageLogin.storyboard; sourceTree = "<group>"; };
+		96637A821CC24B4F00DBD1CF /* PageLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLoginViewController.swift; sourceTree = "<group>"; };
+		96637A841CC24BCD00DBD1CF /* PageLoginBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLoginBodyView.swift; sourceTree = "<group>"; };
+		96637A861CC24D3300DBD1CF /* PageCommonTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCommonTopView.swift; sourceTree = "<group>"; };
+		96637A891CC2515E00DBD1CF /* YMCommonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCommonActions.swift; sourceTree = "<group>"; };
+		9672FB0B1CCDD72400BC7E40 /* YMTouchableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTouchableView.swift; sourceTree = "<group>"; };
+		9672FB121CCF133C00BC7E40 /* PageFace2FaceInfoInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageFace2FaceInfoInputViewController.swift; sourceTree = "<group>"; };
+		9672FB151CCF136B00BC7E40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageFace2FaceInfoInput.storyboard; sourceTree = "<group>"; };
+		9672FB191CCF22F300BC7E40 /* PageFace2FaceInfoInputActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageFace2FaceInfoInputActions.swift; sourceTree = "<group>"; };
+		9672FB1B1CCF276A00BC7E40 /* PageFace2FaceInfoInputBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageFace2FaceInfoInputBodyView.swift; sourceTree = "<group>"; };
+		9672FB1D1CCF4D3100BC7E40 /* YMFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMFonts.swift; sourceTree = "<group>"; };
+		9672FB1F1CCF5E8400BC7E40 /* YMSelectors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMSelectors.swift; sourceTree = "<group>"; };
+		9672FB261CD0610200BC7E40 /* PageFace2FaceQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageFace2FaceQRViewController.swift; sourceTree = "<group>"; };
+		9672FB291CD0623100BC7E40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageFace2FaceQR.storyboard; sourceTree = "<group>"; };
+		9672FB2B1CD067A300BC7E40 /* PageFace2FaceQRActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageFace2FaceQRActions.swift; sourceTree = "<group>"; };
+		9672FB2D1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageFace2FaceQRBodyView.swift; sourceTree = "<group>"; };
+		9672FB351CD1C2BE00BC7E40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageMessageList.storyboard; sourceTree = "<group>"; };
+		9672FB371CD1C2EC00BC7E40 /* PageMessageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMessageListViewController.swift; sourceTree = "<group>"; };
+		9672FB391CD1C31B00BC7E40 /* PageMessageListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMessageListActions.swift; sourceTree = "<group>"; };
+		9672FB3B1CD1C35500BC7E40 /* PageMessageListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMessageListBodyView.swift; sourceTree = "<group>"; };
+		9672FB431CD2222200BC7E40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageMyAdmissionsList.storyboard; sourceTree = "<group>"; };
+		9672FB451CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionsListViewController.swift; sourceTree = "<group>"; };
+		9672FB471CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionsListBodyView.swift; sourceTree = "<group>"; };
+		9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionsListActions.swift; sourceTree = "<group>"; };
+		9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMDatetime.swift; sourceTree = "<group>"; };
+		A556489D24098750735AC565 /* Pods_YiMai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiMai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9619EF4A1CC1DB9600F69CBC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				674EEDC634635DB13AEB3300 /* Pods_YiMai.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		467D48ADB938104A29A3EDAB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */,
+				35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		51934AB1653C9A66BF967E5A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A556489D24098750735AC565 /* Pods_YiMai.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9612DB4F1CC9F71F00262D2E /* RegisterInputHospital */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB501CC9F71F00262D2E /* Actions */,
+				9612DB541CC9F71F00262D2E /* Body */,
+				9612DB561CC9F71F00262D2E /* PageRegisterInputHospitalViewController.swift */,
+				9612DB521CC9F71F00262D2E /* PageRegisterInputHospital.storyboard */,
+			);
+			path = RegisterInputHospital;
+			sourceTree = "<group>";
+		};
+		9612DB501CC9F71F00262D2E /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB511CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9612DB541CC9F71F00262D2E /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB551CC9F71F00262D2E /* PageRegisterInputHospitalBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9612DB571CC9F71F00262D2E /* RegisterPersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB581CC9F71F00262D2E /* Actions */,
+				9612DB5C1CC9F71F00262D2E /* Body */,
+				9612DB5A1CC9F71F00262D2E /* PageRegisterPersonalInfo.storyboard */,
+				9612DB5E1CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift */,
+			);
+			path = RegisterPersonalInfo;
+			sourceTree = "<group>";
+		};
+		9612DB581CC9F71F00262D2E /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB591CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9612DB5C1CC9F71F00262D2E /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB5D1CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9612DB671CC9F72700262D2E /* Personal */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB681CC9F72700262D2E /* Actions */,
+				9612DB691CC9F72700262D2E /* Body */,
+				9612DB6A1CC9F72700262D2E /* Top */,
+				9612DB6F1CC9F75300262D2E /* PagePersonal.storyboard */,
+				9612DB701CC9F76600262D2E /* PagePersonalViewController.swift */,
+			);
+			path = Personal;
+			sourceTree = "<group>";
+		};
+		9612DB681CC9F72700262D2E /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB761CC9F88600262D2E /* PagePersonalActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9612DB691CC9F72700262D2E /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB721CC9F7FA00262D2E /* PagePersonalBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9612DB6A1CC9F72700262D2E /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB741CC9F85900262D2E /* PagePersonalTopView.swift */,
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
+		9619EF441CC1DB9600F69CBC = {
+			isa = PBXGroup;
+			children = (
+				9619EF4F1CC1DB9600F69CBC /* YiMai */,
+				9619EF4E1CC1DB9600F69CBC /* Products */,
+				467D48ADB938104A29A3EDAB /* Pods */,
+				51934AB1653C9A66BF967E5A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9619EF4E1CC1DB9600F69CBC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9619EF4D1CC1DB9600F69CBC /* YiMai.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9619EF4F1CC1DB9600F69CBC /* YiMai */ = {
+			isa = PBXGroup;
+			children = (
+				9619EF731CC1DE1200F69CBC /* UtilityTools */,
+				9619EF651CC1DE0C00F69CBC /* Pages */,
+				9619EF501CC1DB9600F69CBC /* AppDelegate.swift */,
+				9619EF521CC1DB9600F69CBC /* ViewController.swift */,
+				9619EF541CC1DB9600F69CBC /* Main.storyboard */,
+				9619EF5A1CC1DB9600F69CBC /* Assets.xcassets */,
+				9619EF5C1CC1DB9600F69CBC /* LaunchScreen.storyboard */,
+				9619EF5F1CC1DB9600F69CBC /* Info.plist */,
+				9619EF571CC1DB9600F69CBC /* YiMai.xcdatamodeld */,
+			);
+			path = YiMai;
+			sourceTree = "<group>";
+		};
+		9619EF651CC1DE0C00F69CBC /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				961FE8BE1CEEF6A8002785B9 /* YiMai */,
+				9672FB3D1CD221FD00BC7E40 /* MyAdmissionsList */,
+				9672FB2F1CD1C26F00BC7E40 /* MessageList */,
+				9672FB211CD0607900BC7E40 /* Face2FaceQR */,
+				9672FB0D1CCF12E000BC7E40 /* Face2FaceInfoInput */,
+				9612DB671CC9F72700262D2E /* Personal */,
+				9612DB4F1CC9F71F00262D2E /* RegisterInputHospital */,
+				9612DB571CC9F71F00262D2E /* RegisterPersonalInfo */,
+				962076DB1CC723E3002083FA /* RegisterSelectHospatil */,
+				9619EF661CC1DE0C00F69CBC /* Common */,
+				9619EF691CC1DE0C00F69CBC /* Index */,
+				9619EF6D1CC1DE0C00F69CBC /* Login */,
+				9619EF701CC1DE0C00F69CBC /* Register */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		9619EF661CC1DE0C00F69CBC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				96637A881CC2515300DBD1CF /* Actions */,
+				9619EF671CC1DE0C00F69CBC /* Bottom */,
+				9619EF681CC1DE0C00F69CBC /* Top */,
+				9612DB491CC9EA8600262D2E /* YMCurrentPage.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		9619EF671CC1DE0C00F69CBC /* Bottom */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB471CC9D65C00262D2E /* PageCommonBottomView.swift */,
+			);
+			path = Bottom;
+			sourceTree = "<group>";
+		};
+		9619EF681CC1DE0C00F69CBC /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				96637A861CC24D3300DBD1CF /* PageCommonTopView.swift */,
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
+		9619EF691CC1DE0C00F69CBC /* Index */ = {
+			isa = PBXGroup;
+			children = (
+				9619EF6A1CC1DE0C00F69CBC /* Actions */,
+				9619EF6B1CC1DE0C00F69CBC /* Body */,
+				9619EF6C1CC1DE0C00F69CBC /* Top */,
+				9612DB3E1CC8B5DB00262D2E /* PageIndex.storyboard */,
+				9612DB3F1CC8B75300262D2E /* PageIndexViewController.swift */,
+			);
+			path = Index;
+			sourceTree = "<group>";
+		};
+		9619EF6A1CC1DE0C00F69CBC /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB451CC8B96B00262D2E /* PageIndexActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9619EF6B1CC1DE0C00F69CBC /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB431CC8B86400262D2E /* PageIndexBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9619EF6C1CC1DE0C00F69CBC /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				9612DB411CC8B7C500262D2E /* PageIndexTopView.swift */,
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
+		9619EF6D1CC1DE0C00F69CBC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9619EF6E1CC1DE0C00F69CBC /* Actions */,
+				9619EF6F1CC1DE0C00F69CBC /* Body */,
+				96637A7F1CC24A6100DBD1CF /* PageLogin.storyboard */,
+				96637A821CC24B4F00DBD1CF /* PageLoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		9619EF6E1CC1DE0C00F69CBC /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				96637A711CC206A900DBD1CF /* PageLoginActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9619EF6F1CC1DE0C00F69CBC /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				96637A841CC24BCD00DBD1CF /* PageLoginBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9619EF701CC1DE0C00F69CBC /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				9619EF711CC1DE0C00F69CBC /* Actions */,
+				9619EF721CC1DE0C00F69CBC /* Body */,
+				962076D21CC5ECA9002083FA /* PageRegister.storyboard */,
+				962076D31CC5ECCA002083FA /* PageRegisterViewController.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		9619EF711CC1DE0C00F69CBC /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				962076D71CC6024F002083FA /* PageRegisterActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9619EF721CC1DE0C00F69CBC /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				962076D51CC5F196002083FA /* PageRegisterBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9619EF731CC1DE1200F69CBC /* UtilityTools */ = {
+			isa = PBXGroup;
+			children = (
+				96331B031CC8762600E53125 /* YMClasses */,
+				96637A761CC22E6000DBD1CF /* Common */,
+				9619EF741CC1DE1200F69CBC /* Layout */,
+				9619EF751CC1DE1200F69CBC /* Strings */,
+			);
+			path = UtilityTools;
+			sourceTree = "<group>";
+		};
+		9619EF741CC1DE1200F69CBC /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				9619EF7F1CC1FF4E00F69CBC /* YMLayout.swift */,
+				96637A741CC22DE000DBD1CF /* YMSizes.swift */,
+				96637A771CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift */,
+				96637A791CC240C800DBD1CF /* YMColors.swift */,
+				9672FB1D1CCF4D3100BC7E40 /* YMFonts.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		9619EF751CC1DE1200F69CBC /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				9619EF771CC1FF0400F69CBC /* YMCommonStrings.swift */,
+				9619EF791CC1FF1500F69CBC /* YMLoginStrings.swift */,
+				9619EF7B1CC1FF2400F69CBC /* YMIndexStrings.swift */,
+				9619EF7D1CC1FF3A00F69CBC /* YMRegisterStrings.swift */,
+				962076F31CC72788002083FA /* YMRegisterSelectHospitalStrings.swift */,
+				96331AF11CC7729900E53125 /* YMRegisterInputSelectorStrings.swift */,
+				9624936E1CED7235007A9556 /* YMCoreDataKeyStrings.swift */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		961FE8BE1CEEF6A8002785B9 /* YiMai */ = {
+			isa = PBXGroup;
+			children = (
+				961FE8BF1CEEF6A8002785B9 /* Actions */,
+				961FE8C01CEEF6A8002785B9 /* Body */,
+				961FE8C11CEEF6A8002785B9 /* Top */,
+				961FE8C61CEEF6D0002785B9 /* PageYiMai.storyboard */,
+				961FE8C71CEEF6F7002785B9 /* PageYiMaiViewController.swift */,
+			);
+			path = YiMai;
+			sourceTree = "<group>";
+		};
+		961FE8BF1CEEF6A8002785B9 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				961FE8CB1CEEFAE6002785B9 /* PageYiMaiActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		961FE8C01CEEF6A8002785B9 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		961FE8C11CEEF6A8002785B9 /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				961FE8C91CEEF768002785B9 /* PageYiMaiTopView.swift */,
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
+		962076DB1CC723E3002083FA /* RegisterSelectHospatil */ = {
+			isa = PBXGroup;
+			children = (
+				962076DC1CC7240F002083FA /* Actions */,
+				962076DD1CC7240F002083FA /* Body */,
+				962076F21CC72598002083FA /* PageRegisterSelectHospital.storyboard */,
+				962076EE1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift */,
+			);
+			path = RegisterSelectHospatil;
+			sourceTree = "<group>";
+		};
+		962076DC1CC7240F002083FA /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				962076F71CC7292D002083FA /* PageRegisterSelectHospitalActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		962076DD1CC7240F002083FA /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				962076F51CC7291C002083FA /* PageRegisterSelectHospitalBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		96331B031CC8762600E53125 /* YMClasses */ = {
+			isa = PBXGroup;
+			children = (
+				96331B041CC8762600E53125 /* YMButton.swift */,
+				96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */,
+				96331B071CC8762600E53125 /* YMTextInput.swift */,
+				9672FB0B1CCDD72400BC7E40 /* YMTouchableView.swift */,
+				9672FB1F1CCF5E8400BC7E40 /* YMSelectors.swift */,
+				9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */,
+			);
+			path = YMClasses;
+			sourceTree = "<group>";
+		};
+		96637A761CC22E6000DBD1CF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				960606FF1CE97CC500AAFC07 /* YMModelView.swift */,
+				960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */,
+				960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */,
+				960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */,
+				9624936C1CED5CAA007A9556 /* YMValueValidator.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		96637A881CC2515300DBD1CF /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				96637A891CC2515E00DBD1CF /* YMCommonActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9672FB0D1CCF12E000BC7E40 /* Face2FaceInfoInput */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB0E1CCF12E000BC7E40 /* Actions */,
+				9672FB0F1CCF12E000BC7E40 /* Body */,
+				9672FB161CCF136B00BC7E40 /* PageFace2FaceInfoInput.storyboard */,
+				9672FB121CCF133C00BC7E40 /* PageFace2FaceInfoInputViewController.swift */,
+			);
+			path = Face2FaceInfoInput;
+			sourceTree = "<group>";
+		};
+		9672FB0E1CCF12E000BC7E40 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB191CCF22F300BC7E40 /* PageFace2FaceInfoInputActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9672FB0F1CCF12E000BC7E40 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB1B1CCF276A00BC7E40 /* PageFace2FaceInfoInputBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9672FB211CD0607900BC7E40 /* Face2FaceQR */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB221CD0607900BC7E40 /* Actions */,
+				9672FB231CD0607900BC7E40 /* Body */,
+				9672FB2A1CD0623100BC7E40 /* PageFace2FaceQR.storyboard */,
+				9672FB261CD0610200BC7E40 /* PageFace2FaceQRViewController.swift */,
+			);
+			path = Face2FaceQR;
+			sourceTree = "<group>";
+		};
+		9672FB221CD0607900BC7E40 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB2B1CD067A300BC7E40 /* PageFace2FaceQRActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9672FB231CD0607900BC7E40 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB2D1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9672FB2F1CD1C26F00BC7E40 /* MessageList */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB301CD1C26F00BC7E40 /* Actions */,
+				9672FB311CD1C26F00BC7E40 /* Body */,
+				9672FB361CD1C2BE00BC7E40 /* PageMessageList.storyboard */,
+				9672FB371CD1C2EC00BC7E40 /* PageMessageListViewController.swift */,
+			);
+			path = MessageList;
+			sourceTree = "<group>";
+		};
+		9672FB301CD1C26F00BC7E40 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB391CD1C31B00BC7E40 /* PageMessageListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9672FB311CD1C26F00BC7E40 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB3B1CD1C35500BC7E40 /* PageMessageListBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		9672FB3D1CD221FD00BC7E40 /* MyAdmissionsList */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB3E1CD221FD00BC7E40 /* Actions */,
+				9672FB3F1CD221FD00BC7E40 /* Body */,
+				9672FB441CD2222200BC7E40 /* PageMyAdmissionsList.storyboard */,
+				9672FB451CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift */,
+			);
+			path = MyAdmissionsList;
+			sourceTree = "<group>";
+		};
+		9672FB3E1CD221FD00BC7E40 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		9672FB3F1CD221FD00BC7E40 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				9672FB471CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9619EF4C1CC1DB9600F69CBC /* YiMai */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9619EF621CC1DB9600F69CBC /* Build configuration list for PBXNativeTarget "YiMai" */;
+			buildPhases = (
+				A077FAF80F9F5F3142F7BA1E /* 📦 Check Pods Manifest.lock */,
+				9619EF491CC1DB9600F69CBC /* Sources */,
+				9619EF4A1CC1DB9600F69CBC /* Frameworks */,
+				9619EF4B1CC1DB9600F69CBC /* Resources */,
+				181F1355BC3A2B7183EB8798 /* 📦 Embed Pods Frameworks */,
+				A92B73FCA0C5A38855FFC8E1 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YiMai;
+			productName = YiMai;
+			productReference = 9619EF4D1CC1DB9600F69CBC /* YiMai.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9619EF451CC1DB9600F69CBC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = why;
+				TargetAttributes = {
+					9619EF4C1CC1DB9600F69CBC = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 9D4JR4C625;
+					};
+				};
+			};
+			buildConfigurationList = 9619EF481CC1DB9600F69CBC /* Build configuration list for PBXProject "YiMai" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9619EF441CC1DB9600F69CBC;
+			productRefGroup = 9619EF4E1CC1DB9600F69CBC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9619EF4C1CC1DB9600F69CBC /* YiMai */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9619EF4B1CC1DB9600F69CBC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9619EF5E1CC1DB9600F69CBC /* LaunchScreen.storyboard in Resources */,
+				9672FB141CCF136B00BC7E40 /* PageFace2FaceInfoInput.storyboard in Resources */,
+				9612DB601CC9F71F00262D2E /* PageRegisterInputHospital.storyboard in Resources */,
+				96637A7D1CC24A6100DBD1CF /* PageLogin.storyboard in Resources */,
+				9612DB6D1CC9F75300262D2E /* PagePersonal.storyboard in Resources */,
+				9672FB341CD1C2BE00BC7E40 /* PageMessageList.storyboard in Resources */,
+				9672FB281CD0623100BC7E40 /* PageFace2FaceQR.storyboard in Resources */,
+				962076F01CC72598002083FA /* PageRegisterSelectHospital.storyboard in Resources */,
+				961FE8C41CEEF6D0002785B9 /* PageYiMai.storyboard in Resources */,
+				9619EF5B1CC1DB9600F69CBC /* Assets.xcassets in Resources */,
+				9619EF561CC1DB9600F69CBC /* Main.storyboard in Resources */,
+				962076D01CC5ECA9002083FA /* PageRegister.storyboard in Resources */,
+				9612DB641CC9F71F00262D2E /* PageRegisterPersonalInfo.storyboard in Resources */,
+				9612DB3C1CC8B5DB00262D2E /* PageIndex.storyboard in Resources */,
+				9672FB421CD2222200BC7E40 /* PageMyAdmissionsList.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		181F1355BC3A2B7183EB8798 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiMai/Pods-YiMai-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A077FAF80F9F5F3142F7BA1E /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A92B73FCA0C5A38855FFC8E1 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiMai/Pods-YiMai-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9619EF491CC1DB9600F69CBC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9612DB421CC8B7C500262D2E /* PageIndexTopView.swift in Sources */,
+				9612DB611CC9F71F00262D2E /* PageRegisterInputHospitalBodyView.swift in Sources */,
+				9619EF531CC1DB9600F69CBC /* ViewController.swift in Sources */,
+				9619EF7C1CC1FF2400F69CBC /* YMIndexStrings.swift in Sources */,
+				9612DB651CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift in Sources */,
+				9672FB3C1CD1C35500BC7E40 /* PageMessageListBodyView.swift in Sources */,
+				960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */,
+				9612DB461CC8B96B00262D2E /* PageIndexActions.swift in Sources */,
+				9619EF781CC1FF0400F69CBC /* YMCommonStrings.swift in Sources */,
+				9619EF511CC1DB9600F69CBC /* AppDelegate.swift in Sources */,
+				9624936F1CED7235007A9556 /* YMCoreDataKeyStrings.swift in Sources */,
+				962076F61CC7291C002083FA /* PageRegisterSelectHospitalBodyView.swift in Sources */,
+				9672FB0C1CCDD72400BC7E40 /* YMTouchableView.swift in Sources */,
+				9672FB3A1CD1C31B00BC7E40 /* PageMessageListActions.swift in Sources */,
+				962076F41CC72788002083FA /* YMRegisterSelectHospitalStrings.swift in Sources */,
+				9612DB771CC9F88600262D2E /* PagePersonalActions.swift in Sources */,
+				96331AF21CC7729900E53125 /* YMRegisterInputSelectorStrings.swift in Sources */,
+				9612DB711CC9F76600262D2E /* PagePersonalViewController.swift in Sources */,
+				96637A721CC206A900DBD1CF /* PageLoginActions.swift in Sources */,
+				9672FB481CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift in Sources */,
+				9619EF801CC1FF4E00F69CBC /* YMLayout.swift in Sources */,
+				9672FB4C1CD3439400BC7E40 /* YMDatetime.swift in Sources */,
+				9612DB731CC9F7FA00262D2E /* PagePersonalBodyView.swift in Sources */,
+				960606FA1CE591CC00AAFC07 /* YMAPIUtility.swift in Sources */,
+				96637A871CC24D3300DBD1CF /* PageCommonTopView.swift in Sources */,
+				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
+				96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */,
+				9612DB5F1CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift in Sources */,
+				9612DB621CC9F71F00262D2E /* PageRegisterInputHospitalViewController.swift in Sources */,
+				96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */,
+				96637A751CC22DE000DBD1CF /* YMSizes.swift in Sources */,
+				9612DB751CC9F85900262D2E /* PagePersonalTopView.swift in Sources */,
+				96637A8A1CC2515E00DBD1CF /* YMCommonActions.swift in Sources */,
+				9672FB131CCF133C00BC7E40 /* PageFace2FaceInfoInputViewController.swift in Sources */,
+				9672FB1A1CCF22F300BC7E40 /* PageFace2FaceInfoInputActions.swift in Sources */,
+				96331B0B1CC8762600E53125 /* YMClassesAndProtocols.swift in Sources */,
+				9672FB1C1CCF276A00BC7E40 /* PageFace2FaceInfoInputBodyView.swift in Sources */,
+				9619EF7A1CC1FF1500F69CBC /* YMLoginStrings.swift in Sources */,
+				9672FB271CD0610200BC7E40 /* PageFace2FaceQRViewController.swift in Sources */,
+				9612DB481CC9D65C00262D2E /* PageCommonBottomView.swift in Sources */,
+				961FE8CA1CEEF768002785B9 /* PageYiMaiTopView.swift in Sources */,
+				9672FB461CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift in Sources */,
+				962076EF1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift in Sources */,
+				960606FC1CE591CC00AAFC07 /* YMNetworkUtility.swift in Sources */,
+				962076F81CC7292D002083FA /* PageRegisterSelectHospitalActions.swift in Sources */,
+				9619EF7E1CC1FF3A00F69CBC /* YMRegisterStrings.swift in Sources */,
+				9612DB441CC8B86400262D2E /* PageIndexBodyView.swift in Sources */,
+				962076D61CC5F196002083FA /* PageRegisterBodyView.swift in Sources */,
+				961FE8CC1CEEFAE6002785B9 /* PageYiMaiActions.swift in Sources */,
+				96637A7A1CC240C800DBD1CF /* YMColors.swift in Sources */,
+				9672FB2C1CD067A300BC7E40 /* PageFace2FaceQRActions.swift in Sources */,
+				961FE8C81CEEF6F7002785B9 /* PageYiMaiViewController.swift in Sources */,
+				96331B091CC8762600E53125 /* YMButton.swift in Sources */,
+				96637A851CC24BCD00DBD1CF /* PageLoginBodyView.swift in Sources */,
+				9612DB661CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift in Sources */,
+				9672FB1E1CCF4D3100BC7E40 /* YMFonts.swift in Sources */,
+				9612DB631CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift in Sources */,
+				962076D81CC6024F002083FA /* PageRegisterActions.swift in Sources */,
+				962076D41CC5ECCA002083FA /* PageRegisterViewController.swift in Sources */,
+				9612DB4A1CC9EA8600262D2E /* YMCurrentPage.swift in Sources */,
+				960607001CE97CC500AAFC07 /* YMModelView.swift in Sources */,
+				9672FB4A1CD222C100BC7E40 /* PageMyAdmissionsListActions.swift in Sources */,
+				9624936D1CED5CAA007A9556 /* YMValueValidator.swift in Sources */,
+				9619EF591CC1DB9600F69CBC /* YiMai.xcdatamodeld in Sources */,
+				9672FB2E1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift in Sources */,
+				9672FB381CD1C2EC00BC7E40 /* PageMessageListViewController.swift in Sources */,
+				9612DB401CC8B75300262D2E /* PageIndexViewController.swift in Sources */,
+				96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9612DB3E1CC8B5DB00262D2E /* PageIndex.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9612DB3D1CC8B5DB00262D2E /* Base */,
+			);
+			name = PageIndex.storyboard;
+			sourceTree = "<group>";
+		};
+		9612DB521CC9F71F00262D2E /* PageRegisterInputHospital.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9612DB531CC9F71F00262D2E /* Base */,
+			);
+			name = PageRegisterInputHospital.storyboard;
+			sourceTree = "<group>";
+		};
+		9612DB5A1CC9F71F00262D2E /* PageRegisterPersonalInfo.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9612DB5B1CC9F71F00262D2E /* Base */,
+			);
+			name = PageRegisterPersonalInfo.storyboard;
+			sourceTree = "<group>";
+		};
+		9612DB6F1CC9F75300262D2E /* PagePersonal.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9612DB6E1CC9F75300262D2E /* Base */,
+			);
+			name = PagePersonal.storyboard;
+			sourceTree = "<group>";
+		};
+		9619EF541CC1DB9600F69CBC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9619EF551CC1DB9600F69CBC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9619EF5C1CC1DB9600F69CBC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9619EF5D1CC1DB9600F69CBC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		961FE8C61CEEF6D0002785B9 /* PageYiMai.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				961FE8C51CEEF6D0002785B9 /* Base */,
+			);
+			name = PageYiMai.storyboard;
+			sourceTree = "<group>";
+		};
+		962076D21CC5ECA9002083FA /* PageRegister.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				962076D11CC5ECA9002083FA /* Base */,
+			);
+			name = PageRegister.storyboard;
+			sourceTree = "<group>";
+		};
+		962076F21CC72598002083FA /* PageRegisterSelectHospital.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				962076F11CC72598002083FA /* Base */,
+			);
+			name = PageRegisterSelectHospital.storyboard;
+			sourceTree = "<group>";
+		};
+		96637A7F1CC24A6100DBD1CF /* PageLogin.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96637A7E1CC24A6100DBD1CF /* Base */,
+			);
+			name = PageLogin.storyboard;
+			sourceTree = "<group>";
+		};
+		9672FB161CCF136B00BC7E40 /* PageFace2FaceInfoInput.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9672FB151CCF136B00BC7E40 /* Base */,
+			);
+			name = PageFace2FaceInfoInput.storyboard;
+			sourceTree = "<group>";
+		};
+		9672FB2A1CD0623100BC7E40 /* PageFace2FaceQR.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9672FB291CD0623100BC7E40 /* Base */,
+			);
+			name = PageFace2FaceQR.storyboard;
+			sourceTree = "<group>";
+		};
+		9672FB361CD1C2BE00BC7E40 /* PageMessageList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9672FB351CD1C2BE00BC7E40 /* Base */,
+			);
+			name = PageMessageList.storyboard;
+			sourceTree = "<group>";
+		};
+		9672FB441CD2222200BC7E40 /* PageMyAdmissionsList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9672FB431CD2222200BC7E40 /* Base */,
+			);
+			name = PageMyAdmissionsList.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9619EF601CC1DB9600F69CBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9619EF611CC1DB9600F69CBC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9619EF631CC1DB9600F69CBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = YiMai/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = local.YiMai;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9619EF641CC1DB9600F69CBC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = YiMai/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = local.YiMai;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9619EF481CC1DB9600F69CBC /* Build configuration list for PBXProject "YiMai" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9619EF601CC1DB9600F69CBC /* Debug */,
+				9619EF611CC1DB9600F69CBC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9619EF621CC1DB9600F69CBC /* Build configuration list for PBXNativeTarget "YiMai" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9619EF631CC1DB9600F69CBC /* Debug */,
+				9619EF641CC1DB9600F69CBC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9619EF571CC1DB9600F69CBC /* YiMai.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9619EF581CC1DB9600F69CBC /* YiMai.xcdatamodel */,
+			);
+			currentVersion = 9619EF581CC1DB9600F69CBC /* YiMai.xcdatamodel */;
+			path = YiMai.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9619EF451CC1DB9600F69CBC /* Project object */;
+}

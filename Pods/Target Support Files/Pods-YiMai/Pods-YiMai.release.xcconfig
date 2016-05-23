@@ -1,0 +1,8 @@
+EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$CONFIGURATION_BUILD_DIR/AFNetworking" "$CONFIGURATION_BUILD_DIR/FLKAutoLayout" "$CONFIGURATION_BUILD_DIR/Neon" "$CONFIGURATION_BUILD_DIR/ORStackView" "$CONFIGURATION_BUILD_DIR/SwiftyJSON" "$CONFIGURATION_BUILD_DIR/swiftScan"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/AFNetworking/AFNetworking.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FLKAutoLayout/FLKAutoLayout.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Neon/Neon.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/ORStackView/ORStackView.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/swiftScan/swiftScan.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "AFNetworking" -framework "FLKAutoLayout" -framework "Neon" -framework "ORStackView" -framework "SwiftyJSON" -framework "swiftScan"
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+PODS_ROOT = ${SRCROOT}/Pods
