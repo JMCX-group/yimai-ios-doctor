@@ -36,11 +36,34 @@ public class PageYiMaiR1BodyView: PageBodyView {
         func BuildOpertorCell(cell: YMTouchableView, imageName: String, targetPage: String, title: String, count: String?) {
             let icon = YMLayout.GetSuitableImageView(imageName)
             let titleLabel = UILabel()
-            let countLabel = UILabel()
+            
             
             cell.addSubview(icon)
             cell.addSubview(titleLabel)
-            cell.addSubview(countLabel)
+            
+            icon.anchorToEdge(Edge.Top, padding: 0, width: icon.width, height: icon.height)
+            titleLabel.alignAndFillWidth(align: Align.UnderCentered, relativeTo: icon, padding: -100.LayoutVal(), height: 30.LayoutVal())
+            
+            titleLabel.text = title
+            titleLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
+            titleLabel.textColor = YMColors.FontBlue
+            titleLabel.textAlignment = NSTextAlignment.Center
+            
+            
+            if(nil != count && "" != count) {
+                let countLabel = UILabel()
+                cell.addSubview(countLabel)
+                
+                countLabel.text = count
+                countLabel.font = YMFonts.YMDefaultFont(20.LayoutVal())
+                countLabel.textColor = YMColors.FontGray
+                countLabel.textAlignment = NSTextAlignment.Center
+                countLabel.backgroundColor = YMColors.BackgroundGray
+                countLabel.sizeToFit()
+                
+                countLabel.align(Align.UnderCentered, relativeTo: titleLabel, padding: 18.LayoutVal(), width: countLabel.width+40.LayoutVal(), height: 28.LayoutVal())
+            }
+            
         }
         
         SameHopitalButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
@@ -50,8 +73,8 @@ public class PageYiMaiR1BodyView: PageBodyView {
         OperationPanel.addSubview(SameHopitalButton!)
         OperationPanel.addSubview(SameAreasButton!)
         OperationPanel.addSubview(SameSchoolButton!)
-        
-        OperationPanel.groupAndFill(group: Group.Vertical, views: [SameHopitalButton!, SameAreasButton!, SameSchoolButton!], padding: 1)
+
+        OperationPanel.groupAndFill(group: Group.Horizontal, views: [SameHopitalButton!, SameAreasButton!, SameSchoolButton!], padding: 1)
         
         BuildOpertorCell(SameHopitalButton!, imageName: "YiMaiR1SameHospital", targetPage: "", title: "同医院", count: "10人")
         BuildOpertorCell(SameAreasButton!, imageName: "YiMaiR1SameAreas", targetPage: "", title: "同领域", count: "17人")
