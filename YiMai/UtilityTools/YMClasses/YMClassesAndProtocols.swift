@@ -20,7 +20,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME:true,
         YMCommonStrings.CS_PAGE_FACE_2_FACE_QR_NAME:true,
         YMCommonStrings.CS_PAGE_MASSAGE_LIST_NAME:true,
-        YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME:true
+        YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME:true,
+        YMCommonStrings.CS_PAGE_YIMAI_NAME:true
     ]
 }
 

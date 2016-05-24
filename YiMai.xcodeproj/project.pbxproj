@@ -62,6 +62,8 @@
 		96331B091CC8762600E53125 /* YMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B041CC8762600E53125 /* YMButton.swift */; };
 		96331B0B1CC8762600E53125 /* YMClassesAndProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */; };
 		96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B071CC8762600E53125 /* YMTextInput.swift */; };
+		963E74001CF3F8D400C10575 /* YMYiMaiStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E73FF1CF3F8D400C10575 /* YMYiMaiStrings.swift */; };
+		963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E74011CF409B300C10575 /* PageYiMaiR1BodyView.swift */; };
 		96637A721CC206A900DBD1CF /* PageLoginActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A711CC206A900DBD1CF /* PageLoginActions.swift */; };
 		96637A751CC22DE000DBD1CF /* YMSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A741CC22DE000DBD1CF /* YMSizes.swift */; };
 		96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96637A771CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift */; };
@@ -152,6 +154,8 @@
 		96331B041CC8762600E53125 /* YMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMButton.swift; sourceTree = "<group>"; };
 		96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMClassesAndProtocols.swift; sourceTree = "<group>"; };
 		96331B071CC8762600E53125 /* YMTextInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTextInput.swift; sourceTree = "<group>"; };
+		963E73FF1CF3F8D400C10575 /* YMYiMaiStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMYiMaiStrings.swift; sourceTree = "<group>"; };
+		963E74011CF409B300C10575 /* PageYiMaiR1BodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiR1BodyView.swift; sourceTree = "<group>"; };
 		96637A711CC206A900DBD1CF /* PageLoginActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLoginActions.swift; sourceTree = "<group>"; };
 		96637A741CC22DE000DBD1CF /* YMSizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMSizes.swift; sourceTree = "<group>"; };
 		96637A771CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMBasicTypeExtensionForLayout.swift; sourceTree = "<group>"; };
@@ -507,6 +511,7 @@
 				962076F31CC72788002083FA /* YMRegisterSelectHospitalStrings.swift */,
 				96331AF11CC7729900E53125 /* YMRegisterInputSelectorStrings.swift */,
 				9624936E1CED7235007A9556 /* YMCoreDataKeyStrings.swift */,
+				963E73FF1CF3F8D400C10575 /* YMYiMaiStrings.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 		961FE8C01CEEF6A8002785B9 /* Body */ = {
 			isa = PBXGroup;
 			children = (
+				963E74011CF409B300C10575 /* PageYiMaiR1BodyView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -889,6 +895,7 @@
 				9619EF7A1CC1FF1500F69CBC /* YMLoginStrings.swift in Sources */,
 				9672FB271CD0610200BC7E40 /* PageFace2FaceQRViewController.swift in Sources */,
 				9612DB481CC9D65C00262D2E /* PageCommonBottomView.swift in Sources */,
+				963E74001CF3F8D400C10575 /* YMYiMaiStrings.swift in Sources */,
 				961FE8CA1CEEF768002785B9 /* PageYiMaiTopView.swift in Sources */,
 				9672FB461CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift in Sources */,
 				962076EF1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift in Sources */,
@@ -916,6 +923,7 @@
 				9672FB2E1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift in Sources */,
 				9672FB381CD1C2EC00BC7E40 /* PageMessageListViewController.swift in Sources */,
 				9612DB401CC8B75300262D2E /* PageIndexViewController.swift in Sources */,
+				963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */,
 				96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

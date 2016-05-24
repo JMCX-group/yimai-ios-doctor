@@ -13,4 +13,8 @@ public class PageYiMaiActions: PageJumpActions{
     public func QRButtonTouched(sender : UITapGestureRecognizer) {
         
     }
+    
+    public func AddFriendButtonTouched(sender : UITapGestureRecognizer) {
+        
+    }
 }
