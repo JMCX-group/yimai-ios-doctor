@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 public class YMColors {
+    public static let None = UIColor.clearColor()
     public static let White = UIColor.whiteColor()
     public static let FontBlue = UIColor(red: 0x33.RGBVal(), green: 0xa8.RGBVal(), blue: 0xdd.RGBVal(), alpha: 1)
     public static let FontLightBlue = UIColor(red: 0xa8.RGBVal(), green: 0xe9.RGBVal(), blue: 0xfe.RGBVal(), alpha: 1)
