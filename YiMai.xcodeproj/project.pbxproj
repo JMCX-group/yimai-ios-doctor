@@ -93,6 +93,7 @@
 		9672FB481CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB471CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift */; };
 		9672FB4A1CD222C100BC7E40 /* PageMyAdmissionsListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */; };
 		9672FB4C1CD3439400BC7E40 /* YMDatetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */; };
+		96D745AA1CF59D2200E345E3 /* PageYiMaiR2BodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D745A91CF59D2200E345E3 /* PageYiMaiR2BodyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -185,6 +186,7 @@
 		9672FB471CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionsListBodyView.swift; sourceTree = "<group>"; };
 		9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionsListActions.swift; sourceTree = "<group>"; };
 		9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMDatetime.swift; sourceTree = "<group>"; };
+		96D745A91CF59D2200E345E3 /* PageYiMaiR2BodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiR2BodyView.swift; sourceTree = "<group>"; };
 		A556489D24098750735AC565 /* Pods_YiMai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiMai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -540,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				963E74011CF409B300C10575 /* PageYiMaiR1BodyView.swift */,
+				96D745A91CF59D2200E345E3 /* PageYiMaiR2BodyView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -913,6 +916,7 @@
 				9612DB661CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift in Sources */,
 				9672FB1E1CCF4D3100BC7E40 /* YMFonts.swift in Sources */,
 				9612DB631CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift in Sources */,
+				96D745AA1CF59D2200E345E3 /* PageYiMaiR2BodyView.swift in Sources */,
 				962076D81CC6024F002083FA /* PageRegisterActions.swift in Sources */,
 				962076D41CC5ECCA002083FA /* PageRegisterViewController.swift in Sources */,
 				9612DB4A1CC9EA8600262D2E /* YMCurrentPage.swift in Sources */,

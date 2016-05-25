@@ -17,4 +17,18 @@ public class PageYiMaiActions: PageJumpActions{
     public func AddFriendButtonTouched(sender : UITapGestureRecognizer) {
         
     }
+    
+    public func FriendCellTouched(sender : UITapGestureRecognizer) {
+        
+    }
+    
+    public func YiMaiR1TabTouched(sender: YMButton) {
+        let parent = self.Target as! PageYiMaiViewController
+        parent.ShowYiMaiR1Page()
+    }
+    
+    public func YiMaiR2TabTouched(sender: YMButton) {
+        let parent = self.Target as! PageYiMaiViewController
+        parent.ShowYiMaiR2Page()
+    }
 }

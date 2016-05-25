@@ -20,6 +20,9 @@ public class PageYiMaiTopView: NSObject {
     
     public static var TabButtonIndex = YMYiMaiStrings.CS_TOP_TAB_R1_BUTTON_TITLE
     
+    private let R1TabSelector: Selector = "YiMaiR1TabTouched:"
+    private let R2TabSelector: Selector = "YiMaiR2TabTouched:"
+    
     private let TopView = UIView()
     
     private let TabButtonMap = [
@@ -96,6 +99,9 @@ public class PageYiMaiTopView: NSObject {
         
         TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_R2_BUTTON_TITLE]?.backgroundColor = UIColor.clearColor()
         TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_R2_BUTTON_TITLE]?.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        
+        TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_R1_BUTTON_TITLE]?.addTarget(Actions!, action: R1TabSelector, forControlEvents: UIControlEvents.TouchUpInside)
+        TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_R2_BUTTON_TITLE]?.addTarget(Actions!, action: R2TabSelector, forControlEvents: UIControlEvents.TouchUpInside)
     }
 
     private func DrawTabButtons() {

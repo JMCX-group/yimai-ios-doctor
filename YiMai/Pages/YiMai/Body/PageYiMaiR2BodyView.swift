@@ -1,161 +1,50 @@
 //
-//  PageYiMaiR1BodyView.swift
+//  PageYiMaiR2BodyView.swift
 //  YiMai
 //
-//  Created by why on 16/5/24.
+//  Created by why on 16/5/25.
 //  Copyright © 2016年 why. All rights reserved.
 //
 
 import Foundation
 import Neon
 
-public class PageYiMaiR1BodyView: PageBodyView {
+public class PageYiMaiR2BodyView: PageBodyView {
     private var SearchInput: YMTextField? = nil
-    private var SameHopitalButton: YMTouchableView? = nil
-    private var SameSchoolButton: YMTouchableView? = nil
-    private var SameAreasButton: YMTouchableView? = nil
-    
     private let SearchPanel = UIView()
-    private let OperationPanel = UIView()
-    private let NewFriendsPanel = UIView()
     private let FriendsPanel = UIView()
-    
-    private let OperationSelector:Selector = "PageJumpToByViewSender:"
     private let FriendCellTouched: Selector = "FriendButtonTouched:"
-
+    
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.BackgroundGray
+        BodyView.hidden = true
         
         DrawSearchPanel()
-        DrawOptPanel()
-        DrawNewFriendsPanel()
         DrawFriendsPanel()
     }
-
-    private func DrawOptPanel() {
-        BodyView.addSubview(OperationPanel)
-        
-        OperationPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, height: 200.LayoutVal())
-        
-        func BuildOpertorCell(cell: YMTouchableView, imageName: String, targetPage: String, title: String, count: String?) {
-            let icon = YMLayout.GetSuitableImageView(imageName)
-            let titleLabel = UILabel()
-            
-            
-            cell.addSubview(icon)
-            cell.addSubview(titleLabel)
-            
-            icon.anchorToEdge(Edge.Top, padding: 0, width: icon.width, height: icon.height)
-            titleLabel.alignAndFillWidth(align: Align.UnderCentered, relativeTo: icon, padding: -100.LayoutVal(), height: 30.LayoutVal())
-            
-            titleLabel.text = title
-            titleLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
-            titleLabel.textColor = YMColors.FontBlue
-            titleLabel.textAlignment = NSTextAlignment.Center
-            
-            
-            if(nil != count && "" != count) {
-                let countLabel = UILabel()
-                cell.addSubview(countLabel)
-                
-                countLabel.text = count
-                countLabel.font = YMFonts.YMDefaultFont(20.LayoutVal())
-                countLabel.textColor = YMColors.FontGray
-                countLabel.textAlignment = NSTextAlignment.Center
-                countLabel.backgroundColor = YMColors.BackgroundGray
-                countLabel.sizeToFit()
-                
-                countLabel.align(Align.UnderCentered, relativeTo: titleLabel, padding: 18.LayoutVal(), width: countLabel.width+40.LayoutVal(), height: 28.LayoutVal())
-                
-                countLabel.layer.cornerRadius = countLabel.bounds.height / 2
-                countLabel.layer.masksToBounds = true;
-            }
-            
-        }
-        
-        SameHopitalButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
-        SameSchoolButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
-        SameAreasButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
-        
-        OperationPanel.addSubview(SameHopitalButton!)
-        OperationPanel.addSubview(SameAreasButton!)
-        OperationPanel.addSubview(SameSchoolButton!)
-
-        OperationPanel.groupAndFill(group: Group.Horizontal, views: [SameHopitalButton!, SameAreasButton!, SameSchoolButton!], padding: 1)
-        
-        BuildOpertorCell(SameHopitalButton!, imageName: "YiMaiR1SameHospital", targetPage: "", title: "同医院", count: "10人")
-        BuildOpertorCell(SameAreasButton!, imageName: "YiMaiR1SameAreas", targetPage: "", title: "同领域", count: "17人")
-        BuildOpertorCell(SameSchoolButton!, imageName: "YiMaiR1SameSchool", targetPage: "", title: "同学校", count: "9人")
-    }
-
+    
     private func DrawSearchPanel() {
         let searchInputParam = TextFieldCreateParam()
         let searchIconView = UIView(frame: CGRect(x: 0,y: 0,width: 66.LayoutVal(),height: 60.LayoutVal()))
         let searchIcon = YMLayout.GetSuitableImageView("YiMaiGeneralSearchIcon")
-
+        
         searchInputParam.BackgroundImageName = "YiMaiGeneralLongSearchBackground"
         searchInputParam.Placholder = YMYiMaiStrings.CS_SEARCH_PLACEHOLDER
         searchInputParam.FontSize = 26.LayoutVal()
         searchInputParam.FontColor = YMColors.FontBlue
-
+        
         SearchInput = YMLayout.GetTextFieldWithMaxCharCount(searchInputParam, maxCharCount: 60)
         
         BodyView.addSubview(SearchPanel)
         SearchPanel.addSubview(SearchInput!)
         
         SearchPanel.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: 120.LayoutVal())
-
+        
         SearchInput?.anchorInCenter(width: 690.LayoutVal(), height: 60.LayoutVal())
         searchIconView.addSubview(searchIcon)
         searchIcon.anchorInCenter(width: searchIcon.width, height: searchIcon.height)
         SearchInput?.SetLeftPadding(searchIconView)
-    }
-    
-    private func DrawNewFriendsPanel() {
-        BodyView.addSubview(NewFriendsPanel)
-        NewFriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: OperationPanel, padding: 0, height: 130.LayoutVal())
-
-        let titleLabel = UILabel()
-        titleLabel.text = "我的新朋友（新增1人）"
-        titleLabel.textColor = YMColors.FontGray
-        titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
-        titleLabel.sizeToFit()
-        
-        NewFriendsPanel.addSubview(titleLabel)
-        titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 50.LayoutVal())
-        
-        let newFriendsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
-        
-        let icon = YMLayout.GetSuitableImageView("YiMaiR1NewFriendsIcon")
-        newFriendsButton.addSubview(icon)
-        
-        let dividerLine = UIView()
-        dividerLine.backgroundColor = YMColors.FontBlue
-        newFriendsButton.addSubview(dividerLine)
-        
-        let buttonText = UILabel()
-        buttonText.text = "新朋友"
-        buttonText.font = YMFonts.YMDefaultFont(30.LayoutVal())
-        buttonText.textColor = YMColors.FontBlue
-        buttonText.sizeToFit()
-        newFriendsButton.addSubview(buttonText)
-        
-        let notifyPoint = UIView()
-        notifyPoint.backgroundColor = YMColors.NotifyFlagOrange
-        notifyPoint.frame = CGRect(x: 0,y: 0,width: 10.LayoutVal(),height: 10.LayoutVal())
-        notifyPoint.layer.cornerRadius = notifyPoint.bounds.width / 2
-        notifyPoint.layer.masksToBounds = true
-        newFriendsButton.addSubview(notifyPoint)
-        
-        NewFriendsPanel.addSubview(newFriendsButton)
-        
-        newFriendsButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 80.LayoutVal())
-        
-        icon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: icon.width, height: icon.height)
-        dividerLine.anchorToEdge(Edge.Left, padding: 102.LayoutVal(), width: 1, height: 30.LayoutVal())
-        buttonText.anchorToEdge(Edge.Left, padding: 124.LayoutVal(), width: buttonText.width, height: buttonText.height)
-        notifyPoint.anchorToEdge(Edge.Left, padding: 225.LayoutVal(), width: notifyPoint.width, height: notifyPoint.height)
     }
     
     private func DrawFriendsCell(data: [String: AnyObject], prevCell: YMTouchableView?) -> YMTouchableView {
@@ -208,7 +97,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         FriendsPanel.addSubview(cell)
         
         if(nil == prevCell) {
-            cell.anchorToEdge(Edge.Top, padding: 50.LayoutVal(), width: YMSizes.PageWidth, height: 151.LayoutVal())
+            cell.anchorToEdge(Edge.Top, padding: 51.LayoutVal(), width: YMSizes.PageWidth, height: 151.LayoutVal())
         } else {
             cell.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: prevCell!, padding: 1, height: 151.LayoutVal())
         }
@@ -225,15 +114,19 @@ public class PageYiMaiR1BodyView: PageBodyView {
     
     private func DrawFriendsPanel() {
         BodyView.addSubview(FriendsPanel)
-        FriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: NewFriendsPanel, padding: 0, height: 0)
-
-        let  titleLabel = UILabel()
-        titleLabel.text = "我的朋友（2名医生 | 1家医院）"
+        FriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, height: 0)
+        
+        let titlePanel = UIView()
+        let titleLabel = UILabel()
+        titleLabel.text = "朋友的朋友（20名医生 | 5家医院）"
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.sizeToFit()
         
-        FriendsPanel.addSubview(titleLabel)
+        titlePanel.addSubview(titleLabel)
+        FriendsPanel.addSubview(titlePanel)
+        titlePanel.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: 50.LayoutVal())
+        titlePanel.backgroundColor = YMColors.White
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 50.LayoutVal())
         
         var cellView = DrawFriendsCell(
@@ -247,7 +140,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
                 
             ], prevCell: nil
         )
-
+        
         cellView = DrawFriendsCell(
             [
                 YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
@@ -272,53 +165,5 @@ public class PageYiMaiR1BodyView: PageBodyView {
             ], prevCell: cellView
         )
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

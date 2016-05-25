@@ -20,5 +20,7 @@ public class YMColors {
     public static let PanelBackgroundGray = UIColor(red: 0xf9.RGBVal(), green: 0xf9.RGBVal(), blue: 0xf9.RGBVal(), alpha: 1)
     public static let DividerLineGray = UIColor(red: 0xe0.RGBVal(), green: 0xe0.RGBVal(), blue: 0xe0.RGBVal(), alpha: 1)
     
+    public static let NotifyFlagOrange = UIColor(red: 0xff.RGBVal(), green: 0x66.RGBVal(), blue: 0x09.RGBVal(), alpha: 1)
+    
     public static let AlarmFontColor = UIColor(red: 0xcc.RGBVal(), green: 0x22.RGBVal(), blue: 0x22.RGBVal(), alpha: 1)
 }
