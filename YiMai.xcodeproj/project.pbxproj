@@ -94,6 +94,10 @@
 		9672FB4A1CD222C100BC7E40 /* PageMyAdmissionsListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */; };
 		9672FB4C1CD3439400BC7E40 /* YMDatetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */; };
 		96D745AA1CF59D2200E345E3 /* PageYiMaiR2BodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D745A91CF59D2200E345E3 /* PageYiMaiR2BodyView.swift */; };
+		96D745B11CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D745B01CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift */; };
+		96D745B21CF5C1B700E345E3 /* PageYiMaiAddFriends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D745B41CF5C1B700E345E3 /* PageYiMaiAddFriends.storyboard */; };
+		96D745B61CF5C2C500E345E3 /* YiMaiAddFriendsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D745B51CF5C2C500E345E3 /* YiMaiAddFriendsActions.swift */; };
+		96D745B81CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D745B71CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +191,10 @@
 		9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionsListActions.swift; sourceTree = "<group>"; };
 		9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMDatetime.swift; sourceTree = "<group>"; };
 		96D745A91CF59D2200E345E3 /* PageYiMaiR2BodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiR2BodyView.swift; sourceTree = "<group>"; };
+		96D745B01CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiAddFriendsViewController.swift; sourceTree = "<group>"; };
+		96D745B31CF5C1B700E345E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageYiMaiAddFriends.storyboard; sourceTree = "<group>"; };
+		96D745B51CF5C2C500E345E3 /* YiMaiAddFriendsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YiMaiAddFriendsActions.swift; sourceTree = "<group>"; };
+		96D745B71CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiAddFriendsBodyView.swift; sourceTree = "<group>"; };
 		A556489D24098750735AC565 /* Pods_YiMai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiMai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -346,6 +354,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				96D745AB1CF5C14D00E345E3 /* YiMaiAddFriends */,
 				961FE8BE1CEEF6A8002785B9 /* YiMai */,
 				9672FB3D1CD221FD00BC7E40 /* MyAdmissionsList */,
 				9672FB2F1CD1C26F00BC7E40 /* MessageList */,
@@ -723,6 +732,33 @@
 			path = Body;
 			sourceTree = "<group>";
 		};
+		96D745AB1CF5C14D00E345E3 /* YiMaiAddFriends */ = {
+			isa = PBXGroup;
+			children = (
+				96D745AC1CF5C14D00E345E3 /* Acions */,
+				96D745AD1CF5C14D00E345E3 /* Body */,
+				96D745B41CF5C1B700E345E3 /* PageYiMaiAddFriends.storyboard */,
+				96D745B01CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift */,
+			);
+			path = YiMaiAddFriends;
+			sourceTree = "<group>";
+		};
+		96D745AC1CF5C14D00E345E3 /* Acions */ = {
+			isa = PBXGroup;
+			children = (
+				96D745B51CF5C2C500E345E3 /* YiMaiAddFriendsActions.swift */,
+			);
+			path = Acions;
+			sourceTree = "<group>";
+		};
+		96D745AD1CF5C14D00E345E3 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				96D745B71CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -800,6 +836,7 @@
 				9612DB641CC9F71F00262D2E /* PageRegisterPersonalInfo.storyboard in Resources */,
 				9612DB3C1CC8B5DB00262D2E /* PageIndex.storyboard in Resources */,
 				9672FB421CD2222200BC7E40 /* PageMyAdmissionsList.storyboard in Resources */,
+				96D745B21CF5C1B700E345E3 /* PageYiMaiAddFriends.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +898,7 @@
 				9612DB421CC8B7C500262D2E /* PageIndexTopView.swift in Sources */,
 				9612DB611CC9F71F00262D2E /* PageRegisterInputHospitalBodyView.swift in Sources */,
 				9619EF531CC1DB9600F69CBC /* ViewController.swift in Sources */,
+				96D745B11CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift in Sources */,
 				9619EF7C1CC1FF2400F69CBC /* YMIndexStrings.swift in Sources */,
 				9612DB651CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift in Sources */,
 				9672FB3C1CD1C35500BC7E40 /* PageMessageListBodyView.swift in Sources */,
@@ -886,6 +924,7 @@
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
 				96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */,
 				9612DB5F1CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift in Sources */,
+				96D745B81CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift in Sources */,
 				9612DB621CC9F71F00262D2E /* PageRegisterInputHospitalViewController.swift in Sources */,
 				96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */,
 				96637A751CC22DE000DBD1CF /* YMSizes.swift in Sources */,
@@ -914,6 +953,7 @@
 				96331B091CC8762600E53125 /* YMButton.swift in Sources */,
 				96637A851CC24BCD00DBD1CF /* PageLoginBodyView.swift in Sources */,
 				9612DB661CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift in Sources */,
+				96D745B61CF5C2C500E345E3 /* YiMaiAddFriendsActions.swift in Sources */,
 				9672FB1E1CCF4D3100BC7E40 /* YMFonts.swift in Sources */,
 				9612DB631CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift in Sources */,
 				96D745AA1CF59D2200E345E3 /* PageYiMaiR2BodyView.swift in Sources */,
@@ -1045,6 +1085,14 @@
 				9672FB431CD2222200BC7E40 /* Base */,
 			);
 			name = PageMyAdmissionsList.storyboard;
+			sourceTree = "<group>";
+		};
+		96D745B41CF5C1B700E345E3 /* PageYiMaiAddFriends.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96D745B31CF5C1B700E345E3 /* Base */,
+			);
+			name = PageYiMaiAddFriends.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

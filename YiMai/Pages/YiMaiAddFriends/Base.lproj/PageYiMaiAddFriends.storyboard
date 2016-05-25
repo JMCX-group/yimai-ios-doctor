@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="h8f-jE-Jhp">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--Page Yi Mai Add Friends View Controller-->
+        <scene sceneID="azz-SN-0mA">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="h8f-jE-Jhp" customClass="PageYiMaiAddFriendsViewController" customModule="YiMai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jc6-Ux-gRo"/>
+                        <viewControllerLayoutGuide type="bottom" id="IlL-st-xhd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YeG-9f-yLT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FOl-kC-1lV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="543" y="609"/>
+        </scene>
+    </scenes>
+</document>

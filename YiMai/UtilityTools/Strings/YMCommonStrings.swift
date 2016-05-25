@@ -36,4 +36,6 @@ public class YMCommonStrings {
     public static let CS_PAGE_FACE_2_FACE_QR_NAME = "PageFace2FaceQR"
     public static let CS_PAGE_MASSAGE_LIST_NAME = "PageMessageList"
     public static let CS_PAGE_MY_ADMISSIONS_LIST_NAME = "PageMyAdmissionsList"
+    
+    public static let CS_PAGE_YIMAI_ADD_FRIENDS_NAME = "PageYiMaiAddFriends"
 }

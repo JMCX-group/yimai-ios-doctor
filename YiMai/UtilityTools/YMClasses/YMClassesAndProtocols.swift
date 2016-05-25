@@ -21,7 +21,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_FACE_2_FACE_QR_NAME:true,
         YMCommonStrings.CS_PAGE_MASSAGE_LIST_NAME:true,
         YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME:true,
-        YMCommonStrings.CS_PAGE_YIMAI_NAME:true
+        YMCommonStrings.CS_PAGE_YIMAI_NAME:true,
+        YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME:true
     ]
 }
 
@@ -38,6 +39,10 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
     public var NavController : UINavigationController? = nil
     public var JumpWidthAnimate = true
     public var Target: AnyObject? = nil
+    
+    public static let PageJumToSel: Selector = "PageJumpTo:"
+    public static let PageJumpToByViewSenderSel: Selector = "PageJumpToByViewSender:"
+    public static let PageJumpToByImageViewSenderSel: Selector = "PageJumpToByImageViewSender:"
     
     convenience init(navController: UINavigationController?) {
         self.init()

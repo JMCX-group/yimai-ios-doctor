@@ -22,6 +22,7 @@ public class PageYiMaiTopView: NSObject {
     
     private let R1TabSelector: Selector = "YiMaiR1TabTouched:"
     private let R2TabSelector: Selector = "YiMaiR2TabTouched:"
+    private let AddFriendsSelector: Selector = "AddFriendButtonTouched:"
     
     private let TopView = UIView()
     
@@ -56,7 +57,8 @@ public class PageYiMaiTopView: NSObject {
         QRButton = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: "QRButtonTouched:", image: qrImage!)
         
         let addFriendImage = UIImage(named: "PageYiMaiAddFriendButton")
-        AddFriendButton = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: "AddFriendButtonTouched:", image: addFriendImage!)
+        AddFriendButton = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: PageJumpActions.PageJumpToByImageViewSenderSel, image: addFriendImage!)
+        AddFriendButton?.UserStringData = YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME
         
         TopView.addSubview(QRButton!)
         TopView.addSubview(AddFriendButton!)

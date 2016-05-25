@@ -15,7 +15,7 @@ public class PageYiMaiActions: PageJumpActions{
     }
     
     public func AddFriendButtonTouched(sender : UITapGestureRecognizer) {
-        
+//        sender.numberOfTapsRequir
     }
     
     public func FriendCellTouched(sender : UITapGestureRecognizer) {
