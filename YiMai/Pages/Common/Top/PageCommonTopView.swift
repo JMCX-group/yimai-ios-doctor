@@ -10,7 +10,7 @@ import Foundation
 import Neon
 
 public class PageCommonTopView : NSObject {
-    private let TopViewPanel : UIView = UIView()
+    public let TopViewPanel : UIView = UIView()
     private var TopBackground = UIImageView()
     private var TopTitle = UILabel()
     private var TopGoBackBtn = UIImageView()

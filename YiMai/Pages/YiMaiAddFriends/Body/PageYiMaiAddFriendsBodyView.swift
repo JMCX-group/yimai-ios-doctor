@@ -13,22 +13,21 @@ public class PageYiMaiAddFriendsBodyView: PageBodyView {
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.PanelBackgroundGray
-        
-        DrawSpecialManualAddButton()
         DrawContent()
     }
     
-    private func DrawSpecialManualAddButton() {
+    public func DrawSpecialManualAddButton(topView: UIView) {
         let manualAddButton = YMButton()
         
-        ParentView?.addSubview(manualAddButton)
+        topView.addSubview(manualAddButton)
         manualAddButton.setTitle("直接添加", forState: UIControlState.Normal)
         manualAddButton.titleLabel?.font = YMFonts.YMDefaultFont(30.LayoutVal())
         manualAddButton.titleLabel?.textColor = YMColors.White
         manualAddButton.sizeToFit()
-        manualAddButton.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 70.LayoutVal(), width: manualAddButton.width, height: manualAddButton.height)
+        manualAddButton.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 54.LayoutVal(), width: manualAddButton.width, height: manualAddButton.height)
         
-        manualAddButton.layer.zPosition = 1.0
+        manualAddButton.UserStringData = YMCommonStrings.CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME
+        manualAddButton.addTarget(self.Actions!, action: PageJumpActions.PageJumToSel, forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     private func DrawContent() {

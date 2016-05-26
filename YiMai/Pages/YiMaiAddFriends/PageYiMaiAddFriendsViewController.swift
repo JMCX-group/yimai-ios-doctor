@@ -18,8 +18,10 @@ class PageYiMaiAddFriendsViewController: PageViewController {
         if(PageLayoutFlag) {return}
         PageLayoutFlag=true
         
-        Actions = YiMaiAddFriendsActions(navController: NavController)
+        Actions = YiMaiAddFriendsActions(navController: NavController, target: self)
         BodyView = PageYiMaiAddFriendsBodyView(parentView: SelfView!, navController: NavController!, pageActions: Actions!)
         TopView = PageCommonTopView(parentView: SelfView!, titleString: "添加", navController: NavController)
+        
+        BodyView?.DrawSpecialManualAddButton(TopView!.TopViewPanel)
     }
 }

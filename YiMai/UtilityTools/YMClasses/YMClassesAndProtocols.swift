@@ -22,7 +22,9 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_MASSAGE_LIST_NAME:true,
         YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME:true,
         YMCommonStrings.CS_PAGE_YIMAI_NAME:true,
-        YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME:true
+        YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME:true,
+        YMCommonStrings.CS_PAGE_YIMAI_ADD_CONTCATS_FRIENDS_NAME:true,
+        YMCommonStrings.CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME:true
     ]
 }
 

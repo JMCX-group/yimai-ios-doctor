@@ -38,4 +38,6 @@ public class YMCommonStrings {
     public static let CS_PAGE_MY_ADMISSIONS_LIST_NAME = "PageMyAdmissionsList"
     
     public static let CS_PAGE_YIMAI_ADD_FRIENDS_NAME = "PageYiMaiAddFriends"
+    public static let CS_PAGE_YIMAI_ADD_CONTCATS_FRIENDS_NAME = "PageYiMaiAddContactsFriends"
+    public static let CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME = "PageYiMaiManualAddFriend"
 }
