@@ -31,18 +31,24 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
     }
     
     public func AddFriend(sender: UIGestureRecognizer) {
+        let viewController = self.Target as! PageYiMaiManualAddFriendViewController
+        viewController.BodyView?.ClearBody()
+        viewController.BodyView?.ClearInput()
+
         let alertController = UIAlertController(title: "添加成功", message: "等待对方验证", preferredStyle: .Alert)
         let goBack = UIAlertAction(title: "返回", style: .Default,
             handler: {
                 action in
-                
+                self.NavController?.popViewControllerAnimated(true)
         })
         
-        let goOn = UIAlertAction(title: "返回", style: .Default,
+        let goOn = UIAlertAction(title: "继续添加", style: .Default,
             handler: {
                 action in
-                
         })
+        
+        goBack.setValue(YMColors.FontGray, forKey: "titleTextColor")
+        goOn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
         
         alertController.addAction(goBack)
         alertController.addAction(goOn)
@@ -50,7 +56,28 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
     }
     
     public func InvitFriend(sender: UIGestureRecognizer) {
+        let viewController = self.Target as! PageYiMaiManualAddFriendViewController
+        viewController.BodyView?.ClearBody()
+        viewController.BodyView?.ClearInput()
         
+        let alertController = UIAlertController(title: "已经邀请", message: "等待对方同意", preferredStyle: .Alert)
+        let goBack = UIAlertAction(title: "返回", style: .Default,
+            handler: {
+                action in
+                self.NavController?.popViewControllerAnimated(true)
+        })
+        
+        let goOn = UIAlertAction(title: "继续添加", style: .Default,
+            handler: {
+                action in
+        })
+        
+        goBack.setValue(YMColors.FontGray, forKey: "titleTextColor")
+        goOn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        
+        alertController.addAction(goBack)
+        alertController.addAction(goOn)
+        self.NavController!.presentViewController(alertController, animated: true, completion: nil)
     }
     
     public func QRScan(sender: UIGestureRecognizer) {

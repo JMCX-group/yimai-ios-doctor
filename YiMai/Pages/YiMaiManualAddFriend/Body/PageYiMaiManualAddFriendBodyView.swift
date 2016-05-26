@@ -219,11 +219,15 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         titleLabel.anchorInCenter(width: titleLabel.width, height: titleLabel.height)
     }
     
-    private func ClearBody() {
+    public func ClearBody() {
         ResultPanel?.hidden = true
         AddButton?.hidden = true
         InviteButton?.hidden = true
         AlertButton?.hidden = true
+    }
+    
+    public func ClearInput() {
+        SearchTextFeild?.text = ""
     }
     
     public func ShowAddPage(data: [String : AnyObject]) {
