@@ -18,6 +18,7 @@ PODS:
   - Neon (0.0.3)
   - ORStackView (3.0.1):
     - FLKAutoLayout (~> 0.2)
+  - Proposer (0.9.0)
   - swiftScan (1.0.7)
   - SwiftyJSON (2.3.2)
 
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - AFNetworking
   - Neon
   - ORStackView
+  - Proposer
   - swiftScan
   - SwiftyJSON
 
@@ -33,9 +35,10 @@ SPEC CHECKSUMS:
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   Neon: 589d3d217d326abe09726bf81add106cff685bf2
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
+  Proposer: 231565a8b6bbb1816f3670d6471e6a84e582c80c
   swiftScan: 45ecba9a337706f253e0d5a80b7510a7fd03223b
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: c9c438b059ac1470de74a915e71822e8e33aa83a
+PODFILE CHECKSUM: 4025ab999279f1f37207cdf84a63b04ea8105167
 
-COCOAPODS: 1.0.0.beta.6
+COCOAPODS: 1.0.0

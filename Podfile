@@ -9,5 +9,6 @@ target 'YiMai' do
   pod 'SwiftyJSON'
   pod 'Neon'
   pod 'swiftScan'
+  pod 'Proposer'
 end
 

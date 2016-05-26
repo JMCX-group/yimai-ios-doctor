@@ -9,4 +9,8 @@
 import Foundation
 import UIKit
 
-public class YiMaiAddFriendsActions: PageJumpActions{}
+public class YiMaiAddFriendsActions: PageJumpActions{
+    public func NextStep(sender : UITapGestureRecognizer) {
+        
+    }
+}
