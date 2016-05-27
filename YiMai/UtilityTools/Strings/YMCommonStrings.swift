@@ -40,4 +40,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_YIMAI_ADD_FRIENDS_NAME = "PageYiMaiAddFriends"
     public static let CS_PAGE_YIMAI_ADD_CONTCATS_FRIENDS_NAME = "PageYiMaiAddContactsFriends"
     public static let CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME = "PageYiMaiManualAddFriend"
+    public static let CS_PAGE_YIMAI_SAME_AREAS_NAME = "PageYiMaiSameAreas"
+    public static let CS_PAGE_YIMAI_SAME_SCHOOL_NAME = "PageYiMaiSameSchool"
+    public static let CS_PAGE_YIMAI_SAME_HOSPITAL_NAME = "PageYiMaiSameHospital"
 }

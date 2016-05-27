@@ -24,7 +24,11 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_YIMAI_NAME:true,
         YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME:true,
         YMCommonStrings.CS_PAGE_YIMAI_ADD_CONTCATS_FRIENDS_NAME:true,
-        YMCommonStrings.CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME:true
+        YMCommonStrings.CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME:true,
+        YMCommonStrings.CS_PAGE_YIMAI_SAME_AREAS_NAME:true,
+        YMCommonStrings.CS_PAGE_YIMAI_SAME_SCHOOL_NAME:true,
+        YMCommonStrings.CS_PAGE_YIMAI_SAME_HOSPITAL_NAME:true
+
     ]
 }
 

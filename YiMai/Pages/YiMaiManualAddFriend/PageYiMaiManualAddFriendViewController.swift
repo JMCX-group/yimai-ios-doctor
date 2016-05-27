@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PageYiMaiManualAddFriendViewController: PageViewController {
+public class PageYiMaiManualAddFriendViewController: PageViewController {
     private var Actions: YiMaiManualAddFriendActions? = nil
     public var BodyView: PageYiMaiManualAddFriendBodyView? = nil
     

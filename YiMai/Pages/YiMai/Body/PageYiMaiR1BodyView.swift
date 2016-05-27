@@ -71,12 +71,11 @@ public class PageYiMaiR1BodyView: PageBodyView {
                 countLabel.layer.cornerRadius = countLabel.bounds.height / 2
                 countLabel.layer.masksToBounds = true;
             }
-            
         }
         
-        SameHopitalButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
-        SameSchoolButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
-        SameAreasButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
+        SameHopitalButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector, userStringData: YMCommonStrings.CS_PAGE_YIMAI_SAME_HOSPITAL_NAME)
+        SameSchoolButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector, userStringData: YMCommonStrings.CS_PAGE_YIMAI_SAME_SCHOOL_NAME)
+        SameAreasButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector, userStringData: YMCommonStrings.CS_PAGE_YIMAI_SAME_AREAS_NAME)
         
         OperationPanel.addSubview(SameHopitalButton!)
         OperationPanel.addSubview(SameAreasButton!)
