@@ -7,7 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 public class PageAppointmentActions: PageJumpActions {
+    public func PhotoScrollLeft(sender: UIGestureRecognizer) {
+        
+    }
     
+    public func PhotoScrollRight(sender: UIGestureRecognizer) {
+        
+    }
+    
+    public func PhotoSelect(sender: UIGestureRecognizer) {
+        
+    }
 }

@@ -81,7 +81,7 @@ public class PageIndexBodyView {
         OperatorPanel.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 520.LayoutVal(), otherSize: 200.LayoutVal())
         
         Face2FaceButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:", userStringData: YMCommonStrings.CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME)
-        DoctorAppointmentButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:")
+        DoctorAppointmentButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:", userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
         AdmissionsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:")
         RecordsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:")
         
