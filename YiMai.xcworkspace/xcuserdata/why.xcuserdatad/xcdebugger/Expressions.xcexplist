@@ -3,13 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "PagePersonalBodyView.(DrawAnOperationPanel in _5FB8C994EA2930BDEF9C8AA24CEB93A2)(String, icon : String, title : String) -&gt; YMTouchableView:PagePersonalBodyView.swift">
+         contextName = "PageLoginActions.PageJumpTo(YMButton) -&gt; ():PageLoginActions.swift">
          <PersistentStrings>
             <PersistentString
-               value = "icon">
+               value = "sender.UserStringData">
             </PersistentString>
             <PersistentString
-               value = "rightArrow.height">
+               value = "self.NavController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,10 +22,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "static YMLayout.GetStoryboardControllerByName(String) -&gt; UIViewController?:YMLayout.swift">
+         contextName = "PagePersonalBodyView.(DrawOperations in _5FB8C994EA2930BDEF9C8AA24CEB93A2)() -&gt; ():PagePersonalBodyView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "storyboardName">
+               value = "OperationArray">
+            </PersistentString>
+            <PersistentString
+               value = "BodyTopPadding">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PagePersonalBodyView.(DrawAnOperationPanel in _5FB8C994EA2930BDEF9C8AA24CEB93A2)(String, icon : String, title : String) -&gt; YMTouchableView:PagePersonalBodyView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "icon">
+            </PersistentString>
+            <PersistentString
+               value = "rightArrow.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -38,24 +52,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PagePersonalBodyView.(DrawOperations in _5FB8C994EA2930BDEF9C8AA24CEB93A2)() -&gt; ():PagePersonalBodyView.swift">
+         contextName = "PageYiMaiAddContactsFriendsBodyView.(DrawSpecialManualAddButton in _7FE8F7EA7FB8A6F24EE9AFDCE778C986)() -&gt; ():PageYiMaiAddContactsFriendsBodyView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "BodyTopPadding">
+               value = "self.Actions as! PageJumpActions">
             </PersistentString>
             <PersistentString
-               value = "OperationArray">
+               value = "PageJumpActions.PageJumToSel">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PageLoginActions.PageJumpTo(YMButton) -&gt; ():PageLoginActions.swift">
+         contextName = "static YMLayout.GetStoryboardControllerByName(String) -&gt; UIViewController?:YMLayout.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.NavController">
-            </PersistentString>
-            <PersistentString
-               value = "sender.UserStringData">
+               value = "storyboardName">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
