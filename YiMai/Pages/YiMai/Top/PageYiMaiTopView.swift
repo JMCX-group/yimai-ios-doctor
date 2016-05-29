@@ -20,9 +20,9 @@ public class PageYiMaiTopView: NSObject {
     
     public static var TabButtonIndex = YMYiMaiStrings.CS_TOP_TAB_R1_BUTTON_TITLE
     
-    private let R1TabSelector: Selector = "YiMaiR1TabTouched:"
-    private let R2TabSelector: Selector = "YiMaiR2TabTouched:"
-    private let AddFriendsSelector: Selector = "AddFriendButtonTouched:"
+    private let R1TabSelector: Selector = "YiMaiR1TabTouched:".Sel()
+    private let R2TabSelector: Selector = "YiMaiR2TabTouched:".Sel()
+    private let AddFriendsSelector: Selector = "AddFriendButtonTouched:".Sel()
     
     private let TopView = UIView()
     
@@ -54,7 +54,9 @@ public class PageYiMaiTopView: NSObject {
     
     private func DrawTopButtons() {
         let qrImage = UIImage(named: "TopViewQRButton")
-        QRButton = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: "QRButtonTouched:", image: qrImage!)
+        QRButton = YMLayout.GetTouchableImageView(useObject: self.Actions!,
+                                                  useMethod: "QRButtonTouched:".Sel(),
+                                                  image: qrImage!)
         
         let addFriendImage = UIImage(named: "PageYiMaiAddFriendButton")
         AddFriendButton = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: PageJumpActions.PageJumpToByImageViewSenderSel, image: addFriendImage!)

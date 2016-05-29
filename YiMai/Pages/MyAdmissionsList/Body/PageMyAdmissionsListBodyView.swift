@@ -56,7 +56,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         let clearButton = YMButton()
         ParentView?.addSubview(clearButton)
         
-        clearButton.addTarget(Actions, action: "ClearMessageList:", forControlEvents: UIControlEvents.TouchUpInside)
+        clearButton.addTarget(Actions, action: "ClearMessageList:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         
         clearButton.setTitle("清空", forState: UIControlState.Normal)
         clearButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
@@ -102,7 +102,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
     
     private func DrawMessagePanel(msg: YMMyAdmissionsMessage, viewBefore: UIView? = nil) -> UIView{
         let msgPanel = UIView()
-        let timeLabel = DrawTimeLabel(msg, viewBefore: viewBefore)
+        let _ = DrawTimeLabel(msg, viewBefore: viewBefore)
         
         BodyView.addSubview(msgPanel)
         

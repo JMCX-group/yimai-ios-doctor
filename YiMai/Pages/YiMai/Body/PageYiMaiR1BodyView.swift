@@ -20,8 +20,8 @@ public class PageYiMaiR1BodyView: PageBodyView {
     private let NewFriendsPanel = UIView()
     private let FriendsPanel = UIView()
     
-    private let OperationSelector:Selector = "PageJumpToByViewSender:"
-    private let FriendCellTouched: Selector = "FriendButtonTouched:"
+    private let OperationSelector:Selector = "PageJumpToByViewSender:".Sel()
+    private let FriendCellTouched: Selector = "FriendButtonTouched:".Sel()
 
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
@@ -158,7 +158,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
     }
     
     private func DrawFriendsCell(data: [String: AnyObject], prevCell: YMTouchableView?) -> YMTouchableView {
-        let headUrl = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
+        let _ = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String

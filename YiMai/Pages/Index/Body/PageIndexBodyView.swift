@@ -80,10 +80,16 @@ public class PageIndexBodyView {
 
         OperatorPanel.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 520.LayoutVal(), otherSize: 200.LayoutVal())
         
-        Face2FaceButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:", userStringData: YMCommonStrings.CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME)
-        DoctorAppointmentButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:", userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
-        AdmissionsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:")
-        RecordsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:")
+        Face2FaceButton = YMLayout.GetTouchableView(useObject: Actions!,
+                                                    useMethod: "PageJumpToByViewSender:".Sel(),
+                                                    userStringData: YMCommonStrings.CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME)
+        
+        DoctorAppointmentButton = YMLayout.GetTouchableView(useObject: Actions!,
+                                                            useMethod: "PageJumpToByViewSender:".Sel(),
+                                                            userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
+        
+        AdmissionsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
+        RecordsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
         
         OperatorPanel.addSubview(Face2FaceButton!)
         OperatorPanel.addSubview(DoctorAppointmentButton!)
@@ -101,8 +107,11 @@ public class PageIndexBodyView {
     private func DrawDoctorAuthPanel() {
         BodyView.addSubview(DoDoctorAuthPanel)
         DoDoctorAuthPanel.backgroundColor = YMColors.White
-        DoDoctorAuthPanel.align(Align.UnderMatchingLeft, relativeTo: OperatorPanel, padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 110.LayoutVal())
-        DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "PageJumpToByImageViewSender:", imageName: "IndexButtonGoAuth")
+        DoDoctorAuthPanel.align(Align.UnderMatchingLeft, relativeTo: OperatorPanel,
+                                padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 110.LayoutVal())
+        DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                          useMethod: "PageJumpToByImageViewSender:".Sel(),
+                                                          imageName: "IndexButtonGoAuth")
 
         let authHeadline = UILabel()
         authHeadline.font = UIFont.systemFontOfSize(30.LayoutVal())
@@ -126,7 +135,7 @@ public class PageIndexBodyView {
     }
     
     private func GetContactButton(image: UIImage, name: String, desc: String) -> UIView {
-        let buttonView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByImageViewSender:")
+        let buttonView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByImageViewSender:".Sel())
         buttonView.frame = CGRect(x: 0,y: 0,width: 190.LayoutVal(), height: 260.LayoutVal())
         buttonView.backgroundColor = YMColors.PanelBackgroundGray
 
@@ -183,7 +192,7 @@ public class PageIndexBodyView {
         
         LayoutContactButtons()
         
-        MoreContactButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "", imageName: "IndexButtonMoreGray")
+        MoreContactButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "".Sel(), imageName: "IndexButtonMoreGray")
     }
 }
 

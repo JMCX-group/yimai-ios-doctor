@@ -20,14 +20,16 @@ public class PageAppointmentBodyView: PageBodyView {
     private var PhotoScrollLeftButton: YMTouchableView? = nil
     private var PhotoScrollRightButton: YMTouchableView? = nil
     
-    private var SelectDocotorPanel: UIView? = nil
-    private var SelectDocotorButton: YMTouchableView? = nil
-    private let SelectDocotorButtonIcon = YMLayout.GetSuitableImageView("PageAppointmentAddDocotorIcon")
-    private let SelectDocotorButtonLabel = UILabel()
+    private var SelectDoctorPanel: UIView? = nil
+    private var SelectDoctorButton: YMTouchableView? = nil
+    private let SelectDoctorButtonIcon = YMLayout.GetSuitableImageView("PageAppointmentAddDoctorIcon")
+    private let SelectDoctorButtonLabel = UILabel()
     
     private var SelectTimePanel: UIView? = nil
     private var SelectTimeButton: YMTouchableView? = nil
     private let SelectTimeLabel = UILabel()
+    
+    private var ConfirmButton: YMTouchableView? = nil
     
     public static var PatientBasicInfoString: String = ""
     public static var PatientConditionString: String = ""
@@ -44,44 +46,41 @@ public class PageAppointmentBodyView: PageBodyView {
         DrawPatientBasicInfoPanel()
         DrawPatientConditionPanel()
         DrawPhotoPanel()
-        DrawSelectDocotorPanel()
+        DrawSelectDoctorPanel()
         DrawSelectTimePanel()
         DrawPhotoButton()
+        DrawConfirmButton()
     }
     
-    private func BuildPatientInputPanel(placeholder: String, panel: UIView) {
-        let param = TextFieldCreateParam()
-        param.BackgroundColor = YMColors.None
-        param.Placholder = placeholder
-        param.FontSize = 28.LayoutVal()
+    private func DrawPatientTextLabel(text: String, panel: UIView, textColor: UIColor) {
+        let textLabel = UILabel()
+        textLabel.text = text;
+        textLabel.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        textLabel.textColor = textColor
+        textLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         
-        let textField = YMLayout.GetTextField(param)
-        textField.Editable = false
-        
-        panel.addSubview(textField)
-        textField.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: 630.LayoutVal(), height: 80.LayoutVal())
-        
-        let arrowIcon = YMLayout.GetSuitableImageView("CommonRightArrowIcon")
-        panel.addSubview(arrowIcon)
-        
-        arrowIcon.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: arrowIcon.width, height: arrowIcon.height)
+        panel.addSubview(textLabel)
+        textLabel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 630.LayoutVal(), height: 80.LayoutVal())
     }
     
     private func DrawPatientBasicInfoPanel() {
-        PatientBasicInfoPanel = YMLayout.GetTouchableView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel, userStringData: "")
+        PatientBasicInfoPanel = YMLayout.GetTouchableView(useObject: Actions!,
+                                                          useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+                                                          userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_BASIC_INFO_NAME)
         BodyView.addSubview(PatientBasicInfoPanel!)
         PatientBasicInfoPanel?.anchorToEdge(Edge.Top, padding: 30.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
         
-        BuildPatientInputPanel("患者基本信息（必填）", panel: PatientBasicInfoPanel!)
+        DrawPatientTextLabel("患者基本信息（必填）", panel: PatientBasicInfoPanel!, textColor: YMColors.FontGray)
     }
     
     private func DrawPatientConditionPanel() {
-        PatientConditionPanel = YMLayout.GetTouchableView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel, userStringData: "")
+        PatientConditionPanel = YMLayout.GetTouchableView(useObject: Actions!,
+                                                          useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+                                                          userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME)
         BodyView.addSubview(PatientConditionPanel!)
         PatientConditionPanel?.align(Align.UnderMatchingLeft, relativeTo: PatientBasicInfoPanel!, padding: 1.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
-
-        BuildPatientInputPanel("现病史", panel: PatientConditionPanel!)
-
+        
+        DrawPatientTextLabel("现病史", panel: PatientConditionPanel!, textColor: YMColors.FontGray)
     }
     
     private func DrawPhotoPanel() {
@@ -95,8 +94,8 @@ public class PageAppointmentBodyView: PageBodyView {
         
         PhotoInnerPanel?.anchorInCorner(Corner.TopLeft, xPad: 58.LayoutVal(), yPad: 80.LayoutVal(), width: 635.LayoutVal(), height: 144.LayoutVal())
         
-        PhotoScrollLeftButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PhotoScrollLeft:")
-        PhotoScrollRightButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PhotoScrollRight:")
+        PhotoScrollLeftButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PhotoScrollLeft:".Sel())
+        PhotoScrollRightButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PhotoScrollRight:".Sel())
         
         PhotoPanel?.addSubview(PhotoScrollLeftButton!)
         PhotoPanel?.addSubview(PhotoScrollRightButton!)
@@ -148,7 +147,7 @@ public class PageAppointmentBodyView: PageBodyView {
         cell = GetTooltipCell("其他", prevCell: cell)
     }
     
-    private func DrawSelectDocotorPanel() {
+    private func DrawSelectDoctorPanel() {
         let titleLabel = UILabel()
         
         titleLabel.text = "选择医生"
@@ -156,30 +155,30 @@ public class PageAppointmentBodyView: PageBodyView {
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.sizeToFit()
         
-        SelectDocotorPanel = UIView()
-        BodyView.addSubview(SelectDocotorPanel!)
-        SelectDocotorPanel?.align(Align.UnderMatchingLeft, relativeTo: PhotoPanel!, padding: 0, width: YMSizes.PageWidth, height: 210.LayoutVal())
+        SelectDoctorPanel = UIView()
+        BodyView.addSubview(SelectDoctorPanel!)
+        SelectDoctorPanel?.align(Align.UnderMatchingLeft, relativeTo: PhotoPanel!, padding: 0, width: YMSizes.PageWidth, height: 210.LayoutVal())
         
-        SelectDocotorPanel?.addSubview(titleLabel)
+        SelectDoctorPanel?.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 60.LayoutVal())
         
-        SelectDocotorButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel, userStringData: "")
-        SelectDocotorPanel?.addSubview(SelectDocotorButton!)
-        SelectDocotorButton?.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 150.LayoutVal())
+        SelectDoctorButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel, userStringData: "")
+        SelectDoctorPanel?.addSubview(SelectDoctorButton!)
+        SelectDoctorButton?.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 150.LayoutVal())
         
-        SelectDocotorButton?.addSubview(SelectDocotorButtonIcon)
-        SelectDocotorButtonIcon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: SelectDocotorButtonIcon.width, height: SelectDocotorButtonIcon.height)
+        SelectDoctorButton?.addSubview(SelectDoctorButtonIcon)
+        SelectDoctorButtonIcon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: SelectDoctorButtonIcon.width, height: SelectDoctorButtonIcon.height)
         
-        SelectDocotorButtonLabel.textColor = YMColors.FontGray
-        SelectDocotorButtonLabel.text = "点击选择医生"
-        SelectDocotorButtonLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
-        SelectDocotorButtonLabel.sizeToFit()
+        SelectDoctorButtonLabel.textColor = YMColors.FontGray
+        SelectDoctorButtonLabel.text = "点击选择医生"
+        SelectDoctorButtonLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        SelectDoctorButtonLabel.sizeToFit()
         
-        SelectDocotorButton?.addSubview(SelectDocotorButtonLabel)
-        SelectDocotorButtonLabel.align(Align.ToTheRightCentered,
-            relativeTo: SelectDocotorButtonIcon,
+        SelectDoctorButton?.addSubview(SelectDoctorButtonLabel)
+        SelectDoctorButtonLabel.align(Align.ToTheRightCentered,
+            relativeTo: SelectDoctorButtonIcon,
             padding: 24.LayoutVal(),
-            width: SelectDocotorButtonLabel.width, height: SelectDocotorButtonLabel.height)
+            width: SelectDoctorButtonLabel.width, height: SelectDoctorButtonLabel.height)
     }
     
     private func DrawSelectTimePanel() {
@@ -192,7 +191,7 @@ public class PageAppointmentBodyView: PageBodyView {
         
         SelectTimePanel = UIView()
         BodyView.addSubview(SelectTimePanel!)
-        SelectTimePanel?.align(Align.UnderMatchingLeft, relativeTo: SelectDocotorPanel!, padding: 0, width: YMSizes.PageWidth, height: 144.LayoutVal())
+        SelectTimePanel?.align(Align.UnderMatchingLeft, relativeTo: SelectDoctorPanel!, padding: 0, width: YMSizes.PageWidth, height: 144.LayoutVal())
         
         SelectTimePanel?.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 60.LayoutVal())
@@ -212,10 +211,27 @@ public class PageAppointmentBodyView: PageBodyView {
     }
     
     private func DrawPhotoButton() {
-        let photoButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "PhotoSelect:", imageName: "PageAppointmentPhotoIcon")
+        let photoButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "PhotoSelect:".Sel(), imageName: "PageAppointmentPhotoIcon")
         
         BodyView.addSubview(photoButton)
         photoButton.anchorToEdge(Edge.Top, padding: 230.LayoutVal(), width: photoButton.width, height: photoButton.height)
+    }
+    
+    private func DrawConfirmButton() {
+        ConfirmButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoAppointment:".Sel())
+        ParentView!.addSubview(ConfirmButton!)
+        ConfirmButton?.anchorToEdge(Edge.Bottom, padding: 0.LayoutVal(), width: YMSizes.PageWidth, height: 98.LayoutVal())
+
+        ConfirmButton?.backgroundColor = YMColors.CommonBottomGray
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "发送预约请求"
+        titleLabel.textColor = YMColors.FontGray
+        titleLabel.font = YMFonts.YMDefaultFont(34.LayoutVal())
+        titleLabel.sizeToFit()
+        
+        ConfirmButton?.addSubview(titleLabel)
+        titleLabel.anchorInCenter(width: titleLabel.width, height: 98.LayoutVal())
     }
 }
 

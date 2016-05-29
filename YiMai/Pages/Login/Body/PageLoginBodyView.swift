@@ -122,13 +122,17 @@ public class PageLoginBodyView: NSObject {
         RegisterButton.UserStringData = YMCommonStrings.CS_PAGE_REGISTER_NAME
         ForgotButton.UserStringData = YMCommonStrings.CS_PAGE_FORGOT_NAME
         
-        LoginButton.addTarget(self.Actions, action: "DoLogin:", forControlEvents: UIControlEvents.TouchUpInside)
-        RegisterButton.addTarget(self.Actions, action: "PageJumpTo:", forControlEvents: UIControlEvents.TouchUpInside)
-        ForgotButton.addTarget(self.Actions, action: "PageJumpTo:", forControlEvents: UIControlEvents.TouchUpInside)
+        LoginButton.addTarget(self.Actions, action: "DoLogin:".Sel(),
+                              forControlEvents: UIControlEvents.TouchUpInside)
+        RegisterButton.addTarget(self.Actions, action: "PageJumpTo:".Sel(),
+                                 forControlEvents: UIControlEvents.TouchUpInside)
+        ForgotButton.addTarget(self.Actions, action: "PageJumpTo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     private func DrawButtonLayer(){
-        LoginButton = GetLoginButton(YMLoginStrings.CS_LOGIN_LABEL_TITLE, normalImage: "CommonXLButtonBackgroundGray", activtiyImage: "CommonXLButtonBackgroundBlue")
+        LoginButton = GetLoginButton(YMLoginStrings.CS_LOGIN_LABEL_TITLE,
+                                     normalImage: "CommonXLButtonBackgroundGray",
+                                     activtiyImage: "CommonXLButtonBackgroundBlue")
         ForgotButton = GetTextButton(YMLoginStrings.CS_FORGOT_LABEL_TITLE, align: UIControlContentHorizontalAlignment.Left)
         RegisterButton = GetTextButton(YMLoginStrings.CS_REGISTER_LABEL_TITLE, align: UIControlContentHorizontalAlignment.Right)
         

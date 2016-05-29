@@ -11,7 +11,6 @@ import UIKit
 public class PageAppointmentViewController: PageViewController {
     private var Actions: PageAppointmentActions? = nil
     private var BodyView: PageAppointmentBodyView? = nil
-    private var BottomButton: PageAppointmentBottomView? = nil
     
     public override func PageLayout() {
         if(nil != BodyView) {
@@ -25,7 +24,6 @@ public class PageAppointmentViewController: PageViewController {
         super.PageLayout()
         Actions = PageAppointmentActions(navController: self.NavController, target: self)
         BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
-        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约")
-        BottomButton = PageAppointmentBottomView(parent: self.SelfView!)
+        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
     }
 }

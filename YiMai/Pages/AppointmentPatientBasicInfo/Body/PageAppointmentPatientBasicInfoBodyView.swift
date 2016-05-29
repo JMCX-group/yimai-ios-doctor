@@ -1,0 +1,160 @@
+//
+//  PageAppointmentPatientBasicInfoBodyView.swift
+//  YiMai
+//
+//  Created by ios-dev on 16/5/28.
+//  Copyright © 2016年 why. All rights reserved.
+//
+
+import Foundation
+import Neon
+
+public class PageAppointmentPatientBasicInfoBodyView: PageBodyView{
+    private var PatientNamePanel = UIView()
+    private var PatientPhonePanel = UIView()
+    private var PatientGenderPanel = UIView()
+    private var PatientAgePanel = UIView()
+    
+    private var PatientNameInput: YMTextField? = nil
+    private var PatientPhoneInput: YMTextField? = nil
+    private var PatientGenderInput: YMTextField? = nil
+    private var PatientAgeInput: YMTextField? = nil
+    
+    public static var PatientName: String = ""
+    public static var PatientPhone: String = ""
+    public static var PatientGender: String = ""
+    public static var PatientAge: String = ""
+    
+    private var ConfirmButton: YMTouchableView? = nil
+
+    
+    public func Reload(){}
+    
+    override func ViewLayout() {
+        YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
+        BodyView.backgroundColor = YMColors.PanelBackgroundGray
+
+        DrawInputGroup()
+        DrawConfirmButton()
+    }
+    
+    public func ShowGenderSelector(textField: YMTextField) -> Bool {
+        let alertController = UIAlertController(title: "选择性别", message: nil, preferredStyle: .Alert)
+        let goBack = UIAlertAction(title: "男", style: .Default,
+                                   handler: {
+                                    action in
+                                    self.PatientGenderInput?.text = "男"
+        })
+        
+        let goOn = UIAlertAction(title: "女", style: .Default,
+                                 handler: {
+                                    action in
+                                    self.PatientGenderInput?.text = "女"
+
+        })
+        
+        goBack.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        goOn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        
+        alertController.addAction(goBack)
+        alertController.addAction(goOn)
+        self.NavController!.presentViewController(alertController, animated: true, completion: nil)
+        return false
+    }
+    
+    private func DrawInputGroup() {
+        func BuildInputPanel(placeholder: String, inputWidth: CGFloat, panel: UIView, maxCount: Int, isPhone: Bool = false) -> YMTextField {
+            let param = TextFieldCreateParam()
+            
+            param.Placholder = placeholder
+            param.FontSize = 28.LayoutVal()
+            param.FontColor = YMColors.FontBlue
+            var input: YMTextField
+            if(isPhone) {
+                input = YMLayout.GetCellPhoneField(param)
+            } else {
+                input = YMLayout.GetTextFieldWithMaxCharCount(param, maxCharCount: maxCount)
+            }
+            
+            panel.addSubview(input)
+            input.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: inputWidth, height: 80.LayoutVal())
+
+            return input
+        }
+        
+        BodyView.addSubview(PatientNamePanel)
+        BodyView.addSubview(PatientPhonePanel)
+        BodyView.addSubview(PatientGenderPanel)
+        BodyView.addSubview(PatientAgePanel)
+        
+        PatientNamePanel.backgroundColor = YMColors.White
+        PatientPhonePanel.backgroundColor = YMColors.White
+        PatientGenderPanel.backgroundColor = YMColors.White
+        PatientAgePanel.backgroundColor = YMColors.White
+        
+        PatientNamePanel.anchorToEdge(Edge.Top, padding: 30.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
+        PatientPhonePanel.align(Align.UnderMatchingLeft, relativeTo: PatientNamePanel,
+                               padding: 1, width: YMSizes.PageWidth, height: 80.LayoutVal())
+        PatientGenderPanel.align(Align.UnderMatchingLeft, relativeTo: PatientPhonePanel,
+                                padding: 1, width: YMSizes.PageWidth, height: 80.LayoutVal())
+        PatientAgePanel.align(Align.UnderMatchingLeft, relativeTo: PatientGenderPanel,
+                                padding: 1, width: YMSizes.PageWidth, height: 80.LayoutVal())
+
+        PatientNameInput = BuildInputPanel("患者姓名（必填）", inputWidth: 670.LayoutVal(), panel: PatientNamePanel, maxCount: 100)
+        PatientPhoneInput = BuildInputPanel("电话（必填）", inputWidth: 400.LayoutVal(), panel: PatientPhonePanel, maxCount: 13, isPhone: true)
+        PatientGenderInput = BuildInputPanel("性别", inputWidth: 670.LayoutVal(), panel: PatientGenderPanel, maxCount: 1)
+        PatientAgeInput = BuildInputPanel("年龄", inputWidth: 670.LayoutVal(), panel: PatientAgePanel, maxCount: 3)
+        PatientAgeInput?.keyboardType = UIKeyboardType.NumberPad
+        
+        PatientGenderInput?.EditStartCallback = self.ShowGenderSelector
+    }
+    
+    private func DrawConfirmButton() {
+        ConfirmButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoAppointment:".Sel())
+        ParentView!.addSubview(ConfirmButton!)
+        ConfirmButton?.anchorToEdge(Edge.Bottom, padding: 0.LayoutVal(), width: YMSizes.PageWidth, height: 98.LayoutVal())
+
+        ConfirmButton?.backgroundColor = YMColors.CommonBottomGray
+
+        let titleLabel = UILabel()
+        titleLabel.text = "完 成"
+        titleLabel.textColor = YMColors.FontGray
+        titleLabel.font = YMFonts.YMDefaultFont(34.LayoutVal())
+        titleLabel.sizeToFit()
+
+        ConfirmButton?.addSubview(titleLabel)
+        titleLabel.anchorInCenter(width: titleLabel.width, height: 98.LayoutVal())
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

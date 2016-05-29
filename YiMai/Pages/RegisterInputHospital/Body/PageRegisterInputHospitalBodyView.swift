@@ -59,6 +59,6 @@ public class PageRegisterInputHospitalBodyView: NSObject {
         OKButton?.titleLabel?.font = UIFont.systemFontOfSize(26.LayoutVal())
         OKButton?.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
         
-        OKButton?.addTarget(Actions, action: "PageJumpTo:", forControlEvents: UIControlEvents.TouchUpInside)
+        OKButton?.addTarget(Actions, action: "PageJumpTo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
 }

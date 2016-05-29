@@ -38,3 +38,9 @@ extension Int {
         return CGFloat(self) / 255
     }
 }
+
+extension String {
+    public func Sel() -> Selector {
+        return Selector(self)
+    }
+}

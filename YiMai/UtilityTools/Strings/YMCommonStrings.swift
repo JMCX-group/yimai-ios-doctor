@@ -45,4 +45,6 @@ public class YMCommonStrings {
     public static let CS_PAGE_YIMAI_SAME_HOSPITAL_NAME = "PageYiMaiSameHospital"
     
     public static let CS_PAGE_APPOINTMENT_NAME = "PageAppointment"
+    public static let CS_PAGE_APPOINTMENT_PATIENT_BASIC_INFO_NAME = "PageAppointmentBasicInfo"
+    public static let CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME = "PageAppointmentPatientCondition"
 }

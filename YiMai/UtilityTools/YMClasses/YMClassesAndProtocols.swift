@@ -28,7 +28,9 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_YIMAI_SAME_AREAS_NAME:true,
         YMCommonStrings.CS_PAGE_YIMAI_SAME_SCHOOL_NAME:true,
         YMCommonStrings.CS_PAGE_YIMAI_SAME_HOSPITAL_NAME:true,
-        YMCommonStrings.CS_PAGE_APPOINTMENT_NAME:true
+        YMCommonStrings.CS_PAGE_APPOINTMENT_NAME:true,
+        YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_BASIC_INFO_NAME: true,
+        YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME: true
     ]
 }
 
@@ -46,9 +48,9 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
     public var JumpWidthAnimate = true
     public var Target: AnyObject? = nil
     
-    public static let PageJumToSel: Selector = "PageJumpTo:"
-    public static let PageJumpToByViewSenderSel: Selector = "PageJumpToByViewSender:"
-    public static let PageJumpToByImageViewSenderSel: Selector = "PageJumpToByImageViewSender:"
+    public static let PageJumToSel: Selector = "PageJumpTo:".Sel()
+    public static let PageJumpToByViewSenderSel: Selector = "PageJumpToByViewSender:".Sel()
+    public static let PageJumpToByImageViewSenderSel: Selector = "PageJumpToByImageViewSender:".Sel()
     
     convenience init(navController: UINavigationController?) {
         self.init()
@@ -167,7 +169,10 @@ public class PageBodyView {
         self.ViewLayout()
     }
     
-    internal func ViewLayout(){}
+    internal func ViewLayout(){
+        YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
+        BodyView.backgroundColor = YMColors.PanelBackgroundGray
+    }
 }
 
 

@@ -11,4 +11,5 @@ import UIKit
 
 public class YMButton: UIButton {
     public var UserStringData: String = ""
+    public var UserObjectData: AnyObject? = nil
 }

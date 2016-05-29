@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class YMSelectors {
-    public static let PageJump: Selector = "PageJumpTo:"
-    public static let PageJumpByView: Selector = "PageJumpToByViewSender:"
-    public static let PageJumpByImageView: Selector = "PageJumpToByImageViewSender:"
+    public static let PageJump: Selector = "PageJumpTo:".Sel()
+    public static let PageJumpByView: Selector = "PageJumpToByViewSender:".Sel()
+    public static let PageJumpByImageView: Selector = "PageJumpToByImageViewSender:".Sel()
 }

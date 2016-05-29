@@ -45,7 +45,7 @@ public class PagePersonalBodyView {
     }
     
     private func DrawHotLinePanel(){
-        let hotlineView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:")
+        let hotlineView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
         hotlineView.UserStringData = YMCommonStrings.CS_PAGE_HOT_LINE_NAME
         hotlineView.frame = CGRect(x: 0,y: 0,width: YMSizes.PageWidth, height: OperationHeight)
         hotlineView.backgroundColor = YMColors.White
@@ -72,7 +72,7 @@ public class PagePersonalBodyView {
     }
     
     private func DrawAnOperationPanel(targetPage: String, iconName: String, title: String) -> YMTouchableView {
-        let touchableView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:")
+        let touchableView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
         touchableView.UserStringData = targetPage
         touchableView.frame = CGRect(x: 0,y: 0,width: YMSizes.PageWidth, height: OperationHeight)
         touchableView.backgroundColor = YMColors.White

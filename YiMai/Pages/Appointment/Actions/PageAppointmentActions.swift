@@ -21,4 +21,8 @@ public class PageAppointmentActions: PageJumpActions {
     public func PhotoSelect(sender: UIGestureRecognizer) {
         
     }
+    
+    public func DoAppointment(sender: UIGestureRecognizer) {
+        
+    }
 }

@@ -66,8 +66,8 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
     }
     
     private func DrawInputPanel() {
-        HospitalInput = GetTouchableReadonlyInput("医院", action: "ShowCitySelect:")
-        HospitalDepartmentInput = GetTouchableReadonlyInput("科室", action: "ShowCitySelect:")
+        HospitalInput = GetTouchableReadonlyInput("医院", action: "ShowCitySelect:".Sel())
+        HospitalDepartmentInput = GetTouchableReadonlyInput("科室", action: "ShowCitySelect:".Sel())
         
         
         let createParam = TextFieldCreateParam()
@@ -104,7 +104,7 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
         OKButton?.anchorToEdge(Edge.Top, padding: 383.LayoutVal(), width: 670.LayoutVal(), height: 90.LayoutVal())
         
         OKButton?.UserStringData = YMCommonStrings.CS_PAGE_INDEX_NAME
-        OKButton?.addTarget(Actions, action: "PageJumpTo:", forControlEvents: UIControlEvents.TouchUpInside)
+        OKButton?.addTarget(Actions, action: "PageJumpTo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
 }
 

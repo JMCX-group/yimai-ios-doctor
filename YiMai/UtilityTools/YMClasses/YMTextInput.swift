@@ -9,40 +9,61 @@
 import Foundation
 import UIKit
 
+public typealias YMTextFieldEditStartCallback = ((YMTextField) -> Bool)
+
 public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true;
     }
     
-    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if(!textField.isKindOfClass(YMTextField)) { return true }
-        
-        let realTextField = textField as! YMTextField
-        let curTextCount = textField.text?.characters.count
-        let maxCharactersCount : Int = realTextField.MaxCharCount
-
-        if(0 == maxCharactersCount){
-            return true
-        } else {
-            return (curTextCount < maxCharactersCount)
-        }
-    }
-    
     public func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if(!textField.isKindOfClass(YMTextField)) { return true }
         
         let realTextField = textField as! YMTextField
-        
-        print("text touched!")
+	
+        if(nil != realTextField.EditStartCallback) {
+            return realTextField.EditStartCallback!(realTextField)
+        }
         
         return realTextField.Editable
     }
+    
+    public func DidChange(textField: UITextField) {
+        if(!textField.isKindOfClass(YMTextField)) { return }
+        
+        let realTextField = textField as! YMTextField
+        let curTextCount = textField.text?.characters.count
+        let maxCharactersCount : Int = realTextField.MaxCharCount
+        
+        let selectedRange = realTextField.markedTextRange
+        let lang = realTextField.textInputMode?.primaryLanguage
+        let keboard = realTextField.keyboardType
+        
+        if("zh-Hans" == lang && UIKeyboardType.Default == keboard) {
+            print(selectedRange?.start)
+
+            if(nil == selectedRange) {
+                if(0 != maxCharactersCount){
+                    if(curTextCount > maxCharactersCount){
+                        realTextField.text = (realTextField.text! as NSString).substringToIndex(maxCharactersCount)
+                    }
+                }
+            }
+        } else {
+            if(0 != maxCharactersCount){
+                if(curTextCount > maxCharactersCount){
+                    realTextField.text = (realTextField.text! as NSString).substringToIndex(maxCharactersCount)
+                }
+            }
+        }
+    }
 }
 
-public class YMTextField : UITextField {
-    public var MaxCharCount : Int = 0
-    public var Editable : Bool = true
+public class YMTextField: UITextField {
+    public var MaxCharCount: Int = 0
+    public var Editable: Bool = true
+    public var EditStartCallback: YMTextFieldEditStartCallback? = nil
     private var YMDelegate = YMTextFieldDelegate()
     
     public func SetLeftPaddingWidth(leftPadding: CGFloat, paddingMode: UITextFieldViewMode = UITextFieldViewMode.Always) {
@@ -82,6 +103,8 @@ public class YMTextField : UITextField {
         } else {
             self.delegate = YMDelegate
         }
+        
+        self.addTarget(self.YMDelegate, action: "DidChange:".Sel(), forControlEvents: UIControlEvents.EditingChanged)
     }
 
     required public init?(coder aDecoder: NSCoder) {

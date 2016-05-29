@@ -67,6 +67,7 @@ public class PageRegisterSelectHospitalBodyView: NSObject {
         NotFoundButton?.titleLabel?.font = UIFont.systemFontOfSize(26.LayoutVal())
         NotFoundButton?.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
         
-        NotFoundButton?.addTarget(Actions, action: "PageJumpTo:", forControlEvents: UIControlEvents.TouchUpInside)
+        NotFoundButton?.addTarget(Actions, action: "PageJumpTo:".Sel(),
+                                  forControlEvents: UIControlEvents.TouchUpInside)
     }
 }

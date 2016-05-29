@@ -54,7 +54,7 @@ public class PageYiMaiAddFriendsBodyView: PageBodyView {
         BodyView.addSubview(tooltipLabel)
         tooltipLabel.align(Align.UnderCentered, relativeTo: textLabel, padding: 30.LayoutVal(), width: tooltipLabel.width, height: tooltipLabel.height)
         
-        let nextButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "NextStep:")
+        let nextButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "NextStep:".Sel())
         nextButton.backgroundColor = YMColors.None
         let title = UILabel(frame: CGRect(x: 0,y: 0,width: 230.LayoutVal(),height: 60.LayoutVal()))
         title.text = "下一步"

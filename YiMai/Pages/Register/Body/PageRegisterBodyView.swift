@@ -108,7 +108,7 @@ public class PageRegisterBodyView: NSObject {
         NextStepCodeButton = YMButton(frame: NextStepButtonFrame)
         
         NextStepCodeButton?.UserStringData = YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME
-        NextStepCodeButton?.addTarget(self.Actions, action: "PageJumpTo:", forControlEvents: UIControlEvents.TouchUpInside)
+        NextStepCodeButton?.addTarget(self.Actions, action: "PageJumpTo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         
         BodyView.addSubview(GetVerifyCodeButton!)
         BodyView.addSubview(NextStepCodeButton!)
@@ -126,8 +126,11 @@ public class PageRegisterBodyView: NSObject {
     
     private func DrawAgreeCheckbox() {
         AgreeButton = YMButton(frame: AgreeButtonFrame)
-        AgreeCheckbox = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: "AgreementImageTouched:", imageName: "RegisterCheckboxAgreeChecked")
-        AgreeButton?.addTarget(self.Actions, action: "AgreementButtonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+        AgreeCheckbox = YMLayout.GetTouchableImageView(useObject: self.Actions!,
+                                                       useMethod: "AgreementImageTouched:".Sel(),
+                                                       imageName: "RegisterCheckboxAgreeChecked")
+        
+        AgreeButton?.addTarget(self.Actions, action: "AgreementButtonTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         AgreeButton?.setTitle(YMRegisterStrings.CS_AGREE_LABEL_BUTTON, forState: UIControlState.Normal)
         AgreeButton?.titleLabel?.font = UIFont.systemFontOfSize(24.LayoutVal())
         AgreeButton?.setTitleColor(YMColors.FontLightGray, forState: UIControlState.Normal)

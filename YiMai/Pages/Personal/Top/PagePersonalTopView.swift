@@ -62,7 +62,7 @@ public class PagePersonalTopView {
     }
     
     private func DrawQRButton() {
-        TopQRButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "", imageName: "PersonalQRButton")
+        TopQRButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "".Sel(), imageName: "PersonalQRButton")
         TopViewPanel.addSubview(TopQRButton!)
         
         TopQRButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 64.LayoutVal(), width: (TopQRButton?.width)!, height: (TopQRButton?.height)!)

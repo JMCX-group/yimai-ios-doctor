@@ -22,7 +22,7 @@ public class PageYiMaiAddContactsFriendsBootomView {
     }
     
     private func DrawBottom() {
-        BottomView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AddAllContactsFriends:")
+        BottomView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AddAllContactsFriends:".Sel())
         Parent?.addSubview(BottomView!)
         
         BottomView?.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.PageBottomHeight)

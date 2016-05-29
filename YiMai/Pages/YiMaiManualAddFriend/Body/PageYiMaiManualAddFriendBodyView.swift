@@ -26,7 +26,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
     }
     
     public func DrawSpecialQRButton(topView: UIView) {
-        let qrButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "QRScan:", imageName: "TopViewQRButton")
+        let qrButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "QRScan:".Sel(), imageName: "TopViewQRButton")
         
         topView.addSubview(qrButton)
         qrButton.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 24.LayoutVal(), width: qrButton.width, height: qrButton.height)
@@ -55,7 +55,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         SearchPanel.addSubview(SearchTextFeild!)
         SearchTextFeild?.fillSuperview()
         
-        let searchButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "SearchFriend:")
+        let searchButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "SearchFriend:".Sel())
         
         let searchButtonBkg = YMLayout.GetSuitableImageView("YiMaiManualAddFriendSearchButton")
         let searchButtonLabel = UILabel()
@@ -79,7 +79,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         }
         ResultPanel = UIView()
         
-        let headUrl = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
+        let _ = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
@@ -116,7 +116,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         hosLabel.sizeToFit()
         hosLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         
-        let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "FriendCellTouched:", userStringData: userId)
+        let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "FriendCellTouched:".Sel(), userStringData: userId)
         
         cell.addSubview(userHeadBackground)
         cell.addSubview(nameLabel)
@@ -145,7 +145,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
             AddButton?.hidden = false
             return
         }
-        AddButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AddFriend:")
+        AddButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AddFriend:".Sel())
 
         let buttonBkg = YMLayout.GetSuitableImageView("YiMaiManualAddFriendButton")
         let titleLabel = UILabel()
@@ -171,7 +171,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
             InviteButton?.hidden = false
             return
         }
-        InviteButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "InvitFriend:")
+        InviteButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "InvitFriend:".Sel())
         
         let buttonBkg = YMLayout.GetSuitableImageView("YiMaiManualAddFriendButton")
         let titleLabel = UILabel()

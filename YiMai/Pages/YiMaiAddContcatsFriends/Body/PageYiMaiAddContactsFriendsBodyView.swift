@@ -175,7 +175,9 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let jobTitleLabel = UILabel()
         let deptLabel = UILabel()
         let hosLabel = UILabel()
-        let addButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "PostAddFriends:", imageName: "YiMaiAddContactsFriendButton")
+        let addButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                       useMethod: "PostAddFriends:".Sel(),
+                                                       imageName: "YiMaiAddContactsFriendButton")
         let bottomLine = UIView()
         
         bottomLine.backgroundColor = YMColors.DividerLineGray
@@ -203,7 +205,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         hosLabel.sizeToFit()
         hosLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         
-        let infoCell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "ShowFriendInfo:")
+        let infoCell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "ShowFriendInfo:".Sel())
         
         infoCell.addSubview(nameLabel)
         infoCell.addSubview(divider)
