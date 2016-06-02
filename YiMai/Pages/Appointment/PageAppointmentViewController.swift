@@ -12,6 +12,8 @@ public class PageAppointmentViewController: PageViewController {
     private var Actions: PageAppointmentActions? = nil
     private var BodyView: PageAppointmentBodyView? = nil
     
+    public static var SelectedDoctor:[String: AnyObject]? = nil
+    
     public override func PageLayout() {
         if(nil != BodyView) {
             BodyView?.Reload()

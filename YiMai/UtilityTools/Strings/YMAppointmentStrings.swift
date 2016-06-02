@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+public class YMAppointmentStrings {
+    public static let CS_SEARCH_PLACEHOLDER = "请输入医生姓名"
+}

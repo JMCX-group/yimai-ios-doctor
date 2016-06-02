@@ -30,7 +30,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_YIMAI_SAME_HOSPITAL_NAME:true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_NAME:true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_BASIC_INFO_NAME: true,
-        YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME: true
+        YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME: true,
+        YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME: true
     ]
 }
 
@@ -171,7 +172,7 @@ public class PageBodyView {
     
     internal func ViewLayout(){
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
-        BodyView.backgroundColor = YMColors.PanelBackgroundGray
+        BodyView.backgroundColor = YMColors.BackgroundGray
     }
 }
 

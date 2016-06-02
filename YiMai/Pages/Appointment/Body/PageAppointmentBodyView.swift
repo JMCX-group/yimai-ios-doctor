@@ -24,6 +24,7 @@ public class PageAppointmentBodyView: PageBodyView {
     private var SelectDoctorButton: YMTouchableView? = nil
     private let SelectDoctorButtonIcon = YMLayout.GetSuitableImageView("PageAppointmentAddDoctorIcon")
     private let SelectDoctorButtonLabel = UILabel()
+    private var SelectedDoctorCell: UIView? = nil
     
     private var SelectTimePanel: UIView? = nil
     private var SelectTimeButton: YMTouchableView? = nil
@@ -36,7 +37,7 @@ public class PageAppointmentBodyView: PageBodyView {
     public static var AppointmentTimeString: String = "点击选择时间"
     
     public func Reload() {
-        
+        self.DrawDocCell(PageAppointmentViewController.SelectedDoctor)
     }
 
     override func ViewLayout() {
@@ -147,6 +148,69 @@ public class PageAppointmentBodyView: PageBodyView {
         cell = GetTooltipCell("其他", prevCell: cell)
     }
     
+    private func DrawDocCell(data: [String: AnyObject]?) {
+        if(nil == data) {return}
+        
+        SelectedDoctorCell = UIView()
+        let dataObj = data!
+        let _ = dataObj[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
+        let name = dataObj[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
+        let hospital = dataObj[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
+        let department = dataObj[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
+        let jobTitle = dataObj[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as! String
+        
+        let nameLabel = UILabel()
+        let divider = UIView(frame: CGRect(x: 0,y: 0,width: 1,height: 20.LayoutVal()))
+        let jobTitleLabel = UILabel()
+        let deptLabel = UILabel()
+        let hosLabel = UILabel()
+        let userHeadBackground = YMLayout.GetSuitableImageView("YiMaiGeneralHeadImageBorder")
+        
+        nameLabel.text = name
+        nameLabel.textColor = YMColors.FontBlue
+        nameLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        nameLabel.sizeToFit()
+        
+        divider.backgroundColor = YMColors.FontBlue
+        
+        jobTitleLabel.text = jobTitle
+        jobTitleLabel.textColor = YMColors.FontGray
+        jobTitleLabel.font = YMFonts.YMDefaultFont(22.LayoutVal())
+        jobTitleLabel.sizeToFit()
+        
+        deptLabel.text = department
+        deptLabel.textColor = YMColors.FontBlue
+        deptLabel.font = YMFonts.YMDefaultFont(22.LayoutVal())
+        deptLabel.sizeToFit()
+        
+        hosLabel.text = hospital
+        hosLabel.textColor = YMColors.FontGray
+        hosLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        hosLabel.sizeToFit()
+        hosLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+
+        
+        SelectedDoctorCell!.addSubview(userHeadBackground)
+        SelectedDoctorCell!.addSubview(nameLabel)
+        SelectedDoctorCell!.addSubview(divider)
+        SelectedDoctorCell!.addSubview(jobTitleLabel)
+        SelectedDoctorCell!.addSubview(deptLabel)
+        SelectedDoctorCell!.addSubview(hosLabel)
+        
+        SelectDoctorButton!.addSubview(SelectedDoctorCell!)
+
+        SelectedDoctorCell!.fillSuperview()
+        SelectedDoctorCell?.backgroundColor = YMColors.White
+
+        
+        userHeadBackground.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: userHeadBackground.width, height: userHeadBackground.height)
+        nameLabel.anchorInCorner(Corner.TopLeft, xPad: 180.LayoutVal(), yPad: 25.LayoutVal(), width: nameLabel.width, height: nameLabel.height)
+        divider.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 15.LayoutVal(), width: 1, height: divider.height)
+        jobTitleLabel.align(Align.ToTheRightCentered, relativeTo: divider, padding: 15.LayoutVal(), width: jobTitleLabel.width, height: jobTitleLabel.height)
+        deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
+        hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
+    }
+    
     private func DrawSelectDoctorPanel() {
         let titleLabel = UILabel()
         
@@ -162,12 +226,16 @@ public class PageAppointmentBodyView: PageBodyView {
         SelectDoctorPanel?.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 60.LayoutVal())
         
-        SelectDoctorButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel, userStringData: "")
+        SelectDoctorButton = YMLayout.GetTouchableView(useObject: Actions!,
+            useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+            userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME)
+        
         SelectDoctorPanel?.addSubview(SelectDoctorButton!)
         SelectDoctorButton?.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 150.LayoutVal())
         
         SelectDoctorButton?.addSubview(SelectDoctorButtonIcon)
         SelectDoctorButtonIcon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: SelectDoctorButtonIcon.width, height: SelectDoctorButtonIcon.height)
+        
         
         SelectDoctorButtonLabel.textColor = YMColors.FontGray
         SelectDoctorButtonLabel.text = "点击选择医生"
@@ -179,6 +247,7 @@ public class PageAppointmentBodyView: PageBodyView {
             relativeTo: SelectDoctorButtonIcon,
             padding: 24.LayoutVal(),
             width: SelectDoctorButtonLabel.width, height: SelectDoctorButtonLabel.height)
+ 
     }
     
     private func DrawSelectTimePanel() {

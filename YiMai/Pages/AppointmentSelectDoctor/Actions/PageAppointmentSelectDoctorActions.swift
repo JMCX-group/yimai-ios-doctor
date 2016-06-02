@@ -7,7 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 public class PageAppointmentSelectDoctorAcitons: PageJumpActions {
-    
+    public func DoctorSelect(sender: UIGestureRecognizer) {
+        let cell = sender.view! as! YMTouchableView
+
+        PageAppointmentViewController.SelectedDoctor = cell.UserObjectData as? [String: AnyObject]
+        
+        self.NavController?.popViewControllerAnimated(true)
+    }
 }
