@@ -19,6 +19,7 @@ PODS:
   - ORStackView (3.0.1):
     - FLKAutoLayout (~> 0.2)
   - Proposer (0.9.0)
+  - SwiftDate (3.0.8)
   - swiftScan (1.0.7)
   - SwiftyJSON (2.3.2)
 
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - Neon
   - ORStackView
   - Proposer
+  - SwiftDate
   - swiftScan
   - SwiftyJSON
 
@@ -36,9 +38,10 @@ SPEC CHECKSUMS:
   Neon: 589d3d217d326abe09726bf81add106cff685bf2
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
   Proposer: 231565a8b6bbb1816f3670d6471e6a84e582c80c
+  SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
   swiftScan: 45ecba9a337706f253e0d5a80b7510a7fd03223b
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 4025ab999279f1f37207cdf84a63b04ea8105167
+PODFILE CHECKSUM: c9a15ab3d543aac1d1e8bb6230c348ca8679330e
 
 COCOAPODS: 1.0.0

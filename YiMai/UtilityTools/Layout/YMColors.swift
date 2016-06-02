@@ -28,4 +28,5 @@ public class YMColors {
     public static let ProgressBarBlue = UIColor(red: 0x66.RGBVal(), green: 0xc5.RGBVal(), blue: 0xec.RGBVal(), alpha: 1)
     public static let CommonBottomBlue = UIColor(red: 0x66.RGBVal(), green: 0xc5.RGBVal(), blue: 0xec.RGBVal(), alpha: 1)
     public static let CommonBottomGray = UIColor(red: 0xd8.RGBVal(), green: 0xd8.RGBVal(), blue: 0xd8.RGBVal(), alpha: 1)
+    public static let UntouchableCellGray = UIColor(red: 0xb5.RGBVal(), green: 0xb5.RGBVal(), blue: 0xb5.RGBVal(), alpha: 1)
 }

@@ -10,5 +10,6 @@ target 'YiMai' do
   pod 'Neon'
   pod 'swiftScan'
   pod 'Proposer'
+  pod 'SwiftDate'
 end
 

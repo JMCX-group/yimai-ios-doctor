@@ -265,7 +265,7 @@ public class PageAppointmentBodyView: PageBodyView {
         SelectTimePanel?.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 60.LayoutVal())
         
-        SelectTimeButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel, userStringData: "")
+        SelectTimeButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel, userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME)
         
         SelectTimePanel?.addSubview(SelectTimeButton!)
         SelectTimeButton?.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 84.LayoutVal())
