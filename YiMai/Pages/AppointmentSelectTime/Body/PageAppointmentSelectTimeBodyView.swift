@@ -18,11 +18,50 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
     private let CellInnerWidth = 80.LayoutVal()
     private let CellInnerHeight = 56.LayoutVal()
     
+    private var SelectedDays = [String: String]()
+    
     override func ViewLayout() {
         super.ViewLayout()
         
         DrawDoctorCell()
         DrawCalendar()
+        DrawButton()
+    }
+    
+    public func SetSelectedDays(cell: YMTouchableView) {
+        var userData = cell.UserObjectData! as! [String:AnyObject]
+        
+        let untouchable = userData[YMAppointmentStrings.CS_CALENDAR_TOUCHABLE_CELL_KEY] as! Bool
+        let touchedStatus = userData[YMAppointmentStrings.CS_CALENDAR_TOUCH_STATUS_KEY] as! Bool
+        let innerCell = userData[YMAppointmentStrings.CS_CALENDAR_CELL_INNER_KEY] as! UIView
+        let date = userData[YMAppointmentStrings.CS_CALENDAR_CELL_DATE_KEY] as! String
+        
+        if(untouchable) {
+            return
+        }
+        
+        if(touchedStatus) {
+            SelectedDays.removeValueForKey(date)
+            innerCell.backgroundColor = YMColors.PanelBackgroundGray
+            userData[YMAppointmentStrings.CS_CALENDAR_TOUCH_STATUS_KEY] = false
+        } else {
+            if(SelectedDays.count < 3){
+                SelectedDays[date] = date
+                userData[YMAppointmentStrings.CS_CALENDAR_TOUCH_STATUS_KEY] = true
+                innerCell.backgroundColor = YMColors.FontBlue
+            }
+        }
+        
+        cell.UserObjectData = userData
+    }
+    
+    public func GetSelectedDays() -> String {
+        var ret = ""
+        for (_,v) in SelectedDays {
+            ret += v + "  "
+        }
+        
+        return ret
     }
     
     private func DrawDoctorCell(data: [String: AnyObject]?, docPanel: UIView) {
@@ -122,8 +161,9 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
         return cell
     }
     
-    private func DrawCalendarOptCell(date:NSDate) -> UIView {
+    private func DrawCalendarOptCell(date:NSDate, AMorPM: String) -> UIView {
         let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DateSelected:".Sel())
+        let format = DateFormat.Custom("MM月dd日")
         
         cell.backgroundColor = YMColors.DividerLineGray
         var userData = [String: AnyObject]()
@@ -142,6 +182,9 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
         userData[YMAppointmentStrings.CS_CALENDAR_TOUCHABLE_CELL_KEY] = untouchable
         userData[YMAppointmentStrings.CS_CALENDAR_TOUCH_STATUS_KEY] = false
         userData[YMAppointmentStrings.CS_CALENDAR_CELL_INNER_KEY] = cellInner
+        userData[YMAppointmentStrings.CS_CALENDAR_CELL_DATE_KEY] = date.toString(format)! + AMorPM
+        
+        cell.UserObjectData = userData
         
         return cell
     }
@@ -193,8 +236,8 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
             let dateTitle = thisDay.toString(format)! as String
             
             let dateTitleCell = GetCalendarLabelCell(dateTitle, width: 80.LayoutVal(), height: 72.LayoutVal())
-            let amCell = DrawCalendarOptCell(thisDay)
-            let pmCell = DrawCalendarOptCell(thisDay)
+            let amCell = DrawCalendarOptCell(thisDay, AMorPM: "上午")
+            let pmCell = DrawCalendarOptCell(thisDay, AMorPM: "下午")
             
             calendarView.addSubview(dateTitleCell)
             calendarView.addSubview(amCell)
@@ -287,6 +330,48 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
                                 relativeTo: calendarFirstWeek,
                                 padding: 30.LayoutVal(),
                                 width: calendarFirstWeek.width, height: calendarFirstWeek.height)
+    }
+    
+    private func DrawButton() {
+        let okButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "OKButtonTouched:".Sel())
+        let autoButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AutoButtonTouched:".Sel())
+        
+        okButton.backgroundColor = YMColors.None
+        autoButton.backgroundColor = YMColors.None
+        
+        BodyView.addSubview(okButton)
+        BodyView.addSubview(autoButton)
+        
+        okButton.align(Align.UnderMatchingLeft, relativeTo: CalendarPanel, padding: 156.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
+        autoButton.align(Align.UnderMatchingLeft, relativeTo: okButton, padding: 20.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
+        
+        let okBkg = YMLayout.GetSuitableImageView("AppointmentSelectTimeOKButton")
+        let autoBkg = YMLayout.GetSuitableImageView("AppointmentSelectTimeAutoButton")
+        
+        okButton.addSubview(okBkg)
+        autoButton.addSubview(autoBkg)
+        
+        okBkg.anchorInCenter(width: okBkg.width, height: okBkg.height)
+        autoBkg.anchorInCenter(width: autoBkg.width, height: autoBkg.height)
+        
+        let okLabel = UILabel()
+        let autoLabel = UILabel()
+        
+        okLabel.text = "选好了"
+        okLabel.textColor = YMColors.White
+        okLabel.font = YMFonts.YMDefaultFont(34.LayoutVal())
+        okLabel.sizeToFit()
+        
+        autoLabel.text = "由专家决定（推荐）"
+        autoLabel.textColor = YMColors.White
+        autoLabel.font = YMFonts.YMDefaultFont(34.LayoutVal())
+        autoLabel.sizeToFit()
+        
+        okButton.addSubview(okLabel)
+        autoButton.addSubview(autoLabel)
+        
+        okLabel.anchorInCenter(width: okLabel.width, height: okLabel.height)
+        autoLabel.anchorInCenter(width: autoLabel.width, height: autoLabel.height)
     }
 }
 

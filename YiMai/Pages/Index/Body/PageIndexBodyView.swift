@@ -85,7 +85,7 @@ public class PageIndexBodyView {
                                                     userStringData: YMCommonStrings.CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME)
         
         DoctorAppointmentButton = YMLayout.GetTouchableView(useObject: Actions!,
-                                                            useMethod: "PageJumpToByViewSender:".Sel(),
+                                                            useMethod: "JumpToAppointment:".Sel(),
                                                             userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
         
         AdmissionsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())

@@ -10,7 +10,7 @@ import UIKit
 
 public class PageAppointmentPatientConditionViewController: PageViewController {
     private var Actions: PageAppointmentPatientConditionActions? = nil
-    private var BodyView: PageAppointmentPatientConditionBodyView? = nil
+    public var BodyView: PageAppointmentPatientConditionBodyView? = nil
     
     public override func PageLayout() {
         if(PageLayoutFlag) {return}
@@ -20,5 +20,7 @@ public class PageAppointmentPatientConditionViewController: PageViewController {
         Actions = PageAppointmentPatientConditionActions(navController: self.NavController, target: self)
         BodyView = PageAppointmentPatientConditionBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "现病史", navController: self.NavController!)
+        
+        BodyView!.DrawSpecialTopButton(TopView!.TopViewPanel)
     }
 }

@@ -10,5 +10,8 @@ import Foundation
 import UIKit
 
 public class PageIndexActions: PageJumpActions {
-
+    public func JumpToAppointment(sender: UIGestureRecognizer) {
+        PageAppointmentViewController.NewAppointment = true
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
+    }
 }

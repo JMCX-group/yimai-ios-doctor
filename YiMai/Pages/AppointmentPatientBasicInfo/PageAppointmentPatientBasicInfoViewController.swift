@@ -10,7 +10,7 @@ import UIKit
 
 public class PageAppointmentPatientBasicInfoViewController: PageViewController {
     private var Actions: PageAppointmentPatientBasicInfoActions? = nil
-    private var BodyView: PageAppointmentPatientBasicInfoBodyView? = nil
+    public var BodyView: PageAppointmentPatientBasicInfoBodyView? = nil
     
     public override func PageLayout() {
         if(PageLayoutFlag) {return}

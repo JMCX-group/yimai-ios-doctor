@@ -83,6 +83,7 @@ public class YMLayout {
         newTextField.font = UIFont.systemFontOfSize(param.FontSize)
         newTextField.textColor = param.FontColor
         newTextField.delegate = YMLayout.TextFieldDelegate
+        newTextField.text = ""
         
         if(nil != param.BackgroundImage) {
             newTextField.background = param.BackgroundImage

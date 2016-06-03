@@ -10,5 +10,10 @@ import Foundation
 import UIKit
 
 public class PageAppointmentPatientConditionActions: PageJumpActions {
-    
+    public func SaveCondition(sender: UIGestureRecognizer) {
+        let pageController = self.Target! as! PageAppointmentPatientConditionViewController
+        PageAppointmentViewController.PatientCondition = pageController.BodyView!.GetCondition()
+        
+        self.NavController?.popViewControllerAnimated(true)
+    }
 }

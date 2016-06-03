@@ -11,10 +11,14 @@ import Neon
 
 public class PageAppointmentPatientConditionBodyView: PageBodyView {
     private var ConditionInput: YMTextArea? = nil
-    public static var ConditionStrings: String = ""
+
     override func ViewLayout() {
         super.ViewLayout()
         DrawTextArea()
+    }
+    
+    public func GetCondition() -> String {
+        return ConditionInput!.text
     }
     
     private func DrawTextArea() {
@@ -28,5 +32,28 @@ public class PageAppointmentPatientConditionBodyView: PageBodyView {
         ConditionInput?.textColor = YMColors.FontGray
         ConditionInput?.anchorToEdge(Edge.Top, padding: 30.LayoutVal(), width: YMSizes.PageWidth, height: 320.LayoutVal())
         ConditionInput?.MaxCharCount = 500
+        ConditionInput?.text = PageAppointmentViewController.PatientCondition
+    }
+    
+    public func DrawSpecialTopButton(topView: UIView) {
+        let button = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "SaveCondition:".Sel())
+        
+        button.backgroundColor = YMColors.None
+        
+        let buttonBkg = YMLayout.GetSuitableImageView("TopViewSmallButtonBkg")
+        let label = UILabel()
+        label.text = "保存"
+        label.textColor = YMColors.White
+        label.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        label.sizeToFit()
+        
+        button.addSubview(buttonBkg)
+        button.addSubview(label)
+        
+        topView.addSubview(button)
+        button.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 24.LayoutVal(), width: buttonBkg.width, height: buttonBkg.height)
+        
+        buttonBkg.anchorInCenter(width: buttonBkg.width, height: buttonBkg.height)
+        label.anchorInCenter(width: label.width, height: label.height)
     }
 }

@@ -14,9 +14,9 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
         let viewController = Target as! PageYiMaiManualAddFriendViewController
         
         let code = viewController.BodyView?.GetInputCode()
-        if("" == code) {
+        if("" == code || code?.characters.count < 6) {
             viewController.BodyView?.ShowAlertPage()
-        } else if("10086" == code) {
+        } else if("18012345678" == code) {
             viewController.BodyView?.ShowInvitePage()
         } else {
             viewController.BodyView?.ShowAddPage([

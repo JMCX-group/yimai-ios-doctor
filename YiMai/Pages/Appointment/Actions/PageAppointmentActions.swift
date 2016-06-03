@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import Proposer
 
-public class PageAppointmentActions: PageJumpActions {
+public class PageAppointmentActions: PageJumpActions, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     public func PhotoScrollLeft(sender: UIGestureRecognizer) {
         
     }
@@ -19,10 +20,37 @@ public class PageAppointmentActions: PageJumpActions {
     }
     
     public func PhotoSelect(sender: UIGestureRecognizer) {
+        let contacts: PrivateResource = PrivateResource.Photos
         
+        proposeToAccess(contacts, agreed: {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.sourceType = .SavedPhotosAlbum
+                imagePicker.delegate = self
+                
+                self.NavController!.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }, rejected: {
+            let alertController = UIAlertController(title: "系统提示", message: "请去隐私设置里打开照片访问权限！", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "好的", style: .Default,
+                handler: {
+                    action in
+                        
+            })
+            alertController.addAction(okAction)
+            self.NavController!.presentViewController(alertController, animated: true, completion: nil)
+        })
     }
     
-    public func DoAppointment(sender: UIGestureRecognizer) {
+    public func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        let pageController = self.Target! as! PageAppointmentViewController
         
+        let img = UIImageView(image: image)
+        pageController.BodyView!.AddImage(img)
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    public func DoAppointment(sender: UIGestureRecognizer) {
+        self.NavController!.popViewControllerAnimated(true)
     }
 }

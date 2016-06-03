@@ -27,8 +27,4 @@ public class YiMaiAddFriendsActions: PageJumpActions{
                 self.NavController!.presentViewController(alertController, animated: true, completion: nil)
         })
     }
-    
-    public func test(sender: YMButton) {
-        print("!!")
-    }
 }

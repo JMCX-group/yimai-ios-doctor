@@ -42,6 +42,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         createParam.FontColor = YMColors.FontBlue
         createParam.Placholder = "医脉码或手机号"
         SearchTextFeild = YMLayout.GetTextFieldWithMaxCharCount(createParam, maxCharCount: 60)
+        SearchTextFeild?.keyboardType = UIKeyboardType.ASCIICapable
         
         let leftPaddingView = UIView(frame: CGRect(x: 0,y: 0,width: 90.LayoutVal(), height: 130.LayoutVal()))
         let searchIcon = YMLayout.GetSuitableImageView("YiMaiGeneralSearchIcon")

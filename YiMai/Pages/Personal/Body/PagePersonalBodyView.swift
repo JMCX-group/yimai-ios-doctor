@@ -60,15 +60,25 @@ public class PagePersonalBodyView {
         let bottomLine = UIView()
         bottomLine.backgroundColor = YMColors.DividerLineGray
         
+        let label = UILabel()
+        
+        label.text = "律师咨询热线"
+        label.textColor = YMColors.FontBlue
+        label.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        label.sizeToFit()
+        
         hotlineView.addSubview(icon)
         hotlineView.addSubview(dividerLine)
         hotlineView.addSubview(rightArrow)
         hotlineView.addSubview(bottomLine)
+        hotlineView.addSubview(label)
 
         icon.anchorInCorner(Corner.BottomLeft, xPad: 45.LayoutVal(), yPad: 30.LayoutVal(), width: icon.width, height: icon.height)
         dividerLine.anchorInCorner(Corner.BottomLeft, xPad: 102.LayoutVal(), yPad: 30.LayoutVal(), width: dividerLine.width, height: dividerLine.height)
         rightArrow.anchorInCorner(Corner.TopRight, xPad: 40.LayoutVal(), yPad: 33.LayoutVal(), width: rightArrow.width, height: rightArrow.height)
         bottomLine.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1)
+        
+        label.align(Align.ToTheRightCentered, relativeTo: dividerLine, padding: 18.LayoutVal(), width: label.width, height: label.height)
     }
     
     private func DrawAnOperationPanel(targetPage: String, iconName: String, title: String) -> YMTouchableView {
@@ -83,6 +93,12 @@ public class PagePersonalBodyView {
         let icon = YMLayout.GetSuitableImageView(iconName)
         let dividerLine = YMLayout.GetSuitableImageView("PersonalIconDividerLine")
         let rightArrow = YMLayout.GetSuitableImageView("PersonalIconPersonalRightArrow")
+        let label = UILabel()
+        
+        label.text = title
+        label.textColor = YMColors.FontBlue
+        label.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        label.sizeToFit()
         
         let bottomLine = UIView()
         bottomLine.backgroundColor = YMColors.DividerLineGray
@@ -91,11 +107,14 @@ public class PagePersonalBodyView {
         touchableView.addSubview(dividerLine)
         touchableView.addSubview(rightArrow)
         touchableView.addSubview(bottomLine)
+        touchableView.addSubview(label)
         
         icon.anchorInCorner(Corner.BottomLeft, xPad: 45.LayoutVal(), yPad: 30.LayoutVal(), width: icon.width, height: icon.height)
         dividerLine.anchorInCorner(Corner.BottomLeft, xPad: 102.LayoutVal(), yPad: 30.LayoutVal(), width: dividerLine.width, height: dividerLine.height)
         rightArrow.anchorInCorner(Corner.TopRight, xPad: 40.LayoutVal(), yPad: 33.LayoutVal(), width: rightArrow.width, height: rightArrow.height)
         bottomLine.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1)
+        
+        label.align(Align.ToTheRightCentered, relativeTo: dividerLine, padding: 18.LayoutVal(), width: label.width, height: label.height)
         
         return touchableView
     }

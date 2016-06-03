@@ -20,15 +20,21 @@ public class PageAppointmentPatientBasicInfoBodyView: PageBodyView{
     private var PatientGenderInput: YMTextField? = nil
     private var PatientAgeInput: YMTextField? = nil
     
-    public static var PatientName: String = ""
-    public static var PatientPhone: String = ""
-    public static var PatientGender: String = ""
-    public static var PatientAge: String = ""
-    
     private var ConfirmButton: YMTouchableView? = nil
 
     
     public func Reload(){}
+    
+    public func GetPatientInfo() -> [String: String] {
+        var info = [String: String]()
+        
+        info["name"] = PatientNameInput!.text
+        info["phone"] = PatientPhoneInput!.text
+        info["gender"] = PatientGenderInput!.text
+        info["age"] = PatientAgeInput!.text
+        
+        return info
+    }
     
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
@@ -110,7 +116,7 @@ public class PageAppointmentPatientBasicInfoBodyView: PageBodyView{
     }
     
     private func DrawConfirmButton() {
-        ConfirmButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoAppointment:".Sel())
+        ConfirmButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "BasicInfoDone:".Sel())
         ParentView!.addSubview(ConfirmButton!)
         ConfirmButton?.anchorToEdge(Edge.Bottom, padding: 0.LayoutVal(), width: YMSizes.PageWidth, height: 98.LayoutVal())
 

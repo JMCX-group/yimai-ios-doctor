@@ -32,12 +32,18 @@ public class PageAppointmentBodyView: PageBodyView {
     
     private var ConfirmButton: YMTouchableView? = nil
     
+    private var LastImage: UIView? = nil
+    private var ImageCount: Int = 0
+    
     public static var PatientBasicInfoString: String = ""
     public static var PatientConditionString: String = ""
     public static var AppointmentTimeString: String = "点击选择时间"
     
     public func Reload() {
         self.DrawDocCell(PageAppointmentViewController.SelectedDoctor)
+        self.UpdateSelectedTime()
+        self.UpdateBasicInfo()
+        self.UpdateCondition()
     }
 
     override func ViewLayout() {
@@ -64,6 +70,22 @@ public class PageAppointmentBodyView: PageBodyView {
         textLabel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 630.LayoutVal(), height: 80.LayoutVal())
     }
     
+    private func UpdateBasicInfo(){
+        if(nil == PageAppointmentViewController.PatientBasicInfo){
+            DrawPatientBasicInfoPanel()
+        } else {
+            let info = PageAppointmentViewController.PatientBasicInfo!
+            let name = info["name"]!
+            
+            for view in PatientBasicInfoPanel!.subviews{
+                view.removeFromSuperview()
+            }
+            
+            DrawPatientTextLabel(name, panel: PatientBasicInfoPanel!, textColor: YMColors.FontGray)
+
+        }
+    }
+    
     private func DrawPatientBasicInfoPanel() {
         PatientBasicInfoPanel = YMLayout.GetTouchableView(useObject: Actions!,
                                                           useMethod: PageJumpActions.PageJumpToByViewSenderSel,
@@ -74,6 +96,18 @@ public class PageAppointmentBodyView: PageBodyView {
         DrawPatientTextLabel("患者基本信息（必填）", panel: PatientBasicInfoPanel!, textColor: YMColors.FontGray)
     }
     
+    private func UpdateCondition() {
+        for view in PatientConditionPanel!.subviews{
+            view.removeFromSuperview()
+        }
+        
+        if("" == PageAppointmentViewController.PatientCondition){
+            DrawPatientTextLabel("现病史", panel: PatientConditionPanel!, textColor: YMColors.FontGray)
+        } else {
+            DrawPatientTextLabel(PageAppointmentViewController.PatientCondition, panel: PatientConditionPanel!, textColor: YMColors.FontGray)
+        }
+    }
+    
     private func DrawPatientConditionPanel() {
         PatientConditionPanel = YMLayout.GetTouchableView(useObject: Actions!,
                                                           useMethod: PageJumpActions.PageJumpToByViewSenderSel,
@@ -82,6 +116,41 @@ public class PageAppointmentBodyView: PageBodyView {
         PatientConditionPanel?.align(Align.UnderMatchingLeft, relativeTo: PatientBasicInfoPanel!, padding: 1.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
         
         DrawPatientTextLabel("现病史", panel: PatientConditionPanel!, textColor: YMColors.FontGray)
+    }
+    
+    private func GetTooltipCell(info: String = "", prevCell: UIView? = nil, background: UIImageView? = nil) -> UIView {
+        let cell = UIView()
+        PhotoInnerPanel?.addSubview(cell)
+        
+        let titleLabel = UILabel()
+        
+        titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        titleLabel.numberOfLines = 2
+        titleLabel.frame = CGRect(x: 0,y: 0,width: 66.LayoutVal(),height: 66.LayoutVal())
+        titleLabel.text = info
+        titleLabel.textColor = YMColors.FontGray
+        titleLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        
+        titleLabel.sizeToFit()
+        
+        cell.addSubview(titleLabel)
+        cell.backgroundColor = YMColors.BackgroundGray
+        
+        if(nil != prevCell) {
+            cell.align(Align.ToTheRightMatchingTop, relativeTo: prevCell!, padding: 19.LayoutVal(), width: 144.LayoutVal(), height: 144.LayoutVal())
+        } else {
+            cell.anchorToEdge(Edge.Left, padding: 0, width: 144.LayoutVal(), height: 144.LayoutVal())
+        }
+        
+        titleLabel.anchorInCenter(width: titleLabel.width, height: titleLabel.height)
+        cell.layer.masksToBounds = true
+        
+        if(nil != background) {
+            cell.addSubview(background!)
+            background!.anchorInCenter(width: cell.width, height: cell.height)
+        }
+        
+        return cell
     }
     
     private func DrawPhotoPanel() {
@@ -112,35 +181,6 @@ public class PageAppointmentBodyView: PageBodyView {
         
         scrollLeftIcon.anchorToEdge(Edge.Right, padding: 0, width: scrollLeftIcon.width, height: scrollLeftIcon.height)
         scrollRightIcon.anchorToEdge(Edge.Left, padding: 0, width: scrollRightIcon.width, height: scrollRightIcon.height)
-    
-        func GetTooltipCell(info: String, prevCell: UIView?) -> UIView {
-            let cell = UIView()
-            PhotoInnerPanel?.addSubview(cell)
-
-            let titleLabel = UILabel()
-            
-            titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
-            titleLabel.numberOfLines = 2
-            titleLabel.frame = CGRect(x: 0,y: 0,width: 66.LayoutVal(),height: 66.LayoutVal())
-            titleLabel.text = info
-            titleLabel.textColor = YMColors.FontGray
-            titleLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
-
-            titleLabel.sizeToFit()
-            
-            cell.addSubview(titleLabel)
-            cell.backgroundColor = YMColors.BackgroundGray
-            
-            if(nil != prevCell) {
-                cell.align(Align.ToTheRightMatchingTop, relativeTo: prevCell!, padding: 19.LayoutVal(), width: 144.LayoutVal(), height: 144.LayoutVal())
-            } else {
-                cell.anchorToEdge(Edge.Left, padding: 0, width: 144.LayoutVal(), height: 144.LayoutVal())
-            }
-            
-            titleLabel.anchorInCenter(width: titleLabel.width, height: titleLabel.height)
-            
-            return cell
-        }
         
         var cell = GetTooltipCell("病例资料", prevCell: nil)
         cell = GetTooltipCell("病例资料", prevCell: cell)
@@ -247,9 +287,16 @@ public class PageAppointmentBodyView: PageBodyView {
             relativeTo: SelectDoctorButtonIcon,
             padding: 24.LayoutVal(),
             width: SelectDoctorButtonLabel.width, height: SelectDoctorButtonLabel.height)
- 
     }
     
+    public func UpdateSelectedTime() {
+        if("" == PageAppointmentViewController.SelectedTime) {
+            SelectTimeLabel.text = PageAppointmentBodyView.AppointmentTimeString
+        } else {
+            SelectTimeLabel.text = PageAppointmentViewController.SelectedTime
+        }
+    }
+
     private func DrawSelectTimePanel() {
         let titleLabel = UILabel()
         
@@ -273,10 +320,9 @@ public class PageAppointmentBodyView: PageBodyView {
         SelectTimeLabel.text = PageAppointmentBodyView.AppointmentTimeString
         SelectTimeLabel.textColor = YMColors.FontGray
         SelectTimeLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
-        SelectTimeLabel.sizeToFit()
         
         SelectTimeButton?.addSubview(SelectTimeLabel)
-        SelectTimeLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: SelectTimeLabel.width, height: 84.LayoutVal())
+        SelectTimeLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: 500.LayoutVal(), height: 84.LayoutVal())
     }
     
     private func DrawPhotoButton() {
@@ -301,6 +347,23 @@ public class PageAppointmentBodyView: PageBodyView {
         
         ConfirmButton?.addSubview(titleLabel)
         titleLabel.anchorInCenter(width: titleLabel.width, height: 98.LayoutVal())
+    }
+    
+    public func AddImage(image: UIImageView) {
+        self.LastImage = GetTooltipCell("病例资料", prevCell: LastImage, background: image)
+        
+        PhotoInnerPanel?.contentSize = CGSizeMake(
+            self.LastImage!.frame.origin.x + self.LastImage!.width,
+            PhotoInnerPanel!.height
+        )
+        
+        ImageCount = ImageCount + 1
+        
+        if(ImageCount > 4){
+            let x = CGFloat(ImageCount - 4) * (self.LastImage!.width + 19.LayoutVal())
+            let pos = CGPointMake(x, self.LastImage!.frame.origin.y)
+            PhotoInnerPanel?.setContentOffset(pos, animated: true)
+        }
     }
 }
 

@@ -53,9 +53,6 @@ public class PageLoginActions : PageJumpActions {
         }
         
         self.PageLoginBody?.EnableLoginControls()
-        
-        //TODO: For debug
-        self.DoJump(LoginSuccessTargetStroyboard)
     }
 
     public func DoLogin(sender:YMButton) {
