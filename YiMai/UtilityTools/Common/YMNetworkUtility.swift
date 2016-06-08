@@ -24,7 +24,13 @@ public class YMNetworkRequestConfig {
 }
 
 public class YMNetwork {
+    private static var JsonSessionManager: AFHTTPSessionManager? = nil
+    private static var ImageSessionManager: AFHTTPSessionManager? = nil
+    
     private func BuildImageRequestManager() -> AFHTTPSessionManager {
+        if(nil != YMNetwork.ImageSessionManager) {
+            return YMNetwork.ImageSessionManager!
+        }
         let manager = AFHTTPSessionManager()
         let reqSerializer = AFHTTPRequestSerializer()
         let resImageSerializer = AFImageResponseSerializer()
@@ -34,10 +40,14 @@ public class YMNetwork {
         manager.requestSerializer = reqSerializer
         manager.responseSerializer = resImageSerializer
         
-        return manager
+        YMNetwork.ImageSessionManager! = manager
+        return YMNetwork.ImageSessionManager!
     }
     
     private func BuildJsonRequestManager() -> AFHTTPSessionManager {
+        if(nil != YMNetwork.JsonSessionManager) {
+            return YMNetwork.JsonSessionManager!
+        }
         let manager = AFHTTPSessionManager()
         let reqSerializer = AFHTTPRequestSerializer()
         let resJsonSerializer = AFJSONResponseSerializer()
@@ -47,7 +57,8 @@ public class YMNetwork {
         manager.requestSerializer = reqSerializer
         manager.responseSerializer = resJsonSerializer
         
-        return manager
+        YMNetwork.JsonSessionManager = manager
+        return YMNetwork.JsonSessionManager!
     }
     
     public func RequestImageByGet(requestConfig: YMNetworkRequestConfig) -> NSURLSessionDataTask? {
