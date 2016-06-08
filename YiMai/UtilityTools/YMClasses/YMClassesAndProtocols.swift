@@ -160,7 +160,7 @@ public class PageBodyView {
     internal var ParentView: UIView? = nil
     internal var NavController: UINavigationController? = nil
     internal var Actions: AnyObject? = nil
-    internal var BodyView: UIScrollView = UIScrollView()
+    public var BodyView: UIScrollView = UIScrollView()
     
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: AnyObject) {
         self.init()

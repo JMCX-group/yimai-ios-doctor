@@ -34,6 +34,7 @@ public class PageLoginActions : PageJumpActions {
         let realData = data!
 
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_TOKEN, data: realData["token"]!)
+        YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA).YMGetAPPInitData()
         self.DoJump(LoginSuccessTargetStroyboard)
     }
 

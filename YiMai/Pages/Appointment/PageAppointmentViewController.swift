@@ -28,6 +28,9 @@ public class PageAppointmentViewController: PageViewController {
                 PageAppointmentViewController.PatientCondition = ""
                 PageAppointmentViewController.SelectedTime = ""
                 
+                BodyView?.BodyView.removeFromSuperview()
+                TopView?.TopViewPanel.removeFromSuperview()
+                
                 BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
                 TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
                 PageAppointmentViewController.NewAppointment = false

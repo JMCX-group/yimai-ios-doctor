@@ -18,6 +18,7 @@ class YMAPIInterfaceURL {
     static let RegisterURL = YMAPIInterfaceURL.ApiBaseUrl + "/user/register"
     static let GetUserRegisterVerifyCodeURL = YMAPIInterfaceURL.ApiBaseUrl + "/user/verify-code"
     static let UerLogin = YMAPIInterfaceURL.ApiBaseUrl + "/user/login"
+    static let APPInit = YMAPIInterfaceURL.ApiBaseUrl + "/init"
 }
 
 public class YMAPICommonVariable {
@@ -129,6 +130,41 @@ public class YMAPIUtility {
         config.Param = param
         
         network.RequestJsonByPost(config)
+    }
+    
+    public func YMGetAPPInitData() -> Bool {
+        let token = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_TOKEN)
+        if(nil == token) {
+            return false
+        }
+        
+        let config = self.GetDefaultConfig(YMAPIInterfaceURL.APPInit)
+        let network = YMNetwork()
+        
+        config.ProgressHandler = nil
+        config.Param = [YMCommonStrings.CS_API_PARAM_KEY_TOKEN: token! as! String]
+        
+        YMAPICommonVariable.SetJsonCallback(YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA,
+            callback: YMAPIUtility.YMGetInitDataSuccess, update: false)
+        
+        YMAPICommonVariable.SetErrorCallback(YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA,
+                callback: YMAPIUtility.YMGetInitDataError, update: false)
+        
+        network.RequestJsonByGet(config)
+        
+        return true
+    }
+    
+    private static func YMGetInitDataSuccess(data: NSDictionary?) {
+        let realData = data!
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: realData["user"]!)
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SYSTEM_INFO, data: realData["sys_info"]!)
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_RELATIONS, data: realData["relations"]!)
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_RECENT_CONTACTS, data: realData["recent_contacts"]!)
+    }
+    
+    private static func YMGetInitDataError(error: NSError) {
+        print(error)
     }
 }
 

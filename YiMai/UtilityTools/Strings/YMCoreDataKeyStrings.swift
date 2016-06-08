@@ -9,5 +9,10 @@
 import Foundation
 
 public class YMCoreDataKeyStrings {
-    public static let CS_USER_TOKEN = "CoreDateUserToken"
+    public static let CS_USER_TOKEN = "CoreDataUserToken"
+    public static let CS_USER_INFO = "CoreDataUserInfo"
+    public static let CS_SYSTEM_INFO = "CoreDataSystemInfo"
+    public static let CS_USER_RELATIONS = "CoreDataUserRelations"
+    public static let CS_RECENT_CONTACTS = "CoreDataRecentContacts"
+    
 }

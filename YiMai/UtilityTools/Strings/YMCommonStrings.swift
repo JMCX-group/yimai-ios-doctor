@@ -49,4 +49,6 @@ public class YMCommonStrings {
     public static let CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME = "PageAppointmentPatientCondition"
     public static let CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME = "PageAppointmentSelectDoctor"
     public static let CS_PAGE_APPOINTMENT_SELECT_TIME_NAME = "PageAppointmentSelectTime"
+    
+    public static let CS_API_PARAM_KEY_TOKEN = "token"
 }
