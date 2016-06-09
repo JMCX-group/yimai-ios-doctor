@@ -57,6 +57,8 @@ public class PageIndexTopView: NSObject {
         TopSearchInput = YMLayout.GetTextFieldWithMaxCharCount(searchInputParam, maxCharCount: 40)
         TopSearchInput?.SetLeftPadding(leftPadding)
         
+        TopSearchInput?.EditEndCallback = self.Actions?.DoSearch
+        
         TopView.addSubview(TopBackground)
         TopView.addSubview(NameCardButton!)
         TopView.addSubview(SysMessageButton!)

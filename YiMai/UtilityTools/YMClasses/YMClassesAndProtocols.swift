@@ -57,13 +57,19 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
     convenience init(navController: UINavigationController?) {
         self.init()
         self.NavController = navController
+        
+        ExtInit()
     }
     
     convenience init(navController: UINavigationController?, target: AnyObject) {
         self.init()
         self.NavController = navController
         self.Target = target
+        
+        ExtInit()
     }
+    
+    func ExtInit() {}
     
     public func DoJump(targetPageName: String) {
         var targetPage: UIViewController? = nil

@@ -10,10 +10,19 @@ import Foundation
 import UIKit
 
 public typealias YMTextFieldEditStartCallback = ((YMTextField) -> Bool)
+public typealias YMTextFieldEditEndCallback = ((YMTextField) -> Void)
 
 public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if(!textField.isKindOfClass(YMTextField)) { return true }
+        
+        let realTextField = textField as! YMTextField
+        
         textField.resignFirstResponder()
+        if(nil != realTextField.EditEndCallback) {
+            realTextField.EditEndCallback!(realTextField)
+        }
+        
         return true;
     }
     
@@ -64,6 +73,7 @@ public class YMTextField: UITextField {
     public var MaxCharCount: Int = 0
     public var Editable: Bool = true
     public var EditStartCallback: YMTextFieldEditStartCallback? = nil
+    public var EditEndCallback: YMTextFieldEditEndCallback? = nil
     private var YMDelegate = YMTextFieldDelegate()
     
     public func SetLeftPaddingWidth(leftPadding: CGFloat, paddingMode: UITextFieldViewMode = UITextFieldViewMode.Always) {

@@ -51,4 +51,40 @@ public class YMCommonStrings {
     public static let CS_PAGE_APPOINTMENT_SELECT_TIME_NAME = "PageAppointmentSelectTime"
     
     public static let CS_API_PARAM_KEY_TOKEN = "token"
+    public static let CS_API_PARAM_KEY_PHONE = "phone"
+    public static let CS_API_PARAM_KEY_ID = "id"
+    public static let CS_API_PARAM_KEY_CODE = "code"
+    public static let CS_API_PARAM_KEY_FRIEND_ID = "friend_id"
+    public static let CS_API_PARAM_KEY_REMARKS = "remarks"
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
