@@ -53,6 +53,7 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
     public static let PageJumToSel: Selector = "PageJumpTo:".Sel()
     public static let PageJumpToByViewSenderSel: Selector = "PageJumpToByViewSender:".Sel()
     public static let PageJumpToByImageViewSenderSel: Selector = "PageJumpToByImageViewSender:".Sel()
+    public static let DoNothingSel = "DoNothingActions".Sel()
     
     convenience init(navController: UINavigationController?) {
         self.init()
@@ -70,6 +71,8 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
     }
     
     func ExtInit() {}
+    
+    public func DoNothingActions(param: AnyObject) {}
     
     public func DoJump(targetPageName: String) {
         var targetPage: UIViewController? = nil

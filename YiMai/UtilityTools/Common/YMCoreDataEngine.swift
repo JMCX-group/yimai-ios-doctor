@@ -10,7 +10,7 @@ import Foundation
 
 public typealias YMCoreMemDataHandler = (AnyObject?, NSOperationQueue) -> Bool
 
-public class YMCoreMemDataOnceHandler {
+public class YMCoreMemDataOnceHandler: NSObject {
     public var Handler: YMCoreMemDataHandler
     public var CompletedFlag: Bool = false
     
@@ -48,7 +48,7 @@ public class YMCoreDataEngine {
         YMCoreData.CoreMemData[key] = data
     }
     
-    public static func SetDataHandler(module: String, block: String, handler: YMCoreMemDataHandler) {
+    public static func SetDataHandler(module: String, handler: YMCoreMemDataHandler) {
         if(nil == YMCoreData.CoreMemDataHandlerMap[module]) {
             YMCoreData.CoreMemDataHandlerMap[module] = [YMCoreMemDataHandler]()
         }
@@ -56,7 +56,7 @@ public class YMCoreDataEngine {
         YMCoreData.CoreMemDataHandlerMap[module]?.append(handler)
     }
     
-    public static func SetDataOnceHandler(module: String, block: String, handler: YMCoreMemDataOnceHandler) {
+    public static func SetDataOnceHandler(module: String, handler: YMCoreMemDataOnceHandler) {
         if(nil == YMCoreData.CoreMemDataHandlerOnceMap[module]) {
             YMCoreData.CoreMemDataHandlerOnceMap[module] = [YMCoreMemDataOnceHandler]()
         }

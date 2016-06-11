@@ -11,4 +11,5 @@ import Foundation
 public class YMAPIStrings {
     public static let CS_API_ACTION_NAME_INIT_DATA = "apiGetInitData"
     public static let CS_API_ACTION_NAME_COMMON_SEARCH = "apiCommonSearch"
+    public static let CS_API_ACTION_GET_VERIFY_CODE = "apiGetVerifyCode"
 }

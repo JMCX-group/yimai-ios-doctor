@@ -12,13 +12,15 @@ public class PagePersonalViewController: PageViewController {
     private var PersonalTopView: PagePersonalTopView? = nil
     private var PersonalBodyView: PagePersonalBodyView? = nil
     private var Actions: PagePersonalActions? = nil
-
+    private var LoadingView: YMPageLoadingView? = nil
+    private var UserInfo: AnyObject? = nil
+    
     override func GestureRecognizerEnable() -> Bool {return false}
     
     override public func viewWillAppear(animated: Bool) {
         YMCurrentPage.PagePersonalIsAnimatedShow = animated
     }
-    
+
     override func PageLayout(){
         if(PageLayoutFlag) {return}
         PageLayoutFlag=true
@@ -27,7 +29,31 @@ public class PagePersonalViewController: PageViewController {
         
         PersonalBodyView = PagePersonalBodyView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
         PersonalTopView = PagePersonalTopView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
+        LoadingView = YMPageLoadingView(parentView: self.view)
+
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
         
+        UserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
+        if(nil == UserInfo) {
+            LoadingView?.Show()
+            let handler = YMCoreMemDataOnceHandler(handler: self.RefreshUserInfo)
+            YMCoreDataEngine.SetDataOnceHandler("PersonalTopViewRefresh", handler: handler)
+        } else {
+            self.PersonalTopView?.Refresh(self.UserInfo! as! [String : AnyObject])
+        }
+    }
+    
+    private func RefreshUserInfo(data: AnyObject?, queue: NSOperationQueue) -> Bool {
+        UserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
+        if(nil == UserInfo) {
+            return false
+        } else {
+            queue.addOperationWithBlock({
+                self.LoadingView?.Hide()
+                self.PersonalTopView?.Refresh(self.UserInfo! as! [String : AnyObject])
+            })
+            
+            return true
+        }
     }
 }

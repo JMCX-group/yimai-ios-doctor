@@ -40,7 +40,28 @@ class YMAPIInterfaceURL {
     static let RelationAddFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/add-friend"
     static let RelationCommonFriends = YMAPIInterfaceURL.ApiBaseUrl + "/relation/common-friends"
     static let RelationNewFriends = YMAPIInterfaceURL.ApiBaseUrl + "/relation/new-friends"
-    static let RelationRemarks = YMAPIInterfaceURL.ApiBaseUrl + "/relation/remarks"
+    static let RelationFriendRemarks = YMAPIInterfaceURL.ApiBaseUrl + "/relation/remarks"
+    static let RelationPushRecentContacts = YMAPIInterfaceURL.ApiBaseUrl + "/relation/push-recent-contacts"
+    static let RelationDelFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/del"
+    
+    static let GetAllRadio = YMAPIInterfaceURL.ApiBaseUrl + "/radio"
+    static let SetRadioHaveRead = YMAPIInterfaceURL.ApiBaseUrl + "/radio/read"
+    
+    static let CreateNewAppointment = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/new"
+    static let GetAppointmentList = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/list"
+    static let GetAppointmentDetail = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/detail"
+    
+    static let GetAdmissionsList = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/list"
+    static let GetAdmissionDetail = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/detail"
+    static let AdmissionAgree = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/agree"
+    static let AdmissionRefusal = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/refusal"
+    static let AdmissionComplete = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/complete"
+    static let AdmissionRescheduled = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/rescheduled"
+    static let AdmissionCancel = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/cancel"
+    
+    static let CreateFace2FaceAdvice = YMAPIInterfaceURL.ApiBaseUrl + "/f2f-advice/new"
+    
+    static let GetPatientInfo = YMAPIInterfaceURL.ApiBaseUrl + "/patient/get-by-phone"
 }
 
 public class YMAPICommonVariable {
@@ -97,14 +118,18 @@ public class YMAPIUtility {
         return url + "?\(YMCommonStrings.CS_API_PARAM_KEY_TOKEN)=\(token)"
     }
     
-    private static func AppendRouteParamToUrl(url:String, value: String) -> String {
-        let encodedString = value.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
-        if(nil != encodedString) {
-            return url + "/\(encodedString!)"
-        } else {
-            return url + "/?&"
-        }
+    private static func YMUrlEncode(str: String) -> String {
+        let encodedString = str.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
         
+        if(nil != encodedString) {
+            return encodedString!
+        } else {
+            return "?&"
+        }
+    }
+    
+    private static func AppendRouteParamToUrl(url:String, value: String) -> String {
+        return url + "/" + YMAPIUtility.YMUrlEncode(value)
     }
     
     private static func AppendRouteParamToUrl(url:String, value: Int) -> String {
@@ -128,6 +153,12 @@ public class YMAPIUtility {
     }
     
     private func JsonResponseSuccessHandler(sessionDataTask: NSURLSessionDataTask, data: AnyObject?) {
+        if(nil == data) {
+            let response = sessionDataTask.response as! NSHTTPURLResponse
+            print("data is nil and code is :")
+            print(response.statusCode)
+            return
+        }
         let callback = YMAPICommonVariable.JsonCallbackMap[self.Key]
         var jsonData = data as? NSDictionary
         
@@ -169,6 +200,29 @@ public class YMAPIUtility {
         let network = YMNetwork()
         network.RequestJsonByGet(config)
     }
+
+    private func YMAPIPost(baseUrl: String, param: AnyObject?, progressHandler: NetworkProgressHandler?) {
+        let token = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_TOKEN)
+        if(nil == token) {
+            return
+        }
+        
+        let url = YMAPIUtility.AppendTokenToUrl(baseUrl, token: token! as! String)
+        DoPostRequest(url,
+                      param: param,
+                      progressHandler: progressHandler)
+    }
+    
+    private func YMAPIGet(baseUrl: String, param: AnyObject?, progressHandler: NetworkProgressHandler?) {
+        let token = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_TOKEN)
+        if(nil == token) {
+            return
+        }
+        
+        let url = YMAPIUtility.AppendTokenToUrl(baseUrl, token: token! as! String)
+        DoGetRequest(url, param: param, progressHandler: progressHandler)
+    }
+    
     private func GetDefaultConfig(url: String) -> YMNetworkRequestConfig {
         let config = YMNetworkRequestConfig()
         
@@ -183,7 +237,7 @@ public class YMAPIUtility {
         DoPostRequest(YMAPIInterfaceURL.RegisterURL, param: param, progressHandler: progressHandler)
     }
     
-    public func GetVerifyCode(param: AnyObject, progressHandler: NetworkProgressHandler?) {
+    public func YMGetVerifyCode(param: AnyObject, progressHandler: NetworkProgressHandler? = nil) {
         DoPostRequest(YMAPIInterfaceURL.GetUserRegisterVerifyCodeURL, param: param, progressHandler: progressHandler)
     }
     
@@ -197,10 +251,10 @@ public class YMAPIUtility {
             return false
         }
         YMAPICommonVariable.SetJsonCallback(YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA,
-                                            callback: YMAPIUtility.YMGetInitDataSuccess, update: false)
+                                            callback: self.YMGetInitDataSuccess, update: false)
         
         YMAPICommonVariable.SetErrorCallback(YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA,
-                                             callback: YMAPIUtility.YMGetInitDataError, update: false)
+                                             callback: self.YMGetInitDataError, update: false)
         
         let param = [YMCommonStrings.CS_API_PARAM_KEY_TOKEN: token! as! String]
         
@@ -209,16 +263,16 @@ public class YMAPIUtility {
         return true
     }
     
-    private static func YMGetInitDataSuccess(data: NSDictionary?) {
+    private func YMGetInitDataSuccess(data: NSDictionary?) {
         let realData = data!
-        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: realData["user"]!)
-        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SYSTEM_INFO, data: realData["sys_info"]!)
-        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_RELATIONS, data: realData["relations"]!)
-        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_RECENT_CONTACTS, data: realData["recent_contacts"]!)
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: realData[YMCoreDataKeyStrings.INIT_DATA_USER]!)
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SYSTEM_INFO, data: realData[YMCoreDataKeyStrings.INIT_DATA_SYS_INFO]!)
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_RELATIONS, data: realData[YMCoreDataKeyStrings.INIT_DATA_RELATIONS]!)
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_RECENT_CONTACTS, data: realData[YMCoreDataKeyStrings.INIT_DATA_RECENT_CONTACTS]!)
     }
     
-    private static func YMGetInitDataError(error: NSError) {
-        print(error)
+    private func YMGetInitDataError(error: NSError) {
+        self.YMGetAPPInitData()
     }
     
     public func YMGetSearchResult(param:[String: AnyObject], progressHandler: NetworkProgressHandler?) {
@@ -389,11 +443,102 @@ public class YMAPIUtility {
             return
         }
         
-        let url = YMAPIUtility.AppendTokenToUrl(YMAPIInterfaceURL.RelationRemarks, token: token! as! String)
+        let url = YMAPIUtility.AppendTokenToUrl(YMAPIInterfaceURL.RelationFriendRemarks, token: token! as! String)
         DoPostRequest(url,
                      param: [YMCommonStrings.CS_API_PARAM_KEY_FRIEND_ID: friend_id,
                         YMCommonStrings.CS_API_PARAM_KEY_REMARKS: remarks],
                      progressHandler: nil)
+    }
+    
+    public func YMGetRelationFriendRemarks(idList: String) {
+        let token = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_TOKEN)
+        if(nil == token) {
+            return
+        }
+        
+        let url = YMAPIUtility.AppendTokenToUrl(YMAPIInterfaceURL.RelationPushRecentContacts, token: token! as! String)
+        DoPostRequest(url,
+                      param: [YMCommonStrings.CS_API_PARAM_KEY_ID_LIST: idList],
+                      progressHandler: nil)
+    }
+    
+    public func YMRelationDelFriend(friendId: String) {
+        let token = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_TOKEN)
+        if(nil == token) {
+            return
+        }
+        
+        let url = YMAPIUtility.AppendTokenToUrl(YMAPIInterfaceURL.RelationDelFriend, token: token! as! String)
+        DoPostRequest(url,
+                      param: [YMCommonStrings.CS_API_PARAM_KEY_FRIEND_ID: friendId],
+                      progressHandler: nil)
+    }
+
+    //TODO: 修改此方法以上的API接口调用方式
+    public func YMGetAllRadio(page: String? = nil) {
+        if(nil == page){
+            YMAPIGet(YMAPIInterfaceURL.GetAllRadio, param: nil, progressHandler: nil)
+        } else {
+            YMAPIGet(YMAPIInterfaceURL.GetAllRadio, param: [YMCommonStrings.CS_API_PARAM_KEY_PAGE: page!], progressHandler: nil)
+        }
+    }
+    
+    public func YMSetRadioHaveRead(id: String) {
+        YMAPIPost(YMAPIInterfaceURL.SetRadioHaveRead,
+                  param: [YMCommonStrings.CS_API_PARAM_KEY_FRIEND_ID: id],
+                  progressHandler: nil)
+    }
+    
+    public func YMCreateNewAppointment(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.CreateNewAppointment, param: param, progressHandler: nil)
+    }
+    
+    public func YMGetAppointmentList() {
+        YMAPIGet(YMAPIInterfaceURL.GetAppointmentList, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetAppointmentDetail(appointmentId: String) {
+        let url = YMAPIUtility.AppendRouteParamToUrl(YMAPIInterfaceURL.GetAppointmentDetail, value: appointmentId)
+        YMAPIGet(url, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetAdmissionsList() {
+        YMAPIGet(YMAPIInterfaceURL.GetAdmissionsList, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetAdmissionDetail(appointmentId: String) {
+        let url = YMAPIUtility.AppendRouteParamToUrl(YMAPIInterfaceURL.GetAdmissionDetail, value: appointmentId)
+        YMAPIGet(url, param: nil, progressHandler: nil)
+    }
+    
+    public func YMAdmissionAgree(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.AdmissionAgree, param: param, progressHandler: nil)
+    }
+    
+    public func YMAdmissionRefusal(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.AdmissionRefusal, param: param, progressHandler: nil)
+    }
+    
+    public func YMAdmissionComplete(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.AdmissionComplete, param: param, progressHandler: nil)
+    }
+    
+    public func YMAdmissionRescheduled(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.AdmissionRescheduled, param: param, progressHandler: nil)
+    }
+    
+    public func YMAdmissionCancel(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.AdmissionCancel, param: param, progressHandler: nil)
+    }
+    
+    public func YMCreateNewFace2FaceAdvice(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.CreateFace2FaceAdvice, param: param, progressHandler: nil)
+    }
+    
+    public func YMGetPatientInfo(phone: String){
+        YMAPIGet(YMAPIInterfaceURL.GetPatientInfo,
+                 param: [YMCommonStrings.CS_API_PARAM_KEY_PHONE: phone],
+                 progressHandler: nil)
     }
 }
 

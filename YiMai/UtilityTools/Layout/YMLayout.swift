@@ -105,7 +105,7 @@ public class YMLayout {
     
     public static func GetCellPhoneField(param: TextFieldCreateParam) -> YMTextField {
         let newTextField = YMLayout.GetTextFieldWithMaxCharCount(param, maxCharCount: 13)
-        newTextField.keyboardType = UIKeyboardType.PhonePad
+        newTextField.keyboardType = UIKeyboardType.NumberPad
 
         return newTextField
     }

@@ -22,6 +22,8 @@ public class PageIndexViewController: PageViewController {
     override func PageLayout(){
         if(PageLayoutFlag) {return}
         PageLayoutFlag=true
+        
+        YMCoreDataEngine.EngineInitialize()
 
         Actions = PageIndexActions(navController: self.navigationController!)
 

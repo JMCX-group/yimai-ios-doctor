@@ -16,10 +16,10 @@ public class PageRegisterBodyView: NSObject {
 
     private var CellPhoneInput : YMTextField? = nil
     private var PasswordInput : YMTextField? = nil
-    private var VerifyCodeInput : YMTextField? = nil
+    public var VerifyCodeInput : YMTextField? = nil
     private var InvitedCodeInput : YMTextField? = nil
     
-    private var GetVerifyCodeButton : YMButton? = nil
+    public var GetVerifyCodeButton : YMButton? = nil
     private var NextStepCodeButton : YMButton? = nil
     
     private var AgreeButton : YMButton? = nil
@@ -108,7 +108,9 @@ public class PageRegisterBodyView: NSObject {
         NextStepCodeButton = YMButton(frame: NextStepButtonFrame)
         
         NextStepCodeButton?.UserStringData = YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME
-        NextStepCodeButton?.addTarget(self.Actions, action: "PageJumpTo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        NextStepCodeButton?.addTarget(self.Actions, action: "NextStep:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        GetVerifyCodeButton?.addTarget(self.Actions, action: "GetVerifyCode:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         
         BodyView.addSubview(GetVerifyCodeButton!)
         BodyView.addSubview(NextStepCodeButton!)
@@ -141,6 +143,70 @@ public class PageRegisterBodyView: NSObject {
 
         BodyView.addSubview(AgreeButton!)
         BodyView.addSubview(AgreeCheckbox!)
+    }
+    
+    public func VerifyPhoneBeforeGetCode() -> [String: String]? {
+        let phone = self.CellPhoneInput?.text
+        if(!YMValueValidator.IsCellPhoneNum(phone!)) {
+            YMPageModalMessage.ShowErrorInfo("手机号码错误，请输入手机号码！", nav: self.NavController!)
+            return nil
+        }
+        
+        return [YMCommonStrings.CS_API_PARAM_KEY_PHONE: phone!]
+    }
+    
+    public func DisableGetVerifyCodeButton() {
+        self.GetVerifyCodeButton?.setTitle("重新获取(60)", forState: UIControlState.Disabled)
+        self.GetVerifyCodeButton?.titleLabel?.font = YMFonts.YMDefaultFont(20.LayoutVal())
+        self.GetVerifyCodeButton?.enabled = false
+    }
+    
+    public func EnableGetVerifyCodeButton() {
+        self.GetVerifyCodeButton?.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        self.GetVerifyCodeButton?.enabled = true
+    }
+    
+    public func VerifyInput() -> [String:String]? {
+        let phone = self.CellPhoneInput?.text
+        let password = self.PasswordInput?.text
+        let verifyCode = self.VerifyCodeInput?.text
+        
+        //TODO: 医脉邀请码
+        if(!self.AgreeChecked) {
+            YMPageModalMessage.ShowErrorInfo("请先同意服务条款！", nav: self.NavController!)
+            return nil
+        }
+        
+        if(!YMValueValidator.IsCellPhoneNum(phone!)) {
+            YMPageModalMessage.ShowErrorInfo("手机号码错误，请重新输入！", nav: self.NavController!)
+            return nil
+        }
+        
+        if(6 > password?.characters.count) {
+            YMPageModalMessage.ShowErrorInfo("密码长度不足六位！", nav: self.NavController!)
+            return nil
+        }
+        
+        let curVerifyCode = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_REG_VERIFY_CODE)
+        if(nil == curVerifyCode) {
+            YMPageModalMessage.ShowErrorInfo("请先获取验证码！", nav: self.NavController!)
+            return nil
+        }
+        
+        let verifyCodeInString = "\(curVerifyCode!)"
+        if(verifyCodeInString != verifyCode) {
+            YMPageModalMessage.ShowErrorInfo("验证码错误！", nav: self.NavController!)
+            return nil
+        }
+        
+        PageRegisterViewController.RegPhone = phone!
+        PageRegisterViewController.RegPassword = password!
+        
+        return [
+            "phone": phone!,
+            "password": password!,
+            "verify_code": verifyCode!
+        ]
     }
 }
 

@@ -86,7 +86,7 @@ public class PageLoginBodyView: NSObject {
         UsernameInput?.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: BodyTopPadding, otherSize: InputHeight)
         PasswordInput?.align(Align.UnderMatchingLeft, relativeTo: UsernameInput!, padding: 1, width: YMSizes.PageWidth, height: InputHeight)
 
-        UsernameInput?.keyboardType = UIKeyboardType.PhonePad
+        UsernameInput?.keyboardType = UIKeyboardType.NumberPad
         
         BodyPanel.addSubview(ErrorInfoLabel)
         ErrorInfoLabel.textColor = YMColors.AlarmFontColor

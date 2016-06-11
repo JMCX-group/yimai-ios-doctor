@@ -56,6 +56,8 @@ public class YMCommonStrings {
     public static let CS_API_PARAM_KEY_CODE = "code"
     public static let CS_API_PARAM_KEY_FRIEND_ID = "friend_id"
     public static let CS_API_PARAM_KEY_REMARKS = "remarks"
+    public static let CS_API_PARAM_KEY_ID_LIST = "id_list"
+    public static let CS_API_PARAM_KEY_PAGE = "page"
     
 }
 

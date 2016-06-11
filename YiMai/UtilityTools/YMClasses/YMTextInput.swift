@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
+import Neon
 
 public typealias YMTextFieldEditStartCallback = ((YMTextField) -> Bool)
 public typealias YMTextFieldEditEndCallback = ((YMTextField) -> Void)
@@ -67,6 +67,14 @@ public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
             }
         }
     }
+    
+    public func DownButtonTouched(sender: YMButton) {
+        let textField = sender.UserObjectData as! YMTextField
+        textField.resignFirstResponder()
+        if(nil != textField.EditEndCallback) {
+            textField.EditEndCallback!(textField)
+        }
+    }
 }
 
 public class YMTextField: UITextField {
@@ -115,6 +123,18 @@ public class YMTextField: UITextField {
         }
         
         self.addTarget(self.YMDelegate, action: "DidChange:".Sel(), forControlEvents: UIControlEvents.EditingChanged)
+        
+        let topView = UIToolbar(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth, height: 60.LayoutVal()))
+        topView.backgroundColor = YMColors.DividerLineGray
+        let downButton = YMButton()
+        topView.addSubview(downButton)
+        downButton.setTitle("完成", forState: UIControlState.Normal)
+        downButton.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+        downButton.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        downButton.anchorToEdge(Edge.Right, padding: 0, width: 80.LayoutVal(), height: 60.LayoutVal())
+        downButton.UserObjectData = self
+        downButton.addTarget(YMDelegate, action: "DownButtonTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        self.inputAccessoryView = topView
     }
 
     required public init?(coder aDecoder: NSCoder) {

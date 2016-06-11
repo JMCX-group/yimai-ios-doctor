@@ -10,5 +10,7 @@ import Foundation
 import UIKit
 
 public class PagePersonalActions: PageJumpActions{
-
+    public func QRButtonTouched(sender: UIGestureRecognizer) {
+        
+    }
 }

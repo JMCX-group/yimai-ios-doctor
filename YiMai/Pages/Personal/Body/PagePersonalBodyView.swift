@@ -9,12 +9,12 @@
 import Foundation
 import Neon
 
-public class PagePersonalBodyView {
+public class PagePersonalBodyView: NSObject {
     private var ParentView: UIView? = nil
     private var NavController: UINavigationController? = nil
     private var Actions: PagePersonalActions? = nil
     
-    private var BodyView: UIScrollView = UIScrollView()
+    public var BodyView: UIScrollView = UIScrollView()
     
     private var OperationArray: [YMTouchableView] = [YMTouchableView]()
     

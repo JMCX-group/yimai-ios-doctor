@@ -39,7 +39,6 @@ public class PageIndexActions: PageJumpActions {
     }
     
     public func DoSearch(editor: YMTextField) {
-        print(ApiUtility)
 //        ApiUtility?.YMGetSearchResult(["field":editor.text!], progressHandler: nil)
 //        ApiUtility?.YMQueryUserInfo()
 //        ApiUtility?.YMQueryUserInfoById("23976")
@@ -54,9 +53,36 @@ public class PageIndexActions: PageJumpActions {
 //        ApiUtility?.YMGetLevel2Ration()
 //        ApiUtility?.YMAddFriendByPhone("18612345678") //TODO: need test
         
-        ApiUtility?.YMGetRelationCommonFriends("1")  //TODO: need test
+//        ApiUtility?.YMGetRelationCommonFriends("1")  //TODO: need test
 //        ApiUtility?.YMGetRelationNewFriends()
 //        ApiUtility?.YMGetRelationFriendRemarks("4", remarks: "test user 呵呵")
+//        ApiUtility?.YMGetRelationFriendRemarks("1,3")
+//        ApiUtility?.YMRelationDelFriend("4")
+//        ApiUtility?.YMGetAllRadio()
+//        ApiUtility?.YMSetRadioHaveRead("1")
+//        ApiUtility?.YMCreateNewAppointment(
+//            [
+//                "name": "张三",
+//                "phone": "13312345678",
+//                "sex": "1",
+//                "age": "22",
+//                "history": "",
+//                "doctor": "2",
+//                "date": "2016-05-01,2016-05-02",
+//                "am_or_pm": "am,pm"
+//            ])
+        
+//        ApiUtility?.YMGetAppointmentList()
+//        ApiUtility?.YMGetAppointmentDetail("011605150006")
+//        ApiUtility?.YMGetAdmissionsList()
+//        ApiUtility?.YMGetAdmissionDetail("011605150006")
+//        ApiUtility?.YMAdmissionAgree(
+//            [
+//                "id": "011605260002",
+//                "visit_time": "2016-07-01",
+//                "supplement": "附加信息; test",
+//                "remark": "补充说明; test"
+//            ])
     }
 }
 

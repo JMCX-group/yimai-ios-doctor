@@ -32,6 +32,15 @@ public class PagePersonalTopView {
         ViewLayout()
     }
     
+    public func Refresh(userInfo: [String: AnyObject]) {
+        YiMaiCode.text = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_CODE] as? String
+        Username.text = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_NAME] as? String
+        
+        let dept = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_DEPARTMENT] as! [String: String]
+        let jobTitle = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_JOB_TITLE] as! String
+        Desc.text = "\(dept["name"]!) | \(jobTitle)"
+    }
+    
     private func ViewLayout() {
         ParentView?.addSubview(TopViewPanel)
         TopViewPanel.backgroundColor = YMColors.White
@@ -53,7 +62,7 @@ public class PagePersonalTopView {
         
         YiMaiCodeTitle.anchorToEdge(Edge.Bottom, padding: 70.LayoutVal(), width: YMSizes.PageWidth, height: 26.LayoutVal())
         
-        YiMaiCode.text = "ABC123"
+        YiMaiCode.text = ""
         YiMaiCode.textColor = YMColors.FontBlue
         YiMaiCode.textAlignment = NSTextAlignment.Center
         YiMaiCode.font = UIFont.systemFontOfSize(40.LayoutVal())
@@ -62,7 +71,7 @@ public class PagePersonalTopView {
     }
     
     private func DrawQRButton() {
-        TopQRButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "".Sel(), imageName: "PersonalQRButton")
+        TopQRButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "QRButtonTouched:".Sel(), imageName: "PersonalQRButton")
         TopViewPanel.addSubview(TopQRButton!)
         
         TopQRButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 64.LayoutVal(), width: (TopQRButton?.width)!, height: (TopQRButton?.height)!)
@@ -79,7 +88,7 @@ public class PagePersonalTopView {
         
         TopViewPanel.addSubview(Username)
         
-        Username.text = "华佗"
+        Username.text = ""
         Username.textColor = YMColors.White
         Username.textAlignment = NSTextAlignment.Center
         Username.font = UIFont.systemFontOfSize(40.LayoutVal())
@@ -87,7 +96,7 @@ public class PagePersonalTopView {
         
         TopViewPanel.addSubview(Desc)
         
-        Desc.text = "麻醉科 | 主任医师"
+        Desc.text = ""
         Desc.textColor = YMColors.FontLightBlue
         Desc.textAlignment = NSTextAlignment.Center
         Desc.font = UIFont.systemFontOfSize(20.LayoutVal())
