@@ -94,7 +94,7 @@ public class YMCoreDataEngine {
                     handlers.removeAll()
                 }
             }
-            objc_sync_enter(YMCoreDataEngine.OneceHandlerLock)
+            objc_sync_exit(YMCoreDataEngine.OneceHandlerLock)
         }
     }
     
@@ -109,7 +109,7 @@ public class YMCoreDataEngine {
                         handler.CompletedFlag = handler.Handler(data, YMCoreDataEngine.MainQueue)
                     }
                 }
-                objc_sync_enter(YMCoreDataEngine.OneceHandlerLock)
+                objc_sync_exit(YMCoreDataEngine.OneceHandlerLock)
             }
         }
     }

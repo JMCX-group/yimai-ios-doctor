@@ -17,6 +17,8 @@ public class YMCommonStrings {
     public static let CS_PAGE_YIMAI_NAME = "PageYiMai"
     public static let CS_PAGE_PERSONAL_NAME = "PagePersonal"
     
+    public static let CS_PAGE_COMMON_SEARCH_NAME = "PageCommonSearch"
+    
     public static let CS_PAGE_LOGIN_NAME = "PageLogin"
     public static let CS_PAGE_REGISTER_NAME = "PageRegister"
     public static let CS_PAGE_FORGOT_NAME = "PageForgot"

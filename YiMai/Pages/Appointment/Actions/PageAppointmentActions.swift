@@ -23,9 +23,9 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
         let contacts: PrivateResource = PrivateResource.Photos
         
         proposeToAccess(contacts, agreed: {
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
                 let imagePicker = UIImagePickerController()
-                imagePicker.sourceType = .SavedPhotosAlbum
+                imagePicker.sourceType = .PhotoLibrary
                 imagePicker.delegate = self
                 
                 self.NavController!.presentViewController(imagePicker, animated: true, completion: nil)
@@ -47,7 +47,7 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
         
         let img = UIImageView(image: image)
         pageController.BodyView!.AddImage(img)
-        
+
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     public func DoAppointment(sender: UIGestureRecognizer) {
