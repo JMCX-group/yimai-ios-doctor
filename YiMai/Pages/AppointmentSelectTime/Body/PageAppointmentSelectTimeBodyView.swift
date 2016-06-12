@@ -19,6 +19,8 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
     private let CellInnerHeight = 56.LayoutVal()
     
     private var SelectedDays = [String: String]()
+    private var SelectedFullDate = [String: String]()
+    private var SelectedAMorPM = [String: String]()
     
     override func ViewLayout() {
         super.ViewLayout()
@@ -35,6 +37,8 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
         let touchedStatus = userData[YMAppointmentStrings.CS_CALENDAR_TOUCH_STATUS_KEY] as! Bool
         let innerCell = userData[YMAppointmentStrings.CS_CALENDAR_CELL_INNER_KEY] as! UIView
         let date = userData[YMAppointmentStrings.CS_CALENDAR_CELL_DATE_KEY] as! String
+        let fullDate = userData[YMAppointmentStrings.CS_CALENDAR_CELL_FULL_DATE_KEY] as! String
+        let amOrPM = userData[YMAppointmentStrings.CS_CALENDAR_CELL_AM_OR_PM_KEY] as! String
         
         if(untouchable) {
             return
@@ -42,11 +46,15 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
         
         if(touchedStatus) {
             SelectedDays.removeValueForKey(date)
+            SelectedFullDate.removeValueForKey(fullDate)
+            SelectedAMorPM.removeValueForKey(fullDate)
             innerCell.backgroundColor = YMColors.PanelBackgroundGray
             userData[YMAppointmentStrings.CS_CALENDAR_TOUCH_STATUS_KEY] = false
         } else {
             if(SelectedDays.count < 3){
                 SelectedDays[date] = date
+                SelectedFullDate[fullDate] = fullDate
+                SelectedAMorPM[fullDate] = amOrPM
                 userData[YMAppointmentStrings.CS_CALENDAR_TOUCH_STATUS_KEY] = true
                 innerCell.backgroundColor = YMColors.FontBlue
             }
@@ -61,6 +69,21 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
             ret += v + "  "
         }
         
+        return ret
+    }
+    
+    public func GetSelectedDaysForUpload() -> [String] {
+        var ret = [String]()
+        
+        var date = [String]()
+        var amOrPm = [String]()
+        for (k,v) in SelectedFullDate {
+            date.append(v)
+            amOrPm.append(SelectedAMorPM[k]!)
+        }
+        
+        ret.append(date.joinWithSeparator(","))
+        ret.append(amOrPm.joinWithSeparator(","))
         return ret
     }
     
@@ -161,9 +184,10 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
         return cell
     }
     
-    private func DrawCalendarOptCell(date:NSDate, AMorPM: String) -> UIView {
+    private func DrawCalendarOptCell(date:NSDate, AMorPM: String, AMorPMEng: String) -> UIView {
         let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DateSelected:".Sel())
         let format = DateFormat.Custom("MM月dd日")
+        let fullFormat = DateFormat.Custom("YYYY-MM-dd")
         
         cell.backgroundColor = YMColors.DividerLineGray
         var userData = [String: AnyObject]()
@@ -183,6 +207,8 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
         userData[YMAppointmentStrings.CS_CALENDAR_TOUCH_STATUS_KEY] = false
         userData[YMAppointmentStrings.CS_CALENDAR_CELL_INNER_KEY] = cellInner
         userData[YMAppointmentStrings.CS_CALENDAR_CELL_DATE_KEY] = date.toString(format)! + AMorPM
+        userData[YMAppointmentStrings.CS_CALENDAR_CELL_FULL_DATE_KEY] = date.toString(fullFormat)!
+        userData[YMAppointmentStrings.CS_CALENDAR_CELL_AM_OR_PM_KEY] = AMorPMEng
         
         cell.UserObjectData = userData
         
@@ -236,8 +262,8 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
             let dateTitle = thisDay.toString(format)! as String
             
             let dateTitleCell = GetCalendarLabelCell(dateTitle, width: 80.LayoutVal(), height: 72.LayoutVal())
-            let amCell = DrawCalendarOptCell(thisDay, AMorPM: "上午")
-            let pmCell = DrawCalendarOptCell(thisDay, AMorPM: "下午")
+            let amCell = DrawCalendarOptCell(thisDay, AMorPM: "上午", AMorPMEng: "am")
+            let pmCell = DrawCalendarOptCell(thisDay, AMorPM: "下午", AMorPMEng: "pm")
             
             calendarView.addSubview(dateTitleCell)
             calendarView.addSubview(amCell)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		674EEDC634635DB13AEB3300 /* Pods_YiMai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A556489D24098750735AC565 /* Pods_YiMai.framework */; };
+		730848271D0D9D38007E8940 /* YMTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848261D0D9D38007E8940 /* YMTableView.swift */; };
+		730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848281D0D9D4B007E8940 /* YMModuleStrings.swift */; };
 		7394F8401CF9497600F05487 /* PageAppointmentBasicInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7394F8421CF9497600F05487 /* PageAppointmentBasicInfo.storyboard */; };
 		7394F8441CF949B300F05487 /* PageAppointmentPatientBasicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394F8431CF949B300F05487 /* PageAppointmentPatientBasicInfoViewController.swift */; };
 		7394F8461CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394F8451CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift */; };
@@ -154,6 +156,8 @@
 /* Begin PBXFileReference section */
 		10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.debug.xcconfig"; sourceTree = "<group>"; };
 		35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.release.xcconfig"; sourceTree = "<group>"; };
+		730848261D0D9D38007E8940 /* YMTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTableView.swift; sourceTree = "<group>"; };
+		730848281D0D9D4B007E8940 /* YMModuleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMModuleStrings.swift; sourceTree = "<group>"; };
 		7394F8411CF9497600F05487 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentBasicInfo.storyboard; sourceTree = "<group>"; };
 		7394F8431CF949B300F05487 /* PageAppointmentPatientBasicInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentPatientBasicInfoViewController.swift; sourceTree = "<group>"; };
 		7394F8451CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentPatientBasicInfoBodyView.swift; sourceTree = "<group>"; };
@@ -720,6 +724,7 @@
 		9619EF751CC1DE1200F69CBC /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				730848281D0D9D4B007E8940 /* YMModuleStrings.swift */,
 				9619EF771CC1FF0400F69CBC /* YMCommonStrings.swift */,
 				9619EF791CC1FF1500F69CBC /* YMLoginStrings.swift */,
 				9619EF7B1CC1FF2400F69CBC /* YMIndexStrings.swift */,
@@ -804,6 +809,7 @@
 		96331B031CC8762600E53125 /* YMClasses */ = {
 			isa = PBXGroup;
 			children = (
+				730848261D0D9D38007E8940 /* YMTableView.swift */,
 				96331B041CC8762600E53125 /* YMButton.swift */,
 				96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */,
 				96331B071CC8762600E53125 /* YMTextInput.swift */,
@@ -1390,6 +1396,7 @@
 				96D4516E1CF6DB34006817CE /* PageYiMaiManualAddFriendBodyView.swift in Sources */,
 				96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */,
 				96637A751CC22DE000DBD1CF /* YMSizes.swift in Sources */,
+				730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */,
 				7394F8481CF94A2500F05487 /* PageAppointmentPatientBasicInfoActions.swift in Sources */,
 				9612DB751CC9F85900262D2E /* PagePersonalTopView.swift in Sources */,
 				96637A8A1CC2515E00DBD1CF /* YMCommonActions.swift in Sources */,
@@ -1415,6 +1422,7 @@
 				962076F81CC7292D002083FA /* PageRegisterSelectHospitalActions.swift in Sources */,
 				9619EF7E1CC1FF3A00F69CBC /* YMRegisterStrings.swift in Sources */,
 				9612DB441CC8B86400262D2E /* PageIndexBodyView.swift in Sources */,
+				730848271D0D9D38007E8940 /* YMTableView.swift in Sources */,
 				96A3D1C81CFD84C400518DCB /* PageAppointmentSelectDoctorBodyView.swift in Sources */,
 				96D451601CF6D4A1006817CE /* PageYiMaiAddContactsFriendsBootomView.swift in Sources */,
 				7394F8551CF9ABCE00F05487 /* YMTextArea.swift in Sources */,

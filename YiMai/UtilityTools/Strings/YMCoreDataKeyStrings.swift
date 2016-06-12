@@ -16,12 +16,23 @@ public class YMCoreDataKeyStrings {
     public static let CS_USER_RELATIONS = "CoreDataUserRelations"
     public static let CS_RECENT_CONTACTS = "CoreDataRecentContacts"
     
+    public static let CS_NEW_FRIENDS = "CoreDataNewFriends"
+    
+    public static let CS_INIT_FRIENDS = "CoreDataInitFriends"
+    public static let CS_FRIENDS_COUNT_INFO = "CoreDataFriendsCountInfo"
+    public static let CS_SAME_INFO = "CoreDataSameInfo"
+    
+    public static let CS_L1_FRIENDS = "CoreDataL1Friends"
+    public static let CS_L1_FRIENDS_COUNT_INFO = "CoreDataL1FriendsCountInfo"
+    
+    public static let CS_L2_FRIENDS = "CoreDataL2Friends"
+    public static let CS_L2_FRIENDS_COUNT_INFO = "CoreDataL2FriendsCountInfo"
     
     public static let INIT_DATA_USER = "user"
     public static let INIT_DATA_RELATIONS = "relations"
     public static let INIT_DATA_RECENT_CONTACTS = "recent_contacts"
     public static let INIT_DATA_SYS_INFO = "sys_info"
-    
+
     public static let INIT_DATA_USER_ID = "id"
     public static let INIT_DATA_USER_CODE = "code"
     public static let INIT_DATA_USER_PHONE = "phone"
@@ -39,4 +50,38 @@ public class YMCoreDataKeyStrings {
     public static let INIT_DATA_USER_PERSONAL_INTRODUCTION = "personal_introduction"
     public static let INIT_DATA_USER_IS_AUTH = "is_auth"
     public static let INIT_DATA_USER_INVITER = "inviter"
+    
+    
+    public static let KEY_COLLAGE = "college"
+    public static let KEY_DEPARTMENT = "department"
+    public static let KEY_HOSPITAL = "hospital"
+    public static let KEY_UNREAD = "unread"
+    public static let KEY_HEAD_URL = "head_url"
+    public static let KEY_ID = "id"
+    public static let KEY_JOB_TITLE = "job_title"
+    public static let KEY_NAME = "name"
+    public static let KEY_DOCTOR = "doctor"
+    public static let KEY_STATUS = "status"
+    public static let KEY_WORD = "word"
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

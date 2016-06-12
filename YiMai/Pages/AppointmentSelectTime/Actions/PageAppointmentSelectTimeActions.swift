@@ -21,12 +21,14 @@ public class PageAppointmentSelectTimeActions: PageJumpActions {
         let pageController = self.Target as! PageAppointmentSelectTimeViewController
 
         PageAppointmentViewController.SelectedTime = pageController.BodyView!.GetSelectedDays()
+        PageAppointmentViewController.SelectedTimeForUpload = pageController.BodyView!.GetSelectedDaysForUpload()
         
         self.NavController?.popViewControllerAnimated(true)
     }
     
     public func AutoButtonTouched(sender: UIGestureRecognizer) {
         PageAppointmentViewController.SelectedTime = "专家决定"
+        PageAppointmentViewController.SelectedTimeForUpload = []
         self.NavController?.popViewControllerAnimated(true)
 
     }

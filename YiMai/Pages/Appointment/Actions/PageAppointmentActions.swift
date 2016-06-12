@@ -11,6 +11,14 @@ import UIKit
 import Proposer
 
 public class PageAppointmentActions: PageJumpActions, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    var ApiUtility: YMAPIUtility? = nil
+    
+    override func ExtInit() {
+        ApiUtility = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_CREATE_NEW_APPOINTMENT,
+                                  success: CreateAppointmentSuccess,
+                                  error: CreateAppointmentError)
+    }
+    
     public func PhotoScrollLeft(sender: UIGestureRecognizer) {
         
     }
@@ -42,7 +50,9 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
         })
     }
     
-    public func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    public func imagePickerController(picker: UIImagePickerController!,
+                                      didFinishPickingImage image: UIImage!,
+                                                            editingInfo: [NSObject : AnyObject]!) {
         let pageController = self.Target! as! PageAppointmentViewController
         
         let img = UIImageView(image: image)
@@ -50,7 +60,44 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
 
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-    public func DoAppointment(sender: UIGestureRecognizer) {
+    
+    public func CreateAppointmentSuccess(data: NSDictionary?) {
+        print("appointment success")
+        let pageController = self.Target! as! PageAppointmentViewController
+        pageController.Loading?.Hide()
         self.NavController!.popViewControllerAnimated(true)
     }
+    
+    public func CreateAppointmentError(err: NSError) {
+        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
+    }
+    
+    public func DoAppointment(sender: UIGestureRecognizer) {
+        let pageController = self.Target! as! PageAppointmentViewController
+        let uploadData = pageController.VerifyInput()
+        
+        if(nil != uploadData) {
+            pageController.Loading?.Show()
+            ApiUtility?.YMCreateNewAppointment(uploadData!)
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

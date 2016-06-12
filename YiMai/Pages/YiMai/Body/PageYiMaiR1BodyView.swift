@@ -83,9 +83,11 @@ public class PageYiMaiR1BodyView: PageBodyView {
 
         OperationPanel.groupAndFill(group: Group.Horizontal, views: [SameHopitalButton!, SameAreasButton!, SameSchoolButton!], padding: 1)
         
-        BuildOpertorCell(SameHopitalButton!, imageName: "YiMaiR1SameHospital", targetPage: "", title: "同医院", count: "10人")
-        BuildOpertorCell(SameAreasButton!, imageName: "YiMaiR1SameAreas", targetPage: "", title: "同领域", count: "17人")
-        BuildOpertorCell(SameSchoolButton!, imageName: "YiMaiR1SameSchool", targetPage: "", title: "同学校", count: "9人")
+        let same = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_SAME_INFO) as! [String: AnyObject]
+        
+        BuildOpertorCell(SameHopitalButton!, imageName: "YiMaiR1SameHospital", targetPage: "", title: "同医院", count: "\(same["hospital"]!)人")
+        BuildOpertorCell(SameAreasButton!, imageName: "YiMaiR1SameAreas", targetPage: "", title: "同领域", count: "\(same["department"]!)人")
+        BuildOpertorCell(SameSchoolButton!, imageName: "YiMaiR1SameSchool", targetPage: "", title: "同学校", count: "\(same["college"]!)人")
     }
 
     private func DrawSearchPanel() {
@@ -115,8 +117,19 @@ public class PageYiMaiR1BodyView: PageBodyView {
         BodyView.addSubview(NewFriendsPanel)
         NewFriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: OperationPanel, padding: 0, height: 130.LayoutVal())
 
+        let newFriends = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as! [[String:AnyObject]]
+        
+        var i = 0
+        for f in newFriends {
+            let status = "\(f["status"]!)"
+            
+            if("isFriend" == status){
+                i += 1
+            }
+        }
+        
         let titleLabel = UILabel()
-        titleLabel.text = "我的新朋友（新增1人）"
+        titleLabel.text = "我的新朋友（新增\(i)人）"
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.sizeToFit()
@@ -225,9 +238,12 @@ public class PageYiMaiR1BodyView: PageBodyView {
     private func DrawFriendsPanel() {
         BodyView.addSubview(FriendsPanel)
         FriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: NewFriendsPanel, padding: 0, height: 0)
-
+        
+        let l1Doc = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L1_FRIENDS) as! [[String:AnyObject]]
+        let l1DocCnt = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L1_FRIENDS_COUNT_INFO) as! [String: AnyObject]
+        
         let  titleLabel = UILabel()
-        titleLabel.text = "我的朋友（2名医生 | 1家医院）"
+        titleLabel.text = "我的朋友（\(l1DocCnt["doctor"]!)名医生 | \(l1DocCnt["hospital"]!)家医院）"
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.sizeToFit()
@@ -235,41 +251,56 @@ public class PageYiMaiR1BodyView: PageBodyView {
         FriendsPanel.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 50.LayoutVal())
         
-        var cellView = DrawFriendsCell(
-            [
-                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-                YMYiMaiStrings.CS_DATA_KEY_NAME:"池帅",
-                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"鸡西矿业总医院医疗集团二道河子中心医院",
-                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"心血管外科",
-                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-                
-            ], prevCell: nil
-        )
+        var cellView:YMTouchableView? = nil
+        for doc in l1Doc {
+            cellView = DrawFriendsCell(
+                [
+                    YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+                    YMYiMaiStrings.CS_DATA_KEY_NAME:"\(doc["name"]!)",
+                    YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"\(doc["hospital"]!)",
+                    YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"\(doc["department"]!)",
+                    YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"\(doc["job_title"]!)",
+                    YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)"
+                    
+                ], prevCell: cellView
+            )
+        }
 
-        cellView = DrawFriendsCell(
-            [
-                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-                YMYiMaiStrings.CS_DATA_KEY_NAME:"方欣雨",
-                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"牡丹江市西安区先锋医院江滨社区第一卫生服务站",
-                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"小儿营养保健科",
-                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-                
-            ], prevCell: cellView
-        )
-        
-        cellView = DrawFriendsCell(
-            [
-                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-                YMYiMaiStrings.CS_DATA_KEY_NAME:"武瑞鑫",
-                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"中国医学科学院北京协和医院",
-                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"功能神经外科",
-                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-                
-            ], prevCell: cellView
-        )
+//        cellView = DrawFriendsCell(
+//            [
+//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+//                YMYiMaiStrings.CS_DATA_KEY_NAME:"池帅",
+//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"鸡西矿业总医院医疗集团二道河子中心医院",
+//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"心血管外科",
+//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
+//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
+//                
+//            ], prevCell: nil
+//        )
+//
+//        cellView = DrawFriendsCell(
+//            [
+//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+//                YMYiMaiStrings.CS_DATA_KEY_NAME:"方欣雨",
+//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"牡丹江市西安区先锋医院江滨社区第一卫生服务站",
+//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"小儿营养保健科",
+//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
+//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
+//                
+//            ], prevCell: cellView
+//        )
+//        
+//        cellView = DrawFriendsCell(
+//            [
+//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+//                YMYiMaiStrings.CS_DATA_KEY_NAME:"武瑞鑫",
+//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"中国医学科学院北京协和医院",
+//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"功能神经外科",
+//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
+//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
+//                
+//            ], prevCell: cellView
+//        )
     }
 }
 

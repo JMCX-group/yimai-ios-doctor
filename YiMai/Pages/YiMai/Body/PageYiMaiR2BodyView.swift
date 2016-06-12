@@ -116,9 +116,12 @@ public class PageYiMaiR2BodyView: PageBodyView {
         BodyView.addSubview(FriendsPanel)
         FriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, height: 0)
         
+        let l2Doc = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L2_FRIENDS) as! [[String:AnyObject]]
+        let l2DocCnt = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L2_FRIENDS_COUNT_INFO) as! [String: AnyObject]
+        
         let titlePanel = UIView()
         let titleLabel = UILabel()
-        titleLabel.text = "朋友的朋友（20名医生 | 5家医院）"
+        titleLabel.text = "朋友的朋友（\(l2DocCnt["doctor"]!)名医生 | \(l2DocCnt["hospital"]!)家医院）"
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.sizeToFit()
@@ -129,41 +132,56 @@ public class PageYiMaiR2BodyView: PageBodyView {
         titlePanel.backgroundColor = YMColors.White
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 50.LayoutVal())
         
-        var cellView = DrawFriendsCell(
-            [
-                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-                YMYiMaiStrings.CS_DATA_KEY_NAME:"池帅",
-                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"鸡西矿业总医院医疗集团二道河子中心医院",
-                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"心血管外科",
-                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-                
-            ], prevCell: nil
-        )
+        var cellView:YMTouchableView? = nil
+        for doc in l2Doc {
+            cellView = DrawFriendsCell(
+                [
+                    YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+                    YMYiMaiStrings.CS_DATA_KEY_NAME:"\(doc["name"]!)",
+                    YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"\(doc["hospital"]!)",
+                    YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"\(doc["department"]!)",
+                    YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"\(doc["job_title"]!)",
+                    YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)"
+                    
+                ], prevCell: cellView
+            )
+        }
         
-        cellView = DrawFriendsCell(
-            [
-                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-                YMYiMaiStrings.CS_DATA_KEY_NAME:"方欣雨",
-                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"牡丹江市西安区先锋医院江滨社区第一卫生服务站",
-                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"小儿营养保健科",
-                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-                
-            ], prevCell: cellView
-        )
-        
-        cellView = DrawFriendsCell(
-            [
-                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-                YMYiMaiStrings.CS_DATA_KEY_NAME:"武瑞鑫",
-                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"中国医学科学院北京协和医院",
-                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"功能神经外科",
-                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-                
-            ], prevCell: cellView
-        )
+//        cellView = DrawFriendsCell(
+//            [
+//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+//                YMYiMaiStrings.CS_DATA_KEY_NAME:"池帅",
+//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"鸡西矿业总医院医疗集团二道河子中心医院",
+//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"心血管外科",
+//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
+//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
+//                
+//            ], prevCell: nil
+//        )
+//        
+//        cellView = DrawFriendsCell(
+//            [
+//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+//                YMYiMaiStrings.CS_DATA_KEY_NAME:"方欣雨",
+//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"牡丹江市西安区先锋医院江滨社区第一卫生服务站",
+//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"小儿营养保健科",
+//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
+//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
+//                
+//            ], prevCell: cellView
+//        )
+//        
+//        cellView = DrawFriendsCell(
+//            [
+//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+//                YMYiMaiStrings.CS_DATA_KEY_NAME:"武瑞鑫",
+//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"中国医学科学院北京协和医院",
+//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"功能神经外科",
+//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
+//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
+//                
+//            ], prevCell: cellView
+//        )
     }
 
 }

@@ -18,21 +18,17 @@ public class PageAppointmentPatientBasicInfoActions: PageJumpActions {
         let name = info["name"]!
         let phone = info["phone"]!
         
-        if("" == name || "" == phone){
-            let alertController = UIAlertController(title: "请填写姓名和手机号！", message: nil, preferredStyle: .Alert)
-            let okBtn = UIAlertAction(title: "确定", style: .Default,
-                handler: {
-                    action in
-            })
-            
-            
-            okBtn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
-            
-            alertController.addAction(okBtn)
-            self.NavController!.presentViewController(alertController, animated: true, completion: nil)
-        } else {
-            PageAppointmentViewController.PatientBasicInfo = info
-            self.NavController?.popViewControllerAnimated(true)
+        if("" == name) {
+            YMPageModalMessage.ShowErrorInfo("请填写姓名！", nav: self.NavController!)
+            return
         }
+        
+        if(!YMValueValidator.IsCellPhoneNum(phone)) {
+            YMPageModalMessage.ShowErrorInfo("请填写正确的手机号！", nav: self.NavController!)
+            return
+        }
+        
+        PageAppointmentViewController.PatientBasicInfo = info
+        self.NavController?.popViewControllerAnimated(true)
     }
 }

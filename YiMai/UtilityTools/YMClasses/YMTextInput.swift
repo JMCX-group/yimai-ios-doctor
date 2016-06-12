@@ -50,8 +50,6 @@ public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
         let keboard = realTextField.keyboardType
         
         if("zh-Hans" == lang && UIKeyboardType.Default == keboard) {
-            print(selectedRange?.start)
-
             if(nil == selectedRange) {
                 if(0 != maxCharactersCount){
                     if(curTextCount > maxCharactersCount){
