@@ -24,6 +24,7 @@ public class YMColors {
     public static let NotifyFlagOrange = UIColor(red: 0xff.RGBVal(), green: 0x66.RGBVal(), blue: 0x09.RGBVal(), alpha: 1)
     
     public static let AlarmFontColor = UIColor(red: 0xcc.RGBVal(), green: 0x22.RGBVal(), blue: 0x22.RGBVal(), alpha: 1)
+    public static let WarningFontColor = UIColor(red: 0xff.RGBVal(), green: 0x66.RGBVal(), blue: 0x09.RGBVal(), alpha: 1)
     
     public static let ProgressBarBlue = UIColor(red: 0x66.RGBVal(), green: 0xc5.RGBVal(), blue: 0xec.RGBVal(), alpha: 1)
     public static let CommonBottomBlue = UIColor(red: 0x66.RGBVal(), green: 0xc5.RGBVal(), blue: 0xec.RGBVal(), alpha: 1)

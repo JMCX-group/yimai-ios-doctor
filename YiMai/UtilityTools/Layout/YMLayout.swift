@@ -160,6 +160,16 @@ public class YMLayout {
             view.removeFromSuperview()
         }
     }
+    
+    public static func SetHScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView) {
+        scrollView.contentSize = CGSizeMake(lastSubView.width + lastSubView.frame.origin.x,
+                                            scrollView.height)
+    }
+    
+    public static func SetVScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView) {
+        scrollView.contentSize = CGSizeMake(scrollView.width,
+                                            lastSubView.height + lastSubView.frame.origin.y)
+    }
 }
 
 

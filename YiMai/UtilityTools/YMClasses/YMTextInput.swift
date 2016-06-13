@@ -11,6 +11,7 @@ import Neon
 
 public typealias YMTextFieldEditStartCallback = ((YMTextField) -> Bool)
 public typealias YMTextFieldEditEndCallback = ((YMTextField) -> Void)
+public typealias YMTextFieldChangedCallback = ((YMTextField) -> Void)
 
 public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -49,6 +50,10 @@ public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
         let lang = realTextField.textInputMode?.primaryLanguage
         let keboard = realTextField.keyboardType
         
+        if(nil != realTextField.EditChangedCallback) {
+            realTextField.EditChangedCallback!(realTextField)
+        }
+        
         if("zh-Hans" == lang && UIKeyboardType.Default == keboard) {
             if(nil == selectedRange) {
                 if(0 != maxCharactersCount){
@@ -80,6 +85,7 @@ public class YMTextField: UITextField {
     public var Editable: Bool = true
     public var EditStartCallback: YMTextFieldEditStartCallback? = nil
     public var EditEndCallback: YMTextFieldEditEndCallback? = nil
+    public var EditChangedCallback: YMTextFieldChangedCallback? = nil
     private var YMDelegate = YMTextFieldDelegate()
     
     public func SetLeftPaddingWidth(leftPadding: CGFloat, paddingMode: UITextFieldViewMode = UITextFieldViewMode.Always) {

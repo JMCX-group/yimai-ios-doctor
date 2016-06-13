@@ -76,6 +76,7 @@ public class PageMyAdmissionsListActions: PageJumpActions{
     
     public func AdmissionTouched(sender: UIGestureRecognizer) {
         let controller = self.Target! as! PageMyAdmissionsListViewController
+        print("AdmissionTouched")
     }
 }
 

@@ -93,15 +93,30 @@ public class PageLoginBodyView: NSObject {
         ErrorInfoLabel.font = YMFonts.YMDefaultFont(20.LayoutVal())
         ErrorInfoLabel.align(Align.UnderMatchingLeft, relativeTo: PasswordInput!, padding: 12.LayoutVal(), width: YMSizes.PageWidth, height: 20.LayoutVal())
         ErrorInfoLabel.frame.origin.x = InputPaddingLeft
+        
+        UsernameInput?.EditChangedCallback = self.InputVerify
+        PasswordInput?.EditChangedCallback = self.InputVerify
     }
     
-    private func GetLoginButton(text: String, normalImage: String, activtiyImage: String) -> YMButton {
+    private func InputVerify(_: YMTextField) {
+        let userName = UsernameInput?.text
+        let pwd = PasswordInput?.text
+        
+        if(!YMValueValidator.IsEmptyString(userName!) && !YMValueValidator.IsEmptyString(pwd!)) {
+            LoginButton.enabled = true
+        } else {
+            LoginButton.enabled = false
+        }
+    }
+    
+    private func GetLoginButton(text: String, invalidImage: String, activtiyImage: String) -> YMButton {
         let newButton = YMButton()
         
         newButton.setTitle(text, forState: UIControlState.Normal)
-        newButton.setBackgroundImage(UIImage(named: normalImage), forState: UIControlState.Normal)
-        newButton.setBackgroundImage(UIImage(named: activtiyImage), forState: UIControlState.Highlighted)
+        newButton.setBackgroundImage(UIImage(named: invalidImage), forState: UIControlState.Disabled)
+        newButton.setBackgroundImage(UIImage(named: activtiyImage), forState: UIControlState.Normal)
         newButton.titleLabel?.font = UIFont.systemFontOfSize(34.LayoutVal())
+        newButton.enabled = false
 
         return newButton
     }
@@ -131,7 +146,7 @@ public class PageLoginBodyView: NSObject {
     
     private func DrawButtonLayer(){
         LoginButton = GetLoginButton(YMLoginStrings.CS_LOGIN_LABEL_TITLE,
-                                     normalImage: "CommonXLButtonBackgroundGray",
+                                     invalidImage: "CommonXLButtonBackgroundGray",
                                      activtiyImage: "CommonXLButtonBackgroundBlue")
         ForgotButton = GetTextButton(YMLoginStrings.CS_FORGOT_LABEL_TITLE, align: UIControlContentHorizontalAlignment.Left)
         RegisterButton = GetTextButton(YMLoginStrings.CS_REGISTER_LABEL_TITLE, align: UIControlContentHorizontalAlignment.Right)

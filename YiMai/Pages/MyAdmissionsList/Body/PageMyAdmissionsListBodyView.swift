@@ -8,6 +8,7 @@
 
 import Foundation
 import Neon
+import QuartzCore
 
 public struct YMMyAdmissionsMessage {
     var MsgId: String
@@ -86,9 +87,10 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         BodyView.addSubview(WaitCompletePanel)
         BodyView.addSubview(WaitReplyPanel)
 
-        CompletePanel.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
-        WaitCompletePanel.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
-        WaitReplyPanel.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
+        let panelHeight = BodyView.height - TabPanel.height - YMSizes.NormalTopSize.height
+        CompletePanel.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: 0, width: YMSizes.PageWidth, height: panelHeight)
+        WaitCompletePanel.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: 0, width: YMSizes.PageWidth, height: panelHeight)
+        WaitReplyPanel.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: 0, width: YMSizes.PageWidth, height: panelHeight)
         
         TabPanel.addSubview(WaitReplyTabButton!)
         TabPanel.addSubview(WaitCompleteTabButton!)
@@ -130,6 +132,10 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             for data in listData {
                 lastView = DrawAdmissionList(data, prevView: lastView, parent: CompletePanel)
             }
+            
+            if(nil != lastView) {
+                YMLayout.SetVScrollViewContentSize(CompletePanel, lastSubView: lastView!)
+            }
         }
         
         CompletePanelDrew = true
@@ -155,6 +161,10 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             for data in listData {
                 lastView = DrawAdmissionList(data, prevView: lastView, parent: WaitCompletePanel)
             }
+            
+            if(nil != lastView) {
+                YMLayout.SetVScrollViewContentSize(WaitCompletePanel, lastSubView: lastView!)
+            }
         }
         
         WaitCompletePanelDrew = true
@@ -179,6 +189,10 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             let listData = PageMyAdmissionsListViewController.WaitReplyAdmissions
             for data in listData {
                 lastView = DrawAdmissionList(data, prevView: lastView, parent: WaitReplyPanel)
+            }
+            
+            if(nil != lastView) {
+                YMLayout.SetVScrollViewContentSize(WaitReplyPanel, lastSubView: lastView!)
             }
         }
         
@@ -209,7 +223,8 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
     
     private func DrawAdmissionList(data: [String: AnyObject], prevView: UIView?, parent: UIView) -> UIView {
         let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AdmissionTouched:".Sel())
-        
+        cell.UserObjectData = data
+
 //    ["doctor_job_title": 副主任医师,
 //    "doctor_head_url": /uploads/avatar/2.jpg,
 //    "doctor_name": test, "time": 2016-06-09 上午,
@@ -226,9 +241,11 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         
         parent.addSubview(cell)
         if(nil == prevView) {
-            cell.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: 151.LayoutVal())
+//            cell.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: 151.LayoutVal())
+            cell.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 151.LayoutVal())
         } else {
-            cell.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: prevView!, padding: 0, height: 151.LayoutVal())
+//            cell.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: prevView!, padding: 0, height: 151.LayoutVal())
+            cell.align(Align.UnderMatchingLeft, relativeTo: prevView!, padding: 0, width: YMSizes.PageWidth, height: 151.LayoutVal())
         }
 
         let borderBottom = UIView()
@@ -236,6 +253,125 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         
         cell.addSubview(borderBottom)
         borderBottom.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 1.LayoutVal())
+        
+        let headImage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
+        let name = UILabel()
+        let basicInfo = UILabel()
+        let locationIcon = YMLayout.GetSuitableImageView("YMIconLocationBlue")
+        let timeIcon = YMLayout.GetSuitableImageView("YMIconClockBlue")
+        let location = UILabel()
+        let time = UILabel()
+        let type = UILabel()
+        let status = UILabel()
+        let divider = UIView()
+        
+        let genderMap = ["1":"男", "0":"女"]
+        
+        name.text = "\(data["patient_name"]!)"
+        basicInfo.text = "\(genderMap[data["patient_gender"]! as! String]!) \(data["patient_age"]!)岁"
+        location.text = "接口数据缺失"
+        time.text = "\(data["time"]!)"
+        status.text = "\(data["status"]!)"
+        type.text = "\(data["who"]!)"
+        
+        name.textColor = YMColors.FontBlue
+        basicInfo.textColor = YMColors.FontGray
+        location.textColor = YMColors.FontBlue
+        time.textColor = YMColors.FontLightGray
+        type.textColor = YMColors.FontBlue
+        divider.backgroundColor = YMColors.FontBlue
+        if("待确认" == status.text) {
+            status.textColor = YMColors.WarningFontColor
+        } else {
+            status.textColor = YMColors.FontLightBlue
+        }
+        
+        name.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        basicInfo.font = YMFonts.YMDefaultFont(20.LayoutVal())
+        location.font = YMFonts.YMDefaultFont(22.LayoutVal())
+        time.font = YMFonts.YMDefaultFont(22.LayoutVal())
+        type.font = YMFonts.YMDefaultFont(22.LayoutVal())
+        status.font = YMFonts.YMDefaultFont(22.LayoutVal())
+        
+        name.sizeToFit()
+        basicInfo.sizeToFit()
+        location.sizeToFit()
+        time.sizeToFit()
+        status.sizeToFit()
+        
+        type.frame = CGRect(x: 0,y: 0,width: 110.LayoutVal(), height: 30.LayoutVal())
+        type.textAlignment = NSTextAlignment.Center
+        type.layer.cornerRadius = 10.LayoutVal()
+        type.layer.masksToBounds = true
+        type.layer.borderWidth = 1.LayoutVal()
+        type.layer.borderColor = YMColors.FontBlue.CGColor
+        
+        cell.addSubview(name)
+        cell.addSubview(basicInfo)
+        cell.addSubview(location)
+        cell.addSubview(time)
+        cell.addSubview(type)
+        cell.addSubview(status)
+        cell.addSubview(headImage)
+        cell.addSubview(locationIcon)
+        cell.addSubview(timeIcon)
+        cell.addSubview(divider)
+        
+        headImage.anchorToEdge(Edge.Left,
+                               padding: 41.LayoutVal(),
+                               width: headImage.width,
+                               height: headImage.height)
+        
+        name.anchorInCorner(Corner.TopLeft,
+                            xPad: 180.LayoutVal(),
+                            yPad: 25.LayoutVal(),
+                            width: name.width,
+                            height: name.height)
+        
+        divider.align(Align.ToTheRightCentered,
+                      relativeTo: name, padding: 20.LayoutVal(),
+                      width: 1.LayoutVal(), height: 20.LayoutVal())
+        
+        basicInfo.align(Align.ToTheRightCentered,
+                        relativeTo: divider, padding: 20.LayoutVal(),
+                        width: basicInfo.width,
+                        height: basicInfo.height)
+        
+        type.align(Align.ToTheRightCentered,
+                     relativeTo: basicInfo,
+                     padding: 20.LayoutVal(),
+                     width: type.width,
+                     height: type.height)
+        
+        locationIcon.align(Align.UnderMatchingLeft,
+                           relativeTo: name,
+                           padding: 10.LayoutVal(),
+                           width: locationIcon.width,
+                           height: locationIcon.height)
+        
+        location.align(Align.ToTheRightCentered,
+                       relativeTo: locationIcon,
+                       padding: 8.LayoutVal(),
+                       width: location.width,
+                       height: location.height)
+        
+        timeIcon.align(Align.UnderCentered,
+                       relativeTo: locationIcon,
+                       padding: 13.LayoutVal(),
+                       width: timeIcon.width,
+                       height: timeIcon.height)
+        
+        time.align(Align.ToTheRightCentered,
+                   relativeTo: timeIcon,
+                   padding: 8.LayoutVal(),
+                   width: time.width,
+                   height: time.height)
+        
+        status.anchorInCorner(Corner.TopRight,
+                              xPad: 40.LayoutVal(),
+                              yPad: 25.LayoutVal(),
+                              width: status.width,
+                              height: status.height)
 
         return cell
     }
