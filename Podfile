@@ -11,6 +11,5 @@ target 'YiMai' do
   pod 'swiftScan'
   pod 'Proposer'
   pod 'SwiftDate'
-  pod 'Kingfisher'
 end
 
