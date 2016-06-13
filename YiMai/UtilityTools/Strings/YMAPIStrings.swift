@@ -19,4 +19,6 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_GET_NEW_FRIENDS = "apiGetNewFriends"
     
     public static let CS_API_ACTION_CREATE_NEW_APPOINTMENT = "apiCreateNewAppointment"
+    
+    public static let CS_API_ACTION_GET_ADMISSIONS_LIST = "apiGetAdmissionsList"
 }

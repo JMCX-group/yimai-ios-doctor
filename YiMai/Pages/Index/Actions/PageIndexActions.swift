@@ -50,7 +50,7 @@ public class PageIndexActions: PageJumpActions {
 //        ApiUtility?.YMGetHospitalsByCity("1")
 //        ApiUtility?.YMSearchHospital(editor.text!)
 //        ApiUtility?.YMGetDept()
-        ApiUtility?.YMGetInitRelation()
+//        ApiUtility?.YMGetInitRelation()
 //        ApiUtility?.YMGetLevel1Relation()
 //        ApiUtility?.YMGetLevel2Relation()
 //        ApiUtility?.YMAddFriendByPhone("18612345678") //TODO: need test

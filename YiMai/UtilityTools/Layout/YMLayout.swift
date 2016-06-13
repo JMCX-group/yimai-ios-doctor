@@ -154,6 +154,12 @@ public class YMLayout {
         
         return spaceView
     }
+    
+    public static func ClearView(view target: UIView) {
+        for view in target.subviews{
+            view.removeFromSuperview()
+        }
+    }
 }
 
 
