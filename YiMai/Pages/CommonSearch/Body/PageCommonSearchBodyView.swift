@@ -27,7 +27,7 @@ public class PageCommonSearchBodyView: PageBodyView {
         cellInner.textColor = YMColors.White
         cellInner.sizeToFit()
         
-        cell.frame = CGRect(x: 0,y: 0, width: YMSizes.PageWidth, height: 40.LayoutVal())
+        cell.frame = CGRectMake(0,0, YMSizes.PageWidth, 40.LayoutVal())
         cell.CellTitleHeight = 40.LayoutVal()
         cell.CellFullHeight = 40.LayoutVal()
         cell.addSubview(cellInner)
@@ -37,19 +37,31 @@ public class PageCommonSearchBodyView: PageBodyView {
         
         if(nil != realData["sub"]) {
             cell.SubCell = realData["sub"]!
-            
-            let subTable = realData["sub"]! as! YMTableView
-            
-            cell.CellFullHeight = 40.LayoutVal() + subTable.TableViewPanel.height
-            cell.addSubview(subTable.TableViewPanel)
-            let subTableView = subTable.TableViewPanel
-            subTable.TableViewPanel.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: -40.LayoutVal(), otherSize: subTableView.height)
-
         }
+        
+        let bottom = UIView()
+        bottom.backgroundColor = YMColors.DividerLineGray
+        cell.addSubview(bottom)
+        bottom.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1)
         
         cell.CellInnerView = cellInner
     }
 
+    private func SubCellLayout(cell: YMTableViewCell) {
+        if(nil == cell.SubCell) {return}
+
+        let subTable = cell.SubCell! as! YMTableView
+
+        cell.addSubview(subTable.TableViewPanel)
+        let subTableView = subTable.TableViewPanel
+
+        let tableHeight = subTable.GetTableFullHeight()
+        subTableView.anchorToEdge(Edge.Top, padding: cell.CellTitleHeight, width: YMSizes.PageWidth, height: tableHeight)
+        subTable.DrawTableView(false)
+
+        cell.CellFullHeight = subTableView.height + cell.CellTitleHeight
+    }
+    
     private func SubCellBuilder(cell: YMTableViewCell, data: AnyObject?) -> Void {
         let realData = data as! [String: AnyObject]
         let cellInner = UILabel()
@@ -60,17 +72,22 @@ public class PageCommonSearchBodyView: PageBodyView {
         cellInner.textAlignment = NSTextAlignment.Center
         cellInner.sizeToFit()
         
-        cell.frame = CGRect(x: 0,y: 0, width: YMSizes.PageWidth, height: 40.LayoutVal())
+        cell.frame = CGRectMake(0,0, YMSizes.PageWidth, 40.LayoutVal())
         cell.CellTitleHeight = 40.LayoutVal()
         cell.CellFullHeight = 40.LayoutVal()
         cell.addSubview(cellInner)
+        
+        let bottom = UIView()
+        bottom.backgroundColor = YMColors.DividerLineGray
+        cell.addSubview(bottom)
+        bottom.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1)
         
         cellInner.fillSuperview()
         cell.CellInnerView = cellInner
     }
     
     private func CellTouched(cell: YMTableViewCell) -> Void {
-        print("CellTouched")
+//        print("CellTouched")
 
     }
     
@@ -80,18 +97,18 @@ public class PageCommonSearchBodyView: PageBodyView {
     
     private func BuildTable() {
         ResultList?.TableViewPanel.removeFromSuperview()
-        ResultList = YMTableView(builer: CellBuilder, touched: CellTouched)
+        ResultList = YMTableView(builer: CellBuilder, subBuilder: SubCellLayout, touched: CellTouched)
         
         let content = [
             ["a","b","c"],
             ["a","b","c"],
             ["a","b","c"],
+            ["a","b","c","d"],
+            ["a","b","c","d"],
+            ["a","b","c","d"],
             ["a","b","c"],
             ["a","b","c"],
-            ["a","b","c"],
-            ["a","b","c"],
-            ["a","b","c"],
-            ["a","b","c"],
+            ["a","b","c","d"],
             ["a","b","c"],
             ["a","b","c"],
             ["a","b","c"],
@@ -111,7 +128,7 @@ public class PageCommonSearchBodyView: PageBodyView {
             var data = [String: AnyObject]()
 
             if(0 != v.count){
-                subTable = YMTableView(builer: SubCellBuilder, touched: SubCellTouched)
+                subTable = YMTableView(builer: SubCellBuilder, subBuilder: nil, touched: SubCellTouched)
                 
                 for sv in v {
 
@@ -122,8 +139,6 @@ public class PageCommonSearchBodyView: PageBodyView {
                 }
                 
                 data["sub"] = subTable!
-                
-                subTable?.DrawTableView()
             }
             
             data["data"] = v
@@ -132,10 +147,10 @@ public class PageCommonSearchBodyView: PageBodyView {
             ResultList?.AppendCell(data)
         }
         
-        ResultList?.DrawTableView()
-        
         BodyView.addSubview(ResultList!.TableViewPanel)
         ResultList?.TableViewPanel.fillSuperview()
+        ResultList?.DrawTableView(false)
+        ResultList?.SubCellLayout()
     }
 }
 

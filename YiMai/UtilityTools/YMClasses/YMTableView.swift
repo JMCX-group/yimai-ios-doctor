@@ -11,6 +11,7 @@ import Neon
 
 public typealias YMTableViewCellTouched = ((YMTableViewCell) -> Void)
 public typealias YMTableViewCellBuilder = ((YMTableViewCell, AnyObject?) -> Void)
+public typealias YMTableViewSubCellBuilder = ((YMTableViewCell) -> Void)
 
 public class YMTableViewCell: UIView {
     private var Prev: YMTableViewCell? = nil
@@ -45,17 +46,24 @@ public class YMTableView: NSObject {
     
     public var CellBuilder: YMTableViewCellBuilder? = nil
     public var CellTouched: YMTableViewCellTouched? = nil
+    public var SubCellBuilder: YMTableViewSubCellBuilder? = nil
     
     public var TableViewPanel = UIScrollView()
+    
+    public var OnAnimate: Bool = false
+    public var AnimatedCell: YMTableViewCell? = nil
     
     var LastCell: YMTableViewCell? = nil
     let ExpandAnimateLock = NSObject()
     
-    init(builer: YMTableViewCellBuilder, touched: YMTableViewCellTouched?) {
-        self.CellBuilder = builer
-        self.CellTouched = touched
-        
-        LastCell = CellList
+    init(builer: YMTableViewCellBuilder,
+        subBuilder: YMTableViewSubCellBuilder?,
+        touched: YMTableViewCellTouched?) {
+            super.init()
+            self.CellBuilder = builer
+            self.CellTouched = touched
+            self.SubCellBuilder = subBuilder
+            LastCell = CellList
     }
     
     private func GetTouchableView() -> YMTableViewCell {
@@ -71,102 +79,132 @@ public class YMTableView: NSObject {
     
     public func AppendCell(data: AnyObject) ->  YMTableView {
         let cell = GetTouchableView()
-        self.CellBuilder!(cell, data)
         
         cell.ParentTableView = self
         cell.Prev = LastCell
+        
+        cell.layer.masksToBounds = true
 
         LastCell?.Next = cell
         LastCell = cell
-        
+
+        self.CellBuilder!(cell, data)
+
         return self
     }
     
-    public func DrawTableView() ->  YMTableView {
+    public func GetTableFullHeight() -> CGFloat {
+        var tableHeight:CGFloat = 0
+        var cellPointer = self.CellList.Next
+        
+        while(nil != cellPointer) {
+            tableHeight += cellPointer!.CellTitleHeight
+            cellPointer = cellPointer!.Next
+        }
+        
+        return tableHeight
+    }
+    
+    public func DrawTableView(setFullHeight: Bool = true) ->  YMTableView {
+        if(nil == LastCell) {return self}
         var cellPointer = CellList.Next
         if(nil != cellPointer) {
             TableViewPanel.addSubview(cellPointer!)
-            cellPointer?.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: (cellPointer?.height)!)
-            
+            cellPointer?.anchorToEdge(Edge.Top, padding: 0, width: cellPointer!.width, height: cellPointer!.height)
+
             var nextPointer = cellPointer?.Next
             while(nil != nextPointer) {
                 TableViewPanel.addSubview(nextPointer!)
-                nextPointer?.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: cellPointer!, padding: 0, height: (nextPointer?.height)!)
+                nextPointer?.align(Align.UnderMatchingLeft, relativeTo: cellPointer!,
+                    padding: 0, width: nextPointer!.width, height: nextPointer!.height)
                 
                 cellPointer = nextPointer
                 nextPointer = nextPointer?.Next
             }
         }
         
+
         TableViewPanel.contentSize = CGSizeMake(
             LastCell!.width,
             LastCell!.frame.origin.y + LastCell!.height
         )
+        if(setFullHeight) {
+            TableViewPanel.frame = CGRect(x: 0,y: 0,width: LastCell!.width,height: LastCell!.frame.origin.y + LastCell!.height)
+        }
+
         return self
     }
     
     public func CellExpandStateToggle(cell: YMTableViewCell) {
         objc_sync_enter(self.ExpandAnimateLock)
 
+        if(OnAnimate){return}
+        OnAnimate = true
         if(nil != cell.SubCell){
             UIView.beginAnimations(nil, context: nil)
             UIView.setAnimationDuration(0.2)
             if(cell.Expanded) {
                 CellCollapse(cell)
-                cell.Expanded = false
             } else {
                 CellExpand(cell)
-                cell.Expanded = true
             }
+
+            AnimatedCell = cell
+            UIView.setAnimationDelegate(self)
             UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
             UIView.commitAnimations()
+        }
+    }
+    
+    public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        OnAnimate = false
+        if(nil != AnimatedCell) {
+            AnimatedCell!.Expanded = !AnimatedCell!.Expanded
         }
         
         objc_sync_exit(self.ExpandAnimateLock)
     }
     
     private func CellCollapse(cell: YMTableViewCell) {
-        var cellOffSet: CGFloat = CGFloat.NaN
+        var cellOffSet: CGFloat = 0
         var cellPointer = self.CellList.Next
 
         while(nil != cellPointer) {
-            if(CGFloat.NaN != cellOffSet){
-                cellPointer!.frame = cell.frame.offsetBy(dx: 0, dy: cellOffSet)
-            }
             
-            if(cellPointer!.Expanded) {
-                cellOffSet = cellPointer!.CellTitleHeight - cellPointer!.CellFullHeight
-                let rect = CGRect(origin: cellPointer!.frame.origin, size: CGSize(width: cellPointer!.width, height: cellPointer!.CellTitleHeight))
-                cellPointer!.frame = rect
-            }
+            cellPointer?.Expanded = false
+            cellPointer?.frame = CGRectMake(0, cellOffSet, cellPointer!.width, cellPointer!.CellTitleHeight)
+            cellOffSet = cellOffSet + cellPointer!.CellTitleHeight
             
             cellPointer = cellPointer?.Next
         }
     }
     
     private func CellExpand(cell: YMTableViewCell) {
-        var cellOffSet: CGFloat = CGFloat.NaN
+        var cellOffSet: CGFloat = 0
         var cellPointer = self.CellList.Next
         
         while(nil != cellPointer) {
-            if(CGFloat.NaN != cellOffSet){
-                cellPointer!.frame = cell.frame.offsetBy(dx: 0, dy: cellOffSet)
-            }
-            
-            if(cellPointer!.Expanded) {
-                if(CGFloat.NaN == cellOffSet) {cellOffSet = 0}
-                cellOffSet = cellOffSet + cellPointer!.CellTitleHeight - cellPointer!.CellFullHeight
-                let rect = CGRect(origin: cellPointer!.frame.origin, size: CGSize(width: cellPointer!.width, height: cellPointer!.CellTitleHeight))
-                cellPointer!.frame = rect
-            }
+            cellPointer?.Expanded = false
 
-            if(cell == cellPointer) {
-                if(CGFloat.NaN == cellOffSet) {cellOffSet = 0}
-                cellOffSet =  cellOffSet + cellPointer!.CellFullHeight - cellPointer!.CellTitleHeight
-                let rect = CGRect(origin: cellPointer!.frame.origin, size: CGSize(width: cellPointer!.width, height: cellPointer!.CellFullHeight))
-                cellPointer!.frame = rect
+            if(cell != cellPointer) {
+                cellPointer?.frame = CGRectMake(0, cellOffSet, cellPointer!.width, cellPointer!.CellTitleHeight)
+                cellOffSet = cellOffSet + cellPointer!.CellTitleHeight
+            } else {
+                cellPointer?.Expanded = true
+
+                cellPointer?.frame = CGRectMake(0, cellOffSet, cellPointer!.width, cellPointer!.CellFullHeight)
+                cellOffSet = cellOffSet + cellPointer!.CellFullHeight
             }
             
+            cellPointer = cellPointer?.Next
+        }
+    }
+    
+    public func SubCellLayout() {
+        var cellPointer = self.CellList.Next
+        
+        while(nil != cellPointer) {
+            self.SubCellBuilder?(cellPointer!)
             cellPointer = cellPointer?.Next
         }
     }

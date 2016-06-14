@@ -12,6 +12,8 @@ public class PageCommonSearchViewController: PageViewController {
     private var Actions: PageAppointmentPatientBasicInfoActions? = nil
     public var CommonTopView: PageCommonSearchTopView? = nil
     
+    private var CommonSearch: PageCommonSearchBodyView? = nil
+    
     public static var SearchPageTypeName: String = ""
     public static var InitSearchKey: String = ""
     public static var InitPageTitle: String = ""
@@ -34,8 +36,12 @@ public class PageCommonSearchViewController: PageViewController {
         switch PageCommonSearchViewController.SearchPageTypeName {
             
         case YMCommonSearchPageStrings.CS_COMMON_SEARCH_PAGE_TYPE:
-            PageCommonSearchBodyView(parentView: self.SelfView!,
-                navController: self.NavController!, pageActions: Actions!)
+            if(nil != CommonSearch) {
+                
+            } else {
+                CommonSearch = PageCommonSearchBodyView(parentView: self.SelfView!,
+                    navController: self.NavController!, pageActions: Actions!)
+            }
         break
             
         default: break
