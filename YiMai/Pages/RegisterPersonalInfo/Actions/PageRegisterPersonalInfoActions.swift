@@ -15,7 +15,12 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
         self.NavController = navController
     }
     
-    public func ShowCitySelect(sender: YMTextField) {
-        print("text right side touched")
+    public func ShowHospital(sender: UIGestureRecognizer) {
+        PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE
+        DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
+    }
+    
+    public func ShowCity(sender: UIGestureRecognizer) {
+        print("ShowCitySelect")
     }
 }

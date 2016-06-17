@@ -155,8 +155,7 @@ public class YMAPIUtility {
     private func JsonResponseSuccessHandler(sessionDataTask: NSURLSessionDataTask, data: AnyObject?) {
         if(nil == data) {
             let response = sessionDataTask.response as! NSHTTPURLResponse
-            print("data is nil and code is :")
-            print(response.statusCode)
+            print("data is nil and code is :\(response.statusCode)")
             return
         }
         let callback = YMAPICommonVariable.JsonCallbackMap[self.Key]

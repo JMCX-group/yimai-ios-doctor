@@ -208,6 +208,26 @@ public class YMTableView: NSObject {
             cellPointer = cellPointer?.Next
         }
     }
+    
+    public func Clear() {
+        var cellPointer: YMTableViewCell? = nil
+        while(nil != LastCell) {
+            if(self.CellList == LastCell) {
+                break
+            }
+            
+            cellPointer = LastCell
+            LastCell = cellPointer?.Prev
+            
+            cellPointer?.removeFromSuperview()
+            cellPointer?.Prev = nil
+            cellPointer?.Next = nil
+            cellPointer?.CellData = nil
+            cellPointer?.CellInnerView = nil
+            cellPointer?.SubCell = nil
+            cellPointer = nil
+        }
+    }
 }
 
 

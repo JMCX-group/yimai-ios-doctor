@@ -17,8 +17,8 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
     private var BodyView: UIScrollView = UIScrollView()
     
     private var UserRealnameInput: YMTextField? = nil
-    private var HospitalInput: YMTextField? = nil
-    private var HospitalDepartmentInput: YMTextField? = nil
+    private var HospitalInput: YMTouchableView? = nil
+    private var HospitalDepartmentInput: YMTouchableView? = nil
     
     private var UserRealNameString: String = ""
     private var HospitalString: String = ""
@@ -65,9 +65,26 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
         return newTextField
     }
     
+    private func DrawTouchableView(view: UIView, placeholder: String) {
+        let label = UILabel()
+        
+        label.text = placeholder
+        label.textColor = YMColors.FontGray
+        label.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        label.sizeToFit()
+        
+        view.addSubview(label)
+        label.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: label.width, height: label.height)
+
+        let icon = YMLayout.GetSuitableImageView("RegisterPersonalInfoIconRightArrow")
+        view.addSubview(icon)
+        
+        icon.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: icon.width, height: icon.height)
+    }
+    
     private func DrawInputPanel() {
-        HospitalInput = GetTouchableReadonlyInput("医院", action: "ShowCitySelect:".Sel())
-        HospitalDepartmentInput = GetTouchableReadonlyInput("科室", action: "ShowCitySelect:".Sel())
+        HospitalInput = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "ShowHospital:".Sel())
+        HospitalDepartmentInput = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "ShowCity:".Sel())
         
         
         let createParam = TextFieldCreateParam()
@@ -86,6 +103,9 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
         UserRealnameInput?.anchorToEdge(Edge.Top, padding: 70.LayoutVal(), width: YMSizes.PageWidth, height: inputHeight)
         HospitalInput?.align(Align.UnderMatchingLeft, relativeTo: UserRealnameInput!, padding: 1, width: YMSizes.PageWidth, height: inputHeight)
         HospitalDepartmentInput?.align(Align.UnderMatchingLeft, relativeTo: HospitalInput!, padding: 1, width: YMSizes.PageWidth, height: inputHeight)
+        
+        DrawTouchableView(HospitalInput!, placeholder: "医院")
+        DrawTouchableView(HospitalDepartmentInput!, placeholder: "科室")
     }
     
     private func DrawButtonPanel() {

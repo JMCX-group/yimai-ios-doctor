@@ -29,7 +29,6 @@ public class PageRegisterActions: PageJumpActions {
         let realData = data! as! [String: AnyObject]
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_REG_VERIFY_CODE, data: realData["debug"]!)
         
-        print(realData)
         //TODO: this is a debug line
         TargetBodyView!.VerifyCodeInput?.text = "\(realData["debug"]!)"
     }

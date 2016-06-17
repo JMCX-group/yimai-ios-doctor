@@ -100,6 +100,30 @@ public class YMTextField: UITextField {
         self.rightView = UIView(frame: rightPaddingFrame)
     }
     
+    public func SetLeftPadding(leftPaddingWidth: CGFloat, leftPaddingImage: String, paddingMode: UITextFieldViewMode = UITextFieldViewMode.Always) {
+        self.leftViewMode = paddingMode
+        let paddingFrame = CGRect(x: 0,y: 0,width: leftPaddingWidth, height: self.height)
+        let paddingView = UIView(frame: paddingFrame)
+        let paddingIcon = YMLayout.GetSuitableImageView(leftPaddingImage)
+        
+        paddingView.addSubview(paddingIcon)
+        paddingIcon.anchorInCenter(width: paddingIcon.width, height: paddingIcon.height)
+        
+        self.leftView = paddingView
+    }
+    
+    public func SetRightPadding(rightPaddingWidth: CGFloat, rightPaddingImage: String, paddingMode: UITextFieldViewMode = UITextFieldViewMode.Always) {
+        self.rightViewMode = paddingMode
+        let paddingFrame = CGRect(x: 0,y: 0,width: rightPaddingWidth, height: self.height)
+        let paddingView = UIView(frame: paddingFrame)
+        let paddingIcon = YMLayout.GetSuitableImageView(rightPaddingImage)
+        
+        paddingView.addSubview(paddingIcon)
+        paddingIcon.anchorInCenter(width: paddingIcon.width, height: paddingIcon.height)
+        
+        self.rightView = paddingView
+    }
+    
     public func SetLeftPadding(leftPadding: UIView, paddingMode: UITextFieldViewMode = UITextFieldViewMode.Always) {
         self.leftViewMode = paddingMode
         self.leftView = leftPadding
