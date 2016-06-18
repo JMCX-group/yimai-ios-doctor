@@ -13,10 +13,12 @@ public class PageIndexViewController: PageViewController {
     private var BodyView : PageIndexBodyView? = nil
     private var Actions: PageIndexActions? = nil
     
-    override func GestureRecognizerEnable() -> Bool {return false}
+    override func GestureRecognizerEnable() -> Bool {
+        return false
+    }
     
-    override public func viewWillAppear(animated: Bool) {
-        YMCurrentPage.PageIndexIsAnimatedShow = animated
+    override public func viewDidAppear(animated: Bool) {
+        YMCurrentPage.CurrentPage = YMCommonStrings.CS_PAGE_INDEX_NAME
     }
 
     override func PageLayout(){

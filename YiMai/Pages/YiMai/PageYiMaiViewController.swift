@@ -14,7 +14,13 @@ public class PageYiMaiViewController: PageViewController {
     private var YiMaiR1Body: PageYiMaiR1BodyView? = nil
     private var YiMaiR2Body: PageYiMaiR2BodyView? = nil
     
-    override func GestureRecognizerEnable() -> Bool {return false}
+    override func GestureRecognizerEnable() -> Bool {
+        return false
+    }
+    
+    override public func viewDidAppear(animated: Bool) {
+        YMCurrentPage.CurrentPage = YMCommonStrings.CS_PAGE_YIMAI_NAME
+    }
 
     public override func PageLayout(){
         if(PageLayoutFlag) {return}

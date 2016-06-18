@@ -10,7 +10,7 @@ import Foundation
 import Neon
 
 public class YMPageLoading: NSObject {
-    private let MaskBackground = UIView()
+    public let MaskBackground = UIView()
     private let LoadingView = UIActivityIndicatorView()
     private var ParentView: UIView? = nil
     

@@ -14,7 +14,9 @@ class PageYiMaiAddFriendsViewController: PageViewController {
     
     override func PageLayout() {
         super.PageLayout()
-        
+
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
         if(PageLayoutFlag) {return}
         PageLayoutFlag=true
         

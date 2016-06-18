@@ -37,6 +37,14 @@ public class StoryboardThatExist {
     ]
 }
 
+public class NoBackByGesturePage {
+    public static let PageMap: [String:Bool] = [
+        YMCommonStrings.CS_PAGE_INDEX_NAME:true,
+        YMCommonStrings.CS_PAGE_PERSONAL_NAME:true,
+        YMCommonStrings.CS_PAGE_YIMAI_NAME:true
+    ]
+}
+
 public protocol PageJumpActionsProtocol {
     var ControllersDict : Dictionary<String, UIViewController> {get set}
     var NavController : UINavigationController? {get set}
@@ -85,6 +93,7 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
             self.ControllersDict[targetPageName] = targetPage
         }
         
+        YMCurrentPage.CurrentPage = targetPageName
         self.NavController!.pushViewController(targetPage!, animated: JumpWidthAnimate)
     }
 
@@ -140,15 +149,31 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
 
     override public func prefersStatusBarHidden() -> Bool {return false}
     
-    override public func viewDidLayoutSubviews() {
-        self.PageLayout()
-    }
-
     override public func viewDidLoad() {
         super.viewDidLoad()
+
         self.navigationController?.interactivePopGestureRecognizer?.enabled = self.GestureRecognizerEnable()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+        print(self.storyboard)
+        self.PageLayout()
         // Do any additional setup after loading the view.
+    }
+    
+    override public func viewDidDisappear(animated: Bool) {
+        self.PageLayout()
+    }
+    
+    public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if(gestureRecognizer.isKindOfClass(UIScreenEdgePanGestureRecognizer)) {
+            if(nil == NoBackByGesturePage.PageMap[YMCurrentPage.CurrentPage]) {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        return true
     }
     
     public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {

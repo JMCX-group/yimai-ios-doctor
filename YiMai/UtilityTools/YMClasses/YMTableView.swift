@@ -16,7 +16,7 @@ public typealias YMTableViewSubCellBuilder = ((YMTableViewCell) -> Void)
 public class YMTableViewCell: UIView {
     private var Prev: YMTableViewCell? = nil
     private var Next: YMTableViewCell? = nil
-    private var ParentTableView: YMTableView!
+    private var ParentTableView: YMTableView?
 
     public var CellData: AnyObject? = nil
     public var CellInnerView: UIView? = nil
@@ -64,6 +64,8 @@ public class YMTableView: NSObject {
             self.CellTouched = touched
             self.SubCellBuilder = subBuilder
             LastCell = CellList
+        
+            self.TableViewPanel.backgroundColor = YMColors.White
     }
     
     private func GetTouchableView() -> YMTableViewCell {
@@ -211,20 +213,23 @@ public class YMTableView: NSObject {
     
     public func Clear() {
         var cellPointer: YMTableViewCell? = nil
+
         while(nil != LastCell) {
             if(self.CellList == LastCell) {
+                LastCell?.Next = nil
                 break
             }
             
             cellPointer = LastCell
             LastCell = cellPointer?.Prev
-            
+
             cellPointer?.removeFromSuperview()
             cellPointer?.Prev = nil
             cellPointer?.Next = nil
             cellPointer?.CellData = nil
             cellPointer?.CellInnerView = nil
             cellPointer?.SubCell = nil
+            cellPointer?.ParentTableView = nil
             cellPointer = nil
         }
     }

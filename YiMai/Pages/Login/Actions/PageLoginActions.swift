@@ -52,7 +52,6 @@ public class LoginBackendProgress: NSObject {
     
     public func NewFriendsSuccess(data: NSDictionary?) {
         let realData = data!
-        print(realData)
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: realData["friends"]!)
     }
     
@@ -107,23 +106,29 @@ public class PageLoginActions : PageJumpActions {
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_TOKEN, data: realData["token"]!)
         YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA).YMGetAPPInitData()
         BackEndApi.DoApi()
+
         self.DoJump(LoginSuccessTargetStroyboard)
     }
 
     public func LoginErrorCallback(error: NSError) {
-        let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
-        //let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        
-        if(response.statusCode >= 500) {
-            //显示服务器繁忙
-            self.PageLoginBody?.ShowErrorInfo("服务器繁忙，请稍后再试。")
-        } else if (response.statusCode >= 400) {
-            //显示验证失败，用户名或密码错误
-            self.PageLoginBody?.ShowErrorInfo("手机号或密码错误！")
+        if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
+            let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
+            //let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
+            
+            if(response.statusCode >= 500) {
+                //显示服务器繁忙
+                self.PageLoginBody?.ShowErrorInfo("服务器繁忙，请稍后再试。")
+            } else if (response.statusCode >= 400) {
+                //显示验证失败，用户名或密码错误
+                self.PageLoginBody?.ShowErrorInfo("手机号或密码错误！")
+            } else {
+                //显示服务器繁忙
+                self.PageLoginBody?.ShowErrorInfo("服务器繁忙，请稍后再试。")
+            }
         } else {
-            //显示服务器繁忙
-            self.PageLoginBody?.ShowErrorInfo("服务器繁忙，请稍后再试。")
+            YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
         }
+        
         
         self.PageLoginBody?.EnableLoginControls()
     }

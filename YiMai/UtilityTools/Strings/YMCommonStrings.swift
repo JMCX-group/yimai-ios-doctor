@@ -61,6 +61,7 @@ public class YMCommonStrings {
     public static let CS_API_PARAM_KEY_ID_LIST = "id_list"
     public static let CS_API_PARAM_KEY_PAGE = "page"
     public static let CS_API_PARAM_KEY_HOSPITAL = "hospital"
+    public static let CS_API_PARAM_KEY_NAME = "name"
 }
 
 

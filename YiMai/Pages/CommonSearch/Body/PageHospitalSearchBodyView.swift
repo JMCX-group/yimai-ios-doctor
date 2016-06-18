@@ -22,7 +22,6 @@ public class PageHospitalSearchBodyView: PageBodyView {
 
         super.ViewLayout()
         DrawPageTop()
-        DrawInitList()
     }
     
     public func DrawPageTop() {
@@ -31,8 +30,6 @@ public class PageHospitalSearchBodyView: PageBodyView {
         inputParam.Placholder = "输入医院名称"
         inputParam.FontSize = 26.LayoutVal()
         inputParam.FontColor = YMColors.FontBlue
-        
-        let InputPanel = UIView()
         
         BodyView.addSubview(InputPanel)
         InputPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 120.LayoutVal())
@@ -64,13 +61,16 @@ public class PageHospitalSearchBodyView: PageBodyView {
     private func DrawHospitalCell(cell: YMTableViewCell, data: AnyObject?) {
         let realData = data as! [String: AnyObject]
         
-        cell.CellTitleHeight = 81.LayoutVal()
-        cell.CellFullHeight = 81.LayoutVal()
+        let cellHeight = 81.LayoutVal()
+        
+        cell.CellTitleHeight = cellHeight
+        cell.CellFullHeight = cellHeight
         
         cell.CellData = data
-        
-        let cellInner = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: 81.LayoutVal()))
-        let hospitalName = realData[YMCommonStrings.CS_API_PARAM_KEY_HOSPITAL] as! String
+        cell.frame = CGRectMake(0,0, YMSizes.PageWidth, cellHeight)
+
+        let cellInner = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: cellHeight))
+        let hospitalName = realData[YMCommonStrings.CS_API_PARAM_KEY_NAME] as! String
         
         let hospitalLabel = UILabel()
         hospitalLabel.text = hospitalName
@@ -89,12 +89,25 @@ public class PageHospitalSearchBodyView: PageBodyView {
         
         cell.addSubview(cellInner)
     }
-    
-    private func DrawInitList() {
+
+    public func ClearList() {
+        SearchResultTable?.Clear()
     }
     
-    public func DrawSearchResult() {
+    public func DrawSearchResult(data: Array<AnyObject>) {
         SearchResultTable?.Clear()
+        
+        var i = 0
+        for v in data {
+            SearchResultTable?.AppendCell(v)
+            i += 1
+        }
+        
+        SearchResultTable?.TableViewPanel.removeFromSuperview()
+        BodyView.addSubview((SearchResultTable?.TableViewPanel)!)
+        SearchResultTable?.TableViewPanel.alignAndFill(align: Align.UnderMatchingLeft, relativeTo: InputPanel, padding: 0)
+        
+        SearchResultTable?.DrawTableView(false)
     }
 }
 

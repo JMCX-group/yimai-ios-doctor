@@ -22,10 +22,6 @@ public class PageRegisterInputHospitalViewController: PageViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override public func viewDidLayoutSubviews() {
-        self.ViewLayout()
-    }
-    
     private func ViewLayout() {
         if(PageLayoutFlag){return}
         PageLayoutFlag = true
