@@ -43,8 +43,7 @@ public class PageIndexBodyView {
     
     private func ViewLayout() {
         YMLayout.BodyLayoutWithTopAndBottom(ParentView!, bodyView: BodyView)
-        print(BodyView.frame)
-        print(BodyView.bounds)
+
         DrawScrollPanel()
         DrawOperatorPanel()
         DrawDoctorAuthPanel()

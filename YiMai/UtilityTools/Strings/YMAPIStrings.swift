@@ -25,4 +25,5 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_GET_HOSPITALS_BY_CITY_LIST = "apiGetHospitalsByCity"
     public static let CS_API_ACTION_GET_HOSPITALS_BY_KEY_LIST = "apiGetHospitalsByKey"
+    public static let CS_API_ACTION_GET_DEPARTMENT_LIST = "apiGetDepartmentList"
 }

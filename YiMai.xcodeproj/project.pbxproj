@@ -24,6 +24,8 @@
 		7394F85A1D005DF400F05487 /* PageAppointmentSelectTime.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7394F85C1D005DF400F05487 /* PageAppointmentSelectTime.storyboard */; };
 		7394F85E1D005E3600F05487 /* PageAppointmentSelectTimeBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394F85D1D005E3600F05487 /* PageAppointmentSelectTimeBodyView.swift */; };
 		7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394F85F1D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift */; };
+		739AEC461D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739AEC451D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift */; };
+		739AEC481D164B7000E70EF3 /* PageDepartmentSearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739AEC471D164B7000E70EF3 /* PageDepartmentSearchActions.swift */; };
 		960606FA1CE591CC00AAFC07 /* YMAPIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */; };
 		960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */; };
 		960606FC1CE591CC00AAFC07 /* YMNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */; };
@@ -176,6 +178,8 @@
 		7394F85B1D005DF400F05487 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentSelectTime.storyboard; sourceTree = "<group>"; };
 		7394F85D1D005E3600F05487 /* PageAppointmentSelectTimeBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentSelectTimeBodyView.swift; sourceTree = "<group>"; };
 		7394F85F1D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentSelectTimeActions.swift; sourceTree = "<group>"; };
+		739AEC451D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDepartmentSearchBodyView.swift; sourceTree = "<group>"; };
+		739AEC471D164B7000E70EF3 /* PageDepartmentSearchActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDepartmentSearchActions.swift; sourceTree = "<group>"; };
 		960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAPIUtility.swift; sourceTree = "<group>"; };
 		960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCoreDataEngine.swift; sourceTree = "<group>"; };
 		960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMNetworkUtility.swift; sourceTree = "<group>"; };
@@ -975,6 +979,7 @@
 			isa = PBXGroup;
 			children = (
 				96B3E8A41D1146E200C8B5C2 /* PageHospitalSearchActions.swift */,
+				739AEC471D164B7000E70EF3 /* PageDepartmentSearchActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -984,6 +989,7 @@
 			children = (
 				96834F211D0528A500E0C813 /* PageCommonSearchBodyView.swift */,
 				96B3E89F1D10EBB700C8B5C2 /* PageHospitalSearchBodyView.swift */,
+				739AEC451D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -1462,7 +1468,9 @@
 				96637A851CC24BCD00DBD1CF /* PageLoginBodyView.swift in Sources */,
 				9612DB661CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift in Sources */,
 				96D745B61CF5C2C500E345E3 /* YiMaiAddFriendsActions.swift in Sources */,
+				739AEC481D164B7000E70EF3 /* PageDepartmentSearchActions.swift in Sources */,
 				9672FB1E1CCF4D3100BC7E40 /* YMFonts.swift in Sources */,
+				739AEC461D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift in Sources */,
 				9612DB631CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift in Sources */,
 				96D745AA1CF59D2200E345E3 /* PageYiMaiR2BodyView.swift in Sources */,
 				962076D81CC6024F002083FA /* PageRegisterActions.swift in Sources */,

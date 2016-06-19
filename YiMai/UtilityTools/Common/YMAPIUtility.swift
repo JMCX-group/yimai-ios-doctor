@@ -422,7 +422,7 @@ public class YMAPIUtility {
         
         var url = YMAPIUtility.AppendRouteParamToUrl(YMAPIInterfaceURL.RelationCommonFriends, value: friendId)
         url = YMAPIUtility.AppendTokenToUrl(url, token: token! as! String)
-        print(url)
+
         DoGetRequest(url, param: nil, progressHandler: nil)
     }
     

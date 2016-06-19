@@ -15,6 +15,7 @@ public class YMCoreDataKeyStrings {
     public static let CS_SYSTEM_INFO = "CoreDataSystemInfo"
     public static let CS_USER_RELATIONS = "CoreDataUserRelations"
     public static let CS_RECENT_CONTACTS = "CoreDataRecentContacts"
+    public static let CS_ALL_DEPARTMENT = "CoreDataAllDepartment"
     
     public static let CS_NEW_FRIENDS = "CoreDataNewFriends"
     

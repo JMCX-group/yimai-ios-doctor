@@ -9,7 +9,7 @@
 import Foundation
 import Neon
 
-public class PageHospitalSearchBodyView: PageBodyView {
+public class PageDepartmentSearchBodyView: PageBodyView {
     private var SearchInput: YMTextField? = nil
     private let InputPanel: UIView = UIView()
     
@@ -17,34 +17,34 @@ public class PageHospitalSearchBodyView: PageBodyView {
     
     private var Loading: YMPageLoadingView? = nil
     
-    private var SearchActions: PageHospitalSearchActions? = nil
+    private var SearchActions: PageDepartmentSearchActions? = nil
+    public var DepartmentData: [[String:AnyObject]]? = nil
     
-    public static var HospitalSelected: AnyObject? = nil
+    public static var DepartmentSelected: AnyObject? = nil
     
     public override func ViewLayout() {
-        SearchActions = PageHospitalSearchActions(navController: self.NavController, target: self)
-        SearchResultTable = YMTableView(builer: self.DrawHospitalCell, subBuilder: nil, touched: SearchActions!.HospitalSelected)
+        SearchActions = PageDepartmentSearchActions(navController: self.NavController, target: self)
+        SearchResultTable = YMTableView(builer: self.DrawDepartmentCell, subBuilder: nil, touched: SearchActions!.DepartmentSelected)
 
         super.ViewLayout()
         DrawPageTop()
-        
+
         Loading = YMPageLoadingView(parentView: BodyView)
         Loading?.MaskBackground.layer.zPosition = 1.0
-        
-        
-        ShowInitHospitals()
+
+        ShowDepartments()
     }
     
     public func DrawPageTop() {
         let inputParam = TextFieldCreateParam()
         inputParam.BackgroundColor = YMColors.White
-        inputParam.Placholder = "输入医院名称"
+        inputParam.Placholder = "输入科室名称"
         inputParam.FontSize = 26.LayoutVal()
         inputParam.FontColor = YMColors.FontBlue
         
         BodyView.addSubview(InputPanel)
         InputPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 120.LayoutVal())
-
+        
         SearchInput = YMLayout.GetTextFieldWithMaxCharCount(inputParam, maxCharCount: 20)
         InputPanel.addSubview(SearchInput!)
         
@@ -54,24 +54,26 @@ public class PageHospitalSearchBodyView: PageBodyView {
         SearchInput?.SetLeftPadding(66.LayoutVal(), leftPaddingImage: "CommonIconSearchHeader")
 
         SearchInput?.EditEndCallback = SearchActions!.StartSearch
-        
+
         let manuallyInputButton = YMButton()
         manuallyInputButton.setTitle("没找到？", forState: UIControlState.Normal)
         manuallyInputButton.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
         manuallyInputButton.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
         manuallyInputButton.sizeToFit()
-        
+
         InputPanel.addSubview(manuallyInputButton)
         manuallyInputButton.align(Align.ToTheRightCentered,
-            relativeTo: SearchInput!,
-            padding: 30.LayoutVal(),
-            width: manuallyInputButton.width,
-            height: manuallyInputButton.height)
+                                  relativeTo: SearchInput!,
+                                  padding: 30.LayoutVal(),
+                                  width: manuallyInputButton.width,
+                                  height: manuallyInputButton.height)
+
+        manuallyInputButton.addTarget(SearchActions!, action: "InputManually:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
-    
-    private func DrawHospitalCell(cell: YMTableViewCell, data: AnyObject?) {
+
+    private func DrawDepartmentCell(cell: YMTableViewCell, data: AnyObject?) {
         let realData = data as! [String: AnyObject]
-        
+
         let cellHeight = 81.LayoutVal()
         
         cell.CellTitleHeight = cellHeight
@@ -79,7 +81,7 @@ public class PageHospitalSearchBodyView: PageBodyView {
         
         cell.CellData = data
         cell.frame = CGRectMake(0,0, YMSizes.PageWidth, cellHeight)
-
+        
         let cellInner = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: cellHeight))
         let hospitalName = realData[YMCommonStrings.CS_API_PARAM_KEY_NAME] as! String
         
@@ -101,11 +103,10 @@ public class PageHospitalSearchBodyView: PageBodyView {
         cell.addSubview(cellInner)
     }
     
-    public func DrawHospitals(data: NSDictionary?) {
-        let realData = data!["data"]! as! Array<AnyObject>
-        DrawSearchResult(realData)
+    public func DrawDepartments() {
+        DrawSearchResult(DepartmentData!)
     }
-
+    
     public func ClearList() {
         SearchResultTable?.Clear()
     }
@@ -114,10 +115,8 @@ public class PageHospitalSearchBodyView: PageBodyView {
         Loading?.Hide()
         SearchResultTable?.Clear()
         
-        var i = 0
         for v in data {
             SearchResultTable?.AppendCell(v)
-            i += 1
         }
         
         SearchResultTable?.TableViewPanel.removeFromSuperview()
@@ -126,10 +125,10 @@ public class PageHospitalSearchBodyView: PageBodyView {
         
         SearchResultTable?.DrawTableView(false)
     }
-
-    public func ShowInitHospitals() {
+    
+    public func ShowDepartments() {
         Loading?.Show()
-        SearchActions?.InitHospitalList()
+        SearchActions?.InitDepartmentList()
     }
 }
 

@@ -9,32 +9,18 @@
 import UIKit
 
 public class PageCommonSearchViewController: PageViewController {
-//    private var Actions: PageAppointmentPatientBasicInfoActions? = nil
     public var CommonTopView: PageCommonSearchTopView? = nil
-    
-    private var HospitalsSearchActions: PageHospitalSearchActions? = nil
-    private var Loading: YMPageLoadingView? = nil
     
     private var CommonSearch: PageCommonSearchBodyView? = nil
     private var HospitalSearch: PageHospitalSearchBodyView? = nil
+    private var DepartmentSearch: PageDepartmentSearchBodyView? = nil
 
     public static var SearchPageTypeName: String = ""
     public static var InitSearchKey: String = ""
     public static var InitPageTitle: String = ""
     
     public override func PageLayout() {
-        if(PageLayoutFlag) {
-            Loading?.MaskBackground.removeFromSuperview()
-            TopView?.TopViewPanel.removeFromSuperview()
-            
-            LayoutBody()
-            TopView = PageCommonTopView(parentView: self.SelfView!, titleString: PageCommonSearchViewController.InitPageTitle, navController: self.NavController!)
-            return
-        }
-        PageLayoutFlag=true
-        
         super.PageLayout()
-        HospitalsSearchActions = PageHospitalSearchActions(navController: self.NavController, target: self)
         LayoutBody()
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: PageCommonSearchViewController.InitPageTitle, navController: self.NavController!)
         
@@ -44,27 +30,18 @@ public class PageCommonSearchViewController: PageViewController {
         switch PageCommonSearchViewController.SearchPageTypeName {
 
         case YMCommonSearchPageStrings.CS_COMMON_SEARCH_PAGE_TYPE:
-            if(nil != CommonSearch) {
-                
-            } else {
-                CommonSearch = PageCommonSearchBodyView(parentView: self.SelfView!,
-                    navController: self.NavController!, pageActions: HospitalsSearchActions!)
-            }
-            
-            Loading = YMPageLoadingView(parentView: CommonSearch!.BodyView)
+            CommonSearch = PageCommonSearchBodyView(parentView: self.SelfView!,
+                                                    navController: self.NavController!)
         break
             
         case YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE:
-            if(nil != HospitalSearch) {
-                
-            } else {
-                HospitalSearch = PageHospitalSearchBodyView(parentView: self.SelfView!,
-                    navController: self.NavController!, pageActions: HospitalsSearchActions)
-            }
+            HospitalSearch = PageHospitalSearchBodyView(parentView: self.SelfView!,
+                                                        navController: self.NavController!)
             
-            Loading = YMPageLoadingView(parentView: HospitalSearch!.BodyView)
-            Loading?.Show()
-            HospitalsSearchActions?.InitHospitalList()
+        case YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE:
+            DepartmentSearch = PageDepartmentSearchBodyView(parentView: self.SelfView!,
+                                                          navController: self.NavController!)
+            break
         break
             
         default: break
@@ -72,22 +49,53 @@ public class PageCommonSearchViewController: PageViewController {
         }
     }
     
-    public func DrawHospitals(data: NSDictionary?) {
-        let realData = data!["data"]! as! Array<AnyObject>
-        Loading?.Hide()
-        HospitalSearch!.DrawSearchResult(realData)
+    override func PageRefresh() {
+        if(!PageLayoutFlag) {
+            PageLayoutFlag=true
+            return
+        }
+
+        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: PageCommonSearchViewController.InitPageTitle, navController: self.NavController!)
+
+        switch PageCommonSearchViewController.SearchPageTypeName {
+            
+        case YMCommonSearchPageStrings.CS_COMMON_SEARCH_PAGE_TYPE:
+            break
+            
+        case YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE:
+            HospitalSearch?.ShowInitHospitals()
+            break
+            
+        case YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE:
+            DepartmentSearch?.ShowDepartments()
+            break
+            
+        default: break
+            
+        }
     }
-    
-    public func ShowLoading() {
-        Loading?.Show()
-    }
-    
-    public func HideLoading() {
-        Loading?.Hide()
-    }
-    
-    public func ClearList() {
-        HospitalSearch!.ClearList()
+
+    override func PageDisapeared() {
+        if(!PageLayoutFlag){return}
+        
+        TopView?.TopViewPanel.removeFromSuperview()
+        
+        switch PageCommonSearchViewController.SearchPageTypeName {
+            
+        case YMCommonSearchPageStrings.CS_COMMON_SEARCH_PAGE_TYPE:
+            break
+            
+        case YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE:
+            HospitalSearch?.ClearList()
+            break
+            
+        case YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE:
+            DepartmentSearch?.ClearList()
+            break
+            
+        default: break
+            
+        }
     }
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 import Neon
 
-public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
+public class PageRegisterPersonalInfoBodyView: NSObject {
     private var ParentView: UIView? = nil
     private var NavController: UINavigationController? = nil
     private var Actions: PageRegisterPersonalInfoActions? = nil
@@ -19,6 +19,9 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
     private var UserRealnameInput: YMTextField? = nil
     private var HospitalInput: YMTouchableView? = nil
     private var HospitalDepartmentInput: YMTouchableView? = nil
+    
+    private let HospitalLabel = UILabel()
+    private let DepartmentLabel = UILabel()
     
     private var UserRealNameString: String = ""
     private var HospitalString: String = ""
@@ -65,8 +68,7 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
         return newTextField
     }
     
-    private func DrawTouchableView(view: UIView, placeholder: String) {
-        let label = UILabel()
+    private func DrawTouchableView(view: UIView, label: UILabel, placeholder: String) {
         
         label.text = placeholder
         label.textColor = YMColors.FontGray
@@ -74,7 +76,7 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
         label.sizeToFit()
         
         view.addSubview(label)
-        label.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: label.width, height: label.height)
+        label.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 650.LayoutVal(), height: label.height)
 
         let icon = YMLayout.GetSuitableImageView("RegisterPersonalInfoIconRightArrow")
         view.addSubview(icon)
@@ -104,8 +106,8 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
         HospitalInput?.align(Align.UnderMatchingLeft, relativeTo: UserRealnameInput!, padding: 1, width: YMSizes.PageWidth, height: inputHeight)
         HospitalDepartmentInput?.align(Align.UnderMatchingLeft, relativeTo: HospitalInput!, padding: 1, width: YMSizes.PageWidth, height: inputHeight)
         
-        DrawTouchableView(HospitalInput!, placeholder: "医院")
-        DrawTouchableView(HospitalDepartmentInput!, placeholder: "科室")
+        DrawTouchableView(HospitalInput!, label: HospitalLabel, placeholder: "医院")
+        DrawTouchableView(HospitalDepartmentInput!, label: DepartmentLabel, placeholder: "科室")
     }
     
     private func DrawButtonPanel() {
@@ -125,6 +127,20 @@ public class PageRegisterPersonalInfoHospitalBodyView: NSObject {
         
         OKButton?.UserStringData = YMCommonStrings.CS_PAGE_INDEX_NAME
         OKButton?.addTarget(Actions, action: "PageJumpTo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    public func Refesh() {
+        let hospital = PageHospitalSearchBodyView.HospitalSelected
+        if(nil != hospital) {
+            let hospitalName = hospital!["name"] as! String
+            HospitalLabel.text = "\(hospitalName)"
+        }
+        
+        let department = PageDepartmentSearchBodyView.DepartmentSelected
+        if(nil != department) {
+            let departmentName = department!["name"] as! String
+            HospitalLabel.text = "\(departmentName)"
+        }
     }
 }
 

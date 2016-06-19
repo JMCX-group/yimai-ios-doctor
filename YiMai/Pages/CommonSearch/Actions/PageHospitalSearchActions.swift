@@ -11,12 +11,12 @@ import UIKit
 import SwiftyJSON
 
 public class PageHospitalSearchActions: PageJumpActions {
-    private var Controller: PageCommonSearchViewController? = nil
+    private var TargetView: PageHospitalSearchBodyView? = nil
     private var HospitalsByCity: YMAPIUtility? = nil
     private var HospitalsByKey: YMAPIUtility? = nil
     
     private func GetHospitalsByCity(data: NSDictionary?) {
-        Controller?.DrawHospitals(data)
+        TargetView?.DrawHospitals(data)
     }
     
     private func GetHospitalsError(error: NSError) {
@@ -25,11 +25,11 @@ public class PageHospitalSearchActions: PageJumpActions {
     }
     
     private func GetHospitalsByKey(data: NSDictionary?) {
-        Controller?.DrawHospitals(data)
+        TargetView?.DrawHospitals(data)
     }
     
     override func ExtInit() {
-        Controller = self.Target as? PageCommonSearchViewController
+        TargetView = self.Target as? PageHospitalSearchBodyView
         HospitalsByCity = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_HOSPITALS_BY_CITY_LIST,
                                   success: GetHospitalsByCity,
                                   error: GetHospitalsError)
@@ -46,13 +46,12 @@ public class PageHospitalSearchActions: PageJumpActions {
             return
         }
         
-        Controller?.ShowLoading()
-        Controller?.ClearList()
+        TargetView?.ClearList()
         HospitalsByKey?.YMSearchHospital(searchKey!)
     }
     
     public func HospitalSelected(cell: YMTableViewCell) {
-        PageRegisterPersonalInfoViewController.HospitalInfo = cell.CellData
+        PageHospitalSearchBodyView.HospitalSelected = cell.CellData
         self.NavController?.popViewControllerAnimated(true)
     }
 

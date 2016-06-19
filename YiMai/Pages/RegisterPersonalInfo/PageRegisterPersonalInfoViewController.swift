@@ -9,11 +9,8 @@
 import UIKit
 
 public class PageRegisterPersonalInfoViewController: PageViewController {
-    private var BodyView: PageRegisterPersonalInfoHospitalBodyView? = nil
+    private var BodyView: PageRegisterPersonalInfoBodyView? = nil
 
-    public static var HospitalInfo: AnyObject? = nil
-    public static var DepartmentInfo: AnyObject? = nil
-    
     private static var NavController: UIViewController? = nil
 
     override func GestureRecognizerEnable() -> Bool {
@@ -23,18 +20,19 @@ public class PageRegisterPersonalInfoViewController: PageViewController {
         return PageRegisterPersonalInfoViewController.NavController!
     }
     
-    override func PageLayout(){
-        if(PageLayoutFlag) {
-            return
-        }
-        PageLayoutFlag=true
+    override func PagePreRefresh() {
+        if(!PageLayoutFlag) {return}
         
+        BodyView?.Refesh()
+    }
+    
+    override func PageLayout(){
         super.PageLayout()
         
         PageRegisterPersonalInfoViewController.NavController = self
         
         self.NavController!.interactivePopGestureRecognizer?.delegate = self
-        BodyView = PageRegisterPersonalInfoHospitalBodyView(parentView: self.view, navController: self.navigationController!)
+        BodyView = PageRegisterPersonalInfoBodyView(parentView: self.view, navController: self.navigationController!)
         TopView = PageCommonTopView(parentView: self.view,
                                     titleString: YMRegisterInfoStrings.CS_REGISTER_INFO_PAGE_TITLE)
     }

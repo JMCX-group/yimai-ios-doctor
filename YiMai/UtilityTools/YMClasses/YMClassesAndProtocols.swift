@@ -155,13 +155,29 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
         self.navigationController?.interactivePopGestureRecognizer?.enabled = self.GestureRecognizerEnable()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
 
-        print(self.storyboard)
         self.PageLayout()
         // Do any additional setup after loading the view.
     }
     
     override public func viewDidDisappear(animated: Bool) {
-        self.PageLayout()
+        super.viewDidDisappear(animated)
+        
+        //Do some release operation
+        self.PageDisapeared()
+    }
+    
+    override public func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        //Do some refresh operations
+        self.PageRefresh()
+    }
+    
+    override public func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Do some pre-refresh operations
+        self.PagePreRefresh()
     }
     
     public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -172,7 +188,7 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
                 return false
             }
         }
-        
+
         return true
     }
     
@@ -189,6 +205,12 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
         NavController = self.navigationController
         SelfView = self.view
     }
+    
+    internal func PageDisapeared() {}
+    internal func PageRefresh() {
+        if(!PageLayoutFlag){PageLayoutFlag = true}
+    }
+    internal func PagePreRefresh() {}
 }
 
 public class PageBodyView {

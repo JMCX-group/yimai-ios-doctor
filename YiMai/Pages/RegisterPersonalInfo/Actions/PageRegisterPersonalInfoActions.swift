@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class PageRegisterPersonalInfoActions: PageJumpActions {
-    convenience public init(navController: UINavigationController, bodyView: PageRegisterPersonalInfoHospitalBodyView) {
+    convenience public init(navController: UINavigationController, bodyView: PageRegisterPersonalInfoBodyView) {
         self.init()
         self.NavController = navController
     }
@@ -21,6 +21,7 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
     }
     
     public func ShowCity(sender: UIGestureRecognizer) {
-        print("ShowCitySelect")
+        PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE
+        DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
     }
 }
