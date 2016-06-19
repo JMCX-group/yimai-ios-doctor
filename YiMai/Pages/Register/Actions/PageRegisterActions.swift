@@ -20,7 +20,7 @@ public class PageRegisterActions: PageJumpActions {
                                   success: self.GetVerifyCodeSuccess,
                                   error: self.GetVerifyCodeError)
         
-        DoRegisterApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_DO_REGISTER_CODE,
+        DoRegisterApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_DO_REGISTER,
                                     success: self.DoRegisterSuccess,
                                     error: self.DoRegisterError)
     }

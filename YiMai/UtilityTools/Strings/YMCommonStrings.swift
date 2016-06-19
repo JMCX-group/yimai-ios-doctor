@@ -29,10 +29,14 @@ public class YMCommonStrings {
     
     public static let CS_PAGE_MY_ADMISSIONS_SETTING_NAME = "PageMyAdmissions"
     public static let CS_PAGE_MY_PATIENTS_NAME = "PageMyPatients"
+    public static let CS_PAGE_PERSONAL_SETTING_NAME = "PagePersonalSetting"
     public static let CS_PAGE_MY_WALLET_NAME = "PageMyWallet"
-    public static let CS_PAGE_MY_SETTING_NAME = "PageMySetting"
     public static let CS_PAGE_HOT_LINE_NAME = "PageHotLine"
     public static let CS_PAGE_CONSULTANT_ZONE_NAME = "PageConsultantZone"
+    
+    public static let CS_PAGE_ACCOUNT_SETTING_NAME = "PagePersonalAccountSetting"
+    public static let CS_PAGE_PERSONAL_PASSWORD_RESET_NAME = "PagePersonalPasswordReset"
+    
     
     public static let CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME = "PageFace2FaceInfoInput"
     public static let CS_PAGE_FACE_2_FACE_QR_NAME = "PageFace2FaceQR"
@@ -52,6 +56,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME = "PageAppointmentSelectDoctor"
     public static let CS_PAGE_APPOINTMENT_SELECT_TIME_NAME = "PageAppointmentSelectTime"
     
+
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"
     public static let CS_API_PARAM_KEY_ID = "id"

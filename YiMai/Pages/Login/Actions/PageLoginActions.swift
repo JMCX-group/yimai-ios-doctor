@@ -102,8 +102,10 @@ public class PageLoginActions : PageJumpActions {
     
     public func LoginSuccessCallback(data: NSDictionary?) {
         let realData = data!
+        let userInfo = self.PageLoginBody?.GetUserInputInfo()
 
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_TOKEN, data: realData["token"]!)
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_ORG_PASSWORD, data: userInfo!["password"]!)
         YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA).YMGetAPPInitData()
         BackEndApi.DoApi()
 
@@ -147,3 +149,8 @@ public class PageLoginActions : PageJumpActions {
         self.ApiUtility?.YMUserLogin(userInfo!, progressHandler: nil)
     }
 }
+
+
+
+
+

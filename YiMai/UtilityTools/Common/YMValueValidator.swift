@@ -17,7 +17,7 @@ public class YMValueValidator {
         return (phoneNum < MaxCellPhoneNum && phoneNum > MinCellPhoneNum)
     }
     
-    public static func IsEmptyString(str: String) -> Bool {
-        return ("" == str)
+    public static func IsEmptyString(str: String?) -> Bool {
+        return ("" == str) || (nil == str)
     }
 }

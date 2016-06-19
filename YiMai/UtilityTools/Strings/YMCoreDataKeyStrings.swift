@@ -10,6 +10,7 @@ import Foundation
 
 public class YMCoreDataKeyStrings {
     public static let CS_USER_TOKEN = "CoreDataUserToken"
+    public static let CS_USER_ORG_PASSWORD = "CoreDataUserOrgPassword"
     public static let CS_REG_VERIFY_CODE = "CoreDataRegisterVerifyCode"
     public static let CS_USER_INFO = "CoreDataUserInfo"
     public static let CS_SYSTEM_INFO = "CoreDataSystemInfo"

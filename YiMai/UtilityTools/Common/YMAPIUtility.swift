@@ -24,6 +24,8 @@ class YMAPIInterfaceURL {
     static let GetSearchResult = YMAPIInterfaceURL.ApiBaseUrl + "/user/search"
     static let QueryUserInfo = YMAPIInterfaceURL.ApiBaseUrl + "/user/me"
     static let QueryUserInfoById = YMAPIInterfaceURL.ApiBaseUrl + "/user"
+
+    static let ChangeUserInfo = YMAPIInterfaceURL.ApiBaseUrl + "/user"
     
     static let GetCity = YMAPIInterfaceURL.ApiBaseUrl + "/city"
     static let GetCityGrouped = YMAPIInterfaceURL.ApiBaseUrl + "/city/group"
@@ -306,6 +308,10 @@ public class YMAPIUtility {
         url = YMAPIUtility.AppendTokenToUrl(url, token: token! as! String)
 
         DoGetRequest(url, param: nil, progressHandler: nil)
+    }
+    
+    public func YMChangeUserInfo(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.ChangeUserInfo, param: param, progressHandler: nil)
     }
     
     public func YMGetCity() {

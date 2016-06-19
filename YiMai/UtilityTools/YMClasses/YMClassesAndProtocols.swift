@@ -33,7 +33,10 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_BASIC_INFO_NAME: true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME: true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME: true,
-        YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME: true
+        YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME: true,
+        YMCommonStrings.CS_PAGE_PERSONAL_SETTING_NAME: true,
+        YMCommonStrings.CS_PAGE_ACCOUNT_SETTING_NAME: true,
+        YMCommonStrings.CS_PAGE_PERSONAL_PASSWORD_RESET_NAME: true
     ]
 }
 

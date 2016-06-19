@@ -12,7 +12,9 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_NAME_INIT_DATA = "apiGetInitData"
     public static let CS_API_ACTION_NAME_COMMON_SEARCH = "apiCommonSearch"
     public static let CS_API_ACTION_GET_VERIFY_CODE = "apiGetVerifyCode"
-    public static let CS_API_ACTION_DO_REGISTER_CODE = "apiDoRegister"
+    public static let CS_API_ACTION_DO_REGISTER = "apiDoRegister"
+    
+    public static let CS_API_ACTION_CHANGE_PASSWORD = "apiChangePassword"
     
     public static let CS_API_ACTION_GET_INIT_RELATION = "apiGetInitRelation"
     public static let CS_API_ACTION_GET_LEVEL1_RELATION = "apiGetLevel1Relation"

@@ -10,6 +10,18 @@
 		674EEDC634635DB13AEB3300 /* Pods_YiMai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A556489D24098750735AC565 /* Pods_YiMai.framework */; };
 		730848271D0D9D38007E8940 /* YMTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848261D0D9D38007E8940 /* YMTableView.swift */; };
 		730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848281D0D9D4B007E8940 /* YMModuleStrings.swift */; };
+		736EBC561D1675A600C40AA7 /* PagePersonalSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 736EBC581D1675A600C40AA7 /* PagePersonalSetting.storyboard */; };
+		736EBC5A1D1675BD00C40AA7 /* PagePersonalSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC591D1675BD00C40AA7 /* PagePersonalSettingViewController.swift */; };
+		736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC5B1D16761200C40AA7 /* PagePersonalSettingBodyView.swift */; };
+		736EBC5E1D16764D00C40AA7 /* PagePersonalSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC5D1D16764D00C40AA7 /* PagePersonalSettingActions.swift */; };
+		736EBC641D16884F00C40AA7 /* PagePersonalAccountSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 736EBC661D16884F00C40AA7 /* PagePersonalAccountSetting.storyboard */; };
+		736EBC681D16889A00C40AA7 /* PersonalAccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC671D16889A00C40AA7 /* PersonalAccountSettingViewController.swift */; };
+		736EBC6A1D1688CE00C40AA7 /* PagePersonalAccountSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC691D1688CE00C40AA7 /* PagePersonalAccountSettingBodyView.swift */; };
+		736EBC6C1D16893000C40AA7 /* PagePersonalAccountSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC6B1D16893000C40AA7 /* PagePersonalAccountSettingActions.swift */; };
+		736EBC721D16A75600C40AA7 /* PagePersonalPasswordReset.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 736EBC741D16A75600C40AA7 /* PagePersonalPasswordReset.storyboard */; };
+		736EBC761D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC751D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift */; };
+		736EBC781D16A7AD00C40AA7 /* PagePersonalPasswordResetBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC771D16A7AD00C40AA7 /* PagePersonalPasswordResetBodyView.swift */; };
+		736EBC7A1D16A7C200C40AA7 /* PagePersonalPasswordResetActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736EBC791D16A7C200C40AA7 /* PagePersonalPasswordResetActions.swift */; };
 		739009261D1554E100989207 /* YMRegisterInfoString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739009251D1554E100989207 /* YMRegisterInfoString.swift */; };
 		7394F8401CF9497600F05487 /* PageAppointmentBasicInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7394F8421CF9497600F05487 /* PageAppointmentBasicInfo.storyboard */; };
 		7394F8441CF949B300F05487 /* PageAppointmentPatientBasicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394F8431CF949B300F05487 /* PageAppointmentPatientBasicInfoViewController.swift */; };
@@ -164,6 +176,18 @@
 		35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.release.xcconfig"; sourceTree = "<group>"; };
 		730848261D0D9D38007E8940 /* YMTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTableView.swift; sourceTree = "<group>"; };
 		730848281D0D9D4B007E8940 /* YMModuleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMModuleStrings.swift; sourceTree = "<group>"; };
+		736EBC571D1675A600C40AA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PagePersonalSetting.storyboard; sourceTree = "<group>"; };
+		736EBC591D1675BD00C40AA7 /* PagePersonalSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalSettingViewController.swift; sourceTree = "<group>"; };
+		736EBC5B1D16761200C40AA7 /* PagePersonalSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalSettingBodyView.swift; sourceTree = "<group>"; };
+		736EBC5D1D16764D00C40AA7 /* PagePersonalSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalSettingActions.swift; sourceTree = "<group>"; };
+		736EBC651D16884F00C40AA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PagePersonalAccountSetting.storyboard; sourceTree = "<group>"; };
+		736EBC671D16889A00C40AA7 /* PersonalAccountSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalAccountSettingViewController.swift; sourceTree = "<group>"; };
+		736EBC691D1688CE00C40AA7 /* PagePersonalAccountSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalAccountSettingBodyView.swift; sourceTree = "<group>"; };
+		736EBC6B1D16893000C40AA7 /* PagePersonalAccountSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalAccountSettingActions.swift; sourceTree = "<group>"; };
+		736EBC731D16A75600C40AA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PagePersonalPasswordReset.storyboard; sourceTree = "<group>"; };
+		736EBC751D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalPasswordResetViewController.swift; sourceTree = "<group>"; };
+		736EBC771D16A7AD00C40AA7 /* PagePersonalPasswordResetBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalPasswordResetBodyView.swift; sourceTree = "<group>"; };
+		736EBC791D16A7C200C40AA7 /* PagePersonalPasswordResetActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalPasswordResetActions.swift; sourceTree = "<group>"; };
 		739009251D1554E100989207 /* YMRegisterInfoString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMRegisterInfoString.swift; sourceTree = "<group>"; };
 		7394F8411CF9497600F05487 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentBasicInfo.storyboard; sourceTree = "<group>"; };
 		7394F8431CF949B300F05487 /* PageAppointmentPatientBasicInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentPatientBasicInfoViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +367,87 @@
 				A556489D24098750735AC565 /* Pods_YiMai.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		736EBC511D1674D900C40AA7 /* PersonalSetting */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC521D1674D900C40AA7 /* Actions */,
+				736EBC531D1674D900C40AA7 /* Body */,
+				736EBC581D1675A600C40AA7 /* PagePersonalSetting.storyboard */,
+				736EBC591D1675BD00C40AA7 /* PagePersonalSettingViewController.swift */,
+			);
+			path = PersonalSetting;
+			sourceTree = "<group>";
+		};
+		736EBC521D1674D900C40AA7 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC5D1D16764D00C40AA7 /* PagePersonalSettingActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		736EBC531D1674D900C40AA7 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC5B1D16761200C40AA7 /* PagePersonalSettingBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		736EBC5F1D16881E00C40AA7 /* PersonalAccountSetting */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC601D16881E00C40AA7 /* Actions */,
+				736EBC611D16881E00C40AA7 /* Body */,
+				736EBC661D16884F00C40AA7 /* PagePersonalAccountSetting.storyboard */,
+				736EBC671D16889A00C40AA7 /* PersonalAccountSettingViewController.swift */,
+			);
+			path = PersonalAccountSetting;
+			sourceTree = "<group>";
+		};
+		736EBC601D16881E00C40AA7 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC6B1D16893000C40AA7 /* PagePersonalAccountSettingActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		736EBC611D16881E00C40AA7 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC691D1688CE00C40AA7 /* PagePersonalAccountSettingBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		736EBC6D1D16A72900C40AA7 /* PersonalPasswordReset */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC6E1D16A72900C40AA7 /* Actions */,
+				736EBC6F1D16A72900C40AA7 /* Body */,
+				736EBC741D16A75600C40AA7 /* PagePersonalPasswordReset.storyboard */,
+				736EBC751D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift */,
+			);
+			path = PersonalPasswordReset;
+			sourceTree = "<group>";
+		};
+		736EBC6E1D16A72900C40AA7 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC791D16A7C200C40AA7 /* PagePersonalPasswordResetActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		736EBC6F1D16A72900C40AA7 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				736EBC771D16A7AD00C40AA7 /* PagePersonalPasswordResetBodyView.swift */,
+			);
+			path = Body;
 			sourceTree = "<group>";
 		};
 		7394F8321CF9400200F05487 /* AppointmentPatientBasicInfo */ = {
@@ -564,6 +669,9 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				736EBC6D1D16A72900C40AA7 /* PersonalPasswordReset */,
+				736EBC5F1D16881E00C40AA7 /* PersonalAccountSetting */,
+				736EBC511D1674D900C40AA7 /* PersonalSetting */,
 				96834F141D05266800E0C813 /* CommonSearch */,
 				7394F8321CF9400200F05487 /* AppointmentPatientBasicInfo */,
 				7394F8351CF9400200F05487 /* AppointmentPatientCondition */,
@@ -1299,7 +1407,9 @@
 				96A3D1C01CFD846A00518DCB /* PageAppointmentSelectDoctor.storyboard in Resources */,
 				7394F85A1D005DF400F05487 /* PageAppointmentSelectTime.storyboard in Resources */,
 				7394F84B1CF9A36800F05487 /* PageAppointmentPatientCondition.storyboard in Resources */,
+				736EBC561D1675A600C40AA7 /* PagePersonalSetting.storyboard in Resources */,
 				96D4517C1CF7D469006817CE /* PageYiMaiSameAreas.storyboard in Resources */,
+				736EBC721D16A75600C40AA7 /* PagePersonalPasswordReset.storyboard in Resources */,
 				962076F01CC72598002083FA /* PageRegisterSelectHospital.storyboard in Resources */,
 				96D451661CF6D9DF006817CE /* PageYiMaiManualAddFriend.storyboard in Resources */,
 				961FE8C41CEEF6D0002785B9 /* PageYiMai.storyboard in Resources */,
@@ -1314,6 +1424,7 @@
 				96D451921CF7D7D3006817CE /* PageYiMaiSameSchool.storyboard in Resources */,
 				96D745B21CF5C1B700E345E3 /* PageYiMaiAddFriends.storyboard in Resources */,
 				96D451A31CF7F15E006817CE /* PageAppointment.storyboard in Resources */,
+				736EBC641D16884F00C40AA7 /* PagePersonalAccountSetting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1412,8 +1523,10 @@
 				96637A871CC24D3300DBD1CF /* PageCommonTopView.swift in Sources */,
 				739009261D1554E100989207 /* YMRegisterInfoString.swift in Sources */,
 				7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */,
+				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
 				96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */,
+				736EBC6A1D1688CE00C40AA7 /* PagePersonalAccountSettingBodyView.swift in Sources */,
 				7394F8511CF9A3B900F05487 /* PageAppointmentPatientConditionBodyView.swift in Sources */,
 				9612DB5F1CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift in Sources */,
 				96D745B81CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift in Sources */,
@@ -1426,12 +1539,14 @@
 				730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */,
 				7394F8481CF94A2500F05487 /* PageAppointmentPatientBasicInfoActions.swift in Sources */,
 				9612DB751CC9F85900262D2E /* PagePersonalTopView.swift in Sources */,
+				736EBC5E1D16764D00C40AA7 /* PagePersonalSettingActions.swift in Sources */,
 				96637A8A1CC2515E00DBD1CF /* YMCommonActions.swift in Sources */,
 				9672FB131CCF133C00BC7E40 /* PageFace2FaceInfoInputViewController.swift in Sources */,
 				9672FB1A1CCF22F300BC7E40 /* PageFace2FaceInfoInputActions.swift in Sources */,
 				96331B0B1CC8762600E53125 /* YMClassesAndProtocols.swift in Sources */,
 				96D4518B1CF7D733006817CE /* PageYiMaiSameHospitalViewController.swift in Sources */,
 				96B3E8A31D10F94600C8B5C2 /* PageTopSearchInputPanel.swift in Sources */,
+				736EBC6C1D16893000C40AA7 /* PagePersonalAccountSettingActions.swift in Sources */,
 				9634D3711D080A3C00542901 /* YMAPIStrings.swift in Sources */,
 				9672FB1C1CCF276A00BC7E40 /* PageFace2FaceInfoInputBodyView.swift in Sources */,
 				9619EF7A1CC1FF1500F69CBC /* YMLoginStrings.swift in Sources */,
@@ -1457,10 +1572,12 @@
 				96D451601CF6D4A1006817CE /* PageYiMaiAddContactsFriendsBootomView.swift in Sources */,
 				7394F8551CF9ABCE00F05487 /* YMTextArea.swift in Sources */,
 				962076D61CC5F196002083FA /* PageRegisterBodyView.swift in Sources */,
+				736EBC681D16889A00C40AA7 /* PersonalAccountSettingViewController.swift in Sources */,
 				961FE8CC1CEEFAE6002785B9 /* PageYiMaiActions.swift in Sources */,
 				96637A7A1CC240C800DBD1CF /* YMColors.swift in Sources */,
 				7394F8591D005DDD00F05487 /* PageAppointmentSelectTimeViewController.swift in Sources */,
 				9672FB2C1CD067A300BC7E40 /* PageFace2FaceQRActions.swift in Sources */,
+				736EBC781D16A7AD00C40AA7 /* PagePersonalPasswordResetBodyView.swift in Sources */,
 				96D745C61CF6973200E345E3 /* YiMaiAddContactsFriendsActions.swift in Sources */,
 				96D4516A1CF6D9FA006817CE /* PageYiMaiManualAddFriendViewController.swift in Sources */,
 				961FE8C81CEEF6F7002785B9 /* PageYiMaiViewController.swift in Sources */,
@@ -1480,6 +1597,7 @@
 				962076D41CC5ECCA002083FA /* PageRegisterViewController.swift in Sources */,
 				96D451AB1CF7F1B5006817CE /* PageAppointmentActions.swift in Sources */,
 				9612DB4A1CC9EA8600262D2E /* YMCurrentPage.swift in Sources */,
+				736EBC7A1D16A7C200C40AA7 /* PagePersonalPasswordResetActions.swift in Sources */,
 				960607001CE97CC500AAFC07 /* YMModelView.swift in Sources */,
 				9672FB4A1CD222C100BC7E40 /* PageMyAdmissionsListActions.swift in Sources */,
 				7394F8461CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift in Sources */,
@@ -1488,11 +1606,13 @@
 				96834F201D05271800E0C813 /* PageCommonSearchTopView.swift in Sources */,
 				9672FB2E1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift in Sources */,
 				7394F85E1D005E3600F05487 /* PageAppointmentSelectTimeBodyView.swift in Sources */,
+				736EBC761D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift in Sources */,
 				96834F1E1D0526C400E0C813 /* PageCommonSearchViewController.swift in Sources */,
 				9672FB381CD1C2EC00BC7E40 /* PageMessageListViewController.swift in Sources */,
 				9612DB401CC8B75300262D2E /* PageIndexViewController.swift in Sources */,
 				963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */,
 				96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */,
+				736EBC5A1D1675BD00C40AA7 /* PagePersonalSettingViewController.swift in Sources */,
 				96D4518D1CF7D77F006817CE /* PageYiMaiSameHospitalBodyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1500,6 +1620,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		736EBC581D1675A600C40AA7 /* PagePersonalSetting.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				736EBC571D1675A600C40AA7 /* Base */,
+			);
+			name = PagePersonalSetting.storyboard;
+			sourceTree = "<group>";
+		};
+		736EBC661D16884F00C40AA7 /* PagePersonalAccountSetting.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				736EBC651D16884F00C40AA7 /* Base */,
+			);
+			name = PagePersonalAccountSetting.storyboard;
+			sourceTree = "<group>";
+		};
+		736EBC741D16A75600C40AA7 /* PagePersonalPasswordReset.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				736EBC731D16A75600C40AA7 /* Base */,
+			);
+			name = PagePersonalPasswordReset.storyboard;
+			sourceTree = "<group>";
+		};
 		7394F8421CF9497600F05487 /* PageAppointmentBasicInfo.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

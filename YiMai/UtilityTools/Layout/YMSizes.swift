@@ -31,6 +31,8 @@ public class YMSizes {
     public static let PageScrollBodyInset : UIEdgeInsets = UIEdgeInsets(top: 128.LayoutVal(), left: 0, bottom: 98.LayoutVal(), right: 0)
     
     public static let PagePersonalTopHeight = 510.LayoutVal()
+    
+    public static let CommonTouchableViewHeight = 81.LayoutVal()
 
 
     public static let NormalTopSize : CGRect = CGRect(x: 0, y: 0, width: YMSizes.PageWidth, height: YMSizes.PageTopHeight)

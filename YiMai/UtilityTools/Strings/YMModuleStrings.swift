@@ -10,4 +10,5 @@ import Foundation
 
 public class YMModuleStrings {
     public static let MODULE_NAME_REG_VERIFY_CODE = "moduleRegVerifyCode"
+    public static let MODULE_NAME_MY_ACCOUNT_SETTING_CODE = "moduleMyAccountSetting"
 }

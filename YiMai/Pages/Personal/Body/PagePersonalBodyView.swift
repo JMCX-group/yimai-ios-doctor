@@ -124,7 +124,7 @@ public class PagePersonalBodyView: NSObject {
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_ADMISSIONS_SETTING_NAME, iconName: "PersonalIconMyAdmissionsSetting",title: "我的接诊设置")
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_PATIENTS_NAME, iconName: "PersonalIconMyPatient",title: "我的患者")
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_WALLET_NAME, iconName: "PersonalIconMyWallet",title: "我的钱包")
-        DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_SETTING_NAME, iconName: "PersonalIconMySetting",title: "设置")
+        DrawAnOperationPanel(YMCommonStrings.CS_PAGE_PERSONAL_SETTING_NAME, iconName: "PersonalIconMySetting",title: "设置")
         DrawHotLinePanel()
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_CONSULTANT_ZONE_NAME, iconName: "PersonalIconConsultantZone",title: "健康顾问合作专区")
         
