@@ -36,6 +36,7 @@ public class YMCommonStrings {
     
     public static let CS_PAGE_ACCOUNT_SETTING_NAME = "PagePersonalAccountSetting"
     public static let CS_PAGE_PERSONAL_PASSWORD_RESET_NAME = "PagePersonalPasswordReset"
+    public static let CS_PAGE_PERSONAL_ID_NUM_INPUT_NAME = "PagePersonalIDNumInput"
     
     
     public static let CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME = "PageFace2FaceInfoInput"

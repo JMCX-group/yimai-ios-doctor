@@ -169,6 +169,10 @@
 		96D745C61CF6973200E345E3 /* YiMaiAddContactsFriendsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D745C51CF6973200E345E3 /* YiMaiAddContactsFriendsActions.swift */; };
 		96D745C91CF6986A00E345E3 /* PageYiMaiAddContactsFriends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D745CB1CF6986A00E345E3 /* PageYiMaiAddContactsFriends.storyboard */; };
 		96D745CD1CF6A76100E345E3 /* YiMaiAddContactsFriendsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D745CC1CF6A76100E345E3 /* YiMaiAddContactsFriendsStrings.swift */; };
+		96FCD1341D17A93D00A6E12D /* PagePersonalIDNumInput.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FCD1361D17A93D00A6E12D /* PagePersonalIDNumInput.storyboard */; };
+		96FCD1381D17A95100A6E12D /* PagePersonalIDNumInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD1371D17A95100A6E12D /* PagePersonalIDNumInputViewController.swift */; };
+		96FCD13A1D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD1391D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift */; };
+		96FCD13C1D17A9B600A6E12D /* PagePersonalIDNumInputActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD13B1D17A9B600A6E12D /* PagePersonalIDNumInputActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -337,6 +341,10 @@
 		96D745C51CF6973200E345E3 /* YiMaiAddContactsFriendsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YiMaiAddContactsFriendsActions.swift; sourceTree = "<group>"; };
 		96D745CA1CF6986A00E345E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageYiMaiAddContactsFriends.storyboard; sourceTree = "<group>"; };
 		96D745CC1CF6A76100E345E3 /* YiMaiAddContactsFriendsStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YiMaiAddContactsFriendsStrings.swift; sourceTree = "<group>"; };
+		96FCD1351D17A93D00A6E12D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PagePersonalIDNumInput.storyboard; sourceTree = "<group>"; };
+		96FCD1371D17A95100A6E12D /* PagePersonalIDNumInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalIDNumInputViewController.swift; sourceTree = "<group>"; };
+		96FCD1391D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalIDNumInputBodyView.swift; sourceTree = "<group>"; };
+		96FCD13B1D17A9B600A6E12D /* PagePersonalIDNumInputActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalIDNumInputActions.swift; sourceTree = "<group>"; };
 		A556489D24098750735AC565 /* Pods_YiMai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiMai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -669,6 +677,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				96FCD12F1D17A91C00A6E12D /* PersonalIDNumInput */,
 				736EBC6D1D16A72900C40AA7 /* PersonalPasswordReset */,
 				736EBC5F1D16881E00C40AA7 /* PersonalAccountSetting */,
 				736EBC511D1674D900C40AA7 /* PersonalSetting */,
@@ -1333,6 +1342,33 @@
 			path = Body;
 			sourceTree = "<group>";
 		};
+		96FCD12F1D17A91C00A6E12D /* PersonalIDNumInput */ = {
+			isa = PBXGroup;
+			children = (
+				96FCD1301D17A91C00A6E12D /* Actions */,
+				96FCD1311D17A91C00A6E12D /* BodyView */,
+				96FCD1361D17A93D00A6E12D /* PagePersonalIDNumInput.storyboard */,
+				96FCD1371D17A95100A6E12D /* PagePersonalIDNumInputViewController.swift */,
+			);
+			path = PersonalIDNumInput;
+			sourceTree = "<group>";
+		};
+		96FCD1301D17A91C00A6E12D /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				96FCD13B1D17A9B600A6E12D /* PagePersonalIDNumInputActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		96FCD1311D17A91C00A6E12D /* BodyView */ = {
+			isa = PBXGroup;
+			children = (
+				96FCD1391D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift */,
+			);
+			path = BodyView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1421,6 +1457,7 @@
 				9612DB3C1CC8B5DB00262D2E /* PageIndex.storyboard in Resources */,
 				9672FB421CD2222200BC7E40 /* PageMyAdmissionsList.storyboard in Resources */,
 				96D451871CF7D714006817CE /* PageYiMaiSameHospital.storyboard in Resources */,
+				96FCD1341D17A93D00A6E12D /* PagePersonalIDNumInput.storyboard in Resources */,
 				96D451921CF7D7D3006817CE /* PageYiMaiSameSchool.storyboard in Resources */,
 				96D745B21CF5C1B700E345E3 /* PageYiMaiAddFriends.storyboard in Resources */,
 				96D451A31CF7F15E006817CE /* PageAppointment.storyboard in Resources */,
@@ -1525,6 +1562,7 @@
 				7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */,
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
+				96FCD13A1D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift in Sources */,
 				96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */,
 				736EBC6A1D1688CE00C40AA7 /* PagePersonalAccountSettingBodyView.swift in Sources */,
 				7394F8511CF9A3B900F05487 /* PageAppointmentPatientConditionBodyView.swift in Sources */,
@@ -1537,6 +1575,7 @@
 				96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */,
 				96637A751CC22DE000DBD1CF /* YMSizes.swift in Sources */,
 				730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */,
+				96FCD13C1D17A9B600A6E12D /* PagePersonalIDNumInputActions.swift in Sources */,
 				7394F8481CF94A2500F05487 /* PageAppointmentPatientBasicInfoActions.swift in Sources */,
 				9612DB751CC9F85900262D2E /* PagePersonalTopView.swift in Sources */,
 				736EBC5E1D16764D00C40AA7 /* PagePersonalSettingActions.swift in Sources */,
@@ -1605,6 +1644,7 @@
 				9619EF591CC1DB9600F69CBC /* YiMai.xcdatamodeld in Sources */,
 				96834F201D05271800E0C813 /* PageCommonSearchTopView.swift in Sources */,
 				9672FB2E1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift in Sources */,
+				96FCD1381D17A95100A6E12D /* PagePersonalIDNumInputViewController.swift in Sources */,
 				7394F85E1D005E3600F05487 /* PageAppointmentSelectTimeBodyView.swift in Sources */,
 				736EBC761D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift in Sources */,
 				96834F1E1D0526C400E0C813 /* PageCommonSearchViewController.swift in Sources */,
@@ -1850,6 +1890,14 @@
 				96D745CA1CF6986A00E345E3 /* Base */,
 			);
 			name = PageYiMaiAddContactsFriends.storyboard;
+			sourceTree = "<group>";
+		};
+		96FCD1361D17A93D00A6E12D /* PagePersonalIDNumInput.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96FCD1351D17A93D00A6E12D /* Base */,
+			);
+			name = PagePersonalIDNumInput.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

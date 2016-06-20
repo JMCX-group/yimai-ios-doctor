@@ -79,7 +79,7 @@ public class PageAppointmentViewController: PageViewController {
             amOrPm = PageAppointmentViewController.SelectedTimeForUpload![1]
         }
         
-        let doctor = PageAppointmentViewController.SelectedDoctor! as! [String: AnyObject]
+        let doctor = PageAppointmentViewController.SelectedDoctor!
         
         let ret =
             [

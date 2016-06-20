@@ -39,12 +39,20 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         
         let userData = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
         
-        if(nil == userData) {
+        if(nil != userData) {
             DrawData(userData!)
         } else {
             Loading?.Show()
             YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_MY_ACCOUNT_SETTING_CODE,
                                                 handler: YMCoreMemDataOnceHandler(handler: LoadData))
+        }
+    }
+    
+    public func ReloadData() {
+        let userData = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
+        
+        if(nil != userData) {
+            DrawData(userData!)
         }
     }
     
@@ -67,7 +75,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         let realData = data as! [String: AnyObject]
         AccountPhone.text = "\(realData["phone"]!)"
         AccountBindPhone.text = "\(realData["phone"]!)"
-        
+
         let authTextMap = ["0":"已认证", "1":"尚未认证"]
         
         let authString = authTextMap[realData["is_auth"]! as! String]
@@ -124,7 +132,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         
         IDNumButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
-            label: UILabel(), text: "身份证号码")
+            label: UILabel(), text: "身份证号码", userStringData: YMCommonStrings.CS_PAGE_PERSONAL_ID_NUM_INPUT_NAME)
         AppendExtInfo(IDNum, parent: IDNumButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
 
         BodyView.addSubview(bindPhoneButton)

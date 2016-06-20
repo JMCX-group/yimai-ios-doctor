@@ -37,11 +37,12 @@ public class PageCommonSearchViewController: PageViewController {
         case YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE:
             HospitalSearch = PageHospitalSearchBodyView(parentView: self.SelfView!,
                                                         navController: self.NavController!)
-            
+        break
+
         case YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE:
             DepartmentSearch = PageDepartmentSearchBodyView(parentView: self.SelfView!,
                                                           navController: self.NavController!)
-            break
+            
         break
             
         default: break

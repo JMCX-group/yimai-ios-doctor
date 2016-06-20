@@ -36,7 +36,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME: true,
         YMCommonStrings.CS_PAGE_PERSONAL_SETTING_NAME: true,
         YMCommonStrings.CS_PAGE_ACCOUNT_SETTING_NAME: true,
-        YMCommonStrings.CS_PAGE_PERSONAL_PASSWORD_RESET_NAME: true
+        YMCommonStrings.CS_PAGE_PERSONAL_PASSWORD_RESET_NAME: true,
+        YMCommonStrings.CS_PAGE_PERSONAL_ID_NUM_INPUT_NAME: true
     ]
 }
 

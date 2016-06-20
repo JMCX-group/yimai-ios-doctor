@@ -16,4 +16,8 @@ class PagePersonalAccountSettingViewController: PageViewController {
         BodyView = PagePersonalAccountSettingBodyView(parentView: self.SelfView!, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "账户设置", navController: self.NavController!)
     }
+    
+    override func PageRefresh() {
+        BodyView?.ReloadData()
+    }
 }
