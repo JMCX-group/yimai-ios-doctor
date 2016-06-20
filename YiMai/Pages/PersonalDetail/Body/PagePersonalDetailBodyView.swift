@@ -8,3 +8,7 @@
 
 import Foundation
 import Neon
+
+public class PagePersonalDetailBodyView: NSObject {
+    
+}
