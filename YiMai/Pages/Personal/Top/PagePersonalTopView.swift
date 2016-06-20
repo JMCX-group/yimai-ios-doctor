@@ -19,7 +19,7 @@ public class PagePersonalTopView {
     private var TopQRButton: UIImageView? = nil
     private let Username: UILabel = UILabel()
     private let Desc: UILabel = UILabel()
-    private var DefaultUserhead = YMLayout.GetSuitableImageView("PersonalDefaultUserhead")
+    private var UserHead: YMTouchableImageView? = nil
     private let YiMaiCodeTitle: UILabel = UILabel()
     private let YiMaiCode: UILabel = UILabel()
     
@@ -29,6 +29,8 @@ public class PagePersonalTopView {
         self.NavController = navController
         self.Actions = pageActions
         
+        UserHead = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByImageViewSenderSel, imageName: "PersonalDefaultUserhead")
+        UserHead?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_PERSONAL_DETAIL_NAME
         ViewLayout()
     }
     
@@ -83,8 +85,8 @@ public class PagePersonalTopView {
         TopViewPanel.addSubview(topUserheadBackground)
         topUserheadBackground.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: topUserheadBackground.height)
         
-        TopViewPanel.addSubview(DefaultUserhead)
-        DefaultUserhead.anchorToEdge(Edge.Top, padding: 165.LayoutVal(), width: DefaultUserhead.width, height: DefaultUserhead.height)
+        TopViewPanel.addSubview(UserHead!)
+        UserHead!.anchorToEdge(Edge.Top, padding: 165.LayoutVal(), width: UserHead!.width, height: UserHead!.height)
         
         TopViewPanel.addSubview(Username)
         
