@@ -9,6 +9,8 @@
 import Foundation
 
 public class YMCoreDataKeyStrings {
+    public static let CS_USER_LOGIN_STATUS = "CoreDataUserLoginStatus"
+    
     public static let CS_USER_TOKEN = "CoreDataUserToken"
     public static let CS_USER_ORG_PASSWORD = "CoreDataUserOrgPassword"
     public static let CS_REG_VERIFY_CODE = "CoreDataRegisterVerifyCode"
@@ -17,6 +19,8 @@ public class YMCoreDataKeyStrings {
     public static let CS_USER_RELATIONS = "CoreDataUserRelations"
     public static let CS_RECENT_CONTACTS = "CoreDataRecentContacts"
     public static let CS_ALL_DEPARTMENT = "CoreDataAllDepartment"
+
+    public static let CS_USER_INFO_MAP = "CoreDataUserInfoMap"
     
     public static let CS_NEW_FRIENDS = "CoreDataNewFriends"
     

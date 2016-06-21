@@ -23,4 +23,8 @@ class PageLoginViewController: PageViewController {
         BodyView = PageLoginBodyView(parentView: self.view, navController: self.navigationController!)
         TopView = PageCommonTopView(parentView: self.view, titleString: YMLoginStrings.CS_LOGIN_PAGE_TITLE)
     }
+    
+    override func PageDisapeared() {
+        BodyView?.EnableLoginControls()
+    }
 }

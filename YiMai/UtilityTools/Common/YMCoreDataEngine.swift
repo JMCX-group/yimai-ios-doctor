@@ -35,7 +35,7 @@ public class YMCoreDataEngine {
     private static let OneceHandlerLock = NSObject()
     
     private static var HandlerProcessIntervalInUS: UInt32 = 100000
-    private static var OnceHandlerMapClearIntervalInUS: UInt32 = 60000000
+    private static var OnceHandlerMapClearIntervalInUS: UInt32 = 100000
     
     public static func GetData(key: String) -> AnyObject? {
         return YMCoreData.CoreMemData[key]
@@ -81,7 +81,8 @@ public class YMCoreDataEngine {
             usleep(YMCoreDataEngine.OnceHandlerMapClearIntervalInUS)
 
             objc_sync_enter(YMCoreDataEngine.OneceHandlerLock)
-            for (_, var handlers) in YMCoreData.CoreMemDataHandlerOnceMap {
+
+            for (key, handlers) in YMCoreData.CoreMemDataHandlerOnceMap {
                 var clearFlag = true
                 for handler in handlers {
                     if(!handler.CompletedFlag) {
@@ -90,8 +91,10 @@ public class YMCoreDataEngine {
                     }
                 }
                 
-                if(clearFlag) {
-                    handlers.removeAll()
+                if(0 != handlers.count) {
+                    if(clearFlag) {
+                        YMCoreData.CoreMemDataHandlerOnceMap[key]?.removeAll()
+                    }
                 }
             }
             objc_sync_exit(YMCoreDataEngine.OneceHandlerLock)

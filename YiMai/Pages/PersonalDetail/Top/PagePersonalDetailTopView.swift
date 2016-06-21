@@ -12,14 +12,13 @@ import Neon
 public class PagePersonalDetailTopView:NSObject {
     private var ParentView: UIView? = nil
     private var Actions: PagePersonalDetailActions? = nil
-    private var TopView = UIView()
+    public var TopView = UIView()
     
     private let NameLabel = UILabel()
     private let TitleLabel = UILabel()
     private let YiMaiTitleLabel = UILabel()
     private let YiMaiCodeLabel = UILabel()
     
-//    private let HeadBackground = YMLayout.GetSuitableImageView("PersonalTopBackground")
     private var HeadImage: UIImageView? = nil
     private var EditIcon: YMTouchableImageView? = nil
 
@@ -39,7 +38,8 @@ public class PagePersonalDetailTopView:NSObject {
         
         TopView.addSubview(topBackground)
         topBackground.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: topBackground.height)
-        
+        TopView.backgroundColor = YMColors.White
+
         TopView.addSubview(NameLabel)
         TopView.addSubview(TitleLabel)
         TopView.addSubview(YiMaiTitleLabel)
@@ -57,16 +57,16 @@ public class PagePersonalDetailTopView:NSObject {
         
         YiMaiTitleLabel.align(Align.UnderCentered, relativeTo: TitleLabel, padding: 273.LayoutVal(), width: YMSizes.PageWidth, height: 26.LayoutVal())
         YiMaiTitleLabel.textAlignment = NSTextAlignment.Center
-        YiMaiTitleLabel.textColor = YMColors.White
+        YiMaiTitleLabel.textColor = YMColors.FontBlue
         YiMaiTitleLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        YiMaiTitleLabel.text = "医脉码"
 
         YiMaiCodeLabel.align(Align.UnderCentered, relativeTo: YiMaiTitleLabel, padding: 12.LayoutVal(), width: YMSizes.PageWidth, height: 40.LayoutVal())
         YiMaiCodeLabel.textAlignment = NSTextAlignment.Center
-        YiMaiCodeLabel.textColor = YMColors.White
+        YiMaiCodeLabel.textColor = YMColors.FontBlue
         YiMaiCodeLabel.font = YMFonts.YMDefaultFont(40.LayoutVal())
         
         HeadImage = YMLayout.GetSuitableImageView("PersonalDefaultUserhead")
-//        TopView.addSubview(HeadBackground)
         TopView.addSubview(HeadImage!)
         
         HeadImage!.anchorToEdge(Edge.Top, padding: 165.LayoutVal(), width: HeadImage!.width, height: HeadImage!.height)
@@ -77,7 +77,21 @@ public class PagePersonalDetailTopView:NSObject {
     }
     
     public func LoadData(data: [String:AnyObject]) {
+        NameLabel.text = YMVar.MyUserInfo["name"] as? String
         
+        let dept = YMVar.MyUserInfo["department"] as? String
+        let jobTitle = YMVar.MyUserInfo["job_title"] as? String
+        if(nil == dept && nil == jobTitle) {
+            TitleLabel.text = ""
+        } else if(nil == dept && nil != jobTitle) {
+            TitleLabel.text = jobTitle!
+        } else if (nil != dept && nil == jobTitle) {
+            TitleLabel.text = dept!
+        } else {
+            TitleLabel.text = "\(dept!) | \(jobTitle!)"
+        }
+        
+        YiMaiCodeLabel.text = YMVar.MyUserInfo["code"] as? String
     }
 }
 

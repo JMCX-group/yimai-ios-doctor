@@ -266,6 +266,9 @@ public class YMAPIUtility {
     
     private func YMGetInitDataSuccess(data: NSDictionary?) {
         let realData = data!
+
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_LOGIN_STATUS, data: true)
+
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: realData[YMCoreDataKeyStrings.INIT_DATA_USER]!)
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SYSTEM_INFO, data: realData[YMCoreDataKeyStrings.INIT_DATA_SYS_INFO]!)
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_RELATIONS, data: realData[YMCoreDataKeyStrings.INIT_DATA_RELATIONS]!)
@@ -273,7 +276,8 @@ public class YMAPIUtility {
     }
     
     private func YMGetInitDataError(error: NSError) {
-        self.YMGetAPPInitData()
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_LOGIN_STATUS, data: false)
+        //self.YMGetAPPInitData()
     }
     
     public func YMGetSearchResult(param:[String: AnyObject], progressHandler: NetworkProgressHandler?) {

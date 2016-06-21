@@ -29,8 +29,7 @@ public class PagePersonalTopView {
         self.NavController = navController
         self.Actions = pageActions
         
-        UserHead = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByImageViewSenderSel, imageName: "PersonalDefaultUserhead")
-        UserHead?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_PERSONAL_DETAIL_NAME
+        UserHead = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "GoToPersonalDetail:".Sel(), imageName: "PersonalDefaultUserhead")
         ViewLayout()
     }
     

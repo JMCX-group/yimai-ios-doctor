@@ -19,13 +19,14 @@ public class PageIndexViewController: PageViewController {
     
     override public func viewDidAppear(animated: Bool) {
         YMCurrentPage.CurrentPage = YMCommonStrings.CS_PAGE_INDEX_NAME
+        
+        YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)! as! [String: AnyObject]
+        YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
     }
 
     override func PageLayout(){
         if(PageLayoutFlag) {return}
         PageLayoutFlag=true
-        
-        YMCoreDataEngine.EngineInitialize()
 
         Actions = PageIndexActions(navController: self.navigationController!)
 

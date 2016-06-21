@@ -38,7 +38,7 @@ public class PageLoginBodyView: NSObject {
     
     private var Actions : PageLoginActions? = nil
     
-    private var LoginLoadingView: YMControlLoadingView? = nil
+    private var LoginLoadingView: YMPageLoadingView? = nil
     
     convenience init(parentView: UIView, navController: UINavigationController) {
         self.init()
@@ -48,9 +48,9 @@ public class PageLoginBodyView: NSObject {
         
         self.ViewLayout()
 
-        self.LoginLoadingView = YMControlLoadingView(parentView: LoginButton.superview!, target: LoginButton)
+        self.LoginLoadingView = YMPageLoadingView(parentView: ParentView!)
     }
-    
+
     private func ViewLayout(){
         ParentView?.addSubview(BodyPanel)
         BodyPanel.fillSuperview()
@@ -197,6 +197,16 @@ public class PageLoginBodyView: NSObject {
     
     public func EnableLoginControls() {
         self.LoginLoadingView?.Hide()
+        self.UsernameInput?.enabled = true
+        self.PasswordInput?.enabled = true
+    }
+    
+    public func ClearLoginControls() {
+        self.LoginLoadingView?.Hide()
+        
+        self.UsernameInput?.text = ""
+        self.PasswordInput?.text = ""
+
         self.UsernameInput?.enabled = true
         self.PasswordInput?.enabled = true
     }

@@ -109,7 +109,31 @@ public class PageLoginActions : PageJumpActions {
         YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA).YMGetAPPInitData()
         BackEndApi.DoApi()
 
-        self.DoJump(LoginSuccessTargetStroyboard)
+        let handler = YMCoreMemDataOnceHandler(handler: LoginSuccess)
+        YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_MY_ACCOUNT_SETTING, handler: handler)
+    }
+    
+    private func LoginSuccess(_: AnyObject?, queue: NSOperationQueue) -> Bool {
+        let loginStatus = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_LOGIN_STATUS) as? Bool
+        
+        if(nil == loginStatus) {
+            return false
+        }
+        
+        let unpackedStatus = loginStatus!
+        if(!unpackedStatus) {
+            queue.addOperationWithBlock({ () -> Void in
+                YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
+                self.PageLoginBody?.EnableLoginControls()
+            })
+        } else {
+            queue.addOperationWithBlock({ () -> Void in
+                self.PageLoginBody?.ClearLoginControls()
+                self.DoJump(YMCommonStrings.CS_PAGE_INDEX_NAME)
+            })
+        }
+        
+        return true
     }
 
     public func LoginErrorCallback(error: NSError) {

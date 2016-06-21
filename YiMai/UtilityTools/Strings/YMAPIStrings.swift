@@ -17,6 +17,8 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_CHANGE_PASSWORD = "apiChangePassword"
     public static let CS_API_ACTION_SET_ID_NUM = "apiSetIDNum"
     
+    public static let CS_API_ACTION_GET_DOCTOR_BY_ID = "apiGetDoctorById"
+    
     public static let CS_API_ACTION_GET_INIT_RELATION = "apiGetInitRelation"
     public static let CS_API_ACTION_GET_LEVEL1_RELATION = "apiGetLevel1Relation"
     public static let CS_API_ACTION_GET_LEVEL2_RELATION = "apiGetLevel2Relation"

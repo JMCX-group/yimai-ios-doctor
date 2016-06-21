@@ -43,7 +43,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
             DrawData(userData!)
         } else {
             Loading?.Show()
-            YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_MY_ACCOUNT_SETTING_CODE,
+            YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_MY_ACCOUNT_SETTING,
                                                 handler: YMCoreMemDataOnceHandler(handler: LoadData))
         }
     }

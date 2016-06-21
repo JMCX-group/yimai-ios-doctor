@@ -13,4 +13,9 @@ public class PagePersonalActions: PageJumpActions{
     public func QRButtonTouched(sender: UIGestureRecognizer) {
         
     }
+    
+    public func GoToPersonalDetail(_: UIGestureRecognizer) {
+        PagePersonalDetailViewController.DoctorId = YMVar.MyDoctorId
+        DoJump(YMCommonStrings.CS_PAGE_PERSONAL_DETAIL_NAME)
+    }
 }
