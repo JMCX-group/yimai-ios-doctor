@@ -46,19 +46,22 @@ public class PagePersonalDetailViewController: PageViewController {
             return true
         }
 
-        if(nil == userInfoMap) {
+        if(nil != userInfoMap) {
             let unpackedMap = userInfoMap as? [String: [String: AnyObject]]
             if(nil == unpackedMap) {
                 Actions?.GetUserInfo(PagePersonalDetailViewController.DoctorId)
                 return false
             }
             
-            userInfo = unpackedMap![PagePersonalDetailViewController.DoctorId]!
+            userInfo = unpackedMap![PagePersonalDetailViewController.DoctorId]
             
             if(nil == userInfo) {
                 Actions?.GetUserInfo(PagePersonalDetailViewController.DoctorId)
                 return false
             }
+        } else {
+            Actions?.GetUserInfo(PagePersonalDetailViewController.DoctorId)
+            return false
         }
         
         queue.addOperationWithBlock { () -> Void in

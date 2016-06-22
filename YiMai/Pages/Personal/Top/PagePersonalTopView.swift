@@ -37,9 +37,16 @@ public class PagePersonalTopView {
         YiMaiCode.text = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_CODE] as? String
         Username.text = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_NAME] as? String
         
-        let dept = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_DEPARTMENT] as! [String: String]
-        let jobTitle = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_JOB_TITLE] as! String
-        Desc.text = "\(dept["name"]!) | \(jobTitle)"
+        let dept = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_DEPARTMENT] as? [String: String]
+        let jobTitle = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_JOB_TITLE] as? String
+        
+        if(nil != dept && nil != jobTitle) {
+            Desc.text = "\(dept!["name"]!) | \(jobTitle!)"
+        } else if(nil == dept && nil != jobTitle) {
+            Desc.text = "\(jobTitle!)"
+        } else if(nil != dept && nil == jobTitle) {
+            Desc.text = "\(dept!["name"]!)"
+        }
     }
     
     private func ViewLayout() {

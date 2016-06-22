@@ -23,6 +23,7 @@ public class PagePersonalIDNumInputActions: PageJumpActions {
         
         let realData = data!
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: realData["data"]!)
+        YMVar.MyUserInfo = realData["data"]! as! [String : AnyObject]
         self.NavController?.popViewControllerAnimated(true)
     }
     

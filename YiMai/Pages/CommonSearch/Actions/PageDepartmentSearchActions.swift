@@ -16,7 +16,7 @@ public class PageDepartmentSearchActions: PageJumpActions {
     override func ExtInit() {
         targetView = self.Target! as? PageDepartmentSearchBodyView
         
-        departmentApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_HOSPITALS_BY_CITY_LIST,
+        departmentApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_DEPARTMENT_LIST,
                                        success: GetDepartmentList,
                                        error: GetDepartmentError)
     }

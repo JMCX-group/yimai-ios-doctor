@@ -71,24 +71,38 @@ public class PagePersonalDetailTopView:NSObject {
         
         HeadImage!.anchorToEdge(Edge.Top, padding: 165.LayoutVal(), width: HeadImage!.width, height: HeadImage!.height)
         
-        EditIcon = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByImageViewSenderSel, imageName: "PagePersonalEditIcon")
-        TopView.addSubview(EditIcon!)
-        EditIcon!.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 65.LayoutVal(), width: EditIcon!.width, height: EditIcon!.height)
+        let goBackPanel = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "GoBack:".Sel())
+        let backImage = YMLayout.GetSuitableImageView("TopViewButtonGoBack")
+        
+        TopView.addSubview(goBackPanel)
+        goBackPanel.backgroundColor = YMColors.None
+        goBackPanel.anchorInCorner(Corner.TopLeft, xPad: 20.LayoutVal(), yPad: 0, width: 65.LayoutVal(), height: 105.LayoutVal())
+        goBackPanel.addSubview(backImage)
+        backImage.anchorToEdge(Edge.Top, padding: 65.LayoutVal(), width: backImage.width, height: backImage.height)
+        
+        
+        if(PagePersonalDetailViewController.DoctorId == YMVar.MyDoctorId) {
+            EditIcon = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByImageViewSenderSel, imageName: "PagePersonalEditIcon")
+            TopView.addSubview(EditIcon!)
+            EditIcon!.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 65.LayoutVal(), width: EditIcon!.width, height: EditIcon!.height)
+            EditIcon!.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_DETAIL_EDIT_NAME
+        }
     }
     
     public func LoadData(data: [String:AnyObject]) {
         NameLabel.text = YMVar.MyUserInfo["name"] as? String
         
-        let dept = YMVar.MyUserInfo["department"] as? String
+        let dept = YMVar.MyUserInfo["department"] as? [String: AnyObject]
         let jobTitle = YMVar.MyUserInfo["job_title"] as? String
         if(nil == dept && nil == jobTitle) {
             TitleLabel.text = ""
         } else if(nil == dept && nil != jobTitle) {
             TitleLabel.text = jobTitle!
         } else if (nil != dept && nil == jobTitle) {
-            TitleLabel.text = dept!
+            TitleLabel.text = dept!["name"] as? String
         } else {
-            TitleLabel.text = "\(dept!) | \(jobTitle!)"
+            let deptName = dept!["name"]! as! String
+            TitleLabel.text = "\(deptName) | \(jobTitle!)"
         }
         
         YiMaiCodeLabel.text = YMVar.MyUserInfo["code"] as? String

@@ -27,8 +27,6 @@ public class PagePersonalDetailActions: PageJumpActions {
 
         if(nil == userMap) {
             userMap = [String: [String: AnyObject]]()
-            YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO_MAP, data: userMap!)
-            
             userMap![userId] = user
         } else {
             let user = userMap![userId]
@@ -37,6 +35,8 @@ public class PagePersonalDetailActions: PageJumpActions {
                 userMap![userId] = user
             }
         }
+        
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO_MAP, data: userMap!)
     }
     
     private func GetUserInfoError(error: NSError) {
@@ -53,5 +53,9 @@ public class PagePersonalDetailActions: PageJumpActions {
     
     public func GetUserInfo(doctorId: String) {
         GetDetailApi?.YMQueryUserInfoById(doctorId)
+    }
+    
+    public func GoBack(_: UIGestureRecognizer) {
+        self.NavController?.popViewControllerAnimated(true)
     }
 }

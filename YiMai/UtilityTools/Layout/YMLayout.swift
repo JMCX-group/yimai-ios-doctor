@@ -207,6 +207,43 @@ public class YMLayout {
         
         return view
     }
+    
+    public static func GetCommonLargeFullWidthTouchableView(
+        parentView: UIView,
+        useObject: AnyObject,
+        useMethod: Selector,
+        label: UILabel,
+        text: String,
+        userStringData: String = "",
+        fontSize: CGFloat = 28.LayoutVal(),
+        showArrow: Bool = true) -> YMTouchableView {
+            
+            let view = YMLayout.GetTouchableView(useObject: useObject, useMethod: useMethod, userStringData: userStringData)
+            let borderBottom = UIView()
+            
+            borderBottom.backgroundColor = YMColors.CommonBottomGray
+            
+            label.text = text
+            label.font = YMFonts.YMDefaultFont(fontSize)
+            label.textColor = YMColors.FontGray
+            label.sizeToFit()
+            
+            parentView.addSubview(view)
+            view.addSubview(label)
+            view.addSubview(borderBottom)
+            
+            view.frame = CGRect(x: 0,y: 0,width: YMSizes.PageWidth, height: YMSizes.CommonLargeTouchableViewHeight)
+            label.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 650.LayoutVal(), height: label.height)
+            borderBottom.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1.LayoutVal())
+            
+            if(showArrow) {
+                let arrow = YMLayout.GetSuitableImageView("CommonRightArrowIcon")
+                view.addSubview(arrow)
+                arrow.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: arrow.width, height: arrow.height)
+            }
+            
+            return view
+    }
 }
 
 

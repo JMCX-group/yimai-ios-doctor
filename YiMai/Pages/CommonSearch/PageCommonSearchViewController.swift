@@ -27,22 +27,31 @@ public class PageCommonSearchViewController: PageViewController {
     }
 
     private func LayoutBody() {
+        CommonSearch = PageCommonSearchBodyView(parentView: self.SelfView!,
+            navController: self.NavController!)
+        
+        HospitalSearch = PageHospitalSearchBodyView(parentView: self.SelfView!,
+            navController: self.NavController!)
+        
+        DepartmentSearch = PageDepartmentSearchBodyView(parentView: self.SelfView!,
+            navController: self.NavController!)
+        
+        CommonSearch?.BodyView.hidden = true
+        HospitalSearch?.BodyView.hidden = true
+        DepartmentSearch?.BodyView.hidden = true
+        
         switch PageCommonSearchViewController.SearchPageTypeName {
 
         case YMCommonSearchPageStrings.CS_COMMON_SEARCH_PAGE_TYPE:
-            CommonSearch = PageCommonSearchBodyView(parentView: self.SelfView!,
-                                                    navController: self.NavController!)
+            CommonSearch?.BodyView.hidden = false
         break
             
         case YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE:
-            HospitalSearch = PageHospitalSearchBodyView(parentView: self.SelfView!,
-                                                        navController: self.NavController!)
+            HospitalSearch?.BodyView.hidden = false
         break
 
         case YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE:
-            DepartmentSearch = PageDepartmentSearchBodyView(parentView: self.SelfView!,
-                                                          navController: self.NavController!)
-            
+            DepartmentSearch?.BodyView.hidden = false
         break
             
         default: break
@@ -50,24 +59,24 @@ public class PageCommonSearchViewController: PageViewController {
         }
     }
     
-    override func PageRefresh() {
-        if(!PageLayoutFlag) {
-            PageLayoutFlag=true
-            return
-        }
+    override func PagePreRefresh() {
+        if(!PageLayoutFlag) {return}
 
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: PageCommonSearchViewController.InitPageTitle, navController: self.NavController!)
 
         switch PageCommonSearchViewController.SearchPageTypeName {
             
         case YMCommonSearchPageStrings.CS_COMMON_SEARCH_PAGE_TYPE:
+            CommonSearch?.BodyView.hidden = false
             break
             
         case YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE:
+            HospitalSearch?.BodyView.hidden = false
             HospitalSearch?.ShowInitHospitals()
             break
             
         case YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE:
+            DepartmentSearch?.BodyView.hidden = false
             DepartmentSearch?.ShowDepartments()
             break
             
@@ -81,22 +90,12 @@ public class PageCommonSearchViewController: PageViewController {
         
         TopView?.TopViewPanel.removeFromSuperview()
         
-        switch PageCommonSearchViewController.SearchPageTypeName {
-            
-        case YMCommonSearchPageStrings.CS_COMMON_SEARCH_PAGE_TYPE:
-            break
-            
-        case YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE:
-            HospitalSearch?.ClearList()
-            break
-            
-        case YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE:
-            DepartmentSearch?.ClearList()
-            break
-            
-        default: break
-            
-        }
+        CommonSearch?.BodyView.hidden = true
+        HospitalSearch?.BodyView.hidden = true
+        DepartmentSearch?.BodyView.hidden = true
+        
+        HospitalSearch?.ClearList()
+        DepartmentSearch?.ClearList()
     }
 }
 

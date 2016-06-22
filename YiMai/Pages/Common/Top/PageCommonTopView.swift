@@ -57,11 +57,21 @@ public class PageCommonTopView : NSObject {
     
     private func SetGoBackButton(navController:UINavigationController) {
         CommonActions = YMCommonActions(navController: navController)
-        TopGoBackBtn = YMLayout.GetTouchableImageView(useObject: CommonActions!,
-                                                      useMethod: "GoBack:".Sel(),
-                                                      imageName: "TopViewButtonGoBack")
+        let backgroundPanel = YMLayout.GetTouchableView(useObject: CommonActions!, useMethod: "GoBack:".Sel())
+        backgroundPanel.backgroundColor = YMColors.None 
         
-        TopViewPanel.addSubview(TopGoBackBtn)
-        TopGoBackBtn.anchorInCorner(Corner.BottomLeft, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: TopGoBackBtn.width, height: TopGoBackBtn.height)
+        TopGoBackBtn = YMLayout.GetSuitableImageView("TopViewButtonGoBack")
+        
+        TopViewPanel.addSubview(backgroundPanel)
+        backgroundPanel.anchorInCorner(Corner.TopLeft, xPad: 12.LayoutVal(), yPad: 45.LayoutVal(), width: 60.LayoutVal(), height: 60.LayoutVal())
+        backgroundPanel.addSubview(TopGoBackBtn)
+        TopGoBackBtn.anchorToEdge(Edge.Bottom, padding: 0, width: TopGoBackBtn.width, height: TopGoBackBtn.height)
     }
 }
+
+
+
+
+
+
+

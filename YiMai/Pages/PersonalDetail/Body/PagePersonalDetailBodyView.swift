@@ -22,6 +22,9 @@ public class PagePersonalDetailBodyView: NSObject {
     private var TagExpandArrow: YMTouchableImageView? = nil
     private var TagCollapseArrow: YMTouchableImageView? = nil
     
+    private let IntroLabel = UILabel(frame: CGRect(x: 0,y: 0,width: 690.LayoutVal(), height: 0))
+    private let SchoolLabel = UILabel()
+
     init(parent: UIView, actions: PagePersonalDetailActions) {
         super.init()
         self.Parent = parent
@@ -35,14 +38,32 @@ public class PagePersonalDetailBodyView: NSObject {
         BodyView.fillSuperview()
         BodyView.contentInset = UIEdgeInsets(top: 512.LayoutVal(), left: 0, bottom: 0, right: 0)
         BodyView.backgroundColor = YMColors.BackgroundGray
-        
-
     }
     
     public func LoadData(data: [String: AnyObject]) {
+        print(data)
         let tags = data["tags"] as? String
         if(!YMValueValidator.IsEmptyString(tags)) {
             DrawTagPanel(tags!)
+        }
+        
+        var introPanelAlignTo: UIView? = nil
+
+        if(PagePersonalDetailViewController.DoctorId == YMVar.MyDoctorId) {
+            introPanelAlignTo = TagPanel
+        } else {
+//            introPanelAlignTo = CommonFriendPanel
+            introPanelAlignTo = TagPanel
+        }
+
+        let intro = data["personal_introduction"] as? String
+        if(!YMValueValidator.IsEmptyString(intro)) {
+            DrawDoctorIntroduction(intro!, alignView: introPanelAlignTo!)
+        }
+        
+        let school = data["college"] as? [String: AnyObject]
+        if(nil != school) {
+            DrawSchool(school!["name"]! as! String)
         }
     }
     
@@ -158,6 +179,56 @@ public class PagePersonalDetailBodyView: NSObject {
             }
         }
         return
+    }
+    
+    private func DrawDoctorIntroduction(info: String, alignView: UIView) {
+        BodyView.addSubview(IntroductionPanel)
+        IntroductionPanel.backgroundColor = YMColors.White
+        
+        let title = UILabel()
+        title.text = "医生简介"
+        title.textColor = YMColors.FontBlue
+        title.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        title.sizeToFit()
+        
+        IntroductionPanel.addSubview(title)
+        
+        IntroLabel.text = info
+        IntroLabel.textColor = YMColors.FontGray
+        IntroLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        IntroLabel.numberOfLines = 0
+        IntroLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        IntroLabel.preferredMaxLayoutWidth = 690.LayoutVal()
+        IntroLabel.sizeToFit()
+        
+        IntroductionPanel.addSubview(IntroLabel)
+        IntroductionPanel.align(Align.UnderMatchingLeft, relativeTo: alignView, padding: 1, width: YMSizes.PageWidth, height: IntroLabel.height + 90.LayoutVal())
+        
+        title.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 20.LayoutVal(), width: title.width, height: title.height)
+        IntroLabel.align(Align.UnderMatchingLeft, relativeTo: title, padding: 20.LayoutVal(), width: IntroLabel.width, height: IntroLabel.height)
+    }
+    
+    private func DrawSchool(school: String) {
+        BodyView.addSubview(SchoolPanel)
+        SchoolPanel.align(Align.UnderMatchingLeft, relativeTo: IntroductionPanel, padding: 1, width: YMSizes.PageWidth, height: 68.LayoutVal())
+        SchoolPanel.backgroundColor = YMColors.White
+        
+        let title = UILabel()
+        title.text = "毕业院校"
+        title.textColor = YMColors.FontBlue
+        title.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        title.sizeToFit()
+        
+        SchoolPanel.addSubview(title)
+        title.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: title.width, height: title.height)
+        
+        SchoolPanel.addSubview(SchoolLabel)
+        SchoolLabel.text = school
+        SchoolLabel.textColor = YMColors.FontGray
+        SchoolLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        SchoolLabel.sizeToFit()
+
+        SchoolLabel.align(Align.ToTheRightCentered, relativeTo: title, padding: 20.LayoutVal(), width: SchoolLabel.width, height: SchoolLabel.height)
     }
 }
 
