@@ -65,7 +65,7 @@ public class PageCommonTopView : NSObject {
         TopViewPanel.addSubview(backgroundPanel)
         backgroundPanel.anchorInCorner(Corner.TopLeft, xPad: 12.LayoutVal(), yPad: 45.LayoutVal(), width: 60.LayoutVal(), height: 60.LayoutVal())
         backgroundPanel.addSubview(TopGoBackBtn)
-        TopGoBackBtn.anchorToEdge(Edge.Bottom, padding: 0, width: TopGoBackBtn.width, height: TopGoBackBtn.height)
+        TopGoBackBtn.anchorToEdge(Edge.Bottom, padding: 4.LayoutVal(), width: TopGoBackBtn.width, height: TopGoBackBtn.height)
     }
 }
 

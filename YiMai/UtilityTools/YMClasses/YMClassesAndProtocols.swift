@@ -41,7 +41,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_PERSONAL_DETAIL_NAME: true,
         YMCommonStrings.CS_PAGE_PERSONAL_DETAIL_EDIT_NAME: true,
         YMCommonStrings.CS_PAGE_PERSONAL_INTRO_EDIT_NAME: true,
-        YMCommonStrings.CS_PAGE_PERSONAL_NAME_EDIT_NAME: true
+        YMCommonStrings.CS_PAGE_PERSONAL_NAME_EDIT_NAME: true,
+        YMCommonStrings.CS_PAGE_APPOINTMENT_RECORD_NAME: true
     ]
 }
 

@@ -88,7 +88,9 @@ public class PageIndexBodyView {
                                                             userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
         
         AdmissionsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
-        RecordsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
+        RecordsButton = YMLayout.GetTouchableView(useObject: Actions!,
+            useMethod: "PageJumpToByViewSender:".Sel(),
+            userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_RECORD_NAME)
         
         OperatorPanel.addSubview(Face2FaceButton!)
         OperatorPanel.addSubview(DoctorAppointmentButton!)

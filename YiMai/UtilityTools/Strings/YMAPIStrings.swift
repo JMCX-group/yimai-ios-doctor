@@ -27,7 +27,8 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_GET_NEW_FRIENDS = "apiGetNewFriends"
     
     public static let CS_API_ACTION_CREATE_NEW_APPOINTMENT = "apiCreateNewAppointment"
-    
+    public static let CS_API_ACTION_GET_APPOINTMENT_LIST = "apiGetAppointmentList"
+
     public static let CS_API_ACTION_GET_ADMISSIONS_LIST = "apiGetAdmissionsList"
     
     public static let CS_API_ACTION_GET_HOSPITALS_BY_CITY_LIST = "apiGetHospitalsByCity"

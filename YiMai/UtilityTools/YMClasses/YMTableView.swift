@@ -136,7 +136,7 @@ public class YMTableView: NSObject {
 
         return self
     }
-    
+
     public func CellExpandStateToggle(cell: YMTableViewCell) {
         objc_sync_enter(self.ExpandAnimateLock)
 
@@ -157,7 +157,7 @@ public class YMTableView: NSObject {
             UIView.commitAnimations()
         }
     }
-    
+
     public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         OnAnimate = false
         if(nil != AnimatedCell) {

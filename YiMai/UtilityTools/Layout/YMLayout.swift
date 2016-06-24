@@ -161,14 +161,16 @@ public class YMLayout {
         }
     }
     
-    public static func SetHScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView) {
-        scrollView.contentSize = CGSizeMake(lastSubView.width + lastSubView.frame.origin.x,
+    public static func SetHScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView?) {
+        if(nil == lastSubView) { return }
+        scrollView.contentSize = CGSizeMake(lastSubView!.width + lastSubView!.frame.origin.x,
                                             scrollView.height)
     }
     
-    public static func SetVScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView) {
+    public static func SetVScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView?) {
+        if(nil == lastSubView) { return }
         scrollView.contentSize = CGSizeMake(scrollView.width,
-                                            lastSubView.height + lastSubView.frame.origin.y)
+                                            lastSubView!.height + lastSubView!.frame.origin.y)
     }
 
     public static func GetCommonFullWidthTouchableView(
