@@ -17,14 +17,15 @@ class PageLoginViewController: PageViewController {
     }
     
     override func PageLayout(){
-        if(PageLayoutFlag) {return}
-        PageLayoutFlag=true
+        super.PageLayout()
 
         BodyView = PageLoginBodyView(parentView: self.view, navController: self.navigationController!)
         TopView = PageCommonTopView(parentView: self.view, titleString: YMLoginStrings.CS_LOGIN_PAGE_TITLE)
     }
     
     override func PageDisapeared() {
-        BodyView?.EnableLoginControls()
+        YMLayout.ClearView(view: self.SelfView!)
+        BodyView = PageLoginBodyView(parentView: self.view, navController: self.navigationController!)
+        TopView = PageCommonTopView(parentView: self.view, titleString: YMLoginStrings.CS_LOGIN_PAGE_TITLE)
     }
 }

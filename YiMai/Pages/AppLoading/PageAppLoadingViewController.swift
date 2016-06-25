@@ -11,6 +11,8 @@ import Graph
 
 public class PageAppLoadingViewController: PageViewController {
     private var Actions: PageAppLoadingActions? = nil
+    public var LoginInfo: Entity? = nil
+    public var LoadingIndc: YMPageLoadingView? = nil
     
     override func PageLayout() {
         super.PageLayout()
@@ -19,7 +21,9 @@ public class PageAppLoadingViewController: PageViewController {
         self.view.addSubview(loadingImage)
         loadingImage.anchorInCenter(width: loadingImage.width, height: loadingImage.height)
         loadingImage.alpha = 0.0
-
+        
+        LoadingIndc = YMPageLoadingView(parentView: self.SelfView!)
+        LoginInfo = YMLocalData.GetLoginInfo()
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
         loadingImage.opaque = true
@@ -28,16 +32,17 @@ public class PageAppLoadingViewController: PageViewController {
         UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
         UIView.commitAnimations()
         UIView.setAnimationDidStopSelector("animationDidStop:".Sel())
+        
+
     }
 
     override public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         YMDelay(1.0) { () -> () in
-            let e = YMLocalData.Engine.searchForEntity(types: ["Person"])
-            
-            for v in e {
-                print(v)
+            if(nil == self.LoginInfo) {
+                self.Actions?.JumpToLogin()
+            } else {
+                self.Actions?.DoLogin()
             }
-            self.Actions?.JumpToLogin()
         }
     }
 }

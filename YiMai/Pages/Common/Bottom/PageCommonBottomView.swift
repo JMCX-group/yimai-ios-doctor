@@ -10,7 +10,7 @@ import Foundation
 import Neon
 
 public class PageCommonBottomView : NSObject {
-    private let BottomViewPanel : UIView = UIView(frame: YMSizes.NormalBottomSize)
+    public let BottomViewPanel : UIView = UIView(frame: YMSizes.NormalBottomSize)
     
     private var ParentView: UIView? = nil
     

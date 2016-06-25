@@ -10,5 +10,4 @@ import Foundation
 
 public class YMLocalDataStrings {
     public static let EN_LOGIN_INFO = "loginInfo"
-//    public static let EN_LOGIN_INFO = "loginInfo"
 }

@@ -43,12 +43,18 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_PERSONAL_INTRO_EDIT_NAME: true,
         YMCommonStrings.CS_PAGE_PERSONAL_NAME_EDIT_NAME: true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_RECORD_NAME: true,
-        YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME: true
+        YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME: true,
+        YMCommonStrings.CS_PAGE_FORGET_PASSWORD_NAME: true,
+        YMCommonStrings.CS_PAGE_ABOUT_YIMAI_NAME: true,
+        YMCommonStrings.CS_PAGE_YIMAI_INTRO_NAME: true,
+        YMCommonStrings.CS_PAGE_YIMAI_CONTACT_NAME: true
     ]
 }
 
 public class NoBackByGesturePage {
     public static let PageMap: [String:Bool] = [
+        YMCommonStrings.CS_PAGE_LOGIN_NAME: true,
+        YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME: true,
         YMCommonStrings.CS_PAGE_INDEX_NAME:true,
         YMCommonStrings.CS_PAGE_PERSONAL_NAME:true,
         YMCommonStrings.CS_PAGE_YIMAI_NAME:true

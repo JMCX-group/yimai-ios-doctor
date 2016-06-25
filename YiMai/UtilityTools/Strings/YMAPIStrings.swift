@@ -14,6 +14,12 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_GET_VERIFY_CODE = "apiGetVerifyCode"
     public static let CS_API_ACTION_DO_REGISTER = "apiDoRegister"
     
+    public static let CS_API_ACTION_GET_FORGET_VERIFY_CODE = "apiGetForgetVerifyCode"
+    public static let CS_API_ACTION_GET_PASSWORD_BACK = "apiGetPasswordBack"
+
+    
+    public static let CS_API_ACTION_AUTO_LOGIN = "apiAutoLogin"
+    
     public static let CS_API_ACTION_CHANGE_PASSWORD = "apiChangePassword"
     public static let CS_API_ACTION_SET_ID_NUM = "apiSetIDNum"
     

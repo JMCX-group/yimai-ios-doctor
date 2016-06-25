@@ -25,13 +25,23 @@ public class PageIndexViewController: PageViewController {
     }
 
     override func PageLayout(){
-        if(PageLayoutFlag) {return}
-        PageLayoutFlag=true
+        super.PageLayout()
 
         Actions = PageIndexActions(navController: self.navigationController!)
 
         BodyView = PageIndexBodyView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
         IndexTopView = PageIndexTopView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
+        BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
+    }
+    
+    override func PagePreRefresh() {
+        BottomView!.BottomViewPanel.removeFromSuperview()
+        
+        PageCommonBottomView.BottomButtonImage = [
+            YMCommonStrings.CS_PAGE_INDEX_NAME:"IndexButtonHomeBlue",
+            YMCommonStrings.CS_PAGE_YIMAI_NAME:"IndexButtonYiMaiGray",
+            YMCommonStrings.CS_PAGE_PERSONAL_NAME:"IndexButtonPersonalGray"
+        ]
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
     }
 }

@@ -31,7 +31,7 @@ public class PagePersonalSettingBodyView: PageBodyView {
         
         let aboutYiMaiButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
-            label: UILabel(), text: "关于医脉")
+            label: UILabel(), text: "关于医脉", userStringData: YMCommonStrings.CS_PAGE_ABOUT_YIMAI_NAME)
         
         accountSettingButton.anchorToEdge(Edge.Top, padding: 70.LayoutVal(),
                                           width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)

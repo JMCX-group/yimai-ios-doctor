@@ -10,5 +10,13 @@ import Foundation
 import UIKit
 
 public class PagePersonalAccountSettingActions: PageJumpActions {
+    override func ExtInit() {
+        super.ExtInit()
+    }
     
+    public func Logout(_: UIGestureRecognizer) {
+        YMCoreDataEngine.Clear()
+        YMLocalData.ClearLogin()
+        self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
+    }
 }

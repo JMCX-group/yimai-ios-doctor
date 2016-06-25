@@ -155,7 +155,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
             label: UILabel(), text: "更改密码", userStringData: YMCommonStrings.CS_PAGE_PERSONAL_PASSWORD_RESET_NAME)
         
         let logoutButton = YMLayout.GetCommonFullWidthTouchableView(
-            BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+            BodyView, useObject: SettingActions!, useMethod: "Logout:".Sel(),
             label: UILabel(), text: "退出登录", userStringData: "", fontSize: 28.LayoutVal(), showArrow: false)
 
         

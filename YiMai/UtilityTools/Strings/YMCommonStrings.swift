@@ -21,7 +21,7 @@ public class YMCommonStrings {
     
     public static let CS_PAGE_LOGIN_NAME = "PageLogin"
     public static let CS_PAGE_REGISTER_NAME = "PageRegister"
-    public static let CS_PAGE_FORGOT_NAME = "PageForgot"
+    public static let CS_PAGE_FORGET_PASSWORD_NAME = "PageForgetPassword"
     
     public static let CS_PAGE_REGISTER_PERSONAL_INFO_NAME = "PageRegisterPersonalInfo"
     public static let CS_PAGE_REGISTER_SELECT_HOSPITAL_NAME = "PageRegisterSelectHospital"
@@ -63,6 +63,9 @@ public class YMCommonStrings {
     public static let CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME = "PageAppointmentSelectDoctor"
     public static let CS_PAGE_APPOINTMENT_SELECT_TIME_NAME = "PageAppointmentSelectTime"
     
+    public static let CS_PAGE_ABOUT_YIMAI_NAME = "PageAboutYiMai"
+    public static let CS_PAGE_YIMAI_INTRO_NAME = "PageYiMaiIntro"
+    public static let CS_PAGE_YIMAI_CONTACT_NAME = "PageYiMaiContact"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

@@ -111,6 +111,8 @@ public class PageLoginActions : PageJumpActions {
 
         let handler = YMCoreMemDataOnceHandler(handler: LoginSuccess)
         YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_MY_ACCOUNT_SETTING, handler: handler)
+        
+        YMLocalData.SaveLogin(userInfo!["phone"]!, pwd: userInfo!["password"]!)
     }
     
     private func LoginSuccess(_: AnyObject?, queue: NSOperationQueue) -> Bool {

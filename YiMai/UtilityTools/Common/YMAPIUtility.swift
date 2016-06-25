@@ -24,6 +24,7 @@ public class YMAPIInterfaceURL {
     static let GetSearchResult = YMAPIInterfaceURL.ApiBaseUrl + "/user/search"
     static let QueryUserInfo = YMAPIInterfaceURL.ApiBaseUrl + "/user/me"
     static let QueryUserInfoById = YMAPIInterfaceURL.ApiBaseUrl + "/user"
+    static let GetUserPassowrdBack = YMAPIInterfaceURL.ApiBaseUrl + "/user/reset-pwd"
 
     static let ChangeUserInfo = YMAPIInterfaceURL.ApiBaseUrl + "/user"
     
@@ -236,6 +237,10 @@ public class YMAPIUtility {
     
     public func RegisterUser(param: AnyObject, progressHandler: NetworkProgressHandler?) {
         DoPostRequest(YMAPIInterfaceURL.RegisterURL, param: param, progressHandler: progressHandler)
+    }
+    
+    public func YMGetUserPasswordBack(param: AnyObject) {
+        DoPostRequest(YMAPIInterfaceURL.GetUserPassowrdBack, param: param, progressHandler: nil)
     }
     
     public func YMGetVerifyCode(param: AnyObject, progressHandler: NetworkProgressHandler? = nil) {

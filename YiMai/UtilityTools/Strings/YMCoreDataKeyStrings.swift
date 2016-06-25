@@ -14,6 +14,7 @@ public class YMCoreDataKeyStrings {
     public static let CS_USER_TOKEN = "CoreDataUserToken"
     public static let CS_USER_ORG_PASSWORD = "CoreDataUserOrgPassword"
     public static let CS_REG_VERIFY_CODE = "CoreDataRegisterVerifyCode"
+    public static let CS_FORGET_VERIFY_CODE = "CoreDataForgetVerifyCode"
     public static let CS_USER_INFO = "CoreDataUserInfo"
     public static let CS_SYSTEM_INFO = "CoreDataSystemInfo"
     public static let CS_USER_RELATIONS = "CoreDataUserRelations"
@@ -69,6 +70,8 @@ public class YMCoreDataKeyStrings {
     public static let KEY_DOCTOR = "doctor"
     public static let KEY_STATUS = "status"
     public static let KEY_WORD = "word"
+    public static let KEY_LOGIN_NAME = "login_name"
+    public static let KEY_PASSWORD = "password"
 }
 
 

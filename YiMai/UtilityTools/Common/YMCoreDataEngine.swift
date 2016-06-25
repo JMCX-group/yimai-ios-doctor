@@ -31,11 +31,14 @@ public class YMCoreDataEngine {
     private static var HandlerQueue = NSOperationQueue()
     private static var OnecHandlerQueue = NSOperationQueue()
     private static var OnecHandlerClearQueue = NSOperationQueue()
-    
+
     private static let OneceHandlerLock = NSObject()
     
     private static var HandlerProcessIntervalInUS: UInt32 = 100000
     private static var OnceHandlerMapClearIntervalInUS: UInt32 = 100000
+    
+    public static let OnceHandlerClearLock = NSObject()
+    public static let HandlerClearLock = NSObject()
     
     public static func GetData(key: String) -> AnyObject? {
         return YMCoreData.CoreMemData[key]
@@ -66,6 +69,8 @@ public class YMCoreDataEngine {
     
     private static func DataHandlerDispatcher() {
         while (true) {
+            objc_sync_enter(YMCoreDataEngine.HandlerClearLock)
+            
             usleep(YMCoreDataEngine.HandlerProcessIntervalInUS)
             for (key, handlers) in YMCoreData.CoreMemDataHandlerMap {
                 let data = YMCoreData.CoreMemData[key]
@@ -73,13 +78,16 @@ public class YMCoreDataEngine {
                     handler(data, YMCoreDataEngine.MainQueue)
                 }
             }
+            
+            objc_sync_exit(YMCoreDataEngine.HandlerClearLock)
         }
     }
     
     private static func DataOnceHandlerMapClear() {
         while (true) {
-            usleep(YMCoreDataEngine.OnceHandlerMapClearIntervalInUS)
+            objc_sync_enter(YMCoreDataEngine.OnceHandlerClearLock)
 
+            usleep(YMCoreDataEngine.OnceHandlerMapClearIntervalInUS)
             objc_sync_enter(YMCoreDataEngine.OneceHandlerLock)
 
             for (key, handlers) in YMCoreData.CoreMemDataHandlerOnceMap {
@@ -97,12 +105,18 @@ public class YMCoreDataEngine {
                     }
                 }
             }
+            
             objc_sync_exit(YMCoreDataEngine.OneceHandlerLock)
+            
+            objc_sync_exit(YMCoreDataEngine.OnceHandlerClearLock)
+
         }
     }
     
     private static func DataOnceHandlerDispatcher() {
         while (true) {
+            objc_sync_enter(YMCoreDataEngine.OnceHandlerClearLock)
+
             usleep(YMCoreDataEngine.HandlerProcessIntervalInUS)
             for (key, handlers) in YMCoreData.CoreMemDataHandlerOnceMap {
                 let data = YMCoreData.CoreMemData[key]
@@ -114,6 +128,8 @@ public class YMCoreDataEngine {
                 }
                 objc_sync_exit(YMCoreDataEngine.OneceHandlerLock)
             }
+            
+            objc_sync_exit(YMCoreDataEngine.OnceHandlerClearLock)
         }
     }
     
@@ -126,6 +142,28 @@ public class YMCoreDataEngine {
         
         YMCoreDataEngine.EngineInitialized = true
     }
+    
+    public static func Clear() {
+        objc_sync_enter(YMCoreDataEngine.OnceHandlerClearLock)
+        YMCoreData.CoreMemDataHandlerMap.removeAll()
+        objc_sync_exit(YMCoreDataEngine.OnceHandlerClearLock)
+        
+        objc_sync_enter(YMCoreDataEngine.OnceHandlerClearLock)
+        YMCoreData.CoreMemDataHandlerOnceMap.removeAll()
+        objc_sync_exit(YMCoreDataEngine.OnceHandlerClearLock)
+        
+        YMCoreData.CoreMemData.removeAll()
+    }
 }
+
+
+
+
+
+
+
+
+
+
 
 
