@@ -113,7 +113,8 @@ public class PageAppointmentBodyView: PageBodyView {
                                                           useMethod: PageJumpActions.PageJumpToByViewSenderSel,
                                                           userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME)
         BodyView.addSubview(PatientConditionPanel!)
-        PatientConditionPanel?.align(Align.UnderMatchingLeft, relativeTo: PatientBasicInfoPanel!, padding: 1.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
+        PatientConditionPanel?.align(Align.UnderMatchingLeft, relativeTo: PatientBasicInfoPanel!,
+                                     padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 80.LayoutVal())
         
         DrawPatientTextLabel("现病史", panel: PatientConditionPanel!, textColor: YMColors.FontGray)
     }
@@ -200,7 +201,7 @@ public class PageAppointmentBodyView: PageBodyView {
         let jobTitle = dataObj[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as! String
         
         let nameLabel = UILabel()
-        let divider = UIView(frame: CGRect(x: 0,y: 0,width: 1,height: 20.LayoutVal()))
+        let divider = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.OnPx,height: 20.LayoutVal()))
         let jobTitleLabel = UILabel()
         let deptLabel = UILabel()
         let hosLabel = UILabel()
@@ -245,7 +246,7 @@ public class PageAppointmentBodyView: PageBodyView {
         
         userHeadBackground.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: userHeadBackground.width, height: userHeadBackground.height)
         nameLabel.anchorInCorner(Corner.TopLeft, xPad: 180.LayoutVal(), yPad: 25.LayoutVal(), width: nameLabel.width, height: nameLabel.height)
-        divider.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 15.LayoutVal(), width: 1, height: divider.height)
+        divider.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 15.LayoutVal(), width: YMSizes.OnPx, height: divider.height)
         jobTitleLabel.align(Align.ToTheRightCentered, relativeTo: divider, padding: 15.LayoutVal(), width: jobTitleLabel.width, height: jobTitleLabel.height)
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)

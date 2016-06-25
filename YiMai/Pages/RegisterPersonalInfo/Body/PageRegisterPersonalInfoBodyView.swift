@@ -103,8 +103,8 @@ public class PageRegisterPersonalInfoBodyView: NSObject {
         
         let inputHeight = 80.LayoutVal()
         UserRealnameInput?.anchorToEdge(Edge.Top, padding: 70.LayoutVal(), width: YMSizes.PageWidth, height: inputHeight)
-        HospitalInput?.align(Align.UnderMatchingLeft, relativeTo: UserRealnameInput!, padding: 1, width: YMSizes.PageWidth, height: inputHeight)
-        HospitalDepartmentInput?.align(Align.UnderMatchingLeft, relativeTo: HospitalInput!, padding: 1, width: YMSizes.PageWidth, height: inputHeight)
+        HospitalInput?.align(Align.UnderMatchingLeft, relativeTo: UserRealnameInput!, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: inputHeight)
+        HospitalDepartmentInput?.align(Align.UnderMatchingLeft, relativeTo: HospitalInput!, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: inputHeight)
         
         DrawTouchableView(HospitalInput!, label: HospitalLabel, placeholder: "医院")
         DrawTouchableView(HospitalDepartmentInput!, label: DepartmentLabel, placeholder: "科室")

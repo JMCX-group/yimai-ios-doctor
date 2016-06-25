@@ -110,10 +110,10 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         TabPanel.addSubview(divider2)
         
         divider1.align(Align.ToTheRightCentered, relativeTo: WaitReplyTabButton!,
-            padding: 0, width: 1.LayoutVal(), height: 30.LayoutVal())
+            padding: 0, width: YMSizes.OnPx, height: 30.LayoutVal())
         
         divider2.align(Align.ToTheRightCentered, relativeTo: WaitCompleteTabButton!,
-            padding: 0, width: 1.LayoutVal(), height: 30.LayoutVal())
+            padding: 0, width: YMSizes.OnPx, height: 30.LayoutVal())
         
         DrawTabButton(WaitReplyTabButton!, label: WaitReplyTabTitle, title: "待回复")
         DrawTabButton(WaitCompleteTabButton!, label: WaitCompleteTabTitle, title: "待完成")
@@ -252,7 +252,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         borderBottom.backgroundColor = YMColors.DividerLineGray
         
         cell.addSubview(borderBottom)
-        borderBottom.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 1.LayoutVal())
+        borderBottom.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         
         let headImage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
         let name = UILabel()
@@ -303,7 +303,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         type.textAlignment = NSTextAlignment.Center
         type.layer.cornerRadius = 10.LayoutVal()
         type.layer.masksToBounds = true
-        type.layer.borderWidth = 1.LayoutVal()
+        type.layer.borderWidth = YMSizes.OnPx
         type.layer.borderColor = YMColors.FontBlue.CGColor
         
         cell.addSubview(name)
@@ -330,7 +330,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         
         divider.align(Align.ToTheRightCentered,
                       relativeTo: name, padding: 20.LayoutVal(),
-                      width: 1.LayoutVal(), height: 20.LayoutVal())
+                      width: YMSizes.OnPx, height: 20.LayoutVal())
         
         basicInfo.align(Align.ToTheRightCentered,
                         relativeTo: divider, padding: 20.LayoutVal(),

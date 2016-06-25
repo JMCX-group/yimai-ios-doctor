@@ -96,7 +96,7 @@ public class PageHospitalSearchBodyView: PageBodyView {
         cellInner.addSubview(bottomLine)
         
         hospitalLabel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 700.LayoutVal(), height: hospitalLabel.height)
-        bottomLine.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1.LayoutVal())
+        bottomLine.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: YMSizes.OnPx)
         
         cell.addSubview(cellInner)
     }

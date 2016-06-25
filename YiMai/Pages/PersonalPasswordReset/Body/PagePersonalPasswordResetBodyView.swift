@@ -54,9 +54,9 @@ public class PagePersonalPasswordResetBodyView: PageBodyView {
         let inputHeight = 80.LayoutVal()
         OrgPwdInput?.anchorToEdge(Edge.Top, padding: 70.LayoutVal(), width: YMSizes.PageWidth, height: inputHeight)
         NewPwdInput?.align(Align.UnderMatchingLeft, relativeTo: OrgPwdInput!,
-                           padding: 1, width: YMSizes.PageWidth, height: inputHeight)
+                           padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: inputHeight)
         RepeatPwdInput?.align(Align.UnderMatchingLeft, relativeTo: NewPwdInput!,
-                           padding: 1, width: YMSizes.PageWidth, height: inputHeight)
+                           padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: inputHeight)
         
         SubmitButton = YMButton()
         SubmitButton?.setTitle("提交", forState: UIControlState.Normal)

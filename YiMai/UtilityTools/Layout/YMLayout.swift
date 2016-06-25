@@ -161,16 +161,22 @@ public class YMLayout {
         }
     }
     
-    public static func SetHScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView?) {
+    public static func SetViewHeightByLastSubview(view: UIView, lastSubView: UIView, bottomPadding: CGFloat = 0) {
+        let viewPoint = view.frame.origin
+        view.frame = CGRectMake(viewPoint.x, viewPoint.y, view.width,
+                                lastSubView.height + lastSubView.frame.origin.y + bottomPadding)
+    }
+    
+    public static func SetHScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView?, padding: CGFloat = 0) {
         if(nil == lastSubView) { return }
-        scrollView.contentSize = CGSizeMake(lastSubView!.width + lastSubView!.frame.origin.x,
+        scrollView.contentSize = CGSizeMake(lastSubView!.width + lastSubView!.frame.origin.x + padding,
                                             scrollView.height)
     }
     
-    public static func SetVScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView?) {
+    public static func SetVScrollViewContentSize(scrollView: UIScrollView, lastSubView: UIView?, padding: CGFloat = 0) {
         if(nil == lastSubView) { return }
         scrollView.contentSize = CGSizeMake(scrollView.width,
-                                            lastSubView!.height + lastSubView!.frame.origin.y)
+                                            lastSubView!.height + lastSubView!.frame.origin.y + padding)
     }
 
     public static func GetCommonFullWidthTouchableView(
@@ -199,7 +205,7 @@ public class YMLayout {
         
         view.frame = CGRect(x: 0,y: 0,width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
         label.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 650.LayoutVal(), height: label.height)
-        borderBottom.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1.LayoutVal())
+        borderBottom.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: YMSizes.OnPx)
         
         if(showArrow) {
             let arrow = YMLayout.GetSuitableImageView("CommonRightArrowIcon")
@@ -236,7 +242,7 @@ public class YMLayout {
             
             view.frame = CGRect(x: 0,y: 0,width: YMSizes.PageWidth, height: YMSizes.CommonLargeTouchableViewHeight)
             label.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 650.LayoutVal(), height: label.height)
-            borderBottom.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1.LayoutVal())
+            borderBottom.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: YMSizes.OnPx)
             
             if(showArrow) {
                 let arrow = YMLayout.GetSuitableImageView("CommonRightArrowIcon")

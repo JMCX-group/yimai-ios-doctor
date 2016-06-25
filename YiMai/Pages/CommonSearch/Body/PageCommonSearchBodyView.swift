@@ -142,7 +142,8 @@ public class PageCommonSearchBodyView: PageBodyView {
             }
             
             data["data"] = v
-            data["idx"] = "index: \(i++)"
+            data["idx"] = "index: \(i)"
+            i = i + 1
 
             ResultList?.AppendCell(data)
         }

@@ -34,6 +34,8 @@ public class YMSizes {
     
     public static let CommonTouchableViewHeight = 81.LayoutVal()
     public static let CommonLargeTouchableViewHeight = 141.LayoutVal()
+    
+    public static let OnPx = 1 / YMSizes.MainScreen.scale
 
 
     public static let NormalTopSize : CGRect = CGRect(x: 0, y: 0, width: YMSizes.PageWidth, height: YMSizes.PageTopHeight)

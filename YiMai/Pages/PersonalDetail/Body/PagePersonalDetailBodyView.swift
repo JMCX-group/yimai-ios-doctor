@@ -202,7 +202,7 @@ public class PagePersonalDetailBodyView: NSObject {
         IntroLabel.sizeToFit()
         
         IntroductionPanel.addSubview(IntroLabel)
-        IntroductionPanel.align(Align.UnderMatchingLeft, relativeTo: alignView, padding: 1, width: YMSizes.PageWidth, height: IntroLabel.height + 90.LayoutVal())
+        IntroductionPanel.align(Align.UnderMatchingLeft, relativeTo: alignView, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: IntroLabel.height + 90.LayoutVal())
         
         title.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 20.LayoutVal(), width: title.width, height: title.height)
         IntroLabel.align(Align.UnderMatchingLeft, relativeTo: title, padding: 20.LayoutVal(), width: IntroLabel.width, height: IntroLabel.height)
@@ -210,7 +210,7 @@ public class PagePersonalDetailBodyView: NSObject {
     
     private func DrawSchool(school: String) {
         BodyView.addSubview(SchoolPanel)
-        SchoolPanel.align(Align.UnderMatchingLeft, relativeTo: IntroductionPanel, padding: 1, width: YMSizes.PageWidth, height: 68.LayoutVal())
+        SchoolPanel.align(Align.UnderMatchingLeft, relativeTo: IntroductionPanel, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 68.LayoutVal())
         SchoolPanel.backgroundColor = YMColors.White
         
         let title = UILabel()

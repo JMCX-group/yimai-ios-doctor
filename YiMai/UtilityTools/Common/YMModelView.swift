@@ -59,6 +59,7 @@ public class YMPageLoadingView: YMPageLoading {
 
         self.MaskBackground.fillSuperview()
         self.LoadingView.anchorInCenter(width: self.LoadingView.width, height: self.LoadingView.height)
+        MaskBackground.layer.zPosition = 10.0
     }
 }
 

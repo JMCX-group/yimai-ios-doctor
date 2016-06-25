@@ -165,7 +165,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         newFriendsButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 80.LayoutVal())
         
         icon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: icon.width, height: icon.height)
-        dividerLine.anchorToEdge(Edge.Left, padding: 102.LayoutVal(), width: 1, height: 30.LayoutVal())
+        dividerLine.anchorToEdge(Edge.Left, padding: 102.LayoutVal(), width: YMSizes.OnPx, height: 30.LayoutVal())
         buttonText.anchorToEdge(Edge.Left, padding: 124.LayoutVal(), width: buttonText.width, height: buttonText.height)
         notifyPoint.anchorToEdge(Edge.Left, padding: 225.LayoutVal(), width: notifyPoint.width, height: notifyPoint.height)
     }
@@ -179,7 +179,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         let userId = data[YMYiMaiStrings.CS_DATA_KEY_USER_ID] as! String
         
         let nameLabel = UILabel()
-        let divider = UIView(frame: CGRect(x: 0,y: 0,width: 1,height: 20.LayoutVal()))
+        let divider = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.OnPx,height: 20.LayoutVal()))
         let jobTitleLabel = UILabel()
         let deptLabel = UILabel()
         let hosLabel = UILabel()
@@ -222,12 +222,12 @@ public class PageYiMaiR1BodyView: PageBodyView {
         if(nil == prevCell) {
             cell.anchorToEdge(Edge.Top, padding: 50.LayoutVal(), width: YMSizes.PageWidth, height: 151.LayoutVal())
         } else {
-            cell.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: prevCell!, padding: 1, height: 151.LayoutVal())
+            cell.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: prevCell!, padding: YMSizes.OnPx, height: 151.LayoutVal())
         }
         
         userHeadBackground.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: userHeadBackground.width, height: userHeadBackground.height)
         nameLabel.anchorInCorner(Corner.TopLeft, xPad: 180.LayoutVal(), yPad: 25.LayoutVal(), width: nameLabel.width, height: nameLabel.height)
-        divider.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 15.LayoutVal(), width: 1, height: divider.height)
+        divider.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 15.LayoutVal(), width: YMSizes.OnPx, height: divider.height)
         jobTitleLabel.align(Align.ToTheRightCentered, relativeTo: divider, padding: 15.LayoutVal(), width: jobTitleLabel.width, height: jobTitleLabel.height)
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)

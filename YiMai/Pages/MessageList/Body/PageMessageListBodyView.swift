@@ -50,7 +50,7 @@ public class PageMessageListBodyView: PageBodyView {
         messagePanel.backgroundColor = YMColors.White
         
         bottomLine.backgroundColor = YMColors.DividerLineGray
-        bottomLine.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 1.LayoutVal())
+        bottomLine.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         
         panelIcon.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 50.LayoutVal(), width: panelIcon.width, height: panelIcon.height)
         

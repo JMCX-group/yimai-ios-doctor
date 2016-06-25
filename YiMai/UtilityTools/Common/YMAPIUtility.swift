@@ -13,8 +13,8 @@ public typealias YMAPIJsonCallback = ((NSDictionary?) -> Void)
 public typealias YMAPIImageCallback = ((UIImage?) -> Void)
 public typealias YMAPIErrorCallback = ((NSError) -> Void)
 
-class YMAPIInterfaceURL {
-    static let ApiBaseUrl = "http://101.201.40.220/api"
+public class YMAPIInterfaceURL {
+    public static let ApiBaseUrl = "http://101.201.40.220/api"
 
     static let APPInit = YMAPIInterfaceURL.ApiBaseUrl + "/init"
 

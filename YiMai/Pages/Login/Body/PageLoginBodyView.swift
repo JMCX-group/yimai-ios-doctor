@@ -84,7 +84,7 @@ public class PageLoginBodyView: NSObject {
         PasswordInput?.secureTextEntry = true
         
         UsernameInput?.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: BodyTopPadding, otherSize: InputHeight)
-        PasswordInput?.align(Align.UnderMatchingLeft, relativeTo: UsernameInput!, padding: 1, width: YMSizes.PageWidth, height: InputHeight)
+        PasswordInput?.align(Align.UnderMatchingLeft, relativeTo: UsernameInput!, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: InputHeight)
 
         UsernameInput?.keyboardType = UIKeyboardType.NumberPad
         

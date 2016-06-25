@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Graph
 
 public class PageAppLoadingViewController: PageViewController {
     private var Actions: PageAppLoadingActions? = nil
@@ -31,6 +32,11 @@ public class PageAppLoadingViewController: PageViewController {
 
     override public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         YMDelay(1.0) { () -> () in
+            let e = YMLocalData.Engine.searchForEntity(types: ["Person"])
+            
+            for v in e {
+                print(v)
+            }
             self.Actions?.JumpToLogin()
         }
     }

@@ -100,11 +100,11 @@ public class PageAppointmentPatientBasicInfoBodyView: PageBodyView{
         
         PatientNamePanel.anchorToEdge(Edge.Top, padding: 30.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
         PatientPhonePanel.align(Align.UnderMatchingLeft, relativeTo: PatientNamePanel,
-                               padding: 1, width: YMSizes.PageWidth, height: 80.LayoutVal())
+                               padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 80.LayoutVal())
         PatientGenderPanel.align(Align.UnderMatchingLeft, relativeTo: PatientPhonePanel,
-                                padding: 1, width: YMSizes.PageWidth, height: 80.LayoutVal())
+                                padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 80.LayoutVal())
         PatientAgePanel.align(Align.UnderMatchingLeft, relativeTo: PatientGenderPanel,
-                                padding: 1, width: YMSizes.PageWidth, height: 80.LayoutVal())
+                                padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 80.LayoutVal())
 
         PatientNameInput = BuildInputPanel("患者姓名（必填）", inputWidth: 670.LayoutVal(), panel: PatientNamePanel, maxCount: 100)
         PatientPhoneInput = BuildInputPanel("电话（必填）", inputWidth: 400.LayoutVal(), panel: PatientPhonePanel, maxCount: 13, isPhone: true)

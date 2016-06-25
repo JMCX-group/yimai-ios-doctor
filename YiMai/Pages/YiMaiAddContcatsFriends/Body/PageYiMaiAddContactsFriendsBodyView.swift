@@ -135,10 +135,10 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let topLine = UIView()
         FriendsPanel.addSubview(topLine)
         topLine.backgroundColor = YMColors.DividerLineGray
-        topLine.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: 1.LayoutVal())
+        topLine.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         
         FriendsPanel.addSubview(titleLabel)
-        titleLabel.anchorAndFillEdge(Edge.Top, xPad: 40.LayoutVal(), yPad: 1.LayoutVal(), otherSize: 51.LayoutVal())
+        titleLabel.anchorAndFillEdge(Edge.Top, xPad: 40.LayoutVal(), yPad: YMSizes.OnPx, otherSize: 51.LayoutVal())
         
         var cell = self.DrawFriendsCell([
             YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: "池帅",
@@ -171,7 +171,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let cell = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: 136.LayoutVal()))
         
         let nameLabel = UILabel()
-        let divider = UIView(frame: CGRect(x: 0,y: 0,width: 1,height: 20.LayoutVal()))
+        let divider = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.OnPx,height: 20.LayoutVal()))
         let jobTitleLabel = UILabel()
         let deptLabel = UILabel()
         let hosLabel = UILabel()
@@ -221,20 +221,20 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         if(nil == prevCell) {
             cell.anchorToEdge(Edge.Top, padding: 51.LayoutVal(), width: YMSizes.PageWidth, height: cell.height)
         } else {
-            cell.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: prevCell!, padding: 1, height: cell.height)
+            cell.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: prevCell!, padding: YMSizes.OnPx, height: cell.height)
         }
         
         infoCell.fillSuperview()
         
         nameLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 20.LayoutVal(), width: nameLabel.width, height: nameLabel.height)
-        divider.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 15.LayoutVal(), width: 1, height: divider.height)
+        divider.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 15.LayoutVal(), width: YMSizes.OnPx, height: divider.height)
         jobTitleLabel.align(Align.ToTheRightCentered, relativeTo: divider, padding: 15.LayoutVal(), width: jobTitleLabel.width, height: jobTitleLabel.height)
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
         
         addButton.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: addButton.width, height: addButton.height)
         
-        bottomLine.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 1.LayoutVal())
+        bottomLine.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         
         return cell
     }

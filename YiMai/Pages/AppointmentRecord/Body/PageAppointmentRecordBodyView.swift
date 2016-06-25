@@ -99,7 +99,7 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         borderBottom.backgroundColor = YMColors.DividerLineGray
         
         cell.addSubview(borderBottom)
-        borderBottom.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 1.LayoutVal())
+        borderBottom.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         
         let headImage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
         let name = UILabel()
@@ -137,7 +137,7 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         
         divider.backgroundColor = YMColors.FontBlue
         divider.align(Align.ToTheRightCentered, relativeTo: name, padding: 14.LayoutVal(),
-            width: 1.LayoutVal(), height: 20.LayoutVal())
+            width: YMSizes.OnPx, height: 20.LayoutVal())
         
         jobTitle.text = data["doctor_job_title"] as? String
         jobTitle.textColor = YMColors.FontGray
@@ -175,7 +175,7 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         } else if("患者关闭" == statusString) {
             status.textColor = YMColors.FontGray
         } else if("待面诊" == statusString) {
-            status.textColor = YMColors.AlarmFontColor
+            status.textColor = YMColors.WarningFontColor
         } else if ("已过期" == statusString) {
             status.textColor = YMColors.FontGray
         } else if ("面诊完成" == statusString) {

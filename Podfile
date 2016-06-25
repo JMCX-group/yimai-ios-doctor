@@ -12,5 +12,6 @@ target 'YiMai' do
   pod 'Proposer'
   pod 'SwiftDate'
   pod 'MWIDCardValidate'
+  pod 'Graph'
 end
 

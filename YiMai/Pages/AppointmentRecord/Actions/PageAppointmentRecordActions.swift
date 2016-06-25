@@ -28,7 +28,10 @@ public class PageAppointmentRecordActions: PageJumpActions {
     }
     
     public func RecordSelected(sender: UIGestureRecognizer) {
-        
+        let cell = sender.view as! YMTouchableView
+        let cellData = cell.UserObjectData as! [String:AnyObject]
+        PageAppointmentDetailViewController.AppointmentID = "\(cellData["id"]!)"
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
     }
     
     public func GetAppointmentList() {
