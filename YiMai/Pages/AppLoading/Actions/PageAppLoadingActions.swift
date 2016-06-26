@@ -12,7 +12,7 @@ import Graph
 
 public class PageAppLoadingActions: PageJumpActions {
     private var TargetController: PageAppLoadingViewController? = nil
-    private var BackEndApi: LoginBackendProgress = LoginBackendProgress()
+    private var BackEndApi: LoginBackendProgress = LoginBackendProgress(key: "fromLoading")
     private var LoginApi: YMAPIUtility? = nil
     
     override func ExtInit() {

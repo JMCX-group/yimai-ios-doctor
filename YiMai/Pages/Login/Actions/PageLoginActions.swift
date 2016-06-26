@@ -15,9 +15,18 @@ public class LoginBackendProgress: NSObject {
     var L1RelationApi: YMAPIUtility? = nil
     var L2RelationApi: YMAPIUtility? = nil
     var NewFriendsRelationApi: YMAPIUtility? = nil
-    
+    var SameDepartmentApi: YMAPIUtility? = nil
+
     public func ApiError(error: NSError){
         print(error)
+    }
+    
+    public func GetSameDepartmentError(error: NSError) {
+        print("GetSameDepartmentError")
+    }
+    
+    public func GetSameDepartmentSuccess(data: NSDictionary?) {
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SAME_DEPARTMENT, data: data!)
     }
     
     public func InitRelationSuccess(data: NSDictionary?) {
@@ -55,19 +64,22 @@ public class LoginBackendProgress: NSObject {
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: realData["friends"]!)
     }
     
-    override init() {
+    init(key: String) {
         super.init()
-        self.InitRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_INIT_RELATION,
+        self.InitRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_INIT_RELATION + key,
                                        success: self.InitRelationSuccess, error: self.ApiError)
         
-        self.L1RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL1_RELATION,
+        self.L1RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL1_RELATION + key,
                                             success: self.Level1RelationSuccess, error: self.ApiError)
         
-        self.L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION,
+        self.L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION + key,
                                             success: self.Level2RelationSuccess, error: self.ApiError)
         
-        self.NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS,
+        self.NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + key,
                                           success: self.NewFriendsSuccess, error: self.ApiError)
+        
+        self.SameDepartmentApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_SAME_DEPARTMENT_LIST + key,
+                                                  success: self.GetSameDepartmentSuccess, error: self.GetSameDepartmentError)
     }
     
     public func DoApi() {
@@ -75,6 +87,7 @@ public class LoginBackendProgress: NSObject {
         L1RelationApi?.YMGetLevel1Relation()
         L2RelationApi?.YMGetLevel2Relation()
         NewFriendsRelationApi?.YMGetRelationNewFriends()
+        SameDepartmentApi?.YMGetSameDepartmentList(nil)
     }
 }
 
@@ -84,7 +97,7 @@ public class PageLoginActions : PageJumpActions {
     private let LoginActionKey = "YMLoginAction"
     private var ApiUtility : YMAPIUtility? = nil
     
-    private var BackEndApi: LoginBackendProgress = LoginBackendProgress()
+    private var BackEndApi: LoginBackendProgress = LoginBackendProgress(key: "fromLogin")
     
     private func VarSet(sender: YMButton) {
         if(nil == self.ApiUtility) {

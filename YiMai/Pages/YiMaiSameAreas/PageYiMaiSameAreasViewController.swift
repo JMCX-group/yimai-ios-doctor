@@ -9,17 +9,20 @@
 import UIKit
 
 public class PageYiMaiSameAreasViewController: PageViewController{
-    private var Actions: PageYiMaiSameAreasActions? = nil
     public var BodyView: PageYiMaiSameAreasBodyView? = nil
     
     override func PageLayout() {
         super.PageLayout()
         
-        if(PageLayoutFlag) {return}
-        PageLayoutFlag=true
-        
-        Actions = PageYiMaiSameAreasActions(navController: NavController, target: self)
-        BodyView = PageYiMaiSameAreasBodyView(parentView: SelfView!, navController: NavController!, pageActions: Actions!)
+        BodyView = PageYiMaiSameAreasBodyView(parentView: SelfView!, navController: NavController!)
         TopView = PageCommonTopView(parentView: SelfView!, titleString: "同领域", navController: NavController)
+    }
+    
+    override func PagePreRefresh() {
+        BodyView?.LoadData()
+    }
+
+    override func PageDisapeared() {
+        BodyView?.Clear()
     }
 }

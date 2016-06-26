@@ -27,7 +27,7 @@ public class PagePersonalSettingBodyView: PageBodyView {
         
         let privateSettingButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
-            label: UILabel(), text: "隐私设置")
+            label: UILabel(), text: "隐私设置", userStringData: YMCommonStrings.CS_PAGE_PERSONAL_PRIVATE_SETTING_NAME)
         
         let aboutYiMaiButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,

@@ -10,19 +10,97 @@ import Foundation
 import Neon
 
 public class PageYiMaiSameHospitalBodyView: PageBodyView {
+    public var Loading: YMPageLoadingView? = nil
+    private var SameHospitalActions: PageYiMaiSameHospitalActions? = nil
+    private let ResultList = UIScrollView()
+    private var SearchInput: YMTextField? = nil
+    private var SearchPanel = UIView()
+    
     override func ViewLayout() {
-        YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
-        BodyView.backgroundColor = YMColors.PanelBackgroundGray
+        super.ViewLayout()
         
-        DrawBlankContent()
+        SameHospitalActions = PageYiMaiSameHospitalActions(navController: self.NavController!, target: self)
+        Loading = YMPageLoadingView(parentView: BodyView)
+        DrawSearchPanel()
+        DrawListPanel()
     }
     
-    private func DrawBlankContent(){
-        let bigIcon = YMLayout.GetSuitableImageView("PageYiMaiSameHospitalBigIcon")
+    private func DrawSearchPanel() {
+        BodyView.addSubview(SearchPanel)
+        SearchPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 120.LayoutVal())
+        SearchPanel.backgroundColor = YMColors.BackgroundGray
         
+        let param = TextFieldCreateParam()
+        param.BackgroundImageName = "YiMaiGeneralLongSearchBackground"
+        param.FontColor = YMColors.FontBlue
+        param.Placholder = "搜索"
+        param.FontSize = 26.LayoutVal()
+        
+        let searchIconView = UIView(frame: CGRect(x: 0,y: 0,width: 66.LayoutVal(), height: 60.LayoutVal()))
+        let searchIcon = YMLayout.GetSuitableImageView("YiMaiGeneralSearchIcon")
+        
+        searchIconView.addSubview(searchIcon)
+        searchIcon.anchorInCenter(width: searchIcon.width, height: searchIcon.height)
+        
+        SearchInput = YMLayout.GetTextFieldWithMaxCharCount(param, maxCharCount: 20)
+        SearchInput?.SetLeftPadding(searchIconView)
+        SearchInput?.SetRightPaddingWidth(20.LayoutVal())
+        
+        SearchPanel.addSubview(SearchInput!)
+        SearchInput?.anchorInCenter(width: 690.LayoutVal(), height: 60.LayoutVal())
+        
+        SearchInput?.EditEndCallback = SameHospitalActions?.DoSearch
+    }
+    
+    private func DrawListPanel() {
+        BodyView.addSubview(ResultList)
+        ResultList.alignAndFill(align: Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0)
+    }
+    
+    public func LoadData() {
+        let userInfo = YMVar.MyUserInfo
+        let hospital = userInfo["hospital"] as? [String: AnyObject]
+        
+        if(nil == hospital) {
+            DrawBlankContent()
+        } else {
+            Loading?.Show()
+            SameHospitalActions!.GetSameHospitalList(nil)
+        }
+    }
+    
+    public func Clear() {
+        self.ClearList()
+        self.SearchInput?.text = ""
+    }
+
+    public func ClearList() {
+        YMLayout.ClearView(view: ResultList)
+        ResultList.contentSize = CGSizeMake(YMSizes.PageWidth, 0)
+    }
+    
+    public func DrawList(data: [[String: AnyObject]]?) {
+        if(nil == data) {
+            DrawBlankContent()
+            return
+        }
+        
+        var prev: YMTouchableView? = nil
+        
+        for v in data! {
+            prev = PageSearchResultCell.LayoutACell(ResultList, info: v, prev: prev,
+                                             act: SameHospitalActions!, sel: "DocCellTouched:".Sel())
+        }
+
+        YMLayout.SetVScrollViewContentSize(ResultList, lastSubView: prev, padding: 130.LayoutVal())
+    }
+    
+    public func DrawBlankContent(){
+        let bigIcon = YMLayout.GetSuitableImageView("PageYiMaiSameHospitalBigIcon")
+
         BodyView.addSubview(bigIcon)
         bigIcon.anchorToEdge(Edge.Top, padding: 130.LayoutVal(), width: bigIcon.width, height: bigIcon.height)
-        
+
         let titleLabel = UILabel()
         titleLabel.text = "尚无同医院的医生"
         titleLabel.textColor = YMColors.FontGray

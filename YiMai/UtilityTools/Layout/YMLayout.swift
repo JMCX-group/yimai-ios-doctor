@@ -252,6 +252,22 @@ public class YMLayout {
             
             return view
     }
+    
+    public static func GetCommonUserHeadImage(url: String, useObject: AnyObject? = nil, useMethod: Selector? = nil) -> YMTouchableImageView {
+        var userHead: YMTouchableImageView? = nil
+        if(nil == useObject){
+            userHead = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
+        } else {
+            userHead = YMLayout.GetTouchableImageView(useObject: useObject!, useMethod: useMethod!, imageName: "CommonHeadImageBorder")
+        }
+        
+        let fullUrlString = YMAPIInterfaceURL.Server + url
+        let urlObj = NSURL(string: fullUrlString)
+        
+        userHead!.setImageWithURL(urlObj!)
+        
+        return userHead!
+    }
 }
 
 

@@ -41,6 +41,8 @@ public class YMCommonStrings {
     public static let CS_PAGE_PERSONAL_DETAIL_EDIT_NAME = "PagePersonalDetailEdit"
     public static let CS_PAGE_PERSONAL_INTRO_EDIT_NAME = "PagePersonalIntroEdit"
     public static let CS_PAGE_PERSONAL_NAME_EDIT_NAME = "PagePersonalNameEdit"
+    public static let CS_PAGE_PERSONAL_PRIVATE_SETTING_NAME = "PagePersonalPrivateSetting"
+    
     public static let CS_PAGE_APPOINTMENT_RECORD_NAME = "PageAppointmentRecord"
     public static let CS_PAGE_APPOINTMENT_DETAIL_NAME = "PageAppointmentDetail"
     

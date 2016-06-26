@@ -38,6 +38,41 @@ public class YMLocalData {
         
         return es[0]
     }
+    
+    public static func SavePrivateInfo(key: String, data: Bool) {
+        let login = YMLocalData.GetLoginInfo()
+        if(nil == login) {
+            return
+        }
+        let user = login![YMCoreDataKeyStrings.KEY_LOGIN_NAME] as! String
+
+        let privateInfo = YMLocalData.GetPrivateInfo()
+        if(nil == privateInfo) {
+            let e = Entity(type: "\(user).private")
+            e[key] = data
+        } else {
+            privateInfo![key] = data
+        }
+        
+        
+        YMLocalData.Engine.save()
+    }
+    
+    public static func GetPrivateInfo() -> Entity? {
+        let login = YMLocalData.GetLoginInfo()
+        if(nil == login) {
+            return nil
+        }
+        
+        let user = login![YMCoreDataKeyStrings.KEY_LOGIN_NAME] as! String
+        let privateInfo = YMLocalData.Engine.searchForEntity(types: ["\(user).private"])
+        
+        if(0 == privateInfo.count) {
+            return nil
+        }
+        
+        return privateInfo[0]
+    }
 }
 
 

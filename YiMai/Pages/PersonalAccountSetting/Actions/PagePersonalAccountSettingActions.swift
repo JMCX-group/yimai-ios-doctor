@@ -17,6 +17,7 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
     public func Logout(_: UIGestureRecognizer) {
         YMCoreDataEngine.Clear()
         YMLocalData.ClearLogin()
+        YMAPICommonVariable.ClearCallbackMap()
         self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
     }
 }

@@ -47,7 +47,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_FORGET_PASSWORD_NAME: true,
         YMCommonStrings.CS_PAGE_ABOUT_YIMAI_NAME: true,
         YMCommonStrings.CS_PAGE_YIMAI_INTRO_NAME: true,
-        YMCommonStrings.CS_PAGE_YIMAI_CONTACT_NAME: true
+        YMCommonStrings.CS_PAGE_YIMAI_CONTACT_NAME: true,
+        YMCommonStrings.CS_PAGE_PERSONAL_PRIVATE_SETTING_NAME: true
     ]
 }
 

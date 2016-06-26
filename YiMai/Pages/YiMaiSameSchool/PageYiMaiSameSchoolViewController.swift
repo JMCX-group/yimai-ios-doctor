@@ -15,11 +15,16 @@ public class PageYiMaiSameSchoolViewController: PageViewController {
     override func PageLayout() {
         super.PageLayout()
         
-        if(PageLayoutFlag) {return}
-        PageLayoutFlag=true
-        
-        Actions = PageYiMaiSameSchoolActions(navController: NavController, target: self)
-        BodyView = PageYiMaiSameSchoolBodyView(parentView: SelfView!, navController: NavController!, pageActions: Actions!)
+        BodyView = PageYiMaiSameSchoolBodyView(parentView: SelfView!, navController: NavController!)
         TopView = PageCommonTopView(parentView: SelfView!, titleString: "同学校", navController: NavController)
+    }
+    
+    
+    override func PagePreRefresh() {
+        BodyView?.LoadData()
+    }
+    
+    override func PageDisapeared() {
+        BodyView?.Clear()
     }
 }

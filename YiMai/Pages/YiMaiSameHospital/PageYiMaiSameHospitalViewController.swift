@@ -9,17 +9,20 @@
 import UIKit
 
 public class PageYiMaiSameHospitalViewController: PageViewController {
-    private var Actions: PageYiMaiSameHospitalActions? = nil
     public var BodyView: PageYiMaiSameHospitalBodyView? = nil
     
     override func PageLayout() {
         super.PageLayout()
-        
-        if(PageLayoutFlag) {return}
-        PageLayoutFlag=true
-        
-        Actions = PageYiMaiSameHospitalActions(navController: NavController, target: self)
-        BodyView = PageYiMaiSameHospitalBodyView(parentView: SelfView!, navController: NavController!, pageActions: Actions!)
+
+        BodyView = PageYiMaiSameHospitalBodyView(parentView: SelfView!, navController: NavController!)
         TopView = PageCommonTopView(parentView: SelfView!, titleString: "同医院", navController: NavController)
+    }
+    
+    override func PagePreRefresh() {
+        BodyView?.LoadData()
+    }
+    
+    override func PageDisapeared() {
+        BodyView?.Clear()
     }
 }

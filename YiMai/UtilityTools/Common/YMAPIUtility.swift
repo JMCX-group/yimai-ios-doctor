@@ -14,6 +14,7 @@ public typealias YMAPIImageCallback = ((UIImage?) -> Void)
 public typealias YMAPIErrorCallback = ((NSError) -> Void)
 
 public class YMAPIInterfaceURL {
+    public static let Server = "http://101.201.40.220"
     public static let ApiBaseUrl = "http://101.201.40.220/api"
 
     static let APPInit = YMAPIInterfaceURL.ApiBaseUrl + "/init"
@@ -65,6 +66,10 @@ public class YMAPIInterfaceURL {
     static let CreateFace2FaceAdvice = YMAPIInterfaceURL.ApiBaseUrl + "/f2f-advice/new"
     
     static let GetPatientInfo = YMAPIInterfaceURL.ApiBaseUrl + "/patient/get-by-phone"
+    
+    static let GetSameHospitalList = YMAPIInterfaceURL.ApiBaseUrl + "/user/search/same-hospital"
+    static let GetSameCollegeList = YMAPIInterfaceURL.ApiBaseUrl + "/user/search/same-college"
+    static let GetSameDepartmentList = YMAPIInterfaceURL.ApiBaseUrl + "/user/search/same-department"
 }
 
 public class YMAPICommonVariable {
@@ -110,6 +115,13 @@ public class YMAPICommonVariable {
     
     public static func AddTokenToUrl(URL: String) -> String {
         return URL+"&token="+YMAPICommonVariable.Token
+    }
+    
+    public static func ClearCallbackMap() {
+        YMAPICommonVariable.JsonCallbackMap.removeAll()
+        YMAPICommonVariable.ImageCallbackMap.removeAll()
+        YMAPICommonVariable.ErrorCallbackMap.removeAll()
+        YMAPICommonVariable.Token = ""
     }
 }
 
@@ -553,6 +565,36 @@ public class YMAPIUtility {
         YMAPIGet(YMAPIInterfaceURL.GetPatientInfo,
                  param: [YMCommonStrings.CS_API_PARAM_KEY_PHONE: phone],
                  progressHandler: nil)
+    }
+    
+    public func YMGetSameHospitalList(param: [String:AnyObject]?) {
+        var finallyParam = param
+        if(nil == finallyParam){
+            finallyParam = [String:AnyObject]()
+        }
+        
+        finallyParam!["type"] = "same_hospital"
+        YMAPIPost(YMAPIInterfaceURL.GetSameHospitalList, param: finallyParam, progressHandler: nil)
+    }
+    
+    public func YMGetSameCollegeList(param: [String:AnyObject]?) {
+        var finallyParam = param
+        if(nil == finallyParam){
+            finallyParam = [String:AnyObject]()
+        }
+        
+        finallyParam!["type"] = "same_college"
+        YMAPIPost(YMAPIInterfaceURL.GetSameCollegeList, param: finallyParam, progressHandler: nil)
+    }
+    
+    public func YMGetSameDepartmentList(param: [String:AnyObject]?) {
+        var finallyParam = param
+        if(nil == finallyParam){
+            finallyParam = [String:AnyObject]()
+        }
+
+        finallyParam!["type"] = "same_department"
+        YMAPIPost(YMAPIInterfaceURL.GetSameDepartmentList, param: finallyParam, progressHandler: nil)
     }
 }
 

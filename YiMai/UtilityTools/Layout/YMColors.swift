@@ -30,4 +30,9 @@ public class YMColors {
     public static let CommonBottomBlue = UIColor(red: 0x66.RGBVal(), green: 0xc5.RGBVal(), blue: 0xec.RGBVal(), alpha: 1)
     public static let CommonBottomGray = UIColor(red: 0xd8.RGBVal(), green: 0xd8.RGBVal(), blue: 0xd8.RGBVal(), alpha: 1)
     public static let UntouchableCellGray = UIColor(red: 0xb5.RGBVal(), green: 0xb5.RGBVal(), blue: 0xb5.RGBVal(), alpha: 1)
+    
+    public static let SearchCellBkg = UIColor(red: 0xf0.RGBVal(), green: 0xf0.RGBVal(), blue: 0xf0.RGBVal(), alpha: 1)
+    public static let SearchSubCellBkg = UIColor(red: 0xe0.RGBVal(), green: 0xe0.RGBVal(), blue: 0xe0.RGBVal(), alpha: 1)
+    public static let SearchCellBorder = UIColor(red: 0xe0.RGBVal(), green: 0xe0.RGBVal(), blue: 0xe0.RGBVal(), alpha: 1)
+    public static let SearchSubCellBorder = UIColor(red: 0xca.RGBVal(), green: 0xca.RGBVal(), blue: 0xca.RGBVal(), alpha: 1)
 }

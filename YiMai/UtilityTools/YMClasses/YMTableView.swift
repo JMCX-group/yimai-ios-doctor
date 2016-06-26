@@ -192,8 +192,6 @@ public class YMTableView: NSObject {
                 cellPointer?.frame = CGRectMake(0, cellOffSet, cellPointer!.width, cellPointer!.CellTitleHeight)
                 cellOffSet = cellOffSet + cellPointer!.CellTitleHeight
             } else {
-                cellPointer?.Expanded = true
-
                 cellPointer?.frame = CGRectMake(0, cellOffSet, cellPointer!.width, cellPointer!.CellFullHeight)
                 cellOffSet = cellOffSet + cellPointer!.CellFullHeight
             }
