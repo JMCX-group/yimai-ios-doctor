@@ -60,8 +60,12 @@ public class LoginBackendProgress: NSObject {
     }
     
     public func NewFriendsSuccess(data: NSDictionary?) {
-        let realData = data!
-        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: realData["friends"]!)
+        if(nil == data) {
+            YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: [[String:AnyObject]]())
+        } else {
+            let realData = data!
+            YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: realData["friends"]!)
+        }
     }
     
     init(key: String) {

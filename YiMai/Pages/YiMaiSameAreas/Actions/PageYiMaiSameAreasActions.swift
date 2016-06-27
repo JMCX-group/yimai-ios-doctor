@@ -84,8 +84,8 @@ public class PageYiMaiSameAreasActions: PageJumpActions, UIScrollViewDelegate{
         let cell = sender.view! as! YMTouchableView
         let docInfo = cell.UserObjectData as! [String: AnyObject]
         
-        PagePersonalDetailViewController.DoctorId = "\(docInfo["id"]!)"
-        DoJump(YMCommonStrings.CS_PAGE_PERSONAL_DETAIL_NAME)
+        PageYiMaiDoctorDetailBodyView.DocId = "\(docInfo["id"]!)"
+        DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME)
     }
 
     public func DoSearch(input: YMTextField) {

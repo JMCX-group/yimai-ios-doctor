@@ -36,6 +36,8 @@ public class PageRegisterActions: PageJumpActions {
         
         //TODO: this is a debug line
         TargetBodyView!.VerifyCodeInput?.text = "\(realData["debug"]!)"
+        
+        CheckWhenInputChanged(TargetBodyView!.VerifyCodeInput!)
     }
     
     private func DoRegisterError(error: NSError){
@@ -47,6 +49,10 @@ public class PageRegisterActions: PageJumpActions {
         let realData = data! as! [String: AnyObject]
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_TOKEN, data: realData["token"]!)
         
+        let input = TargetBodyView?.VerifyInput()
+
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_ORG_PASSWORD, data: input!["password"]!)
+        YMLocalData.SaveLogin(input!["phone"]!, pwd: input!["password"]!)
         DoJump(YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME)
     }
 
@@ -59,10 +65,12 @@ public class PageRegisterActions: PageJumpActions {
 
     public func AgreementButtonTouched(sender: YMButton) {
         TargetBodyView?.ToggleAgreementStatus()
+        CheckWhenInputChanged(TargetBodyView!.VerifyCodeInput!)
     }
 
     public func AgreementImageTouched(sender: UITapGestureRecognizer) {
         TargetBodyView?.ToggleAgreementStatus()
+        CheckWhenInputChanged(TargetBodyView!.VerifyCodeInput!)
     }
     
     public func NextStep(sender: YMButton) {
@@ -99,6 +107,16 @@ public class PageRegisterActions: PageJumpActions {
         self.TargetBodyView!.DisableGetVerifyCodeButton()
         let dataHandler = YMCoreMemDataOnceHandler(handler: self.VerifyCodeHandler)
         YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_REG_VERIFY_CODE, handler: dataHandler)
+    }
+    
+    public func CheckWhenInputChanged(_: YMTextField) {
+        let ret = TargetBodyView?.VerifyInput(false)
+        
+        if(nil != ret) {
+            TargetBodyView?.NextStepCodeButton?.enabled = true
+        } else {
+            TargetBodyView?.NextStepCodeButton?.enabled = false
+        }
     }
 }
 

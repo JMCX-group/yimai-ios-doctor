@@ -48,6 +48,16 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_GET_SAME_DEPARTMENT_LIST = "apiGetSameDepartmentList"
     
     public static let CS_API_ACTION_GET_DOCTOR_DETAIL = "apiGetDoctorDetail"
+    public static let CS_API_ACTION_ADD_FRIEND = "apiAddFriend"
+    public static let CS_API_ACTION_GET_NEW_FRIEND = "apiGetNewFriend"
+    
+    public static let CS_API_ACTION_AGREE_FRIEND_APPLY = "apiAgreeFriendApply"
+    
+    public static let CS_API_ACTION_QUERY_USER_BY_PHONE = "apiQueryUserByPhone"
+    public static let CS_API_ACTION_QUERY_USER_BY_CODE = "apiQueryUserByCode"
+    
+    public static let CS_API_ACTION_GLOBAL_SEARCH = "apiGlobalSearch"
+
 }
 
 

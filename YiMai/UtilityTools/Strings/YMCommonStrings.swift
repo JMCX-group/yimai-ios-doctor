@@ -68,6 +68,11 @@ public class YMCommonStrings {
     public static let CS_PAGE_ABOUT_YIMAI_NAME = "PageAboutYiMai"
     public static let CS_PAGE_YIMAI_INTRO_NAME = "PageYiMaiIntro"
     public static let CS_PAGE_YIMAI_CONTACT_NAME = "PageYiMaiContact"
+    
+    public static let CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME = "PageYiMaiDoctorDetail"
+    public static let CS_PAGE_NEW_FRIEND_NAME = "PageNewFriend"
+    
+    public static let CS_PAGE_GLOBAL_SEARCH_NAME = "PageGlobalSearch"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

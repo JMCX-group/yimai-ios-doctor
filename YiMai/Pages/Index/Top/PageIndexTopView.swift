@@ -70,3 +70,13 @@ public class PageIndexTopView: NSObject {
         TopSearchInput?.anchorInCorner(Corner.BottomLeft, xPad: 126.LayoutVal(), yPad: 19.LayoutVal(), width: 500.LayoutVal(), height: 48.LayoutVal())
     }
 }
+
+
+
+
+
+
+
+
+
+

@@ -39,8 +39,13 @@ public class PageIndexActions: PageJumpActions {
     }
     
     public func DoSearch(editor: YMTextField) {
-        PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_COMMON_SEARCH_PAGE_TYPE
-        DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
+        let searchKey = editor.text
+        if(YMValueValidator.IsEmptyString(searchKey)) {
+            return
+        } else {
+            PageGlobalSearchViewController.InitSearchKey = editor.text!
+            DoJump(YMCommonStrings.CS_PAGE_GLOBAL_SEARCH_NAME)
+        }
 //        ApiUtility?.YMGetSearchResult(["field":editor.text!], progressHandler: nil)
 //        ApiUtility?.YMQueryUserInfo()
 //        ApiUtility?.YMQueryUserInfoById("23976")

@@ -16,4 +16,12 @@ public class PageYiMaiDoctorDetailViewController: PageViewController {
         BodyView = PageYiMaiDoctorDetailBodyView(parentView: self.SelfView!, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "详细资料", navController: self.NavController!)
     }
+    
+    override func PagePreRefresh() {
+        BodyView?.GetDocInfo()
+    }
+    
+    override func PageDisapeared() {
+        BodyView?.Clear()
+    }
 }

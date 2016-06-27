@@ -78,6 +78,7 @@ public class YMControlLoadingView: YMPageLoading {
 }
 
 public typealias YMErrorAlertCallback = ((UIAlertAction) -> Void)
+public typealias YMNormalAlertCallback = ((UIAlertAction) -> Void)
 public class YMPageModalMessage {
     public static func ShowErrorInfo(info: String, nav: UINavigationController, callback: YMErrorAlertCallback? = nil) {
         let attributedString = NSAttributedString(string: info, attributes: [
@@ -92,6 +93,22 @@ public class YMPageModalMessage {
         alertController.addAction(okBtn)
         alertController.setValue(attributedString, forKey: "attributedMessage")
 
+        nav.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    public static func ShowNormalInfo(info: String, nav: UINavigationController, callback: YMNormalAlertCallback? = nil) {
+        let attributedString = NSAttributedString(string: info, attributes: [
+            NSFontAttributeName: YMFonts.YMDefaultFont(24.LayoutVal())!, //your font here,
+            NSForegroundColorAttributeName : YMColors.FontLightGray
+            ])
+        
+        let alertController = UIAlertController(title: "", message: info, preferredStyle: .Alert)
+        let okBtn = UIAlertAction(title: "确定", style: .Default, handler: callback)
+        okBtn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        
+        alertController.addAction(okBtn)
+        alertController.setValue(attributedString, forKey: "attributedMessage")
+        
         nav.presentViewController(alertController, animated: true, completion: nil)
     }
 }

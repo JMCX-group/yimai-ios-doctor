@@ -13,4 +13,5 @@ public class YMModuleStrings {
     public static let MODULE_NAME_REG_VERIFY_CODE = "moduleRegVerifyCode"
     public static let MODULE_NAME_MY_ACCOUNT_SETTING = "moduleMyAccountSetting"
     public static let MODULE_NAME_PERSONAL_INFO_DETAIL = "modulePersonalInfoDetail"
+    public static let MODULE_NAME_REGISTER_COMPLETE_INFO = "moduleRegisterCompleteInfo"
 }

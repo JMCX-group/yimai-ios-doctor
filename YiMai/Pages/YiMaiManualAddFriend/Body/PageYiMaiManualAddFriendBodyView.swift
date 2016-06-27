@@ -14,6 +14,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
     private let SearchPanel: UIView = UIView()
     private var ResultPanel: UIView? = nil
 
+    private var AlreadyButton: YMTouchableView? = nil
     private var AddButton: YMTouchableView? = nil
     private var InviteButton: YMTouchableView? = nil
     private var AlertButton: UIView? = nil
@@ -82,9 +83,9 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         
         let _ = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
-        let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
-        let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
-        let jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as! String
+        let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as? String
+        let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as? String
+        let jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as? String
         let userId = data[YMYiMaiStrings.CS_DATA_KEY_USER_ID] as! String
         
         let nameLabel = UILabel()
@@ -141,12 +142,14 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
     }
     
-    private func DrawAddButton() {
+    private func DrawAddButton(data: [String: AnyObject]? = nil) {
         if(nil != AddButton){
+            AddButton?.UserObjectData = data
             AddButton?.hidden = false
             return
         }
         AddButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AddFriend:".Sel())
+        AddButton?.UserObjectData = data
 
         let buttonBkg = YMLayout.GetSuitableImageView("YiMaiManualAddFriendButton")
         let titleLabel = UILabel()
@@ -164,6 +167,32 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         titleLabel.font = YMFonts.YMDefaultFont(36.LayoutVal())
         titleLabel.sizeToFit()
 
+        titleLabel.anchorInCenter(width: titleLabel.width, height: titleLabel.height)
+    }
+    
+    private func DrawAlreadyButton() {
+        if(nil != AlreadyButton){
+            AlreadyButton?.hidden = false
+            return
+        }
+        AlreadyButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AddFriend:".Sel())
+        
+        let buttonBkg = YMLayout.GetSuitableImageView("YiMaiManualAddFriendInviladNum")
+        let titleLabel = UILabel()
+        
+        BodyView.addSubview(AlreadyButton!)
+        AlreadyButton?.align(Align.UnderCentered, relativeTo: ResultPanel!, padding: 80.LayoutVal(), width: 670.LayoutVal(), height: 90.LayoutVal())
+        
+        AlreadyButton?.addSubview(buttonBkg)
+        AlreadyButton?.addSubview(titleLabel)
+        
+        buttonBkg.fillSuperview()
+        
+        titleLabel.text = "你们已经是好友了"
+        titleLabel.textColor = YMColors.FontGray
+        titleLabel.font = YMFonts.YMDefaultFont(36.LayoutVal())
+        titleLabel.sizeToFit()
+        
         titleLabel.anchorInCenter(width: titleLabel.width, height: titleLabel.height)
     }
     
@@ -225,6 +254,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         AddButton?.hidden = true
         InviteButton?.hidden = true
         AlertButton?.hidden = true
+        AlreadyButton?.hidden = true
     }
     
     public func ClearInput() {
@@ -234,7 +264,17 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
     public func ShowAddPage(data: [String : AnyObject]) {
         ClearBody()
         DrawResultPanel(data)
-        DrawAddButton()
+        
+        let isFriend = data["is_friend"] as? Int
+        if(nil != isFriend) {
+            if(1 == isFriend) {
+                DrawAlertButton()
+            } else {
+                DrawAddButton(data)
+            }
+        } else {
+            DrawAddButton(data)
+        }
     }
     
     public func ShowInvitePage() {

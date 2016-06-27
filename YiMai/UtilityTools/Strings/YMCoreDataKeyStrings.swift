@@ -32,6 +32,8 @@ public class YMCoreDataKeyStrings {
     public static let CS_SAME_DEPARTMENT = "CoreDataSameDepartment"
     public static let CS_SAME_SAMECOLLEGE = "CoreDataSameCollege"
     
+    public static let CS_GLOBAL_SEARCH = "CoreDataGlobalSearch"
+    
     public static let CS_L1_FRIENDS = "CoreDataL1Friends"
     public static let CS_L1_FRIENDS_COUNT_INFO = "CoreDataL1FriendsCountInfo"
     

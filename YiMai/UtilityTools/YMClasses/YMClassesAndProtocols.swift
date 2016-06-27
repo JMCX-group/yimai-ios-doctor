@@ -48,7 +48,10 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_ABOUT_YIMAI_NAME: true,
         YMCommonStrings.CS_PAGE_YIMAI_INTRO_NAME: true,
         YMCommonStrings.CS_PAGE_YIMAI_CONTACT_NAME: true,
-        YMCommonStrings.CS_PAGE_PERSONAL_PRIVATE_SETTING_NAME: true
+        YMCommonStrings.CS_PAGE_PERSONAL_PRIVATE_SETTING_NAME: true,
+        YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME: true,
+        YMCommonStrings.CS_PAGE_NEW_FRIEND_NAME: true,
+        YMCommonStrings.CS_PAGE_GLOBAL_SEARCH_NAME: true
     ]
 }
 

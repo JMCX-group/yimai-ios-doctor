@@ -16,19 +16,22 @@ public class PageRegisterPersonalInfoBodyView: NSObject {
     
     private var BodyView: UIScrollView = UIScrollView()
     
-    private var UserRealnameInput: YMTextField? = nil
+    public var UserRealnameInput: YMTextField? = nil
     private var HospitalInput: YMTouchableView? = nil
     private var HospitalDepartmentInput: YMTouchableView? = nil
     
     private let HospitalLabel = UILabel()
     private let DepartmentLabel = UILabel()
     
-    private var UserRealNameString: String = ""
-    private var HospitalString: String = ""
-    private var HospitalDepartmentString: String = ""
+    public var UserRealNameString: String = ""
+
+    public var HospitalId: String = ""
+    public var HospitalDepartmentId: String = ""
     
-    private var OKButton: YMButton? = nil
+    public var OKButton: YMButton? = nil
     private var TooltipLabel: UILabel? = nil
+    
+    public var Loading: YMPageLoadingView? = nil
     
     convenience init(parentView: UIView, navController: UINavigationController) {
         self.init()
@@ -36,6 +39,8 @@ public class PageRegisterPersonalInfoBodyView: NSObject {
         self.NavController = navController
         self.Actions = PageRegisterPersonalInfoActions(navController: navController, bodyView: self)
         self.ViewLayout()
+        
+        Loading = YMPageLoadingView(parentView: BodyView)
     }
 
     private func ViewLayout() {
@@ -101,6 +106,8 @@ public class PageRegisterPersonalInfoBodyView: NSObject {
         BodyView.addSubview(HospitalInput!)
         BodyView.addSubview(HospitalDepartmentInput!)
         
+        UserRealnameInput?.EditChangedCallback = Actions!.CheckWhenNameChanged
+        
         let inputHeight = 80.LayoutVal()
         UserRealnameInput?.anchorToEdge(Edge.Top, padding: 70.LayoutVal(), width: YMSizes.PageWidth, height: inputHeight)
         HospitalInput?.align(Align.UnderMatchingLeft, relativeTo: UserRealnameInput!, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: inputHeight)
@@ -117,29 +124,47 @@ public class PageRegisterPersonalInfoBodyView: NSObject {
         let okBackgroundImageBlue = UIImage(named: "CommonXLButtonBackgroundBlue")
         
         OKButton?.setTitle("确定", forState: UIControlState.Normal)
-        OKButton?.setBackgroundImage(okBackgroundImageGray, forState: UIControlState.Normal)
-        OKButton?.setBackgroundImage(okBackgroundImageBlue, forState: UIControlState.Highlighted)
-        OKButton?.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
+        OKButton?.setBackgroundImage(okBackgroundImageGray, forState: UIControlState.Disabled)
+        OKButton?.setBackgroundImage(okBackgroundImageBlue, forState: UIControlState.Normal)
+        OKButton?.setTitleColor(YMColors.FontGray, forState: UIControlState.Disabled)
+        OKButton?.setTitleColor(YMColors.White, forState: UIControlState.Normal)
         OKButton?.titleLabel?.font = UIFont.systemFontOfSize(36.LayoutVal())
+        OKButton?.enabled = false
         
         BodyView.addSubview(OKButton!)
         OKButton?.anchorToEdge(Edge.Top, padding: 383.LayoutVal(), width: 670.LayoutVal(), height: 90.LayoutVal())
         
         OKButton?.UserStringData = YMCommonStrings.CS_PAGE_INDEX_NAME
-        OKButton?.addTarget(Actions, action: "PageJumpTo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        OKButton?.addTarget(Actions, action: "UpdateUserInfo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     public func Refesh() {
         let hospital = PageHospitalSearchBodyView.HospitalSelected
         if(nil != hospital) {
-            let hospitalName = hospital!["name"] as! String
+            let hosInfo = hospital as! [String: AnyObject]
+            let hospitalName = hosInfo["name"] as! String
             HospitalLabel.text = "\(hospitalName)"
+            HospitalId = "\(hosInfo["id"]!)"
         }
         
         let department = PageDepartmentSearchBodyView.DepartmentSelected
         if(nil != department) {
-            let departmentName = department!["name"] as! String
-            HospitalLabel.text = "\(departmentName)"
+            let deptInfo = department as! [String: AnyObject]
+            let departmentName = deptInfo["name"] as! String
+            DepartmentLabel.text = "\(departmentName)"
+            HospitalDepartmentId = "\(deptInfo["id"]!)"
+        }
+        
+        CheckInfoComplete()
+    }
+    
+    public func CheckInfoComplete() {
+        if (!YMValueValidator.IsEmptyString(UserRealnameInput?.text)
+            && "" != HospitalId
+            && "" != HospitalDepartmentId) {
+            OKButton?.enabled = true
+        } else {
+            OKButton?.enabled = false
         }
     }
 }

@@ -137,7 +137,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         NewFriendsPanel.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 50.LayoutVal())
         
-        let newFriendsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector)
+        let newFriendsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector, userStringData: YMCommonStrings.CS_PAGE_NEW_FRIEND_NAME)
         
         let icon = YMLayout.GetSuitableImageView("YiMaiR1NewFriendsIcon")
         newFriendsButton.addSubview(icon)

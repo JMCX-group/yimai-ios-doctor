@@ -20,7 +20,7 @@ public class PageRegisterBodyView: NSObject {
     private var InvitedCodeInput : YMTextField? = nil
     
     public var GetVerifyCodeButton : YMButton? = nil
-    private var NextStepCodeButton : YMButton? = nil
+    public var NextStepCodeButton : YMButton? = nil
     
     private var AgreeButton : YMButton? = nil
     private var AgreeCheckbox : UIImageView? = nil
@@ -101,6 +101,10 @@ public class PageRegisterBodyView: NSObject {
         PasswordInput?.SetLeftPadding(GetInputLeftPadding(InputLeftPadding))
         VerifyCodeInput?.SetLeftPadding(GetInputLeftPadding(InputLeftPadding))
         InvitedCodeInput?.SetLeftPadding(GetInputLeftPadding(InputLeftPadding))
+        
+        CellPhoneInput?.EditChangedCallback = Actions?.CheckWhenInputChanged
+        PasswordInput?.EditChangedCallback = Actions?.CheckWhenInputChanged
+        VerifyCodeInput?.EditChangedCallback = Actions?.CheckWhenInputChanged
     }
     
     private func DrawButtonGroup() {
@@ -122,8 +126,9 @@ public class PageRegisterBodyView: NSObject {
         
         NextStepCodeButton?.setTitle(YMRegisterStrings.CS_NEXT_STEP_BUTTON, forState: UIControlState.Normal)
         NextStepCodeButton?.titleLabel?.font = UIFont.systemFontOfSize(36.LayoutVal())
-        NextStepCodeButton?.setBackgroundImage(UIImage(named: "CommonXLButtonBackgroundGray"), forState: UIControlState.Normal)
-        NextStepCodeButton?.setBackgroundImage(UIImage(named: "CommonXLButtonBackgroundBlue"), forState: UIControlState.Highlighted)
+        NextStepCodeButton?.setBackgroundImage(UIImage(named: "CommonXLButtonBackgroundGray"), forState: UIControlState.Disabled)
+        NextStepCodeButton?.setBackgroundImage(UIImage(named: "CommonXLButtonBackgroundBlue"), forState: UIControlState.Normal)
+        NextStepCodeButton?.enabled = false
     }
     
     private func DrawAgreeCheckbox() {
@@ -166,36 +171,46 @@ public class PageRegisterBodyView: NSObject {
         self.GetVerifyCodeButton?.enabled = true
     }
     
-    public func VerifyInput() -> [String:String]? {
+    public func VerifyInput(showAlarm: Bool = true) -> [String:String]? {
         let phone = self.CellPhoneInput?.text
         let password = self.PasswordInput?.text
         let verifyCode = self.VerifyCodeInput?.text
         
         //TODO: 医脉邀请码
         if(!self.AgreeChecked) {
-            YMPageModalMessage.ShowErrorInfo("请先同意服务条款！", nav: self.NavController!)
+            if(showAlarm) {
+                YMPageModalMessage.ShowErrorInfo("请先同意服务条款！", nav: self.NavController!)
+            }
             return nil
         }
         
         if(!YMValueValidator.IsCellPhoneNum(phone!)) {
-            YMPageModalMessage.ShowErrorInfo("手机号码错误，请重新输入！", nav: self.NavController!)
+            if(showAlarm) {
+                YMPageModalMessage.ShowErrorInfo("手机号码错误，请重新输入！", nav: self.NavController!)
+            }
             return nil
         }
         
         if(6 > password?.characters.count) {
-            YMPageModalMessage.ShowErrorInfo("密码长度不足六位！", nav: self.NavController!)
+            if(showAlarm) {
+                YMPageModalMessage.ShowErrorInfo("密码长度不足六位！", nav: self.NavController!)
+            }
             return nil
         }
         
         let curVerifyCode = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_REG_VERIFY_CODE)
         if(nil == curVerifyCode) {
-            YMPageModalMessage.ShowErrorInfo("请先获取验证码！", nav: self.NavController!)
+            if(showAlarm) {
+                YMPageModalMessage.ShowErrorInfo("请先获取验证码！", nav: self.NavController!)
+            }
             return nil
         }
         
         let verifyCodeInString = "\(curVerifyCode!)"
         if(verifyCodeInString != verifyCode) {
-            YMPageModalMessage.ShowErrorInfo("验证码错误！", nav: self.NavController!)
+            if(showAlarm) {
+                YMPageModalMessage.ShowErrorInfo("验证码错误！", nav: self.NavController!)
+            }
             return nil
         }
         

@@ -28,6 +28,7 @@ public class YMAPIInterfaceURL {
     static let GetUserPassowrdBack = YMAPIInterfaceURL.ApiBaseUrl + "/user/reset-pwd"
 
     static let ChangeUserInfo = YMAPIInterfaceURL.ApiBaseUrl + "/user"
+    static let QueryUserByPhone = YMAPIInterfaceURL.ApiBaseUrl + "/user/phone"
     
     static let GetCity = YMAPIInterfaceURL.ApiBaseUrl + "/city"
     static let GetCityGrouped = YMAPIInterfaceURL.ApiBaseUrl + "/city/group"
@@ -47,6 +48,7 @@ public class YMAPIInterfaceURL {
     static let RelationFriendRemarks = YMAPIInterfaceURL.ApiBaseUrl + "/relation/remarks"
     static let RelationPushRecentContacts = YMAPIInterfaceURL.ApiBaseUrl + "/relation/push-recent-contacts"
     static let RelationDelFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/del"
+    static let RelationAgreeFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/confirm"
     
     static let GetAllRadio = YMAPIInterfaceURL.ApiBaseUrl + "/radio"
     static let SetRadioHaveRead = YMAPIInterfaceURL.ApiBaseUrl + "/radio/read"
@@ -168,12 +170,16 @@ public class YMAPIUtility {
     }
     
     private func JsonResponseSuccessHandler(sessionDataTask: NSURLSessionDataTask, data: AnyObject?) {
+        let callback = YMAPICommonVariable.JsonCallbackMap[self.Key]
         if(nil == data) {
             let response = sessionDataTask.response as! NSHTTPURLResponse
             print("data is nil and code is :\(response.statusCode)")
+            if(nil != callback) {
+                callback!(nil)
+            }
             return
         }
-        let callback = YMAPICommonVariable.JsonCallbackMap[self.Key]
+        
         var jsonData = data as? NSDictionary
         
         if(nil == jsonData) {
@@ -263,15 +269,15 @@ public class YMAPIUtility {
         DoPostRequest(YMAPIInterfaceURL.UerLogin, param: param, progressHandler: progressHandler)
     }
     
-    public func YMGetAPPInitData() -> Bool {
+    public func YMGetAPPInitData(key: String = "") -> Bool {
         let token = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_TOKEN)
         if(nil == token) {
             return false
         }
-        YMAPICommonVariable.SetJsonCallback(YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA,
+        YMAPICommonVariable.SetJsonCallback(YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA + key,
                                             callback: self.YMGetInitDataSuccess, update: false)
         
-        YMAPICommonVariable.SetErrorCallback(YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA,
+        YMAPICommonVariable.SetErrorCallback(YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA + key,
                                              callback: self.YMGetInitDataError, update: false)
         
         let param = [YMCommonStrings.CS_API_PARAM_KEY_TOKEN: token! as! String]
@@ -507,6 +513,23 @@ public class YMAPIUtility {
         } else {
             YMAPIGet(YMAPIInterfaceURL.GetAllRadio, param: [YMCommonStrings.CS_API_PARAM_KEY_PAGE: page!], progressHandler: nil)
         }
+    }
+    
+    public func YMQueryUserByPhone(phone: String) {
+        print(phone)
+        YMAPIGet(YMAPIInterfaceURL.QueryUserByPhone, param: [YMCommonStrings.CS_API_PARAM_KEY_PHONE: phone], progressHandler: nil)
+    }
+    
+    public func YMAddFriendById(id: String) {
+        YMAPIPost(YMAPIInterfaceURL.RelationAddFriend,
+                  param: [YMCommonStrings.CS_API_PARAM_KEY_ID: id],
+                  progressHandler: nil)
+    }
+    
+    public func YMAgreeFriendById(id: String) {
+        YMAPIPost(YMAPIInterfaceURL.RelationAgreeFriend,
+                  param: [YMCommonStrings.CS_API_PARAM_KEY_ID: id],
+                  progressHandler: nil)
     }
     
     public func YMSetRadioHaveRead(id: String) {

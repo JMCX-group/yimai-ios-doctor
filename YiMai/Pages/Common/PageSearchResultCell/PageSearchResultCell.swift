@@ -14,7 +14,7 @@ public typealias ResultCellLayout = ((UIView, UIView?, UIView) -> Void)
 public class PageSearchResultCell {
     public static func LayoutACell(parent: UIView,
                                info: [String: AnyObject],
-                               prev: YMTouchableView?,
+                               prev: UIView?,
                                act: AnyObject,
                                sel: Selector,
                                layoutCallback: ResultCellLayout? = nil) -> YMTouchableView {
@@ -94,7 +94,19 @@ public class PageSearchResultCell {
             dept.align(Align.UnderMatchingLeft,
                        relativeTo: name, padding: 8.LayoutVal(),
                        width: dept.width, height: dept.height)
+        } else {
+            let deptInfo = info["department"] as? String
+            
+            dept.text = deptInfo
+            dept.font = YMFonts.YMDefaultFont(20.LayoutVal())
+            dept.textColor = YMColors.FontGray
+            dept.sizeToFit()
+            
+            dept.align(Align.UnderMatchingLeft,
+                       relativeTo: name, padding: 8.LayoutVal(),
+                       width: dept.width, height: dept.height)
         }
+        
         
         let hospitalInfo = info["hospital"] as? [String: AnyObject]
         if(nil != hospitalInfo) {
@@ -106,6 +118,16 @@ public class PageSearchResultCell {
             hospital.align(Align.UnderMatchingLeft,
                        relativeTo: name, padding: 40.LayoutVal(),
                        width: hospital.width, height: hospital.height)
+        } else {
+            let hospitalInfo = info["hospital"] as? String
+            hospital.text = hospitalInfo
+            hospital.font = YMFonts.YMDefaultFont(24.LayoutVal())
+            hospital.textColor = YMColors.FontLightGray
+            hospital.sizeToFit()
+            
+            hospital.align(Align.UnderMatchingLeft,
+                           relativeTo: name, padding: 40.LayoutVal(),
+                           width: hospital.width, height: hospital.height)
         }
         
         let relationDepth = info["relation"] as? Int
@@ -281,6 +303,47 @@ public class PageSearchResultCell {
             }
         }
 
+        parent.addSubview(table.TableViewPanel)
+        table.TableViewPanel.fillSuperview()
+        table.DrawTableView(false)
+    }
+    
+    public static func GetDeptSearchView(dept: [[String: AnyObject]],
+                                             parent: UIView,
+                                             hospitalTouched: YMTableViewCellTouched) {
+        
+        func DeptCellBuilder(cell: YMTableViewCell, data: AnyObject?) {
+            let realData = data as! [String: AnyObject]
+            let cellInner = UILabel()
+            cellInner.font = YMFonts.YMDefaultFont(28.LayoutVal())
+            cellInner.text = realData["name"] as? String
+            cellInner.textColor = YMColors.FontGray
+            cellInner.sizeToFit()
+            
+            cell.frame = CGRectMake(0,0, YMSizes.PageWidth, 80.LayoutVal())
+            cell.CellTitleHeight = 80.LayoutVal()
+            cell.CellFullHeight = 80.LayoutVal()
+            cell.CellData = realData
+            cell.backgroundColor = YMColors.SearchCellBkg
+            
+            cell.addSubview(cellInner)
+            cellInner.anchorToEdge(Edge.Left, padding: 40.LayoutVal(),
+                                   width: cellInner.width, height: cellInner.height)
+            
+            
+            let bottom = UIView()
+            bottom.backgroundColor = YMColors.SearchCellBorder
+            cell.addSubview(bottom)
+            bottom.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: YMSizes.OnPx)
+            cell.CellInnerView = cellInner
+        }
+        
+        let table = YMTableView(builer: DeptCellBuilder, subBuilder: nil, touched: hospitalTouched)
+
+        for v in dept {
+            table.AppendCell(v)
+        }
+        
         parent.addSubview(table.TableViewPanel)
         table.TableViewPanel.fillSuperview()
         table.DrawTableView(false)
