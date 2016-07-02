@@ -133,8 +133,8 @@ public class PageSearchResultCell {
         let relationDepth = info["relation"] as? Int
 
         if(nil != relationDepth) {
-            let relationMap = ["1": "一度人脉", "2": "二度人脉"]
-            let relationText = relationMap["\(relationDepth!)"]
+            var relationMap = ["1": "一度人脉", "2": "二度人脉"]
+            var relationText = relationMap["\(relationDepth!)"]
             
             if(nil != relationText) {
                 cell.addSubview(relation)
@@ -151,6 +151,9 @@ public class PageSearchResultCell {
                 relation.anchorInCorner(Corner.TopRight, xPad: 28.LayoutVal(), yPad: 30.LayoutVal(),
                                         width: 100.LayoutVal(), height: 30.LayoutVal())
             }
+            
+            relationMap.removeAll()
+            relationText = nil
         }
 
         return cell

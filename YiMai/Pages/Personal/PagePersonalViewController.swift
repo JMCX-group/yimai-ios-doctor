@@ -18,6 +18,7 @@ public class PagePersonalViewController: PageViewController {
     override func GestureRecognizerEnable() -> Bool {return false}
     
     override public func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         YMCurrentPage.CurrentPage = YMCommonStrings.CS_PAGE_PERSONAL_NAME
     }
     

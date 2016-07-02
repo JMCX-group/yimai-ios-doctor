@@ -19,6 +19,7 @@ public class PageYiMaiViewController: PageViewController {
     }
     
     override public func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         YMCurrentPage.CurrentPage = YMCommonStrings.CS_PAGE_YIMAI_NAME
     }
 

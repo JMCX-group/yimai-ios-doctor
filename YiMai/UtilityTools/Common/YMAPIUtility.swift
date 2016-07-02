@@ -75,35 +75,45 @@ public class YMAPIInterfaceURL {
 }
 
 public class YMAPICommonVariable {
-    private static var JsonCallbackMap = Dictionary<String, YMAPIJsonCallback>()
-    private static var ImageCallbackMap = Dictionary<String, YMAPIImageCallback>()
-    private static var ErrorCallbackMap = Dictionary<String, YMAPIErrorCallback>()
+    private static var JsonCallbackMap: Dictionary<String, YMAPIJsonCallback>? = nil
+    private static var ImageCallbackMap: Dictionary<String, YMAPIImageCallback>? = nil
+    private static var ErrorCallbackMap: Dictionary<String, YMAPIErrorCallback>? = nil
+    
     private static var Token = ""
     
     public static func SetJsonCallback(key:String, callback: YMAPIJsonCallback, update: Bool) {
-        let preCallback = YMAPICommonVariable.JsonCallbackMap[key]
+        if(nil == YMAPICommonVariable.JsonCallbackMap) {
+            YMAPICommonVariable.JsonCallbackMap = Dictionary<String, YMAPIJsonCallback>()
+        }
+        let preCallback = YMAPICommonVariable.JsonCallbackMap![key]
         if(nil != preCallback && update) {
-            YMAPICommonVariable.JsonCallbackMap[key] = callback
+            YMAPICommonVariable.JsonCallbackMap![key] = callback
         } else if(nil == preCallback) {
-            YMAPICommonVariable.JsonCallbackMap[key] = callback
+            YMAPICommonVariable.JsonCallbackMap![key] = callback
         }
     }
     
     public static func SetImageCallback(key:String, callback: YMAPIImageCallback, update: Bool){
-        let preCallback = YMAPICommonVariable.ImageCallbackMap[key]
+        if(nil == YMAPICommonVariable.ImageCallbackMap) {
+            YMAPICommonVariable.ImageCallbackMap = Dictionary<String, YMAPIImageCallback>()
+        }
+        let preCallback = YMAPICommonVariable.ImageCallbackMap![key]
         if(nil != preCallback && update) {
-            YMAPICommonVariable.ImageCallbackMap[key] = callback
+            YMAPICommonVariable.ImageCallbackMap![key] = callback
         } else if(nil == preCallback) {
-            YMAPICommonVariable.ImageCallbackMap[key] = callback
+            YMAPICommonVariable.ImageCallbackMap![key] = callback
         }
     }
     
     public static func SetErrorCallback(key:String, callback: YMAPIErrorCallback, update: Bool){
-        let preCallback = YMAPICommonVariable.ErrorCallbackMap[key]
+        if(nil == YMAPICommonVariable.ErrorCallbackMap) {
+            YMAPICommonVariable.ErrorCallbackMap = Dictionary<String, YMAPIErrorCallback>()
+        }
+        let preCallback = YMAPICommonVariable.ErrorCallbackMap![key]
         if(nil != preCallback && update) {
-            YMAPICommonVariable.ErrorCallbackMap[key] = callback
+            YMAPICommonVariable.ErrorCallbackMap![key] = callback
         } else if(nil == preCallback) {
-            YMAPICommonVariable.ErrorCallbackMap[key] = callback
+            YMAPICommonVariable.ErrorCallbackMap![key] = callback
         }
     }
     
@@ -120,9 +130,9 @@ public class YMAPICommonVariable {
     }
     
     public static func ClearCallbackMap() {
-        YMAPICommonVariable.JsonCallbackMap.removeAll()
-        YMAPICommonVariable.ImageCallbackMap.removeAll()
-        YMAPICommonVariable.ErrorCallbackMap.removeAll()
+        YMAPICommonVariable.JsonCallbackMap?.removeAll()
+        YMAPICommonVariable.ImageCallbackMap?.removeAll()
+        YMAPICommonVariable.ErrorCallbackMap?.removeAll()
         YMAPICommonVariable.Token = ""
     }
 }
@@ -145,6 +155,12 @@ public class YMAPIUtility {
         }
     }
     
+    private static func GetTimestamp() -> String {
+        let now = NSDate()
+        let timeInterval:NSTimeInterval = now.timeIntervalSince1970
+        return "\(Int(timeInterval))"
+    }
+    
     private static func AppendRouteParamToUrl(url:String, value: String) -> String {
         return url + "/" + YMAPIUtility.YMUrlEncode(value)
     }
@@ -158,19 +174,19 @@ public class YMAPIUtility {
     }
     
     init(key: String, success: YMAPIJsonCallback, error: YMAPIErrorCallback) {
-        self.Key = key
-        YMAPICommonVariable.SetJsonCallback(key, callback: success, update: false)
-        YMAPICommonVariable.SetErrorCallback(key, callback: error, update: false)
+        self.Key = key + YMAPIUtility.GetTimestamp()
+        YMAPICommonVariable.SetJsonCallback(self.Key, callback: success, update: false)
+        YMAPICommonVariable.SetErrorCallback(self.Key, callback: error, update: false)
     }
     
     init(key: String, success: YMAPIImageCallback, error: YMAPIErrorCallback) {
-        self.Key = key
-        YMAPICommonVariable.SetImageCallback(key, callback: success, update: false)
-        YMAPICommonVariable.SetErrorCallback(key, callback: error, update: false)
+        self.Key = key + YMAPIUtility.GetTimestamp()
+        YMAPICommonVariable.SetImageCallback(self.Key, callback: success, update: false)
+        YMAPICommonVariable.SetErrorCallback(self.Key, callback: error, update: false)
     }
     
     private func JsonResponseSuccessHandler(sessionDataTask: NSURLSessionDataTask, data: AnyObject?) {
-        let callback = YMAPICommonVariable.JsonCallbackMap[self.Key]
+        let callback = YMAPICommonVariable.JsonCallbackMap?[self.Key]
         if(nil == data) {
             let response = sessionDataTask.response as! NSHTTPURLResponse
             print("data is nil and code is :\(response.statusCode)")
@@ -192,7 +208,7 @@ public class YMAPIUtility {
     }
     
     private func JsonResponseErrorHandler(sessionDataTask: NSURLSessionDataTask?, errInfo: NSError){
-        let callback = YMAPICommonVariable.ErrorCallbackMap[self.Key]
+        let callback = YMAPICommonVariable.ErrorCallbackMap?[self.Key]
 
         if(nil != callback) {
             callback!(errInfo)

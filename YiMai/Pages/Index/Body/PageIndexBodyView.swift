@@ -10,9 +10,9 @@ import Foundation
 import Neon
 
 public class PageIndexBodyView {
-    private var ParentView : UIView? = nil
-    private var NavController : UINavigationController? = nil
-    private var Actions: PageIndexActions? = nil
+    private weak var ParentView : UIView? = nil
+    private weak var NavController : UINavigationController? = nil
+    private weak var Actions: PageIndexActions? = nil
     
     private var BodyView: UIScrollView = UIScrollView()
     

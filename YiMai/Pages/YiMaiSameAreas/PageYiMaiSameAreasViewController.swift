@@ -12,6 +12,8 @@ public class PageYiMaiSameAreasViewController: PageViewController{
     public var BodyView: PageYiMaiSameAreasBodyView? = nil
     
     override func PageLayout() {
+        if(PageLayoutFlag) {return}
+
         super.PageLayout()
         
         BodyView = PageYiMaiSameAreasBodyView(parentView: SelfView!, navController: NavController!)

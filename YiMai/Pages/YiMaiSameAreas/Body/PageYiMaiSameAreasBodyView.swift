@@ -226,11 +226,13 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
                 self.SameAreasActions?.GetSameAreasList(nil)
             } else {
                 YMDelay(0.01, closure: {
-                    let userInfo = sameInfo!["users"] as? [[String: AnyObject]]
+                    var userInfo = sameInfo!["users"] as? [[String: AnyObject]]
                     self.DrawList(userInfo)
                     self.LoadCityList(sameInfo! as! [String : AnyObject])
                     self.LoadHospitalList(sameInfo! as! [String : AnyObject])
                     self.Loading?.Hide()
+                    
+                    userInfo = nil
                 })
             }
         }
@@ -269,6 +271,9 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
     
     public func ClearList() {
         YMLayout.ClearView(view: ResultList)
+        YMLayout.ClearView(view: CityFilterList)
+        YMLayout.ClearView(view: HospitalFilterList)
+
         CityFilterList.hidden = true
         HospitalFilterList.hidden = true
         ResultList.contentSize = CGSizeMake(YMSizes.PageWidth, 0)

@@ -12,6 +12,7 @@ public class PageYiMaiSameHospitalViewController: PageViewController {
     public var BodyView: PageYiMaiSameHospitalBodyView? = nil
     
     override func PageLayout() {
+        if(PageLayoutFlag) {return}
         super.PageLayout()
 
         BodyView = PageYiMaiSameHospitalBodyView(parentView: SelfView!, navController: NavController!)

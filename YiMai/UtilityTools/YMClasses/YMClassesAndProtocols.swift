@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class StoryboardThatExist {
-    public static var StoryboardMap: [String:Bool] = [
+    public static let StoryboardMap: [String:Bool] = [
         YMCommonStrings.CS_PAGE_INDEX_NAME:true,
         YMCommonStrings.CS_PAGE_PERSONAL_NAME:true,
         YMCommonStrings.CS_PAGE_LOGIN_NAME:true,
@@ -66,7 +66,7 @@ public class NoBackByGesturePage {
 }
 
 public protocol PageJumpActionsProtocol {
-    var ControllersDict : Dictionary<String, UIViewController> {get set}
+//    var ControllersDict : Dictionary<String, UIViewController> {get set}
     var NavController : UINavigationController? {get set}
     func PageJumpTo(sender:YMButton)
     func PageJumpToByViewSender(sender : UITapGestureRecognizer)
@@ -74,10 +74,10 @@ public protocol PageJumpActionsProtocol {
 }
 
 public class PageJumpActions: NSObject, PageJumpActionsProtocol{
-    public var ControllersDict : Dictionary<String, UIViewController> = Dictionary<String, UIViewController>()
+    public static var ControllersDict : Dictionary<String, UIViewController>? = nil// Dictionary<String, UIViewController>()
     public var NavController : UINavigationController? = nil
     public var JumpWidthAnimate = true
-    public var Target: AnyObject? = nil
+    public weak var Target: AnyObject? = nil
     
     public static let PageJumToSel: Selector = "PageJumpTo:".Sel()
     public static let PageJumpToByViewSenderSel: Selector = "PageJumpToByViewSender:".Sel()
@@ -106,15 +106,32 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
     public func DoJump(targetPageName: String) {
         var targetPage: UIViewController? = nil
         
-        if(nil != self.ControllersDict.indexForKey(targetPageName)){
-            targetPage = self.ControllersDict[targetPageName]!
+        if(nil == PageJumpActions.ControllersDict) {
+            PageJumpActions.ControllersDict = Dictionary<String, UIViewController>()
+        }
+        
+        if(nil != PageJumpActions.ControllersDict?.indexForKey(targetPageName)){
+            targetPage = PageJumpActions.ControllersDict![targetPageName]!
         } else {
             targetPage = YMLayout.GetStoryboardControllerByName(targetPageName)!
-            self.ControllersDict[targetPageName] = targetPage
+            PageJumpActions.ControllersDict?[targetPageName] = targetPage
         }
         
         YMCurrentPage.CurrentPage = targetPageName
-        self.NavController!.pushViewController(targetPage!, animated: JumpWidthAnimate)
+        
+        var push = true
+        for ctrl in self.NavController!.viewControllers {
+            if(targetPage == ctrl) {
+                push = false
+                break
+            }
+        }
+
+        if(push) {
+            self.NavController!.pushViewController(targetPage!, animated: JumpWidthAnimate)
+        } else {
+            self.NavController!.popToViewController(targetPage!, animated: JumpWidthAnimate)
+        }
     }
 
     public func PageJumpTo(sender:YMButton) {
@@ -234,9 +251,9 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
 }
 
 public class PageBodyView {
-    internal var ParentView: UIView? = nil
-    internal var NavController: UINavigationController? = nil
-    internal var Actions: AnyObject? = nil
+    internal weak var ParentView: UIView? = nil
+    internal weak var NavController: UINavigationController? = nil
+    internal weak var Actions: AnyObject? = nil
     public var BodyView: UIScrollView = UIScrollView()
     
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: AnyObject? = nil) {

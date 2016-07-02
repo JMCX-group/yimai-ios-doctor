@@ -13,6 +13,7 @@ public class PageYiMaiSameSchoolViewController: PageViewController {
     public var BodyView: PageYiMaiSameSchoolBodyView? = nil
     
     override func PageLayout() {
+        if(PageLayoutFlag) {return}
         super.PageLayout()
         
         BodyView = PageYiMaiSameSchoolBodyView(parentView: SelfView!, navController: NavController!)

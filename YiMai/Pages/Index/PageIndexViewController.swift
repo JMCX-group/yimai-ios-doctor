@@ -18,6 +18,9 @@ public class PageIndexViewController: PageViewController {
     }
     
     override public func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if(!PageLayoutFlag){PageLayoutFlag = true}
+
         YMCurrentPage.CurrentPage = YMCommonStrings.CS_PAGE_INDEX_NAME
         
         YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)! as! [String: AnyObject]
@@ -25,6 +28,12 @@ public class PageIndexViewController: PageViewController {
     }
 
     override func PageLayout(){
+        print(self)
+
+        if(PageLayoutFlag) {
+            print(self)
+            return
+        }
         super.PageLayout()
 
         Actions = PageIndexActions(navController: self.navigationController!)
