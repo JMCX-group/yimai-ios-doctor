@@ -33,6 +33,9 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
     public var CurrentCity: [String: AnyObject]? = nil
     public var CurrentHospital: [String: AnyObject]? = nil
     
+    private var CityTable: YMTableView? = nil
+    private var HosTable: YMTableView? = nil
+    
     override func ViewLayout() {
         super.ViewLayout()
         
@@ -226,13 +229,11 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
                 self.SameAreasActions?.GetSameAreasList(nil)
             } else {
                 YMDelay(0.01, closure: {
-                    var userInfo = sameInfo!["users"] as? [[String: AnyObject]]
+                    let userInfo = sameInfo!["users"] as? [[String: AnyObject]]
                     self.DrawList(userInfo)
                     self.LoadCityList(sameInfo! as! [String : AnyObject])
                     self.LoadHospitalList(sameInfo! as! [String : AnyObject])
                     self.Loading?.Hide()
-                    
-                    userInfo = nil
                 })
             }
         }
@@ -245,7 +246,9 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
         if(nil != prov && nil != citys) {
             YMLayout.ClearView(view: CityFilterList)
             CityFilterList.hidden = true
-            PageSearchResultCell.GetCityTablView(prov!, citys: citys!,
+            CityTable?.Clear()
+            YMLayout.ClearView(view: CityFilterList)
+            CityTable = PageSearchResultCell.GetCityTablView(prov!, citys: citys!,
                                                  parent: CityFilterList,
                                                  cityTouched: SameAreasActions!.CityTouched)
         }
@@ -257,7 +260,9 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
         if(nil != hospitals) {
             YMLayout.ClearView(view: HospitalFilterList)
             HospitalFilterList.hidden = true
-            PageSearchResultCell.GetHospitalSearchView(hospitals!,
+            HosTable?.Clear()
+            YMLayout.ClearView(view: HospitalFilterList)
+            HosTable = PageSearchResultCell.GetHospitalSearchView(hospitals!,
                                                        parent: HospitalFilterList,
                                                        hospitalTouched: SameAreasActions!.HospitalTouched)
         }
@@ -270,6 +275,9 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
     }
     
     public func ClearList() {
+        CityTable?.Clear()
+        HosTable?.Clear()
+
         YMLayout.ClearView(view: ResultList)
         YMLayout.ClearView(view: CityFilterList)
         YMLayout.ClearView(view: HospitalFilterList)

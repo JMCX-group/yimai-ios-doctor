@@ -225,13 +225,13 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
             if(nil == sameInfo) {
                 self.SameSchoolActions?.GetSameSchoolList(nil)
             } else {
-                YMDelay(0.01, closure: {
+//                YMDelay(0.01, closure: {
                     let userInfo = sameInfo!["users"] as? [[String: AnyObject]]
                     self.DrawList(userInfo)
                     self.LoadCityList(sameInfo! as! [String : AnyObject])
                     self.LoadHospitalList(sameInfo! as! [String : AnyObject])
                     self.Loading?.Hide()
-                })
+//                })
             }
         }
     }

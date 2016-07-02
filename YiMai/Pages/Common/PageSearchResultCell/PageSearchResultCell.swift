@@ -164,9 +164,7 @@ public class PageSearchResultCell {
                                        parent: UIView,
                                        cityTouched: YMTableViewCellTouched) -> YMTableView {
         
-        var table: YMTableView? = nil
-        
-        func ProvinceCellBuilder(cell: YMTableViewCell, data: AnyObject?) {
+       func ProvinceCellBuilder(cell: YMTableViewCell, data: AnyObject?) {
             let realData = data as! [String: AnyObject]
             let provData = realData["prov"] as! [String: AnyObject]
             let cellInner = UILabel()
@@ -237,7 +235,7 @@ public class PageSearchResultCell {
         }
 
         
-        table = YMTableView(builer: ProvinceCellBuilder, subBuilder: CityPanelBuilder, touched: nil)
+        let table = YMTableView(builer: ProvinceCellBuilder, subBuilder: CityPanelBuilder, touched: nil)
         
         for v in provinces {
             let cityTable = YMTableView(builer: CityCellBuilder, subBuilder: nil, touched: cityTouched)
@@ -254,21 +252,21 @@ public class PageSearchResultCell {
                 }
                 provCellData["citys"] = cityTable
                 provCellData["prov"] = v
-                table?.AppendCell(provCellData)
+                table.AppendCell(provCellData)
             }
         }
         
-        parent.addSubview(table!.TableViewPanel)
-        table?.TableViewPanel.fillSuperview()
-        table?.DrawTableView(false)
-        table?.SubCellLayout()
+        parent.addSubview(table.TableViewPanel)
+        table.TableViewPanel.fillSuperview()
+        table.DrawTableView(false)
+        table.SubCellLayout()
         
-        return table!
+        return table
     }
     
     public static func GetHospitalSearchView(hospitals: [String: [ String: [ [String: AnyObject] ] ] ],
                                              parent: UIView,
-                                             hospitalTouched: YMTableViewCellTouched) {
+                                             hospitalTouched: YMTableViewCellTouched) -> YMTableView {
         
         func HospitalCellBuilder(cell: YMTableViewCell, data: AnyObject?) {
             let realData = data as! [String: AnyObject]
@@ -309,6 +307,8 @@ public class PageSearchResultCell {
         parent.addSubview(table.TableViewPanel)
         table.TableViewPanel.fillSuperview()
         table.DrawTableView(false)
+        
+        return table
     }
     
     public static func GetDeptSearchView(dept: [[String: AnyObject]],

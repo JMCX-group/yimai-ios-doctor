@@ -157,6 +157,9 @@ public class YMLayout {
     
     public static func ClearView(view target: UIView) {
         for view in target.subviews{
+            let v = view as? YMTouchableView
+            v?.UserObjectData = nil
+            v?.UserStringData = ""
             view.removeFromSuperview()
         }
     }

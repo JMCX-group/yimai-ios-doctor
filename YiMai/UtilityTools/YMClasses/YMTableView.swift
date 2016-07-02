@@ -18,10 +18,10 @@ public class YMTableViewCell: UIView {
     private var Next: YMTableViewCell? = nil
     private var ParentTableView: YMTableView?
 
-    public var CellData: AnyObject? = nil
-    public var CellInnerView: UIView? = nil
+    public weak var CellData: AnyObject? = nil
+    public weak var CellInnerView: UIView? = nil
     
-    public var SubCell: AnyObject? = nil
+    public weak var SubCell: AnyObject? = nil
 
     public var Expanded: Bool = false
     
@@ -77,6 +77,18 @@ public class YMTableView: NSObject {
         newView.addGestureRecognizer(tapGR)
         
         return newView
+    }
+    
+    public func GetCellCount() -> Int {
+        var cellPointer = self.CellList.Next
+        var count = 0
+        
+        while(nil != cellPointer) {
+            count += 1
+            cellPointer = cellPointer!.Next
+        }
+        
+        return count
     }
     
     public func AppendCell(data: AnyObject) ->  YMTableView {
@@ -220,6 +232,9 @@ public class YMTableView: NSObject {
             
             cellPointer = LastCell
             LastCell = cellPointer?.Prev
+            
+            let subTable = cellPointer?.SubCell as? YMTableView
+            subTable?.Clear()
 
             cellPointer?.removeFromSuperview()
             cellPointer?.Prev = nil
