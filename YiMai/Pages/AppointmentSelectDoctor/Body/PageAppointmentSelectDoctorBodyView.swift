@@ -21,6 +21,8 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         DrawSearchPanel()
         DrawLevel1Friends()
         DrawLevel2Friends()
+        
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: Level2FriendsPanel)
     }
     
     private func DrawSearchPanel() {

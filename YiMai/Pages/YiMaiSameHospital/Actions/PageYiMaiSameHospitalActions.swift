@@ -37,7 +37,11 @@ public class PageYiMaiSameHospitalActions: PageJumpActions{
     }
     
     public func DocCellTouched(sender: UIGestureRecognizer) {
+        let cell = sender.view! as! YMTouchableView
+        let docInfo = cell.UserObjectData as! [String: AnyObject]
         
+        PageYiMaiDoctorDetailBodyView.DocId = "\(docInfo["id"]!)"
+        DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME)
     }
     
     public func DoSearch(input: YMTextField) {

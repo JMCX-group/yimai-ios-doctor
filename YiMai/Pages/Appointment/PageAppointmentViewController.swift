@@ -20,31 +20,8 @@ public class PageAppointmentViewController: PageViewController {
     public static var SelectedTimeForUpload: [String]? = nil
     
     public static var NewAppointment = true
-    
-    public override func PageLayout() {
-        if(nil != BodyView) {
-            if(PageAppointmentViewController.NewAppointment) {
-                
-                PageAppointmentViewController.SelectedDoctor = nil
-                PageAppointmentViewController.PatientBasicInfo = nil
-                PageAppointmentViewController.PatientCondition = ""
-                PageAppointmentViewController.SelectedTime = ""
-                
-                BodyView?.BodyView.removeFromSuperview()
-                TopView?.TopViewPanel.removeFromSuperview()
-                
-                BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
-                TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
-                PageAppointmentViewController.NewAppointment = false
-            } else {
-                BodyView?.Reload()
-            }
-            return
-        }
-        
-        if(PageLayoutFlag) {return}
-        PageLayoutFlag=true
 
+    override func PageLayout() {
         super.PageLayout()
         Actions = PageAppointmentActions(navController: self.NavController, target: self)
         BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
@@ -52,20 +29,50 @@ public class PageAppointmentViewController: PageViewController {
         
         Loading = YMPageLoadingView(parentView: self.view)
     }
-    
-    public func VerifyInput() -> [String:String]? {
+
+    override func PagePreRefresh() {
+        if(PageAppointmentViewController.NewAppointment) {
+            
+            PageAppointmentViewController.SelectedDoctor = nil
+            PageAppointmentViewController.PatientBasicInfo = nil
+            PageAppointmentViewController.PatientCondition = ""
+            PageAppointmentViewController.SelectedTime = ""
+            
+            BodyView?.BodyView.removeFromSuperview()
+            TopView?.TopViewPanel.removeFromSuperview()
+            
+            BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
+            TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
+            PageAppointmentViewController.NewAppointment = false
+        } else {
+            BodyView?.Reload()
+            if(nil != VerifyInput(false)) {
+                BodyView?.SetConfirmEnable()
+            } else {
+                BodyView?.SetConfirmDisable()
+            }
+        }
+    }
+
+    public func VerifyInput(showAlarm: Bool = true) -> [String:String]? {
         if(nil == PageAppointmentViewController.PatientBasicInfo) {
-            YMPageModalMessage.ShowErrorInfo("请填写病人基本信息！", nav: self.NavController!)
+            if(showAlarm) {
+                YMPageModalMessage.ShowErrorInfo("请填写病人基本信息！", nav: self.NavController!)
+            }
             return nil
         }
         
         if(nil == PageAppointmentViewController.SelectedDoctor) {
-            YMPageModalMessage.ShowErrorInfo("请选择医生！", nav: self.NavController!)
+            if(showAlarm) {
+                YMPageModalMessage.ShowErrorInfo("请选择医生！", nav: self.NavController!)
+            }
             return nil
         }
         
         if(nil == PageAppointmentViewController.SelectedTimeForUpload) {
-            YMPageModalMessage.ShowErrorInfo("请选择就诊时间！", nav: self.NavController!)
+            if(showAlarm) {
+                YMPageModalMessage.ShowErrorInfo("请选择就诊时间！", nav: self.NavController!)
+            }
             return nil
         }
         

@@ -39,11 +39,22 @@ public class PageYiMaiViewController: PageViewController {
         YiMaiTopView?.SetSelectedTab(YMYiMaiStrings.CS_TOP_TAB_R1_BUTTON_TITLE)
         YiMaiR2Body?.BodyView.hidden = true
         YiMaiR1Body?.BodyView.hidden = false
+        
+        YiMaiR1Body?.SetBodyScroll()
+        YiMaiR2Body?.SetBodyScroll()
     }
     
     public func ShowYiMaiR2Page() {
         YiMaiTopView?.SetSelectedTab(YMYiMaiStrings.CS_TOP_TAB_R2_BUTTON_TITLE)
         YiMaiR1Body?.BodyView.hidden = true
         YiMaiR2Body?.BodyView.hidden = false
+        
+        YiMaiR1Body?.SetBodyScroll()
+        YiMaiR2Body?.SetBodyScroll()
+    }
+    
+    override func PageDisapeared() {
+        YiMaiR1Body?.SearchInput?.text = ""
+        YiMaiR2Body?.SearchInput?.text = ""
     }
 }

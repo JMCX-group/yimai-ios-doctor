@@ -48,6 +48,8 @@ public class PageIndexBodyView {
         DrawOperatorPanel()
         DrawDoctorAuthPanel()
         DrawContactPanel()
+        
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: ContactPanel, padding: 10.LayoutVal())
     }
     
     private func DrawScrollPanel() {
@@ -87,7 +89,9 @@ public class PageIndexBodyView {
                                                             useMethod: "JumpToAppointment:".Sel(),
                                                             userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
         
-        AdmissionsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
+        AdmissionsButton = YMLayout.GetTouchableView(useObject: Actions!,
+                                                     useMethod: "PageJumpToByViewSender:".Sel(),
+                                                     userStringData: YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME)
         RecordsButton = YMLayout.GetTouchableView(useObject: Actions!,
             useMethod: "PageJumpToByViewSender:".Sel(),
             userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_RECORD_NAME)

@@ -36,6 +36,7 @@ public class PageIndexViewController: PageViewController {
     
     override func PagePreRefresh() {
         BottomView!.BottomViewPanel.removeFromSuperview()
+        IndexTopView?.TopSearchInput?.text = ""
         
         PageCommonBottomView.BottomButtonImage = [
             YMCommonStrings.CS_PAGE_INDEX_NAME:"IndexButtonHomeBlue",

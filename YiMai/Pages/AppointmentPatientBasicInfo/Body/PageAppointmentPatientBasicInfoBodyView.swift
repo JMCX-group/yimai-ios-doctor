@@ -20,7 +20,7 @@ public class PageAppointmentPatientBasicInfoBodyView: PageBodyView{
     private var PatientGenderInput: YMTextField? = nil
     private var PatientAgeInput: YMTextField? = nil
     
-    private var ConfirmButton: YMTouchableView? = nil
+    private var ConfirmButton: YMButton? = nil
 
     
     public func Reload(){}
@@ -113,23 +113,34 @@ public class PageAppointmentPatientBasicInfoBodyView: PageBodyView{
         PatientAgeInput?.keyboardType = UIKeyboardType.NumberPad
         
         PatientGenderInput?.EditStartCallback = self.ShowGenderSelector
+        
+        let basicAction = Actions as? PageAppointmentPatientBasicInfoActions
+        PatientNameInput?.EditChangedCallback = basicAction?.CheckWhenInputChanged
+        PatientPhoneInput?.EditChangedCallback = basicAction?.CheckWhenInputChanged
     }
     
     private func DrawConfirmButton() {
-        ConfirmButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "BasicInfoDone:".Sel())
+        ConfirmButton = YMButton()//YMLayout.GetTouchableView(useObject: Actions!, useMethod: "BasicInfoDone:".Sel())
         ParentView!.addSubview(ConfirmButton!)
         ConfirmButton?.anchorToEdge(Edge.Bottom, padding: 0.LayoutVal(), width: YMSizes.PageWidth, height: 98.LayoutVal())
 
         ConfirmButton?.backgroundColor = YMColors.CommonBottomGray
-
-        let titleLabel = UILabel()
-        titleLabel.text = "完 成"
-        titleLabel.textColor = YMColors.FontGray
-        titleLabel.font = YMFonts.YMDefaultFont(34.LayoutVal())
-        titleLabel.sizeToFit()
-
-        ConfirmButton?.addSubview(titleLabel)
-        titleLabel.anchorInCenter(width: titleLabel.width, height: 98.LayoutVal())
+        ConfirmButton?.addTarget(Actions!, action: "BasicInfoDone:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        ConfirmButton?.setTitle("完 成", forState: UIControlState.Normal)
+        ConfirmButton?.setTitleColor(YMColors.FontGray, forState: UIControlState.Disabled)
+        ConfirmButton?.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        ConfirmButton?.titleLabel?.font = YMFonts.YMDefaultFont(34.LayoutVal())
+        ConfirmButton?.enabled = false
+    }
+    
+    public func SetConfirmEnable() {
+        ConfirmButton?.enabled = true
+        ConfirmButton?.backgroundColor = YMColors.FontBlue
+    }
+    
+    public func SetConfirmDisable() {
+        ConfirmButton?.enabled = false
+        ConfirmButton?.backgroundColor = YMColors.CommonBottomGray
     }
 }
 

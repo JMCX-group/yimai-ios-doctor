@@ -16,7 +16,7 @@ public class PageIndexTopView: NSObject {
     
     private var NameCardButton: YMTouchableImageView? = nil
     private var SysMessageButton: YMTouchableImageView? = nil
-    private var TopSearchInput: YMTextField? = nil
+    public var TopSearchInput: YMTextField? = nil
     private let TopSearchImage: UIImage = UIImage(named: "CommonIconSearchHeader")!
     private let TopBackground = YMLayout.GetSuitableImageView("TopViewBackgroundNormal")
     

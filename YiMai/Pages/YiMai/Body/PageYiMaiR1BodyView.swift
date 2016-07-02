@@ -10,7 +10,7 @@ import Foundation
 import Neon
 
 public class PageYiMaiR1BodyView: PageBodyView {
-    private var SearchInput: YMTextField? = nil
+    public var SearchInput: YMTextField? = nil
     private var SameHopitalButton: YMTouchableView? = nil
     private var SameSchoolButton: YMTouchableView? = nil
     private var SameAreasButton: YMTouchableView? = nil
@@ -21,9 +21,11 @@ public class PageYiMaiR1BodyView: PageBodyView {
     private let FriendsPanel = UIView()
     
     private let OperationSelector:Selector = "PageJumpToByViewSender:".Sel()
-    private let FriendCellTouched: Selector = "FriendButtonTouched:".Sel()
+    private let FriendCellTouched: Selector = "FriendCellTouched:".Sel()
 
     override func ViewLayout() {
+        super.ViewLayout()
+
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.BackgroundGray
         
@@ -31,8 +33,13 @@ public class PageYiMaiR1BodyView: PageBodyView {
         DrawOptPanel()
         DrawNewFriendsPanel()
         DrawFriendsPanel()
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
     }
 
+    public func SetBodyScroll() {
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
+    }
+    
     private func DrawOptPanel() {
         BodyView.addSubview(OperationPanel)
         
@@ -111,6 +118,9 @@ public class PageYiMaiR1BodyView: PageBodyView {
         searchIconView.addSubview(searchIcon)
         searchIcon.anchorInCenter(width: searchIcon.width, height: searchIcon.height)
         SearchInput?.SetLeftPadding(searchIconView)
+        
+        let searchActions = Actions! as? PageYiMaiActions
+        SearchInput?.EditEndCallback = searchActions?.DoSearch
     }
     
     private func DrawNewFriendsPanel() {
@@ -177,6 +187,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
         let jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as! String
         let userId = data[YMYiMaiStrings.CS_DATA_KEY_USER_ID] as! String
+        
         
         let nameLabel = UILabel()
         let divider = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.OnPx,height: 20.LayoutVal()))
@@ -265,42 +276,10 @@ public class PageYiMaiR1BodyView: PageBodyView {
                 ], prevCell: cellView
             )
         }
-
-//        cellView = DrawFriendsCell(
-//            [
-//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-//                YMYiMaiStrings.CS_DATA_KEY_NAME:"池帅",
-//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"鸡西矿业总医院医疗集团二道河子中心医院",
-//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"心血管外科",
-//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-//                
-//            ], prevCell: nil
-//        )
-//
-//        cellView = DrawFriendsCell(
-//            [
-//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-//                YMYiMaiStrings.CS_DATA_KEY_NAME:"方欣雨",
-//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"牡丹江市西安区先锋医院江滨社区第一卫生服务站",
-//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"小儿营养保健科",
-//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-//                
-//            ], prevCell: cellView
-//        )
-//        
-//        cellView = DrawFriendsCell(
-//            [
-//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-//                YMYiMaiStrings.CS_DATA_KEY_NAME:"武瑞鑫",
-//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"中国医学科学院北京协和医院",
-//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"功能神经外科",
-//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-//                
-//            ], prevCell: cellView
-//        )
+        
+        if(nil != cellView) {
+            YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: cellView!)
+        }
     }
 }
 

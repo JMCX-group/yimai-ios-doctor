@@ -38,7 +38,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
     }
     
     public func Clear() {
-        YMLayout.ClearView(view: BodyView)
+        //YMLayout.ClearView(view: BodyView)
     }
     
     public func DrawBasicPanel(data: [String: AnyObject]) -> UIView {

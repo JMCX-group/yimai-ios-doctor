@@ -31,4 +31,25 @@ public class PageAppointmentPatientBasicInfoActions: PageJumpActions {
         PageAppointmentViewController.PatientBasicInfo = info
         self.NavController?.popViewControllerAnimated(true)
     }
+    
+    public func CheckWhenInputChanged(_: YMTextField) {
+        let pageController = self.Target! as! PageAppointmentPatientBasicInfoViewController
+        
+        let info = pageController.BodyView!.GetPatientInfo()
+        
+        let name = info["name"]!
+        let phone = info["phone"]!
+        
+        if("" == name) {
+            pageController.BodyView?.SetConfirmDisable()
+            return
+        }
+        
+        if(!YMValueValidator.IsCellPhoneNum(phone)) {
+            pageController.BodyView?.SetConfirmDisable()
+            return
+        }
+        
+        pageController.BodyView?.SetConfirmEnable()
+    }
 }

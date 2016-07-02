@@ -21,6 +21,8 @@ public class PagePersonalBodyView: NSObject {
     private var BodyTopPadding: UIView? = nil
     private var OperationHeight = 91.LayoutVal()
     
+    private var LastView: UIView? = nil
+    
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: PagePersonalActions){
         self.init()
         self.ParentView = parentView
@@ -28,6 +30,8 @@ public class PagePersonalBodyView: NSObject {
         self.Actions = pageActions
         
         ViewLayout()
+        
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: LastView!)
     }
     
     private func DrawBodyPanel() {
@@ -126,7 +130,7 @@ public class PagePersonalBodyView: NSObject {
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_WALLET_NAME, iconName: "PersonalIconMyWallet",title: "我的钱包")
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_PERSONAL_SETTING_NAME, iconName: "PersonalIconMySetting",title: "设置")
         DrawHotLinePanel()
-        DrawAnOperationPanel(YMCommonStrings.CS_PAGE_CONSULTANT_ZONE_NAME, iconName: "PersonalIconConsultantZone",title: "健康顾问合作专区")
+        LastView = DrawAnOperationPanel(YMCommonStrings.CS_PAGE_CONSULTANT_ZONE_NAME, iconName: "PersonalIconConsultantZone",title: "健康顾问合作专区")
         
         BodyView.groupAndAlign(group: Group.Vertical, andAlign: Align.UnderMatchingLeft,
             views: OperationArray.map({$0 as YMTouchableView}), relativeTo: BodyTopPadding!,

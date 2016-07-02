@@ -269,11 +269,12 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         
         name.text = "\(data["patient_name"]!)"
         basicInfo.text = "\(genderMap[data["patient_gender"]! as! String]!) \(data["patient_age"]!)岁"
-        location.text = "接口数据缺失"
+        location.text = data["hospital"] as? String
         time.text = "\(data["time"]!)"
         status.text = "\(data["status"]!)"
         type.text = "\(data["who"]!)"
         
+        print(data)
         name.textColor = YMColors.FontBlue
         basicInfo.textColor = YMColors.FontGray
         location.textColor = YMColors.FontBlue

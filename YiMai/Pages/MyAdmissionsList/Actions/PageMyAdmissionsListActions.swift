@@ -76,7 +76,13 @@ public class PageMyAdmissionsListActions: PageJumpActions{
     
     public func AdmissionTouched(sender: UIGestureRecognizer) {
         let _ = self.Target! as! PageMyAdmissionsListViewController
-        print("AdmissionTouched")
+        let cell = sender.view as! YMTouchableView
+        let cellData = cell.UserObjectData as! [String: AnyObject]
+        
+        let id = "\(cellData["id"]!)"
+        
+        PageAppointmentDetailViewController.AppointmentID = id
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
     }
 }
 

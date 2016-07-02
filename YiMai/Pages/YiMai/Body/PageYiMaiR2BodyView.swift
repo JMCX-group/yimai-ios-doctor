@@ -10,18 +10,24 @@ import Foundation
 import Neon
 
 public class PageYiMaiR2BodyView: PageBodyView {
-    private var SearchInput: YMTextField? = nil
+    public var SearchInput: YMTextField? = nil
     private let SearchPanel = UIView()
     private let FriendsPanel = UIView()
-    private let FriendCellTouched: Selector = "FriendButtonTouched:".Sel()
+    private let FriendCellTouched: Selector = "FriendCellTouched:".Sel()
     
     override func ViewLayout() {
+        super.ViewLayout()
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.BackgroundGray
         BodyView.hidden = true
         
         DrawSearchPanel()
         DrawFriendsPanel()
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
+    }
+    
+    public func SetBodyScroll() {
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
     }
     
     private func DrawSearchPanel() {
@@ -40,6 +46,9 @@ public class PageYiMaiR2BodyView: PageBodyView {
         SearchPanel.addSubview(SearchInput!)
         
         SearchPanel.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: 120.LayoutVal())
+        
+        let searchActions = Actions! as? PageYiMaiActions
+        SearchInput?.EditEndCallback = searchActions?.DoSearch
         
         SearchInput?.anchorInCenter(width: 690.LayoutVal(), height: 60.LayoutVal())
         searchIconView.addSubview(searchIcon)
@@ -147,41 +156,9 @@ public class PageYiMaiR2BodyView: PageBodyView {
             )
         }
         
-//        cellView = DrawFriendsCell(
-//            [
-//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-//                YMYiMaiStrings.CS_DATA_KEY_NAME:"池帅",
-//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"鸡西矿业总医院医疗集团二道河子中心医院",
-//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"心血管外科",
-//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-//                
-//            ], prevCell: nil
-//        )
-//        
-//        cellView = DrawFriendsCell(
-//            [
-//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-//                YMYiMaiStrings.CS_DATA_KEY_NAME:"方欣雨",
-//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"牡丹江市西安区先锋医院江滨社区第一卫生服务站",
-//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"小儿营养保健科",
-//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-//                
-//            ], prevCell: cellView
-//        )
-//        
-//        cellView = DrawFriendsCell(
-//            [
-//                YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
-//                YMYiMaiStrings.CS_DATA_KEY_NAME:"武瑞鑫",
-//                YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"中国医学科学院北京协和医院",
-//                YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"功能神经外科",
-//                YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-//                YMYiMaiStrings.CS_DATA_KEY_USER_ID:"1"
-//                
-//            ], prevCell: cellView
-//        )
+        if(nil != cellView) {
+            YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: cellView!)
+        }
     }
 
 }

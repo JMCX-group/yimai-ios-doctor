@@ -72,7 +72,7 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
         YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
     }
     
-    public func DoAppointment(sender: UIGestureRecognizer) {
+    public func DoAppointment(_: YMButton) {
         let pageController = self.Target! as! PageAppointmentViewController
         let uploadData = pageController.VerifyInput()
         
@@ -81,6 +81,17 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
             ApiUtility?.YMCreateNewAppointment(uploadData!)
         }
     }
+    
+    public func GoToSelectTime(_: UIGestureRecognizer) {
+        if(nil == PageAppointmentViewController.SelectedDoctor) {
+            YMPageModalMessage.ShowNormalInfo("请先选择医生！", nav: self.NavController!, callback: { (_) in
+                self.DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME)
+            })
+        } else {
+            self.DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME)
+        }
+    }
+    
 }
 
 

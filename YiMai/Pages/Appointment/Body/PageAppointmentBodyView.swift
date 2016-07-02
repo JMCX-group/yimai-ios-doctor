@@ -30,7 +30,7 @@ public class PageAppointmentBodyView: PageBodyView {
     private var SelectTimeButton: YMTouchableView? = nil
     private let SelectTimeLabel = UILabel()
     
-    private var ConfirmButton: YMTouchableView? = nil
+    private var ConfirmButton: YMButton? = nil
     
     private var LastImage: UIView? = nil
     private var ImageCount: Int = 0
@@ -313,7 +313,7 @@ public class PageAppointmentBodyView: PageBodyView {
         SelectTimePanel?.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 60.LayoutVal())
         
-        SelectTimeButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel, userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME)
+        SelectTimeButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "GoToSelectTime:".Sel(), userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME)
         
         SelectTimePanel?.addSubview(SelectTimeButton!)
         SelectTimeButton?.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 84.LayoutVal())
@@ -334,20 +334,29 @@ public class PageAppointmentBodyView: PageBodyView {
     }
     
     private func DrawConfirmButton() {
-        ConfirmButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoAppointment:".Sel())
+        ConfirmButton = YMButton()
         ParentView!.addSubview(ConfirmButton!)
         ConfirmButton?.anchorToEdge(Edge.Bottom, padding: 0.LayoutVal(), width: YMSizes.PageWidth, height: 98.LayoutVal())
+        
+        ConfirmButton?.addTarget(Actions!, action: "DoAppointment:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
 
         ConfirmButton?.backgroundColor = YMColors.CommonBottomGray
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "发送预约请求"
-        titleLabel.textColor = YMColors.FontGray
-        titleLabel.font = YMFonts.YMDefaultFont(34.LayoutVal())
-        titleLabel.sizeToFit()
-        
-        ConfirmButton?.addSubview(titleLabel)
-        titleLabel.anchorInCenter(width: titleLabel.width, height: 98.LayoutVal())
+        ConfirmButton?.setTitle("发送预约请求", forState: UIControlState.Normal)
+        ConfirmButton?.setTitleColor(YMColors.FontGray, forState: UIControlState.Disabled)
+        ConfirmButton?.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        ConfirmButton?.titleLabel?.font = YMFonts.YMDefaultFont(34.LayoutVal())
+        ConfirmButton?.enabled = false
+
+    }
+    
+    public func SetConfirmEnable() {
+        ConfirmButton?.enabled = true
+        ConfirmButton?.backgroundColor = YMColors.CommonBottomBlue
+    }
+    
+    public func SetConfirmDisable() {
+        ConfirmButton?.enabled = false
+        ConfirmButton?.backgroundColor = YMColors.CommonBottomGray
     }
     
     public func AddImage(image: UIImageView) {

@@ -22,12 +22,16 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
     private var SelectedFullDate = [String: String]()
     private var SelectedAMorPM = [String: String]()
     
+    private var LastView: UIView? = nil
+    
     override func ViewLayout() {
         super.ViewLayout()
         
         DrawDoctorCell()
         DrawCalendar()
         DrawButton()
+        
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: LastView)
     }
     
     public func SetSelectedDays(cell: YMTouchableView) {
@@ -398,6 +402,8 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
         
         okLabel.anchorInCenter(width: okLabel.width, height: okLabel.height)
         autoLabel.anchorInCenter(width: autoLabel.width, height: autoLabel.height)
+        
+        LastView = autoLabel
     }
 }
 
