@@ -1,6 +1,0 @@
-framework module MWIDCardValidate {
-  umbrella header "MWIDCardValidate-umbrella.h"
-
-  export *
-  module * { export * }
-}
