@@ -1,7 +1,4 @@
-*.xcuserstate
-project.xcworkspace
-xcuserdata
-UserInterfaceState.xcuserstate
-project.xcworkspace/
-xcuserdata/
-UserInterface.xcuserstate
+/Pods
+/YiMai.xcworkspace
+Podfile.lock
+.DS_Store
