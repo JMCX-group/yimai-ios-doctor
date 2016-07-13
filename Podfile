@@ -5,7 +5,6 @@ use_frameworks!
 
 target 'YiMai' do
   pod 'AFNetworking'
-  pod 'ORStackView'
   pod 'SwiftyJSON'
   pod 'Neon'
   pod 'swiftScan'
