@@ -27,7 +27,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_REGISTER_SELECT_HOSPITAL_NAME = "PageRegisterSelectHospital"
     public static let CS_PAGE_REGISTER_INPUT_HOSPITAL_NAME = "PageRegisterInputHospital"
     
-    public static let CS_PAGE_MY_ADMISSIONS_SETTING_NAME = "PageMyAdmissions"
+    public static let CS_PAGE_MY_ADMISSIONS_SETTING_NAME = "PageMyAdmissionSetting"
     public static let CS_PAGE_MY_PATIENTS_NAME = "PageMyPatients"
     public static let CS_PAGE_PERSONAL_SETTING_NAME = "PagePersonalSetting"
     public static let CS_PAGE_MY_WALLET_NAME = "PageMyWallet"
@@ -45,6 +45,9 @@ public class YMCommonStrings {
     
     public static let CS_PAGE_APPOINTMENT_RECORD_NAME = "PageAppointmentRecord"
     public static let CS_PAGE_APPOINTMENT_DETAIL_NAME = "PageAppointmentDetail"
+    
+    public static let CS_PAEG_ADMISSION_CHARGE_SETTING_NAME = "PageAdmissionChargeSetting"
+    public static let CS_PAEG_ADMISSION_TIME_SETTING_NAME = "PageAdmissionTimeSetting"
     
     
     public static let CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME = "PageFace2FaceInfoInput"

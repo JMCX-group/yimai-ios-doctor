@@ -11,7 +11,7 @@ import UIKit
 
 public class YMTouchableView: UIView {
     public var UserStringData: String = ""
-    public weak var UserObjectData: AnyObject? = nil
+    public var UserObjectData: AnyObject? = nil
 }
 
 public class YMTouchableImageView: UIImageView {
