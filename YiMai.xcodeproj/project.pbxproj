@@ -2085,12 +2085,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9619EF621CC1DB9600F69CBC /* Build configuration list for PBXNativeTarget "YiMai" */;
 			buildPhases = (
+				E6BC80AE7D517AA66177C51A /* 📦 Check Pods Manifest.lock */,
 				A077FAF80F9F5F3142F7BA1E /* [CP] Check Pods Manifest.lock */,
 				9619EF491CC1DB9600F69CBC /* Sources */,
 				9619EF4A1CC1DB9600F69CBC /* Frameworks */,
 				9619EF4B1CC1DB9600F69CBC /* Resources */,
 				181F1355BC3A2B7183EB8798 /* [CP] Embed Pods Frameworks */,
 				A92B73FCA0C5A38855FFC8E1 /* [CP] Copy Pods Resources */,
+				97A49BF49A9AC992897EE74C /* 📦 Embed Pods Frameworks */,
+				3510DDC46F33EA763884CDF2 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2211,6 +2214,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiMai/Pods-YiMai-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3510DDC46F33EA763884CDF2 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiMai/Pods-YiMai-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97A49BF49A9AC992897EE74C /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiMai/Pods-YiMai-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A077FAF80F9F5F3142F7BA1E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2239,6 +2272,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiMai/Pods-YiMai-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6BC80AE7D517AA66177C51A /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
