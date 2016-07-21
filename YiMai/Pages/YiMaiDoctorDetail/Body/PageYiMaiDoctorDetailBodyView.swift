@@ -35,10 +35,13 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         prev = DrawCollege(data, prev: prev!)
 
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: prev)
+        
+        print("view data loaded")
     }
     
     public func Clear() {
-        //YMLayout.ClearView(view: BodyView)
+        print("view cleared")
+        YMLayout.ClearView(view: BodyView)
     }
     
     public func DrawBasicPanel(data: [String: AnyObject]) -> UIView {

@@ -25,7 +25,6 @@ public class PageYiMaiSameAreasViewController: PageViewController{
     }
 
     override func PageDisapeared() {
-        print("cleared")
         BodyView?.Clear()
     }
 }

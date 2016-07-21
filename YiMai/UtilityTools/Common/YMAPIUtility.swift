@@ -365,6 +365,7 @@ public class YMAPIUtility {
             return
         }
         
+        print(self.Key)
         var url = YMAPIUtility.AppendRouteParamToUrl(YMAPIInterfaceURL.QueryUserInfoById, value: doctorId)
         url = YMAPIUtility.AppendTokenToUrl(url, token: token! as! String)
 
