@@ -81,7 +81,7 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
             let amCell = YMButton()
             amCell.setTitle("上午", forState: UIControlState.Normal)
             amCell.setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
-            amCell.backgroundColor = YMColors.DividerLineGray
+//            amCell.backgroundColor = YMColors.DividerLineGray
             amCell.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
             amCell.addTarget(SettingActions!, action: cellTouchedSel, forControlEvents: UIControlEvents.TouchUpInside)
             amCell.UserObjectData = ["weekDay": idx, "AMorPM": "am"]
@@ -91,7 +91,7 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
             let pmCell = YMButton()
             pmCell.setTitle("下午", forState: UIControlState.Normal)
             pmCell.setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
-            pmCell.backgroundColor = YMColors.DividerLineGray
+//            pmCell.backgroundColor = YMColors.DividerLineGray
             pmCell.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
             pmCell.addTarget(SettingActions!, action: cellTouchedSel, forControlEvents: UIControlEvents.TouchUpInside)
             amCell.UserObjectData = ["weekDay": idx, "AMorPM": "pm"]
@@ -103,7 +103,7 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
         amLinePanel.groupAndFill(group: Group.Horizontal, views: AMLineArr.map({$0 as YMButton}), padding: 0)
         pmLinePanel.groupAndFill(group: Group.Horizontal, views: PMLineArr.map({$0 as YMButton}), padding: 0)
         
-        let baseLeft = 106.0.LayoutVal()
+        let baseLeft = 107.0.LayoutVal()
         for i in 1...6 {
             let divider = UIView()
             WeekdayPanel.addSubview(divider)
@@ -160,22 +160,127 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
         leftArrow.anchorInCenter(width: leftArrow.width, height: leftArrow.height)
         rightArrow.anchorInCenter(width: rightArrow.width, height: rightArrow.height)
         
-        CalendarPanel.addSubview(monthLabel)
+        monthPanel.addSubview(monthLabel)
         monthLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
         monthLabel.textColor = YMColors.FontBlue
         monthLabel.text = ""
         monthLabel.sizeToFit()
         monthLabel.anchorInCenter(width: monthLabel.width, height: monthLabel.height)
         
-        DrawCalendarGrid(curDate, parent: CalendarPanel, prev: monthLabel)
+        DrawCalendarGrid(curDate, parent: CalendarPanel, prev: monthPanel)
     }
     
     private func BuildDisabledDayCell(day: Int) -> YMTouchableView {
-        return YMTouchableView()
+        let cell = YMTouchableView()
+        
+        let dayLabel = UILabel()
+        dayLabel.text = "\(day)"
+        dayLabel.textColor = YMColors.WeekdayDisabledFontColor
+        dayLabel.font = YMFonts.YMDefaultFont(32.LayoutVal())
+        dayLabel.sizeToFit()
+
+        cell.addSubview(dayLabel)
+
+        cell.UserObjectData = ["label": dayLabel]
+        cell.UserStringData = "0"
+        return cell
     }
     
     private func BuildNormalDayCell(day: Int) -> YMTouchableView {
-        return YMTouchableView()
+        let cell = YMTouchableView()
+        
+        let dayLabel = UILabel()
+        dayLabel.text = "\(day)"
+        dayLabel.textColor = YMColors.FontBlue
+        dayLabel.font = YMFonts.YMDefaultFont(32.LayoutVal())
+        dayLabel.sizeToFit()
+        
+        cell.addSubview(dayLabel)
+        cell.backgroundColor = YMColors.White
+        
+        let amIcon = YMLayout.GetSuitableImageView("PageAdmissionTimeSettingAMIcon")
+        let pmIcon = YMLayout.GetSuitableImageView("PageAdmissionTimeSettingAMIcon")
+      
+        amIcon.hidden = true
+        pmIcon.hidden = true
+        
+        cell.addSubview(amIcon)
+        cell.addSubview(pmIcon)
+        
+        cell.UserObjectData = ["label": dayLabel, "amIcon": amIcon, "pmIcon": pmIcon, "status": "none"]
+        cell.UserStringData = "1"
+
+        return cell
+    }
+    
+    private func SetDayCellAMSelected(cell: YMTouchableView) {
+        var cellData = cell.UserObjectData as! [String: AnyObject]
+        let amIcon = cellData["amIcon"] as! UIImageView
+        let pmIcon = cellData["pmIcon"] as! UIImageView
+        
+        amIcon.hidden = false
+        pmIcon.hidden = true
+        
+        cell.backgroundColor = YMColors.WeekdaySelectedColor
+        cellData["status"] = "am"
+        cell.UserObjectData = cellData
+    }
+    
+    private func SetDayCellPMSelected(cell: YMTouchableView) {
+        var cellData = cell.UserObjectData as! [String: AnyObject]
+        let amIcon = cellData["amIcon"] as! UIImageView
+        let pmIcon = cellData["pmIcon"] as! UIImageView
+        
+        amIcon.hidden = true
+        pmIcon.hidden = false
+        
+        cell.backgroundColor = YMColors.WeekdaySelectedColor
+        cellData["status"] = "pm"
+        cell.UserObjectData = cellData
+    }
+    
+    private func SetDaySelected(cell: YMTouchableView) {
+        var cellData = cell.UserObjectData as! [String: AnyObject]
+        let amIcon = cellData["amIcon"] as! UIImageView
+        let pmIcon = cellData["pmIcon"] as! UIImageView
+        
+        amIcon.hidden = true
+        pmIcon.hidden = true
+        
+        cell.backgroundColor = YMColors.WeekdaySelectedColor
+        cellData["status"] = "day"
+        cell.UserObjectData = cellData
+    }
+    
+    private func SetDayUnSelected(cell: YMTouchableView) {
+        var cellData = cell.UserObjectData as! [String: AnyObject]
+        let amIcon = cellData["amIcon"] as! UIImageView
+        let pmIcon = cellData["pmIcon"] as! UIImageView
+        
+        amIcon.hidden = false
+        pmIcon.hidden = false
+        
+        cell.backgroundColor = YMColors.WeekdaySelectedColor
+        cellData["status"] = "none"
+        cell.UserObjectData = cellData
+    }
+    
+    private func DrawCalendarGridDividerLine(parent: UIView, weekLineCount: Int) {
+        let baseLeft = 107.0.LayoutVal()
+        for i in 1...6 {
+            let divider = UIView()
+            parent.addSubview(divider)
+            divider.backgroundColor = YMColors.WeekdayLineColor
+            divider.anchorToEdge(Edge.Left, padding: baseLeft * CGFloat(i), width: YMSizes.OnPx, height: parent.height)
+        }
+        
+        let baseTop = 107.0.LayoutVal()
+        for i in 0...weekLineCount {
+            let divider = UIView()
+            parent.addSubview(divider)
+            divider.backgroundColor = YMColors.WeekdayLineColor
+            divider.anchorToEdge(Edge.Top, padding: baseTop * CGFloat(i), width: parent.width, height: YMSizes.OnPx)
+        }
     }
     
     private func DrawCalendarGrid(curDate: NSDate, parent: UIView, prev: UIView? = nil) {
@@ -192,6 +297,7 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
         }
         
         var weekLineArr = [YMTouchableView]()
+
         for week in daysInWeek {
             let weekLine = YMTouchableView()
             gridPanel.addSubview(weekLine)
@@ -211,10 +317,35 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
                 }
                 
                 cellArr.append(cell)
+                weekLine.addSubview(cell)
             }
             
             weekLine.UserObjectData = cellArr
         }
+        
+        gridPanel.groupAndFill(group: .Vertical, views: weekLineArr.map({$0 as YMTouchableView}), padding: 0)
+        
+        for line in weekLineArr {
+            let cellArr = line.UserObjectData as! [YMTouchableView]
+            line.groupAndFill(group: .Horizontal, views: cellArr.map({$0 as YMTouchableView}), padding: 0)
+            
+            for cell in cellArr {
+                let cellData = cell.UserObjectData as! [String: AnyObject]
+                let cellLabel = cellData["label"] as! UILabel
+                
+                cellLabel.anchorInCenter(width: cellLabel.width, height: cellLabel.height)
+                
+                if("1" == cell.UserStringData) {
+                    let amIcon = cellData["amIcon"] as! UIImageView
+                    let pmIcon = cellData["pmIcon"] as! UIImageView
+                    
+                    amIcon.anchorInCorner(Corner.TopRight, xPad: 0, yPad: 0, width: amIcon.width, height: amIcon.height)
+                    pmIcon.anchorInCorner(Corner.BottomRight, xPad: 0, yPad: 0, width: pmIcon.width, height: pmIcon.height)
+                }
+            }
+        }
+        
+        DrawCalendarGridDividerLine(gridPanel, weekLineCount: daysInWeek.count)
     }
     
     private func DrawFixedSchedule() {
