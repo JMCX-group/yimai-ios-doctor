@@ -22,3 +22,81 @@ public class YMDatetimeString {
         return timeFormatter.stringFromDate(dayBeforeNow) as String
     }
 }
+
+public class YMDateTools {
+    public static func GetMonthDaysArrayInWeek(date: NSDate) -> [[Int]] {
+        var dayCountInMonth =
+            //12, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 01]
+            [ 31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 31]
+        
+        let year = date.year
+        let month = date.month
+        let isLeapYear = date.isInLeapYear()!
+        
+        let prevMonth = month - 1
+        
+        if(isLeapYear) {
+            dayCountInMonth[2] = 29
+        }
+        
+        let initMonth = NSDate(year: year, month: month, day: 1)
+        let firstWeekdayInMonth = initMonth.weekday
+        
+        let dayCountInThisMonth = dayCountInMonth[month]
+        let prevMonthNeedFilling = firstWeekdayInMonth - 1
+        let dayCountInFirstWeek = 7 - prevMonthNeedFilling
+        let remainingCountInOtherWeek = dayCountInThisMonth - dayCountInFirstWeek
+        let lastWeekdayCountInMonth = remainingCountInOtherWeek % 7
+        let fullWeekCount = remainingCountInOtherWeek / 7
+        let nextMonthNeedFilling = 7 - lastWeekdayCountInMonth
+        
+        var weekArray = [[Int]]()
+        if(0 != prevMonthNeedFilling) {
+            var firstWeek = [Int]()
+            let prevMonthDayCount = dayCountInMonth[prevMonth]
+            let firstFillingDay = prevMonthDayCount - prevMonthNeedFilling + 1
+            for i in firstFillingDay...prevMonthDayCount {
+                firstWeek.append(-i)
+            }
+            
+            for i in 1...dayCountInFirstWeek {
+                firstWeek.append(i)
+            }
+            
+            weekArray.append(firstWeek)
+        }
+        
+        var dayIdx = dayCountInFirstWeek
+        for _ in 1...fullWeekCount {
+            var week = [Int]()
+            
+            week.append(dayIdx + 1)
+            week.append(dayIdx + 2)
+            week.append(dayIdx + 3)
+            week.append(dayIdx + 4)
+            week.append(dayIdx + 5)
+            week.append(dayIdx + 6)
+            week.append(dayIdx + 7)
+            
+            dayIdx += 7
+            
+            weekArray.append(week)
+        }
+        
+        if(0 != nextMonthNeedFilling) {
+            var lastWeek = [Int]()
+            dayIdx += 1
+            for i in dayIdx...dayCountInThisMonth {
+                lastWeek.append(i)
+            }
+            
+            for i in 1...nextMonthNeedFilling {
+                lastWeek.append(i * 100)
+            }
+            
+            weekArray.append(lastWeek)
+        }
+        
+        return weekArray
+    }
+}

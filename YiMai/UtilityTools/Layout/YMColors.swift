@@ -35,4 +35,7 @@ public class YMColors {
     public static let SearchSubCellBkg = UIColor(red: 0xe0.RGBVal(), green: 0xe0.RGBVal(), blue: 0xe0.RGBVal(), alpha: 1)
     public static let SearchCellBorder = UIColor(red: 0xe0.RGBVal(), green: 0xe0.RGBVal(), blue: 0xe0.RGBVal(), alpha: 1)
     public static let SearchSubCellBorder = UIColor(red: 0xca.RGBVal(), green: 0xca.RGBVal(), blue: 0xca.RGBVal(), alpha: 1)
+    
+    public static let WeekdayLineColor = UIColor(red: 0xb8.RGBVal(), green: 0xb8.RGBVal(), blue: 0xb8.RGBVal(), alpha: 1)
+    public static let WeekdayDisabledFontColor = UIColor(red: 0xb8.RGBVal(), green: 0xb8.RGBVal(), blue: 0xb8.RGBVal(), alpha: 1)
 }

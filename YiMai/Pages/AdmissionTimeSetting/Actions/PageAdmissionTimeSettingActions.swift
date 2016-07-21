@@ -17,4 +17,16 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
     public func TabTouched(sender: UISegmentedControl) {
         print(sender.selectedSegmentIndex)
     }
+    
+    public func AMorPMCellTouched(sender: YMButton) {
+        
+    }
+    
+    public func PrevFixedMonth(sender: UIGestureRecognizer) {
+        
+    }
+    
+    public func NextFixedMonth(sender: UIGestureRecognizer) {
+        
+    }
 }
