@@ -12,5 +12,6 @@ target 'YiMai' do
   pod 'SwiftDate'
   pod 'MWIDCardValidate'
   pod 'Graph'
+  pod 'RongCloudIMKit', '2.4.0'
 end
 

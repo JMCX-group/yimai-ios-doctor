@@ -496,6 +496,7 @@
 		96FCD14A1D17D80D00A6E12D /* PagePersonalDetailActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalDetailActions.swift; sourceTree = "<group>"; };
 		96FCD14C1D17D81A00A6E12D /* PagePersonalDetailTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalDetailTopView.swift; sourceTree = "<group>"; };
 		A556489D24098750735AC565 /* Pods_YiMai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiMai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD3C9A6A1D40BA1700AF7E2C /* YiMai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YiMai-Bridging-Header.h"; sourceTree = "<group>"; };
 		FD54E0561D3771FD00F8E629 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageMyAdmissionSetting.storyboard; sourceTree = "<group>"; };
 		FD54E0581D37722C00F8E629 /* PageMyAdmissionSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionSettingViewController.swift; sourceTree = "<group>"; };
 		FD54E05A1D3772B900F8E629 /* PageMyAdmissionSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionSettingBodyView.swift; sourceTree = "<group>"; };
@@ -1102,6 +1103,7 @@
 				9619EF5C1CC1DB9600F69CBC /* LaunchScreen.storyboard */,
 				9619EF5F1CC1DB9600F69CBC /* Info.plist */,
 				9619EF571CC1DB9600F69CBC /* YiMai.xcdatamodeld */,
+				FD3C9A6A1D40BA1700AF7E2C /* YiMai-Bridging-Header.h */,
 			);
 			path = YiMai;
 			sourceTree = "<group>";
@@ -2113,7 +2115,7 @@
 				TargetAttributes = {
 					9619EF4C1CC1DB9600F69CBC = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 9D4JR4C625;
+						DevelopmentTeam = 6HV8LR8T36;
 					};
 				};
 			};
@@ -2933,9 +2935,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = local.YiMai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.cc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -2948,9 +2951,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = local.YiMai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.cc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
 			};
 			name = Release;
 		};

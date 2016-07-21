@@ -14,10 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         YMCoreDataEngine.EngineInitialize()
+        
+        RCIM.sharedRCIM().initWithAppKey("sfci50a7c75di")
         return true
     }
 

@@ -151,6 +151,9 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
             appointmentBtn.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: 320.LayoutVal(), height: 70.LayoutVal())
             
             appointmentBtn.addTarget(DetailActions!, action: "DoAppointment:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+            
+            chatBtn.UserStringData = "\(data["id"]!)"
+            chatBtn.addTarget(DetailActions!, action: "DoChat:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         }
         return buttonPanel
     }
