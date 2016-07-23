@@ -250,7 +250,7 @@
 		FD54E05D1D3774CE00F8E629 /* PageMyAdmissionSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E05C1D3774CE00F8E629 /* PageMyAdmissionSettingActions.swift */; };
 		FD54E0601D37777400F8E629 /* PageAdmissionTimeSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD54E0621D37777400F8E629 /* PageAdmissionTimeSetting.storyboard */; };
 		FD54E0641D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0631D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift */; };
-		FD54E0661D3777DF00F8E629 /* PageAdmissionTimeSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0651D3777DF00F8E629 /* PageAdmissionTimeSettingBodyView.swift */; };
+		FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0651D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift */; };
 		FD54E06A1D37781E00F8E629 /* PageAdmissionTimeSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0691D37781E00F8E629 /* PageAdmissionTimeSettingActions.swift */; };
 /* End PBXBuildFile section */
 
@@ -503,7 +503,7 @@
 		FD54E05C1D3774CE00F8E629 /* PageMyAdmissionSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionSettingActions.swift; sourceTree = "<group>"; };
 		FD54E0611D37777400F8E629 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAdmissionTimeSetting.storyboard; sourceTree = "<group>"; };
 		FD54E0631D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionTimeSettingViewController.swift; sourceTree = "<group>"; };
-		FD54E0651D3777DF00F8E629 /* PageAdmissionTimeSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionTimeSettingBodyView.swift; sourceTree = "<group>"; };
+		FD54E0651D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionFixedTimeSettingBodyView.swift; sourceTree = "<group>"; };
 		FD54E0691D37781E00F8E629 /* PageAdmissionTimeSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionTimeSettingActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2048,7 +2048,7 @@
 		FD54E04F1D3771BF00F8E629 /* Body */ = {
 			isa = PBXGroup;
 			children = (
-				FD54E0651D3777DF00F8E629 /* PageAdmissionTimeSettingBodyView.swift */,
+				FD54E0651D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -2362,7 +2362,7 @@
 				7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */,
 				737F1F801D2048EE00FFE573 /* PageNewFriendActions.swift in Sources */,
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
-				FD54E0661D3777DF00F8E629 /* PageAdmissionTimeSettingBodyView.swift in Sources */,
+				FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */,
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
 				96FCD13A1D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift in Sources */,
 				96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */,

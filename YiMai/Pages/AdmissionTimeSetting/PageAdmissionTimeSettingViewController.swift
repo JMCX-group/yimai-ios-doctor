@@ -9,11 +9,11 @@
 import UIKit
 
 public class PageAdmissionTimeSettingViewController: PageViewController {
-    public var BodyView: PageAdmissionTimeSettingBodyView? = nil
+    public var BodyView: PageAdmissionFixedTimeSettingBodyView? = nil
     override func PageLayout() {
         super.PageLayout()
         
-        BodyView = PageAdmissionTimeSettingBodyView(parentView: self.SelfView!, navController: self.NavController!)
+        BodyView = PageAdmissionFixedTimeSettingBodyView(parentView: self.SelfView!, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.SelfView!,
                                     titleString: "",
                                     navController: self.NavController!)

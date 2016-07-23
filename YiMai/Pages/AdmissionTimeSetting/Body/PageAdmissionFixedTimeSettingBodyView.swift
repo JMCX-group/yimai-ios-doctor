@@ -9,7 +9,7 @@
 import Foundation
 import Neon
 
-public class PageAdmissionTimeSettingBodyView: PageBodyView {
+public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
     var SettingActions: PageAdmissionTimeSettingActions? = nil
     
     private let WeekdayPanel = UIView()
@@ -20,13 +20,12 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
     
     private let CalendarPanel = UIView()
     
+    private var CurrentDay = NSDate()
+    
     override func ViewLayout() {
         super.ViewLayout()
-        SettingActions = PageAdmissionTimeSettingActions(navController: NavController!,
-                                                         target: self)
-
+        SettingActions = PageAdmissionTimeSettingActions(navController: NavController!, target: self)
         DrawFixedSchedule()
-        DrawFlexibleSchedule()
     }
     
     public func DrawTopTabButton(topVeiw: UIView) {
@@ -81,20 +80,18 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
             let amCell = YMButton()
             amCell.setTitle("上午", forState: UIControlState.Normal)
             amCell.setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
-//            amCell.backgroundColor = YMColors.DividerLineGray
             amCell.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
             amCell.addTarget(SettingActions!, action: cellTouchedSel, forControlEvents: UIControlEvents.TouchUpInside)
-            amCell.UserObjectData = ["weekDay": idx, "AMorPM": "am"]
+            amCell.UserObjectData = ["weekDay": idx, "AMorPM": "am", "status": "0"]
             AMLineArr.append(amCell)
             amLinePanel.addSubview(amCell)
             
             let pmCell = YMButton()
             pmCell.setTitle("下午", forState: UIControlState.Normal)
             pmCell.setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
-//            pmCell.backgroundColor = YMColors.DividerLineGray
             pmCell.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
             pmCell.addTarget(SettingActions!, action: cellTouchedSel, forControlEvents: UIControlEvents.TouchUpInside)
-            amCell.UserObjectData = ["weekDay": idx, "AMorPM": "pm"]
+            amCell.UserObjectData = ["weekDay": idx, "AMorPM": "pm", "status": "0"]
             PMLineArr.append(pmCell)
             pmLinePanel.addSubview(pmCell)
         }
@@ -163,14 +160,14 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
         monthPanel.addSubview(monthLabel)
         monthLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
         monthLabel.textColor = YMColors.FontBlue
-        monthLabel.text = ""
+        monthLabel.text = YMDatetimeString.YYYYMMinChinese(curDate)
         monthLabel.sizeToFit()
         monthLabel.anchorInCenter(width: monthLabel.width, height: monthLabel.height)
         
         DrawCalendarGrid(curDate, parent: CalendarPanel, prev: monthPanel)
     }
     
-    private func BuildDisabledDayCell(day: Int) -> YMTouchableView {
+    private func BuildDisabledDayCell(day: Int, weekdayIdx: Int) -> YMTouchableView {
         let cell = YMTouchableView()
         
         let dayLabel = UILabel()
@@ -181,12 +178,12 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
 
         cell.addSubview(dayLabel)
 
-        cell.UserObjectData = ["label": dayLabel]
+        cell.UserObjectData = ["label": dayLabel, "weekdayIdx": weekdayIdx]
         cell.UserStringData = "0"
         return cell
     }
     
-    private func BuildNormalDayCell(day: Int) -> YMTouchableView {
+    private func BuildNormalDayCell(day: Int, weekdayIdx: Int) -> YMTouchableView {
         let cell = YMTouchableView()
         
         let dayLabel = UILabel()
@@ -207,7 +204,7 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
         cell.addSubview(amIcon)
         cell.addSubview(pmIcon)
         
-        cell.UserObjectData = ["label": dayLabel, "amIcon": amIcon, "pmIcon": pmIcon, "status": "none"]
+        cell.UserObjectData = ["label": dayLabel, "weekdayIdx": weekdayIdx, "amIcon": amIcon, "pmIcon": pmIcon, "status": "none"]
         cell.UserStringData = "1"
 
         return cell
@@ -265,6 +262,22 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
         cell.UserObjectData = cellData
     }
     
+    public func SelectWeekdayAM(weekdayIdx: Int) {
+        
+    }
+    
+    public func SelectWeekDayPM(weekdayIdx: Int) {
+        
+    }
+    
+    public func UnSelectWeekdayAM(weekdayIdx: Int) {
+        
+    }
+    
+    public func UnSelectWeekdayPM(weekdayIdx: Int) {
+        
+    }
+    
     private func DrawCalendarGridDividerLine(parent: UIView, weekLineCount: Int) {
         let baseLeft = 107.0.LayoutVal()
         for i in 1...6 {
@@ -304,18 +317,20 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
             weekLineArr.append(weekLine)
             
             var cellArr = [YMTouchableView]()
+            var weekdayIdx = 0
             for day in week {
                 var cell: YMTouchableView!
                 if(day < 0) {
                     let realDay = -day
-                    cell = BuildDisabledDayCell(realDay)
+                    cell = BuildDisabledDayCell(realDay, weekdayIdx: weekdayIdx)
                 } else if(day >= 100) {
                     let realDay = day / 100
-                    cell = BuildDisabledDayCell(realDay)
+                    cell = BuildDisabledDayCell(realDay, weekdayIdx: weekdayIdx)
                 } else {
-                    cell = BuildNormalDayCell(day)
+                    cell = BuildNormalDayCell(day, weekdayIdx: weekdayIdx)
                 }
                 
+                weekdayIdx += 1
                 cellArr.append(cell)
                 weekLine.addSubview(cell)
             }
@@ -351,7 +366,7 @@ public class PageAdmissionTimeSettingBodyView: PageBodyView {
     private func DrawFixedSchedule() {
         DrawWeekdayPanel()
         DrawDateTitleLabel()
-        DrawCalendar(NSDate())
+        DrawCalendar(CurrentDay)
         
     }
     

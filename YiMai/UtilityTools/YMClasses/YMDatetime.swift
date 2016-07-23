@@ -21,6 +21,12 @@ public class YMDatetimeString {
         timeFormatter.dateFormat = "yyyy-MM-dd"
         return timeFormatter.stringFromDate(dayBeforeNow) as String
     }
+    
+    public static func YYYYMMinChinese(date: NSDate) -> String {
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateFormat = "yyyy年MM月"
+        return timeFormatter.stringFromDate(date) as String
+    }
 }
 
 public class YMDateTools {
