@@ -10,7 +10,7 @@ import Foundation
 import Neon
 
 public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
-    var SettingActions: PageAdmissionTimeSettingActions? = nil
+    var SettingActions: PageAdmissionTimeSettingActions!
     
     private let WeekdayPanel = UIView()
     private var AMLineArr: [YMButton] = [YMButton]()
@@ -22,9 +22,12 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
     
     private var CurrentDay = NSDate()
     
+    private var SelectDict = [Int: String]()
+    private var DayCellMapByWeek = [Int: [YMTouchableView]]()
+    
     override func ViewLayout() {
         super.ViewLayout()
-        SettingActions = PageAdmissionTimeSettingActions(navController: NavController!, target: self)
+        SettingActions = self.Actions as! PageAdmissionTimeSettingActions
         DrawFixedSchedule()
     }
     
@@ -68,6 +71,8 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         let cellTouchedSel = "AMorPMCellTouched:".Sel()
         
         for (idx, val) in firstLineTitle.enumerate() {
+            SelectDict[idx] = "none"
+            DayCellMapByWeek[idx] = [YMTouchableView]()
             let weekDayCell = UILabel()
             weekDayCell.text = val
             weekDayCell.font = YMFonts.YMDefaultFont(26.LayoutVal())
@@ -82,7 +87,7 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
             amCell.setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
             amCell.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
             amCell.addTarget(SettingActions!, action: cellTouchedSel, forControlEvents: UIControlEvents.TouchUpInside)
-            amCell.UserObjectData = ["weekDay": idx, "AMorPM": "am", "status": "0"]
+            amCell.UserObjectData = ["weekDay": idx, "AMorPM": "am"]
             AMLineArr.append(amCell)
             amLinePanel.addSubview(amCell)
             
@@ -91,9 +96,14 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
             pmCell.setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
             pmCell.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
             pmCell.addTarget(SettingActions!, action: cellTouchedSel, forControlEvents: UIControlEvents.TouchUpInside)
-            amCell.UserObjectData = ["weekDay": idx, "AMorPM": "pm", "status": "0"]
+            pmCell.UserObjectData = ["weekDay": idx, "AMorPM": "pm"]
             PMLineArr.append(pmCell)
             pmLinePanel.addSubview(pmCell)
+            
+            if(0 == idx || 6 == idx) {
+                amCell.backgroundColor = YMColors.SearchCellBorder
+                pmCell.backgroundColor = YMColors.SearchCellBorder
+            }
         }
         
         firstLinePanel.groupAndFill(group: Group.Horizontal, views: firstLineArr.map({$0 as UILabel}), padding: 0)
@@ -193,10 +203,14 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         dayLabel.sizeToFit()
         
         cell.addSubview(dayLabel)
-        cell.backgroundColor = YMColors.White
+        if(0 == weekdayIdx || 6 == weekdayIdx) {
+            cell.backgroundColor = YMColors.None
+        } else {
+            cell.backgroundColor = YMColors.White
+        }
         
         let amIcon = YMLayout.GetSuitableImageView("PageAdmissionTimeSettingAMIcon")
-        let pmIcon = YMLayout.GetSuitableImageView("PageAdmissionTimeSettingAMIcon")
+        let pmIcon = YMLayout.GetSuitableImageView("PageAdmissionTimeSettingPMIcon")
       
         amIcon.hidden = true
         pmIcon.hidden = true
@@ -207,6 +221,7 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         cell.UserObjectData = ["label": dayLabel, "weekdayIdx": weekdayIdx, "amIcon": amIcon, "pmIcon": pmIcon, "status": "none"]
         cell.UserStringData = "1"
 
+        DayCellMapByWeek[weekdayIdx]?.append(cell)
         return cell
     }
     
@@ -241,8 +256,8 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         let amIcon = cellData["amIcon"] as! UIImageView
         let pmIcon = cellData["pmIcon"] as! UIImageView
         
-        amIcon.hidden = true
-        pmIcon.hidden = true
+        amIcon.hidden = false
+        pmIcon.hidden = false
         
         cell.backgroundColor = YMColors.WeekdaySelectedColor
         cellData["status"] = "day"
@@ -254,28 +269,88 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         let amIcon = cellData["amIcon"] as! UIImageView
         let pmIcon = cellData["pmIcon"] as! UIImageView
         
-        amIcon.hidden = false
-        pmIcon.hidden = false
+        amIcon.hidden = true
+        pmIcon.hidden = true
         
-        cell.backgroundColor = YMColors.WeekdaySelectedColor
+        cell.backgroundColor = YMColors.None
         cellData["status"] = "none"
         cell.UserObjectData = cellData
     }
     
-    public func SelectWeekdayAM(weekdayIdx: Int) {
+    public func ToggleWeekdayAM(weekdayIdx: Int) -> Bool {
+        var targetSelectDictVal = "none"
+        var targetKey: Int = -1
+        for (k, v) in SelectDict {
+            if(k == weekdayIdx) {
+                targetKey = k
+                if("am" == v) {
+                    targetSelectDictVal = "none"
+                } else if("pm" == v) {
+                    targetSelectDictVal = "day"
+                } else if("day" == v) {
+                    targetSelectDictVal = "pm"
+                } else {
+                    targetSelectDictVal = "am"
+                }
+                break
+            }
+        }
         
+        if(targetKey != -1){
+            SelectDict[targetKey] = targetSelectDictVal
+        }
+        
+        ToggleWeekdayStatus(targetSelectDictVal, weekdayIdx: weekdayIdx)
+        
+        return ("am" == targetSelectDictVal || "day" == targetSelectDictVal)
     }
     
-    public func SelectWeekDayPM(weekdayIdx: Int) {
+    public func ToggleWeekdayPM(weekdayIdx: Int) -> Bool {
+        var targetSelectDictVal = "none"
+        var targetKey: Int = -1
+        for (k, v) in SelectDict {
+            if(k == weekdayIdx) {
+                targetKey = k
+                if("pm" == v) {
+                    targetSelectDictVal = "none"
+                } else if("am" == v) {
+                    targetSelectDictVal = "day"
+                } else if("day" == v) {
+                    targetSelectDictVal = "am"
+                } else {
+                    targetSelectDictVal = "pm"
+                }
+                break
+            }
+        }
         
+        if(targetKey != -1){
+            SelectDict[targetKey] = targetSelectDictVal
+        }
+        
+        ToggleWeekdayStatus(targetSelectDictVal, weekdayIdx: weekdayIdx)
+        
+        return ("pm" == targetSelectDictVal || "day" == targetSelectDictVal)
     }
     
-    public func UnSelectWeekdayAM(weekdayIdx: Int) {
-        
-    }
-    
-    public func UnSelectWeekdayPM(weekdayIdx: Int) {
-        
+    private func ToggleWeekdayStatus(status: String, weekdayIdx: Int) {
+        if("none" == status) {
+            for v in DayCellMapByWeek[weekdayIdx]! {
+                SetDayUnSelected(v)
+            }
+        } else if("day" == status) {
+            for v in DayCellMapByWeek[weekdayIdx]! {
+                SetDaySelected(v)
+            }
+        }  else if("pm" == status) {
+            for v in DayCellMapByWeek[weekdayIdx]! {
+                SetDayCellPMSelected(v)
+            }
+        }  else {
+            for v in DayCellMapByWeek[weekdayIdx]! {
+                SetDayCellAMSelected(v)
+            }
+        }
     }
     
     private func DrawCalendarGridDividerLine(parent: UIView, weekLineCount: Int) {
@@ -367,10 +442,6 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         DrawWeekdayPanel()
         DrawDateTitleLabel()
         DrawCalendar(CurrentDay)
-        
-    }
-    
-    private func DrawFlexibleSchedule() {
         
     }
 }

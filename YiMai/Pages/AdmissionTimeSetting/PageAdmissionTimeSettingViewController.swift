@@ -9,15 +9,20 @@
 import UIKit
 
 public class PageAdmissionTimeSettingViewController: PageViewController {
-    public var BodyView: PageAdmissionFixedTimeSettingBodyView? = nil
+    public var FixedSettingBodyView: PageAdmissionFixedTimeSettingBodyView? = nil
+    public var SettingActions: PageAdmissionTimeSettingActions? = nil
+
     override func PageLayout() {
         super.PageLayout()
         
-        BodyView = PageAdmissionFixedTimeSettingBodyView(parentView: self.SelfView!, navController: self.NavController!)
+        SettingActions = PageAdmissionTimeSettingActions(navController: NavController!, target: self)
+        FixedSettingBodyView = PageAdmissionFixedTimeSettingBodyView(parentView: self.SelfView!,
+                                                                     navController: self.NavController!,
+                                                                     pageActions: SettingActions)
         TopView = PageCommonTopView(parentView: self.SelfView!,
                                     titleString: "",
                                     navController: self.NavController!)
         
-        BodyView?.DrawTopTabButton(TopView!.TopViewPanel)
+        FixedSettingBodyView?.DrawTopTabButton(TopView!.TopViewPanel)
     }
 }
