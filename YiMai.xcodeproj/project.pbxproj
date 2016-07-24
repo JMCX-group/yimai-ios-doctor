@@ -79,6 +79,7 @@
 		7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394F85F1D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift */; };
 		739AEC461D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739AEC451D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift */; };
 		739AEC481D164B7000E70EF3 /* PageDepartmentSearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739AEC471D164B7000E70EF3 /* PageDepartmentSearchActions.swift */; };
+		73EA65C31D444BE90050C12C /* YMChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA65C21D444BE90050C12C /* YMChatViewController.swift */; };
 		960606FA1CE591CC00AAFC07 /* YMAPIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */; };
 		960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */; };
 		960606FC1CE591CC00AAFC07 /* YMNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */; };
@@ -328,6 +329,7 @@
 		7394F85F1D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentSelectTimeActions.swift; sourceTree = "<group>"; };
 		739AEC451D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDepartmentSearchBodyView.swift; sourceTree = "<group>"; };
 		739AEC471D164B7000E70EF3 /* PageDepartmentSearchActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDepartmentSearchActions.swift; sourceTree = "<group>"; };
+		73EA65C21D444BE90050C12C /* YMChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMChatViewController.swift; sourceTree = "<group>"; };
 		960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAPIUtility.swift; sourceTree = "<group>"; };
 		960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCoreDataEngine.swift; sourceTree = "<group>"; };
 		960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMNetworkUtility.swift; sourceTree = "<group>"; };
@@ -1405,6 +1407,7 @@
 				9672FB1F1CCF5E8400BC7E40 /* YMSelectors.swift */,
 				9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */,
 				7394F8541CF9ABCE00F05487 /* YMTextArea.swift */,
+				73EA65C21D444BE90050C12C /* YMChatViewController.swift */,
 			);
 			path = YMClasses;
 			sourceTree = "<group>";
@@ -2492,6 +2495,7 @@
 				96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */,
 				736EBC5A1D1675BD00C40AA7 /* PagePersonalSettingViewController.swift in Sources */,
 				96D4518D1CF7D77F006817CE /* PageYiMaiSameHospitalBodyView.swift in Sources */,
+				73EA65C31D444BE90050C12C /* YMChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2979,11 +2983,11 @@
 			baseConfigurationReference = 10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd.";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.cc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
@@ -2995,11 +2999,11 @@
 			baseConfigurationReference = 35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd.";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.cc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";

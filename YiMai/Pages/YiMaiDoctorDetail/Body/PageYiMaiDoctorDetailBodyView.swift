@@ -156,6 +156,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
             appointmentBtn.addTarget(DetailActions!, action: "DoAppointment:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
             
             chatBtn.UserStringData = "\(data["id"]!)"
+            chatBtn.UserObjectData = data
             chatBtn.addTarget(DetailActions!, action: "DoChat:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         }
         return buttonPanel
