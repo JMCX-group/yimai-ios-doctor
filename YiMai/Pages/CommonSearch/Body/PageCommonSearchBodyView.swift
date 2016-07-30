@@ -87,12 +87,9 @@ public class PageCommonSearchBodyView: PageBodyView {
     }
     
     private func CellTouched(cell: YMTableViewCell) -> Void {
-//        print("CellTouched")
-
     }
     
     private func SubCellTouched(cell: YMTableViewCell) -> Void {
-        print("SubCellTouched")
     }
     
     private func BuildTable() {

@@ -42,7 +42,6 @@ public class PageNewFriendActions: PageJumpActions {
     }
     
     public func AgreeSuccess(_: NSDictionary?) {
-        print("agree success!")
     }
     
     public func AgreeError(error: NSError) {

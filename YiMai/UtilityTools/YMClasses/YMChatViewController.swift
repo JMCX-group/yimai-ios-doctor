@@ -26,11 +26,6 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
     }
     
     public func onRCIMReceiveMessage(message: RCMessage!, left: Int32) {
-        print(message.receivedStatus.rawValue)
-        print(message.receivedStatus.hashValue)
-        
-        let i = RCIMClient.sharedRCIMClient().getUnreadCount([1])
-        print(i)
     }
     
     

@@ -65,7 +65,6 @@ public class PageYiMaiSameSchoolActions: PageJumpActions, UIScrollViewDelegate{
         let cell = sender.view! as! YMTouchableView
         let docInfo = cell.UserObjectData as! [String: AnyObject]
         
-        print(docInfo)
         PageYiMaiDoctorDetailBodyView.DocId = "\(docInfo["id"]!)"
         DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME)
     }

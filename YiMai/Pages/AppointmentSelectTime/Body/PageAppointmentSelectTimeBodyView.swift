@@ -92,7 +92,6 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
     }
     
     private func DrawDoctorCell(data: [String: AnyObject]?, docPanel: UIView) {
-        print(data)
         if(nil == data) {return}
         
         let dataObj = data!

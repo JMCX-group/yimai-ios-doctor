@@ -21,7 +21,6 @@ public class PageHospitalSearchActions: PageJumpActions {
     
     private func GetHospitalsError(error: NSError) {
         let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
     }
     
     private func GetHospitalsByKey(data: NSDictionary?) {

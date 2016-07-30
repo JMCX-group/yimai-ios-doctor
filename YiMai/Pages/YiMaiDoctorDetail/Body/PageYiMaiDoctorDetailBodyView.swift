@@ -35,12 +35,9 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         prev = DrawCollege(data, prev: prev!)
 
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: prev)
-        
-        print("view data loaded")
     }
     
     public func Clear() {
-        print("view cleared")
         YMLayout.ClearView(view: BodyView)
     }
     

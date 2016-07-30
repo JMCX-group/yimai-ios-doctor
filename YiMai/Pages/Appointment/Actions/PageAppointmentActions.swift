@@ -62,7 +62,6 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
     }
     
     public func CreateAppointmentSuccess(data: NSDictionary?) {
-        print("appointment success")
         let pageController = self.Target! as! PageAppointmentViewController
         pageController.Loading?.Hide()
         self.NavController!.popViewControllerAnimated(true)

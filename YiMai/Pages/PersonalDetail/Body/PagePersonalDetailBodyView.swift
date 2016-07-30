@@ -41,7 +41,6 @@ public class PagePersonalDetailBodyView: NSObject {
     }
     
     public func LoadData(data: [String: AnyObject]) {
-        print(data)
         let tags = data["tags"] as? String
         if(!YMValueValidator.IsEmptyString(tags)) {
             DrawTagPanel(tags!)

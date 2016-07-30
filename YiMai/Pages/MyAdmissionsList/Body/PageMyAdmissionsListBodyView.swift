@@ -274,7 +274,6 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         status.text = "\(data["status"]!)"
         type.text = "\(data["who"]!)"
         
-        print(data)
         name.textColor = YMColors.FontBlue
         basicInfo.textColor = YMColors.FontGray
         location.textColor = YMColors.FontBlue

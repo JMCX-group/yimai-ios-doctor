@@ -40,7 +40,6 @@ public class PagePersonalDetailActions: PageJumpActions {
     }
     
     private func GetUserInfoError(error: NSError) {
-        print(error.userInfo)
     }
     
     public func TagPanelExpand(_: UIGestureRecognizer) {

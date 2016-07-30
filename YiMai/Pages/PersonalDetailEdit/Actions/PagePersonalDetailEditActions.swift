@@ -76,12 +76,10 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     }
     
     public func UpdateUserInfo(data: AnyObject) {
-        print(data)
         UpdateApi?.YMChangeUserInfo(data)
     }
     
     private func UpdateSuccess(data: NSDictionary?) {
-        print(data)
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: data!["data"]!)
         YMVar.MyUserInfo = data!["data"]! as! [String : AnyObject]
         TargetController?.BodyView?.LoadData()
@@ -89,7 +87,6 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     }
     
     private func UpdateError(error: NSError) {
-        print(error.userInfo)
         TargetController?.BodyView?.Loading?.Hide()
     }
 }

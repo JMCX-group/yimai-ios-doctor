@@ -21,7 +21,6 @@ public class YiMaiAddFriendsActions: PageJumpActions{
                 let okAction = UIAlertAction(title: "好的", style: .Default,
                         handler: {
                             action in
-                            print("确定")
                         })
                 alertController.addAction(okAction)
                 self.NavController!.presentViewController(alertController, animated: true, completion: nil)

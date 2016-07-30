@@ -328,7 +328,6 @@ public class PageGlobalSearchBodyView: PageBodyView {
         if(friendsCount > 2) {
             for i in 0...1 {
                 lastCell = PageSearchResultCell.LayoutACell(Lv1Panel, info: data[i], prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
-                print(data[i])
                 lastCell.backgroundColor = YMColors.White
             }
             

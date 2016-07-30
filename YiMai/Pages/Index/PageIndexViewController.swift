@@ -28,10 +28,7 @@ public class PageIndexViewController: PageViewController {
     }
 
     override func PageLayout(){
-        print(self)
-
         if(PageLayoutFlag) {
-            print(self)
             return
         }
         super.PageLayout()

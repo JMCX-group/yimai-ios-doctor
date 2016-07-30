@@ -22,7 +22,6 @@ public class PageAppointmentDetailActions: PageJumpActions {
     }
     
     private func DetailGetSuccess(data: NSDictionary?) {
-        print(data)
         TargetView?.LoadData(data!)
     }
     

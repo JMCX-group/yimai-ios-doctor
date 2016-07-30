@@ -365,7 +365,6 @@ public class YMAPIUtility {
             return
         }
         
-        print(self.Key)
         var url = YMAPIUtility.AppendRouteParamToUrl(YMAPIInterfaceURL.QueryUserInfoById, value: doctorId)
         url = YMAPIUtility.AppendTokenToUrl(url, token: token! as! String)
 
@@ -551,7 +550,6 @@ public class YMAPIUtility {
     }
     
     public func YMQueryUserByPhone(phone: String) {
-        print(phone)
         YMAPIGet(YMAPIInterfaceURL.QueryUserByPhone, param: [YMCommonStrings.CS_API_PARAM_KEY_PHONE: phone], progressHandler: nil)
     }
     
