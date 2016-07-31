@@ -23,6 +23,8 @@ public class PageIndexActions: PageJumpActions {
     private func GotSearchError(error: NSError){
         let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
         print(errInfo)
+        
+        print(error)
     }
     
     private func SearchSuccessed(data: NSDictionary?) {
@@ -39,13 +41,14 @@ public class PageIndexActions: PageJumpActions {
     }
     
     public func DoSearch(editor: YMTextField) {
-        let searchKey = editor.text
-        if(YMValueValidator.IsEmptyString(searchKey)) {
-            return
-        } else {
-            PageGlobalSearchViewController.InitSearchKey = editor.text!
-            DoJump(YMCommonStrings.CS_PAGE_GLOBAL_SEARCH_NAME)
-        }
+//        let searchKey = editor.text
+//        if(YMValueValidator.IsEmptyString(searchKey)) {
+//            return
+//        } else {
+//            PageGlobalSearchViewController.InitSearchKey = editor.text!
+//            DoJump(YMCommonStrings.CS_PAGE_GLOBAL_SEARCH_NAME)
+//        }
+        
 //        ApiUtility?.YMGetSearchResult(["field":editor.text!], progressHandler: nil)
 //        ApiUtility?.YMQueryUserInfo()
 //        ApiUtility?.YMQueryUserInfoById("23976")
@@ -80,7 +83,10 @@ public class PageIndexActions: PageJumpActions {
 //            ])
         
 //        ApiUtility?.YMGetAppointmentList()
-//        ApiUtility?.YMGetAppointmentDetail("011605150006")
+        ApiUtility?.YMUploadAddressBook([
+            ["name":"187", "phone":"18712345678"],
+            ["name":"186", "phone":"18612345678"]
+        ])
 //        ApiUtility?.YMGetAdmissionsList()
 //        ApiUtility?.YMGetAdmissionDetail("011605150006")
 //        ApiUtility?.YMAdmissionAgree(

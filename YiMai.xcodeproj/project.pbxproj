@@ -80,6 +80,7 @@
 		739AEC461D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739AEC451D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift */; };
 		739AEC481D164B7000E70EF3 /* PageDepartmentSearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739AEC471D164B7000E70EF3 /* PageDepartmentSearchActions.swift */; };
 		73EA65C31D444BE90050C12C /* YMChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA65C21D444BE90050C12C /* YMChatViewController.swift */; };
+		73EA65C51D4C4BCB0050C12C /* PageAdmissionFlexibleTimeSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA65C41D4C4BCB0050C12C /* PageAdmissionFlexibleTimeSettingBodyView.swift */; };
 		960606FA1CE591CC00AAFC07 /* YMAPIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */; };
 		960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */; };
 		960606FC1CE591CC00AAFC07 /* YMNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */; };
@@ -330,6 +331,7 @@
 		739AEC451D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDepartmentSearchBodyView.swift; sourceTree = "<group>"; };
 		739AEC471D164B7000E70EF3 /* PageDepartmentSearchActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDepartmentSearchActions.swift; sourceTree = "<group>"; };
 		73EA65C21D444BE90050C12C /* YMChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMChatViewController.swift; sourceTree = "<group>"; };
+		73EA65C41D4C4BCB0050C12C /* PageAdmissionFlexibleTimeSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionFlexibleTimeSettingBodyView.swift; sourceTree = "<group>"; };
 		960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAPIUtility.swift; sourceTree = "<group>"; };
 		960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCoreDataEngine.swift; sourceTree = "<group>"; };
 		960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMNetworkUtility.swift; sourceTree = "<group>"; };
@@ -2052,6 +2054,7 @@
 			isa = PBXGroup;
 			children = (
 				FD54E0651D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift */,
+				73EA65C41D4C4BCB0050C12C /* PageAdmissionFlexibleTimeSettingBodyView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -2339,6 +2342,7 @@
 				96331AF21CC7729900E53125 /* YMRegisterInputSelectorStrings.swift in Sources */,
 				9612DB711CC9F76600262D2E /* PagePersonalViewController.swift in Sources */,
 				96FCD1461D17D7C800A6E12D /* PagePersonalDetailViewController.swift in Sources */,
+				73EA65C51D4C4BCB0050C12C /* PageAdmissionFlexibleTimeSettingBodyView.swift in Sources */,
 				73622E481D1EDFE40039E785 /* PageAboutYiMaiBodyView.swift in Sources */,
 				96D451A71CF7F198006817CE /* PageAppointmentBodyView.swift in Sources */,
 				737F1F911D207C7900FFE573 /* PageGlobalSearchBodyView.swift in Sources */,

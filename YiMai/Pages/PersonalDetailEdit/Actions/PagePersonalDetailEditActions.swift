@@ -25,25 +25,25 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     
     public func SelectGender(_: UIGestureRecognizer) {
         let alertController = UIAlertController(title: "选择性别", message: nil, preferredStyle: .Alert)
-        let goBack = UIAlertAction(title: "男", style: .Default,
+        let male = UIAlertAction(title: "男", style: .Default,
             handler: {
                 action in
                 self.UpdateUserInfo(["sex": "1"])
                 self.TargetController?.BodyView?.Loading?.Show()
         })
         
-        let goOn = UIAlertAction(title: "女", style: .Default,
+        let female = UIAlertAction(title: "女", style: .Default,
             handler: {
                 action in
                 self.UpdateUserInfo(["sex": "0"])
                 self.TargetController?.BodyView?.Loading?.Show()
         })
         
-        goBack.setValue(YMColors.FontBlue, forKey: "titleTextColor")
-        goOn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        male.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        female.setValue(YMColors.FontBlue, forKey: "titleTextColor")
         
-        alertController.addAction(goBack)
-        alertController.addAction(goOn)
+        alertController.addAction(male)
+        alertController.addAction(female)
         self.NavController!.presentViewController(alertController, animated: true, completion: nil)
     }
     

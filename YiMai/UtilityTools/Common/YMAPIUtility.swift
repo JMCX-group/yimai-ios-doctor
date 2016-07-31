@@ -49,6 +49,7 @@ public class YMAPIInterfaceURL {
     static let RelationPushRecentContacts = YMAPIInterfaceURL.ApiBaseUrl + "/relation/push-recent-contacts"
     static let RelationDelFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/del"
     static let RelationAgreeFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/confirm"
+    static let RelationUploadAddressBook = YMAPIInterfaceURL.ApiBaseUrl + "/relation/upload-address-book"
     
     static let GetAllRadio = YMAPIInterfaceURL.ApiBaseUrl + "/radio"
     static let SetRadioHaveRead = YMAPIInterfaceURL.ApiBaseUrl + "/radio/read"
@@ -228,7 +229,12 @@ public class YMAPIUtility {
         let config = self.GetRequestConfig(url,param: param, progressHandler: progressHandler)
         let network = YMNetwork()
         network.RequestJsonByPost(config)
-        
+    }
+    
+    private func DoPostRequestWithJsonParam(url: String, param: AnyObject?, progressHandler: NetworkProgressHandler?)  {
+        let config = self.GetRequestConfig(url,param: param, progressHandler: progressHandler)
+        let network = YMNetwork()
+        network.RequestJsonByPostJsonParam(config)
     }
     
     private func DoGetRequest(url: String, param: AnyObject?, progressHandler: NetworkProgressHandler?) {
@@ -247,6 +253,18 @@ public class YMAPIUtility {
         DoPostRequest(url,
                       param: param,
                       progressHandler: progressHandler)
+    }
+    
+    private func YMAPIPostWithJsonParam(baseUrl: String, param: AnyObject?, progressHandler: NetworkProgressHandler?) {
+        let token = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_TOKEN)
+        if(nil == token) {
+            return
+        }
+        
+        let url = YMAPIUtility.AppendTokenToUrl(baseUrl, token: token! as! String)
+        DoPostRequestWithJsonParam(url,
+                                   param: param,
+                                   progressHandler: progressHandler)
     }
     
     private func YMAPIGet(baseUrl: String, param: AnyObject?, progressHandler: NetworkProgressHandler?) {
@@ -563,6 +581,16 @@ public class YMAPIUtility {
         YMAPIPost(YMAPIInterfaceURL.RelationAgreeFriend,
                   param: [YMCommonStrings.CS_API_PARAM_KEY_ID: id],
                   progressHandler: nil)
+    }
+    
+    public func YMUploadAddressBook(data: [[String: String]]) {
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions.PrettyPrinted)
+        let jsonString: String = String(data: jsonData, encoding: NSUTF8StringEncoding)!
+        
+        print(jsonString)
+        YMAPIPostWithJsonParam(YMAPIInterfaceURL.RelationUploadAddressBook,
+                               param: data,
+                               progressHandler: nil)
     }
     
     public func YMSetRadioHaveRead(id: String) {

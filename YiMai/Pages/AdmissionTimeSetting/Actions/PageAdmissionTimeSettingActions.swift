@@ -18,7 +18,13 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
     }
     
     public func TabTouched(sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
+        if(0 == sender.selectedSegmentIndex) {
+            targetController.FixedSettingBodyView?.BodyView.hidden = false
+            targetController.FlexibleSettingBodyView?.BodyView.hidden = true
+        } else {
+            targetController.FixedSettingBodyView?.BodyView.hidden = true
+            targetController.FlexibleSettingBodyView?.BodyView.hidden = false
+        }
     }
     
     public func AMorPMCellTouched(sender: YMButton) {
@@ -40,15 +46,137 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
             sender.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
         } else {
             sender.backgroundColor = YMColors.None
-            sender.titleLabel?.textColor = YMColors.WeekdayDisabledFontColor
+            sender.setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
         }
     }
     
-    public func PrevFixedMonth(sender: UIGestureRecognizer) {
+    private func GetNextMonthDay(curDate: NSDate) -> NSDate {
+        var month = curDate.month
+        var year = curDate.year
         
+        if(12 == month) {
+            month = 1
+            year = year + 1
+        } else {
+            month = month + 1
+        }
+        
+        return NSDate(year: year, month: month, day: 1)
+    }
+    
+    private func GetPrevMonthDay(curDate: NSDate) -> NSDate {
+        let now = NSDate()
+        
+        var month = curDate.month
+        var year = curDate.year
+        
+        let nowMonth = now.month
+        let nowYear = now.year
+        
+        let curMonthNum = year * 100 + month
+        let nowMonthNum = nowYear * 100 + nowMonth
+        
+        if(curMonthNum <= nowMonthNum) {
+            return now
+        }
+        
+        if(1 == month) {
+            month = 12
+            year = year - 1
+        } else {
+            month = month - 1
+        }
+        
+        return NSDate(year: year, month: month, day: 1)
+    }
+    
+    public func PrevFixedMonth(sender: UIGestureRecognizer) {
+        let newDay = GetPrevMonthDay(targetController!.FixedSettingBodyView!.CurrentDay)
+        targetController!.FixedSettingBodyView!.CurrentDay = newDay
+        targetController!.FixedSettingBodyView!.DrawCalendar(newDay)
     }
     
     public func NextFixedMonth(sender: UIGestureRecognizer) {
+        let newDay = GetNextMonthDay(targetController!.FixedSettingBodyView!.CurrentDay)
+        targetController!.FixedSettingBodyView!.CurrentDay = newDay
+        targetController!.FixedSettingBodyView!.DrawCalendar(newDay)
+    }
+    
+    public func PrevFlexibleMonth(sender: UIGestureRecognizer) {
+        let newDay = GetPrevMonthDay(targetController!.FlexibleSettingBodyView!.CurrentDay)
+        targetController!.FlexibleSettingBodyView!.CurrentDay = newDay
+        targetController!.FlexibleSettingBodyView!.DrawCalendar(newDay)
+    }
+    
+    public func NextFlexibleMonth(sender: UIGestureRecognizer) {
+        let newDay = GetNextMonthDay(targetController!.FlexibleSettingBodyView!.CurrentDay)
+        targetController!.FlexibleSettingBodyView!.CurrentDay = newDay
+        targetController!.FlexibleSettingBodyView!.DrawCalendar(newDay)
+    }
+    
+    public func SetFlexibleCellStatus(cell: YMTouchableView, status: String) {
+        if("am" == status) {
+            targetController.FlexibleSettingBodyView?.SetDayCellAMSelected(cell)
+        } else if("pm" == status) {
+            targetController.FlexibleSettingBodyView?.SetDayCellPMSelected(cell)
+        } else if("day" == status) {
+            targetController.FlexibleSettingBodyView?.SetDaySelected(cell)
+        } else {
+            targetController.FlexibleSettingBodyView?.SetDayUnSelected(cell)
+        }
+    }
+    
+    public func FlexibleCellTouched(sender: UIGestureRecognizer) {
+        let cell = sender.view as! YMTouchableView
+        let isEnabledCell = cell.UserStringData
+        
+        let cellData = cell.UserObjectData as! [String: AnyObject]
+
+        let weekdayIdx = cellData["weekdayIdx"] as! Int
+        if(0 == weekdayIdx || 6 == weekdayIdx) {
+            return
+        }
+        if("0" == isEnabledCell) {
+            return
+        }
+        
+        let alertController = UIAlertController(title: "选择时间段", message: nil, preferredStyle: .Alert)
+        let am = UIAlertAction(title: "上午", style: .Default,
+                                   handler: {
+                                    action in
+                                    self.SetFlexibleCellStatus(cell, status: "am")
+        })
+        
+        let pm = UIAlertAction(title: "下午", style: .Default,
+                                 handler: {
+                                    action in
+                                    self.SetFlexibleCellStatus(cell, status: "pm")
+        })
+        
+        let day = UIAlertAction(title: "全天", style: .Default,
+                               handler: {
+                                action in
+                                self.SetFlexibleCellStatus(cell, status: "day")
+        })
+        
+        let cancel = UIAlertAction(title: "不出诊", style: .Default,
+                                handler: {
+                                    action in
+                                    self.SetFlexibleCellStatus(cell, status: "none")
+        })
+        
+        am.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        pm.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        day.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        cancel.setValue(YMColors.WarningFontColor, forKey: "titleTextColor")
+        
+        alertController.addAction(am)
+        alertController.addAction(pm)
+        alertController.addAction(day)
+        alertController.addAction(cancel)
+        self.NavController!.presentViewController(alertController, animated: true, completion: nil)    }
+    
+    public func SaveSetting(sender: UIGestureRecognizer) {
         
     }
 }

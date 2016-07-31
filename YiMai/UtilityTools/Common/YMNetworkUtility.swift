@@ -24,6 +24,7 @@ public class YMNetworkRequestConfig {
 }
 
 public class YMNetwork {
+    private static var JsonRequestSessionManager: AFHTTPSessionManager? = nil
     private static var JsonSessionManager: AFHTTPSessionManager? = nil
     private static var ImageSessionManager: AFHTTPSessionManager? = nil
     
@@ -61,6 +62,23 @@ public class YMNetwork {
         return YMNetwork.JsonSessionManager!
     }
     
+    private func BuildJsonParamRequestManager() -> AFHTTPSessionManager {
+        if(nil != YMNetwork.JsonRequestSessionManager) {
+            return YMNetwork.JsonRequestSessionManager!
+        }
+        let manager = AFHTTPSessionManager()
+        let reqSerializer = AFJSONRequestSerializer()
+        let resJsonSerializer = AFJSONResponseSerializer()
+        
+        resJsonSerializer.acceptableContentTypes = ["application/json"]
+        
+        manager.requestSerializer = reqSerializer
+        manager.responseSerializer = resJsonSerializer
+        
+        YMNetwork.JsonRequestSessionManager = manager
+        return YMNetwork.JsonRequestSessionManager!
+    }
+    
     public func RequestImageByGet(requestConfig: YMNetworkRequestConfig) -> NSURLSessionDataTask? {
         let imageManager = self.BuildImageRequestManager()
         
@@ -88,6 +106,18 @@ public class YMNetwork {
     public func RequestJsonByPost(requestConfig: YMNetworkRequestConfig) -> NSURLSessionDataTask? {
         let jsonManager = self.BuildJsonRequestManager()
 
+        return jsonManager.POST (
+            requestConfig.URL,
+            parameters: requestConfig.Param,
+            progress: requestConfig.ProgressHandler,
+            success: requestConfig.SuccessHandler,
+            failure: requestConfig.ErrorHandler
+        )
+    }
+    
+    public func RequestJsonByPostJsonParam(requestConfig: YMNetworkRequestConfig)  -> NSURLSessionDataTask? {
+        let jsonManager = self.BuildJsonParamRequestManager()
+        
         return jsonManager.POST (
             requestConfig.URL,
             parameters: requestConfig.Param,

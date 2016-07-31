@@ -20,11 +20,11 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
     
     private let CalendarPanel = UIView()
     
-    private var CurrentDay = NSDate()
+    public var CurrentDay = NSDate()
     
     private var SelectDict = [Int: String]()
     private var DayCellMapByWeek = [Int: [YMTouchableView]]()
-    
+
     override func ViewLayout() {
         super.ViewLayout()
         SettingActions = self.Actions as! PageAdmissionTimeSettingActions
@@ -46,6 +46,28 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         tabBtn.selectedSegmentIndex = 0
         
         tabBtn.addTarget(SettingActions!, action: "TabTouched:".Sel(), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    public func DrawTopConfirmButton(topView: UIView) {
+        let button = YMLayout.GetTouchableView(useObject: SettingActions!, useMethod: "SaveSetting:".Sel())
+        
+        button.backgroundColor = YMColors.None
+        
+        let buttonBkg = YMLayout.GetSuitableImageView("TopViewSmallButtonBkg")
+        let label = UILabel()
+        label.text = "保存"
+        label.textColor = YMColors.White
+        label.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        label.sizeToFit()
+        
+        button.addSubview(buttonBkg)
+        button.addSubview(label)
+        
+        topView.addSubview(button)
+        button.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 24.LayoutVal(), width: buttonBkg.width, height: buttonBkg.height)
+        
+        buttonBkg.anchorInCenter(width: buttonBkg.width, height: buttonBkg.height)
+        label.anchorInCenter(width: label.width, height: label.height)
     }
     
     private func DrawWeekdayPanel() {
@@ -138,7 +160,8 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         FixedTitleLabel.align(Align.UnderMatchingLeft, relativeTo: WeekdayPanel, padding: 0, width: YMSizes.PageWidth, height: 80.LayoutVal())
     }
 
-    private func DrawCalendar(curDate: NSDate) {
+    public func DrawCalendar(curDate: NSDate) {
+        YMLayout.ClearView(view: CalendarPanel)
         BodyView.addSubview(CalendarPanel)
         CalendarPanel.align(Align.UnderMatchingLeft, relativeTo: FixedTitleLabel, padding: 0, width: YMSizes.PageWidth, height: 744.LayoutVal())
         
@@ -272,7 +295,7 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         amIcon.hidden = true
         pmIcon.hidden = true
         
-        cell.backgroundColor = YMColors.None
+        cell.backgroundColor = YMColors.White
         cellData["status"] = "none"
         cell.UserObjectData = cellData
     }
@@ -442,7 +465,6 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         DrawWeekdayPanel()
         DrawDateTitleLabel()
         DrawCalendar(CurrentDay)
-        
     }
 }
 

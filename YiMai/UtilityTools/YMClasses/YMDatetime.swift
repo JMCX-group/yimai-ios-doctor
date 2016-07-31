@@ -50,10 +50,10 @@ public class YMDateTools {
         
         let dayCountInThisMonth = dayCountInMonth[month]
         let prevMonthNeedFilling = firstWeekdayInMonth - 1
-        let dayCountInFirstWeek = 7 - prevMonthNeedFilling
+        var dayCountInFirstWeek = 7 - prevMonthNeedFilling
         let remainingCountInOtherWeek = dayCountInThisMonth - dayCountInFirstWeek
         let lastWeekdayCountInMonth = remainingCountInOtherWeek % 7
-        let fullWeekCount = remainingCountInOtherWeek / 7
+        var fullWeekCount = remainingCountInOtherWeek / 7
         let nextMonthNeedFilling = 7 - lastWeekdayCountInMonth
         
         var weekArray = [[Int]]()
@@ -70,6 +70,9 @@ public class YMDateTools {
             }
             
             weekArray.append(firstWeek)
+        } else {
+            dayCountInFirstWeek = 0
+            fullWeekCount = fullWeekCount + 1
         }
         
         var dayIdx = dayCountInFirstWeek
@@ -91,9 +94,11 @@ public class YMDateTools {
         
         if(0 != nextMonthNeedFilling) {
             var lastWeek = [Int]()
-            dayIdx += 1
-            for i in dayIdx...dayCountInThisMonth {
-                lastWeek.append(i)
+            if(0 != lastWeekdayCountInMonth) {
+                dayIdx += 1
+                for i in dayIdx...dayCountInThisMonth {
+                    lastWeek.append(i)
+                }
             }
             
             for i in 1...nextMonthNeedFilling {
