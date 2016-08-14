@@ -20,6 +20,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     private let SearchPanel = UIView()
     private let FriendsPanel = UIView()
     
+    private let DirectAddButton = YMButton()
+    
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.PanelBackgroundGray
@@ -28,17 +30,16 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     }
 
     public func DrawSpecialManualAddButton(topView: UIView) {
-        let manualAddButton = YMButton()
+        topView.addSubview(DirectAddButton)
+        DirectAddButton.setTitle("直接添加", forState: UIControlState.Normal)
+        DirectAddButton.titleLabel?.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        DirectAddButton.titleLabel?.textColor = YMColors.White
+        DirectAddButton.sizeToFit()
+        DirectAddButton.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 54.LayoutVal(),
+                                       width: DirectAddButton.width, height: DirectAddButton.height)
+        DirectAddButton.UserStringData = YMCommonStrings.CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME
         
-        topView.addSubview(manualAddButton)
-        manualAddButton.setTitle("直接添加", forState: UIControlState.Normal)
-        manualAddButton.titleLabel?.font = YMFonts.YMDefaultFont(30.LayoutVal())
-        manualAddButton.titleLabel?.textColor = YMColors.White
-        manualAddButton.sizeToFit()
-        manualAddButton.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 54.LayoutVal(), width: manualAddButton.width, height: manualAddButton.height)
-        manualAddButton.UserStringData = YMCommonStrings.CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME
-        
-        manualAddButton.addTarget(self.Actions!, action: PageJumpActions.PageJumToSel, forControlEvents: UIControlEvents.TouchUpInside)
+        DirectAddButton.addTarget(self.Actions!, action: PageJumpActions.PageJumToSel, forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     private func DrawLoading() {
@@ -80,6 +81,10 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         LoadingProgressBar.layer.cornerRadius = LoadingProgressBar.height / 2
         LoadingProgressBar.layer.masksToBounds = true
 
+        let a = YMAddressBookTools()
+        a.ReadAddressBook()
+        
+        DirectAddButton.hidden = true
         UIView.animateWithDuration(2.3, animations: { () -> Void in
                 self.LoadingProgressBar.frame = CGRect(x: 0,y: 0,width: 600.LayoutVal(), height: self.LoadingProgressBar.height)
             }, completion: self.ClearLoadingAndShowResult)
@@ -90,8 +95,15 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         LoadingTextLine1.removeFromSuperview()
         LoadingTextLine2.removeFromSuperview()
         LoadingTextLine3.removeFromSuperview()
+        DirectAddButton.hidden = false
         
-        ShowResult()
+        let action: YiMaiAddContactsFriendsActions = self.Actions as! YiMaiAddContactsFriendsActions
+        let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
+        
+        controller.LoadingView?.Show()
+        print(YMAddressBookTools.AllContacts)
+        action.UploadAddressBook()
+//        ShowResult()
     }
     
     private func ShowResult() {

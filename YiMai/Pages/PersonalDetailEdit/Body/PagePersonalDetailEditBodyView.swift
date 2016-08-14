@@ -152,8 +152,10 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
             AppendExtInfo(NameLabel, parent: Username!, title: "请填写")
         }
         
-        let yimaiCode = userInfo["code"] as! String
-        AppendExtInfo(YiMaiCodeLabel, parent: YiMaiCode!, title: yimaiCode)
+        let yimaiCode = userInfo["code"] as? String
+        if(nil != yimaiCode) {
+            AppendExtInfo(YiMaiCodeLabel, parent: YiMaiCode!, title: yimaiCode!)
+        }
         
         let gender = userInfo["sex"]
         if(nil == gender) {

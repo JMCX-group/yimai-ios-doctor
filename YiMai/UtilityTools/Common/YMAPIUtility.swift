@@ -8,6 +8,7 @@
 
 import Foundation
 import AFNetworking
+import SwiftyJSON
 
 public typealias YMAPIJsonCallback = ((NSDictionary?) -> Void)
 public typealias YMAPIImageCallback = ((UIImage?) -> Void)
@@ -585,12 +586,11 @@ public class YMAPIUtility {
     
     public func YMUploadAddressBook(data: [[String: String]]) {
         let jsonData = try! NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions.PrettyPrinted)
-        let jsonString: String = String(data: jsonData, encoding: NSUTF8StringEncoding)!
-        
-        print(jsonString)
-        YMAPIPostWithJsonParam(YMAPIInterfaceURL.RelationUploadAddressBook,
-                               param: data,
-                               progressHandler: nil)
+        let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding)
+
+        YMAPIPost(YMAPIInterfaceURL.RelationUploadAddressBook,
+                  param: ["content": strJson!],
+                  progressHandler: nil)
     }
     
     public func YMSetRadioHaveRead(id: String) {

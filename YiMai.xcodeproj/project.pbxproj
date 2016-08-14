@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		674EEDC634635DB13AEB3300 /* Pods_YiMai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A556489D24098750735AC565 /* Pods_YiMai.framework */; };
+		7307BFEC1D601159000F31E5 /* YMAddressBookTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */; };
 		730848271D0D9D38007E8940 /* YMTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848261D0D9D38007E8940 /* YMTableView.swift */; };
 		730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848281D0D9D4B007E8940 /* YMModuleStrings.swift */; };
 		735FDE9E1D1E10C9004152CD /* PageAppointmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FDE9D1D1E10C9004152CD /* PageAppointmentDetailViewController.swift */; };
@@ -259,6 +260,7 @@
 /* Begin PBXFileReference section */
 		10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.debug.xcconfig"; sourceTree = "<group>"; };
 		35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.release.xcconfig"; sourceTree = "<group>"; };
+		7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAddressBookTools.swift; sourceTree = "<group>"; };
 		730848261D0D9D38007E8940 /* YMTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTableView.swift; sourceTree = "<group>"; };
 		730848281D0D9D4B007E8940 /* YMModuleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMModuleStrings.swift; sourceTree = "<group>"; };
 		735FDE9D1D1E10C9004152CD /* PageAppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentDetailViewController.swift; sourceTree = "<group>"; };
@@ -1451,6 +1453,7 @@
 				9624936C1CED5CAA007A9556 /* YMValueValidator.swift */,
 				96C6FB0D1D19304200738D02 /* YMVar.swift */,
 				73622E2B1D1EA2880039E785 /* YMLoaclData.swift */,
+				7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2361,6 +2364,7 @@
 				73622E3A1D1EC2DE0039E785 /* PageForgetPasswordBodyView.swift in Sources */,
 				FD54E06A1D37781E00F8E629 /* PageAdmissionTimeSettingActions.swift in Sources */,
 				9612DB731CC9F7FA00262D2E /* PagePersonalBodyView.swift in Sources */,
+				7307BFEC1D601159000F31E5 /* YMAddressBookTools.swift in Sources */,
 				739011B61D2763C400EAAA1B /* PageAddmissionReplyViewController.swift in Sources */,
 				96D451841CF7D67B006817CE /* PageYiMaiSameAreasActions.swift in Sources */,
 				960606FA1CE591CC00AAFC07 /* YMAPIUtility.swift in Sources */,

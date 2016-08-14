@@ -96,6 +96,8 @@ public class PageCommonSearchViewController: PageViewController {
         
         HospitalSearch?.ClearList()
         DepartmentSearch?.ClearList()
+        
+        print("PageDisapeared")
     }
 }
 

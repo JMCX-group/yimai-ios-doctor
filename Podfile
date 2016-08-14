@@ -13,5 +13,7 @@ target 'YiMai' do
   pod 'MWIDCardValidate'
   pod 'Graph'
   pod 'RongCloudIMKit', '2.4.0'
+  pod 'APAddressBook'
+  pod 'MBProgressHUD'
 end
 

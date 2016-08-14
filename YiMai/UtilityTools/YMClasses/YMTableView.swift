@@ -18,10 +18,10 @@ public class YMTableViewCell: UIView {
     private var Next: YMTableViewCell? = nil
     private var ParentTableView: YMTableView?
 
-    public weak var CellData: AnyObject? = nil
-    public weak var CellInnerView: UIView? = nil
+    public var CellData: AnyObject? = nil
+    public var CellInnerView: UIView? = nil
     
-    public weak var SubCell: AnyObject? = nil
+    public var SubCell: AnyObject? = nil
 
     public var Expanded: Bool = false
     

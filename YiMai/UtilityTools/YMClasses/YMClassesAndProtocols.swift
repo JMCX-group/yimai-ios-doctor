@@ -79,7 +79,7 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
     public static var ControllersDict : Dictionary<String, UIViewController>? = nil// Dictionary<String, UIViewController>()
     public var NavController : UINavigationController? = nil
     public var JumpWidthAnimate = true
-    public weak var Target: AnyObject? = nil
+    public var Target: AnyObject? = nil
     
     public static let PageJumToSel: Selector = "PageJumpTo:".Sel()
     public static let PageJumpToByViewSenderSel: Selector = "PageJumpToByViewSender:".Sel()
@@ -253,9 +253,9 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
 }
 
 public class PageBodyView {
-    internal weak var ParentView: UIView? = nil
-    internal weak var NavController: UINavigationController? = nil
-    internal weak var Actions: AnyObject? = nil
+    internal var ParentView: UIView? = nil
+    internal var NavController: UINavigationController? = nil
+    internal var Actions: AnyObject? = nil
     public var BodyView: UIScrollView = UIScrollView()
     
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: AnyObject? = nil) {

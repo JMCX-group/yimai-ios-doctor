@@ -19,4 +19,8 @@ public class PageRegisterSelectHospitalViewController: PageViewController {
         BodyView = PageRegisterSelectHospitalBodyView(parentView: self.view, navController: self.navigationController!)
         TopView = PageCommonTopView(parentView: self.view, titleString: YMRegisterSelectHospitalStrings.CS_REGISTER_SELECT_HOSPITAL_PAGE_TITLE, navController: self.navigationController)
     }
+    
+    override func PagePreRefresh() {
+        print(PageHospitalSearchBodyView.HospitalSelected)
+    }
 }

@@ -41,7 +41,7 @@ public class PageYiMaiAddFriendsBodyView: PageBodyView {
         textLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
         textLabel.textColor = YMColors.FontGray
         textLabel.sizeToFit()
-        
+
         BodyView.addSubview(textLabel)
         textLabel.align(Align.UnderCentered, relativeTo: icon, padding: 42.LayoutVal(), width: textLabel.width, height: textLabel.height)
         

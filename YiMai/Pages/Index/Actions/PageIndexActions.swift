@@ -49,6 +49,11 @@ public class PageIndexActions: PageJumpActions {
 //            DoJump(YMCommonStrings.CS_PAGE_GLOBAL_SEARCH_NAME)
 //        }
         
+        
+        
+        
+        
+        
 //        ApiUtility?.YMGetSearchResult(["field":editor.text!], progressHandler: nil)
 //        ApiUtility?.YMQueryUserInfo()
 //        ApiUtility?.YMQueryUserInfoById("23976")
@@ -85,7 +90,7 @@ public class PageIndexActions: PageJumpActions {
 //        ApiUtility?.YMGetAppointmentList()
         ApiUtility?.YMUploadAddressBook([
             ["name":"187", "phone":"18712345678"],
-            ["name":"186", "phone":"18612345678"]
+            ["name":"187", "phone":"18611175661"]
         ])
 //        ApiUtility?.YMGetAdmissionsList()
 //        ApiUtility?.YMGetAdmissionDetail("011605150006")
