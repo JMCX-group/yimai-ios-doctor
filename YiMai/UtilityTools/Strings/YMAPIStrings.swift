@@ -49,7 +49,10 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_GET_DOCTOR_DETAIL = "apiGetDoctorDetail"
     public static let CS_API_ACTION_ADD_FRIEND = "apiAddFriend"
+    public static let CS_API_ACTION_ADD_ALL_CONTACTS_FRIEND = "apiAddAllContactsFriend"
     public static let CS_API_ACTION_GET_NEW_FRIEND = "apiGetNewFriend"
+    
+    public static let CS_API_ACTION_INVITE_OTHERS_REGISTER_YIMAI = "apiInviteOthersRegisterYiMai"
     
     public static let CS_API_ACTION_AGREE_FRIEND_APPLY = "apiAgreeFriendApply"
     

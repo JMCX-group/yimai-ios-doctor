@@ -32,5 +32,11 @@ public class PageAdmissionTimeSettingViewController: PageViewController {
         FixedSettingBodyView?.DrawTopConfirmButton(TopView!.TopViewPanel)
         
         FlexibleSettingBodyView?.BodyView.hidden = true
+        
+        LoadingView = YMPageLoadingView(parentView: self.SelfView!)
+    }
+    
+    override func PagePreRefresh() {
+        FixedSettingBodyView!.LoadData()
     }
 }

@@ -12,7 +12,6 @@ public class PagePersonalViewController: PageViewController {
     private var PersonalTopView: PagePersonalTopView? = nil
     private var PersonalBodyView: PagePersonalBodyView? = nil
     private var Actions: PagePersonalActions? = nil
-    private var LoadingView: YMPageLoadingView? = nil
     private var UserInfo: AnyObject? = nil
     
     override func GestureRecognizerEnable() -> Bool {return false}

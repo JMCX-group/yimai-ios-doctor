@@ -2096,7 +2096,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9619EF621CC1DB9600F69CBC /* Build configuration list for PBXNativeTarget "YiMai" */;
 			buildPhases = (
-				E6BC80AE7D517AA66177C51A /* 📦 Check Pods Manifest.lock */,
+				E6BC80AE7D517AA66177C51A /* [CP] Check Pods Manifest.lock */,
 				A077FAF80F9F5F3142F7BA1E /* [CP] Check Pods Manifest.lock */,
 				9619EF491CC1DB9600F69CBC /* Sources */,
 				9619EF4A1CC1DB9600F69CBC /* Frameworks */,
@@ -2285,14 +2285,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiMai/Pods-YiMai-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E6BC80AE7D517AA66177C51A /* 📦 Check Pods Manifest.lock */ = {
+		E6BC80AE7D517AA66177C51A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2991,11 +2991,11 @@
 			baseConfigurationReference = 10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.patient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
@@ -3007,11 +3007,11 @@
 			baseConfigurationReference = 35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.patient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";

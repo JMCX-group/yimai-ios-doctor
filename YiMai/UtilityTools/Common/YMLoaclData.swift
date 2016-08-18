@@ -39,6 +39,40 @@ public class YMLocalData {
         return es[0]
     }
     
+    public static func SaveUserInfo(data: AnyObject) {
+        let login = YMLocalData.GetLoginInfo()
+        if(nil == login) {
+            return
+        }
+        let user = login![YMCoreDataKeyStrings.KEY_LOGIN_NAME] as! String
+        
+        let userInfo = YMLocalData.GetUserInfo()
+        if(nil == userInfo) {
+            let e = Entity(type: "\(user).info")
+            e["info"] = data
+        } else {
+            userInfo!["info"] = data
+        }
+
+        YMLocalData.Engine.save()
+    }
+    
+    public static func GetUserInfo() -> Entity? {
+        let login = YMLocalData.GetLoginInfo()
+        if(nil == login) {
+            return nil
+        }
+        
+        let user = login![YMCoreDataKeyStrings.KEY_LOGIN_NAME] as! String
+        let userInfo = YMLocalData.Engine.searchForEntity(types: ["\(user).info"])
+        
+        if(0 == userInfo.count) {
+            return nil
+        }
+        
+        return userInfo[0]
+    }
+    
     public static func SavePrivateInfo(key: String, data: Bool) {
         let login = YMLocalData.GetLoginInfo()
         if(nil == login) {

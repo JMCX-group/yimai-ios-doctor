@@ -10,9 +10,8 @@ import UIKit
 
 public class PageYiMaiAddContatsFriendsViewController: PageViewController {
     private var Actions: YiMaiAddContactsFriendsActions? = nil
-    private var BodyView: PageYiMaiAddContactsFriendsBodyView? = nil
-    private var BottomButton: PageYiMaiAddContactsFriendsBootomView? = nil
-    public var LoadingView: YMPageLoadingView? = nil
+    public var BodyView: PageYiMaiAddContactsFriendsBodyView? = nil
+    public var BottomButton: PageYiMaiAddContactsFriendsBootomView? = nil
     
     override func PageLayout() {
         super.PageLayout()

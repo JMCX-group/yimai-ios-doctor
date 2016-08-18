@@ -8,13 +8,32 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 public class PageAdmissionTimeSettingActions: PageJumpActions {
     private var targetController: PageAdmissionTimeSettingViewController!
+    private var SaveApi: YMAPIUtility? = nil
+
     override func ExtInit() {
         super.ExtInit()
         
         targetController = self.Target as! PageAdmissionTimeSettingViewController
+        
+        SaveApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_USER + "-admissionTimeSetting",
+                               success: SaveSuccess, error: SaveError)
+    }
+
+    public func SaveSuccess(data: NSDictionary?) {
+        targetController.LoadingView?.Hide()
+        YMLocalData.SaveUserInfo(data!["data"]!)
+        YMVar.MyUserInfo = data!["data"] as! [String : AnyObject]
+        self.NavController!.popViewControllerAnimated(true)
+    }
+    
+    public func SaveError(error: NSError) {
+        targetController.LoadingView?.Hide()
+        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
+        print(errInfo)
     }
     
     public func TabTouched(sender: UISegmentedControl) {
@@ -177,6 +196,37 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         self.NavController!.presentViewController(alertController, animated: true, completion: nil)    }
     
     public func SaveSetting(sender: UIGestureRecognizer) {
-        
+        print(YMVar.MyUserInfo)
+        targetController.LoadingView?.Show()
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(targetController.FixedSettingBodyView!.SettingData, options: NSJSONWritingOptions.PrettyPrinted)
+        let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
+        SaveApi?.YMChangeUserInfo(["admission_set_fixed": strJson])
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

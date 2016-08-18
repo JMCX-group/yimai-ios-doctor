@@ -12,7 +12,8 @@ import Neon
 public class PageYiMaiAddContactsFriendsBootomView {
     public var Actions: YiMaiAddContactsFriendsActions? = nil
     public var Parent: UIView? = nil
-    private var BottomView: YMTouchableView? = nil
+    public var AddAllFriendsBottomView: YMTouchableView? = nil
+    public var InviteAllOthersBottomView: YMTouchableView? = nil
 
     init(action: YiMaiAddContactsFriendsActions, parent: UIView){
         self.Actions = action
@@ -21,20 +22,80 @@ public class PageYiMaiAddContactsFriendsBootomView {
         DrawBottom()
     }
     
-    private func DrawBottom() {
-        BottomView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AddAllContactsFriends:".Sel())
-        Parent?.addSubview(BottomView!)
+    private func GetBottomView(title: String, bottomView: YMTouchableView) {
+        Parent?.addSubview(bottomView)
         
-        BottomView?.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.PageBottomHeight)
+        bottomView.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.PageBottomHeight)
         
         let bottomLabel = UILabel()
-        bottomLabel.text = "添加通讯录的所有医生"
-        bottomLabel.textColor = YMColors.White
+        bottomLabel.text = title
+        bottomLabel.textColor = YMColors.FontGray
         bottomLabel.font = YMFonts.YMDefaultFont(34.LayoutVal())
         bottomLabel.sizeToFit()
         
-        BottomView?.addSubview(bottomLabel)
+        bottomView.addSubview(bottomLabel)
         bottomLabel.anchorInCenter(width: bottomLabel.width, height: bottomLabel.height)
-        BottomView?.backgroundColor = YMColors.CommonBottomBlue
+        bottomView.backgroundColor = YMColors.BackgroundGray
+        
+        bottomView.UserObjectData = bottomLabel
+        bottomView.hidden = true
+    }
+    
+    private func DrawBottom() {
+        AddAllFriendsBottomView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AddAllContactsFriends:".Sel())
+        InviteAllOthersBottomView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "InviteAllOthersRegisterYiMai:".Sel())
+        
+        GetBottomView("添加全部好友", bottomView: AddAllFriendsBottomView!)
+        GetBottomView("邀请通讯录里的所有医生", bottomView: InviteAllOthersBottomView!)
+    }
+    
+    public func EnableAddButton() {
+        let btnLabel = AddAllFriendsBottomView?.UserObjectData as! UILabel
+
+        btnLabel.textColor = YMColors.White
+        AddAllFriendsBottomView?.backgroundColor = YMColors.CommonBottomBlue
+        
+        AddAllFriendsBottomView?.hidden = false
+        InviteAllOthersBottomView?.hidden = true
+    }
+    
+    public func EnabelInviteButton() {
+        let btnLabel = InviteAllOthersBottomView?.UserObjectData as! UILabel
+        
+        btnLabel.textColor = YMColors.White
+        InviteAllOthersBottomView?.backgroundColor = YMColors.CommonBottomBlue
+        
+        InviteAllOthersBottomView?.hidden = false
+        AddAllFriendsBottomView?.hidden = true
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -183,6 +183,7 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
     internal var BottomView : PageCommonBottomView? = nil
     internal var NavController: UINavigationController? = nil
     internal var SelfView: UIView? = nil
+    public var LoadingView: YMPageLoadingView? = nil
 
     internal func GestureRecognizerEnable() -> Bool {return true}
 

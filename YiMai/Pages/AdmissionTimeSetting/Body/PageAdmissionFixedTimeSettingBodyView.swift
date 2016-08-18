@@ -8,6 +8,7 @@
 
 import Foundation
 import Neon
+import SwiftyJSON
 
 public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
     var SettingActions: PageAdmissionTimeSettingActions!
@@ -24,11 +25,88 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
     
     private var SelectDict = [Int: String]()
     private var DayCellMapByWeek = [Int: [YMTouchableView]]()
+    
+    public var SettingData: [[String: AnyObject]] = [
+        ["week":"sun", "am": false, "pm": false],
+        ["week":"mon", "am": false, "pm": false],
+        ["week":"tue", "am": false, "pm": false],
+        ["week":"wed", "am": false, "pm": false],
+        ["week":"thu", "am": false, "pm": false],
+        ["week":"fri", "am": false, "pm": false],
+        ["week":"sat", "am": false, "pm": false]
+    ]
 
     override func ViewLayout() {
         super.ViewLayout()
         SettingActions = self.Actions as! PageAdmissionTimeSettingActions
         DrawFixedSchedule()
+    }
+    
+    public func LoadData() {
+        let settingString = YMVar.MyUserInfo["admission_set_fixed"] as? String
+        if (nil == settingString) {
+            UnselectAll()
+            return
+        }
+        
+        let setting = JSON.parse(settingString!)
+        if (nil == setting) {
+            UnselectAll()
+            return
+        }
+
+        for (idx,daySet) in setting.arrayValue.enumerate() {
+            var targetStatus = "none"
+            var amBtnSelectedStatus = false
+            var pmBtnSelectedStatus = false
+
+            if (false == daySet["pm"].bool && false == daySet["am"].bool) {
+                targetStatus = "none"
+            } else if (true == daySet["pm"].bool && false == daySet["am"].bool) {
+                targetStatus = "pm"
+                pmBtnSelectedStatus = true
+            } else if (false == daySet["pm"].bool && true == daySet["am"].bool) {
+                targetStatus = "am"
+                amBtnSelectedStatus = true
+            } else {
+                targetStatus = "day"
+                amBtnSelectedStatus = true
+                pmBtnSelectedStatus = true
+            }
+            ToggleWeekdayStatus(targetStatus, weekdayIdx: idx)
+            SelectDict[idx] = targetStatus
+            SettingData[idx] = [
+                "week": daySet["week"].string!,
+                "am": daySet["am"].bool!,
+                "pm": daySet["pm"].bool!
+            ]
+            
+            if(true == amBtnSelectedStatus) {
+                AMLineArr[idx].backgroundColor = YMColors.WeekdaySelectedColor
+                AMLineArr[idx].setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+            } else {
+                AMLineArr[idx].backgroundColor = YMColors.None
+                AMLineArr[idx].setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
+            }
+            
+            if(true == pmBtnSelectedStatus) {
+                PMLineArr[idx].backgroundColor = YMColors.WeekdaySelectedColor
+                PMLineArr[idx].setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+            } else {
+                PMLineArr[idx].backgroundColor = YMColors.None
+                PMLineArr[idx].setTitleColor(YMColors.WeekdayDisabledFontColor, forState: UIControlState.Normal)
+            }
+        }
+    }
+    
+    private func UnselectAll() {
+        ToggleWeekdayStatus("none", weekdayIdx: 0)
+        ToggleWeekdayStatus("none", weekdayIdx: 1)
+        ToggleWeekdayStatus("none", weekdayIdx: 2)
+        ToggleWeekdayStatus("none", weekdayIdx: 3)
+        ToggleWeekdayStatus("none", weekdayIdx: 4)
+        ToggleWeekdayStatus("none", weekdayIdx: 5)
+        ToggleWeekdayStatus("none", weekdayIdx: 6)
     }
     
     public func DrawTopTabButton(topVeiw: UIView) {
@@ -360,18 +438,26 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         if("none" == status) {
             for v in DayCellMapByWeek[weekdayIdx]! {
                 SetDayUnSelected(v)
+                SettingData[weekdayIdx]["am"] = false
+                SettingData[weekdayIdx]["pm"] = false
             }
         } else if("day" == status) {
             for v in DayCellMapByWeek[weekdayIdx]! {
                 SetDaySelected(v)
+                SettingData[weekdayIdx]["am"] = true
+                SettingData[weekdayIdx]["pm"] = true
             }
         }  else if("pm" == status) {
             for v in DayCellMapByWeek[weekdayIdx]! {
                 SetDayCellPMSelected(v)
+                SettingData[weekdayIdx]["am"] = false
+                SettingData[weekdayIdx]["pm"] = true
             }
         }  else {
             for v in DayCellMapByWeek[weekdayIdx]! {
                 SetDayCellAMSelected(v)
+                SettingData[weekdayIdx]["am"] = true
+                SettingData[weekdayIdx]["pm"] = false
             }
         }
     }

@@ -16,4 +16,5 @@ public class YMTouchableView: UIView {
 
 public class YMTouchableImageView: UIImageView {
     public var UserStringData: String = ""
+    public var UserObjectData: AnyObject? = nil
 }

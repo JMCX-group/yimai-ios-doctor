@@ -19,8 +19,20 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     private var SearchInput: YMTextField? = nil
     private let SearchPanel = UIView()
     private let FriendsPanel = UIView()
+    private let OthersPanel = UIView()
     
+    private let FriendsListPanel = UIView()
+    private let OthersListPanel = UIView()
+    
+    private var ListType: String = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_FRIENDS
+    
+    private let ShowFriendsListBtn = YMButton()
+    private let ShowOthersListBtn = YMButton()
+
     private let DirectAddButton = YMButton()
+    
+    public var ContactsInYiMaiResult = [String]()
+    public var ContactsInOtherResult = [String]()
     
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
@@ -81,6 +93,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         LoadingProgressBar.layer.cornerRadius = LoadingProgressBar.height / 2
         LoadingProgressBar.layer.masksToBounds = true
 
+        YMAddressBookTools.AllContacts.removeAll()
         let a = YMAddressBookTools()
         a.ReadAddressBook()
         
@@ -103,12 +116,70 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         controller.LoadingView?.Show()
         print(YMAddressBookTools.AllContacts)
         action.UploadAddressBook()
-//        ShowResult()
     }
     
-    private func ShowResult() {
+    public func ShowResult(data: [String: AnyObject]) {
         DrawSearchPanel()
-        DrawFriendsList()
+        
+        let friendsData = data["friends"] as! [[String: AnyObject]]
+        let othersData = data["others"] as! [[String: AnyObject]]
+        DrawFriendsList(friendsData)
+        DrawOtherList(othersData)
+        
+        if(YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_FRIENDS == ListType) {
+            ShowFriendsList()
+        } else if(YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS == ListType) {
+            ShowOthersList()
+        }
+    }
+    
+    public func ShowFriendsList() {
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.2)
+        
+        FriendsListPanel.hidden = false
+        OthersListPanel.hidden = true
+
+        ShowFriendsListBtn.hidden = true
+        ShowOthersListBtn.hidden = false
+
+        YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: FriendsListPanel)
+        YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: ShowOthersListBtn)
+        
+        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: OthersPanel.width, height: OthersPanel.height)
+        BodyView.contentOffset = CGPoint()
+        UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
+        UIView.commitAnimations()
+        
+        let action: YiMaiAddContactsFriendsActions = self.Actions as! YiMaiAddContactsFriendsActions
+        let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
+        
+        controller.BottomButton?.EnableAddButton()
+    }
+    
+    public func ShowOthersList() {
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.2)
+        
+        FriendsListPanel.hidden = true
+        OthersListPanel.hidden = false
+        
+        ShowFriendsListBtn.hidden = false
+        ShowOthersListBtn.hidden = true
+        
+        YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: OthersListPanel)
+        YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: ShowFriendsListBtn)
+        
+        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: OthersPanel.width, height: OthersPanel.height)
+        
+        BodyView.contentOffset = CGPoint()
+        UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
+        UIView.commitAnimations()
+        
+        let action: YiMaiAddContactsFriendsActions = self.Actions as! YiMaiAddContactsFriendsActions
+        let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
+        
+        controller.BottomButton?.EnabelInviteButton()
     }
     
     private func DrawSearchPanel() {
@@ -134,44 +205,194 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         SearchInput?.SetLeftPadding(searchIconView)
     }
     
-    private func DrawFriendsList() {
-        BodyView.addSubview(FriendsPanel)
-        FriendsPanel.align(Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
+    private func DrawOtherList(data: [[String: AnyObject]]) {
+        BodyView.addSubview(OthersPanel)
+        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
         
+        if(0 == data.count) {
+            return
+        }
+        
+        OthersPanel.addSubview(ShowOthersListBtn)
+        ShowOthersListBtn.setTitle("邀请好友加入医脉", forState: UIControlState.Normal)
+        ShowOthersListBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+        ShowOthersListBtn.backgroundColor = YMColors.PanelBackgroundGray
+        ShowOthersListBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        ShowOthersListBtn.addTarget(self.Actions!, action: "ShowOthersListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        ShowOthersListBtn.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 60.LayoutVal())
+
+        OthersPanel.addSubview(OthersListPanel)
+        OthersListPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 0)
+
         let titleLabel = UILabel()
         
-        titleLabel.text = "根据可查询的数据，以下3位联系人可能是医生"
+        titleLabel.text = "您可以邀请以下\(data.count)位好友加入医脉"
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.textColor = YMColors.FontGray
         
         let topLine = UIView()
-        FriendsPanel.addSubview(topLine)
+        OthersListPanel.addSubview(topLine)
         topLine.backgroundColor = YMColors.DividerLineGray
         topLine.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         
-        FriendsPanel.addSubview(titleLabel)
+        OthersListPanel.addSubview(titleLabel)
         titleLabel.anchorAndFillEdge(Edge.Top, xPad: 40.LayoutVal(), yPad: YMSizes.OnPx, otherSize: 51.LayoutVal())
         
-        var cell = self.DrawFriendsCell([
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: "池帅",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_HOSPATIL: "鸡西矿业总医院医疗集团二道河子中心医院",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_DEPARTMENT: "心血管外科",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_JOB_TITLE: "主任医师"
-            ], prevCell: nil)
+        ContactsInOtherResult.removeAll()
+
+        var cell: UIView? = nil
+        for other in data {
+            let name = other["name"] as! String
+            let phone = other["phone"] as! String
+            
+            ContactsInOtherResult.append(phone)
+
+            cell = self.DrawOtherCell([
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: name,
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_PHONE: phone
+                ], prevCell: cell)
+        }
         
-        cell = self.DrawFriendsCell([
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: "方欣雨",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_HOSPATIL: "牡丹江市西安区先锋医院江滨社区第一卫生服务站",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_DEPARTMENT: "小儿营养保健科",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_JOB_TITLE: "主任医师"
-            ], prevCell: cell)
+        YMLayout.SetViewHeightByLastSubview(OthersListPanel, lastSubView: cell!)
+        YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: OthersListPanel)
+    }
+    
+    private func DrawFriendsList(data: [[String: AnyObject]]) {
+        BodyView.addSubview(FriendsPanel)
+        FriendsPanel.align(Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
+
+        if(0 == data.count) {
+            ListType = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS
+            return
+        }
         
-        cell = self.DrawFriendsCell([
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: "武瑞鑫",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_HOSPATIL: "中国医学科学院北京协和医院",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_DEPARTMENT: "功能神经外科",
-            YiMaiAddContactsFriendsStrings.CS_DATA_KEY_JOB_TITLE: "主任医师"
-            ], prevCell: cell)
+        FriendsPanel.addSubview(ShowFriendsListBtn)
+        ShowFriendsListBtn.setTitle("显示医脉资源", forState: UIControlState.Normal)
+        ShowFriendsListBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+        ShowFriendsListBtn.backgroundColor = YMColors.PanelBackgroundGray
+        ShowFriendsListBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        ShowFriendsListBtn.addTarget(self.Actions!, action: "ShowFriendsListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        ShowFriendsListBtn.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 60.LayoutVal())
+        
+        FriendsPanel.addSubview(FriendsListPanel)
+        FriendsListPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 0)
+        
+        let titleLabel = UILabel()
+
+        titleLabel.text = "根据可查询的数据，以下\(data.count)位联系人可能是医生"
+        titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        titleLabel.textColor = YMColors.FontGray
+
+        let topLine = UIView()
+        FriendsListPanel.addSubview(topLine)
+        topLine.backgroundColor = YMColors.DividerLineGray
+        topLine.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
+        
+        FriendsListPanel.addSubview(titleLabel)
+        titleLabel.anchorAndFillEdge(Edge.Top, xPad: 40.LayoutVal(), yPad: YMSizes.OnPx, otherSize: 51.LayoutVal())
+        
+        ContactsInYiMaiResult.removeAll()
+        var cell: UIView? = nil
+        for docotor in data {
+            var title = docotor["job_title"] as? String
+            var hos = docotor["hospital"] as? [String: String]
+            var name = docotor["name"] as? String
+            var dept = docotor["department"] as? [String: String]
+            let id = docotor["id"] as! String
+            
+            ContactsInYiMaiResult.append(id)
+            
+            var hosName = ""
+            var deptName = ""
+            
+            if (nil == title) {
+                title = ""
+            }
+            
+            if(nil == name) {
+                name = ""
+            }
+            
+            if(nil != hos) {
+                hosName = hos!["name"]!
+            }
+            
+            if(nil != dept) {
+                deptName = dept!["name"]!
+            }
+            
+            cell = self.DrawFriendsCell([
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: name!,
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_HOSPATIL: hosName,
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_DEPARTMENT: deptName,
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_JOB_TITLE: title!,
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_USER_ID: id
+                ], prevCell: cell)
+        }
+        
+        YMLayout.SetViewHeightByLastSubview(FriendsListPanel, lastSubView: cell!)
+        YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: FriendsListPanel)
+    }
+    
+    private func DrawOtherCell(data: [String: AnyObject], prevCell: UIView?) -> UIView {
+        let name = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME] as! String
+        let phone = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_PHONE] as! String
+
+        let cell = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: 100.LayoutVal()))
+        
+        let nameLabel = UILabel()
+        let phoneLabel = UILabel()
+        let phoneIcon = YMLayout.GetSuitableImageView("YMIconPhone")
+
+        let addButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                       useMethod: "InviteOthersRegisterYiMai:".Sel(),
+                                                       imageName: "YiMaiAddContactsFriendButton")
+        
+        addButton.UserStringData = phone
+        
+        let bottomLine = UIView()
+        
+        bottomLine.backgroundColor = YMColors.DividerLineGray
+        
+        nameLabel.text = name
+        nameLabel.textColor = YMColors.FontBlue
+        nameLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        nameLabel.sizeToFit()
+        
+        phoneLabel.text = phone
+        phoneLabel.textColor = YMColors.FontGray
+        phoneLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        phoneLabel.sizeToFit()
+        
+        let infoCell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "ShowFriendInfo:".Sel())
+        
+        infoCell.addSubview(nameLabel)
+        infoCell.addSubview(phoneLabel)
+
+        cell.addSubview(infoCell)
+        cell.addSubview(addButton)
+        cell.addSubview(phoneIcon)
+        cell.addSubview(bottomLine)
+        
+        OthersListPanel.addSubview(cell)
+        
+        if(nil == prevCell) {
+            cell.anchorToEdge(Edge.Top, padding: 51.LayoutVal(), width: YMSizes.PageWidth, height: cell.height)
+        } else {
+            cell.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: prevCell!, padding: YMSizes.OnPx, height: cell.height)
+        }
+        
+        infoCell.fillSuperview()
+        
+        nameLabel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: nameLabel.width, height: nameLabel.height)
+        phoneIcon.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 32.LayoutVal(), width: phoneIcon.width, height: phoneIcon.height)
+        phoneLabel.align(Align.ToTheRightCentered, relativeTo: phoneIcon, padding: 10.LayoutVal(), width: phoneLabel.width, height: phoneLabel.height)
+        
+        addButton.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: addButton.width, height: addButton.height)
+        
+        bottomLine.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
+        
+        return cell
     }
     
     private func DrawFriendsCell(data: [String: AnyObject], prevCell: UIView?) -> UIView {
@@ -179,6 +400,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let hospital = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_DEPARTMENT] as! String
         let jobTitle = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_JOB_TITLE] as! String
+        
+        let id = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_USER_ID] as! String
         
         let cell = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: 136.LayoutVal()))
         
@@ -188,8 +411,10 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let deptLabel = UILabel()
         let hosLabel = UILabel()
         let addButton = YMLayout.GetTouchableImageView(useObject: Actions!,
-                                                       useMethod: "PostAddFriends:".Sel(),
+                                                       useMethod: "AddFriend:".Sel(),
                                                        imageName: "YiMaiAddContactsFriendButton")
+        addButton.UserStringData = id
+
         let bottomLine = UIView()
         
         bottomLine.backgroundColor = YMColors.DividerLineGray
@@ -228,7 +453,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         cell.addSubview(addButton)
         cell.addSubview(bottomLine)
         
-        FriendsPanel.addSubview(cell)
+        FriendsListPanel.addSubview(cell)
         
         if(nil == prevCell) {
             cell.anchorToEdge(Edge.Top, padding: 51.LayoutVal(), width: YMSizes.PageWidth, height: cell.height)

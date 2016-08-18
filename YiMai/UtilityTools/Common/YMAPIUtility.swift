@@ -44,6 +44,7 @@ public class YMAPIInterfaceURL {
     static let GetLevel1Relation = YMAPIInterfaceURL.ApiBaseUrl + "/relation/friends"
     static let GetLevel2Relation = YMAPIInterfaceURL.ApiBaseUrl + "/relation/friends-friends"
     static let RelationAddFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/add-friend"
+    static let RelationAddAllFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/add-all"
     static let RelationCommonFriends = YMAPIInterfaceURL.ApiBaseUrl + "/relation/common-friends"
     static let RelationNewFriends = YMAPIInterfaceURL.ApiBaseUrl + "/relation/new-friends"
     static let RelationFriendRemarks = YMAPIInterfaceURL.ApiBaseUrl + "/relation/remarks"
@@ -51,6 +52,8 @@ public class YMAPIInterfaceURL {
     static let RelationDelFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/del"
     static let RelationAgreeFriend = YMAPIInterfaceURL.ApiBaseUrl + "/relation/confirm"
     static let RelationUploadAddressBook = YMAPIInterfaceURL.ApiBaseUrl + "/relation/upload-address-book"
+    
+    static let RelationInviteOthers = YMAPIInterfaceURL.ApiBaseUrl + "/relation/send-invite"
     
     static let GetAllRadio = YMAPIInterfaceURL.ApiBaseUrl + "/radio"
     static let SetRadioHaveRead = YMAPIInterfaceURL.ApiBaseUrl + "/radio/read"
@@ -578,9 +581,21 @@ public class YMAPIUtility {
                   progressHandler: nil)
     }
     
+    public func YMAddMultiFriends(ids: String) {
+        YMAPIPost(YMAPIInterfaceURL.RelationAddAllFriend,
+                  param: [YMCommonStrings.CS_API_PARAM_KEY_ID: ids],
+                  progressHandler: nil)
+    }
+    
     public func YMAgreeFriendById(id: String) {
         YMAPIPost(YMAPIInterfaceURL.RelationAgreeFriend,
                   param: [YMCommonStrings.CS_API_PARAM_KEY_ID: id],
+                  progressHandler: nil)
+    }
+    
+    public func YMInviteOthers(ids: String) {
+        YMAPIPost(YMAPIInterfaceURL.RelationInviteOthers,
+                  param: [YMCommonStrings.CS_API_PARAM_KEY_ID: ids],
                   progressHandler: nil)
     }
     

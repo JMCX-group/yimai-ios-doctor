@@ -17,5 +17,9 @@ public class YiMaiAddContactsFriendsStrings {
     public static let CS_DATA_KEY_HOSPATIL = "hospital"
     public static let CS_DATA_KEY_DEPARTMENT = "department"
     public static let CS_DATA_KEY_JOB_TITLE = "job_title"
+    public static let CS_DATA_KEY_PHONE = "phone"
     public static let CS_DATA_KEY_USER_ID = "id"
+    
+    public static let CS_LIST_TYPE_FRIENDS = "friendsList"
+    public static let CS_LIST_TYPE_OTHERS = "othersList"
 }
