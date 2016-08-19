@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="B2W-Yc-vDT">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Page Admission Charge Setting View Controller-->
+        <scene sceneID="rbF-jj-2Za">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="B2W-Yc-vDT" customClass="PageAdmissionChargeSettingViewController" customModule="YiMai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s5B-tz-bOn"/>
+                        <viewControllerLayoutGuide type="bottom" id="pul-39-QTX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7ai-6c-s8j">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MG5-a0-VEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="767" y="532"/>
+        </scene>
+    </scenes>
+</document>

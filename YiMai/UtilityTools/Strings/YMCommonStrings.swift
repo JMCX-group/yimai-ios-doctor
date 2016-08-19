@@ -49,7 +49,6 @@ public class YMCommonStrings {
     public static let CS_PAEG_ADMISSION_CHARGE_SETTING_NAME = "PageAdmissionChargeSetting"
     public static let CS_PAEG_ADMISSION_TIME_SETTING_NAME = "PageAdmissionTimeSetting"
     
-    
     public static let CS_PAGE_FACE_2_FACE_INFO_INPUT_NAME = "PageFace2FaceInfoInput"
     public static let CS_PAGE_FACE_2_FACE_QR_NAME = "PageFace2FaceQR"
     public static let CS_PAGE_MASSAGE_LIST_NAME = "PageMessageList"
