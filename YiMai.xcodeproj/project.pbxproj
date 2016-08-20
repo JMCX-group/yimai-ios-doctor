@@ -255,6 +255,13 @@
 		FD54E0641D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0631D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift */; };
 		FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0651D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift */; };
 		FD54E06A1D37781E00F8E629 /* PageAdmissionTimeSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0691D37781E00F8E629 /* PageAdmissionTimeSettingActions.swift */; };
+		FD77AF221D68484F00B8C73E /* LBXPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF1B1D68484F00B8C73E /* LBXPermissions.swift */; };
+		FD77AF231D68484F00B8C73E /* LBXScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF1C1D68484F00B8C73E /* LBXScanLineAnimation.swift */; };
+		FD77AF241D68484F00B8C73E /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF1D1D68484F00B8C73E /* LBXScanNetAnimation.swift */; };
+		FD77AF251D68484F00B8C73E /* LBXScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF1E1D68484F00B8C73E /* LBXScanView.swift */; };
+		FD77AF261D68484F00B8C73E /* LBXScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF1F1D68484F00B8C73E /* LBXScanViewController.swift */; };
+		FD77AF271D68484F00B8C73E /* LBXScanViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF201D68484F00B8C73E /* LBXScanViewStyle.swift */; };
+		FD77AF281D68484F00B8C73E /* LBXScanWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF211D68484F00B8C73E /* LBXScanWrapper.swift */; };
 		FD801DCD1D66F2990066198B /* PageAdmissionChargeSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD801DCF1D66F2990066198B /* PageAdmissionChargeSetting.storyboard */; };
 		FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD01D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift */; };
 		FD801DD31D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */; };
@@ -515,6 +522,13 @@
 		FD54E0631D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionTimeSettingViewController.swift; sourceTree = "<group>"; };
 		FD54E0651D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionFixedTimeSettingBodyView.swift; sourceTree = "<group>"; };
 		FD54E0691D37781E00F8E629 /* PageAdmissionTimeSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionTimeSettingActions.swift; sourceTree = "<group>"; };
+		FD77AF1B1D68484F00B8C73E /* LBXPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXPermissions.swift; sourceTree = "<group>"; };
+		FD77AF1C1D68484F00B8C73E /* LBXScanLineAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanLineAnimation.swift; sourceTree = "<group>"; };
+		FD77AF1D1D68484F00B8C73E /* LBXScanNetAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanNetAnimation.swift; sourceTree = "<group>"; };
+		FD77AF1E1D68484F00B8C73E /* LBXScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanView.swift; sourceTree = "<group>"; };
+		FD77AF1F1D68484F00B8C73E /* LBXScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewController.swift; sourceTree = "<group>"; };
+		FD77AF201D68484F00B8C73E /* LBXScanViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewStyle.swift; sourceTree = "<group>"; };
+		FD77AF211D68484F00B8C73E /* LBXScanWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanWrapper.swift; sourceTree = "<group>"; };
 		FD801DCE1D66F2990066198B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAdmissionChargeSetting.storyboard; sourceTree = "<group>"; };
 		FD801DD01D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionChargeSettingViewController.swift; sourceTree = "<group>"; };
 		FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdmissionChargeSettingBodyView.swift; sourceTree = "<group>"; };
@@ -1412,6 +1426,7 @@
 		96331B031CC8762600E53125 /* YMClasses */ = {
 			isa = PBXGroup;
 			children = (
+				FD77AF1A1D68484F00B8C73E /* YMQRScan */,
 				730848261D0D9D38007E8940 /* YMTableView.swift */,
 				96331B041CC8762600E53125 /* YMButton.swift */,
 				96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */,
@@ -2098,6 +2113,20 @@
 			path = Body;
 			sourceTree = "<group>";
 		};
+		FD77AF1A1D68484F00B8C73E /* YMQRScan */ = {
+			isa = PBXGroup;
+			children = (
+				FD77AF1B1D68484F00B8C73E /* LBXPermissions.swift */,
+				FD77AF1C1D68484F00B8C73E /* LBXScanLineAnimation.swift */,
+				FD77AF1D1D68484F00B8C73E /* LBXScanNetAnimation.swift */,
+				FD77AF1E1D68484F00B8C73E /* LBXScanView.swift */,
+				FD77AF1F1D68484F00B8C73E /* LBXScanViewController.swift */,
+				FD77AF201D68484F00B8C73E /* LBXScanViewStyle.swift */,
+				FD77AF211D68484F00B8C73E /* LBXScanWrapper.swift */,
+			);
+			path = YMQRScan;
+			sourceTree = "<group>";
+		};
 		FD801DC81D66F27A0066198B /* AdmissionChargeSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -2366,6 +2395,7 @@
 				737F1F7E1D2048CB00FFE573 /* PageNewFriendBodyView.swift in Sources */,
 				737F1F5B1D1F567E00FFE573 /* PagePersonalPrivateSettingViewController.swift in Sources */,
 				739011BA1D27646900EAAA1B /* PageAddmissionReplyActions.swift in Sources */,
+				FD77AF281D68484F00B8C73E /* LBXScanWrapper.swift in Sources */,
 				96D4516C1CF6DA98006817CE /* YiMaiManualAddFriendActions.swift in Sources */,
 				9624936F1CED7235007A9556 /* YMCoreDataKeyStrings.swift in Sources */,
 				73622E461D1EDF920039E785 /* PageAboutYiMaiViewController.swift in Sources */,
@@ -2408,9 +2438,11 @@
 				960606FA1CE591CC00AAFC07 /* YMAPIUtility.swift in Sources */,
 				96637A871CC24D3300DBD1CF /* PageCommonTopView.swift in Sources */,
 				739009261D1554E100989207 /* YMRegisterInfoString.swift in Sources */,
+				FD77AF221D68484F00B8C73E /* LBXPermissions.swift in Sources */,
 				7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */,
 				737F1F801D2048EE00FFE573 /* PageNewFriendActions.swift in Sources */,
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
+				FD77AF231D68484F00B8C73E /* LBXScanLineAnimation.swift in Sources */,
 				FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */,
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
 				96FCD13A1D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift in Sources */,
@@ -2424,6 +2456,7 @@
 				737F1F851D204B5500FFE573 /* PageNewFriendViewController.swift in Sources */,
 				9612DB5F1CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift in Sources */,
 				96D745B81CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift in Sources */,
+				FD77AF241D68484F00B8C73E /* LBXScanNetAnimation.swift in Sources */,
 				96814A891D1A3E4A002C8BD3 /* PagePersonalDetailEditViewController.swift in Sources */,
 				FD54E05D1D3774CE00F8E629 /* PageMyAdmissionSettingActions.swift in Sources */,
 				9612DB621CC9F71F00262D2E /* PageRegisterInputHospitalViewController.swift in Sources */,
@@ -2506,6 +2539,8 @@
 				9612DB661CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift in Sources */,
 				96D745B61CF5C2C500E345E3 /* YiMaiAddFriendsActions.swift in Sources */,
 				739AEC481D164B7000E70EF3 /* PageDepartmentSearchActions.swift in Sources */,
+				FD77AF261D68484F00B8C73E /* LBXScanViewController.swift in Sources */,
+				FD77AF271D68484F00B8C73E /* LBXScanViewStyle.swift in Sources */,
 				9672FB1E1CCF4D3100BC7E40 /* YMFonts.swift in Sources */,
 				73622E381D1EC28B0039E785 /* PageForgetPasswordViewController.swift in Sources */,
 				739AEC461D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift in Sources */,
@@ -2531,6 +2566,7 @@
 				9619EF591CC1DB9600F69CBC /* YiMai.xcdatamodeld in Sources */,
 				737F1F751D20296F00FFE573 /* PageYiMaiDoctorDetailBodyView.swift in Sources */,
 				96834F201D05271800E0C813 /* PageCommonSearchTopView.swift in Sources */,
+				FD77AF251D68484F00B8C73E /* LBXScanView.swift in Sources */,
 				9672FB2E1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift in Sources */,
 				96FCD1381D17A95100A6E12D /* PagePersonalIDNumInputViewController.swift in Sources */,
 				7394F85E1D005E3600F05487 /* PageAppointmentSelectTimeBodyView.swift in Sources */,

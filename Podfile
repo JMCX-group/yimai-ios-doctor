@@ -7,7 +7,6 @@ target 'YiMai' do
   pod 'AFNetworking'
   pod 'SwiftyJSON'
   pod 'Neon'
-  pod 'swiftScan'
   pod 'Proposer'
   pod 'SwiftDate'
   pod 'MWIDCardValidate'
