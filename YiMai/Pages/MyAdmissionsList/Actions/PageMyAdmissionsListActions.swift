@@ -74,7 +74,31 @@ public class PageMyAdmissionsListActions: PageJumpActions{
 
     }
     
-    public func AdmissionTouched(sender: UIGestureRecognizer) {
+    public func AdmissionCompleteTouched(sender: UIGestureRecognizer) {
+        let _ = self.Target! as! PageMyAdmissionsListViewController
+        let cell = sender.view as! YMTouchableView
+        let cellData = cell.UserObjectData as! [String: AnyObject]
+        
+        let id = "\(cellData["id"]!)"
+        
+        PageAppointmentDetailViewController.AppointmentID = id
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
+    }
+    
+    public func AdmissionReplyTouched(sender: UIGestureRecognizer) {
+        let _ = self.Target! as! PageMyAdmissionsListViewController
+        let cell = sender.view as! YMTouchableView
+        let cellData = cell.UserObjectData as! [String: AnyObject]
+        
+        let id = "\(cellData["id"]!)"
+        let time = "\(cellData["time"]!)"
+        
+        PageAppointmentAcceptBodyView.AppointmentID = id
+        PageAppointmentAcceptBodyView.TimeInfo = time
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_ACCEPT_NAME)
+    }
+    
+    public func AdmissionWaitCompleteTouched(sender: UIGestureRecognizer) {
         let _ = self.Target! as! PageMyAdmissionsListViewController
         let cell = sender.view as! YMTouchableView
         let cellData = cell.UserObjectData as! [String: AnyObject]

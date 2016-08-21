@@ -41,26 +41,11 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
     private var WaitCompletePanelDrew = false
     private var WaitReplyPanelDrew = false
 
-    private let MockData = [
-        [
-            YMMyAdmissionsMessage(MsgId: "1", MsgContent: "测试消息1", StatusString: "去查看", Status: "0", datatime: "2016-04-29 09:08:07")
-        ],
-        
-        [
-            YMMyAdmissionsMessage(MsgId: "2", MsgContent: "测试消息2", StatusString: "去处理", Status: "1", datatime: "2016-04-28 09:08:07")
-        ],
-        
-        [
-            YMMyAdmissionsMessage(MsgId: "3", MsgContent: "测试消息3", StatusString: "去回复", Status: "2", datatime: "2016-04-27 09:08:07")
-        ]
-    ]
     
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.BackgroundGray
-        
-//        DrawSpecialClearButton()
-//        DrawMessages(MockData)
+
         DrawTabPanel()
     }
     
@@ -130,7 +115,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             var lastView:UIView? = nil
             let listData = PageMyAdmissionsListViewController.CompletedAdmissions
             for data in listData {
-                lastView = DrawAdmissionList(data, prevView: lastView, parent: CompletePanel)
+                lastView = DrawAdmissionList(data, prevView: lastView, parent: CompletePanel, actionMethod: "AdmissionCompleteTouched:".Sel())
             }
             
             if(nil != lastView) {
@@ -159,7 +144,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             var lastView:UIView? = nil
             let listData = PageMyAdmissionsListViewController.WaitCompletedAdmissions
             for data in listData {
-                lastView = DrawAdmissionList(data, prevView: lastView, parent: WaitCompletePanel)
+                lastView = DrawAdmissionList(data, prevView: lastView, parent: WaitCompletePanel, actionMethod: "AdmissionWaitCompleteTouched:".Sel())
             }
             
             if(nil != lastView) {
@@ -188,7 +173,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             var lastView:UIView? = nil
             let listData = PageMyAdmissionsListViewController.WaitReplyAdmissions
             for data in listData {
-                lastView = DrawAdmissionList(data, prevView: lastView, parent: WaitReplyPanel)
+                lastView = DrawAdmissionList(data, prevView: lastView, parent: WaitReplyPanel, actionMethod: "AdmissionReplyTouched:".Sel())
             }
             
             if(nil != lastView) {
@@ -221,8 +206,8 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         }
     }
     
-    private func DrawAdmissionList(data: [String: AnyObject], prevView: UIView?, parent: UIView) -> UIView {
-        let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "AdmissionTouched:".Sel())
+    private func DrawAdmissionList(data: [String: AnyObject], prevView: UIView?, parent: UIView, actionMethod: Selector) -> UIView {
+        let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: actionMethod)
         cell.UserObjectData = data
 
 //    ["doctor_job_title": 副主任医师,

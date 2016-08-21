@@ -14,11 +14,14 @@ import Neon
 
 public class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-   public var scanObj: LBXScanWrapper?
+    public var scanObj: LBXScanWrapper?
     
-   public var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
+    public var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
     
-   public var qRScanView: LBXScanView?
+    public var qRScanView: LBXScanView?
+    
+    public var TopView: PageCommonTopView? = nil
+    
     
     //启动区域识别功能
     var isOpenInterestRect = false
@@ -28,13 +31,13 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     
     //是否需要识别后的当前图像
     var isNeedCodeImage = false
-
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
-              // [self.view addSubview:_qRScanView];
+        // [self.view addSubview:_qRScanView];
         self.view.backgroundColor = UIColor.blackColor()
         self.edgesForExtendedLayout = UIRectEdge.None
     }
@@ -43,7 +46,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     {
         isNeedCodeImage = needCodeImg;
     }
- 
+    
     override public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -53,16 +56,10 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         super.viewDidAppear(animated)
         
         drawScanView()
-       
+        
         performSelector(#selector(LBXScanViewController.startScan), withObject: nil, afterDelay: 0.3)
         
-        
-        let testView = UIView()
-        self.view.addSubview(testView)
-        
-        testView.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 0, width: 100, height: 100)
-        testView.backgroundColor = YMColors.White
-        
+        TopView = PageCommonTopView(parentView: self.view, titleString: "二维码扫描", navController: self.navigationController!)
     }
     
     public func startScan()
@@ -99,7 +96,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
                     
                     strongSelf.handleCodeResult(arrayResult)
                 }
-             })
+                })
         }
         
         //结束相机等待提示
@@ -123,7 +120,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         qRScanView?.deviceStartReadying("相机启动中...")
         
     }
-   
+    
     
     /**
      处理扫码结果，如果是继承本控制器的，可以重写该方法,作出相应地处理
@@ -132,12 +129,14 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     {
         for result:LBXScanResult in arrayResult
         {
-            print("%@",result.strScanned)
+//            print("%@",result.strScanned)
         }
         
         let result:LBXScanResult = arrayResult[0]
         
-        showMsg(result.strBarCodeType, message: result.strScanned)
+        print(result.strScanned)
+        self.navigationController?.popViewControllerAnimated(true)
+//        showMsg(result.strBarCodeType, message: result.strScanned)
     }
     
     override public func viewWillDisappear(animated: Bool) {
@@ -188,7 +187,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
                 return
             }
         }
-      
+        
         showMsg("", message: "识别失败")
     }
     
@@ -196,7 +195,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     {
         if LBXScanWrapper.isSysIos8Later()
         {
-        
+            
             //if #available(iOS 8.0, *)
             
             let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -211,14 +210,11 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
             alertController.addAction(alertAction)
             
             presentViewController(alertController, animated: true, completion: nil)
-            
-            
-           
         }
     }
     deinit
     {
-        print("LBXScanViewController deinit")
+//        print("LBXScanViewController deinit")
     }
     
 }

@@ -11,6 +11,10 @@
 		7307BFEC1D601159000F31E5 /* YMAddressBookTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */; };
 		730848271D0D9D38007E8940 /* YMTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848261D0D9D38007E8940 /* YMTableView.swift */; };
 		730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848281D0D9D4B007E8940 /* YMModuleStrings.swift */; };
+		730EF5A71D6942A5002A4DDB /* PageAppointmentAccept.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 730EF5A91D6942A5002A4DDB /* PageAppointmentAccept.storyboard */; };
+		730EF5AB1D694330002A4DDB /* PageAppointmentAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730EF5AA1D694330002A4DDB /* PageAppointmentAcceptViewController.swift */; };
+		730EF5AD1D694362002A4DDB /* PageAppointmentAcceptBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730EF5AC1D694362002A4DDB /* PageAppointmentAcceptBodyView.swift */; };
+		730EF5AF1D6943B7002A4DDB /* PageAppointmentAcceptActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730EF5AE1D6943B7002A4DDB /* PageAppointmentAcceptActions.swift */; };
 		735FDE9E1D1E10C9004152CD /* PageAppointmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FDE9D1D1E10C9004152CD /* PageAppointmentDetailViewController.swift */; };
 		735FDE9F1D1E10EC004152CD /* PageAppointmentDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735FDEA11D1E10EC004152CD /* PageAppointmentDetail.storyboard */; };
 		735FDEA31D1E1148004152CD /* PageAppointmentDetailBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FDEA21D1E1148004152CD /* PageAppointmentDetailBodyView.swift */; };
@@ -274,6 +278,10 @@
 		7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAddressBookTools.swift; sourceTree = "<group>"; };
 		730848261D0D9D38007E8940 /* YMTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTableView.swift; sourceTree = "<group>"; };
 		730848281D0D9D4B007E8940 /* YMModuleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMModuleStrings.swift; sourceTree = "<group>"; };
+		730EF5A81D6942A5002A4DDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentAccept.storyboard; sourceTree = "<group>"; };
+		730EF5AA1D694330002A4DDB /* PageAppointmentAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentAcceptViewController.swift; sourceTree = "<group>"; };
+		730EF5AC1D694362002A4DDB /* PageAppointmentAcceptBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentAcceptBodyView.swift; sourceTree = "<group>"; };
+		730EF5AE1D6943B7002A4DDB /* PageAppointmentAcceptActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentAcceptActions.swift; sourceTree = "<group>"; };
 		735FDE9D1D1E10C9004152CD /* PageAppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentDetailViewController.swift; sourceTree = "<group>"; };
 		735FDEA01D1E10EC004152CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentDetail.storyboard; sourceTree = "<group>"; };
 		735FDEA21D1E1148004152CD /* PageAppointmentDetailBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentDetailBodyView.swift; sourceTree = "<group>"; };
@@ -562,6 +570,125 @@
 				A556489D24098750735AC565 /* Pods_YiMai.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		730EF5961D694270002A4DDB /* AppointmentAccept */ = {
+			isa = PBXGroup;
+			children = (
+				730EF5971D694270002A4DDB /* Actions */,
+				730EF5981D694270002A4DDB /* Body */,
+				730EF5A91D6942A5002A4DDB /* PageAppointmentAccept.storyboard */,
+				730EF5AA1D694330002A4DDB /* PageAppointmentAcceptViewController.swift */,
+			);
+			path = AppointmentAccept;
+			sourceTree = "<group>";
+		};
+		730EF5971D694270002A4DDB /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				730EF5AE1D6943B7002A4DDB /* PageAppointmentAcceptActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		730EF5981D694270002A4DDB /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				730EF5AC1D694362002A4DDB /* PageAppointmentAcceptBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		730EF5991D694270002A4DDB /* AppointmentAcceptSelectHospital */ = {
+			isa = PBXGroup;
+			children = (
+				730EF59A1D694270002A4DDB /* Actions */,
+				730EF59B1D694270002A4DDB /* Body */,
+			);
+			path = AppointmentAcceptSelectHospital;
+			sourceTree = "<group>";
+		};
+		730EF59A1D694270002A4DDB /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		730EF59B1D694270002A4DDB /* Body */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		730EF59C1D694270002A4DDB /* AppointmentAcceptSelectHospitalManually */ = {
+			isa = PBXGroup;
+			children = (
+				730EF59D1D694270002A4DDB /* Actions */,
+				730EF59E1D694270002A4DDB /* Body */,
+			);
+			path = AppointmentAcceptSelectHospitalManually;
+			sourceTree = "<group>";
+		};
+		730EF59D1D694270002A4DDB /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		730EF59E1D694270002A4DDB /* Body */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		730EF59F1D694270002A4DDB /* AppointmentPoliteFormula */ = {
+			isa = PBXGroup;
+			children = (
+				730EF5A01D694270002A4DDB /* Actions */,
+				730EF5A11D694270002A4DDB /* Body */,
+			);
+			path = AppointmentPoliteFormula;
+			sourceTree = "<group>";
+		};
+		730EF5A01D694270002A4DDB /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		730EF5A11D694270002A4DDB /* Body */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		730EF5A21D694270002A4DDB /* AppointmentProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				730EF5A31D694270002A4DDB /* Actions */,
+				730EF5A41D694270002A4DDB /* Body */,
+			);
+			path = AppointmentProcessing;
+			sourceTree = "<group>";
+		};
+		730EF5A31D694270002A4DDB /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		730EF5A41D694270002A4DDB /* Body */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Body;
 			sourceTree = "<group>";
 		};
 		735FDE981D1E0E10004152CD /* AppointmentDetail */ = {
@@ -1139,6 +1266,11 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				730EF5961D694270002A4DDB /* AppointmentAccept */,
+				730EF5991D694270002A4DDB /* AppointmentAcceptSelectHospital */,
+				730EF59C1D694270002A4DDB /* AppointmentAcceptSelectHospitalManually */,
+				730EF59F1D694270002A4DDB /* AppointmentPoliteFormula */,
+				730EF5A21D694270002A4DDB /* AppointmentProcessing */,
 				FD801DC81D66F27A0066198B /* AdmissionChargeSetting */,
 				FD54E04D1D3771BF00F8E629 /* AdmissionTimeSetting */,
 				FD54E0501D3771BF00F8E629 /* MyAdmissionSetting */,
@@ -2161,6 +2293,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9619EF621CC1DB9600F69CBC /* Build configuration list for PBXNativeTarget "YiMai" */;
 			buildPhases = (
+				186DBA0B7695132D8B8D04F0 /* 📦 Check Pods Manifest.lock */,
 				E6BC80AE7D517AA66177C51A /* [CP] Check Pods Manifest.lock */,
 				A077FAF80F9F5F3142F7BA1E /* [CP] Check Pods Manifest.lock */,
 				9619EF491CC1DB9600F69CBC /* Sources */,
@@ -2261,6 +2394,7 @@
 				73622E421D1EDF790039E785 /* PageAboutYiMai.storyboard in Resources */,
 				9672FB421CD2222200BC7E40 /* PageMyAdmissionsList.storyboard in Resources */,
 				96D451871CF7D714006817CE /* PageYiMaiSameHospital.storyboard in Resources */,
+				730EF5A71D6942A5002A4DDB /* PageAppointmentAccept.storyboard in Resources */,
 				96FCD1341D17A93D00A6E12D /* PagePersonalIDNumInput.storyboard in Resources */,
 				96D451921CF7D7D3006817CE /* PageYiMaiSameSchool.storyboard in Resources */,
 				FD54E0551D3771FD00F8E629 /* PageMyAdmissionSetting.storyboard in Resources */,
@@ -2289,6 +2423,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiMai/Pods-YiMai-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		186DBA0B7695132D8B8D04F0 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3510DDC46F33EA763884CDF2 /* 📦 Copy Pods Resources */ = {
@@ -2417,6 +2566,7 @@
 				73622E481D1EDFE40039E785 /* PageAboutYiMaiBodyView.swift in Sources */,
 				96D451A71CF7F198006817CE /* PageAppointmentBodyView.swift in Sources */,
 				737F1F911D207C7900FFE573 /* PageGlobalSearchBodyView.swift in Sources */,
+				730EF5AF1D6943B7002A4DDB /* PageAppointmentAcceptActions.swift in Sources */,
 				96637A721CC206A900DBD1CF /* PageLoginActions.swift in Sources */,
 				735FDEA51D1E1233004152CD /* PageAppointmentDetailActions.swift in Sources */,
 				96D4518F1CF7D78A006817CE /* PageYiMaiSameHospitalActions.swift in Sources */,
@@ -2428,6 +2578,7 @@
 				9619EF801CC1FF4E00F69CBC /* YMLayout.swift in Sources */,
 				9672FB4C1CD3439400BC7E40 /* YMDatetime.swift in Sources */,
 				96D745CD1CF6A76100E345E3 /* YiMaiAddContactsFriendsStrings.swift in Sources */,
+				730EF5AD1D694362002A4DDB /* PageAppointmentAcceptBodyView.swift in Sources */,
 				96A3D1CA1CFD84D300518DCB /* PageAppointmentSelectDoctorActions.swift in Sources */,
 				73622E3A1D1EC2DE0039E785 /* PageForgetPasswordBodyView.swift in Sources */,
 				FD54E06A1D37781E00F8E629 /* PageAdmissionTimeSettingActions.swift in Sources */,
@@ -2516,6 +2667,7 @@
 				9619EF7E1CC1FF3A00F69CBC /* YMRegisterStrings.swift in Sources */,
 				9612DB441CC8B86400262D2E /* PageIndexBodyView.swift in Sources */,
 				730848271D0D9D38007E8940 /* YMTableView.swift in Sources */,
+				730EF5AB1D694330002A4DDB /* PageAppointmentAcceptViewController.swift in Sources */,
 				96A3D1C81CFD84C400518DCB /* PageAppointmentSelectDoctorBodyView.swift in Sources */,
 				96D451601CF6D4A1006817CE /* PageYiMaiAddContactsFriendsBootomView.swift in Sources */,
 				7394F8551CF9ABCE00F05487 /* YMTextArea.swift in Sources */,
@@ -2586,6 +2738,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		730EF5A91D6942A5002A4DDB /* PageAppointmentAccept.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				730EF5A81D6942A5002A4DDB /* Base */,
+			);
+			name = PageAppointmentAccept.storyboard;
+			sourceTree = "<group>";
+		};
 		735FDEA11D1E10EC004152CD /* PageAppointmentDetail.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3079,7 +3239,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.patient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
@@ -3095,7 +3255,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.patient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
