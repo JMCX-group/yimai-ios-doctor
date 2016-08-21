@@ -70,6 +70,9 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
         
         bottomPanel.groupAndFill(group: Group.Horizontal, views: [denyButton, acceptButton], padding: 0)
         dividerLine.anchorInCenter(width: YMSizes.OnPx, height: 34.LayoutVal())
+        
+        denyButton.addTarget(AcceptActions!, action: "DenyAppointmentTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        acceptButton.addTarget(AcceptActions!, action: "AcceptAppointmentTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     private func DrawAppointmentNum() {
@@ -97,7 +100,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
         divider.anchorInCenter(width: YMSizes.OnPx, height: DPPanel.height)
     }
     
-    private func DrawDorctor(data: [String: AnyObject]) {
+    private func DrawDoctor(data: [String: AnyObject]) {
         let headImage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
         let docName = UILabel()
         let jobTitle = UILabel()
@@ -251,7 +254,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
         divider.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 60.LayoutVal(), width: YMSizes.PageWidth, height: YMSizes.OnPx)
         
         let hisLabel = UILabel()
-        hisLabel.numberOfLines = 3
+//        hisLabel.numberOfLines = 3
         hisLabel.text = history!
         hisLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
         hisLabel.textColor = YMColors.FontGray
@@ -262,9 +265,13 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
                           width: YMSizes.PageWidth,
                           height: hisLabel.height + 30.LayoutVal())
         textContent.addSubview(hisLabel)
+
         hisLabel.anchorToEdge(Edge.Top, padding: 0, width: hisLabel.width, height: hisLabel.height)
         hisLabel.anchorInCorner(Corner.TopLeft,
                                 xPad: 40.LayoutVal(), yPad: 0, width: hisLabel.width, height: hisLabel.height)
+        
+        YMLayout.SetViewHeightByLastSubview(textContent, lastSubView: hisLabel)
+        YMLayout.SetViewHeightByLastSubview(TextInfoPanel, lastSubView: textContent, bottomPadding: 20.LayoutVal())
     }
     
     public func ShowImage(list: UIScrollView, imgUrl: String, prev: UIImageView?) -> YMTouchableImageView {
@@ -289,7 +296,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
         BodyView.addSubview(ImagePanel)
         ImagePanel.backgroundColor = YMColors.White
         ImagePanel.align(Align.UnderMatchingLeft, relativeTo: TextInfoPanel,
-                         padding: YMSizes.OnPx,
+                         padding: 20.LayoutVal(),
                          width: YMSizes.PageWidth, height: 225.LayoutVal())
         let imgUrlList = data["img_url"] as? String
         if(YMValueValidator.IsEmptyString(imgUrlList)) {
@@ -338,7 +345,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
     private func DrawTimeInfo() {
         BodyView.addSubview(TimePanel)
         TimePanel.backgroundColor = YMColors.White
-        TimePanel.align(Align.UnderMatchingLeft, relativeTo: TextInfoPanel,
+        TimePanel.align(Align.UnderMatchingLeft, relativeTo: ImagePanel,
                             padding: 20.LayoutVal(),
                             width: YMSizes.PageWidth, height: 220.LayoutVal())
         
@@ -382,14 +389,14 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
     public func LoadData(data: NSDictionary) {
         let doc = data["doctor_info"] as! [String: AnyObject]
         let patient = data["patient_info"] as! [String: AnyObject]
-        DrawDorctor(doc)
+        DrawDoctor(doc)
         DrawPatient(patient)
         AppointmentNum.text = PageAppointmentAcceptBodyView.AppointmentID
         DrawTextInfo(patient)
         DrawImageList(patient)
         DrawTimeInfo()
         
-        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: ImagePanel)
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: TimePanel, padding: 120.LayoutVal())
         Loading?.Hide()
     }
     

@@ -48,4 +48,16 @@ public class PageAppointmentAcceptActions: PageJumpActions {
     public func PatientTransferTouched(sender: UIGestureRecognizer) {
         
     }
+    
+    public func DenyAppointmentTouched(sender: YMButton) {
+        
+    }
+    
+    public func AcceptAppointmentTouched(sender: YMButton) {
+        
+    }
 }
+
+
+
+
