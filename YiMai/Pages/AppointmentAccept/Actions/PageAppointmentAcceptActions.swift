@@ -49,8 +49,13 @@ public class PageAppointmentAcceptActions: PageJumpActions {
         
     }
     
+    public func DenyDlgTagTouched(sender: UIGestureRecognizer) {
+        let label = sender.view as! YMTouchableView
+        TargetView?.SelectDenyReasonLabel(label)
+    }
+    
     public func DenyAppointmentTouched(sender: YMButton) {
-        
+        TargetView?.ShowDenyDialog()
     }
     
     public func AcceptAppointmentTouched(sender: YMButton) {

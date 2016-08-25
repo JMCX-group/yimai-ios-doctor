@@ -113,6 +113,47 @@ public class YMPageModalMessage {
     }
 }
 
+public class YMPageModalDialog: NSObject {
+    public let MaskBackground = UIView()
+    private var ParentView: UIView? = nil
+    private var DlgView: UIView? = nil
+    private var AnimateDuration = 0.2
+
+    public init(parentView: UIView) {
+        self.MaskBackground.alpha = 0.0
+        self.MaskBackground.backgroundColor = UIColor.blackColor()
+        self.MaskBackground.hidden = true
+        
+        self.ParentView = parentView
+    }
+    
+    private func DoShowAnimate() {
+        self.MaskBackground.alpha = 0.6
+    }
+    private func DoHideAnimate() {
+        self.MaskBackground.alpha = 0
+    }
+    
+    private func Hidden(finished: Bool){
+        self.MaskBackground.hidden = true
+    }
+    
+    public func Show(dlgView: UIView){
+        self.DlgView?.removeFromSuperview()
+        self.ParentView!.addSubview(self.MaskBackground)
+        self.MaskBackground.fillSuperview()
+        self.ParentView!.addSubview(dlgView)
+        self.DlgView = dlgView
+        dlgView.anchorInCenter(width: dlgView.width, height: dlgView.height)
+        self.MaskBackground.hidden = false
+        UIView.animateWithDuration(AnimateDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: self.DoShowAnimate, completion: nil)
+    }
+    
+    public func Hide(){
+        UIView.animateWithDuration(AnimateDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: self.DoHideAnimate, completion: self.Hidden)
+    }
+}
+
 
 
 

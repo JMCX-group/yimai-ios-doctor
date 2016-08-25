@@ -89,7 +89,7 @@
 		960606FA1CE591CC00AAFC07 /* YMAPIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */; };
 		960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */; };
 		960606FC1CE591CC00AAFC07 /* YMNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */; };
-		960607001CE97CC500AAFC07 /* YMModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606FF1CE97CC500AAFC07 /* YMModelView.swift */; };
+		960607001CE97CC500AAFC07 /* YMModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960606FF1CE97CC500AAFC07 /* YMModalView.swift */; };
 		9612DB3C1CC8B5DB00262D2E /* PageIndex.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9612DB3E1CC8B5DB00262D2E /* PageIndex.storyboard */; };
 		9612DB401CC8B75300262D2E /* PageIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB3F1CC8B75300262D2E /* PageIndexViewController.swift */; };
 		9612DB421CC8B7C500262D2E /* PageIndexTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB411CC8B7C500262D2E /* PageIndexTopView.swift */; };
@@ -251,6 +251,7 @@
 		96FCD1491D17D7F800A6E12D /* PagePersonalDetailBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD1481D17D7F800A6E12D /* PagePersonalDetailBodyView.swift */; };
 		96FCD14B1D17D80D00A6E12D /* PagePersonalDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD14A1D17D80D00A6E12D /* PagePersonalDetailActions.swift */; };
 		96FCD14D1D17D81A00A6E12D /* PagePersonalDetailTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD14C1D17D81A00A6E12D /* PagePersonalDetailTopView.swift */; };
+		FD2981351D6E97BE006A48CA /* YMLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2981341D6E97BE006A48CA /* YMLabel.swift */; };
 		FD54E0551D3771FD00F8E629 /* PageMyAdmissionSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD54E0571D3771FD00F8E629 /* PageMyAdmissionSetting.storyboard */; };
 		FD54E0591D37722C00F8E629 /* PageMyAdmissionSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0581D37722C00F8E629 /* PageMyAdmissionSettingViewController.swift */; };
 		FD54E05B1D3772B900F8E629 /* PageMyAdmissionSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E05A1D3772B900F8E629 /* PageMyAdmissionSettingBodyView.swift */; };
@@ -356,7 +357,7 @@
 		960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAPIUtility.swift; sourceTree = "<group>"; };
 		960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMCoreDataEngine.swift; sourceTree = "<group>"; };
 		960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMNetworkUtility.swift; sourceTree = "<group>"; };
-		960606FF1CE97CC500AAFC07 /* YMModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMModelView.swift; sourceTree = "<group>"; };
+		960606FF1CE97CC500AAFC07 /* YMModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMModalView.swift; sourceTree = "<group>"; };
 		9612DB3D1CC8B5DB00262D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageIndex.storyboard; sourceTree = "<group>"; };
 		9612DB3F1CC8B75300262D2E /* PageIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndexViewController.swift; sourceTree = "<group>"; };
 		9612DB411CC8B7C500262D2E /* PageIndexTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndexTopView.swift; sourceTree = "<group>"; };
@@ -521,6 +522,7 @@
 		96FCD14A1D17D80D00A6E12D /* PagePersonalDetailActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalDetailActions.swift; sourceTree = "<group>"; };
 		96FCD14C1D17D81A00A6E12D /* PagePersonalDetailTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalDetailTopView.swift; sourceTree = "<group>"; };
 		A556489D24098750735AC565 /* Pods_YiMai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiMai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD2981341D6E97BE006A48CA /* YMLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMLabel.swift; sourceTree = "<group>"; };
 		FD3C9A6A1D40BA1700AF7E2C /* YiMai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YiMai-Bridging-Header.h"; sourceTree = "<group>"; };
 		FD54E0561D3771FD00F8E629 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageMyAdmissionSetting.storyboard; sourceTree = "<group>"; };
 		FD54E0581D37722C00F8E629 /* PageMyAdmissionSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionSettingViewController.swift; sourceTree = "<group>"; };
@@ -1568,6 +1570,7 @@
 				9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */,
 				7394F8541CF9ABCE00F05487 /* YMTextArea.swift */,
 				73EA65C21D444BE90050C12C /* YMChatViewController.swift */,
+				FD2981341D6E97BE006A48CA /* YMLabel.swift */,
 			);
 			path = YMClasses;
 			sourceTree = "<group>";
@@ -1602,7 +1605,7 @@
 		96637A761CC22E6000DBD1CF /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				960606FF1CE97CC500AAFC07 /* YMModelView.swift */,
+				960606FF1CE97CC500AAFC07 /* YMModalView.swift */,
 				960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */,
 				960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */,
 				960606F91CE591CC00AAFC07 /* YMNetworkUtility.swift */,
@@ -2710,7 +2713,7 @@
 				96814A991D1A78DA002C8BD3 /* PagePersonalTagsEditBodyView.swift in Sources */,
 				96925A811D1BC9B30095432C /* PageAppLoadingViewController.swift in Sources */,
 				736EBC7A1D16A7C200C40AA7 /* PagePersonalPasswordResetActions.swift in Sources */,
-				960607001CE97CC500AAFC07 /* YMModelView.swift in Sources */,
+				960607001CE97CC500AAFC07 /* YMModalView.swift in Sources */,
 				9672FB4A1CD222C100BC7E40 /* PageMyAdmissionsListActions.swift in Sources */,
 				96FCD1491D17D7F800A6E12D /* PagePersonalDetailBodyView.swift in Sources */,
 				7394F8461CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift in Sources */,
@@ -2718,6 +2721,7 @@
 				9619EF591CC1DB9600F69CBC /* YiMai.xcdatamodeld in Sources */,
 				737F1F751D20296F00FFE573 /* PageYiMaiDoctorDetailBodyView.swift in Sources */,
 				96834F201D05271800E0C813 /* PageCommonSearchTopView.swift in Sources */,
+				FD2981351D6E97BE006A48CA /* YMLabel.swift in Sources */,
 				FD77AF251D68484F00B8C73E /* LBXScanView.swift in Sources */,
 				9672FB2E1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift in Sources */,
 				96FCD1381D17A95100A6E12D /* PagePersonalIDNumInputViewController.swift in Sources */,
