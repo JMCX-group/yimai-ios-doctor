@@ -35,10 +35,13 @@ public class PageMyAdmissionsListActions: PageJumpActions{
     }
     
     private func AdmissionsListSuccess(data: NSDictionary?) {
-        let realData = data!["data"]!
-        PageMyAdmissionsListViewController.CompletedAdmissions = realData["completed"]! as! [[String:AnyObject]]
-        PageMyAdmissionsListViewController.WaitCompletedAdmissions = realData["wait_complete"]! as! [[String:AnyObject]]
-        PageMyAdmissionsListViewController.WaitReplyAdmissions = realData["wait_reply"]! as! [[String:AnyObject]]
+        if(nil != data) {
+            let realData = data!["data"]!
+            PageMyAdmissionsListViewController.CompletedAdmissions = realData["completed"]! as! [[String:AnyObject]]
+            PageMyAdmissionsListViewController.WaitCompletedAdmissions = realData["wait_complete"]! as! [[String:AnyObject]]
+            PageMyAdmissionsListViewController.WaitReplyAdmissions = realData["wait_reply"]! as! [[String:AnyObject]]
+        }
+ 
         
         let controller = self.Target! as! PageMyAdmissionsListViewController
         controller.HideLoading()

@@ -418,6 +418,16 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         
         ShowWaitReplyPanel()
     }
+    
+    public func Clear() {
+        YMLayout.ClearView(view: CompletePanel)
+        YMLayout.ClearView(view: WaitCompletePanel)
+        YMLayout.ClearView(view: WaitReplyPanel)
+        
+        CompletePanelDrew = false
+        WaitCompletePanelDrew = false
+        WaitReplyPanelDrew = false
+    }
 }
 
 

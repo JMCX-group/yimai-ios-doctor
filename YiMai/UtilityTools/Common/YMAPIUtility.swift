@@ -143,6 +143,18 @@ public class YMAPICommonVariable {
 }
 
 public class YMAPIUtility {
+    public static func PrintErrorInfo(error: NSError) {
+        if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
+            let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
+            let errInfo = error.userInfo["com.alamofire.serialization.response.error.data"] as? NSData
+            
+            print("error code is : \(response.statusCode)")
+            print("error info si : \(errInfo)")
+
+        } else {
+            print(error)
+        }
+    }
 
     private var Key: String = ""
     

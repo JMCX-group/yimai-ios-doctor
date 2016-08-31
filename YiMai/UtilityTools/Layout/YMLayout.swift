@@ -271,6 +271,57 @@ public class YMLayout {
         
         return userHead!
     }
+    
+    public static func GetYMPanelTitleLabel(title: String, fontColor: UIColor, fontSize: CGFloat, backgroundColor: UIColor,
+                                             height: CGFloat, paddingLeft: CGFloat, panel: UIView) -> YMTouchableView {
+        let titleView = YMTouchableView()
+        let titleLabel = UILabel()
+        
+        panel.addSubview(titleView)
+        titleView.anchorToEdge(Edge.Top, padding: 0, width: panel.width, height: height)
+        titleView.backgroundColor = backgroundColor
+        
+        titleLabel.text = title
+        titleLabel.font = YMFonts.YMDefaultFont(fontSize)
+        titleLabel.textColor = fontColor
+        titleLabel.sizeToFit()
+        
+        titleView.addSubview(titleLabel)
+        titleLabel.anchorToEdge(Edge.Left, padding: paddingLeft, width: titleLabel.width, height: titleLabel.height)
+        
+        titleView.UserStringData = title
+        titleView.UserObjectData = ["label": titleLabel]
+        
+        return titleView
+    }
+    
+    public static func GetYMTouchableCell(placeholder: String, padding: CGFloat, showArrow: Bool,
+                                    action: AnyObject, method: Selector,
+                                    width: CGFloat, height: CGFloat,
+                                    fontSize: CGFloat, panel: UIView) -> YMTouchableView {
+        let cell = YMLayout.GetTouchableView(useObject: action, useMethod: method)
+        let label = UILabel()
+        
+        panel.addSubview(cell)
+        cell.anchorToEdge(.Top, padding: 0, width: width, height: height)
+        
+        label.text = placeholder
+        label.textColor = YMColors.FontLightGray
+        label.font = YMFonts.YMDefaultFont(fontSize)
+        label.sizeToFit()
+        
+        cell.addSubview(label)
+        label.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: label.width, height: label.height)
+        
+        if(showArrow) {
+            let arrow = YMLayout.GetSuitableImageView("CommonRightArrowIcon")
+            cell.addSubview(arrow)
+            arrow.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: arrow.width, height: arrow.height)
+        }
+        
+        cell.UserObjectData = ["label": label]
+        return cell
+    }
 }
 
 

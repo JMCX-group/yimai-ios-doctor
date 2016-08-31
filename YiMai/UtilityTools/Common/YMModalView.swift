@@ -150,6 +150,7 @@ public class YMPageModalDialog: NSObject {
     }
     
     public func Hide(){
+        self.DlgView?.removeFromSuperview()
         UIView.animateWithDuration(AnimateDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: self.DoHideAnimate, completion: self.Hidden)
     }
 }
