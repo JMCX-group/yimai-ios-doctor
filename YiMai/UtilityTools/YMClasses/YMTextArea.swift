@@ -8,6 +8,11 @@
 
 import Foundation
 import Neon
+import KMPlaceholderTextView
+
+public typealias YMTextTextareaEditStartCallback = ((YMTextArea) -> Bool)
+public typealias YMTextTextareaEditEndCallback = ((YMTextArea) -> Void)
+public typealias YMTextTextareaChangedCallback = ((YMTextArea) -> Void)
 
 public class YMTextAreaDelegate : NSObject, UITextViewDelegate {
     public func textViewDidChange(textView: UITextView){
@@ -37,9 +42,23 @@ public class YMTextAreaDelegate : NSObject, UITextViewDelegate {
             }
         }
     }
+    
+    public func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        if(!textView.isKindOfClass(YMTextArea)) { return true }
+        let realTextField = textView as! YMTextArea
+        if(nil != realTextField.EditStartCallback) {
+            realTextField.EditStartCallback!(realTextField)
+        }
+        return true
+    }
 
     public func textViewShouldEndEditing(textView: UITextView) -> Bool {
-        textView.resignFirstResponder()
+        if(!textView.isKindOfClass(YMTextArea)) { return true }
+        let realTextField = textView as! YMTextArea
+        realTextField.resignFirstResponder()
+        if(nil != realTextField.EditEndCallback) {
+            realTextField.EditEndCallback!(realTextField)
+        }
         return true
     }
     
@@ -49,9 +68,10 @@ public class YMTextAreaDelegate : NSObject, UITextViewDelegate {
     }
 }
 
-public class YMTextArea: UITextView {
+public class YMTextArea: KMPlaceholderTextView {
     public var MaxCharCount: Int = 0
-    public var EditStartCallback: YMTextFieldEditStartCallback? = nil
+    public var EditStartCallback: YMTextTextareaEditStartCallback? = nil
+    public var EditEndCallback: YMTextTextareaEditEndCallback? = nil
     private var YMDelegate = YMTextAreaDelegate()
     
     public func SetPadding(left: CGFloat = 0.0, right: CGFloat = 0.0, top: CGFloat = 0.0, bottom: CGFloat = 0.0) {

@@ -8,21 +8,99 @@
 
 import Foundation
 import Neon
+import SwiftDate
 
 public class ApointmentAcceptDetailBodyView: PageBodyView {
     private var AcceptActions: ApointmentAcceptDetailActions!
     private let AdmissionTimePanel = YMTouchableView()
     private let HospitalPanel = YMTouchableView()
     private let DescPanel = YMTouchableView()
+    private let NeedToKnowPanel = YMTouchableView()
+    
+    private let SubmitButton = YMButton()
     
     public var TimeCell: YMTouchableView? = nil
+    public var AdmissionTimeString: String = ""
     public let DescInput = YMTextArea(aDelegate: nil)
+    public let NeedToKnowInput = YMTextArea(aDelegate: nil)
+    
+    private var KeyboardHeight: CGFloat = 0
+    private var BlankToBottomHeight: CGFloat = 0
+    
+    private let PickerPanel = UIView()
+    private let AdmissionDatePicker = UIDatePicker()
+    private let TimeSelectBtn = YMButton()
     
     public override func ViewLayout() {
         super.ViewLayout()
         AcceptActions = ApointmentAcceptDetailActions(navController: self.NavController!, target: self)
         DrawAdmissionTime()
         DrawHospital()
+        DrawDesc()
+        DrawNeedToKnow()
+        DrawSubmitButton()
+        DrawAdmissionDatePicker()
+        
+        let centerDefault = NSNotificationCenter.defaultCenter()
+        centerDefault.addObserver(AcceptActions!, selector: "KeyboardWillShow:".Sel(), name: UIKeyboardWillShowNotification, object: nil)
+        
+        YMLayout.SetVScrollViewContentSize(self.BodyView, lastSubView: NeedToKnowPanel)
+        
+        BlankToBottomHeight = (ParentView?.height)! - BodyView.contentSize.height
+    }
+    
+    private func DrawAdmissionDatePicker() {
+        let btnPanel = UIView()
+        btnPanel.backgroundColor = YMColors.DividerLineGray
+        
+        ParentView?.addSubview(PickerPanel)
+        PickerPanel.backgroundColor = YMColors.White
+        
+        PickerPanel.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 276.LayoutVal())
+        
+        PickerPanel.addSubview(AdmissionDatePicker)
+        PickerPanel.addSubview(btnPanel)
+        AdmissionDatePicker.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 216.LayoutVal())
+        AdmissionDatePicker.locale = NSLocale(localeIdentifier: "zh_CN")
+        
+        AdmissionDatePicker.minuteInterval = 15
+        AdmissionDatePicker.minimumDate = NSDate()
+        AdmissionDatePicker.date = NSDate()
+        
+        btnPanel.align(Align.AboveMatchingLeft, relativeTo: AdmissionDatePicker, padding: 0, width: YMSizes.PageWidth, height: 60.LayoutVal())
+        btnPanel.addSubview(TimeSelectBtn)
+        
+        TimeSelectBtn.setTitle("确定", forState: UIControlState.Normal)
+        TimeSelectBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        TimeSelectBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+        TimeSelectBtn.sizeToFit()
+        TimeSelectBtn.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: TimeSelectBtn.width, height: TimeSelectBtn.height)
+        
+        TimeSelectBtn.addTarget(AcceptActions!, action: "AdmissionTimeSelected:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        PickerPanel.hidden = true
+    }
+    
+    public func KeyboardWillShow(aNotification: NSNotification) {
+        PickerPanel.hidden = true
+        let userinfo: NSDictionary = aNotification.userInfo!
+        
+        let nsValue = userinfo.objectForKey(UIKeyboardFrameEndUserInfoKey)
+        
+        let keyboardRec = nsValue?.CGRectValue()
+        
+        let height = keyboardRec?.size.height
+        
+        self.KeyboardHeight = height!
+        
+        let offset = -self.KeyboardHeight + self.BlankToBottomHeight + YMSizes.PageTopHeight
+        if(offset >= 0){
+            return
+        }
+        
+        UIView.animateWithDuration(0.4, animations: {
+            self.BodyView.frame.origin.y = -self.KeyboardHeight + self.BlankToBottomHeight + YMSizes.PageTopHeight
+        })
     }
     
     private func DrawAdmissionTime() {
@@ -42,30 +120,139 @@ public class ApointmentAcceptDetailBodyView: PageBodyView {
     }
     
     private func DrawHospital() {
-        BodyView.addSubview(HospitalPanel)
-        HospitalPanel.align(Align.UnderMatchingLeft, relativeTo: AdmissionTimePanel, padding: 0, width: YMSizes.PageWidth, height: 144.LayoutVal())
-        let title = YMLayout.GetYMPanelTitleLabel("就诊医院", fontColor: YMColors.FontGray, fontSize: 24.LayoutVal(),
-                                      backgroundColor: YMColors.BackgroundGray, height: 60.LayoutVal(),
-                                      paddingLeft: 40.LayoutVal(), panel: HospitalPanel)
-        
-        
-        let HosCell = YMLayout.GetYMTouchableCell("我的医院",
-                                               padding: 40.LayoutVal(), showArrow: false,
-                                               action: AcceptActions!, method: "HospitalTouched:".Sel(),
-                                               width: YMSizes.PageWidth, height: 84.LayoutVal(), fontSize: 26.LayoutVal(), panel: HospitalPanel)
-        
-        HosCell.align(Align.UnderMatchingLeft, relativeTo: title, padding: 0, width: YMSizes.PageWidth, height: 84.LayoutVal())
+//        BodyView.addSubview(HospitalPanel)
+//        HospitalPanel.align(Align.UnderMatchingLeft, relativeTo: AdmissionTimePanel, padding: 0, width: YMSizes.PageWidth, height: 144.LayoutVal())
+//        let title = YMLayout.GetYMPanelTitleLabel("就诊医院", fontColor: YMColors.FontGray, fontSize: 24.LayoutVal(),
+//                                      backgroundColor: YMColors.BackgroundGray, height: 60.LayoutVal(),
+//                                      paddingLeft: 40.LayoutVal(), panel: HospitalPanel)
+//        
+//        
+//        let HosCell = YMLayout.GetYMTouchableCell("我的医院",
+//                                               padding: 40.LayoutVal(), showArrow: false,
+//                                               action: AcceptActions!, method: "HospitalTouched:".Sel(),
+//                                               width: YMSizes.PageWidth, height: 84.LayoutVal(), fontSize: 26.LayoutVal(), panel: HospitalPanel)
+//        
+//        HosCell.align(Align.UnderMatchingLeft, relativeTo: title, padding: 0, width: YMSizes.PageWidth, height: 84.LayoutVal())
     }
     
     private func DrawDesc() {
         BodyView.addSubview(DescPanel)
-        DescPanel.align(Align.UnderMatchingLeft, relativeTo: HospitalPanel, padding: 0, width: YMSizes.PageWidth, height: 144.LayoutVal())
-        YMLayout.GetYMPanelTitleLabel("我的医院", fontColor: YMColors.FontGray, fontSize: 24.LayoutVal(),
+        DescPanel.align(Align.UnderMatchingLeft, relativeTo: AdmissionTimePanel, padding: 0, width: YMSizes.PageWidth, height: 260.LayoutVal())
+        let title = YMLayout.GetYMPanelTitleLabel("补充说明", fontColor: YMColors.FontGray, fontSize: 24.LayoutVal(),
                                       backgroundColor: YMColors.BackgroundGray, height: 60.LayoutVal(),
                                       paddingLeft: 40.LayoutVal(), panel: DescPanel)
         
         
         DescPanel.addSubview(DescInput)
-//        DescPanel.anchorToEdge(Edge., padding: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+        DescInput.align(Align.UnderMatchingLeft, relativeTo: title, padding: 0, width: YMSizes.PageWidth, height: 200.LayoutVal())
+        DescInput.placeholder = "请填写"
+        DescInput.placeholderFont = YMFonts.YMDefaultFont(24.LayoutVal())
+        DescInput.SetPadding(40.LayoutVal(), right: 40.LayoutVal(), top: 10.LayoutVal(), bottom: 0)
+
+        
+        DescInput.EditEndCallback = self.EndInputInfo
+    }
+    
+    private func DrawNeedToKnow() {
+        BodyView.addSubview(NeedToKnowPanel)
+        NeedToKnowPanel.align(Align.UnderMatchingLeft, relativeTo: DescPanel, padding: 0, width: YMSizes.PageWidth, height: 260.LayoutVal())
+        let title = YMLayout.GetYMPanelTitleLabel("就诊须知", fontColor: YMColors.FontGray, fontSize: 24.LayoutVal(),
+                                                  backgroundColor: YMColors.BackgroundGray, height: 60.LayoutVal(),
+                                                  paddingLeft: 40.LayoutVal(), panel: NeedToKnowPanel)
+        
+        
+        NeedToKnowPanel.addSubview(NeedToKnowInput)
+        NeedToKnowInput.align(Align.UnderMatchingLeft, relativeTo: title, padding: 0, width: YMSizes.PageWidth, height: 200.LayoutVal())
+        NeedToKnowInput.placeholder = "请填写"
+        NeedToKnowInput.placeholderFont = YMFonts.YMDefaultFont(24.LayoutVal())
+        NeedToKnowInput.SetPadding(40.LayoutVal(), right: 40.LayoutVal(), top: 10.LayoutVal(), bottom: 0)
+        
+        NeedToKnowInput.EditEndCallback = self.EndInputInfo
+    }
+    
+    public func EndInputInfo(sender: YMTextArea) {
+        UIView.animateWithDuration(0.4, animations: {
+            self.BodyView.frame.origin.y = 0
+        })
+    }
+    
+    private func DrawSubmitButton() {
+        ParentView?.addSubview(SubmitButton)
+        
+        SubmitButton.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 98.LayoutVal())
+        SubmitButton.backgroundColor = YMColors.CommonBottomGray
+        SubmitButton.setTitle("确认接诊", forState: UIControlState.Normal)
+        SubmitButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        SubmitButton.setTitleColor(YMColors.FontGray, forState: UIControlState.Disabled)
+        SubmitButton.enabled = false
+        SubmitButton.titleLabel?.font = YMFonts.YMDefaultFont(34.LayoutVal())
+        
+        SubmitButton.addTarget(AcceptActions!, action: "SubmitTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    public func EnableSubmitButton() {
+        SubmitButton.backgroundColor = YMColors.CommonBottomBlue
+        SubmitButton.enabled = true
+    }
+    
+    public func DisableSubmitButton() {
+        SubmitButton.backgroundColor = YMColors.CommonBottomGray
+        SubmitButton.enabled = false
+    }
+    
+    public func SetAdmissionTime() {
+        PickerPanel.hidden = true
+        
+        let cellData = TimeCell!.UserObjectData as! [String: AnyObject]
+        let cellLabel = cellData["label"] as! UILabel
+        
+        let formatter = NSDateFormatter()
+        //日期样式
+        formatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        cellLabel.text = formatter.stringFromDate(AdmissionDatePicker.date)
+        cellLabel.sizeToFit()
+        
+        EnableSubmitButton()
+    }
+    
+    public func ShowAdmissionTime() {
+        DescInput.resignFirstResponder()
+        NeedToKnowInput.resignFirstResponder()
+        PickerPanel.hidden = false
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

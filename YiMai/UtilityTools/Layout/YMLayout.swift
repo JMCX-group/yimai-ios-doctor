@@ -63,7 +63,7 @@ public class YMLayout {
         return newImageView
     }
     
-    public static func GetTouchableView(useObject actionTarget: AnyObject, useMethod actionFunc: Selector, userStringData: String = "") -> YMTouchableView {
+    public static func GetTouchableView(useObject actionTarget: AnyObject, useMethod actionFunc: Selector, userStringData: String = "", backgroundColor: UIColor = YMColors.White) -> YMTouchableView {
         let newView = YMTouchableView()
 
         newView.UserStringData = userStringData
@@ -71,7 +71,7 @@ public class YMLayout {
 
         newView.userInteractionEnabled = true
         newView.addGestureRecognizer(tapGR)
-        newView.backgroundColor = YMColors.White
+        newView.backgroundColor = backgroundColor
 
         return newView
     }

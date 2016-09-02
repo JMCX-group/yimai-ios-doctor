@@ -47,6 +47,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_APPOINTMENT_DETAIL_NAME = "PageAppointmentDetail"
     public static let CS_PAGE_APPOINTMENT_ACCEPT_NAME = "PageAppointmentAccept"
     public static let CS_PAGE_APPOINTMENT_ACCEPT_DETAIL_NAME = "PageApointmentAcceptDetail"
+    public static let CS_PAGE_APPOINTMENT_PROCESS_NAME = "PageAppointmentProcess"
     
     public static let CS_PAEG_ADMISSION_CHARGE_SETTING_NAME = "PageAdmissionChargeSetting"
     public static let CS_PAEG_ADMISSION_TIME_SETTING_NAME = "PageAdmissionTimeSetting"

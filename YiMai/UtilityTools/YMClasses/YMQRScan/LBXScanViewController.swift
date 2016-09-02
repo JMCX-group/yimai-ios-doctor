@@ -135,8 +135,8 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         let result:LBXScanResult = arrayResult[0]
         
         print(result.strScanned)
-        self.navigationController?.popViewControllerAnimated(true)
-//        showMsg(result.strBarCodeType, message: result.strScanned)
+//        self.navigationController?.popViewControllerAnimated(true)
+        showMsg(result.strBarCodeType, message: result.strScanned)
     }
     
     override public func viewWillDisappear(animated: Bool) {

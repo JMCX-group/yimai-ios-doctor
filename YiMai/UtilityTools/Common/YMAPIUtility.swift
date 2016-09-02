@@ -149,7 +149,11 @@ public class YMAPIUtility {
             let errInfo = error.userInfo["com.alamofire.serialization.response.error.data"] as? NSData
             
             print("error code is : \(response.statusCode)")
-            print("error info si : \(errInfo)")
+            if(nil != errInfo) {
+                print("error info is : \(JSON(errInfo!))")
+            } else {
+                print("no error info")
+            }
 
         } else {
             print(error)

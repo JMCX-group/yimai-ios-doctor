@@ -14,5 +14,6 @@ target 'YiMai' do
   pod 'RongCloudIMKit', '2.4.0'
   pod 'APAddressBook'
   pod 'MBProgressHUD'
+  pod 'KMPlaceholderTextView', '~> 1.2.1'
 end
 

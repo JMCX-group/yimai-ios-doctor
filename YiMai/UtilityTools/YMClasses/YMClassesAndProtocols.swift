@@ -56,7 +56,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAEG_ADMISSION_TIME_SETTING_NAME: true,
         YMCommonStrings.CS_PAEG_ADMISSION_CHARGE_SETTING_NAME: true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_ACCEPT_NAME: true,
-        YMCommonStrings.CS_PAGE_APPOINTMENT_ACCEPT_DETAIL_NAME: true
+        YMCommonStrings.CS_PAGE_APPOINTMENT_ACCEPT_DETAIL_NAME: true,
+        YMCommonStrings.CS_PAGE_APPOINTMENT_PROCESS_NAME: true
     ]
 }
 

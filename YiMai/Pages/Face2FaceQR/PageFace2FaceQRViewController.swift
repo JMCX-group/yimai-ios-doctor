@@ -21,5 +21,7 @@ public class PageFace2FaceQRViewController: PageViewController {
         Actions = PageFace2FaceQRActions(navController: NavController)
         BodyView = PageFace2FaceQRBodyView(parentView: SelfView!, navController: NavController!, pageActions: Actions!)
         TopView = PageCommonTopView(parentView: SelfView!, titleString: "当面咨询", navController: NavController)
+        
+        BodyView?.DrawFastSettingBtn(TopView!.TopViewPanel)
     }
 }
