@@ -77,6 +77,7 @@ public class PageGlobalSearchActions: PageJumpActions {
         }
         
         TargetView?.LastSearchKey = key!
+        TargetView?.HighlightWord = ActiveType.Custom(pattern: key!)
         DoSearch(["field": key!])
     }
     

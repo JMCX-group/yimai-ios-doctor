@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Toucan
 
 public class YMTouchableView: UIView {
     public var UserStringData: String = ""

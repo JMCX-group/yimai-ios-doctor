@@ -79,7 +79,7 @@ public class PageNewFriendBodyView: PageBodyView {
         
         for v in data {
             LastCell = PageSearchResultCell.LayoutACell(ListPanel, info: v, prev: LastCell,
-                                                        act: NewFriendActions!, sel: PageJumpActions.PageJumpToByViewSenderSel)
+                                                        act: NewFriendActions!, sel: PageJumpActions.PageJumpToByViewSenderSel, highlight: ActiveType.URL)
             
             DrawStatus(v["status"]! as! String, cell: LastCell!)
             

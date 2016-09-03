@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Neon
+import Toucan
 
 public class TextFieldCreateParam {
     public var Placholder : String = ""
@@ -321,6 +322,23 @@ public class YMLayout {
         
         cell.UserObjectData = ["label": label]
         return cell
+    }
+    
+    public static func LoadImageFromServer(imageView: UIImageView, url: String, fullUrl: String? = nil, makeItRound: Bool = false) {
+        var url = url
+        
+        if(nil != fullUrl) {
+            url = fullUrl!
+        } else {
+            url = YMAPIInterfaceURL.Server + url
+        }
+        
+        imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
+            if(makeItRound) {
+                imageView.image = Toucan(image: image!).maskWithEllipse().image
+            }
+            print(1)
+        })
     }
 }
 

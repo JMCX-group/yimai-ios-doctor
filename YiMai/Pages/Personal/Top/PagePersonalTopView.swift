@@ -8,6 +8,7 @@
 
 import Foundation
 import Neon
+import Kingfisher
 
 public class PagePersonalTopView {
     private var ParentView: UIView? = nil
@@ -30,6 +31,8 @@ public class PagePersonalTopView {
         self.Actions = pageActions
         
         UserHead = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "GoToPersonalDetail:".Sel(), imageName: "PersonalDefaultUserhead")
+        let userHeadUrl = YMVar.MyUserInfo["head_url"] as! String
+        YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true)
         ViewLayout()
     }
     

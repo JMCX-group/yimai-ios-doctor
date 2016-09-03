@@ -17,6 +17,7 @@ public class PageSearchResultCell {
                                prev: UIView?,
                                act: AnyObject,
                                sel: Selector,
+                               highlight: ActiveType,
                                layoutCallback: ResultCellLayout? = nil) -> YMTouchableView {
 
         
@@ -37,14 +38,25 @@ public class PageSearchResultCell {
         }
         
         let headimage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
-        let name = UILabel()
-        let jobTitle = UILabel()
-        let dept = UILabel()
-        let hospital = UILabel()
-        let relation = UILabel()
+        let name = ActiveLabel()
+        let jobTitle = ActiveLabel()
+        let dept = ActiveLabel()
+        let hospital = ActiveLabel()
+        let relation = ActiveLabel()
         let bottomBorder = UIView()
         let divider = UIView()
         
+        name.enabledTypes = [highlight]
+        name.customColor[highlight] = YMColors.FontBlue
+        
+        jobTitle.enabledTypes = [highlight]
+        jobTitle.customColor[highlight] = YMColors.FontBlue
+        
+        dept.enabledTypes = [highlight]
+        dept.customColor[highlight] = YMColors.FontBlue
+        
+        hospital.enabledTypes = [highlight]
+        hospital.customColor[highlight] = YMColors.FontBlue
         
         cell.addSubview(headimage)
         cell.addSubview(name)

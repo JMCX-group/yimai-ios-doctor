@@ -314,7 +314,7 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
                 break
             }
             LastCell = PageSearchResultCell.LayoutACell(ResultList, info: UserList![i], prev: LastCell,
-                                                    act: SameAreasActions!, sel: "DocCellTouched:".Sel())
+                                                    act: SameAreasActions!, sel: "DocCellTouched:".Sel(), highlight: ActiveType.URL)
         }
         
         ListPos = ListPos + NextPos

@@ -89,7 +89,7 @@ public class PageYiMaiSameHospitalBodyView: PageBodyView {
         
         for v in data! {
             prev = PageSearchResultCell.LayoutACell(ResultList, info: v, prev: prev,
-                                             act: SameHospitalActions!, sel: "DocCellTouched:".Sel())
+                                                    act: SameHospitalActions!, sel: "DocCellTouched:".Sel(), highlight: ActiveType.URL)
         }
 
         YMLayout.SetVScrollViewContentSize(ResultList, lastSubView: prev, padding: 130.LayoutVal())

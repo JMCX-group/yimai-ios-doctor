@@ -11,7 +11,6 @@ import Neon
 
 public class PageGlobalSearchBodyView: PageBodyView {
     private var SearchActions: PageGlobalSearchActions? = nil
-    public var SearchInput: YMTextField? = nil
     private var SearchPanel = UIView()
     private var FiltersPanel = UIView()
     
@@ -35,10 +34,14 @@ public class PageGlobalSearchBodyView: PageBodyView {
     
     public var LastSearchKey = ""
     
+    public var SearchInput: YMTextField? = nil
+
     public var CityFilterKey = ""
     public var HosFilterKey = ""
     public var DeptFilterKey = ""
-    
+
+    public var HighlightWord = ActiveType.Custom(pattern: PageGlobalSearchViewController.InitSearchKey)
+
     override func ViewLayout() {
         super.ViewLayout()
         
@@ -174,7 +177,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         
         var lastCell = titlePanel
         for v in Lv1Data! {
-            lastCell = PageSearchResultCell.LayoutACell(Lv1Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+            lastCell = PageSearchResultCell.LayoutACell(Lv1Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
         }
         
         DrawFiltersList()
@@ -212,7 +215,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         
         var lastCell = titlePanel
         for v in Lv2Data! {
-            lastCell = PageSearchResultCell.LayoutACell(Lv2Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+            lastCell = PageSearchResultCell.LayoutACell(Lv2Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
         }
         
         DrawFiltersList()
@@ -250,7 +253,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         
         var lastCell = titlePanel
         for v in Lv3Data! {
-            lastCell = PageSearchResultCell.LayoutACell(Lv3Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+            lastCell = PageSearchResultCell.LayoutACell(Lv3Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
         }
         
         DrawFiltersList()
@@ -327,7 +330,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         var lastCell = titlePanel
         if(friendsCount > 2) {
             for i in 0...1 {
-                lastCell = PageSearchResultCell.LayoutACell(Lv1Panel, info: data[i], prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+                lastCell = PageSearchResultCell.LayoutACell(Lv1Panel, info: data[i], prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
                 lastCell.backgroundColor = YMColors.White
             }
             
@@ -346,7 +349,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
             lastCell = showMorePanel
         } else {
             for v in data {
-                lastCell = PageSearchResultCell.LayoutACell(Lv1Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+                lastCell = PageSearchResultCell.LayoutACell(Lv1Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
             }
         }
         
@@ -379,7 +382,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         var lastCell = titlePanel
         if(friendsCount > 2) {
             for i in 0...1 {
-                lastCell = PageSearchResultCell.LayoutACell(Lv2Panel, info: data[i], prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+                lastCell = PageSearchResultCell.LayoutACell(Lv2Panel, info: data[i], prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
                 lastCell.backgroundColor = YMColors.White
             }
             
@@ -398,7 +401,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
             lastCell = showMorePanel
         } else {
             for v in data {
-                lastCell = PageSearchResultCell.LayoutACell(Lv2Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+                lastCell = PageSearchResultCell.LayoutACell(Lv2Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
             }
         }
         
@@ -431,7 +434,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         var lastCell = titlePanel
         if(friendsCount > 2) {
             for i in 0...1 {
-                lastCell = PageSearchResultCell.LayoutACell(Lv3Panel, info: data[i], prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+                lastCell = PageSearchResultCell.LayoutACell(Lv3Panel, info: data[i], prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
                 lastCell.backgroundColor = YMColors.White
             }
             
@@ -450,7 +453,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
             lastCell = showMorePanel
         } else {
             for v in data {
-                lastCell = PageSearchResultCell.LayoutACell(Lv3Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel())
+                lastCell = PageSearchResultCell.LayoutACell(Lv3Panel, info: v, prev: lastCell, act: SearchActions!, sel: "CellTouched:".Sel(), highlight: HighlightWord)
             }
         }
         

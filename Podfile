@@ -15,5 +15,7 @@ target 'YiMai' do
   pod 'APAddressBook'
   pod 'MBProgressHUD'
   pod 'KMPlaceholderTextView', '~> 1.2.1'
+  pod 'Kingfisher', '~> 2.4'
+  pod 'Toucan'
 end
 
