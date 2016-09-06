@@ -8,6 +8,7 @@
 
 import Foundation
 import Neon
+import Photos
 
 public class PageAppointmentBodyView: PageBodyView {
     private var PatientBasicInfoPanel: YMTouchableView? = nil
@@ -38,6 +39,43 @@ public class PageAppointmentBodyView: PageBodyView {
     public static var PatientBasicInfoString: String = ""
     public static var PatientConditionString: String = ""
     public static var AppointmentTimeString: String = "点击选择时间"
+    private var AllowedSelection: UInt = 10
+    public var PhotoPikcer: YMPhotoSelector? = nil
+    public var PhotoArray = [UIImage]()
+    
+    public func DeleteImage() {
+        AllowedSelection += 1
+    }
+    
+    public func ImagesSelected(selectedPhotos: [PHAsset]) {
+        for asset in selectedPhotos {
+            let img = YMLayout.TransPHAssetToUIImage(asset)
+            let imgView = UIImageView(image: img)
+
+            self.PhotoArray.append(img)
+            AddImage(imgView)
+            
+        }
+        
+        if(UInt(selectedPhotos.count) > AllowedSelection) {
+            AllowedSelection = 0
+        } else {
+            AllowedSelection = AllowedSelection - UInt(selectedPhotos.count)
+        }
+        
+        if(AllowedSelection > 10) {
+            AllowedSelection = 0
+        }
+    }
+    
+    public func ShowPhotoPicker() {
+        if(0 == AllowedSelection) {
+            YMPageModalMessage.ShowNormalInfo("最多只能添加10张图片", nav: self.NavController!)
+            return
+        }
+        PhotoPikcer?.SetMaxSelection(AllowedSelection)
+        PhotoPikcer?.Show()
+    }
     
     public func Reload() {
         self.DrawDocCell(PageAppointmentViewController.SelectedDoctor)
@@ -49,6 +87,9 @@ public class PageAppointmentBodyView: PageBodyView {
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.PanelBackgroundGray
+        
+        PhotoPikcer = YMPhotoSelector(nav: self.NavController!, maxSelection: AllowedSelection)
+        PhotoPikcer?.SelectedCallback = ImagesSelected
 
         DrawPatientBasicInfoPanel()
         DrawPatientConditionPanel()

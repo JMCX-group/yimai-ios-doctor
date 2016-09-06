@@ -9,14 +9,72 @@
 import Foundation
 import UIKit
 import Proposer
+import AFNetworking
 
 public class PageAppointmentActions: PageJumpActions, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var ApiUtility: YMAPIUtility? = nil
+    var UploadApi: YMAPIUtility? = nil
+    var TargetController: PageAppointmentViewController? = nil
     
+    var AppointmentId = ""
+    var ImageForUpload: UIImage? = nil
+    var PhotoIndex = 0
+
     override func ExtInit() {
+        super.ExtInit()
         ApiUtility = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_CREATE_NEW_APPOINTMENT,
                                   success: CreateAppointmentSuccess,
                                   error: CreateAppointmentError)
+        
+        UploadApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPLOAD_PHOTO_APPOINTMENT,
+                                 success: UploadSuccess,
+                                 error: UploadError)
+        
+        TargetController = self.Target as? PageAppointmentViewController
+    }
+    
+    private func GetImageData(img: UIImage) -> NSData {
+        var imgData = UIImageJPEGRepresentation(ImageForUpload!, 1.0)
+        
+        if (imgData!.length > 100*1024) {
+            if (imgData!.length>1024*1024) {//1M以及以上
+                imgData = UIImageJPEGRepresentation(img, 0.1)
+            }else if (imgData!.length > 512*1024) {//0.5M-1M
+                imgData = UIImageJPEGRepresentation(img, 0.5)
+            }else if (imgData!.length > 200*1024) {//0.25M-0.5M
+                imgData = UIImageJPEGRepresentation(img, 0.9)
+            }
+        }
+        
+        return imgData!
+    }
+    
+    public func UploadBlockBuilder(formData: AFMultipartFormData) {
+        let filename = "\(PhotoIndex).jpg"
+        let imgData = GetImageData(ImageForUpload!)
+
+        print(imgData.length)
+        formData.appendPartWithFileData(imgData, name: "img", fileName: filename, mimeType: "image/jpeg")
+    }
+    
+    public func UploadSuccess(data: NSDictionary?) {
+        print("image \(PhotoIndex) uploaded")
+        PhotoIndex += 1
+        if(PhotoIndex < TargetController!.BodyView!.PhotoArray.count) {
+            ImageForUpload = TargetController!.BodyView!.PhotoArray[PhotoIndex]
+            UploadApi?.YMUploadAddmissionPhotos(["id": AppointmentId], blockBuilder: self.UploadBlockBuilder)
+        } else {
+            TargetController?.Loading?.Hide()
+            self.NavController!.popViewControllerAnimated(true)
+        }
+    }
+    
+    public func UploadError(err: NSError) {
+        YMAPIUtility.PrintErrorInfo(err)
+        TargetController?.Loading?.Hide()
+        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
+//        self.NavController!.popViewControllerAnimated(true)
+
     }
     
     public func PhotoScrollLeft(sender: UIGestureRecognizer) {
@@ -32,11 +90,13 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
         
         proposeToAccess(contacts, agreed: {
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.sourceType = .PhotoLibrary
-                imagePicker.delegate = self
+//                let imagePicker = UIImagePickerController()
+//                imagePicker.sourceType = .PhotoLibrary
+//                imagePicker.delegate = self
+//                
+//                self.NavController!.presentViewController(imagePicker, animated: true, completion: nil)
                 
-                self.NavController!.presentViewController(imagePicker, animated: true, completion: nil)
+                self.TargetController?.BodyView!.ShowPhotoPicker()
             }
         }, rejected: {
             let alertController = UIAlertController(title: "系统提示", message: "请去隐私设置里打开照片访问权限！", preferredStyle: .Alert)
@@ -53,30 +113,34 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
     public func imagePickerController(picker: UIImagePickerController!,
                                       didFinishPickingImage image: UIImage!,
                                                             editingInfo: [NSObject : AnyObject]!) {
-        let pageController = self.Target! as! PageAppointmentViewController
         
         let img = UIImageView(image: image)
-        pageController.BodyView!.AddImage(img)
+        TargetController?.BodyView!.AddImage(img)
 
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     public func CreateAppointmentSuccess(data: NSDictionary?) {
-        let pageController = self.Target! as! PageAppointmentViewController
-        pageController.Loading?.Hide()
-        self.NavController!.popViewControllerAnimated(true)
+
+        AppointmentId = "\(data!["id"]!)"
+        if(PhotoIndex < TargetController!.BodyView!.PhotoArray.count) {
+            ImageForUpload = TargetController!.BodyView!.PhotoArray[PhotoIndex]
+            UploadApi?.YMUploadAddmissionPhotos(["id": AppointmentId], blockBuilder: self.UploadBlockBuilder)
+        }
+        
     }
     
     public func CreateAppointmentError(err: NSError) {
+        YMAPIUtility.PrintErrorInfo(err)
+        TargetController?.Loading?.Hide()
         YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
     }
     
     public func DoAppointment(_: YMButton) {
-        let pageController = self.Target! as! PageAppointmentViewController
-        let uploadData = pageController.VerifyInput()
+        let uploadData = TargetController!.VerifyInput()
         
         if(nil != uploadData) {
-            pageController.Loading?.Show()
+            TargetController?.Loading?.Show()
             ApiUtility?.YMCreateNewAppointment(uploadData!)
         }
     }

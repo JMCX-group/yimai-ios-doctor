@@ -59,6 +59,7 @@ public class YMAPIInterfaceURL {
     static let SetRadioHaveRead = YMAPIInterfaceURL.ApiBaseUrl + "/radio/read"
     
     static let CreateNewAppointment = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/new"
+    static let UploadAppointmentPhoto = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/upload-img"
     static let GetAppointmentList = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/list"
     static let GetAppointmentDetail = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/detail"
     
@@ -147,6 +148,8 @@ public class YMAPIUtility {
         if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
             let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
             let errInfo = error.userInfo["com.alamofire.serialization.response.error.data"] as? NSData
+            let errStr = NSString(data: errInfo!, encoding: NSUTF8StringEncoding)
+
             
             print("error code is : \(response.statusCode)")
             if(nil != errInfo) {
@@ -154,7 +157,9 @@ public class YMAPIUtility {
             } else {
                 print("no error info")
             }
-
+            
+            print("------------org error info---------------")
+            print(errStr)
         } else {
             print(error)
         }
@@ -245,10 +250,28 @@ public class YMAPIUtility {
         return config
     }
     
+    private func GetUploadRequestConfig(url: String, param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder? = nil,
+                                        progressHandler: NetworkProgressHandler? = nil) -> YMNetworkRequestConfig {
+        let config = self.GetDefaultConfig(url)
+        
+        config.ProgressHandler = progressHandler
+        config.BodyWidthBlockBuilder = blockBuilder
+        config.Param = param
+        
+        return config
+    }
+    
     private func DoPostRequest(url: String, param: AnyObject?, progressHandler: NetworkProgressHandler?) {
         let config = self.GetRequestConfig(url,param: param, progressHandler: progressHandler)
         let network = YMNetwork()
         network.RequestJsonByPost(config)
+    }
+    
+    private func DoUploadRequest(url: String, param: AnyObject?,
+                                 blockBuilder: NetworkBodyWidthBlockBuilder?, progressHandler: NetworkProgressHandler?) {
+        let config = self.GetUploadRequestConfig(url,param: param, blockBuilder: blockBuilder, progressHandler: progressHandler)
+        let network = YMNetwork()
+        network.UploadPhotosWithParam(config)
     }
     
     private func DoPostRequestWithJsonParam(url: String, param: AnyObject?, progressHandler: NetworkProgressHandler?)  {
@@ -305,6 +328,19 @@ public class YMAPIUtility {
         config.ErrorHandler = self.JsonResponseErrorHandler
         
         return config
+    }
+    
+    private func YMAPIUploadPhotos(baseUrl: String, param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder, progressHandler: NetworkProgressHandler?) {
+        let token = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_TOKEN)
+        if(nil == token) {
+            return
+        }
+        
+        let url = YMAPIUtility.AppendTokenToUrl(baseUrl, token: token! as! String)
+        DoUploadRequest(url,
+                      param: param,
+                      blockBuilder: blockBuilder,
+                      progressHandler: progressHandler)
     }
     
     public func RegisterUser(param: AnyObject, progressHandler: NetworkProgressHandler?) {
@@ -710,6 +746,11 @@ public class YMAPIUtility {
 
         finallyParam!["type"] = "same_department"
         YMAPIPost(YMAPIInterfaceURL.GetSameDepartmentList, param: finallyParam, progressHandler: nil)
+    }
+    
+    public func YMUploadAddmissionPhotos(param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder) {
+        YMAPIUploadPhotos("http://192.168.0.109/",
+                          param: param, blockBuilder: blockBuilder, progressHandler: nil)
     }
 }
 
