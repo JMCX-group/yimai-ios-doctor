@@ -53,7 +53,6 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
         let filename = "\(PhotoIndex).jpg"
         let imgData = GetImageData(ImageForUpload!)
 
-        print(imgData.length)
         formData.appendPartWithFileData(imgData, name: "img", fileName: filename, mimeType: "image/jpeg")
     }
     

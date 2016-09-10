@@ -211,7 +211,7 @@ public class YMTableView: NSObject {
             cellPointer = cellPointer?.Next
         }
     }
-    
+
     public func SubCellLayout() {
         var cellPointer = self.CellList.Next
         

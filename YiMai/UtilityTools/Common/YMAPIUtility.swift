@@ -749,7 +749,7 @@ public class YMAPIUtility {
     }
     
     public func YMUploadAddmissionPhotos(param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder) {
-        YMAPIUploadPhotos("http://192.168.0.109/",
+        YMAPIUploadPhotos(YMAPIInterfaceURL.UploadAppointmentPhoto,
                           param: param, blockBuilder: blockBuilder, progressHandler: nil)
     }
 }

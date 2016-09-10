@@ -149,6 +149,9 @@ public class YMNetwork {
     public func UploadPhotosWithParam(requestConfig: YMNetworkRequestConfig) {
         let uploadManager = self.BuildImageUploadRequestManager()
         
+//        multipart/form-data; boundary=--------------------------820109731617543034119330
+//        uploadManager.requestSerializer.setValue("content_type", forHTTPHeaderField: "multipart/form-data; boundary=--------------------------820109731617543034119330")
+
         uploadManager.POST(
             requestConfig.URL,
             parameters: requestConfig.Param,
