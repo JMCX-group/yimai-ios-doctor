@@ -253,7 +253,18 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         let genderMap = ["1":"男", "0":"女"]
         
         name.text = "\(data["patient_name"]!)"
-        basicInfo.text = "\(genderMap[data["patient_gender"]! as! String]!) \(data["patient_age"]!)岁"
+        let genderIdx = data["patient_gender"]! as? String
+        var age = data["patient_age"] as? String
+        if(nil == age) {
+            age = ""
+        } else {
+            age = "\(age!)岁"
+        }
+        if(nil != genderIdx) {
+            basicInfo.text = "\(genderMap[genderIdx!]!) \(age!)"
+        } else {
+            basicInfo.text = "\(age)"
+        }
         location.text = data["hospital"] as? String
         time.text = "\(data["time"]!)"
         status.text = "\(data["status"]!)"
