@@ -209,6 +209,8 @@ public class PageLoginBodyView: NSObject {
 
         self.UsernameInput?.enabled = true
         self.PasswordInput?.enabled = true
+        
+        LoginButton.enabled = false
     }
     
     public func ShowErrorInfo(info: String) {

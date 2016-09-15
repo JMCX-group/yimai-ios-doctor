@@ -16,6 +16,9 @@ public class PageFace2FaceInfoInputBodyView: PageBodyView {
     private let InputHeight = 80.LayoutVal()
     private let PaddingLeft = 40.LayoutVal()
     
+    private var DisabledBtn = YMLayout.GetGrayImageView("Face2FaceInfoInputButtonFace2FacePay")
+    private var PayBtn: YMTouchableImageView? = nil
+    
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.BackgroundGray
@@ -23,6 +26,18 @@ public class PageFace2FaceInfoInputBodyView: PageBodyView {
         DrawTitle()
         DrawInputPanel()
         DrawFace2FacePayButton()
+    }
+    
+    public func DrawFastSettingBtn(topView: UIView) {
+        let btn = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "GoToF2FSetting:".Sel(), userStringData: "", backgroundColor: YMColors.None)
+        
+        topView.addSubview(btn)
+        btn.anchorToEdge(Edge.Right, padding: 10.LayoutVal(), width: 60.LayoutVal(), height: YMSizes.PageTopHeight)
+        
+        let icon = YMLayout.GetSuitableImageView("YMIconSettingWhite")
+        
+        btn.addSubview(icon)
+        icon.anchorToEdge(Edge.Bottom, padding: 26.LayoutVal(), width: icon.width, height: icon.height)
     }
     
     private func DrawTitle() {
@@ -65,13 +80,22 @@ public class PageFace2FaceInfoInputBodyView: PageBodyView {
         UserCellPhone?.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: TitleHeight, otherSize: InputHeight)
         dividerLine.align(Align.UnderMatchingLeft, relativeTo: UserCellPhone!, padding: 0, width: YMSizes.PageWidth, height: 1)
         UserName!.align(Align.UnderMatchingLeft, relativeTo: dividerLine, padding: 0, width: YMSizes.PageWidth, height: InputHeight)
+        
+        UserCellPhone?.EditChangedCallback = self.VerifyInput
+        UserName?.EditChangedCallback = self.VerifyInput
     }
     
     private func DrawFace2FacePayButton(){
-        let payButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: YMSelectors.PageJumpByImageView, imageName: "Face2FaceInfoInputButtonFace2FacePay")
-        payButton.UserStringData = YMCommonStrings.CS_PAGE_FACE_2_FACE_QR_NAME
-        BodyView.addSubview(payButton)
-        payButton.align(Align.UnderCentered, relativeTo: UserName!, padding: 465.LayoutVal(), width: payButton.width, height: payButton.height)
+        PayBtn = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: YMSelectors.PageJumpByImageView, imageName: "Face2FaceInfoInputButtonFace2FacePay")
+        PayBtn!.UserStringData = YMCommonStrings.CS_PAGE_FACE_2_FACE_QR_NAME
+        BodyView.addSubview(PayBtn!)
+        BodyView.addSubview(DisabledBtn)
+        PayBtn!.align(Align.UnderCentered, relativeTo: UserName!, padding: 465.LayoutVal(),
+                      width: PayBtn!.width, height: PayBtn!.height)
+        DisabledBtn.align(Align.UnderCentered, relativeTo: UserName!, padding: 465.LayoutVal(),
+                           width: PayBtn!.width, height: PayBtn!.height)
+        
+        PayBtn?.hidden = true
         
         let descFirstLine = UILabel()
         let descSecondLine = UILabel()
@@ -93,8 +117,28 @@ public class PageFace2FaceInfoInputBodyView: PageBodyView {
         BodyView.addSubview(descFirstLine)
         BodyView.addSubview(descSecondLine)
         
-        descFirstLine.align(Align.UnderCentered, relativeTo: payButton, padding: 46.LayoutVal(), width: YMSizes.PageWidth, height: descFontSize)
+        descFirstLine.align(Align.UnderCentered, relativeTo: PayBtn!, padding: 46.LayoutVal(), width: YMSizes.PageWidth, height: descFontSize)
         descSecondLine.align(Align.UnderCentered, relativeTo: descFirstLine, padding: 8.LayoutVal(), width: YMSizes.PageWidth, height: descFontSize)
+    }
+    
+    func VerifyInput(input: YMTextField) {
+        let phone = UserCellPhone?.text
+        let name = UserName?.text
+        
+        if (YMValueValidator.IsCellPhoneNum(phone) && !YMValueValidator.IsEmptyString(name)) {
+            PayBtn?.hidden = false
+            DisabledBtn.hidden = true
+        } else {
+            PayBtn?.hidden = true
+            DisabledBtn.hidden = false
+        }
+    }
+    
+    func Clear() {
+        UserCellPhone?.text = ""
+        UserName?.text = nil
+        PayBtn?.hidden = true
+        DisabledBtn.hidden = true
     }
 }
 

@@ -154,6 +154,11 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
         }
     }
     
+    public func ShowPhotos(gr: UIGestureRecognizer) {
+        let cellOptView = gr.view as! YMTouchableView
+        print(cellOptView.UserObjectData)
+    }
+    
 }
 
 

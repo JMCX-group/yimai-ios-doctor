@@ -9,4 +9,8 @@
 import Foundation
 import UIKit
 
-public class PageFace2FaceInfoInputActions: PageJumpActions{}
+public class PageFace2FaceInfoInputActions: PageJumpActions{
+    public func GoToF2FSetting(sender: UIGestureRecognizer) {
+        DoJump(YMCommonStrings.CS_PAEG_ADMISSION_CHARGE_SETTING_NAME)
+    }
+}

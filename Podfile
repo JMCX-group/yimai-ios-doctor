@@ -10,7 +10,7 @@ target 'YiMai' do
   pod 'Proposer'
   pod 'SwiftDate'
   pod 'MWIDCardValidate'
-  pod 'Graph'
+  pod 'Graph', '~> 1.1.1'
   pod 'RongCloudIMKit', '2.4.0'
   pod 'APAddressBook'
   pod 'MBProgressHUD'

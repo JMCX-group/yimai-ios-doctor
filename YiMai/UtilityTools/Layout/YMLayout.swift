@@ -366,6 +366,18 @@ public class YMLayout {
         }
         return ret
     }
+    
+    public static func GetGrayImageView(imageName: String) -> YMTouchableImageView {
+        let filter = CIFilter(name: "CIPhotoEffectTonal")
+        let context = CIContext(options: nil)
+        let inputImage = CIImage(image: UIImage(named: imageName)!)
+        filter!.setValue(inputImage, forKey: kCIInputImageKey)
+        let outputImage =  filter!.outputImage
+        let cgImage = context.createCGImage(outputImage!,
+                                            fromRect: outputImage!.extent)
+        
+        return YMLayout.GetSuitableImageView(UIImage(CGImage: cgImage))
+    }
 }
 
 

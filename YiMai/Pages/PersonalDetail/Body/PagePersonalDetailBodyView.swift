@@ -81,7 +81,10 @@ public class PagePersonalDetailBodyView: NSObject {
         TagPanel.addSubview(title)
         title.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 20.LayoutVal(), width: title.width, height: title.height)
         
-        DrawTagList(tags, tagTitle: title)
+        let lastLine = DrawTagList(tags, tagTitle: title)
+        if(nil != lastLine) {
+            YMLayout.SetViewHeightByLastSubview(TagPanel, lastSubView: lastLine!)
+        }
 //        TagExpandArrow = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "TagPanelExpand:".Sel(), imageName: "PagePersonalDetailArrowDownIcon")
 //        TagCollapseArrow = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "TagPanelCollapse:".Sel(), imageName: "PagePersonalDetailArrowUpIcon")
     }
@@ -103,7 +106,7 @@ public class PagePersonalDetailBodyView: NSObject {
         return tag
     }
 
-    private func DrawTagList(tags: String, tagTitle: UIView) {
+    private func DrawTagList(tags: String, tagTitle: UIView) -> UIView? {
         func GetTagFullWidth(tagLabel: UILabel) -> CGFloat{
             return tagLabel.width + 50.LayoutVal()
         }
@@ -119,7 +122,7 @@ public class PagePersonalDetailBodyView: NSObject {
         let listLineHeight = 42.LayoutVal()
         
         if(0 == tagArray.count) {
-            return
+            return nil
         }
 
         let tagSorted = tagArray.sort { (a, b) -> Bool in
@@ -127,6 +130,9 @@ public class PagePersonalDetailBodyView: NSObject {
         }
         
         for tag in tagSorted {
+            if (YMValueValidator.IsEmptyString(tag)) {
+                continue
+            }
             let tagLabel = GetTagLabel(tag)
             labelArray.append(tagLabel)
             widthArray.append(GetTagFullWidth(tagLabel))
@@ -154,8 +160,10 @@ public class PagePersonalDetailBodyView: NSObject {
             }
         }
 
+        var lastLine: UIView? = nil
         for (lIdx, lVal) in lineArray.enumerate() {
             let lineView = UIView()
+            lastLine = lineView
             lineViewArray.append(lineView)
             TagPanel.addSubview(lineView)
             if(0 == lIdx) {
@@ -177,7 +185,8 @@ public class PagePersonalDetailBodyView: NSObject {
                 prevLabel = tagLabel
             }
         }
-        return
+
+        return lastLine!
     }
     
     private func DrawDoctorIntroduction(info: String, alignView: UIView) {

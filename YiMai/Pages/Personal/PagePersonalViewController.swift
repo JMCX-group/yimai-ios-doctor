@@ -23,9 +23,18 @@ public class PagePersonalViewController: PageViewController {
     
     override public func viewWillAppear(animated: Bool) {
         YMCurrentPage.PagePersonalIsAnimatedShow = animated
+        UserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
+        if(nil == UserInfo) {
+            LoadingView?.Show()
+            let handler = YMCoreMemDataOnceHandler(handler: self.RefreshUserInfo)
+            YMCoreDataEngine.SetDataOnceHandler("PersonalTopViewRefresh", handler: handler)
+        } else {
+            self.PersonalTopView?.Refresh(self.UserInfo! as! [String : AnyObject])
+        }
     }
 
     override func PageLayout(){
+        super.PageLayout()
         if(PageLayoutFlag) {return}
         PageLayoutFlag=true
         
@@ -36,15 +45,6 @@ public class PagePersonalViewController: PageViewController {
         LoadingView = YMPageLoadingView(parentView: self.view)
 
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
-        
-        UserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
-        if(nil == UserInfo) {
-            LoadingView?.Show()
-            let handler = YMCoreMemDataOnceHandler(handler: self.RefreshUserInfo)
-            YMCoreDataEngine.SetDataOnceHandler("PersonalTopViewRefresh", handler: handler)
-        } else {
-            self.PersonalTopView?.Refresh(self.UserInfo! as! [String : AnyObject])
-        }
     }
     
     private func RefreshUserInfo(data: AnyObject?, queue: NSOperationQueue) -> Bool {

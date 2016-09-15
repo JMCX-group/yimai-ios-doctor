@@ -22,5 +22,13 @@ class PageFace2FaceInfoInputViewController: PageViewController {
         Actions = PageFace2FaceInfoInputActions(navController: selfNav)
         BodyView = PageFace2FaceInfoInputBodyView(parentView: selfView, navController: selfNav!, pageActions: Actions!)
         TopView = PageCommonTopView(parentView: selfView, titleString: "当面咨询", navController: selfNav)
+        
+        BodyView?.DrawFastSettingBtn(TopView!.TopViewPanel)
+    }
+    
+    override func PageDisapeared() {
+        if(self.isMovingFromParentViewController()) {
+            BodyView?.Clear()
+        }
     }
 }

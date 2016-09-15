@@ -33,6 +33,7 @@ public class PageAppointmentBodyView: PageBodyView {
     
     private var ConfirmButton: YMButton? = nil
     
+    private var MorePhotoButton: UIView? = nil
     private var LastImage: UIView? = nil
     private var ImageCount: Int = 0
     
@@ -164,6 +165,19 @@ public class PageAppointmentBodyView: PageBodyView {
         let cell = UIView()
         PhotoInnerPanel?.addSubview(cell)
         
+        var userData = [String: AnyObject]()
+
+        var opration: YMTouchableView? = nil
+        
+        if(nil == background) {
+            opration = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PhotoSelect:".Sel())
+        } else {
+            opration = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "ShowPhotos:".Sel())
+            userData["photo"] = background
+        }
+        
+        opration?.backgroundColor = YMColors.None
+
         let titleLabel = UILabel()
         
         titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
@@ -191,6 +205,12 @@ public class PageAppointmentBodyView: PageBodyView {
             cell.addSubview(background!)
             background!.anchorInCenter(width: cell.width, height: cell.height)
         }
+        
+        cell.addSubview(opration!)
+        opration?.fillSuperview()
+        userData["cell"] = cell
+
+        opration?.UserObjectData = userData
         
         return cell
     }
@@ -228,6 +248,9 @@ public class PageAppointmentBodyView: PageBodyView {
         cell = GetTooltipCell("病例资料", prevCell: cell)
         cell = GetTooltipCell("病例资料", prevCell: cell)
         cell = GetTooltipCell("其他", prevCell: cell)
+        MorePhotoButton = GetTooltipCell("更多资料", prevCell: cell)
+        
+        MorePhotoButton?.hidden = true
     }
     
     private func DrawDocCell(data: [String: AnyObject]?) {
@@ -403,18 +426,31 @@ public class PageAppointmentBodyView: PageBodyView {
     public func AddImage(image: UIImageView) {
         self.LastImage = GetTooltipCell("病例资料", prevCell: LastImage, background: image)
         
-        PhotoInnerPanel?.contentSize = CGSizeMake(
-            self.LastImage!.frame.origin.x + self.LastImage!.width,
-            PhotoInnerPanel!.height
-        )
-        
         ImageCount = ImageCount + 1
         
-        if(ImageCount > 4){
-            let x = CGFloat(ImageCount - 4) * (self.LastImage!.width + 19.LayoutVal())
-            let pos = CGPointMake(x, self.LastImage!.frame.origin.y)
+        if(ImageCount > 3) {
+            MorePhotoButton?.hidden = false
+            MorePhotoButton!.align(Align.ToTheRightMatchingTop, relativeTo: LastImage!, padding: 19.LayoutVal(), width: 144.LayoutVal(), height: 144.LayoutVal())
+            let x = CGFloat(ImageCount - 3) * (self.MorePhotoButton!.width + 19.LayoutVal())
+            let pos = CGPointMake(x, MorePhotoButton!.frame.origin.y)
             PhotoInnerPanel?.setContentOffset(pos, animated: true)
+            
+            PhotoInnerPanel?.contentSize = CGSizeMake(
+                MorePhotoButton!.frame.origin.x + MorePhotoButton!.width,
+                PhotoInnerPanel!.height
+            )
+        } else {
+            PhotoInnerPanel?.contentSize = CGSizeMake(
+                self.LastImage!.frame.origin.x + self.LastImage!.width,
+                PhotoInnerPanel!.height
+            )
         }
+        
+//        if(ImageCount > 4){
+//            let x = CGFloat(ImageCount - 4) * (self.LastImage!.width + 19.LayoutVal())
+//            let pos = CGPointMake(x, self.LastImage!.frame.origin.y)
+//            PhotoInnerPanel?.setContentOffset(pos, animated: true)
+//        }
     }
 }
 

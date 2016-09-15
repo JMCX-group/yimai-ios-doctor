@@ -176,6 +176,11 @@
 		9672FB481CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB471CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift */; };
 		9672FB4A1CD222C100BC7E40 /* PageMyAdmissionsListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */; };
 		9672FB4C1CD3439400BC7E40 /* YMDatetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */; };
+		9676761E1D8ADF3400A07106 /* ActiveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967676181D8ADF3400A07106 /* ActiveBuilder.swift */; };
+		9676761F1D8ADF3400A07106 /* ActiveLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9676761A1D8ADF3400A07106 /* ActiveLabel.swift */; };
+		967676201D8ADF3400A07106 /* ActiveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9676761B1D8ADF3400A07106 /* ActiveType.swift */; };
+		967676211D8ADF3400A07106 /* RegexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9676761C1D8ADF3400A07106 /* RegexParser.swift */; };
+		967676221D8ADF3400A07106 /* StringTrimExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9676761D1D8ADF3400A07106 /* StringTrimExtension.swift */; };
 		96814A851D1A3E36002C8BD3 /* PagePersonalDetailEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96814A871D1A3E36002C8BD3 /* PagePersonalDetailEdit.storyboard */; };
 		96814A891D1A3E4A002C8BD3 /* PagePersonalDetailEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96814A881D1A3E4A002C8BD3 /* PagePersonalDetailEditViewController.swift */; };
 		96814A8B1D1A3E9D002C8BD3 /* PagePersonalDetailEditBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96814A8A1D1A3E9D002C8BD3 /* PagePersonalDetailEditBodyView.swift */; };
@@ -276,9 +281,6 @@
 		FDC1C92C1D791E70000A515B /* PageAppointmentProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C92B1D791E70000A515B /* PageAppointmentProcessViewController.swift */; };
 		FDC1C92E1D791EA9000A515B /* PageAppointmentProcessBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C92D1D791EA9000A515B /* PageAppointmentProcessBodyView.swift */; };
 		FDC1C9301D791EE1000A515B /* PageAppointmentProcessActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C92F1D791EE1000A515B /* PageAppointmentProcessActions.swift */; };
-		FDC1C9351D79760A000A515B /* ActiveLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C9321D79760A000A515B /* ActiveLabel.swift */; };
-		FDC1C9361D79760A000A515B /* ActiveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C9331D79760A000A515B /* ActiveType.swift */; };
-		FDC1C9371D79760A000A515B /* RegexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C9341D79760A000A515B /* RegexParser.swift */; };
 		FDF46D311D768876007B9987 /* PageApointmentAcceptDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDF46D331D768876007B9987 /* PageApointmentAcceptDetail.storyboard */; };
 		FDF46D371D7688C7007B9987 /* ApointmentAcceptDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF46D361D7688C7007B9987 /* ApointmentAcceptDetailViewController.swift */; };
 		FDF46D391D768A43007B9987 /* ApointmentAcceptDetailBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF46D381D768A43007B9987 /* ApointmentAcceptDetailBodyView.swift */; };
@@ -458,6 +460,12 @@
 		9672FB471CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionsListBodyView.swift; sourceTree = "<group>"; };
 		9672FB491CD222C100BC7E40 /* PageMyAdmissionsListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionsListActions.swift; sourceTree = "<group>"; };
 		9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMDatetime.swift; sourceTree = "<group>"; };
+		967676181D8ADF3400A07106 /* ActiveBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveBuilder.swift; sourceTree = "<group>"; };
+		967676191D8ADF3400A07106 /* ActiveLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveLabel.h; sourceTree = "<group>"; };
+		9676761A1D8ADF3400A07106 /* ActiveLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveLabel.swift; sourceTree = "<group>"; };
+		9676761B1D8ADF3400A07106 /* ActiveType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveType.swift; sourceTree = "<group>"; };
+		9676761C1D8ADF3400A07106 /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
+		9676761D1D8ADF3400A07106 /* StringTrimExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTrimExtension.swift; sourceTree = "<group>"; };
 		96814A861D1A3E36002C8BD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PagePersonalDetailEdit.storyboard; sourceTree = "<group>"; };
 		96814A881D1A3E4A002C8BD3 /* PagePersonalDetailEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalDetailEditViewController.swift; sourceTree = "<group>"; };
 		96814A8A1D1A3E9D002C8BD3 /* PagePersonalDetailEditBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalDetailEditBodyView.swift; sourceTree = "<group>"; };
@@ -560,9 +568,6 @@
 		FDC1C92B1D791E70000A515B /* PageAppointmentProcessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessViewController.swift; sourceTree = "<group>"; };
 		FDC1C92D1D791EA9000A515B /* PageAppointmentProcessBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessBodyView.swift; sourceTree = "<group>"; };
 		FDC1C92F1D791EE1000A515B /* PageAppointmentProcessActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessActions.swift; sourceTree = "<group>"; };
-		FDC1C9321D79760A000A515B /* ActiveLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveLabel.swift; sourceTree = "<group>"; };
-		FDC1C9331D79760A000A515B /* ActiveType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveType.swift; sourceTree = "<group>"; };
-		FDC1C9341D79760A000A515B /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
 		FDF46D321D768876007B9987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageApointmentAcceptDetail.storyboard; sourceTree = "<group>"; };
 		FDF46D361D7688C7007B9987 /* ApointmentAcceptDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApointmentAcceptDetailViewController.swift; sourceTree = "<group>"; };
 		FDF46D381D768A43007B9987 /* ApointmentAcceptDetailBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApointmentAcceptDetailBodyView.swift; sourceTree = "<group>"; };
@@ -2374,9 +2379,12 @@
 		FDC1C9311D79760A000A515B /* YMLabel */ = {
 			isa = PBXGroup;
 			children = (
-				FDC1C9321D79760A000A515B /* ActiveLabel.swift */,
-				FDC1C9331D79760A000A515B /* ActiveType.swift */,
-				FDC1C9341D79760A000A515B /* RegexParser.swift */,
+				967676181D8ADF3400A07106 /* ActiveBuilder.swift */,
+				967676191D8ADF3400A07106 /* ActiveLabel.h */,
+				9676761A1D8ADF3400A07106 /* ActiveLabel.swift */,
+				9676761B1D8ADF3400A07106 /* ActiveType.swift */,
+				9676761C1D8ADF3400A07106 /* RegexParser.swift */,
+				9676761D1D8ADF3400A07106 /* StringTrimExtension.swift */,
 			);
 			path = YMLabel;
 			sourceTree = "<group>";
@@ -2635,9 +2643,11 @@
 				9672FB3C1CD1C35500BC7E40 /* PageMessageListBodyView.swift in Sources */,
 				FDF46D3B1D768B32007B9987 /* ApointmentAcceptDetailActions.swift in Sources */,
 				960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */,
+				9676761F1D8ADF3400A07106 /* ActiveLabel.swift in Sources */,
 				9612DB461CC8B96B00262D2E /* PageIndexActions.swift in Sources */,
 				9619EF781CC1FF0400F69CBC /* YMCommonStrings.swift in Sources */,
 				96D745C41CF696ED00E345E3 /* PageYiMaiAddContactsFriendsBodyView.swift in Sources */,
+				967676211D8ADF3400A07106 /* RegexParser.swift in Sources */,
 				9619EF511CC1DB9600F69CBC /* AppDelegate.swift in Sources */,
 				96814A8B1D1A3E9D002C8BD3 /* PagePersonalDetailEditBodyView.swift in Sources */,
 				737F1F7E1D2048CB00FFE573 /* PageNewFriendBodyView.swift in Sources */,
@@ -2664,7 +2674,6 @@
 				FD801DD51D66F3140066198B /* PageAdmissionChargeSettingActions.swift in Sources */,
 				73622E481D1EDFE40039E785 /* PageAboutYiMaiBodyView.swift in Sources */,
 				96D451A71CF7F198006817CE /* PageAppointmentBodyView.swift in Sources */,
-				FDC1C9351D79760A000A515B /* ActiveLabel.swift in Sources */,
 				737F1F911D207C7900FFE573 /* PageGlobalSearchBodyView.swift in Sources */,
 				730EF5AF1D6943B7002A4DDB /* PageAppointmentAcceptActions.swift in Sources */,
 				96637A721CC206A900DBD1CF /* PageLoginActions.swift in Sources */,
@@ -2705,6 +2714,7 @@
 				73622E3C1D1EC3180039E785 /* PageForgetPasswordActions.swift in Sources */,
 				737F1F611D1F60BF00FFE573 /* YMPersonalPrivateStrings.swift in Sources */,
 				737F1F851D204B5500FFE573 /* PageNewFriendViewController.swift in Sources */,
+				967676201D8ADF3400A07106 /* ActiveType.swift in Sources */,
 				9612DB5F1CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift in Sources */,
 				96D745B81CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift in Sources */,
 				FDC1C9301D791EE1000A515B /* PageAppointmentProcessActions.swift in Sources */,
@@ -2760,7 +2770,6 @@
 				962076EF1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift in Sources */,
 				96B3E8A01D10EBB700C8B5C2 /* PageHospitalSearchBodyView.swift in Sources */,
 				FDF46D391D768A43007B9987 /* ApointmentAcceptDetailBodyView.swift in Sources */,
-				FDC1C9371D79760A000A515B /* RegexParser.swift in Sources */,
 				96B3E8A51D1146E200C8B5C2 /* PageHospitalSearchActions.swift in Sources */,
 				960606FC1CE591CC00AAFC07 /* YMNetworkUtility.swift in Sources */,
 				96D4519A1CF7D827006817CE /* PageYiMaiSameSchoolActions.swift in Sources */,
@@ -2804,6 +2813,7 @@
 				96D745AA1CF59D2200E345E3 /* PageYiMaiR2BodyView.swift in Sources */,
 				962076D81CC6024F002083FA /* PageRegisterActions.swift in Sources */,
 				96834F241D05373000E0C813 /* YMCommonSearchPageStrings.swift in Sources */,
+				9676761E1D8ADF3400A07106 /* ActiveBuilder.swift in Sources */,
 				FDF46D371D7688C7007B9987 /* ApointmentAcceptDetailViewController.swift in Sources */,
 				7394F8441CF949B300F05487 /* PageAppointmentPatientBasicInfoViewController.swift in Sources */,
 				96834F221D0528A500E0C813 /* PageCommonSearchBodyView.swift in Sources */,
@@ -2820,7 +2830,6 @@
 				96FCD1491D17D7F800A6E12D /* PagePersonalDetailBodyView.swift in Sources */,
 				7394F8461CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift in Sources */,
 				9624936D1CED5CAA007A9556 /* YMValueValidator.swift in Sources */,
-				FDC1C9361D79760A000A515B /* ActiveType.swift in Sources */,
 				9619EF591CC1DB9600F69CBC /* YiMai.xcdatamodeld in Sources */,
 				737F1F751D20296F00FFE573 /* PageYiMaiDoctorDetailBodyView.swift in Sources */,
 				96834F201D05271800E0C813 /* PageCommonSearchTopView.swift in Sources */,
@@ -2836,6 +2845,7 @@
 				FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */,
 				963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */,
 				FDC1C92E1D791EA9000A515B /* PageAppointmentProcessBodyView.swift in Sources */,
+				967676221D8ADF3400A07106 /* StringTrimExtension.swift in Sources */,
 				96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */,
 				736EBC5A1D1675BD00C40AA7 /* PagePersonalSettingViewController.swift in Sources */,
 				96D4518D1CF7D77F006817CE /* PageYiMaiSameHospitalBodyView.swift in Sources */,

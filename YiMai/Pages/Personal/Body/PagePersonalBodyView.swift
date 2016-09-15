@@ -48,7 +48,7 @@ public class PagePersonalBodyView: NSObject {
         DrawOperations()
     }
     
-    private func DrawHotLinePanel(){
+    private func DrawHotLinePanel() -> UIView {
         let hotlineView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
         hotlineView.UserStringData = YMCommonStrings.CS_PAGE_HOT_LINE_NAME
         hotlineView.frame = CGRect(x: 0,y: 0,width: YMSizes.PageWidth, height: OperationHeight)
@@ -83,6 +83,8 @@ public class PagePersonalBodyView: NSObject {
         bottomLine.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 1)
         
         label.align(Align.ToTheRightCentered, relativeTo: dividerLine, padding: 18.LayoutVal(), width: label.width, height: label.height)
+        
+        return hotlineView
     }
     
     private func DrawAnOperationPanel(targetPage: String, iconName: String, title: String) -> YMTouchableView {
@@ -129,8 +131,8 @@ public class PagePersonalBodyView: NSObject {
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_PATIENTS_NAME, iconName: "PersonalIconMyPatient",title: "我的患者")
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_WALLET_NAME, iconName: "PersonalIconMyWallet",title: "我的钱包")
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_PERSONAL_SETTING_NAME, iconName: "PersonalIconMySetting",title: "设置")
-        DrawHotLinePanel()
-        LastView = DrawAnOperationPanel(YMCommonStrings.CS_PAGE_CONSULTANT_ZONE_NAME, iconName: "PersonalIconConsultantZone",title: "健康顾问合作专区")
+        LastView = DrawHotLinePanel()
+//        LastView = DrawAnOperationPanel(YMCommonStrings.CS_PAGE_CONSULTANT_ZONE_NAME, iconName: "PersonalIconConsultantZone",title: "健康顾问合作专区")
         
         BodyView.groupAndAlign(group: Group.Vertical, andAlign: Align.UnderMatchingLeft,
             views: OperationArray.map({$0 as YMTouchableView}), relativeTo: BodyTopPadding!,

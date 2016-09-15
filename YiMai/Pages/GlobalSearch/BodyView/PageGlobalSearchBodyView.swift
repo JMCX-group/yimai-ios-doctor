@@ -280,11 +280,6 @@ public class PageGlobalSearchBodyView: PageBodyView {
             Lv3Data = l3!
         }
         
-        
-        Lv1Panel.hidden = false
-        Lv2Panel.hidden = false
-        Lv3Panel.hidden = false
-        
         DrawLv1InitPanel(Lv1Data!)
         DrawLv2InitPanel(Lv2Data!)
         DrawLv3InitPanel(Lv3Data!)
@@ -316,7 +311,8 @@ public class PageGlobalSearchBodyView: PageBodyView {
         
         let friendsCount = data.count
         if(0 == friendsCount) {
-            titleLabel.text = "暂无医生朋友"
+            return
+//            titleLabel.text = "暂无医生朋友"
         } else {
             titleLabel.text = "医生朋友（\(friendsCount)名）"
         }
@@ -368,7 +364,8 @@ public class PageGlobalSearchBodyView: PageBodyView {
         
         let friendsCount = data.count
         if(0 == friendsCount) {
-            titleLabel.text = "暂无二度医脉"
+            return
+//            titleLabel.text = "暂无二度医脉"
         } else {
             titleLabel.text = "二度医脉（\(friendsCount)名）"
         }
@@ -420,7 +417,8 @@ public class PageGlobalSearchBodyView: PageBodyView {
         
         let friendsCount = data.count
         if(0 == friendsCount) {
-            titleLabel.text = "暂无其他医生资源"
+            return
+//            titleLabel.text = "暂无其他医生资源"
         } else {
             titleLabel.text = "其他医生（\(friendsCount)名）"
         }

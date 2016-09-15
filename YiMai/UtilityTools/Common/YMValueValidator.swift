@@ -12,8 +12,12 @@ public class YMValueValidator {
     private static let MaxCellPhoneNum: Int64 = 20000000000
     private static let MinCellPhoneNum: Int64 = 10000000000
 
-    public static func IsCellPhoneNum(str: String) -> Bool {
-        let phoneNum = Int64(str)
+    public static func IsCellPhoneNum(str: String?) -> Bool {
+        if (YMValueValidator.IsEmptyString(str)) {
+            return false
+        }
+        
+        let phoneNum = Int64(str!)
         return (phoneNum < MaxCellPhoneNum && phoneNum > MinCellPhoneNum)
     }
     
