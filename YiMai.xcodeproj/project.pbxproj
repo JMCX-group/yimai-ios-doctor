@@ -206,6 +206,7 @@
 		96925A841D1BCC310095432C /* PageAppLoading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96925A861D1BCC310095432C /* PageAppLoading.storyboard */; };
 		96925A891D1BEBC50095432C /* PageAppLoadingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96925A881D1BEBC50095432C /* PageAppLoadingActions.swift */; };
 		96925A8B1D1CDCAD0095432C /* YMAppointmentRecordStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96925A8A1D1CDCAD0095432C /* YMAppointmentRecordStrings.swift */; };
+		96A21BDA1D8D9BFB00297AFA /* YMQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A21BD91D8D9BFB00297AFA /* YMQRCode.swift */; };
 		96A3D1C01CFD846A00518DCB /* PageAppointmentSelectDoctor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96A3D1C21CFD846A00518DCB /* PageAppointmentSelectDoctor.storyboard */; };
 		96A3D1C41CFD848200518DCB /* PageAppointmentSelectDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3D1C31CFD848200518DCB /* PageAppointmentSelectDoctorViewController.swift */; };
 		96A3D1C81CFD84C400518DCB /* PageAppointmentSelectDoctorBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3D1C71CFD84C400518DCB /* PageAppointmentSelectDoctorBodyView.swift */; };
@@ -491,6 +492,7 @@
 		96925A851D1BCC310095432C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppLoading.storyboard; sourceTree = "<group>"; };
 		96925A881D1BEBC50095432C /* PageAppLoadingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppLoadingActions.swift; sourceTree = "<group>"; };
 		96925A8A1D1CDCAD0095432C /* YMAppointmentRecordStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAppointmentRecordStrings.swift; sourceTree = "<group>"; };
+		96A21BD91D8D9BFB00297AFA /* YMQRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMQRCode.swift; sourceTree = "<group>"; };
 		96A3D1C11CFD846A00518DCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentSelectDoctor.storyboard; sourceTree = "<group>"; };
 		96A3D1C31CFD848200518DCB /* PageAppointmentSelectDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentSelectDoctorViewController.swift; sourceTree = "<group>"; };
 		96A3D1C71CFD84C400518DCB /* PageAppointmentSelectDoctorBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentSelectDoctorBodyView.swift; sourceTree = "<group>"; };
@@ -1638,6 +1640,7 @@
 		96637A761CC22E6000DBD1CF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				96A21BD91D8D9BFB00297AFA /* YMQRCode.swift */,
 				960606FF1CE97CC500AAFC07 /* YMModalView.swift */,
 				960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */,
 				960606F81CE591CC00AAFC07 /* YMCoreDataEngine.swift */,
@@ -2778,6 +2781,7 @@
 				962045731D1B9BCD00E18D88 /* PageAppointmentRecordActions.swift in Sources */,
 				9619EF7E1CC1FF3A00F69CBC /* YMRegisterStrings.swift in Sources */,
 				9612DB441CC8B86400262D2E /* PageIndexBodyView.swift in Sources */,
+				96A21BDA1D8D9BFB00297AFA /* YMQRCode.swift in Sources */,
 				730848271D0D9D38007E8940 /* YMTableView.swift in Sources */,
 				730EF5AB1D694330002A4DDB /* PageAppointmentAcceptViewController.swift in Sources */,
 				96A3D1C81CFD84C400518DCB /* PageAppointmentSelectDoctorBodyView.swift in Sources */,
