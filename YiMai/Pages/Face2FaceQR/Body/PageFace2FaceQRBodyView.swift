@@ -20,6 +20,8 @@ public class PageFace2FaceQRBodyView: PageBodyView {
     private let QRCode = YMLayout.GetSuitableImageView("Face2FaceTempQR")
     private let ChargesTipPanel = UIView()
 
+    private let Fee = "\(YMVar.MyUserInfo["fee_face_to_face"]!)"
+
     
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
@@ -126,6 +128,8 @@ public class PageFace2FaceQRBodyView: PageBodyView {
     
     private func DrawYiMaiQR() {
         BodyView.addSubview(QRCode)
+        let qrImage = YMQRCode.generateImage(Fee, avatarImage: nil)
+        QRCode.image = qrImage
         QRCode.align(Align.UnderCentered, relativeTo: YiMaiCodePanel, padding: 40.LayoutVal(), width: QRCode.width, height: QRCode.height)
     }
     

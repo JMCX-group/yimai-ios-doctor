@@ -17,4 +17,12 @@ public class PageAdmissionChargeSettingViewController: PageViewController {
         BodyView = PageAdmissionChargeSettingBodyView(parentView: self.SelfView!, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "接诊收费", navController: self.NavController)
     }
+    
+    override func PagePreRefresh() {
+        BodyView?.LoadData()
+    }
+    
+    override func PageDisapeared() {
+        BodyView?.UpdateSettings()
+    }
 }
