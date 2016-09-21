@@ -342,6 +342,16 @@ public class YMLayout {
         })
     }
     
+    public static func GetNomalLabel(text: String?, textColor: UIColor, fontSize: CGFloat) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = textColor
+        label.font = YMFonts.YMDefaultFont(fontSize)
+        label.sizeToFit()
+        
+        return label
+    }
+    
     public static func TransPHAssetToUIImage(asset: PHAsset) -> UIImage {
         let manager = PHImageManager.defaultManager()
         let option = PHImageRequestOptions()

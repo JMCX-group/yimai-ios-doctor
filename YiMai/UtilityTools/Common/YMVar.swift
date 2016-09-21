@@ -29,4 +29,18 @@ public class YMVar:NSObject {
         
         return "\(ret!)"
     }
+    
+    static func TryToGetArrayFromJsonStringData(json: String) -> NSArray? {
+        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
+        if(nil == data) { return nil }
+        guard let ret = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSArray else { return nil }
+        return ret
+    }
+    
+    static func TryToGetDictFromJsonStringData(json: String) -> NSDictionary? {
+        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
+        if(nil == data) { return nil }
+        guard let ret = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary else { return nil }
+        return ret
+    }
 }

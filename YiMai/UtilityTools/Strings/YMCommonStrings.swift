@@ -78,6 +78,8 @@ public class YMCommonStrings {
     public static let CS_PAGE_NEW_FRIEND_NAME = "PageNewFriend"
     
     public static let CS_PAGE_GLOBAL_SEARCH_NAME = "PageGlobalSearch"
+    
+    public static let CS_PAGE_ADD_FRIEND_QR_CARD = "PageAddFriendInfoCard"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

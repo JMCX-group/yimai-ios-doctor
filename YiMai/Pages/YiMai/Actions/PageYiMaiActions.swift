@@ -10,6 +10,26 @@ import Foundation
 import UIKit
 
 public class PageYiMaiActions: PageJumpActions{
+    public func QRScanSuccess(qrStr: String?) {
+        if(nil == qrStr) {
+            return
+        }
+        
+        YMQRRecognizer.RecognizFromQRJson(qrStr!, qrRecognizedFunc: QRRecongized, qrUnrecognizedFunc: QRUnrecongized)
+    }
+    
+    public func QRRecongized(data: AnyObject) {
+        let dataInfo = data as! [String: AnyObject]
+        
+        let docId = "\(dataInfo["id"]!)"
+        PageAddFriendInfoCardBodyView.DoctorID = docId
+        DoJump(YMCommonStrings.CS_PAGE_ADD_FRIEND_QR_CARD)
+    }
+    
+    public func QRUnrecongized(data: AnyObject) {
+        YMPageModalMessage.ShowErrorInfo("二维码非医脉信息！", nav: self.NavController!)
+    }
+    
     public func QRButtonTouched(sender : UITapGestureRecognizer) {
         var style = LBXScanViewStyle()
         
@@ -53,6 +73,8 @@ public class PageYiMaiActions: PageJumpActions{
         
         //开启只识别矩形框内图像功能
         vc.isOpenInterestRect = true
+        
+        vc.scanSuccessHandler = QRScanSuccess
         
         self.NavController?.pushViewController(vc, animated: true)
     }
