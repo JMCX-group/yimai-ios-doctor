@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PageAddFriendInfoCardViewController: PageViewController {
+public class PageAddFriendInfoCardViewController: PageViewController {
     var BodyView: PageAddFriendInfoCardBodyView!
     
     public static var BacktoController: UIViewController? = nil
@@ -21,6 +21,7 @@ class PageAddFriendInfoCardViewController: PageViewController {
     }
 
     override func PagePreRefresh() {
+        BodyView.Loading.Show()
         BodyView.AddActions.GetDocApi.YMQueryUserInfoById(PageAddFriendInfoCardBodyView.DoctorID)
     }
     

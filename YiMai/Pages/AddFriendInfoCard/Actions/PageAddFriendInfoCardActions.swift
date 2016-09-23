@@ -37,7 +37,11 @@ public class PageAddFriendInfoCardActions: PageJumpActions {
     }
     
     func GoBack(_: UIAlertAction) {
-        self.NavController?.popViewControllerAnimated(true)
+        if(nil == PageAddFriendInfoCardViewController.BacktoController) {
+            self.NavController?.popViewControllerAnimated(true)
+        } else {
+            self.NavController?.popToViewController(PageAddFriendInfoCardViewController.BacktoController!, animated: true)
+        }
     }
     
     func GetDocInfoFailed(error: NSError) {
@@ -45,14 +49,22 @@ public class PageAddFriendInfoCardActions: PageJumpActions {
     }
     
     func AddSuccess(data: NSDictionary?) {
-        self.NavController?.popViewControllerAnimated(true)
+        TargetView.Loading.Hide()
+
+        if(nil == PageAddFriendInfoCardViewController.BacktoController) {
+            self.NavController?.popViewControllerAnimated(true)
+        } else {
+            self.NavController?.popToViewController(PageAddFriendInfoCardViewController.BacktoController!, animated: true)
+        }
     }
     
     func AddFailed(error: NSError) {
+        TargetView.Loading.Hide()
         YMPageModalMessage.ShowNormalInfo("网络通讯故障，请稍后再试。", nav: self.NavController!)
     }
     
     func SubmitTouched(sender: YMButton) {
+        TargetView.Loading.Show()
         AddFriendApi.YMAddFriendById(PageAddFriendInfoCardBodyView.DoctorID)
     }
 }

@@ -260,6 +260,14 @@
 		FD113D881D7D521200628295 /* YMPhotoSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD113D871D7D521200628295 /* YMPhotoSelector.swift */; };
 		FD1F57F51D9132A30039769D /* YMQRRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F57F41D9132A30039769D /* YMQRRecognizer.swift */; };
 		FD2981351D6E97BE006A48CA /* YMLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2981341D6E97BE006A48CA /* YMLabel.swift */; };
+		FD2A99BD1D937DF8001953D6 /* PageMyInfoCardActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2A99B71D937DF8001953D6 /* PageMyInfoCardActions.swift */; };
+		FD2A99BE1D937DF8001953D6 /* PageMyInfoCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD2A99B81D937DF8001953D6 /* PageMyInfoCard.storyboard */; };
+		FD2A99BF1D937DF8001953D6 /* PageMyInfoCardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2A99BB1D937DF8001953D6 /* PageMyInfoCardBodyView.swift */; };
+		FD2A99C01D937DF8001953D6 /* PageMyInfoCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2A99BC1D937DF8001953D6 /* PageMyInfoCardViewController.swift */; };
+		FD2A99C91D951D6B001953D6 /* PageAppointmentProcessingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2A99C31D951D6A001953D6 /* PageAppointmentProcessingActions.swift */; };
+		FD2A99CA1D951D6B001953D6 /* PageAppointmentProcessing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD2A99C41D951D6A001953D6 /* PageAppointmentProcessing.storyboard */; };
+		FD2A99CB1D951D6B001953D6 /* PageAppointmentProcessingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2A99C71D951D6A001953D6 /* PageAppointmentProcessingBodyView.swift */; };
+		FD2A99CC1D951D6B001953D6 /* PageAppointmentProcessingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2A99C81D951D6A001953D6 /* PageAppointmentProcessingViewController.swift */; };
 		FD54E0551D3771FD00F8E629 /* PageMyAdmissionSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD54E0571D3771FD00F8E629 /* PageMyAdmissionSetting.storyboard */; };
 		FD54E0591D37722C00F8E629 /* PageMyAdmissionSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E0581D37722C00F8E629 /* PageMyAdmissionSettingViewController.swift */; };
 		FD54E05B1D3772B900F8E629 /* PageMyAdmissionSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54E05A1D3772B900F8E629 /* PageMyAdmissionSettingBodyView.swift */; };
@@ -279,10 +287,6 @@
 		FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD01D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift */; };
 		FD801DD31D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */; };
 		FD801DD51D66F3140066198B /* PageAdmissionChargeSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD41D66F3140066198B /* PageAdmissionChargeSettingActions.swift */; };
-		FDC1C9281D791E3B000A515B /* PageAppointmentProcess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC1C92A1D791E3B000A515B /* PageAppointmentProcess.storyboard */; };
-		FDC1C92C1D791E70000A515B /* PageAppointmentProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C92B1D791E70000A515B /* PageAppointmentProcessViewController.swift */; };
-		FDC1C92E1D791EA9000A515B /* PageAppointmentProcessBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C92D1D791EA9000A515B /* PageAppointmentProcessBodyView.swift */; };
-		FDC1C9301D791EE1000A515B /* PageAppointmentProcessActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC1C92F1D791EE1000A515B /* PageAppointmentProcessActions.swift */; };
 		FDD93EA31D923744003576D4 /* PageAddFriendInfoCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD93EA21D923744003576D4 /* PageAddFriendInfoCardViewController.swift */; };
 		FDD93EA41D923754003576D4 /* PageAddFriendInfoCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD93EA61D923754003576D4 /* PageAddFriendInfoCard.storyboard */; };
 		FDD93EA81D923773003576D4 /* PageAddFriendInfoCardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD93EA71D923773003576D4 /* PageAddFriendInfoCardBodyView.swift */; };
@@ -552,6 +556,14 @@
 		FD113D871D7D521200628295 /* YMPhotoSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMPhotoSelector.swift; sourceTree = "<group>"; };
 		FD1F57F41D9132A30039769D /* YMQRRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMQRRecognizer.swift; sourceTree = "<group>"; };
 		FD2981341D6E97BE006A48CA /* YMLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMLabel.swift; sourceTree = "<group>"; };
+		FD2A99B71D937DF8001953D6 /* PageMyInfoCardActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyInfoCardActions.swift; sourceTree = "<group>"; };
+		FD2A99B91D937DF8001953D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageMyInfoCard.storyboard; sourceTree = "<group>"; };
+		FD2A99BB1D937DF8001953D6 /* PageMyInfoCardBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyInfoCardBodyView.swift; sourceTree = "<group>"; };
+		FD2A99BC1D937DF8001953D6 /* PageMyInfoCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyInfoCardViewController.swift; sourceTree = "<group>"; };
+		FD2A99C31D951D6A001953D6 /* PageAppointmentProcessingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessingActions.swift; sourceTree = "<group>"; };
+		FD2A99C51D951D6A001953D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentProcessing.storyboard; sourceTree = "<group>"; };
+		FD2A99C71D951D6A001953D6 /* PageAppointmentProcessingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessingBodyView.swift; sourceTree = "<group>"; };
+		FD2A99C81D951D6A001953D6 /* PageAppointmentProcessingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessingViewController.swift; sourceTree = "<group>"; };
 		FD3C9A6A1D40BA1700AF7E2C /* YiMai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YiMai-Bridging-Header.h"; sourceTree = "<group>"; };
 		FD54E0561D3771FD00F8E629 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageMyAdmissionSetting.storyboard; sourceTree = "<group>"; };
 		FD54E0581D37722C00F8E629 /* PageMyAdmissionSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionSettingViewController.swift; sourceTree = "<group>"; };
@@ -572,10 +584,6 @@
 		FD801DD01D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionChargeSettingViewController.swift; sourceTree = "<group>"; };
 		FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdmissionChargeSettingBodyView.swift; sourceTree = "<group>"; };
 		FD801DD41D66F3140066198B /* PageAdmissionChargeSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionChargeSettingActions.swift; sourceTree = "<group>"; };
-		FDC1C9291D791E3B000A515B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentProcess.storyboard; sourceTree = "<group>"; };
-		FDC1C92B1D791E70000A515B /* PageAppointmentProcessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessViewController.swift; sourceTree = "<group>"; };
-		FDC1C92D1D791EA9000A515B /* PageAppointmentProcessBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessBodyView.swift; sourceTree = "<group>"; };
-		FDC1C92F1D791EE1000A515B /* PageAppointmentProcessActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentProcessActions.swift; sourceTree = "<group>"; };
 		FDD93EA21D923744003576D4 /* PageAddFriendInfoCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAddFriendInfoCardViewController.swift; sourceTree = "<group>"; };
 		FDD93EA51D923754003576D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAddFriendInfoCard.storyboard; sourceTree = "<group>"; };
 		FDD93EA71D923773003576D4 /* PageAddFriendInfoCardBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAddFriendInfoCardBodyView.swift; sourceTree = "<group>"; };
@@ -705,29 +713,6 @@
 			sourceTree = "<group>";
 		};
 		730EF5A11D694270002A4DDB /* Body */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Body;
-			sourceTree = "<group>";
-		};
-		730EF5A21D694270002A4DDB /* AppointmentProcessing */ = {
-			isa = PBXGroup;
-			children = (
-				730EF5A31D694270002A4DDB /* Actions */,
-				730EF5A41D694270002A4DDB /* Body */,
-			);
-			path = AppointmentProcessing;
-			sourceTree = "<group>";
-		};
-		730EF5A31D694270002A4DDB /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Actions;
-			sourceTree = "<group>";
-		};
-		730EF5A41D694270002A4DDB /* Body */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -1309,14 +1294,14 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				FD2A99C11D951D6A001953D6 /* AppointmentProcessing */,
+				FD2A99B51D937DF8001953D6 /* MyInfoCard */,
 				FDD93E9D1D923710003576D4 /* AddFriendInfoCard */,
-				FDC1C9231D791E16000A515B /* AppointmentProcess */,
 				FD6AC6711D768770000775FB /* AppointmentAcceptDetail */,
 				730EF5961D694270002A4DDB /* AppointmentAccept */,
 				730EF5991D694270002A4DDB /* AppointmentAcceptSelectHospital */,
 				730EF59C1D694270002A4DDB /* AppointmentAcceptSelectHospitalManually */,
 				730EF59F1D694270002A4DDB /* AppointmentPoliteFormula */,
-				730EF5A21D694270002A4DDB /* AppointmentProcessing */,
 				FD801DC81D66F27A0066198B /* AdmissionChargeSetting */,
 				FD54E04D1D3771BF00F8E629 /* AdmissionTimeSetting */,
 				FD54E0501D3771BF00F8E629 /* MyAdmissionSetting */,
@@ -2241,6 +2226,60 @@
 			path = Top;
 			sourceTree = "<group>";
 		};
+		FD2A99B51D937DF8001953D6 /* MyInfoCard */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A99B61D937DF8001953D6 /* Actions */,
+				FD2A99BA1D937DF8001953D6 /* Body */,
+				FD2A99B81D937DF8001953D6 /* PageMyInfoCard.storyboard */,
+				FD2A99BC1D937DF8001953D6 /* PageMyInfoCardViewController.swift */,
+			);
+			path = MyInfoCard;
+			sourceTree = "<group>";
+		};
+		FD2A99B61D937DF8001953D6 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A99B71D937DF8001953D6 /* PageMyInfoCardActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		FD2A99BA1D937DF8001953D6 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A99BB1D937DF8001953D6 /* PageMyInfoCardBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		FD2A99C11D951D6A001953D6 /* AppointmentProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A99C21D951D6A001953D6 /* Actions */,
+				FD2A99C61D951D6A001953D6 /* Body */,
+				FD2A99C41D951D6A001953D6 /* PageAppointmentProcessing.storyboard */,
+				FD2A99C81D951D6A001953D6 /* PageAppointmentProcessingViewController.swift */,
+			);
+			path = AppointmentProcessing;
+			sourceTree = "<group>";
+		};
+		FD2A99C21D951D6A001953D6 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A99C31D951D6A001953D6 /* PageAppointmentProcessingActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		FD2A99C61D951D6A001953D6 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A99C71D951D6A001953D6 /* PageAppointmentProcessingBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
 		FD54E04D1D3771BF00F8E629 /* AdmissionTimeSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -2360,33 +2399,6 @@
 			isa = PBXGroup;
 			children = (
 				FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */,
-			);
-			path = Body;
-			sourceTree = "<group>";
-		};
-		FDC1C9231D791E16000A515B /* AppointmentProcess */ = {
-			isa = PBXGroup;
-			children = (
-				FDC1C9241D791E16000A515B /* Actions */,
-				FDC1C9251D791E16000A515B /* Body */,
-				FDC1C92A1D791E3B000A515B /* PageAppointmentProcess.storyboard */,
-				FDC1C92B1D791E70000A515B /* PageAppointmentProcessViewController.swift */,
-			);
-			path = AppointmentProcess;
-			sourceTree = "<group>";
-		};
-		FDC1C9241D791E16000A515B /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				FDC1C92F1D791EE1000A515B /* PageAppointmentProcessActions.swift */,
-			);
-			path = Actions;
-			sourceTree = "<group>";
-		};
-		FDC1C9251D791E16000A515B /* Body */ = {
-			isa = PBXGroup;
-			children = (
-				FDC1C92D1D791EA9000A515B /* PageAppointmentProcessBodyView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -2511,12 +2523,12 @@
 				96925A841D1BCC310095432C /* PageAppLoading.storyboard in Resources */,
 				737F1F571D1F565100FFE573 /* PagePersonalPrivateSetting.storyboard in Resources */,
 				7394F8401CF9497600F05487 /* PageAppointmentBasicInfo.storyboard in Resources */,
+				FD2A99BE1D937DF8001953D6 /* PageMyInfoCard.storyboard in Resources */,
 				9672FB341CD1C2BE00BC7E40 /* PageMessageList.storyboard in Resources */,
 				96FCD1421D17D6F000A6E12D /* PagePersonalDetail.storyboard in Resources */,
 				96814A851D1A3E36002C8BD3 /* PagePersonalDetailEdit.storyboard in Resources */,
 				9672FB281CD0623100BC7E40 /* PageFace2FaceQR.storyboard in Resources */,
 				96A3D1C01CFD846A00518DCB /* PageAppointmentSelectDoctor.storyboard in Resources */,
-				FDC1C9281D791E3B000A515B /* PageAppointmentProcess.storyboard in Resources */,
 				96814AA11D1A815F002C8BD3 /* PagePersonalIntroEdit.storyboard in Resources */,
 				7394F85A1D005DF400F05487 /* PageAppointmentSelectTime.storyboard in Resources */,
 				7394F84B1CF9A36800F05487 /* PageAppointmentPatientCondition.storyboard in Resources */,
@@ -2539,6 +2551,7 @@
 				9612DB641CC9F71F00262D2E /* PageRegisterPersonalInfo.storyboard in Resources */,
 				9612DB3C1CC8B5DB00262D2E /* PageIndex.storyboard in Resources */,
 				73622E421D1EDF790039E785 /* PageAboutYiMai.storyboard in Resources */,
+				FD2A99CA1D951D6B001953D6 /* PageAppointmentProcessing.storyboard in Resources */,
 				9672FB421CD2222200BC7E40 /* PageMyAdmissionsList.storyboard in Resources */,
 				FDD93EA41D923754003576D4 /* PageAddFriendInfoCard.storyboard in Resources */,
 				96D451871CF7D714006817CE /* PageYiMaiSameHospital.storyboard in Resources */,
@@ -2672,6 +2685,7 @@
 			files = (
 				9612DB421CC8B7C500262D2E /* PageIndexTopView.swift in Sources */,
 				96814A8D1D1A3F20002C8BD3 /* PagePersonalDetailEditActions.swift in Sources */,
+				FD2A99BD1D937DF8001953D6 /* PageMyInfoCardActions.swift in Sources */,
 				FD54E05B1D3772B900F8E629 /* PageMyAdmissionSettingBodyView.swift in Sources */,
 				9612DB611CC9F71F00262D2E /* PageRegisterInputHospitalBodyView.swift in Sources */,
 				96D451AD1CF7FBBD006817CE /* YMAppointmentStrings.swift in Sources */,
@@ -2762,7 +2776,6 @@
 				967676201D8ADF3400A07106 /* ActiveType.swift in Sources */,
 				9612DB5F1CC9F71F00262D2E /* PageRegisterInputHospitalActions.swift in Sources */,
 				96D745B81CF5C2E500E345E3 /* PageYiMaiAddFriendsBodyView.swift in Sources */,
-				FDC1C9301D791EE1000A515B /* PageAppointmentProcessActions.swift in Sources */,
 				FD77AF241D68484F00B8C73E /* LBXScanNetAnimation.swift in Sources */,
 				96814A891D1A3E4A002C8BD3 /* PagePersonalDetailEditViewController.swift in Sources */,
 				FD54E05D1D3774CE00F8E629 /* PageMyAdmissionSettingActions.swift in Sources */,
@@ -2775,6 +2788,7 @@
 				96925A8B1D1CDCAD0095432C /* YMAppointmentRecordStrings.swift in Sources */,
 				730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */,
 				96FCD13C1D17A9B600A6E12D /* PagePersonalIDNumInputActions.swift in Sources */,
+				FD2A99C01D937DF8001953D6 /* PageMyInfoCardViewController.swift in Sources */,
 				739011B81D2763EA00EAAA1B /* PageAddmissionReplyBodyView.swift in Sources */,
 				FD54E0641D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift in Sources */,
 				7394F8481CF94A2500F05487 /* PageAppointmentPatientBasicInfoActions.swift in Sources */,
@@ -2809,6 +2823,7 @@
 				96D451801CF7D4A9006817CE /* PageYiMaiSameAreasViewController.swift in Sources */,
 				9672FB461CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift in Sources */,
 				96814AB31D1A9813002C8BD3 /* PagePersonalNameEditViewController.swift in Sources */,
+				FD2A99CB1D951D6B001953D6 /* PageAppointmentProcessingBodyView.swift in Sources */,
 				962045711D1B9BAD00E18D88 /* PageAppointmentRecordBodyView.swift in Sources */,
 				FD801DD31D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift in Sources */,
 				96A3D1C41CFD848200518DCB /* PageAppointmentSelectDoctorViewController.swift in Sources */,
@@ -2838,6 +2853,7 @@
 				7394F8591D005DDD00F05487 /* PageAppointmentSelectTimeViewController.swift in Sources */,
 				9672FB2C1CD067A300BC7E40 /* PageFace2FaceQRActions.swift in Sources */,
 				736EBC781D16A7AD00C40AA7 /* PagePersonalPasswordResetBodyView.swift in Sources */,
+				FD2A99C91D951D6B001953D6 /* PageAppointmentProcessingActions.swift in Sources */,
 				96D745C61CF6973200E345E3 /* YiMaiAddContactsFriendsActions.swift in Sources */,
 				96C6FB0E1D19304200738D02 /* YMVar.swift in Sources */,
 				96D4516A1CF6D9FA006817CE /* PageYiMaiManualAddFriendViewController.swift in Sources */,
@@ -2848,7 +2864,6 @@
 				96637A851CC24BCD00DBD1CF /* PageLoginBodyView.swift in Sources */,
 				9612DB661CC9F71F00262D2E /* PageRegisterPersonalInfoViewController.swift in Sources */,
 				96D745B61CF5C2C500E345E3 /* YiMaiAddFriendsActions.swift in Sources */,
-				FDC1C92C1D791E70000A515B /* PageAppointmentProcessViewController.swift in Sources */,
 				739AEC481D164B7000E70EF3 /* PageDepartmentSearchActions.swift in Sources */,
 				FD77AF261D68484F00B8C73E /* LBXScanViewController.swift in Sources */,
 				FD77AF271D68484F00B8C73E /* LBXScanViewStyle.swift in Sources */,
@@ -2868,6 +2883,7 @@
 				96814A971D1A78A9002C8BD3 /* PagePersonalTagsEditViewController.swift in Sources */,
 				96D451AB1CF7F1B5006817CE /* PageAppointmentActions.swift in Sources */,
 				9612DB4A1CC9EA8600262D2E /* YMCurrentPage.swift in Sources */,
+				FD2A99BF1D937DF8001953D6 /* PageMyInfoCardBodyView.swift in Sources */,
 				96814A991D1A78DA002C8BD3 /* PagePersonalTagsEditBodyView.swift in Sources */,
 				96925A811D1BC9B30095432C /* PageAppLoadingViewController.swift in Sources */,
 				736EBC7A1D16A7C200C40AA7 /* PagePersonalPasswordResetActions.swift in Sources */,
@@ -2886,13 +2902,13 @@
 				9672FB2E1CD0680700BC7E40 /* PageFace2FaceQRBodyView.swift in Sources */,
 				96FCD1381D17A95100A6E12D /* PagePersonalIDNumInputViewController.swift in Sources */,
 				7394F85E1D005E3600F05487 /* PageAppointmentSelectTimeBodyView.swift in Sources */,
+				FD2A99CC1D951D6B001953D6 /* PageAppointmentProcessingViewController.swift in Sources */,
 				736EBC761D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift in Sources */,
 				96834F1E1D0526C400E0C813 /* PageCommonSearchViewController.swift in Sources */,
 				9672FB381CD1C2EC00BC7E40 /* PageMessageListViewController.swift in Sources */,
 				9612DB401CC8B75300262D2E /* PageIndexViewController.swift in Sources */,
 				FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */,
 				963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */,
-				FDC1C92E1D791EA9000A515B /* PageAppointmentProcessBodyView.swift in Sources */,
 				967676221D8ADF3400A07106 /* StringTrimExtension.swift in Sources */,
 				96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */,
 				736EBC5A1D1675BD00C40AA7 /* PagePersonalSettingViewController.swift in Sources */,
@@ -3288,6 +3304,22 @@
 			name = PagePersonalDetail.storyboard;
 			sourceTree = "<group>";
 		};
+		FD2A99B81D937DF8001953D6 /* PageMyInfoCard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD2A99B91D937DF8001953D6 /* Base */,
+			);
+			name = PageMyInfoCard.storyboard;
+			sourceTree = "<group>";
+		};
+		FD2A99C41D951D6A001953D6 /* PageAppointmentProcessing.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD2A99C51D951D6A001953D6 /* Base */,
+			);
+			name = PageAppointmentProcessing.storyboard;
+			sourceTree = "<group>";
+		};
 		FD54E0571D3771FD00F8E629 /* PageMyAdmissionSetting.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3310,14 +3342,6 @@
 				FD801DCE1D66F2990066198B /* Base */,
 			);
 			name = PageAdmissionChargeSetting.storyboard;
-			sourceTree = "<group>";
-		};
-		FDC1C92A1D791E3B000A515B /* PageAppointmentProcess.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FDC1C9291D791E3B000A515B /* Base */,
-			);
-			name = PageAppointmentProcess.storyboard;
 			sourceTree = "<group>";
 		};
 		FDD93EA61D923754003576D4 /* PageAddFriendInfoCard.storyboard */ = {

@@ -33,25 +33,9 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
         TargetController = self.Target as? PageAppointmentViewController
     }
     
-    private func GetImageData(img: UIImage) -> NSData {
-        var imgData = UIImageJPEGRepresentation(ImageForUpload!, 1.0)
-        
-        if (imgData!.length > 100*1024) {
-            if (imgData!.length>1024*1024) {//1M以及以上
-                imgData = UIImageJPEGRepresentation(img, 0.1)
-            }else if (imgData!.length > 512*1024) {//0.5M-1M
-                imgData = UIImageJPEGRepresentation(img, 0.5)
-            }else if (imgData!.length > 200*1024) {//0.25M-0.5M
-                imgData = UIImageJPEGRepresentation(img, 0.9)
-            }
-        }
-        
-        return imgData!
-    }
-    
     public func UploadBlockBuilder(formData: AFMultipartFormData) {
         let filename = "\(PhotoIndex).jpg"
-        let imgData = GetImageData(ImageForUpload!)
+        let imgData = YMLayout.GetScaledImageData(ImageForUpload!)
 
         formData.appendPartWithFileData(imgData, name: "img", fileName: filename, mimeType: "image/jpeg")
     }

@@ -68,7 +68,8 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_UPLOAD_ADDRESS_BOOK = "apiUploadAddressBook"
     
     public static let CS_API_ACTION_CONFIRM_FEE_SETTING = "apiConfirmFeeSetting"
-
+    
+    public static let CS_API_ACTION_UPLOAD_USER_HEAD = "apiUploadUserHead"
 }
 
 

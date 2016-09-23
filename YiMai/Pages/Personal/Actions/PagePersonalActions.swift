@@ -11,8 +11,7 @@ import UIKit
 
 public class PagePersonalActions: PageJumpActions{
     public func QRButtonTouched(sender: UIGestureRecognizer) {
-        PageAddFriendInfoCardBodyView.DoctorID = YMVar.MyDoctorId
-        DoJump(YMCommonStrings.CS_PAGE_ADD_FRIEND_QR_CARD)
+        DoJump(YMCommonStrings.CS_PAGE_MY_INFO_CARD)
     }
     
     public func GoToPersonalDetail(_: UIGestureRecognizer) {

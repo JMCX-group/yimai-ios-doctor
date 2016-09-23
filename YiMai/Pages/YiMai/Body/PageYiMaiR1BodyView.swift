@@ -127,10 +127,14 @@ public class PageYiMaiR1BodyView: PageBodyView {
         BodyView.addSubview(NewFriendsPanel)
         NewFriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: OperationPanel, padding: 0, height: 130.LayoutVal())
 
-        let newFriends = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as! [[String:AnyObject]]
+        var newFriends = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as? [[String:AnyObject]]
+        
+        if(nil == newFriends) {
+            newFriends = [[String:AnyObject]]()
+        }
         
         var i = 0
-        for f in newFriends {
+        for f in newFriends! {
             let status = "\(f["status"]!)"
             
             if("isFriend" == status){
@@ -139,7 +143,11 @@ public class PageYiMaiR1BodyView: PageBodyView {
         }
         
         let titleLabel = UILabel()
-        titleLabel.text = "我的新朋友（新增\(i)人）"
+        if(0 == i) {
+            titleLabel.text = "我的新朋友（新增\(i)人）"
+        } else {
+            titleLabel.text = "我的新朋友"
+        }
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.sizeToFit()

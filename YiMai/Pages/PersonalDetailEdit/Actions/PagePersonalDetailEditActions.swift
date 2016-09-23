@@ -8,19 +8,46 @@
 
 import Foundation
 import UIKit
+import AFNetworking
+import Photos
+import Toucan
 
 public class PagePersonalDetailEditActions: PageJumpActions {
     private var TargetController: PagePersonalDetailEditViewController? = nil
     private var UpdateApi: YMAPIUtility? = nil
+    var UploadApi: YMAPIUtility? = nil
+    
+    var ImageForUpload: UIImage? = nil
 
     override func ExtInit() {
         UpdateApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_USER,
             success: UpdateSuccess, error: UpdateError)
+        UploadApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPLOAD_USER_HEAD,
+                                 success: UploadSuccess,
+                                 error: UploadError)
+        
         TargetController = self.Target as? PagePersonalDetailEditViewController
+    }
+
+    public func UploadBlockBuilder(formData: AFMultipartFormData) {
+        let filename = "head_img.jpg"
+        let imgData = YMLayout.GetScaledImageData(ImageForUpload!)
+        
+        formData.appendPartWithFileData(imgData, name: "head_img", fileName: filename, mimeType: "image/jpeg")
+    }
+
+    public func UploadSuccess(data: NSDictionary?) {
+        print("upload success")
+        TargetController?.BodyView?.Loading?.Hide()
+    }
+    
+    public func UploadError(err: NSError) {
+        YMAPIUtility.PrintErrorInfo(err)
+        TargetController?.BodyView?.Loading?.Hide()
     }
     
     public func ChangeHeadImage(_: UIGestureRecognizer) {
-        
+        TargetController?.BodyView?.PhotoPikcer?.Show()
     }
     
     public func SelectGender(_: UIGestureRecognizer) {
@@ -88,6 +115,12 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     
     private func UpdateError(error: NSError) {
         TargetController?.BodyView?.Loading?.Hide()
+    }
+    
+    public func HeadImagesSelected(selectedPhotos: [PHAsset]) {
+        ImageForUpload = YMLayout.TransPHAssetToUIImage(selectedPhotos[0])
+        TargetController?.BodyView?.UpdateUserHead(ImageForUpload!)
+        UploadApi?.YMUploadUserHead(["head_img": "head_img.jpg"], blockBuilder: UploadBlockBuilder)
     }
 }
 

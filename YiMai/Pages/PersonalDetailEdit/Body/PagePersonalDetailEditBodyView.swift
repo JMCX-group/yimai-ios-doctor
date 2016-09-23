@@ -8,6 +8,7 @@
 
 import Foundation
 import Neon
+import Photos
 
 public class PagePersonalDetailEditBodyView: PageBodyView {
     private let ExtButtonInfoPadding = 80.LayoutVal()
@@ -44,7 +45,11 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
     private let TagsLabel = UILabel()
     private let IntroLabel = UILabel()
     
+    private let UserHeadImg = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
+    
     public var Loading: YMPageLoadingView? = nil
+    
+    public var PhotoPikcer: YMPhotoSelector? = nil
     
     override func ViewLayout() {
         super.ViewLayout()
@@ -53,7 +58,13 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         DrawExtPanel()
         DrawIntroPanel()
         LoadData()
+        
+        PhotoPikcer = YMPhotoSelector(nav: self.NavController!, maxSelection: 1)
+        PhotoPikcer?.SelectedCallback = editActions!.HeadImagesSelected
+        
         Loading = YMPageLoadingView(parentView: BodyView)
+        
+        print(editActions)
     }
     
     private func AppendExtInfo(label: UILabel, parent: UIView, title: String = "", fontColor: UIColor = YMColors.FontGray, fontSize: CGFloat = 28.LayoutVal()){
@@ -139,6 +150,10 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         if(nil != headUrl) {
             if("<null>" == headUrl!) {
                 AppendExtInfo(UserHeadLabel, parent: UserHead!, title: "请上传")
+            } else {
+                UserHead?.addSubview(UserHeadImg)
+                UserHeadImg.anchorToEdge(Edge.Right, padding: 40.LayoutVal(),
+                                         width: UserHeadImg.width, height: UserHeadImg.height)
             }
         } else {
             AppendExtInfo(UserHeadLabel, parent: UserHead!, title: "请上传")
@@ -264,6 +279,11 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         } else {
             LoadData()
         }
+    }
+    
+    func UpdateUserHead(headImg: UIImage) {
+        UserHeadImg.image = headImg
+        Loading?.Show()
     }
 }
 

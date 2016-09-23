@@ -40,6 +40,7 @@ public class PageIndexTopView: NSObject {
         NameCardButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: YMSelectors.PageJumpByImageView, imageName: "IndexButtonNameCard")
         SysMessageButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: YMSelectors.PageJumpByImageView, imageName: "IndexButtonMessageEmpty")
         
+        NameCardButton?.UserStringData = YMCommonStrings.CS_PAGE_MY_INFO_CARD
         SysMessageButton?.UserStringData = YMCommonStrings.CS_PAGE_MASSAGE_LIST_NAME
         
         let searchInputParam = TextFieldCreateParam()

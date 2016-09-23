@@ -20,7 +20,15 @@ public class PagePersonalDetailEditViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        if(!PageLayoutFlag) { return }
+//        if(!PageLayoutFlag) { return }
+//        print("isBeingPresented : \(self.isBeingPresented())")
+//        print("isBeingDismissed : \(self.isBeingDismissed())")
+//        print("isMovingToParentViewController : \(self.isMovingToParentViewController())")
+//        print("isMovingFromParentViewController : \(self.isMovingFromParentViewController())")
+//
+//        if(self.isMovingToParentViewController()) {
+//            BodyView!.Reload()
+//        }
         BodyView!.Reload()
     }
 }

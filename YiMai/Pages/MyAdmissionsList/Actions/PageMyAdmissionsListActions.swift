@@ -107,9 +107,11 @@ public class PageMyAdmissionsListActions: PageJumpActions{
         let cellData = cell.UserObjectData as! [String: AnyObject]
         
         let id = "\(cellData["id"]!)"
+        let time = "\(cellData["time"]!)"
         
-        PageAppointmentDetailViewController.AppointmentID = id
-        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
+        PageAppointmentProcessingBodyView.AppointmentID = id
+        PageAppointmentProcessingBodyView.TimeInfo = time
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_PROCESSING_NAME)
     }
 }
 

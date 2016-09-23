@@ -1,5 +1,5 @@
 //
-//  PageAddFriendInfoCardBodyView.swift
+//  PageMyInfoCardBodyView.swift
 //  YiMai
 //
 //  Created by superxing on 16/9/21.
@@ -9,14 +9,12 @@
 import Foundation
 import Neon
 
-public class PageAddFriendInfoCardBodyView: PageBodyView {
+public class PageMyInfoCardBodyView: PageBodyView {
     
-    var AddActions: PageAddFriendInfoCardActions!
+    var AddActions: PageMyInfoCardActions!
     var UserHead = YMLayout.GetSuitableImageView("PersonalDefaultUserhead")
     var UserQR = YMLayout.GetSuitableImageView("Face2FaceTempQR")
-    
-    var SubmitBtn = YMButton()
-    
+
     var Loading: YMPageLoadingView!
     
     public static var DoctorID = ""
@@ -24,9 +22,8 @@ public class PageAddFriendInfoCardBodyView: PageBodyView {
     override func ViewLayout() {
         super.ViewLayout()
         
-        AddActions = PageAddFriendInfoCardActions(navController: self.NavController, target: self)
+        AddActions = PageMyInfoCardActions(navController: self.NavController, target: self)
         DrawUserHead()
-        DrawSubmit()
         Loading = YMPageLoadingView(parentView: ParentView!)
         Loading.Show()
     }
@@ -44,7 +41,6 @@ public class PageAddFriendInfoCardBodyView: PageBodyView {
         let hospital = userInfo["hospital"] as? String
         let dept = userInfo["department"] as? String
         let id = userInfo["id"] as! String
-        let isFriend = "\(userInfo["is_friend"]!)"
         
         let nameLabel = YMLayout.GetNomalLabel(name, textColor: YMColors.FontBlue, fontSize: 40.LayoutVal())
         let jobTitleLabel = YMLayout.GetNomalLabel(jobTitle, textColor: YMColors.FontGray, fontSize: 28.LayoutVal())
@@ -95,26 +91,7 @@ public class PageAddFriendInfoCardBodyView: PageBodyView {
             UserQR.align(Align.UnderCentered, relativeTo: codePanel, padding: 50.LayoutVal(), width: UserQR.width, height: UserQR.height)
         }
         
-        if("1" == isFriend) {
-            SubmitBtn.enabled = false
-            SubmitBtn.backgroundColor = YMColors.CommonBottomGray
-        } else {
-            SubmitBtn.enabled = true
-            SubmitBtn.backgroundColor = YMColors.FontBlue
-        }
-
         Loading.Hide()
-    }
-    
-    func DrawSubmit() {
-        ParentView?.addSubview(SubmitBtn)
-        SubmitBtn.setTitle("提交", forState: UIControlState.Normal)
-        SubmitBtn.setTitleColor(YMColors.White, forState: UIControlState.Normal)
-        SubmitBtn.titleLabel?.font = YMFonts.YMDefaultFont(36.LayoutVal())
-        
-        SubmitBtn.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 98.LayoutVal())
-        
-        SubmitBtn.addTarget(AddActions, action: "SubmitTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func Clear() {
@@ -122,7 +99,7 @@ public class PageAddFriendInfoCardBodyView: PageBodyView {
         UserHead = YMLayout.GetSuitableImageView("PersonalDefaultUserhead")
         UserQR = YMLayout.GetSuitableImageView("Face2FaceTempQR")
         DrawUserHead()
-        PageAddFriendInfoCardBodyView.DoctorID = ""
+        PageMyInfoCardBodyView.DoctorID = ""
         Loading.Hide()
     }
 }

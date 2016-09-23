@@ -159,7 +159,7 @@ public class YMAPIUtility {
             }
             
             print("------------org error info---------------")
-            print(errStr)
+            print(error)
         } else {
             print(error)
         }
@@ -750,6 +750,11 @@ public class YMAPIUtility {
     
     public func YMUploadAddmissionPhotos(param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder) {
         YMAPIUploadPhotos(YMAPIInterfaceURL.UploadAppointmentPhoto,
+                          param: param, blockBuilder: blockBuilder, progressHandler: nil)
+    }
+    
+    public func YMUploadUserHead(param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder) {
+        YMAPIUploadPhotos(YMAPIInterfaceURL.ChangeUserInfo,
                           param: param, blockBuilder: blockBuilder, progressHandler: nil)
     }
 }

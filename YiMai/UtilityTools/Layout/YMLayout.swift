@@ -334,6 +334,8 @@ public class YMLayout {
             url = YMAPIInterfaceURL.Server + url
         }
         
+        url += url+"?t=" + "\(NSDate().timeIntervalSince1970)"
+        
         imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
             if(makeItRound) {
                 imageView.image = Toucan(image: image!).maskWithEllipse().image
@@ -387,6 +389,28 @@ public class YMLayout {
                                             fromRect: outputImage!.extent)
         
         return YMLayout.GetSuitableImageView(UIImage(CGImage: cgImage))
+    }
+    
+    public static func GetScaledImageData(img: UIImage) -> NSData {
+        
+        var imgForProcess = img
+        if(img.size.width > 800 && img.size.height > 800) {
+            imgForProcess = Toucan(image: imgForProcess).resize(CGSize(width: 800, height: 800), fitMode: Toucan.Resize.FitMode.Clip).image
+        }
+        
+        var imgData = UIImageJPEGRepresentation(imgForProcess, 1.0)
+        
+        if (imgData!.length > 100*1024) {
+            if (imgData!.length>1024*1024) {//1M以及以上
+                imgData = UIImageJPEGRepresentation(imgForProcess, 0.1)
+            }else if (imgData!.length > 512*1024) {//0.5M-1M
+                imgData = UIImageJPEGRepresentation(imgForProcess, 0.5)
+            }else if (imgData!.length > 200*1024) {//0.25M-0.5M
+                imgData = UIImageJPEGRepresentation(imgForProcess, 0.9)
+            }
+        }
+        
+        return imgData!
     }
 }
 

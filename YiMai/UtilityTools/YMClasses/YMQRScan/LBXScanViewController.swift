@@ -133,8 +133,8 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     {
         
         let result:LBXScanResult = arrayResult[0]
-        scanSuccessHandler?(qrString: result.strScanned)
         self.navigationController?.popViewControllerAnimated(true)
+        scanSuccessHandler?(qrString: result.strScanned)
     }
     
     override public func viewWillDisappear(animated: Bool) {
@@ -151,8 +151,8 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         if(!LBXPermissions.isGetPhotoPermission())
         {
             showMsg("提示", message: "没有相册权限，请到设置->隐私中开启本程序相册权限")
-            scanFailedHandler?(qrString: nil)
             self.navigationController?.popViewControllerAnimated(true)
+            scanFailedHandler?(qrString: nil)
         }
         
         let picker = UIImagePickerController()
@@ -189,8 +189,8 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         }
         
         showMsg("", message: "识别失败")
-        scanFailedHandler?(qrString: nil)
         self.navigationController?.popViewControllerAnimated(true)
+        scanFailedHandler?(qrString: nil)
     }
     
     func showMsg(title:String?,message:String?)
