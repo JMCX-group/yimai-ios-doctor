@@ -334,18 +334,17 @@ public class YMLayout {
             url = YMAPIInterfaceURL.Server + url
         }
         
-        url += url+"?t=" + "\(NSDate().timeIntervalSince1970)"
-        
+        url += "?t=" + "\(NSDate().timeIntervalSince1970)"
+        print(url)
         imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
             if(makeItRound) {
                 imageView.image = Toucan(image: image!).maskWithEllipse().image
             }
-            print(1)
         })
     }
     
-    public static func GetNomalLabel(text: String?, textColor: UIColor, fontSize: CGFloat) -> UILabel {
-        let label = UILabel()
+    public static func GetNomalLabel(text: String?, textColor: UIColor, fontSize: CGFloat) -> ActiveLabel {
+        let label = ActiveLabel()
         label.text = text
         label.textColor = textColor
         label.font = YMFonts.YMDefaultFont(fontSize)

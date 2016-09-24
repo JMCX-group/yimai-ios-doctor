@@ -19,7 +19,7 @@ public class PageAppointmentProcessingViewController: PageViewController {
         
         BodyView!.DrawTransferButton(TopView!.TopViewPanel)
         BodyView!.DrawConfirmButton(self.SelfView!)
-        BodyView!.SetModalDialog(self.SelfView!)
+        BodyView!.DrawAdmissionDatePicker()
     }
     
     override func PagePreRefresh() {

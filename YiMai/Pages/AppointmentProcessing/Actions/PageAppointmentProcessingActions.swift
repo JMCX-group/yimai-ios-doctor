@@ -12,7 +12,12 @@ import UIKit
 public class PageAppointmentProcessingActions: PageJumpActions {
     private var TargetView: PageAppointmentProcessingBodyView? = nil
     private var DetailApi: YMAPIUtility? = nil
-    private var DenyApi: YMAPIUtility? = nil
+    private var CompleteApi: YMAPIUtility? = nil
+    private var RescheduleApi: YMAPIUtility? = nil
+    
+    public func GoBack(_: UIAlertAction) {
+        self.NavController?.popViewControllerAnimated(true)
+    }
     
     override func ExtInit() {
         super.ExtInit()
@@ -20,8 +25,11 @@ public class PageAppointmentProcessingActions: PageJumpActions {
         DetailApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_APPOINTMENT_DETAIL,
                                  success: DetailGetSuccess, error: DetailGetError)
         
-        DenyApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_DENY_APPOINTMENT,
-                                 success: DenySuccess, error: DenyError)
+        CompleteApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_APPOINTMENT_COMPLETE,
+                                 success: CompleteSuccess, error: CompleteError)
+        
+        RescheduleApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_ACCEPT_APPOINTMENT,
+                                   success: RescheduleSuccess, error: RescheduleError)
         
         TargetView = self.Target as? PageAppointmentProcessingBodyView
     }
@@ -31,17 +39,30 @@ public class PageAppointmentProcessingActions: PageJumpActions {
     }
     
     private func DetailGetError(error: NSError) {
-        
+        YMPageModalMessage.ShowErrorInfo("网络通讯故障，请稍后再试。",
+                                         nav: self.NavController!, callback: GoBack)
     }
     
-    private func DenySuccess(data: NSDictionary?) {
-        TargetView?.HideDenyDialog()
+    private func CompleteSuccess(data: NSDictionary?) {
+        TargetView?.Loading?.Hide()
         self.NavController!.popViewControllerAnimated(true)
     }
     
-    private func DenyError(error: NSError) {
-        TargetView?.HideDenyDialog()
+    private func CompleteError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetView?.Loading?.Hide()
         self.NavController!.popViewControllerAnimated(true)
+    }
+    
+    private func RescheduleSuccess(data: NSDictionary?) {
+        TargetView?.Loading?.Hide()
+        self.NavController?.popViewControllerAnimated(true)
+    }
+    
+    private func RescheduleError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetView?.Loading?.Hide()
+        self.NavController?.popViewControllerAnimated(true)
     }
     
     public func GetDetail() {
@@ -64,34 +85,32 @@ public class PageAppointmentProcessingActions: PageJumpActions {
         
     }
     
-    public func DenyDlgTagTouched(sender: UIGestureRecognizer) {
-        let label = sender.view as! YMTouchableView
-        TargetView?.SelectDenyReasonLabel(label)
+    public func CancelReschedule(sender: YMButton) {
+        TargetView?.HideAdmissionTime()
     }
     
-    public func DenyAppointmentTouched(sender: YMButton) {
-        TargetView?.ShowDenyDialog()
+    public func AppointmentRescheduleTouched(gr: UIGestureRecognizer) {
+        TargetView?.ShowAdmissionTime()
     }
     
-    public func AcceptAppointmentTouched(sender: YMButton) {
-        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_ACCEPT_DETAIL_NAME)
+    public func AppointmentCompleteTouched(sender: YMButton) {
+        TargetView?.Loading?.Show()
+        CompleteApi?.YMAdmissionComplete(["id": PageAppointmentProcessingBodyView.AppointmentID])
     }
     
-    public func DenyConfirmTouched(sender: YMButton) {
-        var reasonStr = "近期比较忙，没时间"
-        if("4" == TargetView?.SelectedDenyReason?.UserStringData){
-            reasonStr = TargetView!.DenyOtherReasonInput.text
-        } else {
-            let userData = TargetView!.SelectedDenyReason?.UserObjectData as! [String: AnyObject]
-            let label = userData["label"] as! UILabel
-            reasonStr = label.text!
-        }
-
-        DenyApi?.YMAdmissionRefusal(["id": PageAppointmentProcessingBodyView.AppointmentID, "reason": reasonStr])
-    }
-    
-    public func CancelDenyTouched(sender: YMButton) {
-        TargetView?.HideDenyDialog()
+    public func AdmissionTimeSelected(sender: YMButton) {
+        let formatter = NSDateFormatter()
+        //日期样式
+        formatter.dateFormat = "yyyy年MM月dd日 a"
+        let dateStr = formatter.stringFromDate(TargetView!.AdmissionDatePicker.date)
+        
+        TargetView?.HideAdmissionTime()
+        TargetView?.Loading?.Show()
+        
+        RescheduleApi?.YMAdmissionRescheduled([
+                "id": PageAppointmentProcessingBodyView.AppointmentID,
+                "visit_time": dateStr
+            ])
     }
 }
 

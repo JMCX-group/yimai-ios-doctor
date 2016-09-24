@@ -208,9 +208,12 @@ public class ApointmentAcceptDetailBodyView: PageBodyView {
         
         let formatter = NSDateFormatter()
         //日期样式
-        formatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        formatter.dateFormat = "yyyy年MM月dd日 a HH:mm"
         cellLabel.text = formatter.stringFromDate(AdmissionDatePicker.date)
         cellLabel.sizeToFit()
+        
+        formatter.dateFormat = "yyyy年MM月dd日 a"
+        AdmissionTimeString = formatter.stringFromDate(AdmissionDatePicker.date)
         
         EnableSubmitButton()
     }

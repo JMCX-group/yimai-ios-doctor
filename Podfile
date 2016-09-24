@@ -18,5 +18,6 @@ target 'YiMai' do
   pod 'Kingfisher', '~> 2.4'
   pod 'Toucan'
   pod 'QBImagePickerController', '~> 3.4.0'
+  pod 'ChameleonFramework/Swift'
 end
 

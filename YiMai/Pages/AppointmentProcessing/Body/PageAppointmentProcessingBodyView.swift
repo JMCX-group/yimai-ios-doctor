@@ -8,6 +8,7 @@
 
 import Foundation
 import Neon
+import ChameleonFramework
 
 public class PageAppointmentProcessingBodyView: PageBodyView {
     private var AcceptActions: PageAppointmentProcessingActions? = nil
@@ -18,25 +19,18 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
     private let TextInfoPanel = UIView()
     private let ImagePanel = UIView()
     private let TimePanel = UIView()
+    private let DescPanel = UIView()
+    private let NeedToKnowPanel = UIView()
     
     public var Loading: YMPageLoadingView? = nil
     public static var AppointmentID: String = ""
     public static var TimeInfo: String = ""
     
-    private var DenyInfoDlg: YMPageModalDialog? = nil
-    
-    private let DenyInfoBox = UIView()
-    private let DenyTitle = UILabel()
-    private let DenyConfirmBtn = YMButton()
-    private let CancelDenyBtn = YMButton()
-    
-    private var DenyBecauseBusy: YMTouchableView!
-    private var DenyBecauseTrip: YMTouchableView!
-    private var DenyBecauseNotExpertise: YMTouchableView!
-    private var DenyBecauseOtherReason: YMTouchableView!
-    
-    public var SelectedDenyReason: YMTouchableView? = nil
-    public let DenyOtherReasonInput = YMTextArea(aDelegate: nil)
+    private let PickerPanel = UIView()
+    private let PickerMask = YMButton()
+    let AdmissionDatePicker = UIDatePicker()
+    private let TimeSelectBtn = YMButton()
+    private let CancelBtn = YMButton()
     
     override func ViewLayout() {
         super.ViewLayout()
@@ -45,8 +39,70 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
         DrawDP()
         DrawAppointmentNum()
         
-        Loading = YMPageLoadingView(parentView: self.BodyView)
+        Loading = YMPageLoadingView(parentView: ParentView!)
         Loading?.Show()
+    }
+    
+    public func ShowAdmissionTime() {
+        PickerPanel.hidden = false
+    }
+    
+    public func HideAdmissionTime() {
+        PickerPanel.hidden = true
+    }
+    
+    public func DrawAdmissionDatePicker() {
+        let btnPanel = UIView()
+        btnPanel.backgroundColor = YMColors.DividerLineGray
+        let pickerOptPanel = UIView()
+        
+        ParentView?.addSubview(PickerPanel)
+        PickerPanel.fillSuperview()
+        PickerPanel.addSubview(PickerMask)
+        PickerPanel.addSubview(pickerOptPanel)
+        
+        pickerOptPanel.backgroundColor = YMColors.White
+        pickerOptPanel.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 276.LayoutVal())
+        
+        PickerMask.fillSuperview()
+        PickerMask.backgroundColor = HexColor("#000000", 0.7)
+        PickerMask.addTarget(AcceptActions!, action: "CancelReschedule:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        pickerOptPanel.addSubview(AdmissionDatePicker)
+        pickerOptPanel.addSubview(btnPanel)
+        AdmissionDatePicker.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 216.LayoutVal())
+        AdmissionDatePicker.locale = NSLocale(localeIdentifier: "zh_CN")
+        
+        AdmissionDatePicker.minuteInterval = 15
+        AdmissionDatePicker.minimumDate = NSDate()
+        AdmissionDatePicker.date = NSDate()
+        
+        btnPanel.align(Align.AboveMatchingLeft, relativeTo: AdmissionDatePicker, padding: 0, width: YMSizes.PageWidth, height: 60.LayoutVal())
+        btnPanel.addSubview(CancelBtn)
+        btnPanel.addSubview(TimeSelectBtn)
+        
+        let titleLabel = YMLayout.GetNomalLabel("将接诊时间变更至", textColor: HexColor("#222222"), fontSize: 24.LayoutVal())
+        btnPanel.addSubview(titleLabel)
+        titleLabel.anchorInCenter(width: titleLabel.width, height: titleLabel.height)
+
+        CancelBtn.setTitle("取消", forState: UIControlState.Normal)
+        CancelBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        CancelBtn.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
+        CancelBtn.sizeToFit()
+        CancelBtn.anchorToEdge(Edge.Left, padding: 40.LayoutVal(),
+                               width: CancelBtn.width, height: CancelBtn.height)
+        
+        CancelBtn.addTarget(AcceptActions!, action: "CancelReschedule:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        TimeSelectBtn.setTitle("确定", forState: UIControlState.Normal)
+        TimeSelectBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        TimeSelectBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+        TimeSelectBtn.sizeToFit()
+        TimeSelectBtn.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: TimeSelectBtn.width, height: TimeSelectBtn.height)
+        
+        TimeSelectBtn.addTarget(AcceptActions!, action: "AdmissionTimeSelected:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        PickerPanel.hidden = true
     }
 
     public func DrawTransferButton(top: UIView) {
@@ -95,162 +151,44 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
         uncheckedIcon?.hidden = false
         textLabel?.textColor = YMColors.FontLightGray
     }
-    
-    private func SetDenyReasonLabelSelected(label: YMTouchableView) {
-        let ctrlMap = label.UserObjectData as! [String: AnyObject]
-        
-        let checkedIcon = ctrlMap["checked"] as? YMTouchableImageView
-        let uncheckedIcon = ctrlMap["unchecked"] as? YMTouchableImageView
-        let textLabel = ctrlMap["label"] as? UILabel
-        
-        checkedIcon?.hidden = false
-        uncheckedIcon?.hidden = true
-        textLabel?.textColor = YMColors.FontBlue
-        
-        SelectedDenyReason = label
-    }
-    
-    private func ResetDenyDlg() {
-        SetDenyReasonLabelUnselected(DenyBecauseBusy)
-        SetDenyReasonLabelUnselected(DenyBecauseTrip)
-        SetDenyReasonLabelUnselected(DenyBecauseNotExpertise)
-        SetDenyReasonLabelUnselected(DenyBecauseOtherReason)
-        
-        DenyOtherReasonInput.editable = false
-        DenyOtherReasonInput.backgroundColor = YMColors.BackgroundGray
-    }
-    
-    public func SelectDenyReasonLabel(label: YMTouchableView) {
-        ResetDenyDlg()
-        SetDenyReasonLabelSelected(label)
-        SelectedDenyReason = label
-        
-        if(label == DenyBecauseOtherReason){
-            DenyOtherReasonInput.editable = true
-            DenyOtherReasonInput.backgroundColor = YMColors.PanelBackgroundGray
-        }
-    }
-    
-    public func SetModalDialog(parent: UIView) {
-        self.DenyInfoDlg = YMPageModalDialog(parentView: parent)
-        
-        DenyInfoBox.frame = CGRect(x: 0, y: 0, width: 560.LayoutVal(), height: 520.LayoutVal())
-        DenyInfoBox.layer.cornerRadius = 28.LayoutVal()
-        DenyInfoBox.backgroundColor = YMColors.White
-        DenyInfoBox.layer.masksToBounds = true
-        
-        DenyBecauseBusy = YMLayout.GetTouchableView(useObject: AcceptActions!, useMethod: "DenyDlgTagTouched:".Sel())
-        DenyBecauseTrip = YMLayout.GetTouchableView(useObject: AcceptActions!, useMethod: "DenyDlgTagTouched:".Sel())
-        DenyBecauseNotExpertise = YMLayout.GetTouchableView(useObject: AcceptActions!, useMethod: "DenyDlgTagTouched:".Sel())
-        DenyBecauseOtherReason = YMLayout.GetTouchableView(useObject: AcceptActions!, useMethod: "DenyDlgTagTouched:".Sel())
-        
-        DenyInfoBox.addSubview(DenyBecauseBusy)
-        DenyInfoBox.addSubview(DenyBecauseTrip)
-        DenyInfoBox.addSubview(DenyBecauseNotExpertise)
-        DenyInfoBox.addSubview(DenyBecauseOtherReason)
-        DenyInfoBox.addSubview(DenyOtherReasonInput)
-        DenyInfoBox.addSubview(DenyTitle)
-        DenyInfoBox.addSubview(DenyConfirmBtn)
-        DenyInfoBox.addSubview(CancelDenyBtn)
-        
-        DenyTitle.text = "请输入拒绝理由"
-        DenyTitle.font = YMFonts.YMDefaultFont(26.LayoutVal())
-        DenyTitle.textColor = YMColors.FontGray
-        DenyTitle.sizeToFit()
-        DenyTitle.anchorToEdge(Edge.Top, padding: 28.LayoutVal(), width: DenyTitle.width, height: DenyTitle.height)
-        
-        DenyInfoBox.groupAgainstEdge(group: Group.Horizontal, views: [CancelDenyBtn, DenyConfirmBtn], againstEdge: Edge.Bottom,
-                                     padding: 0, width: DenyInfoBox.width / 2, height: 80.LayoutVal())
-        
-        DenyConfirmBtn.setTitle("确认", forState: UIControlState.Normal)
-        DenyConfirmBtn.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
-        DenyConfirmBtn.titleLabel?.font = YMFonts.YMDefaultFont(28.LayoutVal())
-        DenyConfirmBtn.addTarget(AcceptActions!, action: "DenyConfirmTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        CancelDenyBtn.setTitle("取消", forState: UIControlState.Normal)
-        CancelDenyBtn.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
-        CancelDenyBtn.titleLabel?.font = YMFonts.YMDefaultFont(28.LayoutVal())
-        CancelDenyBtn.addTarget(AcceptActions!, action: "CancelDenyTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
 
-        DenyBecauseBusy.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 110.LayoutVal(), otherSize: 26.LayoutVal())
-        DenyBecauseTrip.align(Align.UnderMatchingLeft, relativeTo: DenyBecauseBusy, padding: 20.LayoutVal(), width: DenyInfoBox.width, height: 26.LayoutVal())
-        DenyBecauseNotExpertise.align(Align.UnderMatchingLeft, relativeTo: DenyBecauseTrip, padding: 20.LayoutVal(), width: DenyInfoBox.width, height: 26.LayoutVal())
-        DenyBecauseOtherReason.align(Align.UnderMatchingLeft, relativeTo: DenyBecauseNotExpertise, padding: 20.LayoutVal(), width: DenyInfoBox.width, height: 26.LayoutVal())
-
-        DenyBecauseBusy?.UserStringData = "1"
-        DenyBecauseTrip?.UserStringData = "2"
-        DenyBecauseNotExpertise?.UserStringData = "3"
-        DenyBecauseOtherReason?.UserStringData = "4"
-        
-        DrawReasonLabel(DenyBecauseBusy, labelText: "近期比较忙，没有时间")
-        DrawReasonLabel(DenyBecauseTrip, labelText: "近期要出差，无法接诊")
-        DrawReasonLabel(DenyBecauseNotExpertise, labelText: "这不是我的专长，建议另约其他专家")
-        DrawReasonLabel(DenyBecauseOtherReason, labelText: "其他原因")
-        
-        DenyOtherReasonInput.editable = false
-        DenyOtherReasonInput.font = YMFonts.YMDefaultFont(26.LayoutVal())
-        DenyOtherReasonInput.MaxCharCount = 50
-        DenyOtherReasonInput.backgroundColor = YMColors.BackgroundGray
-        DenyOtherReasonInput.anchorToEdge(Edge.Top, padding: 280.LayoutVal(), width: 450.LayoutVal(), height: 130.LayoutVal())
-        
-        let titleBottom = UIView()
-        let btnTop = UIView()
-        let btnDivider = UIView()
-        
-        titleBottom.backgroundColor = YMColors.DividerLineGray
-        btnTop.backgroundColor = YMColors.DividerLineGray
-        btnDivider.backgroundColor = YMColors.DividerLineGray
-        
-        DenyInfoBox.addSubview(titleBottom)
-        DenyInfoBox.addSubview(btnTop)
-        DenyInfoBox.addSubview(btnDivider)
-        
-        titleBottom.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 80.LayoutVal(), otherSize: YMSizes.OnPx)
-        btnTop.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 80.LayoutVal(), otherSize: YMSizes.OnPx)
-        btnDivider.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.OnPx, height: 80.LayoutVal())
-        
-        ResetDenyDlg()
-        SetDenyReasonLabelSelected(DenyBecauseBusy)
-    }
-    
-    public func ShowDenyDialog() {
-        DenyInfoDlg?.Show(DenyInfoBox)
-    }
-
-    public func HideDenyDialog() {
-        DenyInfoDlg?.Hide()
-    }
-    
     public func DrawConfirmButton(parent: UIView) {
         let bottomPanel = UIView()
-        let denyButton = YMButton()
+        let denyButton = YMLayout.GetTouchableView(useObject: AcceptActions!,
+                                                   useMethod: "AppointmentRescheduleTouched:".Sel())
         let acceptButton = YMButton()
-        let dividerLine = UIView()
         
-        denyButton.setTitle("拒绝", forState: UIControlState.Normal)
-        denyButton.titleLabel?.font = YMFonts.YMDefaultFont(34.LayoutVal())
-        denyButton.backgroundColor = YMColors.CommonBottomBlue
-        denyButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        let calendarIcon = YMLayout.GetSuitableImageView("YMIconCalendarGray")
+        denyButton.addSubview(calendarIcon)
         
-        acceptButton.setTitle("同意接诊", forState: UIControlState.Normal)
+        let titleLabel = YMLayout.GetNomalLabel("改期", textColor: YMColors.FontGray, fontSize: 30.LayoutVal())
+        denyButton.addSubview(titleLabel)
+        
+//        denyButton.setTitle("改期", forState: UIControlState.Normal)
+//        denyButton.titleLabel?.font = YMFonts.YMDefaultFont(34.LayoutVal())
+//        denyButton.backgroundColor = YMColors.CommonBottomBlue
+//        denyButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        
+        acceptButton.setTitle("面诊已完成", forState: UIControlState.Normal)
         acceptButton.titleLabel?.font = YMFonts.YMDefaultFont(34.LayoutVal())
         acceptButton.backgroundColor = YMColors.CommonBottomBlue
         acceptButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
-        
-        dividerLine.backgroundColor = YMColors.White
-        
+
         parent.addSubview(bottomPanel)
         bottomPanel.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 98.LayoutVal())
         
         bottomPanel.addSubview(denyButton)
         bottomPanel.addSubview(acceptButton)
-        bottomPanel.addSubview(dividerLine)
         
-        bottomPanel.groupAndFill(group: Group.Horizontal, views: [denyButton, acceptButton], padding: 0)
-        dividerLine.anchorInCenter(width: YMSizes.OnPx, height: 34.LayoutVal())
+        denyButton.anchorToEdge(Edge.Left, padding: 0, width: 300.LayoutVal(), height: 98.LayoutVal())
+        acceptButton.alignAndFill(align: Align.ToTheRightCentered, relativeTo: denyButton, padding: 0)
         
-        denyButton.addTarget(AcceptActions!, action: "DenyAppointmentTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
-        acceptButton.addTarget(AcceptActions!, action: "AcceptAppointmentTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        calendarIcon.anchorToEdge(Edge.Left, padding: 100.LayoutVal(),
+                                  width: calendarIcon.width, height: calendarIcon.height)
+        titleLabel.align(Align.ToTheRightCentered, relativeTo: calendarIcon,
+                         padding: 12.LayoutVal(), width: titleLabel.width, height: titleLabel.height)
+
+        acceptButton.addTarget(AcceptActions!, action: "AppointmentCompleteTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     private func DrawAppointmentNum() {
@@ -525,12 +463,12 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
         TimePanel.backgroundColor = YMColors.White
         TimePanel.align(Align.UnderMatchingLeft, relativeTo: ImagePanel,
                             padding: 20.LayoutVal(),
-                            width: YMSizes.PageWidth, height: 220.LayoutVal())
+                            width: YMSizes.PageWidth, height: 150.LayoutVal())
         
         let titleLabel = UILabel()
         
         TimePanel.addSubview(titleLabel)
-        titleLabel.text = "期望就诊时间"
+        titleLabel.text = "就诊时间"
         titleLabel.textColor = YMColors.FontBlue
         titleLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
         titleLabel.sizeToFit()
@@ -564,6 +502,133 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
                                 xPad: 40.LayoutVal(), yPad: 0, width: timeLabel.width, height: timeLabel.height)
     }
     
+    func DataParser(data: NSDictionary) -> [String: String] {
+        var desc = ""
+        var needToKnow = ""
+        
+        let otherInfo = data["other_info"] as? [String: AnyObject]
+        let timeLine = otherInfo!["time_line"] as? [[String: AnyObject]]
+        
+        for action in timeLine! {
+            let info = action["info"] as? [String: AnyObject]
+            let otherInfo = info!["other"] as? [[String: AnyObject]]
+            if(nil != otherInfo) {
+                for mixedInfo in otherInfo! {
+                    let infoName = mixedInfo["name"] as? String
+                    
+                    if(nil != infoName) {
+                        if("补充说明" == infoName!) {
+                            desc = mixedInfo["content"] as! String
+                        }
+                        
+                        if("就诊须知" == infoName) {
+                            needToKnow = mixedInfo["content"] as! String
+                        }
+                    }
+                }
+            }
+        }
+        
+        var ret = [String: String]()
+        
+        ret["desc"] = desc
+        ret["needToKnow"] = needToKnow
+        
+        return ret
+    }
+    
+    func DrawDesc(text: String?) {
+        BodyView.addSubview(DescPanel)
+        DescPanel.backgroundColor = YMColors.White
+        DescPanel.align(Align.UnderMatchingLeft, relativeTo: TimePanel,
+                        padding: 20.LayoutVal(),
+                        width: YMSizes.PageWidth, height: 150.LayoutVal())
+        
+        let titleLabel = UILabel()
+        
+        DescPanel.addSubview(titleLabel)
+        titleLabel.text = "补充说明"
+        titleLabel.textColor = YMColors.FontBlue
+        titleLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        titleLabel.sizeToFit()
+        titleLabel.anchorInCorner(Corner.TopLeft,
+                                  xPad: 40.LayoutVal(), yPad: 20.LayoutVal(),
+                                  width: titleLabel.width, height: titleLabel.height)
+        
+        
+        let textContent = YMLayout.GetTouchableView(useObject: AcceptActions!, useMethod: "TextDetailTouched:".Sel())
+        DescPanel.addSubview(textContent)
+        
+        let divider = UIView()
+        divider.backgroundColor = YMColors.DividerLineGray
+        DescPanel.addSubview(divider)
+        divider.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 60.LayoutVal(), width: YMSizes.PageWidth, height: YMSizes.OnPx)
+        
+        let timeLabel = UILabel()
+        timeLabel.numberOfLines = 300
+        timeLabel.text = text
+        timeLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        timeLabel.textColor = YMColors.FontGray
+        timeLabel.frame = CGRectMake(0, 0, 670.LayoutVal(), 0)
+        timeLabel.sizeToFit()
+        textContent.align(Align.UnderMatchingLeft, relativeTo: divider,
+                          padding: 30.LayoutVal(),
+                          width: YMSizes.PageWidth,
+                          height: timeLabel.height + 30.LayoutVal())
+        textContent.addSubview(timeLabel)
+        timeLabel.anchorToEdge(Edge.Top, padding: 0, width: timeLabel.width, height: timeLabel.height)
+        timeLabel.anchorInCorner(Corner.TopLeft,
+                                 xPad: 40.LayoutVal(), yPad: 0, width: timeLabel.width, height: timeLabel.height)
+        
+        YMLayout.SetViewHeightByLastSubview(DescPanel, lastSubView: textContent)
+    }
+    
+    func DrawNeedToKnow(text: String?) {
+        BodyView.addSubview(NeedToKnowPanel)
+        NeedToKnowPanel.backgroundColor = YMColors.White
+        NeedToKnowPanel.align(Align.UnderMatchingLeft, relativeTo: DescPanel,
+                        padding: 20.LayoutVal(),
+                        width: YMSizes.PageWidth, height: 150.LayoutVal())
+        
+        let titleLabel = UILabel()
+        
+        NeedToKnowPanel.addSubview(titleLabel)
+        titleLabel.text = "补充说明"
+        titleLabel.textColor = YMColors.FontBlue
+        titleLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        titleLabel.sizeToFit()
+        titleLabel.anchorInCorner(Corner.TopLeft,
+                                  xPad: 40.LayoutVal(), yPad: 20.LayoutVal(),
+                                  width: titleLabel.width, height: titleLabel.height)
+        
+        
+        let textContent = YMLayout.GetTouchableView(useObject: AcceptActions!, useMethod: "TextDetailTouched:".Sel())
+        NeedToKnowPanel.addSubview(textContent)
+        
+        let divider = UIView()
+        divider.backgroundColor = YMColors.DividerLineGray
+        NeedToKnowPanel.addSubview(divider)
+        divider.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 60.LayoutVal(), width: YMSizes.PageWidth, height: YMSizes.OnPx)
+        
+        let timeLabel = UILabel()
+        timeLabel.numberOfLines = 300
+        timeLabel.text = text
+        timeLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        timeLabel.textColor = YMColors.FontGray
+        timeLabel.frame = CGRectMake(0, 0, 670.LayoutVal(), 0)
+        timeLabel.sizeToFit()
+        textContent.align(Align.UnderMatchingLeft, relativeTo: divider,
+                          padding: 30.LayoutVal(),
+                          width: YMSizes.PageWidth,
+                          height: timeLabel.height + 30.LayoutVal())
+        textContent.addSubview(timeLabel)
+        timeLabel.anchorToEdge(Edge.Top, padding: 0, width: timeLabel.width, height: timeLabel.height)
+        timeLabel.anchorInCorner(Corner.TopLeft,
+                                 xPad: 40.LayoutVal(), yPad: 0, width: timeLabel.width, height: timeLabel.height)
+        
+        YMLayout.SetViewHeightByLastSubview(NeedToKnowPanel, lastSubView: textContent)
+    }
+    
     public func LoadData(data: NSDictionary) {
         let doc = data["doctor_info"] as! [String: AnyObject]
         let patient = data["patient_info"] as! [String: AnyObject]
@@ -575,7 +640,12 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
         DrawTimeInfo()
         
         print(data)
-        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: TimePanel, padding: 120.LayoutVal())
+        
+        let otherInfo = DataParser(data)
+        DrawDesc(otherInfo["desc"])
+        DrawNeedToKnow(otherInfo["needToKnow"])
+        
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: NeedToKnowPanel, padding: 120.LayoutVal())
         Loading?.Hide()
     }
     
@@ -590,6 +660,8 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
         YMLayout.ClearView(view: TextInfoPanel)
         YMLayout.ClearView(view: ImagePanel)
         YMLayout.ClearView(view: TimePanel)
+        YMLayout.ClearView(view: DescPanel)
+        YMLayout.ClearView(view: NeedToKnowPanel)
     }
 }
 

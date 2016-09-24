@@ -38,6 +38,8 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_GET_APPOINTMENT_DETAIL = "apiGetAppointmentDetail"
     public static let CS_API_ACTION_DENY_APPOINTMENT = "apiDenyAppointment"
     public static let CS_API_ACTION_ACCEPT_APPOINTMENT = "apiAcceptAppointment"
+    public static let CS_API_ACTION_APPOINTMENT_COMPLETE = "apiAppointmentComplete"
+    public static let CS_API_ACTION_RESCHEDULE_APPOINTMENT = "apiRescheduleAppointment"
     
 
     public static let CS_API_ACTION_GET_ADMISSIONS_LIST = "apiGetAdmissionsList"

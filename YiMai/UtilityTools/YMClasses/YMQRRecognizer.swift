@@ -26,8 +26,8 @@ class YMQRRecognizer: NSObject {
         qrUnrecognizedFunc?(qrData: json)
     }
     
-    static func GenQRJsonString(data: AnyObject) -> String? {
-        let qrData = ["YMQRData": data]
+    static func GenQRJsonString(data: AnyObject, opt: String = "") -> String? {
+        let qrData = ["YMQRData": data, "YMOperation": opt]
         
         if(NSJSONSerialization.isValidJSONObject(qrData)) {
             let jsonData = try! NSJSONSerialization.dataWithJSONObject(qrData, options: NSJSONWritingOptions.PrettyPrinted)

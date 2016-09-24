@@ -59,7 +59,10 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_APPOINTMENT_ACCEPT_DETAIL_NAME: true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_PROCESSING_NAME: true,
         YMCommonStrings.CS_PAGE_ADD_FRIEND_QR_CARD: true,
-        YMCommonStrings.CS_PAGE_MY_INFO_CARD: true
+        YMCommonStrings.CS_PAGE_MY_INFO_CARD: true,
+        YMCommonStrings.CS_PAGE_REAUIRE_PAPER_CARD: true,
+        YMCommonStrings.CS_PAGE_COMMON_TEXT_INPUT: true,
+        YMCommonStrings.CS_PAGE_PAPER_CARD_PREVIEW: true
     ]
 }
 

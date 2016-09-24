@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class YMLabel: UILabel {
+public class YMLabel: ActiveLabel {
     public var UserStringData: String = ""
     public var UserObjectData: AnyObject? = nil
     

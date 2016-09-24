@@ -81,6 +81,10 @@ public class YMCommonStrings {
     
     public static let CS_PAGE_MY_INFO_CARD = "PageMyInfoCard"
     public static let CS_PAGE_ADD_FRIEND_QR_CARD = "PageAddFriendInfoCard"
+    public static let CS_PAGE_REAUIRE_PAPER_CARD = "RequirePaperCard"
+    public static let CS_PAGE_PAPER_CARD_PREVIEW = "PaperCardPreview"
+
+    public static let CS_PAGE_COMMON_TEXT_INPUT = "PageCommonTextInput"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

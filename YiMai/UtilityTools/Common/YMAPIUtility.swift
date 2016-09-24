@@ -152,14 +152,14 @@ public class YMAPIUtility {
 
             
             print("error code is : \(response.statusCode)")
-            if(nil != errInfo) {
-                print("error info is : \(JSON(errInfo!))")
+            if(nil != errStr) {
+                print("error info is : \(JSON.parse(errStr! as String))")
             } else {
                 print("no error info")
             }
             
             print("------------org error info---------------")
-            print(error)
+            print(errStr)
         } else {
             print(error)
         }

@@ -51,4 +51,8 @@ public class PageMyInfoCardActions: PageJumpActions {
     func AddFailed(error: NSError) {
         YMPageModalMessage.ShowNormalInfo("网络通讯故障，请稍后再试。", nav: self.NavController!)
     }
+    
+    func GoToRequirePaperCard(_: YMButton) {
+        DoJump(YMCommonStrings.CS_PAGE_REAUIRE_PAPER_CARD)
+    }
 }
