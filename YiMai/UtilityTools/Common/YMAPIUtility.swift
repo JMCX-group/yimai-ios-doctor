@@ -62,6 +62,7 @@ public class YMAPIInterfaceURL {
     static let UploadAppointmentPhoto = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/upload-img"
     static let GetAppointmentList = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/list"
     static let GetAppointmentDetail = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/detail"
+    static let AppointmentTranser = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/transfer"
     
     static let GetAdmissionsList = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/list"
     static let GetAdmissionDetail = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/detail"
@@ -668,6 +669,10 @@ public class YMAPIUtility {
     
     public func YMCreateNewAppointment(param: AnyObject) {
         YMAPIPost(YMAPIInterfaceURL.CreateNewAppointment, param: param, progressHandler: nil)
+    }
+    
+    public func YMAppointmentTransfer(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.AppointmentTranser, param: param, progressHandler: nil)
     }
     
     public func YMGetAppointmentList() {

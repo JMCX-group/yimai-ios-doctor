@@ -60,8 +60,11 @@ public class PageAppointmentAcceptActions: PageJumpActions {
         
     }
 
-    public func PatientTransferTouched(sender: UIGestureRecognizer) {
-        
+    public func PatientTransferTouched(qr: UIGestureRecognizer) {
+        let btn = qr.view as! YMTouchableImageView
+
+        PageAppointmentTransferViewController.AppointmentData = btn.UserObjectData as? [String: AnyObject]
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_TRANSFER)
     }
     
     public func DenyDlgTagTouched(sender: UIGestureRecognizer) {

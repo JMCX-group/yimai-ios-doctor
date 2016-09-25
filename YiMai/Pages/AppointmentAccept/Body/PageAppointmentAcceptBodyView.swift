@@ -35,6 +35,8 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
     private var DenyBecauseNotExpertise: YMTouchableView!
     private var DenyBecauseOtherReason: YMTouchableView!
     
+    private var TransferBtn: YMTouchableImageView? = nil
+    
     public var SelectedDenyReason: YMTouchableView? = nil
     public let DenyOtherReasonInput = YMTextArea(aDelegate: nil)
     
@@ -50,12 +52,13 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
     }
 
     public func DrawTransferButton(top: UIView) {
-        let transferBtn = YMLayout.GetTouchableImageView(useObject: AcceptActions!,
+        TransferBtn = YMLayout.GetTouchableImageView(useObject: AcceptActions!,
                                                          useMethod: "PatientTransferTouched:".Sel(),
                                                          imageName: "AppointmentAcceptForTransferIcon")
         
-        top.addSubview(transferBtn)
-        transferBtn.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 24.LayoutVal(), width: transferBtn.width, height: transferBtn.height)
+        top.addSubview(TransferBtn!)
+        TransferBtn!.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 24.LayoutVal(),
+                                   width: TransferBtn!.width, height: TransferBtn!.height)
     }
     
     private func DrawReasonLabel(labelLine: YMTouchableView, labelText: String) {
@@ -574,6 +577,8 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
         DrawImageList(patient)
         DrawTimeInfo()
         
+        TransferBtn!.UserObjectData = data
+
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: TimePanel, padding: 120.LayoutVal())
         Loading?.Hide()
     }
@@ -589,6 +594,8 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
         YMLayout.ClearView(view: TextInfoPanel)
         YMLayout.ClearView(view: ImagePanel)
         YMLayout.ClearView(view: TimePanel)
+        
+        TransferBtn?.UserObjectData = nil
     }
 }
 

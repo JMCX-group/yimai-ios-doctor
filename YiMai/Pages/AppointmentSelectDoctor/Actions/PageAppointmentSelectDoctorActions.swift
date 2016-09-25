@@ -13,7 +13,13 @@ public class PageAppointmentSelectDoctorAcitons: PageJumpActions {
     public func DoctorSelect(sender: UIGestureRecognizer) {
         let cell = sender.view! as! YMTouchableView
 
-        PageAppointmentViewController.SelectedDoctor = cell.UserObjectData as? [String: AnyObject]
+        let controllers = NavController!.viewControllers
+        let prevCtrl = controllers[controllers.count - 2]
+        if(prevCtrl.isKindOfClass(PageAppointmentViewController)){
+            PageAppointmentViewController.SelectedDoctor = cell.UserObjectData as? [String: AnyObject]
+        } else {
+            PageAppointmentTransferViewController.SelectedDoctor = cell.UserObjectData as? [String: AnyObject]
+        }
         
         self.NavController?.popViewControllerAnimated(true)
     }

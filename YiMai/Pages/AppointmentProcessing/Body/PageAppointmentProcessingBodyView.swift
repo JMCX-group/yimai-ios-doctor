@@ -106,12 +106,7 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
     }
 
     public func DrawTransferButton(top: UIView) {
-        let transferBtn = YMLayout.GetTouchableImageView(useObject: AcceptActions!,
-                                                         useMethod: "PatientTransferTouched:".Sel(),
-                                                         imageName: "AppointmentProcessingForTransferIcon")
         
-        top.addSubview(transferBtn)
-        transferBtn.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 24.LayoutVal(), width: transferBtn.width, height: transferBtn.height)
     }
     
     private func DrawReasonLabel(labelLine: YMTouchableView, labelText: String) {
