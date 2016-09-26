@@ -50,7 +50,7 @@ public class PagePersonalBodyView: NSObject {
     
     private func DrawHotLinePanel() -> UIView {
         let hotlineView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByViewSender:".Sel())
-        hotlineView.UserStringData = YMCommonStrings.CS_PAGE_HOT_LINE_NAME
+        hotlineView.UserStringData = YMCommonStrings.CS_PAGE_YIMAI_LAWYER_INFO
         hotlineView.frame = CGRect(x: 0,y: 0,width: YMSizes.PageWidth, height: OperationHeight)
         hotlineView.backgroundColor = YMColors.White
         

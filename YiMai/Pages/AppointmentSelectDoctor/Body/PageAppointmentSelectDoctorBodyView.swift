@@ -54,7 +54,7 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
     }
     
     private func DrawFriendsCell(data: [String: AnyObject], docPanel: UIView, prevCell: UIView?) -> YMTouchableView {
-        let _ = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
+        let head = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
@@ -117,6 +117,8 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
         
+        YMLayout.LoadImageFromServer(userHeadBackground, url: head, fullUrl: nil, makeItRound: true)
+        
         return cell
     }
     
@@ -150,7 +152,7 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         for doc in l1Doc {
             cellView = DrawFriendsCell(
                 [
-                    YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+                    YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"\(doc["head_url"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_NAME:"\(doc["name"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"\(doc["hospital"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"\(doc["department"]!)",
@@ -205,7 +207,7 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         for doc in l2Doc {
             cellView = DrawFriendsCell(
                 [
-                    YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+                    YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"\(doc["head_url"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_NAME:"\(doc["name"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"\(doc["hospital"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"\(doc["department"]!)",

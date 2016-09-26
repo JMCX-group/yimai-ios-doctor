@@ -62,6 +62,8 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         basicPanel.addSubview(divider)
         
         userHead.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: userHead.width, height: userHead.height)
+        let head = data["head_url"] as! String
+        YMLayout.LoadImageFromServer(userHead, url: head, fullUrl: nil, makeItRound: true)
         
         name.text = data["name"] as? String
         name.textColor = YMColors.FontBlue
@@ -323,6 +325,9 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
             } else {
                 headImg.align(Align.ToTheRightCentered, relativeTo: lastHeadImg!, padding: 40.LayoutVal(), width: headImg.width, height: headImg.height)
             }
+            
+            let head = data["head_url"] as! String
+            YMLayout.LoadImageFromServer(headImg, url: head, fullUrl: nil, makeItRound: true)
             
             lastHeadImg = headImg
         }

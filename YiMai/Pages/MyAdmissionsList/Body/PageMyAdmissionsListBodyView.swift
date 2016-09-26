@@ -317,6 +317,8 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
                                padding: 41.LayoutVal(),
                                width: headImage.width,
                                height: headImage.height)
+        let head = data["head_url"] as! String
+        YMLayout.LoadImageFromServer(headImage, url: head, fullUrl: nil, makeItRound: true)
         
         name.anchorInCorner(Corner.TopLeft,
                             xPad: 180.LayoutVal(),

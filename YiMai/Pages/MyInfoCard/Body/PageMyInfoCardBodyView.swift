@@ -91,7 +91,7 @@ public class PageMyInfoCardBodyView: PageBodyView {
         
         
         if(nil != head) {
-            YMLayout.LoadImageFromServer(UserHead, url: head!)
+            YMLayout.LoadImageFromServer(UserHead, url: head!, fullUrl: nil, makeItRound: true)
         }
         
         BodyView.addSubview(nameLabel)

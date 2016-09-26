@@ -25,6 +25,9 @@ public class PageIndexViewController: PageViewController {
         
         YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)! as! [String: AnyObject]
         YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
+        
+        var a = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
+        print(a)
     }
 
     override func PageLayout(){

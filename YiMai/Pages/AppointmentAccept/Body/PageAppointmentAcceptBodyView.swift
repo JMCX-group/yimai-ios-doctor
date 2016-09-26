@@ -298,6 +298,8 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
         
         headImage.anchorToEdge(Edge.Top, padding: 30.LayoutVal(),
                                width: headImage.width, height: headImage.height)
+        let head = data["head_url"] as! String
+        YMLayout.LoadImageFromServer(headImage, url: head, fullUrl: nil, makeItRound: true)
         
         divider.backgroundColor = YMColors.FontBlue
         divider.align(Align.UnderCentered, relativeTo: headImage,
@@ -359,6 +361,8 @@ public class PageAppointmentAcceptBodyView: PageBodyView {
         
         headImage.anchorToEdge(Edge.Top, padding: 30.LayoutVal(),
                                width: headImage.width, height: headImage.height)
+        let head = data["head_url"] as! String
+        YMLayout.LoadImageFromServer(headImage, url: head, fullUrl: nil, makeItRound: true)
         
         patientName.text = "\(data["name"]!)"
         patientName.textColor = YMColors.FontBlue

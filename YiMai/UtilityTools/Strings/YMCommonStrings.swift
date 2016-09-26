@@ -31,7 +31,6 @@ public class YMCommonStrings {
     public static let CS_PAGE_MY_PATIENTS_NAME = "PageMyPatients"
     public static let CS_PAGE_PERSONAL_SETTING_NAME = "PagePersonalSetting"
     public static let CS_PAGE_MY_WALLET_NAME = "PageMyWallet"
-    public static let CS_PAGE_HOT_LINE_NAME = "PageHotLine"
     public static let CS_PAGE_CONSULTANT_ZONE_NAME = "PageConsultantZone"
     
     public static let CS_PAGE_ACCOUNT_SETTING_NAME = "PagePersonalAccountSetting"
@@ -74,6 +73,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_ABOUT_YIMAI_NAME = "PageAboutYiMai"
     public static let CS_PAGE_YIMAI_INTRO_NAME = "PageYiMaiIntro"
     public static let CS_PAGE_YIMAI_CONTACT_NAME = "PageYiMaiContact"
+    public static let CS_PAGE_YIMAI_LAWYER_INFO = "PageLawyerInfo"
     
     public static let CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME = "PageYiMaiDoctorDetail"
     public static let CS_PAGE_NEW_FRIEND_NAME = "PageNewFriend"

@@ -57,7 +57,7 @@ public class PageYiMaiR2BodyView: PageBodyView {
     }
     
     private func DrawFriendsCell(data: [String: AnyObject], prevCell: YMTouchableView?) -> YMTouchableView {
-        let _ = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
+        let head = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
@@ -118,6 +118,8 @@ public class PageYiMaiR2BodyView: PageBodyView {
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
         
+        YMLayout.LoadImageFromServer(userHeadBackground, url: head, fullUrl: nil, makeItRound: true)
+
         return cell
     }
     
@@ -145,13 +147,12 @@ public class PageYiMaiR2BodyView: PageBodyView {
         for doc in l2Doc {
             cellView = DrawFriendsCell(
                 [
-                    YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"test",
+                    YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"\(doc["head_url"])",
                     YMYiMaiStrings.CS_DATA_KEY_NAME:"\(doc["name"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"\(doc["hospital"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"\(doc["department"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"\(doc["job_title"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)"
-                    
                 ], prevCell: cellView
             )
         }

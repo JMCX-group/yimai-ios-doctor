@@ -72,6 +72,8 @@ public class PageSearchResultCell {
         headimage.anchorInCorner(Corner.TopLeft,
                                  xPad: 40.LayoutVal(), yPad: 20.LayoutVal(),
                                  width: headimage.width, height: headimage.height)
+        let head = info["head_url"] as! String
+        YMLayout.LoadImageFromServer(headimage, url: head, fullUrl: nil, makeItRound: true)
         
         name.text = "\(info["name"]!)"
         name.font = YMFonts.YMDefaultFont(30.LayoutVal())

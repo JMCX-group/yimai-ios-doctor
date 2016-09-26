@@ -81,7 +81,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         }
         ResultPanel = UIView()
         
-        let _ = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
+        let head = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as? String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as? String
@@ -140,6 +140,8 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         jobTitleLabel.align(Align.ToTheRightCentered, relativeTo: divider, padding: 15.LayoutVal(), width: jobTitleLabel.width, height: jobTitleLabel.height)
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
+        
+        YMLayout.LoadImageFromServer(userHeadBackground, url: head, fullUrl: nil, makeItRound: true)
     }
     
     private func DrawAddButton(data: [String: AnyObject]? = nil) {

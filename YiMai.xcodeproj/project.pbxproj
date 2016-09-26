@@ -303,6 +303,9 @@
 		FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD01D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift */; };
 		FD801DD31D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */; };
 		FD801DD51D66F3140066198B /* PageAdmissionChargeSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD41D66F3140066198B /* PageAdmissionChargeSettingActions.swift */; };
+		FDD1DB1A1D992BA000C289B1 /* PageLawyerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD1DB191D992BA000C289B1 /* PageLawyerInfoViewController.swift */; };
+		FDD1DB1B1D992BC700C289B1 /* PageLawyerInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD1DB1D1D992BC700C289B1 /* PageLawyerInfo.storyboard */; };
+		FDD1DB1F1D992D0700C289B1 /* PageLawyerInfoBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD1DB1E1D992D0700C289B1 /* PageLawyerInfoBodyView.swift */; };
 		FDD93EA31D923744003576D4 /* PageAddFriendInfoCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD93EA21D923744003576D4 /* PageAddFriendInfoCardViewController.swift */; };
 		FDD93EA41D923754003576D4 /* PageAddFriendInfoCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD93EA61D923754003576D4 /* PageAddFriendInfoCard.storyboard */; };
 		FDD93EA81D923773003576D4 /* PageAddFriendInfoCardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD93EA71D923773003576D4 /* PageAddFriendInfoCardBodyView.swift */; };
@@ -616,6 +619,9 @@
 		FD801DD01D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionChargeSettingViewController.swift; sourceTree = "<group>"; };
 		FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdmissionChargeSettingBodyView.swift; sourceTree = "<group>"; };
 		FD801DD41D66F3140066198B /* PageAdmissionChargeSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionChargeSettingActions.swift; sourceTree = "<group>"; };
+		FDD1DB191D992BA000C289B1 /* PageLawyerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLawyerInfoViewController.swift; sourceTree = "<group>"; };
+		FDD1DB1C1D992BC700C289B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageLawyerInfo.storyboard; sourceTree = "<group>"; };
+		FDD1DB1E1D992D0700C289B1 /* PageLawyerInfoBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLawyerInfoBodyView.swift; sourceTree = "<group>"; };
 		FDD93EA21D923744003576D4 /* PageAddFriendInfoCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAddFriendInfoCardViewController.swift; sourceTree = "<group>"; };
 		FDD93EA51D923754003576D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAddFriendInfoCard.storyboard; sourceTree = "<group>"; };
 		FDD93EA71D923773003576D4 /* PageAddFriendInfoCardBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAddFriendInfoCardBodyView.swift; sourceTree = "<group>"; };
@@ -1326,6 +1332,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				FDD1DB151D992B0300C289B1 /* LawyerInfo */,
 				96661E7D1D97D876000692D0 /* AppointmentTransfer */,
 				96C02FE01D96B4870096E216 /* PaperCardPreview */,
 				96C02FB31D9669310096E216 /* RequirePaperCard */,
@@ -2560,6 +2567,24 @@
 			path = YMLabel;
 			sourceTree = "<group>";
 		};
+		FDD1DB151D992B0300C289B1 /* LawyerInfo */ = {
+			isa = PBXGroup;
+			children = (
+				FDD1DB161D992B0300C289B1 /* BodyView */,
+				FDD1DB1D1D992BC700C289B1 /* PageLawyerInfo.storyboard */,
+				FDD1DB191D992BA000C289B1 /* PageLawyerInfoViewController.swift */,
+			);
+			path = LawyerInfo;
+			sourceTree = "<group>";
+		};
+		FDD1DB161D992B0300C289B1 /* BodyView */ = {
+			isa = PBXGroup;
+			children = (
+				FDD1DB1E1D992D0700C289B1 /* PageLawyerInfoBodyView.swift */,
+			);
+			path = BodyView;
+			sourceTree = "<group>";
+		};
 		FDD93E9D1D923710003576D4 /* AddFriendInfoCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2690,6 +2715,7 @@
 				73622E531D1EE2FC0039E785 /* PageYiMaiIntro.storyboard in Resources */,
 				961FE8C41CEEF6D0002785B9 /* PageYiMai.storyboard in Resources */,
 				9619EF5B1CC1DB9600F69CBC /* Assets.xcassets in Resources */,
+				FDD1DB1B1D992BC700C289B1 /* PageLawyerInfo.storyboard in Resources */,
 				FD54E0601D37777400F8E629 /* PageAdmissionTimeSetting.storyboard in Resources */,
 				9619EF561CC1DB9600F69CBC /* Main.storyboard in Resources */,
 				96814A931D1A788B002C8BD3 /* PagePersonalTagsEdit.storyboard in Resources */,
@@ -2848,6 +2874,7 @@
 				9672FB3C1CD1C35500BC7E40 /* PageMessageListBodyView.swift in Sources */,
 				FDF46D3B1D768B32007B9987 /* ApointmentAcceptDetailActions.swift in Sources */,
 				960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */,
+				FDD1DB1F1D992D0700C289B1 /* PageLawyerInfoBodyView.swift in Sources */,
 				9676761F1D8ADF3400A07106 /* ActiveLabel.swift in Sources */,
 				9612DB461CC8B96B00262D2E /* PageIndexActions.swift in Sources */,
 				FDD93EAA1D92377E003576D4 /* PageAddFriendInfoCardActions.swift in Sources */,
@@ -3072,6 +3099,7 @@
 				967676221D8ADF3400A07106 /* StringTrimExtension.swift in Sources */,
 				96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */,
 				736EBC5A1D1675BD00C40AA7 /* PagePersonalSettingViewController.swift in Sources */,
+				FDD1DB1A1D992BA000C289B1 /* PageLawyerInfoViewController.swift in Sources */,
 				96D4518D1CF7D77F006817CE /* PageYiMaiSameHospitalBodyView.swift in Sources */,
 				73EA65C31D444BE90050C12C /* YMChatViewController.swift in Sources */,
 			);
@@ -3534,6 +3562,14 @@
 				FD801DCE1D66F2990066198B /* Base */,
 			);
 			name = PageAdmissionChargeSetting.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD1DB1D1D992BC700C289B1 /* PageLawyerInfo.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD1DB1C1D992BC700C289B1 /* Base */,
+			);
+			name = PageLawyerInfo.storyboard;
 			sourceTree = "<group>";
 		};
 		FDD93EA61D923754003576D4 /* PageAddFriendInfoCard.storyboard */ = {
