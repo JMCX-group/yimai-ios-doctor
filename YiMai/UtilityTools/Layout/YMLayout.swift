@@ -347,11 +347,14 @@ public class YMLayout {
 
         url += "?t=" + "\(NSDate().timeIntervalSince1970)"
         print(url)
-        imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
-            if(makeItRound) {
-                imageView.image = Toucan(image: image!).maskWithEllipse().image
-            }
-        })
+        let imgUrl = NSURL(string: url)
+        if(nil != imgUrl) {
+            imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
+                if(makeItRound) {
+                    imageView.image = Toucan(image: image!).maskWithEllipse().image
+                }
+            })
+        }
     }
     
     public static func GetNomalLabel(text: String?, textColor: UIColor, fontSize: CGFloat) -> ActiveLabel {
@@ -415,6 +418,7 @@ public class YMLayout {
                 imgData = UIImageJPEGRepresentation(imgForProcess, 0.1)
             }else if (imgData!.length > 512*1024) {//0.5M-1M
                 imgData = UIImageJPEGRepresentation(imgForProcess, 0.5)
+                
             }else if (imgData!.length > 200*1024) {//0.25M-0.5M
                 imgData = UIImageJPEGRepresentation(imgForProcess, 0.9)
             }

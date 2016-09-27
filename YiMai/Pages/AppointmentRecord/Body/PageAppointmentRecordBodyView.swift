@@ -126,7 +126,7 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         headImage.anchorInCorner(Corner.TopLeft,
             xPad: 40.LayoutVal(), yPad: 20.LayoutVal(),
             width: headImage.width, height: headImage.height)
-        let head = data["head_url"] as! String
+        let head = data["doctor_head_url"] as! String
         YMLayout.LoadImageFromServer(headImage, url: head, fullUrl: nil, makeItRound: true)
         
         name.text = data["doctor_name"] as? String

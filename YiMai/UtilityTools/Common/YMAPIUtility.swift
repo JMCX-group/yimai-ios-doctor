@@ -79,6 +79,8 @@ public class YMAPIInterfaceURL {
     static let GetSameHospitalList = YMAPIInterfaceURL.ApiBaseUrl + "/user/search/same-hospital"
     static let GetSameCollegeList = YMAPIInterfaceURL.ApiBaseUrl + "/user/search/same-college"
     static let GetSameDepartmentList = YMAPIInterfaceURL.ApiBaseUrl + "/user/search/same-department"
+    
+    static let GetMyPatientList = YMAPIInterfaceURL.ApiBaseUrl + "/patient/all"
 }
 
 public class YMAPICommonVariable {
@@ -761,6 +763,10 @@ public class YMAPIUtility {
     public func YMUploadUserHead(param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder) {
         YMAPIUploadPhotos(YMAPIInterfaceURL.ChangeUserInfo,
                           param: param, blockBuilder: blockBuilder, progressHandler: nil)
+    }
+    
+    public func YMGetMyPatientList() {
+        YMAPIGet(YMAPIInterfaceURL.GetMyPatientList, param: nil, progressHandler: nil)
     }
 }
 

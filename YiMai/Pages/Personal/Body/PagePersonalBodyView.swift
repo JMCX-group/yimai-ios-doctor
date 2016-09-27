@@ -128,7 +128,7 @@ public class PagePersonalBodyView: NSObject {
     private func DrawOperations() {
         
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_ADMISSIONS_SETTING_NAME, iconName: "PersonalIconMyAdmissionsSetting",title: "我的接诊设置")
-        DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_PATIENTS_NAME, iconName: "PersonalIconMyPatient",title: "我的患者")
+        DrawAnOperationPanel(YMCommonStrings.CS_PAGE_PATIENT_LIST, iconName: "PersonalIconMyPatient",title: "我的患者")
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_MY_WALLET_NAME, iconName: "PersonalIconMyWallet",title: "我的钱包")
         DrawAnOperationPanel(YMCommonStrings.CS_PAGE_PERSONAL_SETTING_NAME, iconName: "PersonalIconMySetting",title: "设置")
         LastView = DrawHotLinePanel()

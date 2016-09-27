@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
+import Neon
 
 public class YMLabel: ActiveLabel {
     public var UserStringData: String = ""
@@ -18,5 +18,10 @@ public class YMLabel: ActiveLabel {
         
         let gr = UITapGestureRecognizer(target: actionObject, action: actionMethod)
         self.addGestureRecognizer(gr)
+    }
+    
+    public func SetSemicircleBorder() {
+        self.layer.cornerRadius = self.height / 2
+        self.layer.masksToBounds = true
     }
 }

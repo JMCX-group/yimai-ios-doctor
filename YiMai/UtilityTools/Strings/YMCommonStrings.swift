@@ -28,7 +28,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_REGISTER_INPUT_HOSPITAL_NAME = "PageRegisterInputHospital"
     
     public static let CS_PAGE_MY_ADMISSIONS_SETTING_NAME = "PageMyAdmissionSetting"
-    public static let CS_PAGE_MY_PATIENTS_NAME = "PageMyPatients"
+    public static let CS_PAGE_PATIENT_LIST = "PageMyPatientList"
     public static let CS_PAGE_PERSONAL_SETTING_NAME = "PagePersonalSetting"
     public static let CS_PAGE_MY_WALLET_NAME = "PageMyWallet"
     public static let CS_PAGE_CONSULTANT_ZONE_NAME = "PageConsultantZone"
@@ -84,7 +84,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_ADD_FRIEND_QR_CARD = "PageAddFriendInfoCard"
     public static let CS_PAGE_REAUIRE_PAPER_CARD = "RequirePaperCard"
     public static let CS_PAGE_PAPER_CARD_PREVIEW = "PaperCardPreview"
-
+    
     public static let CS_PAGE_COMMON_TEXT_INPUT = "PageCommonTextInput"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
