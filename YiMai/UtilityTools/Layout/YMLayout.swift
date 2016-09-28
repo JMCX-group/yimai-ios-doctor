@@ -325,7 +325,7 @@ public class YMLayout {
         return cell
     }
     
-    public static func LoadImageFromServer(imageView: UIImageView, url urlSegment: String, fullUrl: String? = nil, makeItRound: Bool = false) {
+    public static func LoadImageFromServer(imageView: UIImageView, url urlSegment: String, fullUrl: String? = nil, makeItRound: Bool = false, refresh: Bool = false) {
         var url = urlSegment
         
         var urlArr = url.componentsSeparatedByString("Optional(")
@@ -342,10 +342,11 @@ public class YMLayout {
         } else {
             url = YMAPIInterfaceURL.Server + url
         }
-        
-        print(url)
 
-        url += "?t=" + "\(NSDate().timeIntervalSince1970)"
+        if(refresh) {
+            url += "?t=" + "\(NSDate().timeIntervalSince1970)"
+        }
+
         print(url)
         let imgUrl = NSURL(string: url)
         if(nil != imgUrl) {

@@ -39,6 +39,12 @@ public class PageYiMaiViewController: PageViewController {
         BottomView = PageCommonBottomView(parentView: self.SelfView!, navController: self.NavController!)
     }
     
+    override func PagePreRefresh() {
+        if (!RecentContactList!.BodyView.hidden) {
+            ShowRecentContactPage()
+        }
+    }
+    
     public func ShowYiMaiR1Page(){
         YiMaiTopView?.SetSelectedTab(YMYiMaiStrings.CS_TOP_TAB_R1_BUTTON_TITLE)
         RecentContactList?.BodyView.hidden = true

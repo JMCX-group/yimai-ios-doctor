@@ -90,6 +90,7 @@ class PageYiMaiRecentContactList: PageBodyView {
     func LoadData(doctors: [[String: AnyObject]]) {
         let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
 
+        YMLayout.ClearView(view: BodyView)
         var docInfo = [String: AnyObject]()
         var cell: YMTouchableView? = nil
         for docImInfo in imInfo {
