@@ -81,6 +81,7 @@ public class YMAPIInterfaceURL {
     static let GetSameDepartmentList = YMAPIInterfaceURL.ApiBaseUrl + "/user/search/same-department"
     
     static let GetMyPatientList = YMAPIInterfaceURL.ApiBaseUrl + "/patient/all"
+    static let GetDoctorsByIdList = YMAPIInterfaceURL.ApiBaseUrl + "/search/doctors"
 }
 
 public class YMAPICommonVariable {
@@ -767,6 +768,10 @@ public class YMAPIUtility {
     
     public func YMGetMyPatientList() {
         YMAPIGet(YMAPIInterfaceURL.GetMyPatientList, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetRecentContactedDocList(param: [String: String]) {
+        YMAPIPost(YMAPIInterfaceURL.GetDoctorsByIdList, param: param, progressHandler: nil)
     }
 }
 

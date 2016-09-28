@@ -10,7 +10,7 @@ import UIKit
 
 public class PageIndexViewController: PageViewController {
     private var IndexTopView: PageIndexTopView? = nil
-    private var BodyView : PageIndexBodyView? = nil
+    var BodyView : PageIndexBodyView? = nil
     private var Actions: PageIndexActions? = nil
     
     override func GestureRecognizerEnable() -> Bool {
@@ -26,8 +26,9 @@ public class PageIndexViewController: PageViewController {
         YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)! as! [String: AnyObject]
         YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
         
-        var a = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
-        print(a)
+        let docList = YMIMUtility.GetRecentContactDoctorsIdList()
+
+        Actions?.ContactApi.YMGetRecentContactedDocList(["id_list": docList.joinWithSeparator(",")])
     }
 
     override func PageLayout(){
@@ -36,7 +37,7 @@ public class PageIndexViewController: PageViewController {
         }
         super.PageLayout()
 
-        Actions = PageIndexActions(navController: self.navigationController!)
+        Actions = PageIndexActions(navController: self.navigationController!, target: self)
 
         BodyView = PageIndexBodyView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
         IndexTopView = PageIndexTopView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)

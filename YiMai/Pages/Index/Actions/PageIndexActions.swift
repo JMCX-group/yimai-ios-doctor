@@ -14,17 +14,34 @@ public class PageIndexActions: PageJumpActions {
     private var ApiUtility: YMAPIUtility? = nil
     private let ApiSearchActionKey = YMAPIStrings.CS_API_ACTION_NAME_COMMON_SEARCH + "-indexCommonSearch"
     
+    var TargetController: PageIndexViewController!
+    
+    var ContactApi: YMAPIUtility!
+    
     override func ExtInit() {
         ApiUtility = YMAPIUtility(key: self.ApiSearchActionKey,
                                   success: self.SearchSuccessed,
                                   error: self.GotSearchError)
+        
+        ContactApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_RECENTLY_CONTACT,
+                                  success: GetRecentContactSuccess,
+                                  error: GetRecentContactFailed)
+        
+        TargetController = Target as! PageIndexViewController
+    }
+    
+    func GetRecentContactSuccess(data: NSDictionary?) {
+        let realData = data!["data"] as! [[String: AnyObject]]
+        TargetController.BodyView!.LoadContactList(realData)
+    }
+    
+    func GetRecentContactFailed(error: NSError) {
+        let realData = [[String: AnyObject]]()
+        TargetController.BodyView!.LoadContactList(realData)
     }
     
     private func GotSearchError(error: NSError){
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
-        
-        print(error)
+        YMAPIUtility.PrintErrorInfo(error)
     }
     
     private func SearchSuccessed(data: NSDictionary?) {
@@ -33,6 +50,26 @@ public class PageIndexActions: PageJumpActions {
         } else {
             print("no result!!!")
         }
+    }
+    
+    public func DoChat(gr: UIGestureRecognizer) {
+        let sender = gr.view as! YMTouchableView
+        let chat = YMChatViewController()
+        //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
+        chat.conversationType = RCConversationType.ConversationType_PRIVATE
+        //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
+        chat.targetId = sender.UserStringData
+        //设置聊天会话界面要显示的标题
+        chat.title = ""
+        
+        let userData = sender.UserObjectData as! [String: AnyObject]
+        chat.ViewTitle = userData["name"] as! String
+        
+        chat.automaticallyAdjustsScrollViewInsets = false
+        chat.prefersStatusBarHidden()
+        
+        //显示聊天会话界面
+        self.NavController?.pushViewController(chat, animated: true)
     }
     
     public func JumpToAppointment(sender: UIGestureRecognizer) {

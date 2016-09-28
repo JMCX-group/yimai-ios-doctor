@@ -273,6 +273,8 @@
 		96FCD1491D17D7F800A6E12D /* PagePersonalDetailBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD1481D17D7F800A6E12D /* PagePersonalDetailBodyView.swift */; };
 		96FCD14B1D17D80D00A6E12D /* PagePersonalDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD14A1D17D80D00A6E12D /* PagePersonalDetailActions.swift */; };
 		96FCD14D1D17D81A00A6E12D /* PagePersonalDetailTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCD14C1D17D81A00A6E12D /* PagePersonalDetailTopView.swift */; };
+		FD07E5D11D9B67A900E33CE8 /* YMIMUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07E5D01D9B67A900E33CE8 /* YMIMUtility.swift */; };
+		FD07E5D31D9BA48400E33CE8 /* PageYiMaiRecentContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07E5D21D9BA48400E33CE8 /* PageYiMaiRecentContactList.swift */; };
 		FD113D881D7D521200628295 /* YMPhotoSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD113D871D7D521200628295 /* YMPhotoSelector.swift */; };
 		FD1F57F51D9132A30039769D /* YMQRRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F57F41D9132A30039769D /* YMQRRecognizer.swift */; };
 		FD2981351D6E97BE006A48CA /* YMLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2981341D6E97BE006A48CA /* YMLabel.swift */; };
@@ -592,6 +594,8 @@
 		96FCD14A1D17D80D00A6E12D /* PagePersonalDetailActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalDetailActions.swift; sourceTree = "<group>"; };
 		96FCD14C1D17D81A00A6E12D /* PagePersonalDetailTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalDetailTopView.swift; sourceTree = "<group>"; };
 		A556489D24098750735AC565 /* Pods_YiMai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiMai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD07E5D01D9B67A900E33CE8 /* YMIMUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMIMUtility.swift; sourceTree = "<group>"; };
+		FD07E5D21D9BA48400E33CE8 /* PageYiMaiRecentContactList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiRecentContactList.swift; sourceTree = "<group>"; };
 		FD113D871D7D521200628295 /* YMPhotoSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMPhotoSelector.swift; sourceTree = "<group>"; };
 		FD1F57F41D9132A30039769D /* YMQRRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMQRRecognizer.swift; sourceTree = "<group>"; };
 		FD2981341D6E97BE006A48CA /* YMLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMLabel.swift; sourceTree = "<group>"; };
@@ -1599,6 +1603,7 @@
 			children = (
 				963E74011CF409B300C10575 /* PageYiMaiR1BodyView.swift */,
 				96D745A91CF59D2200E345E3 /* PageYiMaiR2BodyView.swift */,
+				FD07E5D21D9BA48400E33CE8 /* PageYiMaiRecentContactList.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -1698,6 +1703,7 @@
 				96C6FB0D1D19304200738D02 /* YMVar.swift */,
 				73622E2B1D1EA2880039E785 /* YMLoaclData.swift */,
 				7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */,
+				FD07E5D01D9B67A900E33CE8 /* YMIMUtility.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2926,6 +2932,7 @@
 				FD77AF281D68484F00B8C73E /* LBXScanWrapper.swift in Sources */,
 				96D4516C1CF6DA98006817CE /* YiMaiManualAddFriendActions.swift in Sources */,
 				9624936F1CED7235007A9556 /* YMCoreDataKeyStrings.swift in Sources */,
+				FD07E5D31D9BA48400E33CE8 /* PageYiMaiRecentContactList.swift in Sources */,
 				73622E461D1EDF920039E785 /* PageAboutYiMaiViewController.swift in Sources */,
 				962076F61CC7291C002083FA /* PageRegisterSelectHospitalBodyView.swift in Sources */,
 				9672FB0C1CCDD72400BC7E40 /* YMTouchableView.swift in Sources */,
@@ -2938,6 +2945,7 @@
 				96814AB51D1A9833002C8BD3 /* PagePersonalNameEditBodyView.swift in Sources */,
 				96D451701CF6F3E9006817CE /* YMYiMaiManualAddFriendStrings.swift in Sources */,
 				96331AF21CC7729900E53125 /* YMRegisterInputSelectorStrings.swift in Sources */,
+				FD07E5D11D9B67A900E33CE8 /* YMIMUtility.swift in Sources */,
 				9612DB711CC9F76600262D2E /* PagePersonalViewController.swift in Sources */,
 				96FCD1461D17D7C800A6E12D /* PagePersonalDetailViewController.swift in Sources */,
 				FD7B4C2B1D9A6B500003BE0D /* PageMyPatientListActions.swift in Sources */,

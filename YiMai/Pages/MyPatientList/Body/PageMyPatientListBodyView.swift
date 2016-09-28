@@ -242,7 +242,3 @@ public class PageMyPatientListBodyView: PageBodyView {
 
 
 
-
-
-
-

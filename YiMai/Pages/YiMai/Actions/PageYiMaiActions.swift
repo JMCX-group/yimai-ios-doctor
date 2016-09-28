@@ -10,6 +10,27 @@ import Foundation
 import UIKit
 
 public class PageYiMaiActions: PageJumpActions{
+    var TargetController: PageYiMaiViewController!
+    var ContactApi: YMAPIUtility!
+    
+    override func ExtInit() {
+        super.ExtInit()
+        TargetController = Target as! PageYiMaiViewController
+        ContactApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_RECENTLY_CONTACT,
+                                  success: GetRecentContactSuccess,
+                                  error: GetRecentContactFailed)
+    }
+    
+    func GetRecentContactSuccess(data: NSDictionary?) {
+        let realData = data!["data"] as! [[String: AnyObject]]
+        TargetController.RecentContactList.LoadData(realData)
+    }
+    
+    func GetRecentContactFailed(error: NSError) {
+        let realData = [[String: AnyObject]]()
+        TargetController.RecentContactList.LoadData(realData)
+    }
+
     public func QRScanSuccess(qrStr: String?) {
         if(nil == qrStr) {
             return
@@ -86,15 +107,16 @@ public class PageYiMaiActions: PageJumpActions{
     }
     
     public func YiMaiR1TabTouched(sender: YMButton) {
-        let parent = self.Target as! PageYiMaiViewController
-        parent.ShowYiMaiR1Page()
+        TargetController.ShowYiMaiR1Page()
     }
     
     public func YiMaiR2TabTouched(sender: YMButton) {
-        let parent = self.Target as! PageYiMaiViewController
-        parent.ShowYiMaiR2Page()
+        TargetController.ShowYiMaiR2Page()
     }
     
+    public func YiMaiRecentContact(sender: YMButton) {
+        TargetController.ShowRecentContactPage()
+    }
     
     public func DoSearch(editor: YMTextField) {
         let searchKey = editor.text
@@ -105,4 +127,48 @@ public class PageYiMaiActions: PageJumpActions{
             DoJump(YMCommonStrings.CS_PAGE_GLOBAL_SEARCH_NAME)
         }
     }
+    
+    public func DoChat(gr: UIGestureRecognizer) {
+        let sender = gr.view as! YMTouchableView
+        let chat = YMChatViewController()
+        //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
+        chat.conversationType = RCConversationType.ConversationType_PRIVATE
+        //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
+        chat.targetId = sender.UserStringData
+        //设置聊天会话界面要显示的标题
+        chat.title = ""
+        
+        let userData = sender.UserObjectData as! [String: AnyObject]
+        chat.ViewTitle = userData["name"] as! String
+        
+        chat.automaticallyAdjustsScrollViewInsets = false
+        chat.prefersStatusBarHidden()
+        
+        //显示聊天会话界面
+        self.NavController?.pushViewController(chat, animated: true)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

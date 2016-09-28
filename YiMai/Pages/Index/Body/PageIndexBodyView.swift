@@ -139,8 +139,8 @@ public class PageIndexBodyView {
         DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
     }
     
-    private func GetContactButton(image: UIImage, name: String, desc: String) -> UIView {
-        let buttonView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "PageJumpToByImageViewSender:".Sel())
+    private func GetContactButton(image: UIImage, name: String, desc: String) -> YMTouchableView {
+        let buttonView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoChat:".Sel())
         buttonView.frame = CGRect(x: 0,y: 0,width: 190.LayoutVal(), height: 260.LayoutVal())
         buttonView.backgroundColor = YMColors.PanelBackgroundGray
 
@@ -166,6 +166,8 @@ public class PageIndexBodyView {
         contactName.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 174.LayoutVal(), width: buttonView.width, height: 26.LayoutVal())
         contactDesc.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 204.LayoutVal(), width: buttonView.width, height: 22.LayoutVal())
         
+        buttonView.UserObjectData = ["img": buttonImage, "name": name]
+        
         return buttonView
     }
     
@@ -179,25 +181,50 @@ public class PageIndexBodyView {
         let buttonHeight = baseButton.height
         
         ContactPanel.groupInCorner(group: Group.Horizontal, views: ContactArray.map({$0 as UIView}), inCorner: Corner.TopLeft, padding: 0, width: buttonWidth, height: buttonHeight)
+        
+        YMLayout.SetHScrollViewContentSize(ContactPanel, lastSubView: ContactArray.last!)
     }
 
     private func DrawContactPanel() {
         BodyView.addSubview(ContactPanel)
         ContactPanel.backgroundColor = YMColors.PanelBackgroundGray
         ContactPanel.align(Align.UnderMatchingLeft, relativeTo: DoDoctorAuthPanel, padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 260.LayoutVal())
-        
+    }
+    
+    func LoadContactList(data: [[String: AnyObject]]) {
         let yiImage = UIImage(named: "IndexButtonYi")
         let maiImage = UIImage(named: "IndexButtonMai")
         
         let yiButton = GetContactButton(yiImage!, name: "小医", desc: "智能客服")
         let maiButton = GetContactButton(maiImage!, name: "小脉", desc: "智能客服")
-
+        
+        YMLayout.ClearView(view: ContactPanel)
+        ContactArray.removeAll()
+        
         ContactArray.append(yiButton)
         ContactArray.append(maiButton)
         
-        LayoutContactButtons()
+        let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
+
+        for docImInfo in imInfo {
+            for doc in data {
+                if("\(docImInfo.targetId!)" == "\(doc["id"]!)" || "\(docImInfo.senderUserId!)" == "\(doc["id"]!)") {
+                    
+                    let img = UIImage(named: "IndexButtonContactBackground")
+                    let cell = GetContactButton(img!, name: "\(doc["name"]!)", desc: "\(doc["job_title"]!)")
+                    
+                    let cellData = cell.UserObjectData as! [String: AnyObject]
+                    let cellImage = cellData["img"] as! UIImageView
+                    YMLayout.LoadImageFromServer(cellImage, url: "\(doc["head_url"]!)", fullUrl: nil, makeItRound: true)
+                    cell.UserStringData = "\(doc["id"]!)"
+                    ContactArray.append(cell)
+                    break
+                }
+            }
+        }
         
-        MoreContactButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "".Sel(), imageName: "IndexButtonMoreGray")
+        
+        LayoutContactButtons()
     }
 }
 

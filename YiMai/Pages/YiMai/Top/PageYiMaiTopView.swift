@@ -22,6 +22,7 @@ public class PageYiMaiTopView: NSObject {
     
     private let R1TabSelector: Selector = "YiMaiR1TabTouched:".Sel()
     private let R2TabSelector: Selector = "YiMaiR2TabTouched:".Sel()
+    private let RecentTabSelector: Selector = "YiMaiRecentContact:".Sel()
     private let AddFriendsSelector: Selector = "AddFriendButtonTouched:".Sel()
     
     private let TopView = UIView()
@@ -104,6 +105,7 @@ public class PageYiMaiTopView: NSObject {
         TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_R2_BUTTON_TITLE]?.backgroundColor = UIColor.clearColor()
         TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_R2_BUTTON_TITLE]?.setTitleColor(YMColors.White, forState: UIControlState.Normal)
         
+        TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_COMM_BUTTON_TITLE]?.addTarget(Actions!, action: RecentTabSelector, forControlEvents: UIControlEvents.TouchUpInside)
         TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_R1_BUTTON_TITLE]?.addTarget(Actions!, action: R1TabSelector, forControlEvents: UIControlEvents.TouchUpInside)
         TabButtonMap[YMYiMaiStrings.CS_TOP_TAB_R2_BUTTON_TITLE]?.addTarget(Actions!, action: R2TabSelector, forControlEvents: UIControlEvents.TouchUpInside)
     }
