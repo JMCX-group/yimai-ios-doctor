@@ -52,7 +52,8 @@ public class PageAppointmentTransferActions: PageJumpActions, UINavigationContro
             TargetController?.Loading?.Show()
             ApiUtility?.YMAppointmentTransfer([
                     "id": PageAppointmentAcceptBodyView.AppointmentID,
-                    "doctor_id": uploadData!["doctor"]!
+                    "doctor_id": uploadData!["doctor"]!,
+                    "reason": "转诊"
                 ])
         }
     }

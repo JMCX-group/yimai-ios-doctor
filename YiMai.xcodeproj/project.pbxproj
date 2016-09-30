@@ -276,6 +276,10 @@
 		FD07E5D11D9B67A900E33CE8 /* YMIMUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07E5D01D9B67A900E33CE8 /* YMIMUtility.swift */; };
 		FD07E5D31D9BA48400E33CE8 /* PageYiMaiRecentContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07E5D21D9BA48400E33CE8 /* PageYiMaiRecentContactList.swift */; };
 		FD113D881D7D521200628295 /* YMPhotoSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD113D871D7D521200628295 /* YMPhotoSelector.swift */; };
+		FD1D7D441D9CA76B0006F190 /* PageDoctorAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1D7D461D9CA76B0006F190 /* PageDoctorAuth.storyboard */; };
+		FD1D7D481D9CA7970006F190 /* PageDoctorAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1D7D471D9CA7970006F190 /* PageDoctorAuthViewController.swift */; };
+		FD1D7D4A1D9CA7B10006F190 /* PageDoctorAuthBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1D7D491D9CA7B10006F190 /* PageDoctorAuthBodyView.swift */; };
+		FD1D7D4C1D9CA7BF0006F190 /* PageDoctorAuthActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1D7D4B1D9CA7BF0006F190 /* PageDoctorAuthActions.swift */; };
 		FD1F57F51D9132A30039769D /* YMQRRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F57F41D9132A30039769D /* YMQRRecognizer.swift */; };
 		FD2981351D6E97BE006A48CA /* YMLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2981341D6E97BE006A48CA /* YMLabel.swift */; };
 		FD2A99BD1D937DF8001953D6 /* PageMyInfoCardActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2A99B71D937DF8001953D6 /* PageMyInfoCardActions.swift */; };
@@ -597,6 +601,10 @@
 		FD07E5D01D9B67A900E33CE8 /* YMIMUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMIMUtility.swift; sourceTree = "<group>"; };
 		FD07E5D21D9BA48400E33CE8 /* PageYiMaiRecentContactList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiRecentContactList.swift; sourceTree = "<group>"; };
 		FD113D871D7D521200628295 /* YMPhotoSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMPhotoSelector.swift; sourceTree = "<group>"; };
+		FD1D7D451D9CA76B0006F190 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageDoctorAuth.storyboard; sourceTree = "<group>"; };
+		FD1D7D471D9CA7970006F190 /* PageDoctorAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDoctorAuthViewController.swift; sourceTree = "<group>"; };
+		FD1D7D491D9CA7B10006F190 /* PageDoctorAuthBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDoctorAuthBodyView.swift; sourceTree = "<group>"; };
+		FD1D7D4B1D9CA7BF0006F190 /* PageDoctorAuthActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDoctorAuthActions.swift; sourceTree = "<group>"; };
 		FD1F57F41D9132A30039769D /* YMQRRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMQRRecognizer.swift; sourceTree = "<group>"; };
 		FD2981341D6E97BE006A48CA /* YMLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMLabel.swift; sourceTree = "<group>"; };
 		FD2A99B71D937DF8001953D6 /* PageMyInfoCardActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyInfoCardActions.swift; sourceTree = "<group>"; };
@@ -1344,6 +1352,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				FD1D7D3F1D9CA7430006F190 /* DoctorAuth */,
 				FD7B4C1E1D9A613E0003BE0D /* MyPatientList */,
 				FDD1DB151D992B0300C289B1 /* LawyerInfo */,
 				96661E7D1D97D876000692D0 /* AppointmentTransfer */,
@@ -2392,6 +2401,33 @@
 			path = Top;
 			sourceTree = "<group>";
 		};
+		FD1D7D3F1D9CA7430006F190 /* DoctorAuth */ = {
+			isa = PBXGroup;
+			children = (
+				FD1D7D401D9CA7430006F190 /* Actions */,
+				FD1D7D411D9CA7430006F190 /* Body */,
+				FD1D7D461D9CA76B0006F190 /* PageDoctorAuth.storyboard */,
+				FD1D7D471D9CA7970006F190 /* PageDoctorAuthViewController.swift */,
+			);
+			path = DoctorAuth;
+			sourceTree = "<group>";
+		};
+		FD1D7D401D9CA7430006F190 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				FD1D7D4B1D9CA7BF0006F190 /* PageDoctorAuthActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		FD1D7D411D9CA7430006F190 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				FD1D7D491D9CA7B10006F190 /* PageDoctorAuthBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
 		FD2A99B51D937DF8001953D6 /* MyInfoCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2729,6 +2765,7 @@
 				96637A7D1CC24A6100DBD1CF /* PageLogin.storyboard in Resources */,
 				9612DB6D1CC9F75300262D2E /* PagePersonal.storyboard in Resources */,
 				9620456B1D1B9B4100E18D88 /* PageAppointmentRecord.storyboard in Resources */,
+				FD1D7D441D9CA76B0006F190 /* PageDoctorAuth.storyboard in Resources */,
 				739011B21D2763AD00EAAA1B /* PageAddmissionReply.storyboard in Resources */,
 				96C02FD71D968D4A0096E216 /* PageCommonTextInput.storyboard in Resources */,
 				FD801DCD1D66F2990066198B /* PageAdmissionChargeSetting.storyboard in Resources */,
@@ -2923,6 +2960,7 @@
 				FDD93EAA1D92377E003576D4 /* PageAddFriendInfoCardActions.swift in Sources */,
 				9619EF781CC1FF0400F69CBC /* YMCommonStrings.swift in Sources */,
 				96D745C41CF696ED00E345E3 /* PageYiMaiAddContactsFriendsBodyView.swift in Sources */,
+				FD1D7D481D9CA7970006F190 /* PageDoctorAuthViewController.swift in Sources */,
 				967676211D8ADF3400A07106 /* RegexParser.swift in Sources */,
 				9619EF511CC1DB9600F69CBC /* AppDelegate.swift in Sources */,
 				96814A8B1D1A3E9D002C8BD3 /* PagePersonalDetailEditBodyView.swift in Sources */,
@@ -3112,6 +3150,7 @@
 				FDF46D371D7688C7007B9987 /* ApointmentAcceptDetailViewController.swift in Sources */,
 				7394F8441CF949B300F05487 /* PageAppointmentPatientBasicInfoViewController.swift in Sources */,
 				96834F221D0528A500E0C813 /* PageCommonSearchBodyView.swift in Sources */,
+				FD1D7D4C1D9CA7BF0006F190 /* PageDoctorAuthActions.swift in Sources */,
 				73622E571D1EE30A0039E785 /* PageYiMaiIntroViewController.swift in Sources */,
 				96661E881D97D876000692D0 /* PageAppointmentTransferViewController.swift in Sources */,
 				962076D41CC5ECCA002083FA /* PageRegisterViewController.swift in Sources */,
@@ -3145,6 +3184,7 @@
 				FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */,
 				963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */,
 				967676221D8ADF3400A07106 /* StringTrimExtension.swift in Sources */,
+				FD1D7D4A1D9CA7B10006F190 /* PageDoctorAuthBodyView.swift in Sources */,
 				96637A831CC24B4F00DBD1CF /* PageLoginViewController.swift in Sources */,
 				736EBC5A1D1675BD00C40AA7 /* PagePersonalSettingViewController.swift in Sources */,
 				FDD1DB1A1D992BA000C289B1 /* PageLawyerInfoViewController.swift in Sources */,
@@ -3570,6 +3610,14 @@
 				96FCD1431D17D6F000A6E12D /* Base */,
 			);
 			name = PagePersonalDetail.storyboard;
+			sourceTree = "<group>";
+		};
+		FD1D7D461D9CA76B0006F190 /* PageDoctorAuth.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD1D7D451D9CA76B0006F190 /* Base */,
+			);
+			name = PageDoctorAuth.storyboard;
 			sourceTree = "<group>";
 		};
 		FD2A99B81D937DF8001953D6 /* PageMyInfoCard.storyboard */ = {

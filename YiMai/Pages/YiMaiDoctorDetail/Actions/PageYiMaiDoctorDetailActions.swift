@@ -29,6 +29,7 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     
     public func GetInfoSuccess(data: NSDictionary?) {
         let userInfo = data!["user"] as! [String: AnyObject]
+        TargetView?.DoctorInfo = userInfo
         TargetView?.LoadData(userInfo)
     }
     
@@ -65,7 +66,10 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     }
     
     public func DoAppointment(sender: YMButton) {
-        
+        PageAppointmentViewController.DoctorIsPreSelected = true
+        PageAppointmentViewController.NewAppointment = true
+        PageAppointmentViewController.SelectedDoctor = TargetView?.DoctorInfo
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
     }
     
     public func DoChat(sender: YMButton) {

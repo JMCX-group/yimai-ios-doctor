@@ -15,6 +15,8 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
     public var AddFriendBtn: YMButton? = nil
     public static var DocId: String = ""
     
+    var DoctorInfo: [String: AnyObject]? = nil
+    
     override func ViewLayout() {
         super.ViewLayout()
         DetailActions = PageYiMaiDoctorDetailActions(navController: self.NavController, target: self)

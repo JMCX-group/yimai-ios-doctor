@@ -25,7 +25,7 @@ public class PageIndexBodyView {
     private var RecordsButton: UIView? = nil
     
     private var DoDoctorAuthPanel = UIView()
-    private var DoctorAuthButton: UIImageView? = nil
+    private var DoctorAuthButton: YMTouchableImageView? = nil
     
     private var ContactPanel = UIScrollView()
     
@@ -117,6 +117,8 @@ public class PageIndexBodyView {
         DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
                                                           useMethod: "PageJumpToByImageViewSender:".Sel(),
                                                           imageName: "IndexButtonGoAuth")
+        
+        DoctorAuthButton?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME
 
         let authHeadline = UILabel()
         authHeadline.font = UIFont.systemFontOfSize(30.LayoutVal())

@@ -51,7 +51,7 @@ public class YMLayout {
         
         newImageView.userInteractionEnabled = true
         newImageView.addGestureRecognizer(tapGR)
-        
+
         return newImageView
     }
     
@@ -343,9 +343,9 @@ public class YMLayout {
             url = YMAPIInterfaceURL.Server + url
         }
 
-        if(refresh) {
+//        if(refresh) {
             url += "?t=" + "\(NSDate().timeIntervalSince1970)"
-        }
+//        }
 
         print(url)
         let imgUrl = NSURL(string: url)

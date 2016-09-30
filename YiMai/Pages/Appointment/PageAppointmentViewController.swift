@@ -19,6 +19,8 @@ public class PageAppointmentViewController: PageViewController {
     public static var SelectedTime: String = ""
     public static var SelectedTimeForUpload: [String]? = nil
     
+    public static var DoctorIsPreSelected = false
+    
     public static var NewAppointment = true
 
     override func PageLayout() {
@@ -33,7 +35,12 @@ public class PageAppointmentViewController: PageViewController {
     override func PagePreRefresh() {
         if(PageAppointmentViewController.NewAppointment) {
             
-            PageAppointmentViewController.SelectedDoctor = nil
+            if(!PageAppointmentViewController.DoctorIsPreSelected) {
+                PageAppointmentViewController.SelectedDoctor = nil
+            } else {
+                PageAppointmentViewController.DoctorIsPreSelected = false
+            }
+
             PageAppointmentViewController.PatientBasicInfo = nil
             PageAppointmentViewController.PatientCondition = ""
             PageAppointmentViewController.SelectedTime = ""
@@ -44,6 +51,7 @@ public class PageAppointmentViewController: PageViewController {
             BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
             TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
             PageAppointmentViewController.NewAppointment = false
+            BodyView?.Reload()
         } else {
             BodyView?.Reload()
             if(nil != VerifyInput(false)) {

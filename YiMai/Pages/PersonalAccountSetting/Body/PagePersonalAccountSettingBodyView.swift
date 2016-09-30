@@ -78,8 +78,17 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
 
         let authTextMap = ["0":"已认证", "1":"尚未认证"]
         
+        let isAuth = realData["is_auth"]! as! String
         let authString = authTextMap[realData["is_auth"]! as! String]
         AuthLabel.text = authString
+        
+        AuthButton?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME
+
+        if("1" == isAuth) {
+            AuthButton?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME
+        } else {
+//            AuthButton?.hidden = true
+        }
         
         if("<null>" == "\(realData["ID_number"]!)") {
             IDNum.text = "尚未填写身份证号码"
