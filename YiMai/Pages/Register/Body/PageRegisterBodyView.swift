@@ -49,6 +49,18 @@ public class PageRegisterBodyView: NSObject {
         self.ViewLayout()
     }
     
+    public func Clear() {
+        CellPhoneInput?.text = ""
+        PasswordInput?.text = ""
+        VerifyCodeInput?.text = ""
+        InvitedCodeInput?.text = ""
+        
+        EnableGetVerifyCodeButton()
+        NextStepCodeButton?.enabled = false
+        
+        CellPhoneInput?.becomeFirstResponder()
+    }
+    
     public func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         

@@ -22,4 +22,8 @@ public class PageRegisterViewController: PageViewController {
         BodyView = PageRegisterBodyView(parentView: self.view, navController: self.navigationController!)
         TopView = PageCommonTopView(parentView: self.view, titleString: YMRegisterStrings.CS_REGISTER_PAGE_TITLE, navController: self.navigationController)
     }
+    
+    override func PagePreRefresh() {
+        BodyView?.Clear()
+    }
 }

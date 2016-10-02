@@ -40,7 +40,7 @@ public class PageRegisterPersonalInfoBodyView: NSObject {
         self.Actions = PageRegisterPersonalInfoActions(navController: navController, bodyView: self)
         self.ViewLayout()
         
-        Loading = YMPageLoadingView(parentView: BodyView)
+        Loading = YMPageLoadingView(parentView: parentView)
     }
 
     private func ViewLayout() {
@@ -136,6 +136,11 @@ public class PageRegisterPersonalInfoBodyView: NSObject {
         
         OKButton?.UserStringData = YMCommonStrings.CS_PAGE_INDEX_NAME
         OKButton?.addTarget(Actions, action: "UpdateUserInfo:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    public func Reset() {
+        YMLayout.ClearView(view: BodyView)
+        ViewLayout()
     }
     
     public func Refesh() {

@@ -21,9 +21,15 @@ public class PageRegisterPersonalInfoViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        if(!PageLayoutFlag) {return}
         
-        BodyView?.Refesh()
+        if(isMovingToParentViewController()) {
+            BodyView?.Reset()
+            TopView?.TopViewPanel.removeFromSuperview()
+            TopView = PageCommonTopView(parentView: self.view,
+                                        titleString: YMRegisterInfoStrings.CS_REGISTER_INFO_PAGE_TITLE)
+        } else {
+            BodyView?.Refesh()
+        }
     }
     
     override func PageLayout(){

@@ -14,7 +14,7 @@ public class PageRegisterActions: PageJumpActions {
     private var TargetBodyView : PageRegisterBodyView? = nil
     private var GetVerifyApi: YMAPIUtility? = nil
     private var DoRegisterApi: YMAPIUtility? = nil
-    private var VerifyCodeEnableCounter:Int = 0
+    var VerifyCodeEnableCounter:Int = 0
     override func ExtInit() {
         GetVerifyApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_VERIFY_CODE,
                                   success: self.GetVerifyCodeSuccess,
@@ -40,9 +40,15 @@ public class PageRegisterActions: PageJumpActions {
         CheckWhenInputChanged(TargetBodyView!.VerifyCodeInput!)
     }
     
+    func ClearAfterAlert(_: UIAlertAction) {
+        TargetBodyView?.Clear()
+        VerifyCodeEnableCounter = 601
+    }
+    
     private func DoRegisterError(error: NSError){
         let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
         print(errInfo)
+        YMPageModalMessage.ShowErrorInfo(errInfo["message"].stringValue, nav: self.NavController!, callback: ClearAfterAlert)
     }
     
     private func DoRegisterSuccess(data: NSDictionary?) {
