@@ -15,6 +15,6 @@ class PagePersonalIDNumInputViewController: PageViewController {
         super.PageLayout()
         
         BodyView = PagePersonalIDNumInputBodyView(parentView: self.SelfView!, navController: self.NavController!)
-        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "修改密码", navController: self.NavController!)
+        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "身份证号码", navController: self.NavController!)
     }
 }

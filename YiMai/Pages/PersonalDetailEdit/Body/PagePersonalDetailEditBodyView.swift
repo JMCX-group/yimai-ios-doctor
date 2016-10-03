@@ -154,6 +154,8 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
                 UserHead?.addSubview(UserHeadImg)
                 UserHeadImg.anchorToEdge(Edge.Right, padding: 40.LayoutVal(),
                                          width: UserHeadImg.width, height: UserHeadImg.height)
+                
+                YMLayout.LoadImageFromServer(UserHeadImg, url: headUrl!, fullUrl: nil, makeItRound: true, refresh: true)
             }
         } else {
             AppendExtInfo(UserHeadLabel, parent: UserHead!, title: "请上传")
@@ -257,21 +259,13 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         let intro = userInfo["personal_introduction"] as? String
         if(intro != PagePersonalIntroEditViewController.IntroText) {
             showLoadingFlag = true
-            if(nil == intro) {
-                editActions!.UpdateUserInfo(["personal_introduction": ""])
-            } else {
-                editActions!.UpdateUserInfo(["personal_introduction": PagePersonalIntroEditViewController.IntroText])
-            }
+            editActions!.UpdateUserInfo(["personal_introduction": PagePersonalIntroEditViewController.IntroText])
         }
         
         let userName = userInfo["name"] as? String
         if(userName != PagePersonalNameEditViewController.UserName) {
             showLoadingFlag = true
-            if(nil == userName) {
-                editActions!.UpdateUserInfo(["name": ""])
-            } else {
-                editActions!.UpdateUserInfo(["name": PagePersonalNameEditViewController.UserName])
-            }
+            editActions!.UpdateUserInfo(["name": PagePersonalNameEditViewController.UserName])
         }
         
         if(showLoadingFlag) {

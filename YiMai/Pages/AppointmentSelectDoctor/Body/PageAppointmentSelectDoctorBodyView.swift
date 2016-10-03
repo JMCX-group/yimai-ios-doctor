@@ -146,7 +146,7 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         
         let l1Doc = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L1_FRIENDS) as! [[String:AnyObject]]
         
-        let titlePanel = DrawListTitle("朋友", panel: Level1FriendsPanel)
+        let titlePanel = DrawListTitle("一度医脉", panel: Level1FriendsPanel)
         
         var cellView: UIView? = titlePanel
         for doc in l1Doc {
@@ -201,7 +201,7 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         
         let l2Doc = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L2_FRIENDS) as! [[String:AnyObject]]
 
-        let titlePanel = DrawListTitle("朋友的朋友", panel: Level2FriendsPanel)
+        let titlePanel = DrawListTitle("二度医脉", panel: Level2FriendsPanel)
         
         var cellView: UIView? = titlePanel
         for doc in l2Doc {

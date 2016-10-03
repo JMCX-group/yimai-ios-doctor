@@ -110,7 +110,7 @@ public class PageYiMaiSameHospitalBodyView: PageBodyView {
         BodyView.addSubview(titleLabel)
         titleLabel.align(Align.UnderCentered, relativeTo: bigIcon, padding: 50.LayoutVal(), width: titleLabel.width, height: titleLabel.height)
         
-        let inviteButton = YMLayout.GetTouchableView(useObject: Actions!,
+        let inviteButton = YMLayout.GetTouchableView(useObject: SameHospitalActions!,
             useMethod: PageJumpActions.PageJumpToByViewSenderSel,
             userStringData: YMCommonStrings.CS_PAGE_YIMAI_MANUAL_ADD_FRIEND_NAME)
         

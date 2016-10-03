@@ -60,12 +60,12 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
             var amBtnSelectedStatus = false
             var pmBtnSelectedStatus = false
 
-            if (false == daySet["pm"].bool && false == daySet["am"].bool) {
+            if (false == daySet["pm"].boolValue && false == daySet["am"].boolValue) {
                 targetStatus = "none"
-            } else if (true == daySet["pm"].bool && false == daySet["am"].bool) {
+            } else if (true == daySet["pm"].boolValue && false == daySet["am"].boolValue) {
                 targetStatus = "pm"
                 pmBtnSelectedStatus = true
-            } else if (false == daySet["pm"].bool && true == daySet["am"].bool) {
+            } else if (false == daySet["pm"].boolValue && true == daySet["am"].boolValue) {
                 targetStatus = "am"
                 amBtnSelectedStatus = true
             } else {
@@ -75,10 +75,11 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
             }
             ToggleWeekdayStatus(targetStatus, weekdayIdx: idx)
             SelectDict[idx] = targetStatus
+            
             SettingData[idx] = [
-                "week": daySet["week"].string!,
-                "am": daySet["am"].bool!,
-                "pm": daySet["pm"].bool!
+                "week": daySet["week"].stringValue,
+                "am": daySet["am"].boolValue,
+                "pm": daySet["pm"].boolValue
             ]
             
             if(true == amBtnSelectedStatus) {

@@ -71,6 +71,9 @@ public class PagePersonalDetailTopView:NSObject {
         
         HeadImage!.anchorToEdge(Edge.Top, padding: 165.LayoutVal(), width: HeadImage!.width, height: HeadImage!.height)
         
+        let headUrl = YMVar.MyUserInfo["head_url"] as! String
+        YMLayout.LoadImageFromServer(HeadImage!, url: headUrl, fullUrl: nil, makeItRound: true, refresh: true)
+        
         let goBackPanel = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "GoBack:".Sel())
         let backImage = YMLayout.GetSuitableImageView("TopViewButtonGoBack")
         

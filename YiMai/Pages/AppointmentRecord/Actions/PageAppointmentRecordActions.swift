@@ -20,6 +20,13 @@ public class PageAppointmentRecordActions: PageJumpActions {
     }
     
     private func GetAppointmentListSuccess(data: NSDictionary?) {
+        if(nil == data) {
+            TargetView?.Loading?.Hide()
+            TargetView?.TabPanel.hidden = true
+            YMPageModalMessage.ShowNormalInfo("您尚未约诊过病人", nav: self.NavController!)
+            return
+        }
+        TargetView?.TabPanel.hidden = false
         TargetView?.LoadData(data!["data"] as? NSDictionary)
     }
     

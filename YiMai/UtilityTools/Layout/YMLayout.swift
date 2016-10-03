@@ -343,16 +343,18 @@ public class YMLayout {
             url = YMAPIInterfaceURL.Server + url
         }
 
-//        if(refresh) {
+        if(refresh) {
             url += "?t=" + "\(NSDate().timeIntervalSince1970)"
-//        }
+        }
 
         print(url)
         let imgUrl = NSURL(string: url)
         if(nil != imgUrl) {
             imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
                 if(makeItRound) {
-                    imageView.image = Toucan(image: image!).maskWithEllipse().image
+                    imageView.image = Toucan(image: image!)
+                        .resize(CGSize(width: imageView.width, height: imageView.height), fitMode: Toucan.Resize.FitMode.Crop)
+                        .maskWithEllipse().image
                 }
             })
         }

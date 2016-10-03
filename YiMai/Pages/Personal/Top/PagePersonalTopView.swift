@@ -32,7 +32,7 @@ public class PagePersonalTopView {
         
         UserHead = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "GoToPersonalDetail:".Sel(), imageName: "PersonalDefaultUserhead")
         let userHeadUrl = YMVar.MyUserInfo["head_url"] as! String
-        YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true)
+        YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true, refresh: true)
         ViewLayout()
     }
     

@@ -132,7 +132,7 @@ public class PageYiMaiR2BodyView: PageBodyView {
         
         let titlePanel = UIView()
         let titleLabel = UILabel()
-        titleLabel.text = "朋友的朋友（\(l2DocCnt["doctor"]!)名医生 | \(l2DocCnt["hospital"]!)家医院）"
+        titleLabel.text = "二度医脉（\(l2DocCnt["doctor"]!)名医生 | \(l2DocCnt["hospital"]!)家医院）"
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.sizeToFit()

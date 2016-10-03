@@ -12,7 +12,7 @@ import Neon
 public class PageAppointmentRecordBodyView: PageBodyView {
     private var RecordActions: PageAppointmentRecordActions? = nil
     
-    private let TabPanel = UIView()
+    let TabPanel = UIView()
     public var TabWaitButton: YMTouchableView? = nil
     public var TabAlreadyButton: YMTouchableView? = nil
 
