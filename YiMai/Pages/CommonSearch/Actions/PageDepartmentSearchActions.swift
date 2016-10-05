@@ -39,7 +39,23 @@ public class PageDepartmentSearchActions: PageJumpActions {
     }
 
     public func StartSearch(text: YMTextField) {
+        print(targetView?.DepartmentData)
         
+        let searchKey = text.text!
+        if(YMValueValidator.IsEmptyString(searchKey)) {
+            targetView?.DrawDepartments()
+        } else {
+            var resultData = [[String: AnyObject]]()
+            if(nil != targetView?.DepartmentData) {
+                for v in targetView!.DepartmentData! {
+                    let deptName = v["name"] as! String
+                    if(deptName.containsString(searchKey)) {
+                        resultData.append(["id": v["id"]!, "name": deptName])
+                    }
+                }
+            }
+            targetView?.DrawDepartments(resultData)
+        }
     }
     
     public func InitDepartmentList() {

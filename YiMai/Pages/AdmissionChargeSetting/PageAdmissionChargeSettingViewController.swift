@@ -22,7 +22,13 @@ public class PageAdmissionChargeSettingViewController: PageViewController {
         BodyView?.LoadData()
     }
     
-    override func PageDisapeared() {
+    override public func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        BodyView?.UpdateVar()
         BodyView?.UpdateSettings()
+    }
+    
+    override func PageDisapeared() {
+//        BodyView?.UpdateSettings()
     }
 }

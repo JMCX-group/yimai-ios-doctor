@@ -10,7 +10,7 @@ import Foundation
 
 public class YMVar:NSObject {
     public static var MyDoctorId: String = ""
-    public static var MyUserInfo: [String:AnyObject]!
+    public static var MyUserInfo: [String:AnyObject] = [String:AnyObject]()
     
     public static func GetStringByKey(dict: [String: AnyObject], key: String) -> String {
         let ret = dict[key] as? String

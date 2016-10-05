@@ -26,7 +26,12 @@ public class PageFace2FaceQRBodyView: PageBodyView {
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.BackgroundGray
-
+    }
+    
+    func LoadData() {
+        YMLayout.ClearView(view: BodyView)
+        YMLayout.ClearView(view: YiMaiCodePanel)
+        YMLayout.ClearView(view: ChargesTipPanel)
         DrawUserHead()
         DrawUserTextLines()
         DrawYiMaiCode()
@@ -58,8 +63,6 @@ public class PageFace2FaceQRBodyView: PageBodyView {
 
         BodyView.addSubview(userNameLine)
         BodyView.addSubview(UserDescLine)
-
-        print(YMVar.MyUserInfo)
 
         userNameLine.text = YMVar.MyUserInfo["name"] as? String
         userNameLine.textAlignment = NSTextAlignment.Center
@@ -152,7 +155,7 @@ public class PageFace2FaceQRBodyView: PageBodyView {
         tipTitleLine.font = YMFonts.YMDefaultFont(34.LayoutVal())
         
         let fee = "\(YMVar.MyUserInfo["fee_face_to_face"]!)"
-
+print(YMVar.MyUserInfo)
         tipFirstLine.text = "医脉平台为您提供预约咨询及相关支付服务"
   
         tipFirstLine.textColor = YMColors.FontGray

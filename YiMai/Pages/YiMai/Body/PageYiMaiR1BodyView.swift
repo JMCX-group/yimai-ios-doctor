@@ -182,7 +182,9 @@ public class PageYiMaiR1BodyView: PageBodyView {
         
         newFriendsButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 80.LayoutVal())
         
-        icon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: icon.width, height: icon.height)
+        if(i > 0) {
+            icon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: icon.width, height: icon.height)
+        }
         dividerLine.anchorToEdge(Edge.Left, padding: 102.LayoutVal(), width: YMSizes.OnPx, height: 30.LayoutVal())
         buttonText.anchorToEdge(Edge.Left, padding: 124.LayoutVal(), width: buttonText.width, height: buttonText.height)
         notifyPoint.anchorToEdge(Edge.Left, padding: 225.LayoutVal(), width: notifyPoint.width, height: notifyPoint.height)

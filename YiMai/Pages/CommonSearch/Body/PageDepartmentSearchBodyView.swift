@@ -10,7 +10,7 @@ import Foundation
 import Neon
 
 public class PageDepartmentSearchBodyView: PageBodyView {
-    private var SearchInput: YMTextField? = nil
+    var SearchInput: YMTextField? = nil
     private let InputPanel: UIView = UIView()
     
     private var SearchResultTable: YMTableView? = nil
@@ -85,26 +85,38 @@ public class PageDepartmentSearchBodyView: PageBodyView {
         let cellInner = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: cellHeight))
         let hospitalName = realData[YMCommonStrings.CS_API_PARAM_KEY_NAME] as! String
         
-        let hospitalLabel = UILabel()
-        hospitalLabel.text = hospitalName
-        hospitalLabel.textColor = YMColors.FontGray
-        hospitalLabel.font = YMFonts.YMDefaultFont(28.LayoutVal())
-        hospitalLabel.sizeToFit()
+        let deptLabel = ActiveLabel()
         
-        cellInner.addSubview(hospitalLabel)
+        deptLabel.textColor = YMColors.FontGray
+        deptLabel.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        
+        let searchKey = SearchInput!.text!
+        if(!YMValueValidator.IsEmptyString(searchKey)) {
+            let hightLight = ActiveType.Custom(pattern: searchKey)
+            deptLabel.enabledTypes = [hightLight]
+            deptLabel.customColor[hightLight] = YMColors.FontBlue
+        }
+        deptLabel.text = hospitalName
+        deptLabel.sizeToFit()
+        
+        cellInner.addSubview(deptLabel)
         
         let bottomLine = UIView()
         bottomLine.backgroundColor = YMColors.DividerLineGray
         cellInner.addSubview(bottomLine)
         
-        hospitalLabel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 700.LayoutVal(), height: hospitalLabel.height)
+        deptLabel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 700.LayoutVal(), height: deptLabel.height)
         bottomLine.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: YMSizes.OnPx)
         
         cell.addSubview(cellInner)
     }
     
-    public func DrawDepartments() {
-        DrawSearchResult(DepartmentData!)
+    public func DrawDepartments(data: [[String:AnyObject]]? = nil) {
+        if(nil != data) {
+            DrawSearchResult(data!)
+        } else {
+            DrawSearchResult(DepartmentData!)
+        }
     }
     
     public func ClearList() {
@@ -121,7 +133,9 @@ public class PageDepartmentSearchBodyView: PageBodyView {
         
         SearchResultTable?.TableViewPanel.removeFromSuperview()
         BodyView.addSubview((SearchResultTable?.TableViewPanel)!)
-        SearchResultTable?.TableViewPanel.alignAndFill(align: Align.UnderMatchingLeft, relativeTo: InputPanel, padding: 0)
+        SearchResultTable?.TableViewPanel.align(Align.UnderMatchingLeft, relativeTo: InputPanel,
+                                                padding: 0, width: YMSizes.PageWidth,
+                                                height: BodyView.height - InputPanel.height - 128.LayoutVal())
         
         SearchResultTable?.DrawTableView(false)
     }

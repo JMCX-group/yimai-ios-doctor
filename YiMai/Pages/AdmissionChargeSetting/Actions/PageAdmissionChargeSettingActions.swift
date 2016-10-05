@@ -22,11 +22,12 @@ public class PageAdmissionChargeSettingActions: PageJumpActions {
     }
     
     public func SaveSuccess(data: NSDictionary?) {
-        TargetView?.UpdateVar()
+//        TargetView?.UpdateVar()
+//        YMVar.MyUserInfo = data!["data"] as! [String : AnyObject]
     }
     
     public func SaveFailed(error: NSError) {
-        TargetView?.UpdateVar()
+//        TargetView?.UpdateVar()
     }
     
     public func ChargeSwitchTouched(sender: UISwitch) {
@@ -47,3 +48,14 @@ public class PageAdmissionChargeSettingActions: PageJumpActions {
         )
     }
 }
+
+
+
+
+
+
+
+
+
+
+

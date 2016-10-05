@@ -37,6 +37,7 @@ public class PagePersonalIDNumInputBodyView: PageBodyView {
         param.DefaultText = PagePersonalIDNumInputBodyView.IDNum
         IDInput = YMLayout.GetTextFieldWithMaxCharCount(param, maxCharCount: 18)
         IDInput?.EditChangedCallback = CheckInput
+        IDInput?.keyboardType = UIKeyboardType.PhonePad
         
         BodyView.addSubview(IDInput!)
         IDInput!.anchorToEdge(Edge.Top, padding: 70.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
@@ -77,12 +78,13 @@ public class PagePersonalIDNumInputBodyView: PageBodyView {
         let id = IDInput!.text
         
         if(id?.characters.count == 18) {
-            if(MWIDCardValidate.validateIdentityCard(id!)){
-                SetSubmitEnable()
-            } else {
-                ErrorInfo.hidden = false
-                SetSubmitDisable()
-            }
+            SetSubmitEnable()
+//            if(MWIDCardValidate.validateIdentityCard(id!)){
+//                SetSubmitEnable()
+//            } else {
+//                ErrorInfo.hidden = false
+//                SetSubmitDisable()
+//            }
         } else {
             ErrorInfo.hidden = true
             SetSubmitDisable()

@@ -24,4 +24,8 @@ public class PageFace2FaceQRViewController: PageViewController {
         
         BodyView?.DrawFastSettingBtn(TopView!.TopViewPanel)
     }
+    
+    override func PagePreRefresh() {
+        BodyView?.LoadData()
+    }
 }

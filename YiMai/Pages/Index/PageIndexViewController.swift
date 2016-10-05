@@ -23,12 +23,14 @@ public class PageIndexViewController: PageViewController {
 
         YMCurrentPage.CurrentPage = YMCommonStrings.CS_PAGE_INDEX_NAME
         
-        YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)! as! [String: AnyObject]
-        YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
-        
         let docList = YMIMUtility.GetRecentContactDoctorsIdList()
 
         Actions?.ContactApi.YMGetRecentContactedDocList(["id_list": docList.joinWithSeparator(",")])
+        
+        if(0 == YMVar.MyUserInfo.count) {
+            YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)! as! [String: AnyObject]
+            YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
+        }
     }
 
     override func PageLayout(){

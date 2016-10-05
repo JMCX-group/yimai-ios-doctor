@@ -77,6 +77,7 @@ public class PageCommonSearchViewController: PageViewController {
             
         case YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE:
             DepartmentSearch?.BodyView.hidden = false
+            DepartmentSearch?.SearchInput?.text = ""
             DepartmentSearch?.ShowDepartments()
             break
             

@@ -160,10 +160,12 @@ public class PageAdmissionChargeSettingBodyView: PageBodyView {
             CommonChargeLabel.textColor = YMColors.FontGray
             CommonCharge?.textColor = YMColors.FontBlue
             CommonCharge?.enabled = true
+            ChargeSwitch.on = true
         } else {
             CommonChargeLabel.textColor = YMColors.FontLightGray
             CommonCharge?.textColor = YMColors.FontLightGray
             CommonCharge?.enabled = false
+            ChargeSwitch.on = false
         }
     }
 
@@ -188,8 +190,10 @@ public class PageAdmissionChargeSettingBodyView: PageBodyView {
             YMVar.MyUserInfo["fee_switch"] = "0"
         }
         
-        YMVar.MyUserInfo["fee"] = CommonCharge?.text
-        YMVar.MyUserInfo["fee_face_to_face"] = Face2FaceCharge?.text
+        YMVar.MyUserInfo["fee"] = CommonCharge?.text!
+        YMVar.MyUserInfo["fee_face_to_face"] = Face2FaceCharge?.text!
+        
+        print(YMVar.MyUserInfo)
     }
     
     
