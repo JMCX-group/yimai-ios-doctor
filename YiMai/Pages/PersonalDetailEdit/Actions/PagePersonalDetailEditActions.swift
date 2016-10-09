@@ -95,7 +95,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     }
     
     public func InputSchool(_: UIGestureRecognizer) {
-        
+        DoJump(YMCommonStrings.CS_PAGE_ALL_COLLEGE_LIST)
     }
     
     public func InputIDNum(_: UIGestureRecognizer) {

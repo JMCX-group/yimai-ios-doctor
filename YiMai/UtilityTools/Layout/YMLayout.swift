@@ -352,9 +352,11 @@ public class YMLayout {
         if(nil != imgUrl) {
             imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
                 if(makeItRound) {
-                    imageView.image = Toucan(image: image!)
-                        .resize(CGSize(width: imageView.width, height: imageView.height), fitMode: Toucan.Resize.FitMode.Crop)
-                        .maskWithEllipse().image
+                    if(nil != image) {
+                        imageView.image = Toucan(image: image!)
+                            .resize(CGSize(width: imageView.width, height: imageView.height), fitMode: Toucan.Resize.FitMode.Crop)
+                            .maskWithEllipse().image
+                    }
                 }
             })
         }

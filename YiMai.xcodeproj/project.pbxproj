@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F9332F31DA688F900637982 /* PageAllCollegeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F9332F51DA688F900637982 /* PageAllCollegeList.storyboard */; };
+		2F9332F71DA6893600637982 /* PageAllCollegeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332F61DA6893600637982 /* PageAllCollegeListViewController.swift */; };
+		2F9332F91DA689B800637982 /* PageAllCollegeListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */; };
+		2F9332FB1DA689C600637982 /* PageAllCollegeListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332FA1DA689C600637982 /* PageAllCollegeListActions.swift */; };
 		674EEDC634635DB13AEB3300 /* Pods_YiMai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A556489D24098750735AC565 /* Pods_YiMai.framework */; };
 		7307BFEC1D601159000F31E5 /* YMAddressBookTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */; };
 		730848271D0D9D38007E8940 /* YMTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848261D0D9D38007E8940 /* YMTableView.swift */; };
@@ -328,6 +332,10 @@
 
 /* Begin PBXFileReference section */
 		10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.debug.xcconfig"; sourceTree = "<group>"; };
+		2F9332F41DA688F900637982 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAllCollegeList.storyboard; sourceTree = "<group>"; };
+		2F9332F61DA6893600637982 /* PageAllCollegeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListViewController.swift; sourceTree = "<group>"; };
+		2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListBodyView.swift; sourceTree = "<group>"; };
+		2F9332FA1DA689C600637982 /* PageAllCollegeListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListActions.swift; sourceTree = "<group>"; };
 		35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.release.xcconfig"; sourceTree = "<group>"; };
 		7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAddressBookTools.swift; sourceTree = "<group>"; };
 		730848261D0D9D38007E8940 /* YMTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTableView.swift; sourceTree = "<group>"; };
@@ -664,6 +672,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F9332EE1DA6889C00637982 /* AllCollegeList */ = {
+			isa = PBXGroup;
+			children = (
+				2F9332EF1DA6889C00637982 /* Actions */,
+				2F9332F01DA6889C00637982 /* Body */,
+				2F9332F51DA688F900637982 /* PageAllCollegeList.storyboard */,
+				2F9332F61DA6893600637982 /* PageAllCollegeListViewController.swift */,
+			);
+			path = AllCollegeList;
+			sourceTree = "<group>";
+		};
+		2F9332EF1DA6889C00637982 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				2F9332FA1DA689C600637982 /* PageAllCollegeListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		2F9332F01DA6889C00637982 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
 		467D48ADB938104A29A3EDAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1352,6 +1387,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				2F9332EE1DA6889C00637982 /* AllCollegeList */,
 				FD1D7D3F1D9CA7430006F190 /* DoctorAuth */,
 				FD7B4C1E1D9A613E0003BE0D /* MyPatientList */,
 				FDD1DB151D992B0300C289B1 /* LawyerInfo */,
@@ -2757,6 +2793,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9619EF5E1CC1DB9600F69CBC /* LaunchScreen.storyboard in Resources */,
+				2F9332F31DA688F900637982 /* PageAllCollegeList.storyboard in Resources */,
 				9672FB141CCF136B00BC7E40 /* PageFace2FaceInfoInput.storyboard in Resources */,
 				96814AAF1D1A9800002C8BD3 /* PagePersonalNameEdit.storyboard in Resources */,
 				73622E341D1EC27D0039E785 /* PageForgetPassword.storyboard in Resources */,
@@ -2993,6 +3030,7 @@
 				96D451A71CF7F198006817CE /* PageAppointmentBodyView.swift in Sources */,
 				737F1F911D207C7900FFE573 /* PageGlobalSearchBodyView.swift in Sources */,
 				730EF5AF1D6943B7002A4DDB /* PageAppointmentAcceptActions.swift in Sources */,
+				2F9332FB1DA689C600637982 /* PageAllCollegeListActions.swift in Sources */,
 				96637A721CC206A900DBD1CF /* PageLoginActions.swift in Sources */,
 				735FDEA51D1E1233004152CD /* PageAppointmentDetailActions.swift in Sources */,
 				96D4518F1CF7D78A006817CE /* PageYiMaiSameHospitalActions.swift in Sources */,
@@ -3050,6 +3088,7 @@
 				96D4516E1CF6DB34006817CE /* PageYiMaiManualAddFriendBodyView.swift in Sources */,
 				96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */,
 				96637A751CC22DE000DBD1CF /* YMSizes.swift in Sources */,
+				2F9332F91DA689B800637982 /* PageAllCollegeListBodyView.swift in Sources */,
 				96925A8B1D1CDCAD0095432C /* YMAppointmentRecordStrings.swift in Sources */,
 				730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */,
 				96FCD13C1D17A9B600A6E12D /* PagePersonalIDNumInputActions.swift in Sources */,
@@ -3078,6 +3117,7 @@
 				73622E5E1D1EE5720039E785 /* PageYiMaiContactViewController.swift in Sources */,
 				9612DB481CC9D65C00262D2E /* PageCommonBottomView.swift in Sources */,
 				73622E2C1D1EA2880039E785 /* YMLoaclData.swift in Sources */,
+				2F9332F71DA6893600637982 /* PageAllCollegeListViewController.swift in Sources */,
 				96D451A21CF7F14E006817CE /* PageAppointmentViewController.swift in Sources */,
 				963E74001CF3F8D400C10575 /* YMYiMaiStrings.swift in Sources */,
 				73622E2E1D1EA3810039E785 /* YMLoaclDataStrings.swift in Sources */,
@@ -3196,6 +3236,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		2F9332F51DA688F900637982 /* PageAllCollegeList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F9332F41DA688F900637982 /* Base */,
+			);
+			name = PageAllCollegeList.storyboard;
+			sourceTree = "<group>";
+		};
 		730EF5A91D6942A5002A4DDB /* PageAppointmentAccept.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

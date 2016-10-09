@@ -15,8 +15,8 @@ public typealias YMAPIImageCallback = ((UIImage?) -> Void)
 public typealias YMAPIErrorCallback = ((NSError) -> Void)
 
 public class YMAPIInterfaceURL {
-    public static let Server = "http://123.56.88.244"
-    public static let ApiBaseUrl = "http://123.56.88.244/api"
+    public static let Server = "http://139.129.210.89"
+    public static let ApiBaseUrl = "http://139.129.210.89/api"
 
     static let APPInit = YMAPIInterfaceURL.ApiBaseUrl + "/init"
 
@@ -37,6 +37,7 @@ public class YMAPIInterfaceURL {
     static let SearchHospital = YMAPIInterfaceURL.ApiBaseUrl + "/hospital/search"
     static let GetHospitalById = YMAPIInterfaceURL.ApiBaseUrl + "/hospital"
     static let GetHospitalsByCity = YMAPIInterfaceURL.ApiBaseUrl + "/hospital/city"
+    static let GetAllCollege = YMAPIInterfaceURL.ApiBaseUrl + "/college/all"
     
     static let GetDepartment = YMAPIInterfaceURL.ApiBaseUrl + "/dept"
     
@@ -768,6 +769,10 @@ public class YMAPIUtility {
     
     public func YMGetMyPatientList() {
         YMAPIGet(YMAPIInterfaceURL.GetMyPatientList, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetAllCollegeList() {
+        YMAPIGet(YMAPIInterfaceURL.GetAllCollege, param: nil, progressHandler: nil)
     }
     
     public func YMGetRecentContactedDocList(param: [String: String]) {

@@ -66,7 +66,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_COMMON_TEXT_INPUT: true,
         YMCommonStrings.CS_PAGE_PAPER_CARD_PREVIEW: true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_TRANSFER: true,
-        YMCommonStrings.CS_PAGE_PATIENT_LIST: true
+        YMCommonStrings.CS_PAGE_PATIENT_LIST: true,
+        YMCommonStrings.CS_PAGE_ALL_COLLEGE_LIST: true
     ]
 }
 
@@ -270,6 +271,7 @@ public class PageBodyView {
     internal var ParentView: UIView? = nil
     internal var NavController: UINavigationController? = nil
     internal var Actions: AnyObject? = nil
+    var FullPageLoading: YMPageLoadingView!
     public var BodyView: UIScrollView = UIScrollView()
     
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: AnyObject? = nil) {
@@ -277,6 +279,8 @@ public class PageBodyView {
         self.ParentView = parentView
         self.NavController = navController
         self.Actions = pageActions
+        
+        FullPageLoading = YMPageLoadingView(parentView: parentView)
         
         self.ViewLayout()
     }

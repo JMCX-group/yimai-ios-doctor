@@ -50,7 +50,7 @@ public class PageDepartmentSearchBodyView: PageBodyView {
         
         SearchInput?.anchorToEdge(Edge.Left, padding: 30.LayoutVal(), width: 570.LayoutVal(), height: 60.LayoutVal())
         SearchInput?.layer.cornerRadius = 6.LayoutVal()
-        SearchInput?.layer.masksToBounds
+        SearchInput?.layer.masksToBounds = true
         SearchInput?.SetLeftPadding(66.LayoutVal(), leftPaddingImage: "CommonIconSearchHeader")
 
         SearchInput?.EditEndCallback = SearchActions!.StartSearch
