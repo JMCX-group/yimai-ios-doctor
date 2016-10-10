@@ -16,6 +16,8 @@ public class PageNewFriendViewController: PageViewController {
         
         BodyView = PageNewFriendBodyView(parentView: self.SelfView!, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "新朋友", navController: self.NavController)
+        
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: [[String:AnyObject]]())
     }
     
     override func PagePreRefresh() {

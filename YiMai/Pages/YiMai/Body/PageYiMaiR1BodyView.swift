@@ -35,6 +35,20 @@ public class PageYiMaiR1BodyView: PageBodyView {
         DrawFriendsPanel()
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
     }
+    
+    func Reload() {
+        YMLayout.ClearView(view: BodyView)
+        YMLayout.ClearView(view: SearchPanel)
+        YMLayout.ClearView(view: OperationPanel)
+        YMLayout.ClearView(view: NewFriendsPanel)
+        YMLayout.ClearView(view: FriendsPanel)
+
+        DrawSearchPanel()
+        DrawOptPanel()
+        DrawNewFriendsPanel()
+        DrawFriendsPanel()
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
+    }
 
     public func SetBodyScroll() {
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
@@ -143,7 +157,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         }
         
         let titleLabel = UILabel()
-        if(0 == i) {
+        if(0 != i) {
             titleLabel.text = "我的新朋友（新增\(i)人）"
         } else {
             titleLabel.text = "我的新朋友"
@@ -158,7 +172,6 @@ public class PageYiMaiR1BodyView: PageBodyView {
         let newFriendsButton = YMLayout.GetTouchableView(useObject: Actions!, useMethod: OperationSelector, userStringData: YMCommonStrings.CS_PAGE_NEW_FRIEND_NAME)
         
         let icon = YMLayout.GetSuitableImageView("YiMaiR1NewFriendsIcon")
-        newFriendsButton.addSubview(icon)
         
         let dividerLine = UIView()
         dividerLine.backgroundColor = YMColors.FontBlue
@@ -176,18 +189,20 @@ public class PageYiMaiR1BodyView: PageBodyView {
         notifyPoint.frame = CGRect(x: 0,y: 0,width: 10.LayoutVal(),height: 10.LayoutVal())
         notifyPoint.layer.cornerRadius = notifyPoint.bounds.width / 2
         notifyPoint.layer.masksToBounds = true
-        newFriendsButton.addSubview(notifyPoint)
-        
+
         NewFriendsPanel.addSubview(newFriendsButton)
         
         newFriendsButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 80.LayoutVal())
         
-        if(i > 0) {
-            icon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: icon.width, height: icon.height)
-        }
+        newFriendsButton.addSubview(icon)
+        icon.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: icon.width, height: icon.height)
         dividerLine.anchorToEdge(Edge.Left, padding: 102.LayoutVal(), width: YMSizes.OnPx, height: 30.LayoutVal())
         buttonText.anchorToEdge(Edge.Left, padding: 124.LayoutVal(), width: buttonText.width, height: buttonText.height)
-        notifyPoint.anchorToEdge(Edge.Left, padding: 225.LayoutVal(), width: notifyPoint.width, height: notifyPoint.height)
+        
+        if(i > 0) {
+            newFriendsButton.addSubview(notifyPoint)
+            notifyPoint.anchorToEdge(Edge.Left, padding: 225.LayoutVal(), width: notifyPoint.width, height: notifyPoint.height)
+        }
     }
     
     private func DrawFriendsCell(data: [String: AnyObject], prevCell: YMTouchableView?) -> YMTouchableView {

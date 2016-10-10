@@ -14,7 +14,8 @@ public class PageNewFriendBodyView: PageBodyView {
 
     public var SearchInput: YMTextField? = nil
     private var SearchPanel = UIView()
-    private let QuickLinkPanel = YMLayout.GetSuitableImageView("NewFriendsTemp")
+    private let QuickLinkPanel = UIView()
+    private let QuickLinkPanelBkg = YMLayout.GetSuitableImageView("NewFriendsTemp")
     private let ListPanel = UIScrollView()
     private var LastCell: YMTouchableView? = nil
 
@@ -115,7 +116,23 @@ public class PageNewFriendBodyView: PageBodyView {
     
     private func DrawQuickLinkPanel() {
         BodyView.addSubview(QuickLinkPanel)
-        QuickLinkPanel.align(Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, width: YMSizes.PageWidth, height: QuickLinkPanel.height)
+        BodyView.addSubview(QuickLinkPanel)
+        QuickLinkPanel.align(Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, width: YMSizes.PageWidth, height: QuickLinkPanelBkg.height)
+        
+        QuickLinkPanel.addSubview(QuickLinkPanelBkg)
+        QuickLinkPanelBkg.fillSuperview()
+        
+        let contactListBtn = YMButton()
+        let qrBtn = YMButton()
+        
+        QuickLinkPanel.addSubview(contactListBtn)
+        QuickLinkPanel.addSubview(qrBtn)
+        
+        QuickLinkPanel.groupAndFill(group: Group.Horizontal, views: [contactListBtn, qrBtn], padding: 0)
+        
+        contactListBtn.addTarget(NewFriendActions!, action: "JumpToContactPage:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        qrBtn.addTarget(NewFriendActions!, action: "JumpToQRPage:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+//        QuickLinkPanel.align(Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, width: YMSizes.PageWidth, height: QuickLinkPanel.height)
     }
     
     public func Clear() {
