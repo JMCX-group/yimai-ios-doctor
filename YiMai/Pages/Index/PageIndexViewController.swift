@@ -31,6 +31,8 @@ public class PageIndexViewController: PageViewController {
             YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)! as! [String: AnyObject]
             YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
         }
+        
+        print(YMVar.MyUserInfo)
     }
 
     override func PageLayout(){

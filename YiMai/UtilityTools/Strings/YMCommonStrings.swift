@@ -89,6 +89,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_COMMON_TEXT_INPUT = "PageCommonTextInput"
     
     public static let CS_PAGE_ALL_COLLEGE_LIST = "PageAllCollegeList"
+    public static let CS_PAGE_INPUT_MY_FEATURES = "PageInputMyFeatures"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

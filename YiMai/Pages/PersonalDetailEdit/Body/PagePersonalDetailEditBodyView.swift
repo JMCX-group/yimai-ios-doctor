@@ -132,7 +132,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
     private func DrawIntroPanel() {
         Tags = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: editActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
-            label: UILabel(), text: "特长")
+            label: UILabel(), text: "特长", userStringData: YMCommonStrings.CS_PAGE_INPUT_MY_FEATURES)
         
         Intro = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: editActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
@@ -248,7 +248,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
             let hospitalId = "\(unpackedHospital["id"]!)"
             editActions!.UpdateUserInfo(["hospital": hospitalId])
         }
-        
+
         if(nil != newDepartment) {
             showLoadingFlag = true
             let unpackedDept = newDepartment as! [String: AnyObject]

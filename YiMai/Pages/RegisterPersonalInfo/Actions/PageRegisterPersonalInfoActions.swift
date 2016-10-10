@@ -66,11 +66,15 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
     
     public func ShowHospital(sender: UIGestureRecognizer) {
         PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE
+        PageCommonSearchViewController.InitPageTitle = "选择医院"
+        PageCommonSearchViewController.InitSearchKey = ""
         DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
     }
     
     public func ShowCity(sender: UIGestureRecognizer) {
         PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE
+        PageCommonSearchViewController.InitPageTitle = "选择科室"
+        PageCommonSearchViewController.InitSearchKey = ""
         DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
     }
     

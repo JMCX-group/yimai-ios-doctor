@@ -72,6 +72,7 @@ public class PageCommonSearchViewController: PageViewController {
             
         case YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE:
             HospitalSearch?.BodyView.hidden = false
+            HospitalSearch?.SearchInput?.text = ""
             HospitalSearch?.ShowInitHospitals()
             break
             

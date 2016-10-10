@@ -10,7 +10,7 @@ import Foundation
 import Neon
 
 public class PageHospitalSearchBodyView: PageBodyView {
-    private var SearchInput: YMTextField? = nil
+    var SearchInput: YMTextField? = nil
     private let InputPanel: UIView = UIView()
     
     private var SearchResultTable: YMTableView? = nil
