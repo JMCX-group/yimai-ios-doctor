@@ -121,10 +121,20 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     public func ShowResult(data: [String: AnyObject]) {
         DrawSearchPanel()
         
-        let friendsData = data["friends"] as! [[String: AnyObject]]
-        let othersData = data["others"] as! [[String: AnyObject]]
-        DrawFriendsList(friendsData)
-        DrawOtherList(othersData)
+        let friendsData = data["friends"] as? [[String: AnyObject]]
+        let othersData = data["others"] as? [[String: AnyObject]]
+        if(nil != friendsData) {
+            DrawFriendsList(friendsData!)
+        } else {
+            DrawFriendsList([[String: AnyObject]]())
+            ListType = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS
+        }
+        
+        if(nil != othersData) {
+            DrawOtherList(othersData!)
+        } else {
+            DrawOtherList([[String: AnyObject]]())
+        }
         
         if(YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_FRIENDS == ListType) {
             ShowFriendsList()
@@ -155,6 +165,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
         
         controller.BottomButton?.EnableAddButton()
+        
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsListPanel, padding: 128.LayoutVal() + SearchPanel.height)
     }
     
     public func ShowOthersList() {
@@ -180,6 +192,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
         
         controller.BottomButton?.EnabelInviteButton()
+        
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: OthersListPanel, padding: 128.LayoutVal() + SearchPanel.height)
     }
     
     private func DrawSearchPanel() {

@@ -24,7 +24,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
     
     private var Hospital: YMTouchableView? = nil
     private var Department: YMTouchableView? = nil
-    private var JobTitle: YMTouchableView? = nil
+    var JobTitle: YMTouchableView? = nil
     private var School: YMTouchableView? = nil
     private var IDNum: YMTouchableView? = nil
     
@@ -38,7 +38,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
     
     private let HospitalLabel = UILabel()
     private let DepartmentLabel = UILabel()
-    private let JobTitleLabel = UILabel()
+    let JobTitleLabel = UILabel()
     private let SchoolLabel = UILabel()
     private let IDNumLabel = UILabel()
 
@@ -67,7 +67,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         print(editActions)
     }
     
-    private func AppendExtInfo(label: UILabel, parent: UIView, title: String = "", fontColor: UIColor = YMColors.FontGray, fontSize: CGFloat = 28.LayoutVal()){
+    func AppendExtInfo(label: UILabel, parent: UIView, title: String = "", fontColor: UIColor = YMColors.FontGray, fontSize: CGFloat = 28.LayoutVal()){
         parent.addSubview(label)
         label.textColor = fontColor
         label.text = title

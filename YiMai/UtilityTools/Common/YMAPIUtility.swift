@@ -629,7 +629,7 @@ public class YMAPIUtility {
     }
     
     public func YMQueryUserByPhone(phone: String) {
-        YMAPIGet(YMAPIInterfaceURL.QueryUserByPhone, param: [YMCommonStrings.CS_API_PARAM_KEY_PHONE: phone], progressHandler: nil)
+        YMAPIGet(YMAPIInterfaceURL.QueryUserByPhone + "/\(phone)", param: nil, progressHandler: nil)
     }
     
     public func YMAddFriendById(id: String) {

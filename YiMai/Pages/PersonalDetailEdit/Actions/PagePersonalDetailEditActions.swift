@@ -90,8 +90,18 @@ public class PagePersonalDetailEditActions: PageJumpActions {
         DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
     }
     
-    public func InputJobTitle(_: UIGestureRecognizer) {
+    func UpdateJobTitle(act: UIAlertAction) {
+        let title = act.title!
+        TargetController?.BodyView!.AppendExtInfo(TargetController!.BodyView!.JobTitleLabel,
+                                                 parent: TargetController!.BodyView!.JobTitle!,
+                                                 title: title)
         
+        YMVar.MyUserInfo["job_title"] = title
+        UpdateUserInfo(["job_title": title])
+    }
+    
+    public func InputJobTitle(_: UIGestureRecognizer) {
+        YMJobtitleSelectModal.ShowSelectModal(self.NavController!, callback: UpdateJobTitle)
     }
     
     public func InputSchool(_: UIGestureRecognizer) {
@@ -109,6 +119,12 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     private func UpdateSuccess(data: NSDictionary?) {
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: data!["data"]!)
         YMVar.MyUserInfo = data!["data"]! as! [String : AnyObject]
+        
+        let jobTitle = YMVar.MyUserInfo["job_title"] as? String
+        if(nil == jobTitle) {
+            YMVar.MyUserInfo["job_title"] = "医生"
+        }
+        
         TargetController?.BodyView?.LoadData()
         TargetController?.BodyView?.Loading?.Hide()
     }

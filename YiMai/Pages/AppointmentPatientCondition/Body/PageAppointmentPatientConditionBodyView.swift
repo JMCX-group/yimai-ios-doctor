@@ -10,14 +10,17 @@ import Foundation
 import Neon
 
 public class PageAppointmentPatientConditionBodyView: PageBodyView {
-    private var ConditionInput: YMTextArea? = nil
+    var ConditionInput: YMTextArea? = nil
 
+    static var InitContent = ""
+    
     override func ViewLayout() {
         super.ViewLayout()
         DrawTextArea()
     }
     
     public func GetCondition() -> String {
+        PageAppointmentPatientConditionBodyView.InitContent = ConditionInput!.text
         return ConditionInput!.text
     }
     
@@ -33,6 +36,8 @@ public class PageAppointmentPatientConditionBodyView: PageBodyView {
         ConditionInput?.anchorToEdge(Edge.Top, padding: 30.LayoutVal(), width: YMSizes.PageWidth, height: 320.LayoutVal())
         ConditionInput?.MaxCharCount = 500
         ConditionInput?.text = PageAppointmentViewController.PatientCondition
+        
+        ConditionInput?.text = PageAppointmentPatientConditionBodyView.InitContent
     }
     
     public func DrawSpecialTopButton(topView: UIView) {

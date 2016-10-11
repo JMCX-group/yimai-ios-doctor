@@ -40,6 +40,8 @@ public class PageAppointmentViewController: PageViewController {
             } else {
                 PageAppointmentViewController.DoctorIsPreSelected = false
             }
+            
+            PageAppointmentPatientConditionBodyView.InitContent = ""
 
             PageAppointmentViewController.PatientBasicInfo = nil
             PageAppointmentViewController.PatientCondition = ""

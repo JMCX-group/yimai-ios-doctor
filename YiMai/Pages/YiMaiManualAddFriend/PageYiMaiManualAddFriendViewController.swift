@@ -24,5 +24,10 @@ public class PageYiMaiManualAddFriendViewController: PageViewController {
         
         BodyView?.DrawSpecialQRButton(TopView!.TopViewPanel)
     }
+    
+    override func PagePreRefresh() {
+        super.PagePreRefresh()
+        BodyView?.ClearInput()
+    }
 }
 

@@ -72,9 +72,9 @@ class PageAllCollegeListActions: PageJumpActions {
         let data = cell.UserObjectData as! [String:AnyObject]
         PageAllCollegeListBodyView.SelectedCollege = data
         YMVar.MyUserInfo["college"] = data
-        
+
         self.NavController?.popViewControllerAnimated(true)
-        UpdateApi.YMChangeUserInfo(["college": data])
+        UpdateApi.YMChangeUserInfo(["college": data["id"]!])
     }
 }
 

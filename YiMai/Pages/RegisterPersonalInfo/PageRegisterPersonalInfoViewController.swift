@@ -22,6 +22,8 @@ public class PageRegisterPersonalInfoViewController: PageViewController {
     
     override func PagePreRefresh() {
         
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_LOGIN_STATUS, data: false)
+
         if(isMovingToParentViewController()) {
             BodyView?.Reset()
             TopView?.TopViewPanel.removeFromSuperview()

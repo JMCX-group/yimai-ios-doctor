@@ -32,6 +32,11 @@ public class PageIndexViewController: PageViewController {
             YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
         }
         
+        let jobTitle = YMVar.MyUserInfo["job_title"] as? String
+        if(nil == jobTitle) {
+            YMVar.MyUserInfo["job_title"] = "医生"
+        }
+        
         print(YMVar.MyUserInfo)
     }
 

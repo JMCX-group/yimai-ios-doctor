@@ -24,6 +24,12 @@ public class PagePersonalIDNumInputActions: PageJumpActions {
         let realData = data!
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: realData["data"]!)
         YMVar.MyUserInfo = realData["data"]! as! [String : AnyObject]
+        
+        let jobTitle = YMVar.MyUserInfo["job_title"] as? String
+        if(nil == jobTitle) {
+            YMVar.MyUserInfo["job_title"] = "医生"
+        }
+        
         self.NavController?.popViewControllerAnimated(true)
     }
     

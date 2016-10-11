@@ -27,6 +27,12 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         targetController.LoadingView?.Hide()
         YMLocalData.SaveUserInfo(data!["data"]!)
         YMVar.MyUserInfo = data!["data"] as! [String : AnyObject]
+        
+        let jobTitle = YMVar.MyUserInfo["job_title"] as? String
+        if(nil == jobTitle) {
+            YMVar.MyUserInfo["job_title"] = "医生"
+        }
+
         self.NavController!.popViewControllerAnimated(true)
     }
     

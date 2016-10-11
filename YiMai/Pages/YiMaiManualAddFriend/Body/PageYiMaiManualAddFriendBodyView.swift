@@ -10,7 +10,7 @@ import Foundation
 import Neon
 
 public class PageYiMaiManualAddFriendBodyView: PageBodyView {
-    private var SearchTextFeild: YMTextField? = nil
+    var SearchTextFeild: YMTextField? = nil
     private let SearchPanel: UIView = UIView()
     private var ResultPanel: UIView? = nil
 

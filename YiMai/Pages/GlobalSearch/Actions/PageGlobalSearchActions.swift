@@ -90,18 +90,18 @@ public class PageGlobalSearchActions: PageJumpActions {
     }
     
     public func ShowLv1FullList(_: UIGestureRecognizer) {
-        TargetView?.BodyView.contentOffset = CGPointMake(0, 0)
+//        TargetView?.BodyView.contentOffset = CGPointMake(0, 0)
         TargetView?.ShowLv1FullList()
     }
     
     public func ShowLv2FullList(_: UIGestureRecognizer) {
-        TargetView?.BodyView.contentOffset = CGPointMake(0, 0)
+//        TargetView?.BodyView.contentOffset = CGPointMake(0, 0)
         TargetView?.ShowLv2FullList()
 
     }
     
     public func ShowLv3FullList(_: UIGestureRecognizer) {
-        TargetView?.BodyView.contentOffset = CGPointMake(0, 0)
+//        TargetView?.BodyView.contentOffset = CGPointMake(0, 0)
         TargetView?.ShowLv3FullList()
     }
     

@@ -148,6 +148,40 @@ public class PageLoginActions : PageJumpActions {
         } else {
             queue.addOperationWithBlock({ () -> Void in
                 self.PageLoginBody?.ClearLoginControls()
+                let userInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO) as? [String: AnyObject]
+                
+                if(nil == userInfo) {
+                    self.DoJump(YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME)
+                    return
+                }
+                
+                let userName = userInfo!["name"] as? String
+                let userHos = userInfo!["hospital"] as? [String: AnyObject]
+                let userDept = userInfo!["department"] as? [String: AnyObject]
+                
+                if(YMValueValidator.IsEmptyString(userName)) {
+                    self.DoJump(YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME)
+                    return
+                }
+                
+                if(nil == userHos) {
+                    self.DoJump(YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME)
+                    return
+                }
+                
+                if(nil == userDept) {
+                    self.DoJump(YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME)
+                    return
+                }
+
+                let hosName = userHos!["name"] as? String
+                let deptName = userDept!["name"] as? String
+                
+                if(YMValueValidator.IsEmptyString(hosName) || YMValueValidator.IsEmptyString(deptName)) {
+                    self.DoJump(YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME)
+                    return
+                }
+
                 self.DoJump(YMCommonStrings.CS_PAGE_INDEX_NAME)
             })
         }

@@ -243,7 +243,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         
         let friendsCount = Lv3Data?.count
         
-        titleLabel.text = "医生朋友（\(friendsCount!)名）"
+        titleLabel.text = "其他医生（\(friendsCount!)名）"
         
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(20.LayoutVal())
@@ -292,7 +292,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         Lv2Panel.contentOffset = CGPointMake(0, 0)
         Lv3Panel.contentOffset = CGPointMake(0, 0)
         
-        BodyView.contentOffset = CGPointMake(0, 0)
+//        BodyView.contentOffset = CGPointMake(0, 0)
         
         DrawFiltersList()
         
@@ -316,6 +316,8 @@ public class PageGlobalSearchBodyView: PageBodyView {
         } else {
             titleLabel.text = "医生朋友（\(friendsCount)名）"
         }
+        
+        Lv1Panel.hidden = false
         
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(20.LayoutVal())
@@ -370,6 +372,8 @@ public class PageGlobalSearchBodyView: PageBodyView {
             titleLabel.text = "二度医脉（\(friendsCount)名）"
         }
         
+        Lv2Panel.hidden = false
+        
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(20.LayoutVal())
         titleLabel.sizeToFit()
@@ -422,6 +426,8 @@ public class PageGlobalSearchBodyView: PageBodyView {
         } else {
             titleLabel.text = "其他医生（\(friendsCount)名）"
         }
+        
+        Lv3Panel.hidden = false
         
         titleLabel.textColor = YMColors.FontGray
         titleLabel.font = YMFonts.YMDefaultFont(20.LayoutVal())
