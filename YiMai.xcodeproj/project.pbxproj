@@ -321,6 +321,10 @@
 		FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD01D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift */; };
 		FD801DD31D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */; };
 		FD801DD51D66F3140066198B /* PageAdmissionChargeSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD801DD41D66F3140066198B /* PageAdmissionChargeSettingActions.swift */; };
+		FD86428C1DAF30B500C93411 /* PageSYSBroadcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD86428E1DAF30B500C93411 /* PageSYSBroadcast.storyboard */; };
+		FD8642901DAF30CD00C93411 /* PageSYSBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD86428F1DAF30CD00C93411 /* PageSYSBroadcastViewController.swift */; };
+		FD8642921DAF310000C93411 /* PageSYSBroadcastBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8642911DAF310000C93411 /* PageSYSBroadcastBodyView.swift */; };
+		FD8642941DAF31C700C93411 /* PageSYSBroadcastActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8642931DAF31C700C93411 /* PageSYSBroadcastActions.swift */; };
 		FDD1DB1A1D992BA000C289B1 /* PageLawyerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD1DB191D992BA000C289B1 /* PageLawyerInfoViewController.swift */; };
 		FDD1DB1B1D992BC700C289B1 /* PageLawyerInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD1DB1D1D992BC700C289B1 /* PageLawyerInfo.storyboard */; };
 		FDD1DB1F1D992D0700C289B1 /* PageLawyerInfoBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD1DB1E1D992D0700C289B1 /* PageLawyerInfoBodyView.swift */; };
@@ -655,6 +659,10 @@
 		FD801DD01D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionChargeSettingViewController.swift; sourceTree = "<group>"; };
 		FD801DD21D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdmissionChargeSettingBodyView.swift; sourceTree = "<group>"; };
 		FD801DD41D66F3140066198B /* PageAdmissionChargeSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAdmissionChargeSettingActions.swift; sourceTree = "<group>"; };
+		FD86428D1DAF30B500C93411 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageSYSBroadcast.storyboard; sourceTree = "<group>"; };
+		FD86428F1DAF30CD00C93411 /* PageSYSBroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSYSBroadcastViewController.swift; sourceTree = "<group>"; };
+		FD8642911DAF310000C93411 /* PageSYSBroadcastBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSYSBroadcastBodyView.swift; sourceTree = "<group>"; };
+		FD8642931DAF31C700C93411 /* PageSYSBroadcastActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSYSBroadcastActions.swift; sourceTree = "<group>"; };
 		FDD1DB191D992BA000C289B1 /* PageLawyerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLawyerInfoViewController.swift; sourceTree = "<group>"; };
 		FDD1DB1C1D992BC700C289B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageLawyerInfo.storyboard; sourceTree = "<group>"; };
 		FDD1DB1E1D992D0700C289B1 /* PageLawyerInfoBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLawyerInfoBodyView.swift; sourceTree = "<group>"; };
@@ -1395,6 +1403,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				FD8642871DAF307D00C93411 /* SYSBroadcast */,
 				FD5512FA1DAB769200A84801 /* InputMyFeatures */,
 				2F9332EE1DA6889C00637982 /* AllCollegeList */,
 				FD1D7D3F1D9CA7430006F190 /* DoctorAuth */,
@@ -2704,6 +2713,33 @@
 			path = Body;
 			sourceTree = "<group>";
 		};
+		FD8642871DAF307D00C93411 /* SYSBroadcast */ = {
+			isa = PBXGroup;
+			children = (
+				FD8642881DAF307D00C93411 /* Actions */,
+				FD8642891DAF307D00C93411 /* Body */,
+				FD86428E1DAF30B500C93411 /* PageSYSBroadcast.storyboard */,
+				FD86428F1DAF30CD00C93411 /* PageSYSBroadcastViewController.swift */,
+			);
+			path = SYSBroadcast;
+			sourceTree = "<group>";
+		};
+		FD8642881DAF307D00C93411 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				FD8642931DAF31C700C93411 /* PageSYSBroadcastActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		FD8642891DAF307D00C93411 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				FD8642911DAF310000C93411 /* PageSYSBroadcastBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
 		FDC1C9311D79760A000A515B /* YMLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2855,6 +2891,7 @@
 				96C02FE51D96B4C10096E216 /* PaperCardPreview.storyboard in Resources */,
 				7394F85A1D005DF400F05487 /* PageAppointmentSelectTime.storyboard in Resources */,
 				7394F84B1CF9A36800F05487 /* PageAppointmentPatientCondition.storyboard in Resources */,
+				FD86428C1DAF30B500C93411 /* PageSYSBroadcast.storyboard in Resources */,
 				FD5512FF1DAB76B400A84801 /* PageInputMyFeatures.storyboard in Resources */,
 				73622E5A1D1EE5660039E785 /* PageYiMaiContact.storyboard in Resources */,
 				FDF46D311D768876007B9987 /* PageApointmentAcceptDetail.storyboard in Resources */,
@@ -3096,8 +3133,10 @@
 				739009261D1554E100989207 /* YMRegisterInfoString.swift in Sources */,
 				FD77AF221D68484F00B8C73E /* LBXPermissions.swift in Sources */,
 				7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */,
+				FD8642901DAF30CD00C93411 /* PageSYSBroadcastViewController.swift in Sources */,
 				737F1F801D2048EE00FFE573 /* PageNewFriendActions.swift in Sources */,
 				96C02FD11D9670560096E216 /* RequirePaperCardActions.swift in Sources */,
+				FD8642941DAF31C700C93411 /* PageSYSBroadcastActions.swift in Sources */,
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
 				FD77AF231D68484F00B8C73E /* LBXScanLineAnimation.swift in Sources */,
 				FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */,
@@ -3105,6 +3144,7 @@
 				FD1F57F51D9132A30039769D /* YMQRRecognizer.swift in Sources */,
 				96FCD13A1D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift in Sources */,
 				96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */,
+				FD8642921DAF310000C93411 /* PageSYSBroadcastBodyView.swift in Sources */,
 				737F1F691D1F9D8E00FFE573 /* PageSearchResultCell.swift in Sources */,
 				735FDE9E1D1E10C9004152CD /* PageAppointmentDetailViewController.swift in Sources */,
 				736EBC6A1D1688CE00C40AA7 /* PagePersonalAccountSettingBodyView.swift in Sources */,
@@ -3762,6 +3802,14 @@
 				FD801DCE1D66F2990066198B /* Base */,
 			);
 			name = PageAdmissionChargeSetting.storyboard;
+			sourceTree = "<group>";
+		};
+		FD86428E1DAF30B500C93411 /* PageSYSBroadcast.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD86428D1DAF30B500C93411 /* Base */,
+			);
+			name = PageSYSBroadcast.storyboard;
 			sourceTree = "<group>";
 		};
 		FDD1DB1D1D992BC700C289B1 /* PageLawyerInfo.storyboard */ = {

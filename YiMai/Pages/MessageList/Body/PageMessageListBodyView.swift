@@ -87,6 +87,7 @@ public class PageMessageListBodyView: PageBodyView {
     private func DrawBroadCast() {
         BroadcastPanel = GetMessageTouchablePanel("MessageListIconBroadCast", title: "广播站")
         BroadcastPanel?.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: PanelHeight)
+        BroadcastPanel?.UserStringData = YMCommonStrings.CS_PAGE_SYS_BROADCAST
     }
     
     private func DrawMyAdmission() {

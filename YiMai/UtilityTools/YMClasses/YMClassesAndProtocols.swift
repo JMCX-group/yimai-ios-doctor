@@ -68,7 +68,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_APPOINTMENT_TRANSFER: true,
         YMCommonStrings.CS_PAGE_PATIENT_LIST: true,
         YMCommonStrings.CS_PAGE_ALL_COLLEGE_LIST: true,
-        YMCommonStrings.CS_PAGE_INPUT_MY_FEATURES: true
+        YMCommonStrings.CS_PAGE_INPUT_MY_FEATURES: true,
+        YMCommonStrings.CS_PAGE_SYS_BROADCAST: true
     ]
 }
 
