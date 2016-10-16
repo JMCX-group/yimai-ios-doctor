@@ -293,7 +293,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         
         let titleLabel = UILabel()
 
-        titleLabel.text = "根据可查询的数据，以下\(data.count)位联系人可能是医生"
+        titleLabel.text = "根据可查询的数据，您在医脉有\(data.count)位好友"
         titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
         titleLabel.textColor = YMColors.FontGray
 

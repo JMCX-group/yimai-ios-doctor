@@ -19,8 +19,12 @@ public class PageIndexTopView: NSObject {
     public var TopSearchInput: YMTextField? = nil
     private let TopSearchImage: UIImage = UIImage(named: "CommonIconSearchHeader")!
     private let TopBackground = YMLayout.GetSuitableImageView("TopViewBackgroundNormal")
+    private let MsgWithNotifyPointIcon = YMLayout.GetSuitableImageView("IndexButtonMessageHaveNew")
+    private let MsgWithoutNotifyPointIcon = YMLayout.GetSuitableImageView("IndexButtonMessageEmpty")
     
     private let TopView = UIView()
+    
+    private static var StartRefreshMsgStatus = false
     
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: PageIndexActions){
         self.init()
@@ -69,6 +73,28 @@ public class PageIndexTopView: NSObject {
         NameCardButton?.anchorInCorner(Corner.BottomLeft, xPad: 30.LayoutVal(), yPad: 23.LayoutVal(), width: (NameCardButton?.width)!, height: (NameCardButton?.height)!)
         SysMessageButton?.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 23.LayoutVal(), width: (SysMessageButton?.width)!, height: (SysMessageButton?.height)!)
         TopSearchInput?.anchorInCorner(Corner.BottomLeft, xPad: 126.LayoutVal(), yPad: 19.LayoutVal(), width: 500.LayoutVal(), height: 48.LayoutVal())
+    }
+    
+    func ShowNewMsgNotifyPoint(fromLoop: Bool = false) {
+        if(PageIndexTopView.StartRefreshMsgStatus && !fromLoop) {
+            return
+        }
+        PageIndexTopView.StartRefreshMsgStatus = true
+        UpdateMsgNotifyStatus()
+        
+        YMDelay(1.0) { 
+            self.ShowNewMsgNotifyPoint(true)
+        }
+    }
+    
+    func UpdateMsgNotifyStatus() {
+        if(0 == YMVar.MyNewBroadcastInfo.count
+            && 0 == YMVar.MyNewAdmissionInfo.count
+            && 0 == YMVar.MyNewAppointmentInfo.count) {
+            SysMessageButton?.image = MsgWithoutNotifyPointIcon.image
+        } else {
+            SysMessageButton?.image = MsgWithNotifyPointIcon.image
+        }
     }
 }
 

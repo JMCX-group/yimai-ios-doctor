@@ -25,7 +25,7 @@ public class PageMessageListBodyView: PageBodyView {
         DrawMyAppointment()
     }
     
-    private func GetMessageTouchablePanel(icon: String, title: String, subtitle: String = "暂无信息", time: String = "", hasNewFlag: Bool = false) -> YMTouchableView {
+    private func GetMessageTouchablePanel(icon: String, title: String, subtitle: String = "暂无信息", method: Selector = YMSelectors.PageJumpByView,time: String = "", hasNewFlag: Bool = false) -> YMTouchableView {
         let panelIcon = YMLayout.GetSuitableImageView(icon)
         let titleLine = UILabel()
         let subtitleLine = UILabel()
@@ -36,7 +36,7 @@ public class PageMessageListBodyView: PageBodyView {
         let subtitleFontSize = 22.LayoutVal()
         let timeFontSize = 22.LayoutVal()
         
-        let messagePanel = YMLayout.GetTouchableView(useObject: Actions!, useMethod: YMSelectors.PageJumpByView)
+        let messagePanel = YMLayout.GetTouchableView(useObject: Actions!, useMethod: method)
         
         
         
@@ -85,19 +85,38 @@ public class PageMessageListBodyView: PageBodyView {
     }
     
     private func DrawBroadCast() {
-        BroadcastPanel = GetMessageTouchablePanel("MessageListIconBroadCast", title: "广播站")
+        var text = "暂无新的系统广播"
+        if(0 != YMVar.MyNewBroadcastInfo.count) {
+            text = YMVar.MyNewBroadcastInfo["name"] as! String
+        }
+        
+        BroadcastPanel = GetMessageTouchablePanel("MessageListIconBroadCast",
+                                                  title: "广播站", subtitle: text,
+                                                  method: "BroadcastTouched:".Sel())
         BroadcastPanel?.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: PanelHeight)
-        BroadcastPanel?.UserStringData = YMCommonStrings.CS_PAGE_SYS_BROADCAST
     }
     
     private func DrawMyAdmission() {
-        MyAdmissionPanel = GetMessageTouchablePanel("MessageListIconMyAdmissions", title: "我的接诊信息", subtitle: "您收到一条来自孙权的约诊请求（预约号为252AD），请您及时处理。")
+        print(YMVar.MyNewAdmissionInfo)
+        
+        var text = "暂无新的接诊信息"
+        if(0 != YMVar.MyNewAdmissionInfo.count) {
+            text = YMVar.MyNewAdmissionInfo["text"] as! String
+        }
+        MyAdmissionPanel = GetMessageTouchablePanel("MessageListIconMyAdmissions",
+                                                    title: "我的接诊信息", subtitle: text,
+                                                    method: "AdmissionTouched:".Sel())
         MyAdmissionPanel?.align(Align.UnderMatchingLeft, relativeTo: BroadcastPanel!, padding: 0, width: YMSizes.PageWidth, height: PanelHeight)
-        MyAdmissionPanel?.UserStringData = YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME
     }
     
     private func DrawMyAppointment() {
-        MyAppointmentPanel = GetMessageTouchablePanel("MessageListIconMyAppointment", title: "约诊回复信息", subtitle: "张仲景医生已回复您替患者曹操发起的约诊请求（预约号220AD）")
+        var text = "暂无新的约诊回复信息"
+        if(0 != YMVar.MyNewAppointmentInfo.count) {
+            text = YMVar.MyNewAppointmentInfo["text"] as! String
+        }
+        MyAppointmentPanel = GetMessageTouchablePanel("MessageListIconMyAppointment",
+                                                      title: "约诊回复信息", subtitle: text,
+                                                      method: "AppointmentTouched:".Sel())
         MyAppointmentPanel?.align(Align.UnderMatchingLeft, relativeTo: MyAdmissionPanel!, padding: 0, width: YMSizes.PageWidth, height: PanelHeight)
     }
 }

@@ -114,6 +114,10 @@
 		9612DB731CC9F7FA00262D2E /* PagePersonalBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB721CC9F7FA00262D2E /* PagePersonalBodyView.swift */; };
 		9612DB751CC9F85900262D2E /* PagePersonalTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB741CC9F85900262D2E /* PagePersonalTopView.swift */; };
 		9612DB771CC9F88600262D2E /* PagePersonalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9612DB761CC9F88600262D2E /* PagePersonalActions.swift */; };
+		961646011DB1DB3C007BA360 /* PageShowWebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 961646031DB1DB3C007BA360 /* PageShowWebView.storyboard */; };
+		961646071DB1DC56007BA360 /* PageShowWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961646061DB1DC56007BA360 /* PageShowWebViewController.swift */; };
+		961646091DB1DC80007BA360 /* PageShowWebBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961646081DB1DC80007BA360 /* PageShowWebBodyView.swift */; };
+		9616460B1DB1DCB9007BA360 /* PageShowWebViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9616460A1DB1DCB9007BA360 /* PageShowWebViewActions.swift */; };
 		9619EF511CC1DB9600F69CBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF501CC1DB9600F69CBC /* AppDelegate.swift */; };
 		9619EF531CC1DB9600F69CBC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EF521CC1DB9600F69CBC /* ViewController.swift */; };
 		9619EF561CC1DB9600F69CBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9619EF541CC1DB9600F69CBC /* Main.storyboard */; };
@@ -148,6 +152,7 @@
 		96331B091CC8762600E53125 /* YMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B041CC8762600E53125 /* YMButton.swift */; };
 		96331B0B1CC8762600E53125 /* YMClassesAndProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */; };
 		96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96331B071CC8762600E53125 /* YMTextInput.swift */; };
+		9634CE371DB3055800CAC1DE /* YMBackgroundRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9634CE361DB3055800CAC1DE /* YMBackgroundRefresh.swift */; };
 		9634D3711D080A3C00542901 /* YMAPIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9634D3701D080A3C00542901 /* YMAPIStrings.swift */; };
 		963E74001CF3F8D400C10575 /* YMYiMaiStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E73FF1CF3F8D400C10575 /* YMYiMaiStrings.swift */; };
 		963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E74011CF409B300C10575 /* PageYiMaiR1BodyView.swift */; };
@@ -447,6 +452,10 @@
 		9612DB721CC9F7FA00262D2E /* PagePersonalBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalBodyView.swift; sourceTree = "<group>"; };
 		9612DB741CC9F85900262D2E /* PagePersonalTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalTopView.swift; sourceTree = "<group>"; };
 		9612DB761CC9F88600262D2E /* PagePersonalActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePersonalActions.swift; sourceTree = "<group>"; };
+		961646021DB1DB3C007BA360 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageShowWebView.storyboard; sourceTree = "<group>"; };
+		961646061DB1DC56007BA360 /* PageShowWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageShowWebViewController.swift; sourceTree = "<group>"; };
+		961646081DB1DC80007BA360 /* PageShowWebBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageShowWebBodyView.swift; sourceTree = "<group>"; };
+		9616460A1DB1DCB9007BA360 /* PageShowWebViewActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageShowWebViewActions.swift; sourceTree = "<group>"; };
 		9619EF4D1CC1DB9600F69CBC /* YiMai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YiMai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9619EF501CC1DB9600F69CBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9619EF521CC1DB9600F69CBC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -483,6 +492,7 @@
 		96331B041CC8762600E53125 /* YMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMButton.swift; sourceTree = "<group>"; };
 		96331B061CC8762600E53125 /* YMClassesAndProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMClassesAndProtocols.swift; sourceTree = "<group>"; };
 		96331B071CC8762600E53125 /* YMTextInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTextInput.swift; sourceTree = "<group>"; };
+		9634CE361DB3055800CAC1DE /* YMBackgroundRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMBackgroundRefresh.swift; sourceTree = "<group>"; };
 		9634D3701D080A3C00542901 /* YMAPIStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAPIStrings.swift; sourceTree = "<group>"; };
 		963E73FF1CF3F8D400C10575 /* YMYiMaiStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMYiMaiStrings.swift; sourceTree = "<group>"; };
 		963E74011CF409B300C10575 /* PageYiMaiR1BodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageYiMaiR1BodyView.swift; sourceTree = "<group>"; };
@@ -1365,6 +1375,33 @@
 			path = Top;
 			sourceTree = "<group>";
 		};
+		961645FC1DB1DADE007BA360 /* ShowWebView */ = {
+			isa = PBXGroup;
+			children = (
+				961645FD1DB1DADE007BA360 /* Actions */,
+				961645FE1DB1DADE007BA360 /* BodyView */,
+				961646031DB1DB3C007BA360 /* PageShowWebView.storyboard */,
+				961646061DB1DC56007BA360 /* PageShowWebViewController.swift */,
+			);
+			path = ShowWebView;
+			sourceTree = "<group>";
+		};
+		961645FD1DB1DADE007BA360 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				9616460A1DB1DCB9007BA360 /* PageShowWebViewActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		961645FE1DB1DADE007BA360 /* BodyView */ = {
+			isa = PBXGroup;
+			children = (
+				961646081DB1DC80007BA360 /* PageShowWebBodyView.swift */,
+			);
+			path = BodyView;
+			sourceTree = "<group>";
+		};
 		9619EF441CC1DB9600F69CBC = {
 			isa = PBXGroup;
 			children = (
@@ -1476,6 +1513,7 @@
 		9619EF661CC1DE0C00F69CBC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				961645FC1DB1DADE007BA360 /* ShowWebView */,
 				96C02FD21D968D240096E216 /* CommonTextInput */,
 				737F1F651D1F930400FFE573 /* PageSearchResultCell */,
 				96637A881CC2515300DBD1CF /* Actions */,
@@ -1767,6 +1805,7 @@
 				73622E2B1D1EA2880039E785 /* YMLoaclData.swift */,
 				7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */,
 				FD07E5D01D9B67A900E33CE8 /* YMIMUtility.swift */,
+				9634CE361DB3055800CAC1DE /* YMBackgroundRefresh.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2874,6 +2913,7 @@
 				96637A7D1CC24A6100DBD1CF /* PageLogin.storyboard in Resources */,
 				9612DB6D1CC9F75300262D2E /* PagePersonal.storyboard in Resources */,
 				9620456B1D1B9B4100E18D88 /* PageAppointmentRecord.storyboard in Resources */,
+				961646011DB1DB3C007BA360 /* PageShowWebView.storyboard in Resources */,
 				FD1D7D441D9CA76B0006F190 /* PageDoctorAuth.storyboard in Resources */,
 				739011B21D2763AD00EAAA1B /* PageAddmissionReply.storyboard in Resources */,
 				96C02FD71D968D4A0096E216 /* PageCommonTextInput.storyboard in Resources */,
@@ -3135,6 +3175,7 @@
 				7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */,
 				FD8642901DAF30CD00C93411 /* PageSYSBroadcastViewController.swift in Sources */,
 				737F1F801D2048EE00FFE573 /* PageNewFriendActions.swift in Sources */,
+				9634CE371DB3055800CAC1DE /* YMBackgroundRefresh.swift in Sources */,
 				96C02FD11D9670560096E216 /* RequirePaperCardActions.swift in Sources */,
 				FD8642941DAF31C700C93411 /* PageSYSBroadcastActions.swift in Sources */,
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
@@ -3174,9 +3215,11 @@
 				FD2A99C01D937DF8001953D6 /* PageMyInfoCardViewController.swift in Sources */,
 				739011B81D2763EA00EAAA1B /* PageAddmissionReplyBodyView.swift in Sources */,
 				FD54E0641D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift in Sources */,
+				9616460B1DB1DCB9007BA360 /* PageShowWebViewActions.swift in Sources */,
 				7394F8481CF94A2500F05487 /* PageAppointmentPatientBasicInfoActions.swift in Sources */,
 				9612DB751CC9F85900262D2E /* PagePersonalTopView.swift in Sources */,
 				736EBC5E1D16764D00C40AA7 /* PagePersonalSettingActions.swift in Sources */,
+				961646091DB1DC80007BA360 /* PageShowWebBodyView.swift in Sources */,
 				96FCD14D1D17D81A00A6E12D /* PagePersonalDetailTopView.swift in Sources */,
 				737F1F931D207C8200FFE573 /* PageGlobalSearchActions.swift in Sources */,
 				96637A8A1CC2515E00DBD1CF /* YMCommonActions.swift in Sources */,
@@ -3288,6 +3331,7 @@
 				7394F8461CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift in Sources */,
 				9624936D1CED5CAA007A9556 /* YMValueValidator.swift in Sources */,
 				9619EF591CC1DB9600F69CBC /* YiMai.xcdatamodeld in Sources */,
+				961646071DB1DC56007BA360 /* PageShowWebViewController.swift in Sources */,
 				FDD93EA81D923773003576D4 /* PageAddFriendInfoCardBodyView.swift in Sources */,
 				737F1F751D20296F00FFE573 /* PageYiMaiDoctorDetailBodyView.swift in Sources */,
 				96834F201D05271800E0C813 /* PageCommonSearchTopView.swift in Sources */,
@@ -3490,6 +3534,14 @@
 				9612DB6E1CC9F75300262D2E /* Base */,
 			);
 			name = PagePersonal.storyboard;
+			sourceTree = "<group>";
+		};
+		961646031DB1DB3C007BA360 /* PageShowWebView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				961646021DB1DB3C007BA360 /* Base */,
+			);
+			name = PageShowWebView.storyboard;
 			sourceTree = "<group>";
 		};
 		9619EF541CC1DB9600F69CBC /* Main.storyboard */ = {

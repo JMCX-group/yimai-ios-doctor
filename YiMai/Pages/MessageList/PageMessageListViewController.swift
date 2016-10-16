@@ -22,4 +22,8 @@ class PageMessageListViewController: PageViewController {
         BodyView = PageMessageListBodyView(parentView: SelfView!, navController: NavController!, pageActions: Actions!)
         TopView = PageCommonTopView(parentView: SelfView!, titleString: "消息", navController: NavController)
     }
+    
+    override func PageRefresh() {
+        
+    }
 }

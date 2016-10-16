@@ -80,6 +80,9 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_GET_MY_PATIENT_LIST = "apiGetMyPatientList"
     public static let CS_API_ACTION_GET_SYS_BORADCAST_LIST = "apiGetSYSBroadcastList"
+    
+    public static let CS_API_ACTION_BACKGROUND_REFRESH = "apiBackgroundRefresh"
+    public static let CS_API_ACTION_CLEAR_MSG = "apiClearMsg"
 }
 
 

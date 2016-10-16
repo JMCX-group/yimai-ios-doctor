@@ -83,6 +83,13 @@ public class YMAPIInterfaceURL {
     
     static let GetMyPatientList = YMAPIInterfaceURL.ApiBaseUrl + "/patient/all"
     static let GetDoctorsByIdList = YMAPIInterfaceURL.ApiBaseUrl + "/search/doctors"
+    
+    static let GetAllNewAdmission = YMAPIInterfaceURL.ApiBaseUrl + "/msg/admissions/new"
+    static let GetAllNewAppointment = YMAPIInterfaceURL.ApiBaseUrl + "/msg/appointment/new"
+    
+    static let ClearAllNewBroadcast = YMAPIInterfaceURL.ApiBaseUrl + "/radio/all-read"
+    static let ClearAllNewAdmission = YMAPIInterfaceURL.ApiBaseUrl + "/msg/admissions/all-read"
+    static let ClearAllNewAppointment = YMAPIInterfaceURL.ApiBaseUrl + "/msg/appointment/all-read"
 }
 
 public class YMAPICommonVariable {
@@ -777,6 +784,24 @@ public class YMAPIUtility {
     
     public func YMGetRecentContactedDocList(param: [String: String]) {
         YMAPIPost(YMAPIInterfaceURL.GetDoctorsByIdList, param: param, progressHandler: nil)
+    }
+    
+    public func YMGetNewAdmissionList() {
+        YMAPIGet(YMAPIInterfaceURL.GetAllNewAdmission, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetNewAppointmentList() {
+        YMAPIGet(YMAPIInterfaceURL.GetAllNewAppointment, param: nil, progressHandler: nil)
+    }
+    
+    public func YMClearAllNewBroadcast() {
+        YMAPIGet(YMAPIInterfaceURL.ClearAllNewBroadcast, param: nil, progressHandler: nil)
+    }
+    public func YMClearAllNewAdmission() {
+        YMAPIGet(YMAPIInterfaceURL.ClearAllNewAdmission, param: nil, progressHandler: nil)
+    }
+    public func YMClearAllNewAppointment() {
+        YMAPIGet(YMAPIInterfaceURL.ClearAllNewAppointment, param: nil, progressHandler: nil)
     }
 }
 

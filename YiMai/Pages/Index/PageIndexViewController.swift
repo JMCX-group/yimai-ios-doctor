@@ -32,12 +32,18 @@ public class PageIndexViewController: PageViewController {
             YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
         }
         
+        if(0 == YMVar.MySysInfo.count) {
+            YMVar.MySysInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_SYSTEM_INFO)! as! [String: AnyObject]
+        }
+        
         let jobTitle = YMVar.MyUserInfo["job_title"] as? String
         if(nil == jobTitle) {
             YMVar.MyUserInfo["job_title"] = "医生"
         }
         
-        print(YMVar.MyUserInfo)
+        print(YMVar.MySysInfo)
+        
+        YMBackgroundRefresh.Start()
     }
 
     override func PageLayout(){
@@ -51,6 +57,8 @@ public class PageIndexViewController: PageViewController {
         BodyView = PageIndexBodyView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
         IndexTopView = PageIndexTopView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
+        
+        IndexTopView!.ShowNewMsgNotifyPoint()
     }
     
     override func PagePreRefresh() {
@@ -63,5 +71,6 @@ public class PageIndexViewController: PageViewController {
             YMCommonStrings.CS_PAGE_PERSONAL_NAME:"IndexButtonPersonalGray"
         ]
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
+        IndexTopView!.UpdateMsgNotifyStatus()
     }
 }

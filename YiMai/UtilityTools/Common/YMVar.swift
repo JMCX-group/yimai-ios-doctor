@@ -11,6 +11,21 @@ import Foundation
 public class YMVar:NSObject {
     public static var MyDoctorId: String = ""
     public static var MyUserInfo: [String:AnyObject] = [String:AnyObject]()
+    public static var MySysInfo: [String:AnyObject] = [String:AnyObject]()
+    
+    public static var MyNewBroadcastInfo: [String: AnyObject] = [String: AnyObject]()
+    public static var MyNewAdmissionInfo: [String: AnyObject] = [String: AnyObject]()
+    public static var MyNewAppointmentInfo: [String: AnyObject] = [String: AnyObject]()
+    
+    public static func Clear() {
+        YMVar.MyUserInfo.removeAll()
+        YMVar.MySysInfo.removeAll()
+        YMVar.MyDoctorId = ""
+
+        YMVar.MyNewBroadcastInfo.removeAll()
+        YMVar.MyNewAdmissionInfo.removeAll()
+        YMVar.MyNewAppointmentInfo.removeAll()
+    }
     
     public static func GetStringByKey(dict: [String: AnyObject], key: String) -> String {
         let ret = dict[key] as? String
