@@ -11,6 +11,7 @@ import UIKit
 import Neon
 import Toucan
 import Photos
+import Kingfisher
 
 public class TextFieldCreateParam {
     public var Placholder : String = ""
@@ -352,13 +353,18 @@ public class YMLayout {
         }
 
         if(refresh) {
+            let cache = KingfisherManager.sharedManager.cache
+            cache.removeImageForKey(url)
             url += "?t=" + "\(NSDate().timeIntervalSince1970)"
         }
 
-        print(url)
         let imgUrl = NSURL(string: url)
         if(nil != imgUrl) {
-            imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
+            var opt: KingfisherOptionsInfo = [KingfisherOptionsInfoItem]()
+            if(refresh) {
+                opt.append(KingfisherOptionsInfoItem.ForceRefresh)
+            }
+            imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: imageView.image, optionsInfo: opt, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
                 if(makeItRound) {
                     if(nil != image) {
                         imageView.image = Toucan(image: image!)

@@ -43,6 +43,10 @@ public class PagePersonalTopView {
         let dept = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_DEPARTMENT] as? [String: String]
         let jobTitle = userInfo[YMCoreDataKeyStrings.INIT_DATA_USER_JOB_TITLE] as? String
         
+        
+        let userHeadUrl = YMVar.MyUserInfo["head_url"] as! String
+        YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true, refresh: true)
+
         if(nil != dept && nil != jobTitle) {
             Desc.text = "\(dept!["name"]!) | \(jobTitle!)"
         } else if(nil == dept && nil != jobTitle) {
