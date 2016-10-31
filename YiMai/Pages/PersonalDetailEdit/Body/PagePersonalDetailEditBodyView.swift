@@ -45,7 +45,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
     private let TagsLabel = UILabel()
     private let IntroLabel = UILabel()
     
-    private let UserHeadImg = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
+    let UserHeadImg = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
     
     public var Loading: YMPageLoadingView? = nil
     

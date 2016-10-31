@@ -38,6 +38,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
 
     public func UploadSuccess(data: NSDictionary?) {
         print("upload success")
+        TargetController?.BodyView?.UserHeadImg.image = Toucan(image: ImageForUpload!).maskWithEllipse().image
         TargetController?.BodyView?.Loading?.Hide()
     }
     
