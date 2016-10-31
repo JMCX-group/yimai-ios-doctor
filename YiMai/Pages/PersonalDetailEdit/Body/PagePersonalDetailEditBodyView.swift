@@ -73,7 +73,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         label.text = title
         label.font = YMFonts.YMDefaultFont(fontSize)
         label.textAlignment = NSTextAlignment.Right
-        label.anchorToEdge(Edge.Right, padding: ExtButtonInfoPadding, width: ExtButtonInfoWidth, height: fontSize)
+        label.anchorToEdge(Edge.Right, padding: ExtButtonInfoPadding, width: ExtButtonInfoWidth, height: label.height)
     }
     
     private func DrawBasicPanel() {
@@ -228,12 +228,13 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         let intro = userInfo["personal_introduction"] as? String
         if(nil != intro){
             PagePersonalIntroEditViewController.IntroText = intro!
+            AppendExtInfo(IntroLabel, parent: Intro!, title: intro!)
         } else {
             PagePersonalIntroEditViewController.IntroText = ""
+            AppendExtInfo(IntroLabel, parent: Intro!, title: "编辑")
         }
         
         AppendExtInfo(TagsLabel, parent: Tags!, title: "编辑")
-        AppendExtInfo(IntroLabel, parent: Intro!, title: "编辑")
     }
     
     public func Reload() {
@@ -255,6 +256,8 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
             let deptId = "\(unpackedDept["id"]!)"
             editActions!.UpdateUserInfo(["department": deptId])
         }
+        
+        print(userInfo)
         
         let intro = userInfo["personal_introduction"] as? String
         if(intro != PagePersonalIntroEditViewController.IntroText) {
