@@ -64,7 +64,8 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         
         Loading = YMPageLoadingView(parentView: BodyView)
         
-        print(editActions)
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: Intro)
+//        print(editActions)
     }
     
     func AppendExtInfo(label: UILabel, parent: UIView, title: String = "", fontColor: UIColor = YMColors.FontGray, fontSize: CGFloat = 28.LayoutVal()){

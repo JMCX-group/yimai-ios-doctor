@@ -270,12 +270,12 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
     internal func PagePreRefresh() {}
 }
 
-public class PageBodyView {
+public class PageBodyView: NSObject, UITableViewDelegate {
     internal var ParentView: UIView? = nil
     internal var NavController: UINavigationController? = nil
     internal var Actions: AnyObject? = nil
     var FullPageLoading: YMPageLoadingView!
-    public var BodyView: UIScrollView = UIScrollView()
+    public var BodyView: UITableView = UITableView()
     
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: AnyObject? = nil) {
         self.init()
@@ -285,12 +285,25 @@ public class PageBodyView {
         
         FullPageLoading = YMPageLoadingView(parentView: parentView)
         
+        BodyView.delegate = self
+        
+        BodyView.separatorStyle = UITableViewCellSeparatorStyle.None
+
         self.ViewLayout()
     }
     
     internal func ViewLayout(){
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.BackgroundGray
+//        BodyView.contentSize = CGSizeMake(BodyView.width, BodyView.height + 1)
+    }
+    
+    func BodyViewEndDragging() {
+        print(self.BodyView.contentOffset)
+    }
+    
+    public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        BodyViewEndDragging()
     }
 }
 

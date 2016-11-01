@@ -17,4 +17,13 @@ class PageDoctorAuthViewController: PageViewController {
         BodyView = PageDoctorAuthBodyView(parentView: self.view, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.view, titleString: "认证资料", navController: self.NavController!)
     }
+
+    override func PagePreRefresh() {
+        let authFlag = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
+        if("1" == authFlag) {
+            //TODO: Show
+        } else {
+            
+        }
+    }
 }
