@@ -270,12 +270,16 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
     internal func PagePreRefresh() {}
 }
 
-public class PageBodyView: NSObject, UITableViewDelegate {
+class YMBodyTableView: UITableView {
+    var BodyViewContentSize = CGSize.zero
+}
+
+public class PageBodyView: NSObject, UITableViewDelegate, UITableViewDataSource {
     internal var ParentView: UIView? = nil
     internal var NavController: UINavigationController? = nil
     internal var Actions: AnyObject? = nil
     var FullPageLoading: YMPageLoadingView!
-    public var BodyView: UITableView = UITableView()
+    var BodyView: YMBodyTableView = YMBodyTableView()
     
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: AnyObject? = nil) {
         self.init()
@@ -286,6 +290,7 @@ public class PageBodyView: NSObject, UITableViewDelegate {
         FullPageLoading = YMPageLoadingView(parentView: parentView)
         
         BodyView.delegate = self
+        BodyView.dataSource = self
         
         BodyView.separatorStyle = UITableViewCellSeparatorStyle.None
 
@@ -295,11 +300,21 @@ public class PageBodyView: NSObject, UITableViewDelegate {
     internal func ViewLayout(){
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.BackgroundGray
-//        BodyView.contentSize = CGSizeMake(BodyView.width, BodyView.height + 1)
     }
     
     func BodyViewEndDragging() {
+        BodyView.contentSize = BodyView.BodyViewContentSize
         print(self.BodyView.contentOffset)
+    }
+    
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print("return UITableViewCell")
+        BodyView.contentSize = BodyView.BodyViewContentSize
+        return UITableViewCell()
     }
     
     public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {

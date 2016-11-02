@@ -191,6 +191,11 @@ public class YMLayout {
         if(nil == lastSubView) { return }
         scrollView.contentSize = CGSizeMake(scrollView.width,
                                             lastSubView!.height + lastSubView!.frame.origin.y + padding)
+        
+        if(scrollView.isKindOfClass(YMBodyTableView)) {
+            let view = scrollView as! YMBodyTableView
+            view.BodyViewContentSize = scrollView.contentSize
+        }
     }
 
     public static func GetCommonFullWidthTouchableView(
