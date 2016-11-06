@@ -77,6 +77,16 @@ public class PageIndexActions: PageJumpActions {
         DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
     }
     
+    func JumpToAuthPage(gr: UIGestureRecognizer) {
+        let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
+        
+        if("processing" == authStatus) {
+            DoJump(YMCommonStrings.CS_PAGE_AUTH_PROCESSING)
+        } else {
+            DoJump(YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME)
+        }
+    }
+    
     public func DoSearch(editor: YMTextField) {
         let searchKey = editor.text
         if(YMValueValidator.IsEmptyString(searchKey)) {

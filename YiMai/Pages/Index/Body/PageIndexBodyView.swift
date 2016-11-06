@@ -114,9 +114,18 @@ public class PageIndexBodyView {
         DoDoctorAuthPanel.backgroundColor = YMColors.White
         DoDoctorAuthPanel.align(Align.UnderMatchingLeft, relativeTo: OperatorPanel,
                                 padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 110.LayoutVal())
-        DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
-                                                          useMethod: "PageJumpToByImageViewSender:".Sel(),
-                                                          imageName: "IndexButtonGoAuth")
+        
+        let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
+        if("completed" == authStatus) {
+            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                              useMethod: "JumpToAuthPage:".Sel(),
+                                                              imageName: "IndexButtonAuthed")
+        } else {
+            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                              useMethod: "JumpToAuthPage:".Sel(),
+                                                              imageName: "IndexButtonGoAuth")
+        }
+
         
         DoctorAuthButton?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME
 

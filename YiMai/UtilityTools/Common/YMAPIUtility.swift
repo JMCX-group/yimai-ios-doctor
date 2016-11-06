@@ -65,6 +65,8 @@ public class YMAPIInterfaceURL {
     static let GetAppointmentDetail = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/detail"
     static let AppointmentTranser = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/transfer"
     
+    static let UploadAuthPhoto = YMAPIInterfaceURL.ApiBaseUrl + "/user/upload-auth-img"
+    
     static let GetAdmissionsList = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/list"
     static let GetAdmissionDetail = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/detail"
     static let AdmissionAgree = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/agree"
@@ -766,6 +768,11 @@ public class YMAPIUtility {
     
     public func YMUploadAddmissionPhotos(param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder) {
         YMAPIUploadPhotos(YMAPIInterfaceURL.UploadAppointmentPhoto,
+                          param: param, blockBuilder: blockBuilder, progressHandler: nil)
+    }
+    
+    public func YMUploadAuthPhotos(param: AnyObject?, blockBuilder: NetworkBodyWidthBlockBuilder) {
+        YMAPIUploadPhotos(YMAPIInterfaceURL.UploadAuthPhoto,
                           param: param, blockBuilder: blockBuilder, progressHandler: nil)
     }
     

@@ -113,7 +113,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
             label: UILabel(), text: "我的账号", userStringData: "", fontSize: 28.LayoutVal(), showArrow: false)
         
         AuthButton = YMLayout.GetCommonFullWidthTouchableView(
-            BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+            BodyView, useObject: SettingActions!, useMethod: "GoToAuthPage:".Sel(),
             label: UILabel(), text: "实名认证")
         
         BodyView.addSubview(myAccountButton)

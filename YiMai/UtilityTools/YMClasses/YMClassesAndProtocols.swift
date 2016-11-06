@@ -70,7 +70,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_ALL_COLLEGE_LIST: true,
         YMCommonStrings.CS_PAGE_INPUT_MY_FEATURES: true,
         YMCommonStrings.CS_PAGE_SYS_BROADCAST: true,
-        YMCommonStrings.CS_PAGE_SHOW_WEB_PAGE: true
+        YMCommonStrings.CS_PAGE_SHOW_WEB_PAGE: true,
+        YMCommonStrings.CS_PAGE_AUTH_PROCESSING: true
     ]
 }
 
@@ -314,7 +315,10 @@ public class PageBodyView: NSObject, UITableViewDelegate, UITableViewDataSource 
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         print("return UITableViewCell")
         BodyView.contentSize = BodyView.BodyViewContentSize
-        return UITableViewCell()
+        
+        let cell = UITableViewCell()
+        cell.backgroundColor = YMColors.None
+        return cell
     }
     
     public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {

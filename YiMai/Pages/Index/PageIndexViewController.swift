@@ -41,7 +41,7 @@ public class PageIndexViewController: PageViewController {
             YMVar.MyUserInfo["job_title"] = "医生"
         }
         
-        print(YMVar.MySysInfo)
+        print(YMVar.MyUserInfo)
         
         YMBackgroundRefresh.Start()
     }
