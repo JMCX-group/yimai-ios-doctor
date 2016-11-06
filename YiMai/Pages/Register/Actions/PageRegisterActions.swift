@@ -124,6 +124,11 @@ public class PageRegisterActions: PageJumpActions {
             TargetBodyView?.NextStepCodeButton?.enabled = false
         }
     }
+    
+    func ShowAgreementTouched(sender: UIButton) {
+        PageShowWebViewController.TargetUrl = "/agreement/doctor"
+        DoJump(YMCommonStrings.CS_PAGE_SHOW_WEB_PAGE)
+    }
 }
 
 

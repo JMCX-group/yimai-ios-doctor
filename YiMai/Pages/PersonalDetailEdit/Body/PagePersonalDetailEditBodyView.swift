@@ -73,7 +73,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         label.text = title
         label.font = YMFonts.YMDefaultFont(fontSize)
         label.textAlignment = NSTextAlignment.Right
-        label.anchorToEdge(Edge.Right, padding: ExtButtonInfoPadding, width: ExtButtonInfoWidth, height: label.height)
+        label.anchorToEdge(Edge.Right, padding: ExtButtonInfoPadding, width: ExtButtonInfoWidth, height: fontSize + 1)
     }
     
     private func DrawBasicPanel() {
@@ -201,7 +201,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         }
         
         let jobTitle = userInfo["job_title"] as? String
-        if(nil != jobTitle) {
+        if(nil != jobTitle && "医生" != jobTitle) {
             AppendExtInfo(JobTitleLabel, parent: JobTitle!, title: jobTitle!)
         } else {
             AppendExtInfo(JobTitleLabel, parent: JobTitle!, title: "请填写")

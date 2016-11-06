@@ -18,6 +18,9 @@ public class PageNewFriendBodyView: PageBodyView {
     private let QuickLinkPanelBkg = YMLayout.GetSuitableImageView("NewFriendsTemp")
     private let ListPanel = UIScrollView()
     private var LastCell: YMTouchableView? = nil
+    
+    var FriendsListToShow = [[String: AnyObject]]()
+    var AllFriendsList = [[String: AnyObject]]()
 
     override func ViewLayout() {
         super.ViewLayout()
@@ -36,7 +39,8 @@ public class PageNewFriendBodyView: PageBodyView {
         DrawFriendsList(data)
     }
     
-    private func DrawFriendsList(data: [[String: AnyObject]]) {
+    func DrawFriendsList(data: [[String: AnyObject]], hightlight: ActiveType = ActiveType.URL) {
+        FriendsListToShow = data
         func DrawStatus(status: String, cell: YMTouchableView) {
             if("waitForFriendAgree" == status) {
                 let label = UILabel()
@@ -78,7 +82,9 @@ public class PageNewFriendBodyView: PageBodyView {
         BodyView.addSubview(ListPanel)
         ListPanel.alignAndFill(align: Align.UnderMatchingLeft, relativeTo: QuickLinkPanel, padding: 0)
         
-        for v in data {
+        YMLayout.ClearView(view: ListPanel)
+        LastCell = nil
+        for v in FriendsListToShow {
             LastCell = PageSearchResultCell.LayoutACell(ListPanel, info: v, prev: LastCell,
                                                         act: NewFriendActions!, sel: PageJumpActions.PageJumpToByViewSenderSel, highlight: ActiveType.URL)
             
@@ -112,6 +118,8 @@ public class PageNewFriendBodyView: PageBodyView {
         
         SearchPanel.addSubview(SearchInput!)
         SearchInput?.anchorInCenter(width: 690.LayoutVal(), height: 60.LayoutVal())
+        
+        SearchInput?.EditEndCallback = NewFriendActions?.SearchEnd
     }
     
     private func DrawQuickLinkPanel() {

@@ -77,7 +77,7 @@ public class PagePersonalIDNumInputBodyView: PageBodyView {
     private func CheckInput(_: YMTextField) {
         let id = IDInput!.text
         
-        if(id?.characters.count == 18) {
+        if(id?.characters.count >= 17) {
             SetSubmitEnable()
 //            if(MWIDCardValidate.validateIdentityCard(id!)){
 //                SetSubmitEnable()
