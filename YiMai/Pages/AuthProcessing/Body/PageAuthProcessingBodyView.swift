@@ -20,7 +20,6 @@ class PageAuthProcessingBodyView: PageBodyView {
     }
     
     func DrawFullBody() {
-//        print(YMVar.MyUserInfo)
         let info = YMLayout.GetNomalLabel("您的信息正在认证中！", textColor: YMColors.FontGray, fontSize: 48.LayoutVal())
         
         BodyView.addSubview(info)

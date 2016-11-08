@@ -14,7 +14,7 @@ class PageAuthProcessingActions: PageJumpActions {
     
     override func ExtInit() {
         super.ExtInit()
-        
+
         TargetView = Target as! PageAuthProcessingBodyView
     }
 }
