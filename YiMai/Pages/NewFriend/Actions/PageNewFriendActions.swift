@@ -134,6 +134,7 @@ public class PageNewFriendActions: PageJumpActions {
             return
         }
         
+        TargetView?.AllFriendsList = friends!
         TargetView?.LoadData(friends!)
     }
     
@@ -165,4 +166,34 @@ public class PageNewFriendActions: PageJumpActions {
         button.enabled = false
         AgreeFriendApi?.YMAgreeFriendById(userId)
     }
+    
+    func SearchEnd(text: YMTextField) {
+        let key = text.text
+        
+        if(YMValueValidator.IsEmptyString(key)) {
+            TargetView?.DrawFriendsList(TargetView!.AllFriendsList)
+        } else {
+            var friendsFilted = [[String: AnyObject]]()
+            for f in TargetView!.FriendsListToShow {
+                let name = f["name"] as! String
+                if(name.containsString(key!)) {
+                    friendsFilted.append(f)
+                }
+            }
+            
+            TargetView?.DrawFriendsList(friendsFilted)
+        }
+//        DrawFriendsList()
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

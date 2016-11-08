@@ -23,6 +23,7 @@ public class PageRegisterBodyView: NSObject {
     public var NextStepCodeButton : YMButton? = nil
     
     private var AgreeButton : YMButton? = nil
+    private let ShowAgreementBtn = UIButton()
     private var AgreeCheckbox : UIImageView? = nil
     private var AgreementCheckedImage : UIImage = UIImage(named: "RegisterCheckboxAgreeChecked")!
     private var AgreementUncheckedImage : UIImage = UIImage(named: "RegisterCheckboxAgreeUnchecked")!
@@ -148,6 +149,12 @@ public class PageRegisterBodyView: NSObject {
         AgreeCheckbox = YMLayout.GetTouchableImageView(useObject: self.Actions!,
                                                        useMethod: "AgreementImageTouched:".Sel(),
                                                        imageName: "RegisterCheckboxAgreeChecked")
+
+        ShowAgreementBtn.addTarget(Actions, action: "ShowAgreementTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        ShowAgreementBtn.setTitle("查看", forState: UIControlState.Normal)
+        ShowAgreementBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        ShowAgreementBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+        ShowAgreementBtn.sizeToFit()
         
         AgreeButton?.addTarget(self.Actions, action: "AgreementButtonTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         AgreeButton?.setTitle(YMRegisterStrings.CS_AGREE_LABEL_BUTTON, forState: UIControlState.Normal)
@@ -160,6 +167,10 @@ public class PageRegisterBodyView: NSObject {
 
         BodyView.addSubview(AgreeButton!)
         BodyView.addSubview(AgreeCheckbox!)
+        BodyView.addSubview(ShowAgreementBtn)
+        
+        ShowAgreementBtn.align(Align.ToTheRightCentered, relativeTo: AgreeButton!, padding: 10.LayoutVal(),
+                               width: ShowAgreementBtn.width, height: ShowAgreementBtn.height)
     }
     
     public func VerifyPhoneBeforeGetCode() -> [String: String]? {

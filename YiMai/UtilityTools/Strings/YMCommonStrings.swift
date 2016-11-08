@@ -93,6 +93,8 @@ public class YMCommonStrings {
     public static let CS_PAGE_SYS_BROADCAST = "PageSYSBroadcast"
     
     public static let CS_PAGE_SHOW_WEB_PAGE = "PageShowWebView"
+    
+    public static let CS_PAGE_AUTH_PROCESSING = "PageAuthProcessing"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"
