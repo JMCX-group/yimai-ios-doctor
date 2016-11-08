@@ -303,7 +303,7 @@ public class PageBodyView: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     func BodyViewEndDragging() {
-        BodyView.contentSize = BodyView.BodyViewContentSize
+//        BodyView.contentSize = BodyView.BodyViewContentSize
         print(self.BodyView.contentOffset)
     }
     
