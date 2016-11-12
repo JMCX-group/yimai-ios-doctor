@@ -15,8 +15,8 @@ public typealias YMAPIImageCallback = ((UIImage?) -> Void)
 public typealias YMAPIErrorCallback = ((NSError) -> Void)
 
 public class YMAPIInterfaceURL {
-    public static let Server = "http://139.129.210.89"
-    public static let ApiBaseUrl = "http://139.129.210.89/api"
+    public static let Server = "http://d.medi-link.cn/"
+    public static let ApiBaseUrl = "http://d.medi-link.cn/api"
 
     static let APPInit = YMAPIInterfaceURL.ApiBaseUrl + "/init"
 

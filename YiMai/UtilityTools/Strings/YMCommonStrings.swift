@@ -30,7 +30,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_MY_ADMISSIONS_SETTING_NAME = "PageMyAdmissionSetting"
     public static let CS_PAGE_PATIENT_LIST = "PageMyPatientList"
     public static let CS_PAGE_PERSONAL_SETTING_NAME = "PagePersonalSetting"
-    public static let CS_PAGE_MY_WALLET_NAME = "PageMyWallet"
+    public static let CS_PAGE_MY_WALLET_NAME = "PageWalletInfo"
     public static let CS_PAGE_CONSULTANT_ZONE_NAME = "PageConsultantZone"
     
     public static let CS_PAGE_ACCOUNT_SETTING_NAME = "PagePersonalAccountSetting"

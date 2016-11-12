@@ -130,7 +130,7 @@ class PageInputMyFeaturesBodyView: PageBodyView {
     }
     
     func DrawFullBody() {
-        let tags = YMVar.MyUserInfo["tags"] as! String
+        let tags = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "tags")
         
         AllTags.removeAll()
         let lastLine = YMLayout.DrawTagList(tags.componentsSeparatedByString(","), tagPanel: BodyView,

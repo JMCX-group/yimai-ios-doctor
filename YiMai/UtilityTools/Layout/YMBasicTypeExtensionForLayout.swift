@@ -43,4 +43,19 @@ extension String {
     public func Sel() -> Selector {
         return Selector(self)
     }
+    
+    public var DoubleVal: Double {
+        get {
+            return (self as NSString).doubleValue
+        }
+    }
 }
+
+
+
+
+
+
+
+
+

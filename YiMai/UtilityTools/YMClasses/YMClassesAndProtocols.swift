@@ -71,7 +71,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_INPUT_MY_FEATURES: true,
         YMCommonStrings.CS_PAGE_SYS_BROADCAST: true,
         YMCommonStrings.CS_PAGE_SHOW_WEB_PAGE: true,
-        YMCommonStrings.CS_PAGE_AUTH_PROCESSING: true
+        YMCommonStrings.CS_PAGE_AUTH_PROCESSING: true,
+        YMCommonStrings.CS_PAGE_MY_WALLET_NAME: true
     ]
 }
 

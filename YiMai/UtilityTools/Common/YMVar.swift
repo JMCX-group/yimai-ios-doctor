@@ -28,12 +28,16 @@ public class YMVar:NSObject {
     }
     
     public static func GetStringByKey(dict: [String: AnyObject], key: String) -> String {
-        let ret = dict[key] as? String
+        let ret = dict[key]
         if(nil == ret) {
             return ""
         }
         
-        return ret!
+        if("<null>" == "\(ret!)") {
+            return ""
+        }
+        
+        return "\(ret!)"
     }
     
     public static func GetIntStringByKey(dict: [String: AnyObject], key: String) -> String {
