@@ -36,7 +36,7 @@ class PageWalletInfoActions: PageJumpActions {
     }
     
     func ShowCashDetail(gr: UIGestureRecognizer) {
-        
+        DoJump(YMCommonStrings.CS_PAGE_MY_WALLET_RECORD)
     }
 }
 

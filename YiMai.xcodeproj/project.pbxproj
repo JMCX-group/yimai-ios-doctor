@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F2BDA511DD80A7900310385 /* PageWalletRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F2BDA531DD80A7900310385 /* PageWalletRecord.storyboard */; };
+		2F2BDA551DD80A9000310385 /* PageWalletRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2BDA541DD80A9000310385 /* PageWalletRecordViewController.swift */; };
+		2F2BDA571DD80C3D00310385 /* PageWalletRecordBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2BDA561DD80C3D00310385 /* PageWalletRecordBodyView.swift */; };
+		2F2BDA591DD80C5900310385 /* PageWalletRecordActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2BDA581DD80C5900310385 /* PageWalletRecordActions.swift */; };
 		2F9332F31DA688F900637982 /* PageAllCollegeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F9332F51DA688F900637982 /* PageAllCollegeList.storyboard */; };
 		2F9332F71DA6893600637982 /* PageAllCollegeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332F61DA6893600637982 /* PageAllCollegeListViewController.swift */; };
 		2F9332F91DA689B800637982 /* PageAllCollegeListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */; };
@@ -353,6 +357,10 @@
 
 /* Begin PBXFileReference section */
 		10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.debug.xcconfig"; sourceTree = "<group>"; };
+		2F2BDA521DD80A7900310385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageWalletRecord.storyboard; sourceTree = "<group>"; };
+		2F2BDA541DD80A9000310385 /* PageWalletRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageWalletRecordViewController.swift; sourceTree = "<group>"; };
+		2F2BDA561DD80C3D00310385 /* PageWalletRecordBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageWalletRecordBodyView.swift; sourceTree = "<group>"; };
+		2F2BDA581DD80C5900310385 /* PageWalletRecordActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageWalletRecordActions.swift; sourceTree = "<group>"; };
 		2F9332F41DA688F900637982 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAllCollegeList.storyboard; sourceTree = "<group>"; };
 		2F9332F61DA6893600637982 /* PageAllCollegeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListViewController.swift; sourceTree = "<group>"; };
 		2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListBodyView.swift; sourceTree = "<group>"; };
@@ -714,6 +722,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F2BDA4C1DD80A5300310385 /* WalletRecord */ = {
+			isa = PBXGroup;
+			children = (
+				2F2BDA4D1DD80A5300310385 /* Actions */,
+				2F2BDA4E1DD80A5300310385 /* Body */,
+				2F2BDA531DD80A7900310385 /* PageWalletRecord.storyboard */,
+				2F2BDA541DD80A9000310385 /* PageWalletRecordViewController.swift */,
+			);
+			path = WalletRecord;
+			sourceTree = "<group>";
+		};
+		2F2BDA4D1DD80A5300310385 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				2F2BDA581DD80C5900310385 /* PageWalletRecordActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		2F2BDA4E1DD80A5300310385 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				2F2BDA561DD80C3D00310385 /* PageWalletRecordBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
 		2F9332EE1DA6889C00637982 /* AllCollegeList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1456,6 +1491,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				2F2BDA4C1DD80A5300310385 /* WalletRecord */,
 				FD3A101A1DD1ED83008C905B /* AuthProcessing */,
 				FD4E24B61DD16B380079C07C /* WalletInfo */,
 				FD8642871DAF307D00C93411 /* SYSBroadcast */,
@@ -2982,6 +3018,7 @@
 				73622E341D1EC27D0039E785 /* PageForgetPassword.storyboard in Resources */,
 				96D745C91CF6986A00E345E3 /* PageYiMaiAddContactsFriends.storyboard in Resources */,
 				9612DB601CC9F71F00262D2E /* PageRegisterInputHospital.storyboard in Resources */,
+				2F2BDA511DD80A7900310385 /* PageWalletRecord.storyboard in Resources */,
 				96637A7D1CC24A6100DBD1CF /* PageLogin.storyboard in Resources */,
 				9612DB6D1CC9F75300262D2E /* PagePersonal.storyboard in Resources */,
 				9620456B1D1B9B4100E18D88 /* PageAppointmentRecord.storyboard in Resources */,
@@ -3255,6 +3292,7 @@
 				FD8642941DAF31C700C93411 /* PageSYSBroadcastActions.swift in Sources */,
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
 				FD77AF231D68484F00B8C73E /* LBXScanLineAnimation.swift in Sources */,
+				2F2BDA591DD80C5900310385 /* PageWalletRecordActions.swift in Sources */,
 				FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */,
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
 				FD1F57F51D9132A30039769D /* YMQRRecognizer.swift in Sources */,
@@ -3285,6 +3323,7 @@
 				96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */,
 				96637A751CC22DE000DBD1CF /* YMSizes.swift in Sources */,
 				2F9332F91DA689B800637982 /* PageAllCollegeListBodyView.swift in Sources */,
+				2F2BDA571DD80C3D00310385 /* PageWalletRecordBodyView.swift in Sources */,
 				96925A8B1D1CDCAD0095432C /* YMAppointmentRecordStrings.swift in Sources */,
 				730848291D0D9D4B007E8940 /* YMModuleStrings.swift in Sources */,
 				96FCD13C1D17A9B600A6E12D /* PagePersonalIDNumInputActions.swift in Sources */,
@@ -3305,6 +3344,7 @@
 				FD3A10251DD1ED83008C905B /* PageAuthProcessingViewController.swift in Sources */,
 				96D4518B1CF7D733006817CE /* PageYiMaiSameHospitalViewController.swift in Sources */,
 				96B3E8A31D10F94600C8B5C2 /* PageTopSearchInputPanel.swift in Sources */,
+				2F2BDA551DD80A9000310385 /* PageWalletRecordViewController.swift in Sources */,
 				736EBC6C1D16893000C40AA7 /* PagePersonalAccountSettingActions.swift in Sources */,
 				9634D3711D080A3C00542901 /* YMAPIStrings.swift in Sources */,
 				9672FB1C1CCF276A00BC7E40 /* PageFace2FaceInfoInputBodyView.swift in Sources */,
@@ -3440,6 +3480,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		2F2BDA531DD80A7900310385 /* PageWalletRecord.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F2BDA521DD80A7900310385 /* Base */,
+			);
+			name = PageWalletRecord.storyboard;
+			sourceTree = "<group>";
+		};
 		2F9332F51DA688F900637982 /* PageAllCollegeList.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
