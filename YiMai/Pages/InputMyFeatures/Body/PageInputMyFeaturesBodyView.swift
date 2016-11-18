@@ -43,9 +43,12 @@ class PageInputMyFeaturesBodyView: PageBodyView {
         if(tagExist) {
             YMPageModalMessage.ShowNormalInfo("特长：”\(text)“ 已存在！", nav: self.NavController!)
         } else {
-            let tagStrings = YMVar.MyUserInfo["tags"] as! String
+            var tagStrings = YMVar.MyUserInfo["tags"] as? String
             
-            var tagArray = tagStrings.componentsSeparatedByString(",")
+            if(nil == tagStrings) {
+                tagStrings = ""
+            }
+            var tagArray = tagStrings!.componentsSeparatedByString(",")
             tagArray.append(text)
             YMVar.MyUserInfo["tags"] = tagArray.joinWithSeparator(",")
             
