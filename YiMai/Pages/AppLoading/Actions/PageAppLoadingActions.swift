@@ -89,6 +89,7 @@ public class PageAppLoadingActions: PageJumpActions {
                 let deptName = userDept!["name"] as? String
                 
                 if(YMValueValidator.IsEmptyString(hosName) || YMValueValidator.IsEmptyString(deptName)) {
+                    PageRegisterPersonalInfoViewController.NeedInit = true
                     self.DoJump(YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME)
                     return
                 }

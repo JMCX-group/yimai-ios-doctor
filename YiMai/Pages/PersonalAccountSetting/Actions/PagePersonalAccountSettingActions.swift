@@ -30,6 +30,7 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
         YMVar.Clear()
         YMBackgroundRefresh.Stop()
 //        YMAPICommonVariable.ClearCallbackMap()
+        PageRegisterPersonalInfoViewController.NeedInit = true
         self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
     }
 }

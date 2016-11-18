@@ -44,6 +44,10 @@ public class YMCoreDataEngine {
         return YMCoreData.CoreMemData?[key]
     }
     
+    public static func RemoveData(key: String) {
+        YMCoreData.CoreMemData?[key] = nil
+    }
+    
     public static func SaveData(key: String, data: AnyObject) {
         if(nil == YMCoreData.CoreMemData?[key]) {
             YMCoreData.CoreMemData?[key] = [AnyObject]()
