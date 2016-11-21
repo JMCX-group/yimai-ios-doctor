@@ -36,8 +36,9 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     }
     
     private func AddFriendError(error: NSError){
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
+//        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
+//        print(errInfo)
+        YMAPIUtility.PrintErrorInfo(error)
         TargetController?.LoadingView?.Hide()
     }
     
@@ -119,6 +120,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         TargetController!.LoadingView?.Hide()
         
         let resultData = data!["data"] as! [String: AnyObject]
+        TargetController!.BodyView!.FullList = resultData
         TargetController!.BodyView!.ShowResult(resultData)
     }
 

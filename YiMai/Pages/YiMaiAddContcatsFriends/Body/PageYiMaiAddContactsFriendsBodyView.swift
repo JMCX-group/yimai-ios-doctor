@@ -24,6 +24,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     private let FriendsListPanel = UIView()
     private let OthersListPanel = UIView()
     
+    var FullList = [String: AnyObject]()
+    
     private var ListType: String = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_FRIENDS
     
     private let ShowFriendsListBtn = YMButton()
@@ -118,8 +120,10 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         action.UploadAddressBook()
     }
     
-    public func ShowResult(data: [String: AnyObject]) {
-        DrawSearchPanel()
+    public func ShowResult(data: [String: AnyObject], drawSearch: Bool = true, listType: String = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS) {
+        if(drawSearch) {
+            DrawSearchPanel()
+        }
         
         let friendsData = data["friends"] as? [[String: AnyObject]]
         let othersData = data["others"] as? [[String: AnyObject]]
@@ -127,7 +131,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
             DrawFriendsList(friendsData!)
         } else {
             DrawFriendsList([[String: AnyObject]]())
-            ListType = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS
+            ListType = listType
         }
         
         if(nil != othersData) {
@@ -157,7 +161,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: ShowOthersListBtn)
         
         OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: OthersPanel.width, height: OthersPanel.height)
-        BodyView.contentOffset = CGPoint()
+//        BodyView.contentOffset = CGPoint()
         UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
         UIView.commitAnimations()
         
@@ -165,6 +169,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
         
         controller.BottomButton?.EnableAddButton()
+        
+        ListType = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_FRIENDS
         
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsListPanel, padding: 128.LayoutVal() + SearchPanel.height)
     }
@@ -181,10 +187,10 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         
         YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: OthersListPanel)
         YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: ShowFriendsListBtn)
-        
+
         OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: OthersPanel.width, height: OthersPanel.height)
         
-        BodyView.contentOffset = CGPoint()
+//        BodyView.contentOffset = CGPoint()
         UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
         UIView.commitAnimations()
         
@@ -192,6 +198,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
         
         controller.BottomButton?.EnabelInviteButton()
+        
+        ListType = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS
         
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: OthersListPanel, padding: 128.LayoutVal() + SearchPanel.height)
     }
@@ -222,12 +230,89 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     
     func DoSearch(_: YMTextField) {
         let searchKey = SearchInput!.text
+        
+        if(YMValueValidator.IsEmptyString(searchKey)) {
+            ShowResult(FullList, drawSearch: false, listType: ListType)
+            return
+        }
+        
+        var friendsData = [[String: AnyObject]]()
+        var othersData = [[String: AnyObject]]()
+        
+        let orgFriendsData = FullList["friends"] as? [[String: AnyObject]]
+        let orgOthersData = FullList["others"] as? [[String: AnyObject]]
+        
+        if(nil != orgFriendsData) {
+            for docotor in orgFriendsData! {
+                var title = docotor["job_title"] as? String
+                var hos = docotor["hospital"] as? [String: String]
+                var name = docotor["name"] as? String
+                var dept = docotor["department"] as? [String: String]
+                
+                var hosName = ""
+                var deptName = ""
+                
+                if (nil == title) {
+                    title = ""
+                }
+                
+                if(nil == name) {
+                    name = ""
+                }
+                
+                if(nil != hos) {
+                    hosName = hos!["name"]!
+                }
+                
+                if(nil != dept) {
+                    deptName = dept!["name"]!
+                }
+                
+                if(name!.containsString(searchKey!)) {
+                    friendsData.append(docotor)
+                    continue
+                }
+                
+                if(hosName.containsString(searchKey!)) {
+                    friendsData.append(docotor)
+                    continue
+                }
+                
+                if(deptName.containsString(searchKey!)) {
+                    friendsData.append(docotor)
+                    continue
+                }
+            }
+        }
+        
+        if(nil != orgOthersData) {
+            for other in orgOthersData! {
+                let name = other["name"] as! String
+                let phone = other["phone"] as! String
+                
+                if(name.containsString(searchKey!)) {
+                    othersData.append(other)
+                    continue
+                }
+                
+                if(phone.containsString(searchKey!)) {
+                    othersData.append(other)
+                    continue
+                }
+            }
+        }
+        
+        
+        
+        ShowResult(["friends": friendsData, "others": othersData], drawSearch: false, listType: ListType)
+        
     }
     
     private func DrawOtherList(data: [[String: AnyObject]]) {
         BodyView.addSubview(OthersPanel)
         OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
         
+        YMLayout.ClearView(view: OthersPanel)
         if(0 == data.count) {
             return
         }
@@ -242,6 +327,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
 
         OthersPanel.addSubview(OthersListPanel)
         OthersListPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 0)
+        YMLayout.ClearView(view: OthersListPanel)
 
         let titleLabel = UILabel()
         
@@ -253,7 +339,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         OthersListPanel.addSubview(topLine)
         topLine.backgroundColor = YMColors.DividerLineGray
         topLine.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
-        
+
         OthersListPanel.addSubview(titleLabel)
         titleLabel.anchorAndFillEdge(Edge.Top, xPad: 40.LayoutVal(), yPad: YMSizes.OnPx, otherSize: 51.LayoutVal())
         
@@ -280,6 +366,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         BodyView.addSubview(FriendsPanel)
         FriendsPanel.align(Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
 
+        YMLayout.ClearView(view: FriendsPanel)
         if(0 == data.count) {
             ListType = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS
             return
@@ -295,6 +382,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         
         FriendsPanel.addSubview(FriendsListPanel)
         FriendsListPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 0)
+        YMLayout.ClearView(view: FriendsListPanel)
         
         let titleLabel = UILabel()
 
