@@ -82,7 +82,7 @@ public class RequirePaperCardActions: PageJumpActions {
     
     func GoPreview(_: YMButton) {
         PaperCardPreviewBodyView.AddressInfo =
-            "\(TargetView!.AddresseeAddr) \(TargetView!.AddresseeName) \(TargetView!.AddresseePhone)"
+            "\(TargetView!.AddresseeAddr) \(TargetView!.AddresseeName) 收 手机号：\(TargetView!.AddresseePhone)"
         DoJump(YMCommonStrings.CS_PAGE_PAPER_CARD_PREVIEW)
     }
 }

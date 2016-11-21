@@ -26,6 +26,7 @@ public class PageYiMaiSameSchoolViewController: PageViewController {
     }
     
     override func PageDisapeared() {
+        YMCoreDataEngine.RemoveData(YMCoreDataKeyStrings.CS_SAME_SAMECOLLEGE)
         BodyView?.Clear()
     }
 }

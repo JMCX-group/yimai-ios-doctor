@@ -33,6 +33,9 @@ class PageCommonTextInputViewController: PageViewController {
     
     override func PagePreRefresh() {
         BodyView.DrawTextInput()
+        TopView?.TopViewPanel.removeFromSuperview()
+        TopView = PageCommonTopView(parentView: self.view, titleString: PageCommonTextInputViewController.TitleString, navController: self.NavController!)
+
     }
     
     override func PageDisapeared() {
@@ -45,3 +48,10 @@ class PageCommonTextInputViewController: PageViewController {
         PageCommonTextInputViewController.Result = nil
     }
 }
+
+
+
+
+
+
+

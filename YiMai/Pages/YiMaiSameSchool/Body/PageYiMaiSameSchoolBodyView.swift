@@ -300,6 +300,12 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
                 NoMoreUser = true
                 break
             }
+            
+            let thisID = "\(UserList![i]["id"]!)"
+            if(thisID == YMVar.MyDoctorId) {
+                continue
+            }
+            
             LastCell = PageSearchResultCell.LayoutACell(ResultList, info: UserList![i], prev: LastCell,
                                                         act: SameSchoolActions!, sel: "DocCellTouched:".Sel(), highlight: ActiveType.URL)
         }

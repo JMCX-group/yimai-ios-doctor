@@ -88,6 +88,10 @@ public class PageYiMaiSameHospitalBodyView: PageBodyView {
         var prev: YMTouchableView? = nil
         
         for v in data! {
+            let thisID = "\(v["id"]!)"
+            if(thisID == YMVar.MyDoctorId) {
+                continue
+            }
             prev = PageSearchResultCell.LayoutACell(ResultList, info: v, prev: prev,
                                                     act: SameHospitalActions!, sel: "DocCellTouched:".Sel(), highlight: ActiveType.URL)
         }

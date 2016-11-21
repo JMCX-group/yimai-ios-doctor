@@ -118,8 +118,9 @@ public class PaperCardPreviewBodyView: PageBodyView {
         addrPanel.align(Align.UnderMatchingLeft, relativeTo: titlePanel,
                         padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: addrLabel.height + 60.LayoutVal())
         
-        addrPanel.addSubview(addrTitleLabel)
-        addrLabel.anchorInCenter(width: addrLabel.width, height: addrLabel.height)
+        addrPanel.addSubview(addrLabel)
+        addrLabel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(),
+                               width: addrLabel.width, height: addrLabel.height)
         
         ParentView?.addSubview(ConfirmButton)
         ConfirmButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 98.LayoutVal())

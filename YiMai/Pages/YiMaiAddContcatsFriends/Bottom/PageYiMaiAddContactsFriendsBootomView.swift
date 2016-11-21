@@ -65,7 +65,7 @@ public class PageYiMaiAddContactsFriendsBootomView {
         btnLabel.textColor = YMColors.White
         InviteAllOthersBottomView?.backgroundColor = YMColors.CommonBottomBlue
         
-        InviteAllOthersBottomView?.hidden = false
+        InviteAllOthersBottomView?.hidden = true
         AddAllFriendsBottomView?.hidden = true
     }
 }

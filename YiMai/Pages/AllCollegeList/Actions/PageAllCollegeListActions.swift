@@ -27,12 +27,16 @@ class PageAllCollegeListActions: PageJumpActions {
     
     func UpdateSuccess(data: NSDictionary?) {
         TargetView.FullPageLoading.Hide()
-        print(data)
+        self.NavController?.popViewControllerAnimated(true)
+
+//        print(data)
     }
     
     func UpdateError(error: NSError) {
         TargetView.FullPageLoading.Hide()
         YMAPIUtility.PrintErrorInfo(error)
+        self.NavController?.popViewControllerAnimated(true)
+
     }
     
     func GetCollegeSuccess(data: NSDictionary?) {
@@ -71,9 +75,8 @@ class PageAllCollegeListActions: PageJumpActions {
         let cell = gr.view as! YMTouchableView
         let data = cell.UserObjectData as! [String:AnyObject]
         PageAllCollegeListBodyView.SelectedCollege = data
-        YMVar.MyUserInfo["college"] = data
-
-        self.NavController?.popViewControllerAnimated(true)
+//        YMVar.MyUserInfo["college"] = data
+        TargetView.FullPageLoading.Show()
         UpdateApi.YMChangeUserInfo(["college": data["id"]!])
     }
 }

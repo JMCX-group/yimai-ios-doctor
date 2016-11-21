@@ -208,6 +208,11 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         }
         
         let school = userInfo["college"] as? [String: AnyObject]
+
+        print("begin 1: ====== ")
+        print(YMVar.MyUserInfo["college"])
+        print("end 2: ====== ")
+
         if(nil != school) {
             AppendExtInfo(SchoolLabel, parent: School!, title: school!["name"] as! String)
         } else {
@@ -222,7 +227,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
                 AppendExtInfo(IDNumLabel, parent: IDNum!, title: "请填写")
             }
         } else {
-            AppendExtInfo(SchoolLabel, parent: School!, title: "请填写")
+            AppendExtInfo(IDNumLabel, parent: IDNum!, title: "请填写")
         }
         
         let intro = userInfo["personal_introduction"] as? String
@@ -256,9 +261,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
             let deptId = "\(unpackedDept["id"]!)"
             editActions!.UpdateUserInfo(["department": deptId])
         }
-        
-        print(userInfo)
-        
+
         let intro = userInfo["personal_introduction"] as? String
         if(intro != PagePersonalIntroEditViewController.IntroText) {
             showLoadingFlag = true
@@ -270,6 +273,10 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
             showLoadingFlag = true
             editActions!.UpdateUserInfo(["name": PagePersonalNameEditViewController.UserName])
         }
+        
+        print("begin 3: ====== ")
+        print(showLoadingFlag)
+        print("end 4: ====== ")
         
         if(showLoadingFlag) {
             Loading?.Show()

@@ -15,7 +15,7 @@ public class PageCommonTopView : NSObject {
     private var TopTitle = UILabel()
     private var TopGoBackBtn = UIImageView()
     
-    private var ParentView:UIView? = nil
+    var ParentView:UIView? = nil
     private var TitleString = ""
     private var CommonActions : YMCommonActions? = nil
 

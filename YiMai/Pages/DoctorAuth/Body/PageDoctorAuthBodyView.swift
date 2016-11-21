@@ -23,11 +23,14 @@ class PageDoctorAuthBodyView: PageBodyView {
     let SubmitButton = YMButton()
     
     func ImagesSelected(selectedPhotos: [PHAsset]) {
-        let photo = selectedPhotos[0]
-        let asset = YMLayout.TransPHAssetToUIImage(photo)
+//        let photo = selectedPhotos[0]
+        
 
-        PhotoArray.append(asset)
-        PhotoLayout()
+        for photo in selectedPhotos {
+            let asset = YMLayout.TransPHAssetToUIImage(photo)
+            PhotoArray.append(asset)
+            PhotoLayout()
+        }
         
         SubmitButton.backgroundColor = YMColors.CommonBottomBlue
         SubmitButton.enabled = true
@@ -36,7 +39,7 @@ class PageDoctorAuthBodyView: PageBodyView {
     override func ViewLayout() {
         super.ViewLayout()
         AuthActions = PageDoctorAuthActions(navController: self.NavController!, target: self)
-        PhotoPikcer = YMPhotoSelector(nav: self.NavController!, maxSelection: 1)
+        PhotoPikcer = YMPhotoSelector(nav: self.NavController!, maxSelection: 5)
         PhotoPikcer?.SelectedCallback = ImagesSelected
         DrawFullBody()
     }

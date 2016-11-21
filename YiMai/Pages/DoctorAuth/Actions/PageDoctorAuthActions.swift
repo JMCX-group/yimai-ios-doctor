@@ -37,7 +37,7 @@ class PageDoctorAuthActions: PageJumpActions {
     }
     
     func UploadSuccess(data: NSDictionary?) {
-        print(data)
+//        print(data)
         TargetView.FullPageLoading.Hide()
         self.NavController!.popViewControllerAnimated(true)
     }
@@ -65,6 +65,7 @@ class PageDoctorAuthActions: PageJumpActions {
             return
         }
         
+        TargetView.FullPageLoading.Show()
         UploadApi?.YMUploadAuthPhotos(nil, blockBuilder: UploadBlockBuilder)
 //        self.NavController!.popViewControllerAnimated(true)
     }
