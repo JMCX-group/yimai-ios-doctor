@@ -30,3 +30,11 @@ public class PageYiMaiSameSchoolViewController: PageViewController {
         BodyView?.Clear()
     }
 }
+
+
+
+
+
+
+
+

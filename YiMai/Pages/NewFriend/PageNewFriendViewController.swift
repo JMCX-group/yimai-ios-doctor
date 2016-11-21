@@ -21,10 +21,13 @@ public class PageNewFriendViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        BodyView?.GetList()
+        if(self.isMovingToParentViewController()) {
+            BodyView?.Clear()
+            BodyView?.SearchInput?.text = ""
+            BodyView?.GetList()
+        }
     }
     
     override func PageDisapeared() {
-        BodyView?.Clear()
     }
 }

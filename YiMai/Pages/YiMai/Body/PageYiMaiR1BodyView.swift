@@ -106,9 +106,25 @@ public class PageYiMaiR1BodyView: PageBodyView {
         
         let same = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_SAME_INFO) as! [String: AnyObject]
         
-        BuildOpertorCell(SameHopitalButton!, imageName: "YiMaiR1SameHospital", targetPage: "", title: "同医院", count: "\(same["hospital"]!)人")
-        BuildOpertorCell(SameAreasButton!, imageName: "YiMaiR1SameAreas", targetPage: "", title: "同领域", count: "\(same["department"]!)人")
-        BuildOpertorCell(SameSchoolButton!, imageName: "YiMaiR1SameSchool", targetPage: "", title: "同学校", count: "\(same["college"]!)人")
+        var sameHosCount = same["hospital"] as! Int
+        var sameAreaCount = same["department"] as! Int
+        var sameSchCount = same["college"] as! Int
+        
+        if(sameHosCount > 0) {
+            sameHosCount = sameHosCount - 1
+        }
+        
+        if(sameAreaCount > 0) {
+            sameAreaCount = sameAreaCount - 1
+        }
+        
+        if(sameSchCount > 0) {
+            sameSchCount = sameSchCount - 1
+        }
+        
+        BuildOpertorCell(SameHopitalButton!, imageName: "YiMaiR1SameHospital", targetPage: "", title: "同医院", count: "\(sameHosCount)人")
+        BuildOpertorCell(SameAreasButton!, imageName: "YiMaiR1SameAreas", targetPage: "", title: "同领域", count: "\(sameAreaCount)人")
+        BuildOpertorCell(SameSchoolButton!, imageName: "YiMaiR1SameSchool", targetPage: "", title: "同学校", count: "\(sameSchCount)人")
     }
 
     private func DrawSearchPanel() {

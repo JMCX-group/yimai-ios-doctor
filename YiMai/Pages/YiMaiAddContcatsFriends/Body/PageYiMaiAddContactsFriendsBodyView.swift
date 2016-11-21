@@ -217,6 +217,11 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         searchIconView.addSubview(searchIcon)
         searchIcon.anchorInCenter(width: searchIcon.width, height: searchIcon.height)
         SearchInput?.SetLeftPadding(searchIconView)
+        SearchInput?.EditEndCallback = DoSearch
+    }
+    
+    func DoSearch(_: YMTextField) {
+        let searchKey = SearchInput!.text
     }
     
     private func DrawOtherList(data: [[String: AnyObject]]) {
@@ -313,6 +318,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
             var name = docotor["name"] as? String
             var dept = docotor["department"] as? [String: String]
             let id = docotor["id"] as! String
+            
+            print(docotor)
             
             ContactsInYiMaiResult.append(id)
             

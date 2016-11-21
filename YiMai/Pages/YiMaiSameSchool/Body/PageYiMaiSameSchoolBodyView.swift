@@ -18,7 +18,7 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
     
     private var ListPos: Int = 0
     private var NextPos: Int = 15
-    private var Step:Int = 15
+    private let Step:Int = 15
     private var LastCell: YMTouchableView? = nil
     private var NoMoreUser: Bool = false
     
@@ -310,7 +310,7 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
                                                         act: SameSchoolActions!, sel: "DocCellTouched:".Sel(), highlight: ActiveType.URL)
         }
         
-        ListPos = ListPos + NextPos
+        ListPos = NextPos + 1
         NextPos = ListPos + Step
         YMLayout.SetVScrollViewContentSize(ResultList, lastSubView: LastCell, padding: 130.LayoutVal())
     }

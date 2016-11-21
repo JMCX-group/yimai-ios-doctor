@@ -85,6 +85,7 @@ public class YMAPIInterfaceURL {
     
     static let GetMyPatientList = YMAPIInterfaceURL.ApiBaseUrl + "/patient/all"
     static let GetDoctorsByIdList = YMAPIInterfaceURL.ApiBaseUrl + "/search/doctors"
+    static let GetDoctorInfoByYMCode = YMAPIInterfaceURL.ApiBaseUrl + "/search/doctor_info"
     
     static let GetAllNewAdmission = YMAPIInterfaceURL.ApiBaseUrl + "/msg/admissions/new"
     static let GetAllNewAppointment = YMAPIInterfaceURL.ApiBaseUrl + "/msg/appointment/new"
@@ -794,6 +795,10 @@ public class YMAPIUtility {
     
     public func YMGetRecentContactedDocList(param: [String: String]) {
         YMAPIPost(YMAPIInterfaceURL.GetDoctorsByIdList, param: param, progressHandler: nil)
+    }
+    
+    public func YMGetDoctorInfoByYMCode(param: [String: String]) {
+        YMAPIPost(YMAPIInterfaceURL.GetDoctorInfoByYMCode, param: param, progressHandler: nil)
     }
     
     public func YMGetNewAdmissionList() {

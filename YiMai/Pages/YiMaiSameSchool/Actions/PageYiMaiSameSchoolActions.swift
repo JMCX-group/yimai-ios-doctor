@@ -27,6 +27,7 @@ public class PageYiMaiSameSchoolActions: PageJumpActions, UIScrollViewDelegate{
     private func GetListSuccess(data: NSDictionary?) {
         TargetView?.Loading?.Hide()
         
+        print(data)
         if(nil != ThisCacheKey) {
             YMCoreDataEngine.SaveData(ThisCacheKey!, data: data!)
             TargetView?.LoadHospitalList(data! as! [String : AnyObject])
