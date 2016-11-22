@@ -24,14 +24,14 @@ public class CameraView: UIView {
     public var currentPosition = CameraGlobals.shared.defaultCameraPosition
     
     public func startSession() {
-        dispatch_async(cameraQueue) {
+//        dispatch_async(cameraQueue) {
             self.createSession()
             self.session?.startRunning()
-        }
+//        }
     }
     
     public func stopSession() {
-        dispatch_async(cameraQueue) {
+//        dispatch_async(cameraQueue) {
             self.session?.stopRunning()
             self.preview?.removeFromSuperlayer()
             
@@ -40,7 +40,7 @@ public class CameraView: UIView {
             self.imageOutput = nil
             self.preview = nil
             self.device = nil
-        }
+//        }
     }
     
     public override func layoutSubviews() {

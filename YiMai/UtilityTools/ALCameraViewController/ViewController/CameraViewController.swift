@@ -169,7 +169,7 @@ public class CameraViewController: UIViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+//        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     public override func prefersStatusBarHidden() -> Bool {
@@ -513,7 +513,7 @@ public class CameraViewController: UIViewController {
         }
         
         presentViewController(imagePicker, animated: true) {
-            self.cameraView.stopSession()
+//            self.cameraView.stopSession()
         }
     }
     
@@ -537,9 +537,14 @@ public class CameraViewController: UIViewController {
     }
     
     internal func layoutCameraResult(asset: PHAsset) {
-        cameraView.stopSession()
+//        cameraView.stopSession()
         startConfirmController(asset)
         toggleButtons(true)
+    }
+    
+    override public func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.cameraView.stopSession()
     }
     
     private func startConfirmController(asset: PHAsset) {

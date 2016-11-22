@@ -274,9 +274,9 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
             editActions!.UpdateUserInfo(["name": PagePersonalNameEditViewController.UserName])
         }
         
-        print("begin 3: ====== ")
-        print(showLoadingFlag)
-        print("end 4: ====== ")
+//        print("begin 3: ====== ")
+//        print(showLoadingFlag)
+//        print("end 4: ====== ")
         
         if(showLoadingFlag) {
             FullPageLoading.Show()
