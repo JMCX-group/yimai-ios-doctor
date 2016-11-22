@@ -30,29 +30,31 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
     }
     
     func GetLocationAuth() {
-        let contacts: PrivateResource = PrivateResource.Location(PrivateResource.LocationUsage.WhenInUse)
+        self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
         
-        if(contacts.isNotDeterminedAuthorization) {
-            proposeToAccess(contacts, agreed: {
-                
-                }, rejected: {
-                    self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
-            })
-        } else {
-            if(!contacts.isAuthorized) {
-                proposeToAccess(contacts, agreed: {
-                    
-                    }, rejected: {
-                        
-                })
-            } else {
-                proposeToAccess(contacts, agreed: {
-                    
-                    }, rejected: {
-                        self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
-                })
-            }
-        }
+//        let contacts: PrivateResource = PrivateResource.Location(PrivateResource.LocationUsage.WhenInUse)
+//        
+//        if(contacts.isNotDeterminedAuthorization) {
+//            proposeToAccess(contacts, agreed: {
+//                print("get location success")
+//                }, rejected: {
+//                self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
+//            })
+//        } else {
+//            if(!contacts.isAuthorized) {
+//                proposeToAccess(contacts, agreed: {
+//                    print("get location success")
+//                    }, rejected: {
+//                    self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
+//                })
+//            } else {
+//                proposeToAccess(contacts, agreed: {
+//                    print("get location success")
+//                    }, rejected: {
+//                    self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
+//                })
+//            }
+//        }
     }
     
     public func onRCIMReceiveMessage(message: RCMessage!, left: Int32) {

@@ -11,6 +11,7 @@ import UIKit
 import AFNetworking
 import Photos
 import Toucan
+//import ALCameraViewController
 
 public class PagePersonalDetailEditActions: PageJumpActions {
     private var TargetController: PagePersonalDetailEditViewController? = nil
@@ -39,7 +40,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     public func UploadSuccess(data: NSDictionary?) {
         print("upload success")
         TargetController?.BodyView?.UserHeadImg.image = Toucan(image: ImageForUpload!).maskWithEllipse().image
-        TargetController?.BodyView?.Loading?.Hide()
+        TargetController?.BodyView?.FullPageLoading.Hide()
     }
     
     public func UploadError(err: NSError) {
@@ -48,7 +49,8 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     }
     
     public func ChangeHeadImage(_: UIGestureRecognizer) {
-        TargetController?.BodyView?.PhotoPikcer?.Show()
+//        TargetController?.BodyView?.PhotoPikcer?.Show()
+        HeadImagesSelected(nil)
     }
     
     public func SelectGender(_: UIGestureRecognizer) {
@@ -57,14 +59,14 @@ public class PagePersonalDetailEditActions: PageJumpActions {
             handler: {
                 action in
                 self.UpdateUserInfo(["sex": "1"])
-                self.TargetController?.BodyView?.Loading?.Show()
+                self.TargetController?.BodyView?.FullPageLoading.Show()
         })
         
         let female = UIAlertAction(title: "女", style: .Default,
             handler: {
                 action in
                 self.UpdateUserInfo(["sex": "0"])
-                self.TargetController?.BodyView?.Loading?.Show()
+                self.TargetController?.BodyView?.FullPageLoading.Show()
         })
         
         male.setValue(YMColors.FontBlue, forKey: "titleTextColor")
@@ -131,13 +133,31 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     }
     
     private func UpdateError(error: NSError) {
-        TargetController?.BodyView?.Loading?.Hide()
+        TargetController?.BodyView?.FullPageLoading.Hide()
     }
     
-    public func HeadImagesSelected(selectedPhotos: [PHAsset]) {
-        ImageForUpload = YMLayout.TransPHAssetToUIImage(selectedPhotos[0])
-        TargetController?.BodyView?.UpdateUserHead(ImageForUpload!)
-        UploadApi?.YMUploadUserHead(["head_img": "head_img.jpg"], blockBuilder: UploadBlockBuilder)
+    var CamSelect: CameraViewController!
+    public func HeadImagesSelected(_: [PHAsset]?) {
+        CamSelect = CameraViewController(croppingEnabled: true) {(img, pha) in
+            print("abc")
+            if(nil != img) {
+                self.TargetController?.BodyView?.FullPageLoading.Show()
+                self.ImageForUpload = img!
+//                self.TargetController?.BodyView?.UpdateUserHead(img!)
+                self.UploadApi?.YMUploadUserHead(["head_img": "head_img.jpg"], blockBuilder: self.UploadBlockBuilder)
+            }
+            
+            self.CamSelect!.navigationController?.popViewControllerAnimated(true)
+            print("def")
+
+        }
+        
+        self.NavController!.pushViewController(CamSelect, animated: true)
+
+        
+//        ImageForUpload = YMLayout.TransPHAssetToUIImage(selectedPhotos[0])
+//        TargetController?.BodyView?.UpdateUserHead(ImageForUpload!)
+//        UploadApi?.YMUploadUserHead(["head_img": "head_img.jpg"], blockBuilder: UploadBlockBuilder)
     }
 }
 

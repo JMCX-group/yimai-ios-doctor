@@ -279,7 +279,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         print("end 4: ====== ")
         
         if(showLoadingFlag) {
-            Loading?.Show()
+            FullPageLoading.Show()
         } else {
             LoadData()
         }
@@ -287,7 +287,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
     
     func UpdateUserHead(headImg: UIImage) {
         UserHeadImg.image = headImg
-        Loading?.Show()
+//        Loading?.Show()
     }
 }
 

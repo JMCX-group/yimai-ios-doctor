@@ -20,5 +20,6 @@ target 'YiMai' do
   pod 'QBImagePickerController', '~> 3.4.0'
   pod 'ChameleonFramework/Swift', '~> 2.1.0'
   pod 'Charts', '~> 2.2.5'
+  #  pod 'ALCameraViewController', '~> 1.1.9'
 end
 

@@ -323,6 +323,27 @@
 		FD5513031DAB76C700A84801 /* PageInputMyFeaturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5513021DAB76C700A84801 /* PageInputMyFeaturesViewController.swift */; };
 		FD5513051DAB770A00A84801 /* PageInputMyFeaturesBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5513041DAB770A00A84801 /* PageInputMyFeaturesBodyView.swift */; };
 		FD5513071DAB773300A84801 /* PageInputMyFeaturesActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5513061DAB773300A84801 /* PageInputMyFeaturesActions.swift */; };
+		FD5D64231DE44322004C5286 /* CameraView.strings in Resources */ = {isa = PBXBuildFile; fileRef = FD5D640B1DE44322004C5286 /* CameraView.strings */; };
+		FD5D64241DE44322004C5286 /* CameraViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD5D640C1DE44322004C5286 /* CameraViewAssets.xcassets */; };
+		FD5D64251DE44322004C5286 /* CameraGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D640E1DE44322004C5286 /* CameraGlobals.swift */; };
+		FD5D64261DE44322004C5286 /* CameraShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D640F1DE44322004C5286 /* CameraShot.swift */; };
+		FD5D64271DE44322004C5286 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64101DE44322004C5286 /* ImageFetcher.swift */; };
+		FD5D64281DE44322004C5286 /* PhotoLibraryAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64111DE44322004C5286 /* PhotoLibraryAuthorizer.swift */; };
+		FD5D64291DE44322004C5286 /* SingleImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64121DE44322004C5286 /* SingleImageFetcher.swift */; };
+		FD5D642A1DE44322004C5286 /* SingleImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64131DE44322004C5286 /* SingleImageSaver.swift */; };
+		FD5D642B1DE44322004C5286 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64141DE44322004C5286 /* UIButtonExtensions.swift */; };
+		FD5D642C1DE44322004C5286 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64151DE44322004C5286 /* UIViewExtensions.swift */; };
+		FD5D642D1DE44322004C5286 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64161DE44322004C5286 /* Utilities.swift */; };
+		FD5D642E1DE44322004C5286 /* VolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64171DE44322004C5286 /* VolumeControl.swift */; };
+		FD5D642F1DE44322004C5286 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64191DE44322004C5286 /* CameraViewController.swift */; };
+		FD5D64301DE44322004C5286 /* CameraViewControllerConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D641A1DE44322004C5286 /* CameraViewControllerConstraint.swift */; };
+		FD5D64311DE44322004C5286 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D641B1DE44322004C5286 /* ConfirmViewController.swift */; };
+		FD5D64321DE44322004C5286 /* ConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD5D641C1DE44322004C5286 /* ConfirmViewController.xib */; };
+		FD5D64331DE44322004C5286 /* PhotoLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D641D1DE44322004C5286 /* PhotoLibraryViewController.swift */; };
+		FD5D64341DE44322004C5286 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D641F1DE44322004C5286 /* CameraView.swift */; };
+		FD5D64351DE44322004C5286 /* CropOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64201DE44322004C5286 /* CropOverlay.swift */; };
+		FD5D64361DE44322004C5286 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64211DE44322004C5286 /* ImageCell.swift */; };
+		FD5D64371DE44322004C5286 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D64221DE44322004C5286 /* PermissionsView.swift */; };
 		FD77AF221D68484F00B8C73E /* LBXPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF1B1D68484F00B8C73E /* LBXPermissions.swift */; };
 		FD77AF231D68484F00B8C73E /* LBXScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF1C1D68484F00B8C73E /* LBXScanLineAnimation.swift */; };
 		FD77AF241D68484F00B8C73E /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77AF1D1D68484F00B8C73E /* LBXScanNetAnimation.swift */; };
@@ -678,6 +699,27 @@
 		FD5513021DAB76C700A84801 /* PageInputMyFeaturesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageInputMyFeaturesViewController.swift; sourceTree = "<group>"; };
 		FD5513041DAB770A00A84801 /* PageInputMyFeaturesBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageInputMyFeaturesBodyView.swift; sourceTree = "<group>"; };
 		FD5513061DAB773300A84801 /* PageInputMyFeaturesActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageInputMyFeaturesActions.swift; sourceTree = "<group>"; };
+		FD5D640B1DE44322004C5286 /* CameraView.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = CameraView.strings; sourceTree = "<group>"; };
+		FD5D640C1DE44322004C5286 /* CameraViewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CameraViewAssets.xcassets; sourceTree = "<group>"; };
+		FD5D640E1DE44322004C5286 /* CameraGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraGlobals.swift; sourceTree = "<group>"; };
+		FD5D640F1DE44322004C5286 /* CameraShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraShot.swift; sourceTree = "<group>"; };
+		FD5D64101DE44322004C5286 /* ImageFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		FD5D64111DE44322004C5286 /* PhotoLibraryAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAuthorizer.swift; sourceTree = "<group>"; };
+		FD5D64121DE44322004C5286 /* SingleImageFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageFetcher.swift; sourceTree = "<group>"; };
+		FD5D64131DE44322004C5286 /* SingleImageSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageSaver.swift; sourceTree = "<group>"; };
+		FD5D64141DE44322004C5286 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		FD5D64151DE44322004C5286 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		FD5D64161DE44322004C5286 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		FD5D64171DE44322004C5286 /* VolumeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeControl.swift; sourceTree = "<group>"; };
+		FD5D64191DE44322004C5286 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		FD5D641A1DE44322004C5286 /* CameraViewControllerConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewControllerConstraint.swift; sourceTree = "<group>"; };
+		FD5D641B1DE44322004C5286 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
+		FD5D641C1DE44322004C5286 /* ConfirmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmViewController.xib; sourceTree = "<group>"; };
+		FD5D641D1DE44322004C5286 /* PhotoLibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryViewController.swift; sourceTree = "<group>"; };
+		FD5D641F1DE44322004C5286 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		FD5D64201DE44322004C5286 /* CropOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropOverlay.swift; sourceTree = "<group>"; };
+		FD5D64211DE44322004C5286 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		FD5D64221DE44322004C5286 /* PermissionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		FD77AF1B1D68484F00B8C73E /* LBXPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXPermissions.swift; sourceTree = "<group>"; };
 		FD77AF1C1D68484F00B8C73E /* LBXScanLineAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanLineAnimation.swift; sourceTree = "<group>"; };
 		FD77AF1D1D68484F00B8C73E /* LBXScanNetAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanNetAnimation.swift; sourceTree = "<group>"; };
@@ -1687,6 +1729,7 @@
 		9619EF731CC1DE1200F69CBC /* UtilityTools */ = {
 			isa = PBXGroup;
 			children = (
+				FD5D640A1DE44322004C5286 /* ALCameraViewController */,
 				96331B031CC8762600E53125 /* YMClasses */,
 				96637A761CC22E6000DBD1CF /* Common */,
 				9619EF741CC1DE1200F69CBC /* Layout */,
@@ -2765,6 +2808,58 @@
 			path = Body;
 			sourceTree = "<group>";
 		};
+		FD5D640A1DE44322004C5286 /* ALCameraViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FD5D640B1DE44322004C5286 /* CameraView.strings */,
+				FD5D640C1DE44322004C5286 /* CameraViewAssets.xcassets */,
+				FD5D640D1DE44322004C5286 /* Utilities */,
+				FD5D64181DE44322004C5286 /* ViewController */,
+				FD5D641E1DE44322004C5286 /* Views */,
+			);
+			path = ALCameraViewController;
+			sourceTree = "<group>";
+		};
+		FD5D640D1DE44322004C5286 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FD5D640E1DE44322004C5286 /* CameraGlobals.swift */,
+				FD5D640F1DE44322004C5286 /* CameraShot.swift */,
+				FD5D64101DE44322004C5286 /* ImageFetcher.swift */,
+				FD5D64111DE44322004C5286 /* PhotoLibraryAuthorizer.swift */,
+				FD5D64121DE44322004C5286 /* SingleImageFetcher.swift */,
+				FD5D64131DE44322004C5286 /* SingleImageSaver.swift */,
+				FD5D64141DE44322004C5286 /* UIButtonExtensions.swift */,
+				FD5D64151DE44322004C5286 /* UIViewExtensions.swift */,
+				FD5D64161DE44322004C5286 /* Utilities.swift */,
+				FD5D64171DE44322004C5286 /* VolumeControl.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		FD5D64181DE44322004C5286 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FD5D64191DE44322004C5286 /* CameraViewController.swift */,
+				FD5D641A1DE44322004C5286 /* CameraViewControllerConstraint.swift */,
+				FD5D641B1DE44322004C5286 /* ConfirmViewController.swift */,
+				FD5D641C1DE44322004C5286 /* ConfirmViewController.xib */,
+				FD5D641D1DE44322004C5286 /* PhotoLibraryViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FD5D641E1DE44322004C5286 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD5D641F1DE44322004C5286 /* CameraView.swift */,
+				FD5D64201DE44322004C5286 /* CropOverlay.swift */,
+				FD5D64211DE44322004C5286 /* ImageCell.swift */,
+				FD5D64221DE44322004C5286 /* PermissionsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FD6AC6711D768770000775FB /* AppointmentAcceptDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -3036,11 +3131,14 @@
 				96FCD1421D17D6F000A6E12D /* PagePersonalDetail.storyboard in Resources */,
 				96814A851D1A3E36002C8BD3 /* PagePersonalDetailEdit.storyboard in Resources */,
 				9672FB281CD0623100BC7E40 /* PageFace2FaceQR.storyboard in Resources */,
+				FD5D64231DE44322004C5286 /* CameraView.strings in Resources */,
 				96A3D1C01CFD846A00518DCB /* PageAppointmentSelectDoctor.storyboard in Resources */,
 				96814AA11D1A815F002C8BD3 /* PagePersonalIntroEdit.storyboard in Resources */,
+				FD5D64241DE44322004C5286 /* CameraViewAssets.xcassets in Resources */,
 				96C02FE51D96B4C10096E216 /* PaperCardPreview.storyboard in Resources */,
 				7394F85A1D005DF400F05487 /* PageAppointmentSelectTime.storyboard in Resources */,
 				7394F84B1CF9A36800F05487 /* PageAppointmentPatientCondition.storyboard in Resources */,
+				FD5D64321DE44322004C5286 /* ConfirmViewController.xib in Resources */,
 				FD86428C1DAF30B500C93411 /* PageSYSBroadcast.storyboard in Resources */,
 				FD5512FF1DAB76B400A84801 /* PageInputMyFeatures.storyboard in Resources */,
 				73622E5A1D1EE5660039E785 /* PageYiMaiContact.storyboard in Resources */,
@@ -3212,6 +3310,7 @@
 				FD113D881D7D521200628295 /* YMPhotoSelector.swift in Sources */,
 				96D745B11CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift in Sources */,
 				9619EF7C1CC1FF2400F69CBC /* YMIndexStrings.swift in Sources */,
+				FD5D64341DE44322004C5286 /* CameraView.swift in Sources */,
 				9612DB651CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift in Sources */,
 				9672FB3C1CD1C35500BC7E40 /* PageMessageListBodyView.swift in Sources */,
 				FDF46D3B1D768B32007B9987 /* ApointmentAcceptDetailActions.swift in Sources */,
@@ -3262,8 +3361,10 @@
 				96D4518F1CF7D78A006817CE /* PageYiMaiSameHospitalActions.swift in Sources */,
 				9672FB481CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift in Sources */,
 				96925A891D1BEBC50095432C /* PageAppLoadingActions.swift in Sources */,
+				FD5D642B1DE44322004C5286 /* UIButtonExtensions.swift in Sources */,
 				73622E4A1D1EE01B0039E785 /* PageAboutYiMaiActions.swift in Sources */,
 				96814AA91D1A81BC002C8BD3 /* PagePersonalIntroEditActions.swift in Sources */,
+				FD5D64291DE44322004C5286 /* SingleImageFetcher.swift in Sources */,
 				96D451981CF7D815006817CE /* PageYiMaiSameSchoolBodyView.swift in Sources */,
 				9619EF801CC1FF4E00F69CBC /* YMLayout.swift in Sources */,
 				9672FB4C1CD3439400BC7E40 /* YMDatetime.swift in Sources */,
@@ -3296,6 +3397,7 @@
 				FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */,
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
 				FD1F57F51D9132A30039769D /* YMQRRecognizer.swift in Sources */,
+				FD5D64311DE44322004C5286 /* ConfirmViewController.swift in Sources */,
 				96FCD13A1D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift in Sources */,
 				96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */,
 				FD8642921DAF310000C93411 /* PageSYSBroadcastBodyView.swift in Sources */,
@@ -3318,6 +3420,7 @@
 				FD4E24C11DD16DB70079C07C /* PageWalletInfoBodyView.swift in Sources */,
 				9612DB621CC9F71F00262D2E /* PageRegisterInputHospitalViewController.swift in Sources */,
 				96D451821CF7D66D006817CE /* PageYiMaiSameAreasBodyView.swift in Sources */,
+				FD5D642F1DE44322004C5286 /* CameraViewController.swift in Sources */,
 				96D451961CF7D7EF006817CE /* PageYiMaiSameSchoolViewController.swift in Sources */,
 				96D4516E1CF6DB34006817CE /* PageYiMaiManualAddFriendBodyView.swift in Sources */,
 				96331B0C1CC8762600E53125 /* YMTextInput.swift in Sources */,
@@ -3346,12 +3449,14 @@
 				96B3E8A31D10F94600C8B5C2 /* PageTopSearchInputPanel.swift in Sources */,
 				2F2BDA551DD80A9000310385 /* PageWalletRecordViewController.swift in Sources */,
 				736EBC6C1D16893000C40AA7 /* PagePersonalAccountSettingActions.swift in Sources */,
+				FD5D64301DE44322004C5286 /* CameraViewControllerConstraint.swift in Sources */,
 				9634D3711D080A3C00542901 /* YMAPIStrings.swift in Sources */,
 				9672FB1C1CCF276A00BC7E40 /* PageFace2FaceInfoInputBodyView.swift in Sources */,
 				737F1F5F1D1F571500FFE573 /* PagePersonalPrivateSettingActions.swift in Sources */,
 				96814AA51D1A8174002C8BD3 /* PagePersonalIntroEditViewController.swift in Sources */,
 				9619EF7A1CC1FF1500F69CBC /* YMLoginStrings.swift in Sources */,
 				9672FB271CD0610200BC7E40 /* PageFace2FaceQRViewController.swift in Sources */,
+				FD5D642E1DE44322004C5286 /* VolumeControl.swift in Sources */,
 				96814AA71D1A81B2002C8BD3 /* PagePersonalIntroEditBodyView.swift in Sources */,
 				73622E5E1D1EE5720039E785 /* PageYiMaiContactViewController.swift in Sources */,
 				9612DB481CC9D65C00262D2E /* PageCommonBottomView.swift in Sources */,
@@ -3364,17 +3469,21 @@
 				737F1F731D20294600FFE573 /* PageYiMaiDoctorDetailViewController.swift in Sources */,
 				737F1F8F1D207C4B00FFE573 /* PageGlobalSearchViewController.swift in Sources */,
 				735FDEA31D1E1148004152CD /* PageAppointmentDetailBodyView.swift in Sources */,
+				FD5D64271DE44322004C5286 /* ImageFetcher.swift in Sources */,
 				96D451801CF7D4A9006817CE /* PageYiMaiSameAreasViewController.swift in Sources */,
 				96C02FDD1D969C3C0096E216 /* PageCommonTextInputBodyView.swift in Sources */,
 				9672FB461CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift in Sources */,
 				96814AB31D1A9813002C8BD3 /* PagePersonalNameEditViewController.swift in Sources */,
 				FD7B4C271D9A6A980003BE0D /* PageMyPatientListViewController.swift in Sources */,
+				FD5D64371DE44322004C5286 /* PermissionsView.swift in Sources */,
 				FD2A99CB1D951D6B001953D6 /* PageAppointmentProcessingBodyView.swift in Sources */,
 				96C02FCD1D9670200096E216 /* RequirePaperCardViewController.swift in Sources */,
 				962045711D1B9BAD00E18D88 /* PageAppointmentRecordBodyView.swift in Sources */,
 				FD801DD31D66F2FE0066198B /* AdmissionChargeSettingBodyView.swift in Sources */,
 				96A3D1C41CFD848200518DCB /* PageAppointmentSelectDoctorViewController.swift in Sources */,
+				FD5D642D1DE44322004C5286 /* Utilities.swift in Sources */,
 				96C02FE91D96B4D00096E216 /* PaperCardPreviewViewController.swift in Sources */,
+				FD5D64361DE44322004C5286 /* ImageCell.swift in Sources */,
 				962076EF1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift in Sources */,
 				96B3E8A01D10EBB700C8B5C2 /* PageHospitalSearchBodyView.swift in Sources */,
 				FDF46D391D768A43007B9987 /* ApointmentAcceptDetailBodyView.swift in Sources */,
@@ -3396,13 +3505,16 @@
 				96D451601CF6D4A1006817CE /* PageYiMaiAddContactsFriendsBootomView.swift in Sources */,
 				7394F8551CF9ABCE00F05487 /* YMTextArea.swift in Sources */,
 				96814A9B1D1A78E7002C8BD3 /* PagePersonalTagsEditActions.swift in Sources */,
+				FD5D64281DE44322004C5286 /* PhotoLibraryAuthorizer.swift in Sources */,
 				962076D61CC5F196002083FA /* PageRegisterBodyView.swift in Sources */,
 				736EBC681D16889A00C40AA7 /* PersonalAccountSettingViewController.swift in Sources */,
 				961FE8CC1CEEFAE6002785B9 /* PageYiMaiActions.swift in Sources */,
+				FD5D64351DE44322004C5286 /* CropOverlay.swift in Sources */,
 				96637A7A1CC240C800DBD1CF /* YMColors.swift in Sources */,
 				96C02FCF1D9670470096E216 /* RequirePaperCardBodyView.swift in Sources */,
 				FD5513051DAB770A00A84801 /* PageInputMyFeaturesBodyView.swift in Sources */,
 				737F1F771D2029A100FFE573 /* PageYiMaiDoctorDetailActions.swift in Sources */,
+				FD5D64261DE44322004C5286 /* CameraShot.swift in Sources */,
 				7394F8591D005DDD00F05487 /* PageAppointmentSelectTimeViewController.swift in Sources */,
 				9672FB2C1CD067A300BC7E40 /* PageFace2FaceQRActions.swift in Sources */,
 				736EBC781D16A7AD00C40AA7 /* PagePersonalPasswordResetBodyView.swift in Sources */,
@@ -3438,8 +3550,10 @@
 				962076D41CC5ECCA002083FA /* PageRegisterViewController.swift in Sources */,
 				96814A971D1A78A9002C8BD3 /* PagePersonalTagsEditViewController.swift in Sources */,
 				96D451AB1CF7F1B5006817CE /* PageAppointmentActions.swift in Sources */,
+				FD5D64251DE44322004C5286 /* CameraGlobals.swift in Sources */,
 				9612DB4A1CC9EA8600262D2E /* YMCurrentPage.swift in Sources */,
 				FD2A99BF1D937DF8001953D6 /* PageMyInfoCardBodyView.swift in Sources */,
+				FD5D642A1DE44322004C5286 /* SingleImageSaver.swift in Sources */,
 				96814A991D1A78DA002C8BD3 /* PagePersonalTagsEditBodyView.swift in Sources */,
 				96925A811D1BC9B30095432C /* PageAppLoadingViewController.swift in Sources */,
 				736EBC7A1D16A7C200C40AA7 /* PagePersonalPasswordResetActions.swift in Sources */,
@@ -3449,6 +3563,7 @@
 				96FCD1491D17D7F800A6E12D /* PagePersonalDetailBodyView.swift in Sources */,
 				7394F8461CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift in Sources */,
 				9624936D1CED5CAA007A9556 /* YMValueValidator.swift in Sources */,
+				FD5D64331DE44322004C5286 /* PhotoLibraryViewController.swift in Sources */,
 				9619EF591CC1DB9600F69CBC /* YiMai.xcdatamodeld in Sources */,
 				961646071DB1DC56007BA360 /* PageShowWebViewController.swift in Sources */,
 				FDD93EA81D923773003576D4 /* PageAddFriendInfoCardBodyView.swift in Sources */,
@@ -3474,6 +3589,7 @@
 				FDD1DB1A1D992BA000C289B1 /* PageLawyerInfoViewController.swift in Sources */,
 				96D4518D1CF7D77F006817CE /* PageYiMaiSameHospitalBodyView.swift in Sources */,
 				73EA65C31D444BE90050C12C /* YMChatViewController.swift in Sources */,
+				FD5D642C1DE44322004C5286 /* UIViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4128,7 +4244,7 @@
 				INFOPLIST_FILE = YiMai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor.l;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
@@ -4145,7 +4261,7 @@
 				INFOPLIST_FILE = YiMai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor.l;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
