@@ -797,8 +797,8 @@ public class YMAPIUtility {
         YMAPIPost(YMAPIInterfaceURL.GetDoctorsByIdList, param: param, progressHandler: nil)
     }
     
-    public func YMGetDoctorInfoByYMCode(param: [String: String]) {
-        YMAPIPost(YMAPIInterfaceURL.GetDoctorInfoByYMCode, param: param, progressHandler: nil)
+    public func YMGetDoctorInfoByYMCode(param: String) {
+        YMAPIPost(YMAPIInterfaceURL.GetDoctorInfoByYMCode, param: ["dp_code": param], progressHandler: nil)
     }
     
     public func YMGetNewAdmissionList() {

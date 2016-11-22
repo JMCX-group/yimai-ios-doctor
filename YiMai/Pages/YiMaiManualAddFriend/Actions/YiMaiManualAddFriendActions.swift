@@ -41,20 +41,31 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
     }
     
     public func QuerySuccess(data: NSDictionary?) {
-        let userInfo = data!["user"] as! [String: AnyObject]
-        TargetController?.BodyView?.ShowAddPage(userInfo)
+        var userInfo = data!["user"] as? [String: AnyObject]
+        if(nil == userInfo) {
+            userInfo = data!["data"] as? [String: AnyObject]
+        }
+        
+        if(nil == userInfo) {
+            let viewController = Target as! PageYiMaiManualAddFriendViewController
+            viewController.BodyView?.ShowAlertPage()
+            return
+        }
+        
+        
+        TargetController?.BodyView?.ShowAddPage(userInfo!)
     }
     
     public func QueryError(error: NSError) {
         if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
-//            let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
             let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
             
             print(errInfo)
+            let viewController = Target as! PageYiMaiManualAddFriendViewController
+            viewController.BodyView?.ShowAlertPage()
         } else {
             YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
         }
-        TargetController?.BodyView?.ClearBody()
     }
     
     public func SearchFriend(sender: UIGestureRecognizer) {
@@ -63,25 +74,14 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
         let code = viewController.BodyView?.GetInputCode()
         
         if(!YMValueValidator.IsCellPhoneNum(code!)) {
-            viewController.BodyView?.ShowAlertPage()
-//            QueryByCodeApi?.YMQueryUserInfoById()
+            if(code?.characters.count != 8) {
+                viewController.BodyView?.ShowAlertPage()
+                return
+            }
+            QueryByCodeApi?.YMGetDoctorInfoByYMCode(code!)
         } else {
             QueryByPhoneApi?.YMQueryUserByPhone(code!)
         }
-//        if("" == code || code?.characters.count < 6) {
-//            viewController.BodyView?.ShowAlertPage()
-//        } else if("18012345678" == code) {
-//            viewController.BodyView?.ShowInvitePage()
-//        } else {
-//            viewController.BodyView?.ShowAddPage([
-//                YMYiMaiManualAddFriendStrings.CS_DATA_KEY_USERHEAD:"test",
-//                YMYiMaiManualAddFriendStrings.CS_DATA_KEY_NAME:"池帅",
-//                YMYiMaiManualAddFriendStrings.CS_DATA_KEY_HOSPATIL:"鸡西矿业总医院医疗集团二道河子中心医院",
-//                YMYiMaiManualAddFriendStrings.CS_DATA_KEY_DEPARTMENT:"心血管外科",
-//                YMYiMaiManualAddFriendStrings.CS_DATA_KEY_JOB_TITLE:"主任医师",
-//                YMYiMaiManualAddFriendStrings.CS_DATA_KEY_USER_ID:"1"
-//                ])
-//        }
     }
     
     public func AddFriend(sender: UIGestureRecognizer) {

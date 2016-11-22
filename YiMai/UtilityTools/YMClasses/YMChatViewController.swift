@@ -9,6 +9,7 @@
 import Foundation
 import Neon
 import SwiftyJSON
+import Proposer
 
 public class YMChatViewController: RCConversationViewController, RCIMReceiveMessageDelegate {
     var TopView: PageCommonTopView? = nil
@@ -22,7 +23,36 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
                                                      padding: 0, width: YMSizes.PageWidth, height: messageListHeight)
         
         RCIM.sharedRCIM().receiveMessageDelegate = self
+    }
+    
+    override public func viewWillAppear(animated: Bool) {
+        GetLocationAuth()
+    }
+    
+    func GetLocationAuth() {
+        let contacts: PrivateResource = PrivateResource.Location(PrivateResource.LocationUsage.WhenInUse)
         
+        if(contacts.isNotDeterminedAuthorization) {
+            proposeToAccess(contacts, agreed: {
+                
+                }, rejected: {
+                    self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
+            })
+        } else {
+            if(!contacts.isAuthorized) {
+                proposeToAccess(contacts, agreed: {
+                    
+                    }, rejected: {
+                        
+                })
+            } else {
+                proposeToAccess(contacts, agreed: {
+                    
+                    }, rejected: {
+                        self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
+                })
+            }
+        }
     }
     
     public func onRCIMReceiveMessage(message: RCMessage!, left: Int32) {

@@ -225,7 +225,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
 
     }
     
-    private func DrawAlertButton() {
+    private func DrawAlertButton(title: String = "请输入正确的医脉码或手机号") {
         if(nil != AlertButton){
             AlertButton?.hidden = false
             return
@@ -236,14 +236,14 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         let titleLabel = UILabel()
 
         BodyView.addSubview(AlertButton!)
-        AlertButton?.align(Align.UnderCentered, relativeTo: SearchPanel, padding: 80.LayoutVal(), width: 670.LayoutVal(), height: 90.LayoutVal())
+        AlertButton?.align(Align.UnderCentered, relativeTo: ResultPanel!, padding: 80.LayoutVal(), width: 670.LayoutVal(), height: 90.LayoutVal())
         
         AlertButton?.addSubview(buttonBkg)
         AlertButton?.addSubview(titleLabel)
         
         buttonBkg.fillSuperview()
         
-        titleLabel.text = "无效号码"
+        titleLabel.text = title
         titleLabel.textColor = YMColors.NotifyFlagOrange
         titleLabel.font = YMFonts.YMDefaultFont(36.LayoutVal())
         titleLabel.sizeToFit()
@@ -267,10 +267,17 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         ClearBody()
         DrawResultPanel(data)
         
+        let id = "\(data["id"]!)"
+        
+        if(YMVar.MyDoctorId == id) {
+            DrawAlertButton("不允许添加自己为好友")
+            return
+        }
+        
         let isFriend = data["is_friend"] as? Int
         if(nil != isFriend) {
             if(1 == isFriend) {
-                DrawAlertButton()
+                DrawAlertButton("你们已经是好友")
             } else {
                 DrawAddButton(data)
             }
