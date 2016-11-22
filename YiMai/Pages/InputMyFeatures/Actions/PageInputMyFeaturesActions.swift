@@ -22,11 +22,12 @@ class PageInputMyFeaturesActions: PageJumpActions {
     }
     
     func TagChangeSuccess(data: NSDictionary?) {
-        
+        TargetView.FullPageLoading.Hide()
     }
     
     func TagChangeError(error: NSError) {
         YMAPIUtility.PrintErrorInfo(error)
+        TargetView.FullPageLoading.Hide()
     }
     
     func TagAdded(text: String) {

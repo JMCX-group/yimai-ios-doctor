@@ -45,7 +45,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     
     public func UploadError(err: NSError) {
         YMAPIUtility.PrintErrorInfo(err)
-        TargetController?.BodyView?.Loading?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     public func ChangeHeadImage(_: UIGestureRecognizer) {
@@ -129,7 +129,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
         }
         
         TargetController?.BodyView?.LoadData()
-        TargetController?.BodyView?.Loading?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func UpdateError(error: NSError) {

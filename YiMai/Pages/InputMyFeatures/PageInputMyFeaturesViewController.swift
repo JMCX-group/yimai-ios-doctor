@@ -26,13 +26,16 @@ class PageInputMyFeaturesViewController: PageViewController {
         BodyView.SwapDelBtnStatus()
     }
     
-    override func PageDisapeared() {
-        var tags = YMVar.MyUserInfo["tags"] as? String
-        
-        if(nil == tags) {
-            tags = ""
-        }
-
-        BodyView.FeaturesActions.FeaturesApi.YMChangeUserInfo(["tags": tags!])
-    }
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        var tags = YMVar.MyUserInfo["tags"] as? String
+//        
+//        if(nil == tags) {
+//            tags = ""
+//        }
+//        
+//        print(YMVar.MyUserInfo["tags"])
+//
+//        BodyView.FeaturesActions.FeaturesApi.YMChangeUserInfo(["tags": tags!])
+//    }
 }

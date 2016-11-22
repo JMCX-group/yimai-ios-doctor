@@ -350,11 +350,14 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
             let name = other["name"] as! String
             let phone = other["phone"] as! String
             
+            let smsStatus = other["sms_status"] as! String
+
             ContactsInOtherResult.append(phone)
 
             cell = self.DrawOtherCell([
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: name,
-                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_PHONE: phone
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_PHONE: phone,
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_SMS_STATUS: smsStatus
                 ], prevCell: cell)
         }
         
@@ -406,8 +409,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
             var name = docotor["name"] as? String
             var dept = docotor["department"] as? [String: String]
             let id = docotor["id"] as! String
-            
-            print(docotor)
+            let isAdded = "\(docotor["is_add_friend"]!)"
             
             ContactsInYiMaiResult.append(id)
             
@@ -435,7 +437,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_HOSPATIL: hosName,
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_DEPARTMENT: deptName,
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_JOB_TITLE: title!,
-                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_USER_ID: id
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_USER_ID: id,
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_FRIEND_ADDED: isAdded
                 ], prevCell: cell)
         }
         
@@ -446,6 +449,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     private func DrawOtherCell(data: [String: AnyObject], prevCell: UIView?) -> UIView {
         let name = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME] as! String
         let phone = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_PHONE] as! String
+        let smsStatus = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_SMS_STATUS] as! String
 
         let cell = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: 100.LayoutVal()))
         
@@ -456,6 +460,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let addButton = YMLayout.GetTouchableImageView(useObject: Actions!,
                                                        useMethod: "InviteOthersRegisterYiMai:".Sel(),
                                                        imageName: "YiMaiAddContactsFriendButton")
+        
+        let invitedLabel = YMLayout.GetNomalLabel("已邀请", textColor: YMColors.FontLightGray, fontSize: 20.LayoutVal())
         
         addButton.UserStringData = phone
         
@@ -482,6 +488,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         cell.addSubview(addButton)
         cell.addSubview(phoneIcon)
         cell.addSubview(bottomLine)
+        cell.addSubview(invitedLabel)
         
         OthersListPanel.addSubview(cell)
         
@@ -498,6 +505,15 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         phoneLabel.align(Align.ToTheRightCentered, relativeTo: phoneIcon, padding: 10.LayoutVal(), width: phoneLabel.width, height: phoneLabel.height)
         
         addButton.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: addButton.width, height: addButton.height)
+        invitedLabel.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: invitedLabel.width, height: invitedLabel.height)
+        
+        addButton.UserObjectData = invitedLabel
+        
+        if("false" == smsStatus) {
+            invitedLabel.hidden = true
+        } else {
+            addButton.hidden = true
+        }
         
         bottomLine.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         
@@ -509,6 +525,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let hospital = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_DEPARTMENT] as! String
         let jobTitle = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_JOB_TITLE] as! String
+        let added = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_FRIEND_ADDED] as! String
         
         let id = data[YiMaiAddContactsFriendsStrings.CS_DATA_KEY_USER_ID] as! String
         
@@ -522,6 +539,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let addButton = YMLayout.GetTouchableImageView(useObject: Actions!,
                                                        useMethod: "AddFriend:".Sel(),
                                                        imageName: "YiMaiAddContactsFriendButton")
+        
+        let addedLabel = YMLayout.GetNomalLabel("已添加", textColor: YMColors.FontLightGray, fontSize: 20.LayoutVal())
         addButton.UserStringData = id
 
         let bottomLine = UIView()
@@ -561,6 +580,9 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         cell.addSubview(infoCell)
         cell.addSubview(addButton)
         cell.addSubview(bottomLine)
+        cell.addSubview(addedLabel)
+        
+        addButton.UserObjectData = addedLabel
         
         FriendsListPanel.addSubview(cell)
         
@@ -577,8 +599,14 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         jobTitleLabel.align(Align.ToTheRightCentered, relativeTo: divider, padding: 15.LayoutVal(), width: jobTitleLabel.width, height: jobTitleLabel.height)
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
-        
+        addedLabel.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: addedLabel.width, height: addedLabel.height)
         addButton.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: addButton.width, height: addButton.height)
+
+        if("1" == added) {
+            addButton.hidden = true
+        } else {
+            addedLabel.hidden = true
+        }
         
         bottomLine.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         

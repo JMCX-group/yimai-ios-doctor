@@ -22,7 +22,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     private func InviteOtherError(error: NSError){
         let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
         print(errInfo)
-        TargetController!.LoadingView?.Hide()
+//        TargetController!.LoadingView?.Hide()
     }
     
     private func InviteOtherErrorSuccessed(data: NSDictionary?) {
@@ -32,14 +32,14 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
             print("no result!!!")
         }
         
-        TargetController?.LoadingView?.Hide()
+//        TargetController?.LoadingView?.Hide()
     }
     
     private func AddFriendError(error: NSError){
 //        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
 //        print(errInfo)
         YMAPIUtility.PrintErrorInfo(error)
-        TargetController?.LoadingView?.Hide()
+//        TargetController?.LoadingView?.Hide()
     }
     
     private func AddFriendSuccessed(data: NSDictionary?) {
@@ -48,13 +48,13 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         } else {
             print("no result!!!")
         }
-        TargetController?.LoadingView?.Hide()
+//        TargetController?.LoadingView?.Hide()
     }
     
     private func AddAllFriendsError(error: NSError){
         let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
         print(errInfo)
-        TargetController?.LoadingView?.Hide()
+//        TargetController?.LoadingView?.Hide()
     }
     
     private func AddAllFriendsSuccessed(data: NSDictionary?) {
@@ -137,7 +137,11 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         let id = addBtn.UserStringData
         AddFriendApi?.YMAddFriendById(id)
         
-        TargetController?.LoadingView?.Show()
+        let addLabel = addBtn.UserObjectData as! UILabel
+        addBtn.hidden = true
+        addLabel.hidden = false
+        addBtn.UserObjectData = nil
+//        TargetController?.LoadingView?.Show()
     }
     
     public func AddAllContactsFriends(sender: UIGestureRecognizer) {
@@ -152,7 +156,11 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         let id = addBtn.UserStringData
         InviteOtherApi?.YMInviteOthers(id)
         
-        TargetController?.LoadingView?.Show()
+        let invitedLabel = addBtn.UserObjectData as! UILabel
+        invitedLabel.hidden = false
+        addBtn.hidden = true
+        
+//        TargetController?.LoadingView?.Show()
 
     }
     

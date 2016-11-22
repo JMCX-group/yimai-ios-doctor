@@ -48,12 +48,22 @@ class PageInputMyFeaturesBodyView: PageBodyView {
             if(nil == tagStrings) {
                 tagStrings = ""
             }
-            var tagArray = tagStrings!.componentsSeparatedByString(",")
-            tagArray.append(text)
-            YMVar.MyUserInfo["tags"] = tagArray.joinWithSeparator(",")
+            let tagArray = tagStrings!.componentsSeparatedByString(",")
+            
+            var cleanTagArray = [String]()
+            for tag in tagArray {
+                if(!YMValueValidator.IsEmptyString(tag)) {
+                    cleanTagArray.append(tag)
+                }
+            }
+            cleanTagArray.append(text)
+            YMVar.MyUserInfo["tags"] = cleanTagArray.joinWithSeparator(",")
             
             DrawFullBody()
             SwapDelBtnStatus()
+            
+            FullPageLoading.Show()
+            FeaturesActions.FeaturesApi.YMChangeUserInfo(["tags": cleanTagArray.joinWithSeparator(",")])
         }
     }
     
