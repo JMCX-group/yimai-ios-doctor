@@ -18,6 +18,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
     
     private var AuthButton: YMTouchableView? = nil
     private var IDNumButton: YMTouchableView? = nil
+    private var bindEmailButton: YMTouchableView? = nil
     
     private var SettingActions: PagePersonalAccountSettingActions? = nil
     private let DefaultButtonGroupPadding = 70.LayoutVal()
@@ -25,6 +26,8 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
     private let ExtButtonInfoWidth = 400.LayoutVal()
     
     private var Loading: YMPageLoading? = nil
+    
+    private var EmailUpdateFlag = false
     
     override func ViewLayout() {
         super.ViewLayout()
@@ -56,6 +59,19 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         }
     }
     
+    func AddEmail(email: String) {
+        EMail.text = email
+        
+        if(!YMValueValidator.IsEmail(email)) {
+            YMPageModalMessage.ShowErrorInfo("无效的邮箱", nav: self.NavController!)
+            return
+        }
+        
+        EmailUpdateFlag = true
+//        AppendExtInfo(EMail, parent: bindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+        SettingActions!.SettingApi.YMChangeUserInfo(["email": email])
+    }
+    
     private func LoadData(data: AnyObject?, mainQueue: NSOperationQueue) -> Bool {
         let userData = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
         
@@ -75,6 +91,8 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         let realData = data as! [String: AnyObject]
         AccountPhone.text = "\(realData["phone"]!)"
         AccountBindPhone.text = "\(realData["phone"]!)"
+        
+        let email = YMVar.GetStringByKey(realData, key: "email")
 
         let authTextMap = ["0":"已认证", "1":"尚未认证"]
         
@@ -95,7 +113,17 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         } else {
             IDNum.text = "\(realData["ID_number"]!)"
         }
-        EMail.text = "尚未开通邮件绑定功能"
+        
+        if(!EmailUpdateFlag) {
+            if(YMValueValidator.IsEmptyString(email)) {
+                EMail.text = "尚未开通邮件绑定功能"
+            } else {
+                EMail.text = email
+            }
+//            AppendExtInfo(EMail, parent: bindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+        } else {
+            EmailUpdateFlag = false
+        }
     }
     
     private func AppendExtInfo(label: UILabel, parent: UIView, fontColor: UIColor = YMColors.FontGray, fontSize: CGFloat = 28.LayoutVal()){
@@ -134,10 +162,10 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
             label: UILabel(), text: "绑定手机号")
         AppendExtInfo(AccountBindPhone, parent: bindPhoneButton, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
         
-        let bindEmailButton = YMLayout.GetCommonFullWidthTouchableView(
-            BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+        bindEmailButton = YMLayout.GetCommonFullWidthTouchableView(
+            BodyView, useObject: SettingActions!, useMethod: "EmailCellTouched:".Sel(),
             label: UILabel(), text: "邮箱地址")
-        AppendExtInfo(EMail, parent: bindEmailButton, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+        AppendExtInfo(EMail, parent: bindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
         
         IDNumButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
@@ -145,16 +173,16 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         AppendExtInfo(IDNum, parent: IDNumButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
 
         BodyView.addSubview(bindPhoneButton)
-        BodyView.addSubview(bindEmailButton)
+        BodyView.addSubview(bindEmailButton!)
         BodyView.addSubview(IDNumButton!)
         
         bindPhoneButton.align(Align.UnderMatchingLeft, relativeTo: AuthButton!,
                           padding: DefaultButtonGroupPadding, width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
         
-        bindEmailButton.align(Align.UnderMatchingLeft, relativeTo: bindPhoneButton,
+        bindEmailButton!.align(Align.UnderMatchingLeft, relativeTo: bindPhoneButton,
                           padding: 0, width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
         
-        IDNumButton?.align(Align.UnderMatchingLeft, relativeTo: bindEmailButton,
+        IDNumButton?.align(Align.UnderMatchingLeft, relativeTo: bindEmailButton!,
                           padding: 0, width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
     }
     

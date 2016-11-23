@@ -46,5 +46,6 @@ public class PageMessageListActions: PageJumpActions{
         ClearBroadcastApi.YMClearAllNewAppointment()
         YMVar.MyNewAppointmentInfo.removeAll()
         //TODO: reply list
+        DoJump(YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST)
     }
 }

@@ -86,6 +86,9 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_GET_WALLET_INFO = "apiGetWalletInfo"
     public static let CS_API_ACTION_GET_WALLET_RECORD = "apiGetWalletRecord"
+    
+    public static let CS_API_ACTION_GET_ALL_NEW_APPOINTMENT_MSG = "apiGetAllNewAppointmentMsg"
+    public static let CS_API_ACTION_CLEAR_ALL_NEW_APPOINTMENT_MSG = "apiClearAllNewAppointmentMsg"
 }
 
 

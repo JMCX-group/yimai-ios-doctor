@@ -73,7 +73,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_SHOW_WEB_PAGE: true,
         YMCommonStrings.CS_PAGE_AUTH_PROCESSING: true,
         YMCommonStrings.CS_PAGE_MY_WALLET_NAME: true,
-        YMCommonStrings.CS_PAGE_MY_WALLET_RECORD: true
+        YMCommonStrings.CS_PAGE_MY_WALLET_RECORD: true,
+        YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST: true
     ]
 }
 

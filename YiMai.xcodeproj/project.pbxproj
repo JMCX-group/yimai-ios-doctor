@@ -363,6 +363,10 @@
 		FD8642901DAF30CD00C93411 /* PageSYSBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD86428F1DAF30CD00C93411 /* PageSYSBroadcastViewController.swift */; };
 		FD8642921DAF310000C93411 /* PageSYSBroadcastBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8642911DAF310000C93411 /* PageSYSBroadcastBodyView.swift */; };
 		FD8642941DAF31C700C93411 /* PageSYSBroadcastActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8642931DAF31C700C93411 /* PageSYSBroadcastActions.swift */; };
+		FDD02E971DE5477C00118FC3 /* PageAppointmentReplyList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD02E991DE5477C00118FC3 /* PageAppointmentReplyList.storyboard */; };
+		FDD02E9B1DE547B500118FC3 /* PageAppointmentReplyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD02E9A1DE547B500118FC3 /* PageAppointmentReplyListViewController.swift */; };
+		FDD02E9D1DE5480500118FC3 /* PageAppointmentReplyListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD02E9C1DE5480500118FC3 /* PageAppointmentReplyListBodyView.swift */; };
+		FDD02E9F1DE5484000118FC3 /* PageAppointmentReplyListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD02E9E1DE5484000118FC3 /* PageAppointmentReplyListActions.swift */; };
 		FDD1DB1A1D992BA000C289B1 /* PageLawyerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD1DB191D992BA000C289B1 /* PageLawyerInfoViewController.swift */; };
 		FDD1DB1B1D992BC700C289B1 /* PageLawyerInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD1DB1D1D992BC700C289B1 /* PageLawyerInfo.storyboard */; };
 		FDD1DB1F1D992D0700C289B1 /* PageLawyerInfoBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD1DB1E1D992D0700C289B1 /* PageLawyerInfoBodyView.swift */; };
@@ -739,6 +743,10 @@
 		FD86428F1DAF30CD00C93411 /* PageSYSBroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSYSBroadcastViewController.swift; sourceTree = "<group>"; };
 		FD8642911DAF310000C93411 /* PageSYSBroadcastBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSYSBroadcastBodyView.swift; sourceTree = "<group>"; };
 		FD8642931DAF31C700C93411 /* PageSYSBroadcastActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSYSBroadcastActions.swift; sourceTree = "<group>"; };
+		FDD02E981DE5477C00118FC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAppointmentReplyList.storyboard; sourceTree = "<group>"; };
+		FDD02E9A1DE547B500118FC3 /* PageAppointmentReplyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentReplyListViewController.swift; sourceTree = "<group>"; };
+		FDD02E9C1DE5480500118FC3 /* PageAppointmentReplyListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentReplyListBodyView.swift; sourceTree = "<group>"; };
+		FDD02E9E1DE5484000118FC3 /* PageAppointmentReplyListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentReplyListActions.swift; sourceTree = "<group>"; };
 		FDD1DB191D992BA000C289B1 /* PageLawyerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLawyerInfoViewController.swift; sourceTree = "<group>"; };
 		FDD1DB1C1D992BC700C289B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageLawyerInfo.storyboard; sourceTree = "<group>"; };
 		FDD1DB1E1D992D0700C289B1 /* PageLawyerInfoBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageLawyerInfoBodyView.swift; sourceTree = "<group>"; };
@@ -1533,6 +1541,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				FDD02E921DE5471200118FC3 /* AppointmentReplyList */,
 				2F2BDA4C1DD80A5300310385 /* WalletRecord */,
 				FD3A101A1DD1ED83008C905B /* AuthProcessing */,
 				FD4E24B61DD16B380079C07C /* WalletInfo */,
@@ -2995,6 +3004,33 @@
 			path = YMLabel;
 			sourceTree = "<group>";
 		};
+		FDD02E921DE5471200118FC3 /* AppointmentReplyList */ = {
+			isa = PBXGroup;
+			children = (
+				FDD02E931DE5471200118FC3 /* Actions */,
+				FDD02E941DE5471200118FC3 /* Body */,
+				FDD02E991DE5477C00118FC3 /* PageAppointmentReplyList.storyboard */,
+				FDD02E9A1DE547B500118FC3 /* PageAppointmentReplyListViewController.swift */,
+			);
+			path = AppointmentReplyList;
+			sourceTree = "<group>";
+		};
+		FDD02E931DE5471200118FC3 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				FDD02E9E1DE5484000118FC3 /* PageAppointmentReplyListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		FDD02E941DE5471200118FC3 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				FDD02E9C1DE5480500118FC3 /* PageAppointmentReplyListBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
 		FDD1DB151D992B0300C289B1 /* LawyerInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -3138,6 +3174,7 @@
 				96C02FE51D96B4C10096E216 /* PaperCardPreview.storyboard in Resources */,
 				7394F85A1D005DF400F05487 /* PageAppointmentSelectTime.storyboard in Resources */,
 				7394F84B1CF9A36800F05487 /* PageAppointmentPatientCondition.storyboard in Resources */,
+				FDD02E971DE5477C00118FC3 /* PageAppointmentReplyList.storyboard in Resources */,
 				FD5D64321DE44322004C5286 /* ConfirmViewController.xib in Resources */,
 				FD86428C1DAF30B500C93411 /* PageSYSBroadcast.storyboard in Resources */,
 				FD5512FF1DAB76B400A84801 /* PageInputMyFeatures.storyboard in Resources */,
@@ -3398,6 +3435,7 @@
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
 				FD1F57F51D9132A30039769D /* YMQRRecognizer.swift in Sources */,
 				FD5D64311DE44322004C5286 /* ConfirmViewController.swift in Sources */,
+				FDD02E9F1DE5484000118FC3 /* PageAppointmentReplyListActions.swift in Sources */,
 				96FCD13A1D17A97A00A6E12D /* PagePersonalIDNumInputBodyView.swift in Sources */,
 				96637A781CC22EFB00DBD1CF /* YMBasicTypeExtensionForLayout.swift in Sources */,
 				FD8642921DAF310000C93411 /* PageSYSBroadcastBodyView.swift in Sources */,
@@ -3515,6 +3553,7 @@
 				FD5513051DAB770A00A84801 /* PageInputMyFeaturesBodyView.swift in Sources */,
 				737F1F771D2029A100FFE573 /* PageYiMaiDoctorDetailActions.swift in Sources */,
 				FD5D64261DE44322004C5286 /* CameraShot.swift in Sources */,
+				FDD02E9B1DE547B500118FC3 /* PageAppointmentReplyListViewController.swift in Sources */,
 				7394F8591D005DDD00F05487 /* PageAppointmentSelectTimeViewController.swift in Sources */,
 				9672FB2C1CD067A300BC7E40 /* PageFace2FaceQRActions.swift in Sources */,
 				736EBC781D16A7AD00C40AA7 /* PagePersonalPasswordResetBodyView.swift in Sources */,
@@ -3536,6 +3575,7 @@
 				9672FB1E1CCF4D3100BC7E40 /* YMFonts.swift in Sources */,
 				73622E381D1EC28B0039E785 /* PageForgetPasswordViewController.swift in Sources */,
 				739AEC461D1643D200E70EF3 /* PageDepartmentSearchBodyView.swift in Sources */,
+				FDD02E9D1DE5480500118FC3 /* PageAppointmentReplyListBodyView.swift in Sources */,
 				9612DB631CC9F71F00262D2E /* PageRegisterPersonalInfoActions.swift in Sources */,
 				96D745AA1CF59D2200E345E3 /* PageYiMaiR2BodyView.swift in Sources */,
 				962076D81CC6024F002083FA /* PageRegisterActions.swift in Sources */,
@@ -4122,6 +4162,14 @@
 				FD86428D1DAF30B500C93411 /* Base */,
 			);
 			name = PageSYSBroadcast.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD02E991DE5477C00118FC3 /* PageAppointmentReplyList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD02E981DE5477C00118FC3 /* Base */,
+			);
+			name = PageAppointmentReplyList.storyboard;
 			sourceTree = "<group>";
 		};
 		FDD1DB1D1D992BC700C289B1 /* PageLawyerInfo.storyboard */ = {

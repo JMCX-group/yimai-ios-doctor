@@ -26,8 +26,11 @@ public class PageCommonTextInputBodyView: PageBodyView {
 
         if(PageCommonTextInputType.Text == PageCommonTextInputViewController.InputType) {
             TextInput = YMLayout.GetTextFieldWithMaxCharCount(param, maxCharCount: PageCommonTextInputViewController.InputMaxLen)
-        } else {
+        } else if (PageCommonTextInputType.Tel == PageCommonTextInputViewController.InputType){
             TextInput = YMLayout.GetCellPhoneField(param)
+        } else {
+            TextInput = YMLayout.GetTextFieldWithMaxCharCount(param, maxCharCount: PageCommonTextInputViewController.InputMaxLen)
+            TextInput.keyboardType = UIKeyboardType.EmailAddress
         }
         
         TextInput.SetBothPaddingWidth(40.LayoutVal())

@@ -11,6 +11,7 @@ import UIKit
 public enum PageCommonTextInputType {
     case Text
     case Tel
+    case Email
 }
 
 public typealias PageCommonTextInputResult = ((text: String) -> Void)

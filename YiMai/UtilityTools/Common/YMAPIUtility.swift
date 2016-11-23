@@ -94,6 +94,8 @@ public class YMAPIInterfaceURL {
     static let ClearAllNewAdmission = YMAPIInterfaceURL.ApiBaseUrl + "/msg/admissions/all-read"
     static let ClearAllNewAppointment = YMAPIInterfaceURL.ApiBaseUrl + "/msg/appointment/all-read"
     
+    static let GetAllNewAppointmentMsg = YMAPIInterfaceURL.ApiBaseUrl + "/msg/appointment/all"
+    
     static let WalletInfo = YMAPIInterfaceURL.ApiBaseUrl + "/wallet/info"
     static let WalletRecord = YMAPIInterfaceURL.ApiBaseUrl + "/wallet/record"
 }
@@ -825,6 +827,10 @@ public class YMAPIUtility {
     
     public func YMGetWalletRecord() {
         YMAPIGet(YMAPIInterfaceURL.WalletRecord, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetAllNewAppointmentMsg() {
+        YMAPIGet(YMAPIInterfaceURL.GetAllNewAppointmentMsg, param: nil, progressHandler: nil)
     }
 }
 
