@@ -76,8 +76,9 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
     
     private func DrawResultPanel(data: [String: AnyObject]) {
         if(nil != ResultPanel){
+            YMLayout.ClearView(view: ResultPanel!)
             ResultPanel?.hidden = false
-            return
+            
         }
         ResultPanel = UIView()
         

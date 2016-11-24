@@ -19,6 +19,8 @@ class PageWalletInfoViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
+        BodyView.Clear()
+        BodyView.FullPageLoading.Show()
         BodyView.WalletActions.InfoApi.YMGetWalletInfo()
     }
 }

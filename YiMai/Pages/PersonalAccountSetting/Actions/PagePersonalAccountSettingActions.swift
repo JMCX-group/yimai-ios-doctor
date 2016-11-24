@@ -37,14 +37,15 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
         YMVar.Clear()
         YMBackgroundRefresh.Stop()
 //        YMAPICommonVariable.ClearCallbackMap()
+        PagePersonalIntroEditViewController.IntroText = ""
         PageRegisterPersonalInfoViewController.NeedInit = true
         self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
     }
     
     func EmailCellTouched(gr: UIGestureRecognizer) {
         let targetView = Target as! PagePersonalAccountSettingBodyView
-        PageCommonTextInputViewController.TitleString = "输入email"
-        PageCommonTextInputViewController.Placeholder = "请输入email（最多40字符）"
+        PageCommonTextInputViewController.TitleString = "输入电子邮箱"
+        PageCommonTextInputViewController.Placeholder = "请输入电子邮箱（最多40字符）"
         PageCommonTextInputViewController.InputType = PageCommonTextInputType.Email
         PageCommonTextInputViewController.InputMaxLen = 40
         PageCommonTextInputViewController.Result = targetView.AddEmail

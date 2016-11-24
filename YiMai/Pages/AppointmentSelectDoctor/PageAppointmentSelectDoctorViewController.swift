@@ -18,6 +18,16 @@ public class PageAppointmentSelectDoctorViewController: PageViewController {
         
         super.PageLayout()
         Actions = PageAppointmentSelectDoctorAcitons(navController: self.NavController, target: self)
+        
+    }
+    
+    override func PagePreRefresh() {
+        BodyView?.Actions = nil
+        YMLayout.ClearView(view: self.view)
+        
+        BodyView = nil
+        TopView = nil
+
         BodyView = PageAppointmentSelectDoctorBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "选择医生", navController: self.NavController!)
     }

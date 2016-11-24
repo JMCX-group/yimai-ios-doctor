@@ -56,9 +56,7 @@ public class PagePersonalDetailBodyView: NSObject {
         }
 
         let intro = data["personal_introduction"] as? String
-        if(!YMValueValidator.IsEmptyString(intro)) {
-            DrawDoctorIntroduction(intro!, alignView: introPanelAlignTo!)
-        }
+        DrawDoctorIntroduction(intro, alignView: introPanelAlignTo!)
         
         let school = data["college"] as? [String: AnyObject]
         if(nil != school) {
@@ -189,10 +187,13 @@ public class PagePersonalDetailBodyView: NSObject {
         return lastLine!
     }
     
-    private func DrawDoctorIntroduction(info: String, alignView: UIView) {
+    private func DrawDoctorIntroduction(info: String?, alignView: UIView) {
         BodyView.addSubview(IntroductionPanel)
         IntroductionPanel.backgroundColor = YMColors.White
-        
+        if(YMValueValidator.IsEmptyString(info)) {
+            IntroductionPanel.align(Align.UnderMatchingLeft, relativeTo: alignView, padding: 0, width: YMSizes.PageWidth, height: 0)
+            return
+        }
         let title = UILabel()
         title.text = "医生简介"
         title.textColor = YMColors.FontBlue

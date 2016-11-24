@@ -39,7 +39,7 @@ public class PageAppointmentBodyView: PageBodyView {
     
     public static var PatientBasicInfoString: String = ""
     public static var PatientConditionString: String = ""
-    public static var AppointmentTimeString: String = "点击选择时间"
+    public static var AppointmentTimeString: String = "点击此处选择时间"
     private var AllowedSelection: UInt = 10
     public var PhotoPikcer: YMPhotoSelector? = nil
     public var PhotoArray = [UIImage]()
@@ -387,9 +387,16 @@ public class PageAppointmentBodyView: PageBodyView {
         SelectTimeLabel.text = PageAppointmentBodyView.AppointmentTimeString
         SelectTimeLabel.textColor = YMColors.FontGray
         SelectTimeLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        SelectTimeLabel.sizeToFit()
+        
+        let icon = YMLayout.GetSuitableImageView("YMIconTimelineTime")
         
         SelectTimeButton?.addSubview(SelectTimeLabel)
-        SelectTimeLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: 500.LayoutVal(), height: 84.LayoutVal())
+        SelectTimeButton?.addSubview(icon)
+
+        icon.anchorToEdge(Edge.Left, padding: 70.LayoutVal(), width: icon.width, height: icon.height)
+        SelectTimeLabel.align(Align.ToTheRightCentered, relativeTo: icon, padding: 10.LayoutVal(), width: 500.LayoutVal(), height: SelectTimeLabel.height)
+        //        SelectTimeLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: 500.LayoutVal(), height: 84.LayoutVal())
     }
     
     private func DrawPhotoButton() {

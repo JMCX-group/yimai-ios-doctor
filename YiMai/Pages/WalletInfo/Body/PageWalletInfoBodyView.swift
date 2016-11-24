@@ -47,6 +47,12 @@ class PageWalletInfoBodyView: PageBodyView {
         FullPageLoading.Hide()
     }
     
+    func Clear() {
+        YMLayout.ClearView(view: BalancePanel)
+        YMLayout.ClearView(view: BalanceDetailPanel)
+        YMLayout.ClearView(view: PiePanel)
+    }
+    
     func DrawBalancePanel(data: [String: AnyObject]) {
         let total = YMVar.GetStringByKey(data, key: "total")
         let totalLabel = YMLayout.GetNomalLabel(total, textColor: YMColors.FontGray, fontSize: 90.LayoutVal())

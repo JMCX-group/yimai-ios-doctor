@@ -314,7 +314,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
             return
 //            titleLabel.text = "暂无医生朋友"
         } else {
-            titleLabel.text = "医生朋友（\(friendsCount)名）"
+            titleLabel.text = "一度医脉（\(friendsCount)名）"
         }
         
         Lv1Panel.hidden = false

@@ -34,6 +34,7 @@ public class PageRegisterPersonalInfoViewController: PageViewController {
             PageHospitalSearchBodyView.HospitalSelected = nil
             PageDepartmentSearchBodyView.DepartmentSelected = nil
             YMCoreDataEngine.RemoveData(YMCoreDataKeyStrings.CS_USER_LOGIN_STATUS)
+            PageRegisterPersonalInfoViewController.NeedInit = false
         } else {
             if(PageRegisterPersonalInfoViewController.NeedInit) {
                 BodyView?.Reset()

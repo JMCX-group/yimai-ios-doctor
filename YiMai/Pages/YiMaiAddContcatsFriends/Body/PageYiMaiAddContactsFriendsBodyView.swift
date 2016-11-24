@@ -160,7 +160,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: FriendsListPanel)
         YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: ShowOthersListBtn)
         
-        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: OthersPanel.width, height: OthersPanel.height)
+        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 10.LayoutVal(), width: OthersPanel.width, height: OthersPanel.height)
 //        BodyView.contentOffset = CGPoint()
         UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
         UIView.commitAnimations()
@@ -188,7 +188,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: OthersListPanel)
         YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: ShowFriendsListBtn)
 
-        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: OthersPanel.width, height: OthersPanel.height)
+        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 10.LayoutVal(), width: OthersPanel.width, height: OthersPanel.height)
         
 //        BodyView.contentOffset = CGPoint()
         UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
@@ -321,9 +321,9 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         ShowOthersListBtn.setTitle("邀请好友加入医脉", forState: UIControlState.Normal)
         ShowOthersListBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
         ShowOthersListBtn.backgroundColor = YMColors.PanelBackgroundGray
-        ShowOthersListBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        ShowOthersListBtn.titleLabel?.font = YMFonts.YMDefaultFont(30.LayoutVal())
         ShowOthersListBtn.addTarget(self.Actions!, action: "ShowOthersListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
-        ShowOthersListBtn.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 60.LayoutVal())
+        ShowOthersListBtn.anchorToEdge(Edge.Top, padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 60.LayoutVal())
 
         OthersPanel.addSubview(OthersListPanel)
         OthersListPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 0)
@@ -379,7 +379,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         ShowFriendsListBtn.setTitle("显示医脉资源", forState: UIControlState.Normal)
         ShowFriendsListBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
         ShowFriendsListBtn.backgroundColor = YMColors.PanelBackgroundGray
-        ShowFriendsListBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        ShowFriendsListBtn.titleLabel?.font = YMFonts.YMDefaultFont(30.LayoutVal())
         ShowFriendsListBtn.addTarget(self.Actions!, action: "ShowFriendsListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         ShowFriendsListBtn.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 60.LayoutVal())
         

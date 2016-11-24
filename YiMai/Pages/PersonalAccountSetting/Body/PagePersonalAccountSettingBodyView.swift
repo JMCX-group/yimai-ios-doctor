@@ -116,7 +116,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         
         if(!EmailUpdateFlag) {
             if(YMValueValidator.IsEmptyString(email)) {
-                EMail.text = "尚未开通邮件绑定功能"
+                EMail.text = "尚未绑定电子邮箱"
             } else {
                 EMail.text = email
             }

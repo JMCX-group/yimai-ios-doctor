@@ -327,6 +327,10 @@ public class PageBodyView: NSObject, UITableViewDelegate, UITableViewDataSource 
     public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         BodyViewEndDragging()
     }
+    
+    deinit {
+        print("PageBodyView deinit")
+    }
 }
 
 

@@ -17,8 +17,24 @@ public class LoginBackendProgress: NSObject {
     var NewFriendsRelationApi: YMAPIUtility? = nil
     var SameDepartmentApi: YMAPIUtility? = nil
 
-    public func ApiError(error: NSError){
-        print(error)
+    public func ApiError1(error: NSError){
+        print("error 1")
+        YMAPIUtility.PrintErrorInfo(error)
+    }
+    
+    public func ApiError2(error: NSError){
+        print("error 2")
+        YMAPIUtility.PrintErrorInfo(error)
+    }
+    
+    public func ApiError3(error: NSError){
+        print("error 3")
+        YMAPIUtility.PrintErrorInfo(error)
+    }
+    
+    public func ApiError4(error: NSError){
+        print("error 4")
+        YMAPIUtility.PrintErrorInfo(error)
     }
     
     public func GetSameDepartmentError(error: NSError) {
@@ -71,16 +87,16 @@ public class LoginBackendProgress: NSObject {
     init(key: String) {
         super.init()
         self.InitRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_INIT_RELATION + key,
-                                       success: self.InitRelationSuccess, error: self.ApiError)
+                                       success: self.InitRelationSuccess, error: self.ApiError1)
         
         self.L1RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL1_RELATION + key,
-                                            success: self.Level1RelationSuccess, error: self.ApiError)
+                                            success: self.Level1RelationSuccess, error: self.ApiError2)
         
         self.L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION + key,
-                                            success: self.Level2RelationSuccess, error: self.ApiError)
+                                            success: self.Level2RelationSuccess, error: self.ApiError3)
         
         self.NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + key,
-                                          success: self.NewFriendsSuccess, error: self.ApiError)
+                                          success: self.NewFriendsSuccess, error: self.ApiError4)
         
         self.SameDepartmentApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_SAME_DEPARTMENT_LIST + key,
                                                   success: self.GetSameDepartmentSuccess, error: self.GetSameDepartmentError)
@@ -205,6 +221,7 @@ public class PageLoginActions : PageJumpActions {
                 self.PageLoginBody?.ShowErrorInfo("服务器繁忙，请稍后再试。")
             }
         } else {
+            YMAPIUtility.PrintErrorInfo(error)
             YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
         }
         

@@ -27,8 +27,8 @@ class PageAllCollegeListActions: PageJumpActions {
     
     func UpdateSuccess(data: NSDictionary?) {
         TargetView.FullPageLoading.Hide()
+        YMVar.MyUserInfo["college"] = PageAllCollegeListBodyView.SelectedCollege
         self.NavController?.popViewControllerAnimated(true)
-
 //        print(data)
     }
     
