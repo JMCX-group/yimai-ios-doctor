@@ -75,6 +75,10 @@ public class RequirePaperCardBodyView: PageBodyView {
     func DrawFullBody() {
         YMLayout.ClearView(view: BodyView)
         
+        AddresseeName = ""
+        AddresseeAddr = ""
+        AddresseePhone = ""
+        
         var name = YMVar.MyUserInfo["name"] as? String
         var jobTitle = YMVar.MyUserInfo["job_title"] as? String
         let hospital = YMVar.MyUserInfo["hospital"] as? [String: AnyObject]
@@ -130,6 +134,24 @@ public class RequirePaperCardBodyView: PageBodyView {
         PreviewButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 98.LayoutVal())
         
         PreviewButton.addTarget(RequireActions, action: "GoPreview:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let required = "\(YMVar.MyUserInfo["application_card"]!)"
+        if("1" == required) {
+            PreviewButton.setTitle("已申请", forState: UIControlState.Normal)
+            DisablePreview()
+            
+            AddresseeAddrCell.removeFromSuperview()
+            AddresseeNameCell.removeFromSuperview()
+            AddresseePhoneCell.removeFromSuperview()
+            
+            AddresseeAddr = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "address")
+            AddresseeName = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "addressee")
+            AddresseePhone = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "receive_phone")
+            
+            AddresseeAddrCell = GetCell("地址", text: AddresseeAddr, prev: cell)
+            AddresseeNameCell = GetCell("收件人姓名", text: AddresseeName, prev: AddresseeAddrCell)
+            AddresseePhoneCell = GetCell("收件手机号", text: AddresseePhone, prev: AddresseeNameCell)
+        }
     }
     
     func VerifyAddresseeInfo() {

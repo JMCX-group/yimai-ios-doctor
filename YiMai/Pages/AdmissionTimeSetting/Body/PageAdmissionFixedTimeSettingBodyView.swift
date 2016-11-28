@@ -324,6 +324,17 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         cell.UserStringData = "1"
 
         DayCellMapByWeek[weekdayIdx]?.append(cell)
+        
+        let status = SelectDict[weekdayIdx]
+        print("idx: \(weekdayIdx) status: \(status)")
+        
+        if("day" == status) {
+            SetDaySelected(cell)
+        } else if("am" == status) {
+            SetDayCellAMSelected(cell)
+        } else if("pm" == status) {
+            SetDayCellPMSelected(cell)
+        }
         return cell
     }
     

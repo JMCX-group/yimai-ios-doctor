@@ -61,6 +61,30 @@ public class PageGlobalSearchBodyView: PageBodyView {
         DeptList.alignAndFill(align: Align.UnderMatchingLeft, relativeTo: FiltersPanel, padding: 0)
     }
     
+    func DrawFilterButton(button: YMTouchableView, text: String) {
+        YMLayout.ClearView(view: button)
+        let titleLabel = UILabel()
+        titleLabel.text = text
+        titleLabel.textColor = YMColors.FontGray
+        titleLabel.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        titleLabel.sizeToFit()
+        
+        button.addSubview(titleLabel)
+        let titleMaxWidth = button.width - 60.LayoutVal()
+        if(titleLabel.width > titleMaxWidth){
+            titleLabel.anchorInCenter(width: titleMaxWidth, height: titleLabel.height)
+        } else {
+            titleLabel.anchorInCenter(width: titleLabel.width, height: titleLabel.height)
+        }
+        
+        let arrIcon = YMLayout.GetSuitableImageView("YMIconFilterButtonArrow")
+        button.addSubview(arrIcon)
+        arrIcon.align(Align.ToTheRightCentered, relativeTo: titleLabel,
+                      padding: 12.LayoutVal(), width: arrIcon.width, height: arrIcon.height)
+        
+        button.UserObjectData = ["label": titleLabel, "icon": arrIcon]
+    }
+    
     private func DrawFiltersPanel() {
         BodyView.addSubview(FiltersPanel)
         FiltersPanel.align(Align.UnderMatchingLeft, relativeTo: SearchPanel,
@@ -77,28 +101,6 @@ public class PageGlobalSearchBodyView: PageBodyView {
         FiltersPanel.groupAndFill(group: Group.Horizontal,
                                   views: [CityFilterButton!, HosFilterButton!, DeptFilterButton!], padding: 0)
         
-        func DrawFilterButton(button: YMTouchableView, text: String) {
-            let titleLabel = UILabel()
-            titleLabel.text = text
-            titleLabel.textColor = YMColors.FontGray
-            titleLabel.font = YMFonts.YMDefaultFont(28.LayoutVal())
-            titleLabel.sizeToFit()
-            
-            button.addSubview(titleLabel)
-            let titleMaxWidth = button.width - 40.LayoutVal()
-            if(titleLabel.width > titleMaxWidth){
-                titleLabel.anchorInCenter(width: titleMaxWidth, height: titleLabel.height)
-            } else {
-                titleLabel.anchorInCenter(width: titleLabel.width, height: titleLabel.height)
-            }
-            
-            let arrIcon = YMLayout.GetSuitableImageView("YMIconFilterButtonArrow")
-            button.addSubview(arrIcon)
-            arrIcon.align(Align.ToTheRightCentered, relativeTo: titleLabel,
-                          padding: 12.LayoutVal(), width: arrIcon.width, height: arrIcon.height)
-            
-            button.UserObjectData = ["label": titleLabel, "icon": arrIcon]
-        }
         
         DrawFilterButton(CityFilterButton!, text: "城市")
         DrawFilterButton(HosFilterButton!, text: "医院")
@@ -472,15 +474,18 @@ public class PageGlobalSearchBodyView: PageBodyView {
     }
     
     public func LoadCityList(data: [String: AnyObject]) {
-        let prov = data["provinces"] as? [[String: AnyObject]]
-        let citys = data["citys"] as? [String: [ [String:AnyObject] ] ]
+        var prov = data["provinces"] as? [[String: AnyObject]]
+        var citys = data["citys"] as? [String: [ [String:AnyObject] ] ]
         
         if(nil != prov && nil != citys) {
             YMLayout.ClearView(view: CityList)
             CityList.hidden = true
+            prov?.insert(["id": "clear", "name": "重置过滤条件"], atIndex: 0)
+            citys?["clear"] = [[String:AnyObject]]()
             PageSearchResultCell.GetCityTablView(prov!, citys: citys!,
                                                  parent: CityList,
-                                                 cityTouched: SearchActions!.CityTouched)
+                                                 cityTouched: SearchActions!.CityTouched,
+                                                 provTouched: SearchActions!.ProvTouched)
         }
     }
     
@@ -508,6 +513,19 @@ public class PageGlobalSearchBodyView: PageBodyView {
         }
     }
     
+    public func ResetFilter() {
+        let users = LastSearchData!["users"] as! [String: AnyObject]
+        Lv1Data = users["friends"] as? [[String: AnyObject]]
+        Lv2Data = users["friends-friends"] as? [[String: AnyObject]]
+        Lv3Data = users["other"] as? [[String: AnyObject]]
+        
+        LoadData(nil, l1: Lv2Data, l2: Lv2Data, l3: Lv3Data)
+        
+        DrawFilterButton(CityFilterButton!, text: "城市")
+        DrawFilterButton(HosFilterButton!, text: "医院")
+        DrawFilterButton(DeptFilterButton!, text: "科室")
+    }
+    
     public func FilterResultByCity(cityName: String) {
         func GetFilteredArray(org: [[String: AnyObject]], key: String) -> [[String: AnyObject]] {
             var ret = [[String: AnyObject]]()
@@ -533,9 +551,17 @@ public class PageGlobalSearchBodyView: PageBodyView {
         let l3 = GetFilteredArray(Lv3Data!, key: cityName)
 
         LoadData(nil, l1: l1, l2: l2, l3: l3)
+        
+        DrawFilterButton(CityFilterButton!, text: cityName)
+
+//        let btnData = CityFilterButton!.UserObjectData as! [String: AnyObject]
+//        let label = btnData["label"] as! UILabel
+//        label.text = cityName
+//        public var HosFilterButton: YMTouchableView? = nil
+//        public var DeptFilterButton: YMTouchableView? = nil
     }
     
-    public func FilterResultByHos(hosId: String) {
+    public func FilterResultByHos(hosId: String, hosName: String) {
         func GetFilteredArray(org: [[String: AnyObject]], key: String) -> [[String: AnyObject]] {
             var ret = [[String: AnyObject]]()
             for v in org {
@@ -561,9 +587,17 @@ public class PageGlobalSearchBodyView: PageBodyView {
         let l3 = GetFilteredArray(Lv3Data!, key: hosId)
         
         LoadData(nil, l1: l1, l2: l2, l3: l3)
+        
+
+        DrawFilterButton(HosFilterButton!, text: hosName)
+//        let btnData = HosFilterButton!.UserObjectData as! [String: AnyObject]
+//        let label = btnData["label"] as! UILabel
+//        label.text = hosName
+        //        public var HosFilterButton: YMTouchableView? = nil
+        //        public var DeptFilterButton: YMTouchableView? = nil
     }
     
-    public func FilterResultByDept(deptId: String) {
+    public func FilterResultByDept(deptId: String, deptName: String) {
         func GetFilteredArray(org: [[String: AnyObject]], key: String) -> [[String: AnyObject]] {
             var ret = [[String: AnyObject]]()
             for v in org {
@@ -589,6 +623,14 @@ public class PageGlobalSearchBodyView: PageBodyView {
         let l3 = GetFilteredArray(Lv3Data!, key: deptId)
         
         LoadData(nil, l1: l1, l2: l2, l3: l3)
+        
+        DrawFilterButton(DeptFilterButton!, text: deptName)
+
+//        let btnData = DeptFilterButton!.UserObjectData as! [String: AnyObject]
+//        let label = btnData["label"] as! UILabel
+//        label.text = deptName
+        //        public var HosFilterButton: YMTouchableView? = nil
+        //        public var DeptFilterButton: YMTouchableView? = nil
     }
 }
 

@@ -8,6 +8,8 @@
 
 import Foundation
 import Neon
+import SwiftyJSON
+import SwiftDate
 
 public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
     var SettingActions: PageAdmissionTimeSettingActions!
@@ -24,13 +26,27 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
     
     public var CurrentDay = NSDate()
     
-    private var SelectDict = [Int: String]()
+    var SelectDict = [String: String]()
     private var DayCellMapByWeek = [Int: [YMTouchableView]]()
 
     override func ViewLayout() {
         super.ViewLayout()
         SettingActions = self.Actions as! PageAdmissionTimeSettingActions
         DrawFlexibleSchedule()
+    }
+
+    func SetSelectDict(key key: NSDate, status: String, remove: Bool = false) {
+        let keyStr = key.toString(DateFormat.ISO8601Format(ISO8601Type.Date))!
+        if(remove) {
+            SelectDict[keyStr] = nil
+        } else {
+            SelectDict[keyStr] = status
+        }
+    }
+    
+    func GetDateStatus(key key: NSDate) -> String? {
+        let keyStr = key.toString(DateFormat.ISO8601Format(ISO8601Type.Date))!
+        return SelectDict[keyStr]
     }
     
     private func DrawDateTitleLabel() {
@@ -125,7 +141,7 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         
         cell.addSubview(dayLabel)
         if(0 == weekdayIdx || 6 == weekdayIdx) {
-            cell.backgroundColor = YMColors.None
+            cell.backgroundColor = YMColors.White
         } else {
             cell.backgroundColor = YMColors.White
         }
@@ -139,10 +155,24 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         cell.addSubview(amIcon)
         cell.addSubview(pmIcon)
         
+        
         cell.UserObjectData = ["date": cellDate, "label": dayLabel, "weekdayIdx": weekdayIdx, "amIcon": amIcon, "pmIcon": pmIcon, "status": "none"]
         cell.UserStringData = "1"
         
         DayCellMapByWeek[weekdayIdx]?.append(cell)
+        
+        let status = GetDateStatus(key: cellDate)
+        if(nil != status) {
+            let statusStr = status!
+            if("am" == statusStr) {
+                SetDayCellAMSelected(cell)
+            } else if("pm" == statusStr) {
+                SetDayCellPMSelected(cell)
+            } else if("day" == statusStr){
+                SetDaySelected(cell)
+            }
+        }
+
         return cell
     }
     
@@ -157,6 +187,9 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         cell.backgroundColor = YMColors.WeekdaySelectedColor
         cellData["status"] = "am"
         cell.UserObjectData = cellData
+        
+        let date = cellData["date"] as! NSDate
+        SetSelectDict(key: date, status: "am")
     }
     
     public func SetDayCellPMSelected(cell: YMTouchableView) {
@@ -170,6 +203,9 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         cell.backgroundColor = YMColors.WeekdaySelectedColor
         cellData["status"] = "pm"
         cell.UserObjectData = cellData
+        
+        let date = cellData["date"] as! NSDate
+        SetSelectDict(key: date, status: "pm")
     }
     
     public func SetDaySelected(cell: YMTouchableView) {
@@ -183,6 +219,9 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         cell.backgroundColor = YMColors.WeekdaySelectedColor
         cellData["status"] = "day"
         cell.UserObjectData = cellData
+        
+        let date = cellData["date"] as! NSDate
+        SetSelectDict(key: date, status: "day")
     }
     
     public func SetDayUnSelected(cell: YMTouchableView) {
@@ -196,6 +235,9 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         cell.backgroundColor = YMColors.White
         cellData["status"] = "none"
         cell.UserObjectData = cellData
+        
+        let date = cellData["date"] as! NSDate
+        SetSelectDict(key: date, status: "none", remove: true)
     }
     
     private func DrawCalendarGridDividerLine(parent: UIView, weekLineCount: Int) {
@@ -287,4 +329,71 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         DrawDateTitleLabel()
         DrawCalendar(CurrentDay)
     }
+    
+    func GetSettingData() -> String {
+        var ret = [[String: AnyObject]]()
+        for (k, v) in SelectDict {
+            
+            var entry = [String: AnyObject]()
+            entry["date"] = k
+            entry["am"] = false
+            entry["pm"] = false
+            let status = v
+            if("am" == status) {
+                entry["am"] = true
+            } else if("pm" == status) {
+                entry["pm"] = true
+            } else if("day" == status) {
+                entry["am"] = true
+                entry["pm"] = true
+            }
+            
+            ret.append(entry)
+        }
+        
+        
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(ret, options: NSJSONWritingOptions.PrettyPrinted)
+        let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
+        print(strJson)
+        return strJson
+    }
+    
+    func LoadData() {
+        let settingString = YMVar.MyUserInfo["admission_set_flexible"] as? String
+        CurrentDay = NSDate()
+        SelectDict.removeAll()
+
+        if(nil != settingString) {
+            let setting = JSON.parse(settingString!)
+            
+            for (_, setting) in setting.arrayValue.enumerate() {
+                let date = setting["date"].stringValue
+                let pm = setting["pm"].boolValue
+                let am = setting["am"].boolValue
+                
+                if(YMValueValidator.IsEmptyString(date)) {
+                    continue
+                }
+                
+                if(pm && am) {
+                    SelectDict[date] = "day"
+                } else if(pm && !am) {
+                    SelectDict[date] = "pm"
+                } else if(!pm && am) {
+                    SelectDict[date] = "am"
+                }
+            }
+        }
+
+        DrawCalendar(CurrentDay)
+    }
 }
+
+
+
+
+
+
+
+
+

@@ -18,7 +18,7 @@ class PageYiMaiIntroViewController: PageViewController {
         bodyView.addSubview(introImg)
         introImg.anchorToEdge(Edge.Top, padding: 0, width: introImg.width, height: introImg.height)
         
-        TopView = PageCommonTopView(parentView: self.view, titleString: "医脉简介", navController: self.NavController!)
+        TopView = PageCommonTopView(parentView: self.view, titleString: "医者脉连简介", navController: self.NavController!)
         
         YMLayout.SetVScrollViewContentSize(bodyView, lastSubView: introImg)
     }

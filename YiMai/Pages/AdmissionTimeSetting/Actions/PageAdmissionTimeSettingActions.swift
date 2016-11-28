@@ -55,9 +55,9 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
     public func AMorPMCellTouched(sender: YMButton) {
         let userData = sender.UserObjectData as! [String: AnyObject]
         let weekday = userData["weekDay"] as! Int
-        if(0 == weekday || 6 == weekday) {
-            return
-        }
+//        if(0 == weekday || 6 == weekday) {
+//            return
+//        }
         
         var buttonSelectedStatus = false
         if("am" == (userData["AMorPM"] as! String)) {
@@ -158,9 +158,9 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         let cellData = cell.UserObjectData as! [String: AnyObject]
 
         let weekdayIdx = cellData["weekdayIdx"] as! Int
-        if(0 == weekdayIdx || 6 == weekdayIdx) {
-            return
-        }
+//        if(0 == weekdayIdx || 6 == weekdayIdx) {
+//            return
+//        }
         if("0" == isEnabledCell) {
             return
         }
@@ -206,7 +206,10 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         targetController.LoadingView?.Show()
         let jsonData = try! NSJSONSerialization.dataWithJSONObject(targetController.FixedSettingBodyView!.SettingData, options: NSJSONWritingOptions.PrettyPrinted)
         let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
-        SaveApi?.YMChangeUserInfo(["admission_set_fixed": strJson])
+        
+        
+        let flexibleSetting = targetController.FlexibleSettingBodyView!.GetSettingData()
+        SaveApi?.YMChangeUserInfo(["admission_set_fixed": strJson, "admission_set_flexible": flexibleSetting])
     }
 }
 

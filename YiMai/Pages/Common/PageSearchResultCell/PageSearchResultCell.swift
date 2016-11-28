@@ -176,7 +176,8 @@ public class PageSearchResultCell {
     public static func GetCityTablView(provinces: [[String: AnyObject]],
                                        citys: [String: [ [String:AnyObject] ] ],
                                        parent: UIView,
-                                       cityTouched: YMTableViewCellTouched) -> YMTableView {
+                                       cityTouched: YMTableViewCellTouched,
+                                       provTouched: YMTableViewCellTouched? = nil) -> YMTableView {
         
        func ProvinceCellBuilder(cell: YMTableViewCell, data: AnyObject?) {
             let realData = data as! [String: AnyObject]
@@ -196,7 +197,7 @@ public class PageSearchResultCell {
             cell.addSubview(cellInner)
             cellInner.anchorToEdge(Edge.Left, padding: 40.LayoutVal(),
                                    width: cellInner.width, height: cellInner.height)
-            
+        
             if(nil != realData["citys"]) {
                 cell.SubCell = realData["citys"]!
             }
@@ -235,7 +236,7 @@ public class PageSearchResultCell {
             cell.CellTitleHeight = 60.LayoutVal()
             cell.CellFullHeight = 60.LayoutVal()
             cell.CellData = realData
-            cell.backgroundColor = YMColors.SearchSubCellBkg
+            cell.backgroundColor = YMColors.SearchCellBkg
             
             cell.addSubview(cellInner)
             cellInner.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: cellInner.width, height: cellInner.height)
@@ -249,7 +250,7 @@ public class PageSearchResultCell {
         }
 
         
-        let table = YMTableView(builer: ProvinceCellBuilder, subBuilder: CityPanelBuilder, touched: nil)
+        let table = YMTableView(builer: ProvinceCellBuilder, subBuilder: CityPanelBuilder, touched: provTouched)
         
         for v in provinces {
             let cityTable = YMTableView(builer: CityCellBuilder, subBuilder: nil, touched: cityTouched)
@@ -260,12 +261,18 @@ public class PageSearchResultCell {
             if(nil == cityList) {
                 continue
             }
+            
+            
             if(0 != cityList!.count) {
                 for v in cityList! {
                     cityTable.AppendCell(v)
                 }
                 provCellData["citys"] = cityTable
                 provCellData["prov"] = v
+                table.AppendCell(provCellData)
+            } else {
+                provCellData["prov"] = v
+                provCellData["citys"] = nil
                 table.AppendCell(provCellData)
             }
         }

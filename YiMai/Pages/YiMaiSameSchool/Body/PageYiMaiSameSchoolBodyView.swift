@@ -319,7 +319,7 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
         let bigIcon = YMLayout.GetSuitableImageView("PageYiMaiSameSchoolBigIcon")
         
         BodyView.addSubview(bigIcon)
-        bigIcon.anchorToEdge(Edge.Top, padding: 130.LayoutVal(), width: bigIcon.width, height: bigIcon.height)
+        bigIcon.anchorToEdge(Edge.Top, padding: 260.LayoutVal(), width: bigIcon.width, height: bigIcon.height)
         
         let titleLabel = UILabel()
         titleLabel.text = "尚无同院校的医生"

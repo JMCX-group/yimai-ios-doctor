@@ -55,8 +55,16 @@ public class PageIndexBodyView {
     private func DrawScrollPanel() {
         //TODO: 此处应该显示轮播图
         let tempScrollImage = YMLayout.GetSuitableImageView("IndexScrollPhoto")
-        BodyView.addSubview(tempScrollImage)
-        tempScrollImage.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: tempScrollImage.height)
+//        BodyView.addSubview(tempScrollImage)
+//        tempScrollImage.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: tempScrollImage.height)
+        
+        let scrollView = JMCarouselScrollView(
+            frame: CGRect(x: 0, y: 0, width:UIScreen.mainScreen().bounds.width, height: tempScrollImage.height),
+            imageArray: [UIImage(named: "IndexScrollPhoto")!, UIImage(named: "IndexScrollPhoto")!],
+            pagePointColor: UIColor.whiteColor(),
+            stepTime: 3.0)
+        BodyView.addSubview(scrollView)
+        scrollView.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: tempScrollImage.height)
     }
     
     private func SetOperatorContent(operatorButton: UIView, imageName: String, text: String) {

@@ -122,7 +122,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     private func UpdateSuccess(data: NSDictionary?) {
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: data!["data"]!)
         YMVar.MyUserInfo = data!["data"]! as! [String : AnyObject]
-        
+        print(YMVar.MyUserInfo)
         let jobTitle = YMVar.MyUserInfo["job_title"] as? String
         if(nil == jobTitle) {
             YMVar.MyUserInfo["job_title"] = "医生"

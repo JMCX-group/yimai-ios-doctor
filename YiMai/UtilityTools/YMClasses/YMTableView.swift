@@ -151,6 +151,10 @@ public class YMTableView: NSObject {
 
     public func CellExpandStateToggle(cell: YMTableViewCell) {
         objc_sync_enter(self.ExpandAnimateLock)
+        if(nil == cell.SubCell) {
+//            OnAnimate = false
+            return
+        }
 
         if(OnAnimate){return}
         OnAnimate = true

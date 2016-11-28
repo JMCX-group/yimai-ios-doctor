@@ -11,6 +11,8 @@
 		2F2BDA551DD80A9000310385 /* PageWalletRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2BDA541DD80A9000310385 /* PageWalletRecordViewController.swift */; };
 		2F2BDA571DD80C3D00310385 /* PageWalletRecordBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2BDA561DD80C3D00310385 /* PageWalletRecordBodyView.swift */; };
 		2F2BDA591DD80C5900310385 /* PageWalletRecordActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2BDA581DD80C5900310385 /* PageWalletRecordActions.swift */; };
+		2F3793561DEC4509001343A8 /* JMCarouselCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3793541DEC4509001343A8 /* JMCarouselCollection.swift */; };
+		2F3793571DEC4509001343A8 /* JMCarouselScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3793551DEC4509001343A8 /* JMCarouselScrollView.swift */; };
 		2F9332F31DA688F900637982 /* PageAllCollegeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F9332F51DA688F900637982 /* PageAllCollegeList.storyboard */; };
 		2F9332F71DA6893600637982 /* PageAllCollegeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332F61DA6893600637982 /* PageAllCollegeListViewController.swift */; };
 		2F9332F91DA689B800637982 /* PageAllCollegeListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */; };
@@ -386,6 +388,8 @@
 		2F2BDA541DD80A9000310385 /* PageWalletRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageWalletRecordViewController.swift; sourceTree = "<group>"; };
 		2F2BDA561DD80C3D00310385 /* PageWalletRecordBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageWalletRecordBodyView.swift; sourceTree = "<group>"; };
 		2F2BDA581DD80C5900310385 /* PageWalletRecordActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageWalletRecordActions.swift; sourceTree = "<group>"; };
+		2F3793541DEC4509001343A8 /* JMCarouselCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMCarouselCollection.swift; sourceTree = "<group>"; };
+		2F3793551DEC4509001343A8 /* JMCarouselScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMCarouselScrollView.swift; sourceTree = "<group>"; };
 		2F9332F41DA688F900637982 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAllCollegeList.storyboard; sourceTree = "<group>"; };
 		2F9332F61DA6893600637982 /* PageAllCollegeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListViewController.swift; sourceTree = "<group>"; };
 		2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListBodyView.swift; sourceTree = "<group>"; };
@@ -797,6 +801,15 @@
 				2F2BDA561DD80C3D00310385 /* PageWalletRecordBodyView.swift */,
 			);
 			path = Body;
+			sourceTree = "<group>";
+		};
+		2F3793531DEC4509001343A8 /* JMCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				2F3793541DEC4509001343A8 /* JMCarouselCollection.swift */,
+				2F3793551DEC4509001343A8 /* JMCarouselScrollView.swift */,
+			);
+			path = JMCarousel;
 			sourceTree = "<group>";
 		};
 		2F9332EE1DA6889C00637982 /* AllCollegeList */ = {
@@ -1853,6 +1866,7 @@
 		96331B031CC8762600E53125 /* YMClasses */ = {
 			isa = PBXGroup;
 			children = (
+				2F3793531DEC4509001343A8 /* JMCarousel */,
 				FDC1C9311D79760A000A515B /* YMLabel */,
 				FD77AF1A1D68484F00B8C73E /* YMQRScan */,
 				730848261D0D9D38007E8940 /* YMTableView.swift */,
@@ -3347,6 +3361,8 @@
 				FD113D881D7D521200628295 /* YMPhotoSelector.swift in Sources */,
 				96D745B11CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift in Sources */,
 				9619EF7C1CC1FF2400F69CBC /* YMIndexStrings.swift in Sources */,
+				2F3793561DEC4509001343A8 /* JMCarouselCollection.swift in Sources */,
+				2F3793571DEC4509001343A8 /* JMCarouselScrollView.swift in Sources */,
 				FD5D64341DE44322004C5286 /* CameraView.swift in Sources */,
 				9612DB651CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift in Sources */,
 				9672FB3C1CD1C35500BC7E40 /* PageMessageListBodyView.swift in Sources */,
@@ -4292,7 +4308,7 @@
 				INFOPLIST_FILE = YiMai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor.a;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
@@ -4309,7 +4325,7 @@
 				INFOPLIST_FILE = YiMai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor.a;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";

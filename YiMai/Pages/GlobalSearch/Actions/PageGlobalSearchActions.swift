@@ -117,16 +117,32 @@ public class PageGlobalSearchActions: PageJumpActions {
         TargetView?.FilterResultByCity(name)
     }
     
+    public func ProvTouched(cell: YMTableViewCell) {
+        let data = cell.CellData as! [String: AnyObject]
+        let provData = data["prov"] as! [String: AnyObject]
+        
+        let provId = "\(provData["id"]!)"
+        
+        if("clear" == provId) {
+            TargetView?.CityList.hidden = true
+            TargetView?.HosList.hidden = true
+            TargetView?.DeptList.hidden = true
+            TargetView?.ResetFilter()
+            
+            searchBy = "key"
+        }
+    }
+
     public func HosTouched(cell: YMTableViewCell) {
         searchBy = "hos"
         
         let data = cell.CellData as! [String: AnyObject]
         let id = "\(data["id"]!)"
-        
+        let name = "\(data["name"]!)"
         TargetView?.CityList.hidden = true
         TargetView?.HosList.hidden = true
         TargetView?.DeptList.hidden = true
-        TargetView?.FilterResultByHos(id)
+        TargetView?.FilterResultByHos(id, hosName: name)
     }
     
     public func DeptTouched(cell: YMTableViewCell) {
@@ -134,11 +150,12 @@ public class PageGlobalSearchActions: PageJumpActions {
         
         let data = cell.CellData as! [String: AnyObject]
         let id = "\(data["id"]!)"
+        let deptName = "\(data["name"]!)"
         
         TargetView?.CityList.hidden = true
         TargetView?.HosList.hidden = true
         TargetView?.DeptList.hidden = true
-        TargetView?.FilterResultByDept(id)
+        TargetView?.FilterResultByDept(id, deptName: deptName)
     }
     
     public func CityFilterTouched(_: UIGestureRecognizer) {

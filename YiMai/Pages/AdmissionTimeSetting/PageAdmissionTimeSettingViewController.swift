@@ -21,14 +21,14 @@ public class PageAdmissionTimeSettingViewController: PageViewController {
                                                                      navController: self.NavController!,
                                                                      pageActions: SettingActions)
         
-//        FlexibleSettingBodyView = PageAdmissionFlexibleTimeSettingBodyView(parentView: self.SelfView!,
-//                                                                        navController: self.NavController!,
-//                                                                        pageActions: SettingActions)
+        FlexibleSettingBodyView = PageAdmissionFlexibleTimeSettingBodyView(parentView: self.SelfView!,
+                                                                        navController: self.NavController!,
+                                                                        pageActions: SettingActions)
         TopView = PageCommonTopView(parentView: self.SelfView!,
-                                    titleString: "接诊时间",
+                                    titleString: "",
                                     navController: self.NavController!)
         
-//        FixedSettingBodyView?.DrawTopTabButton(TopView!.TopViewPanel)
+        FixedSettingBodyView?.DrawTopTabButton(TopView!.TopViewPanel)
         FixedSettingBodyView?.DrawTopConfirmButton(TopView!.TopViewPanel)
         
         FlexibleSettingBodyView?.BodyView.hidden = true
@@ -38,5 +38,13 @@ public class PageAdmissionTimeSettingViewController: PageViewController {
     
     override func PagePreRefresh() {
         FixedSettingBodyView!.LoadData()
+        FlexibleSettingBodyView!.LoadData()
     }
 }
+
+
+
+
+
+
+

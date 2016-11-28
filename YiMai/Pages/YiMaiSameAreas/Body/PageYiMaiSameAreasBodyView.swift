@@ -332,7 +332,7 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
         let bigIcon = YMLayout.GetSuitableImageView("PageYiMaiSameAreasBigIcon")
         
         BodyView.addSubview(bigIcon)
-        bigIcon.anchorToEdge(Edge.Top, padding: 130.LayoutVal(), width: bigIcon.width, height: bigIcon.height)
+        bigIcon.anchorToEdge(Edge.Top, padding: 260.LayoutVal(), width: bigIcon.width, height: bigIcon.height)
         
         let titleLabel = UILabel()
         titleLabel.text = "尚无同领域的医生"

@@ -11,7 +11,7 @@ import Neon
 import ChameleonFramework
 
 public class PaperCardPreviewBodyView: PageBodyView {
-    static var AddressInfo = ""
+    static var AddressInfo = [String: String]()
     
     var PreviewActions: PaperCardPreviewActions!
     var ConfirmButton = YMButton()
@@ -106,7 +106,7 @@ public class PaperCardPreviewBodyView: PageBodyView {
         let addrLabel = UILabel()
         
         addrLabel.numberOfLines = 20
-        addrLabel.text = PaperCardPreviewBodyView.AddressInfo
+        addrLabel.text = PaperCardPreviewBodyView.AddressInfo["address"]
         addrLabel.font = YMFonts.YMDefaultFont(28.LayoutVal())
         addrLabel.textColor = YMColors.FontLightGray
         addrLabel.frame = CGRectMake(0, 0, 670.LayoutVal(), 0)
@@ -121,6 +121,26 @@ public class PaperCardPreviewBodyView: PageBodyView {
         addrPanel.addSubview(addrLabel)
         addrLabel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(),
                                width: addrLabel.width, height: addrLabel.height)
+        
+        let addrLine2Panel = UIView()
+        let addrLine2Label = UILabel()
+        
+        addrLine2Label.numberOfLines = 20
+        addrLine2Label.text = PaperCardPreviewBodyView.AddressInfo["addressee"]! + " 收    手机号 " + PaperCardPreviewBodyView.AddressInfo["receive_phone"]!
+        addrLine2Label.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        addrLine2Label.textColor = YMColors.FontLightGray
+        addrLine2Label.frame = CGRectMake(0, 0, 670.LayoutVal(), 0)
+        addrLine2Label.sizeToFit()
+        
+        addrLine2Panel.backgroundColor = YMColors.White
+        
+        BodyView.addSubview(addrLine2Panel)
+        addrLine2Panel.align(Align.UnderMatchingLeft, relativeTo: addrPanel,
+                        padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: addrLine2Label.height + 60.LayoutVal())
+        
+        addrLine2Panel.addSubview(addrLine2Label)
+        addrLine2Label.anchorToEdge(Edge.Left, padding: 40.LayoutVal(),
+                               width: addrLine2Label.width, height: addrLine2Label.height)
         
         ParentView?.addSubview(ConfirmButton)
         ConfirmButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 98.LayoutVal())
