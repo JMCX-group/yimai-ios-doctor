@@ -319,7 +319,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         friendsList.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 130.LayoutVal())
         
         var lastHeadImg: UIImageView? = nil
-        for _ in commonFriendList! {
+        for friend in commonFriendList! {
             let headImg = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
             friendsList.addSubview(headImg)
             if(nil == lastHeadImg) {
@@ -327,8 +327,8 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
             } else {
                 headImg.align(Align.ToTheRightCentered, relativeTo: lastHeadImg!, padding: 40.LayoutVal(), width: headImg.width, height: headImg.height)
             }
-            
-            let head = data["head_url"] as! String
+
+            let head = friend["head_url"] as! String
             YMLayout.LoadImageFromServer(headImg, url: head, fullUrl: nil, makeItRound: true)
             
             lastHeadImg = headImg

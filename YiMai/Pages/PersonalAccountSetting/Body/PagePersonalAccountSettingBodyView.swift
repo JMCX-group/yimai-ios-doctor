@@ -40,52 +40,64 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         
         Loading = YMPageLoading(parentView: BodyView)
         
-        let userData = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
+//        let userData = YMVar.MyUserInfo //YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
         
-        if(nil != userData) {
-            DrawData(userData!)
-        } else {
-            Loading?.Show()
-            YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_MY_ACCOUNT_SETTING,
-                                                handler: YMCoreMemDataOnceHandler(handler: LoadData))
-        }
+        Loading?.Show()
+        LoadData()
+//            YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_MY_ACCOUNT_SETTING,
+//                                                handler: YMCoreMemDataOnceHandler(handler: LoadData))
     }
     
     public func ReloadData() {
-        let userData = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
-        
-        if(nil != userData) {
-            DrawData(userData!)
-        }
+        let userData = YMVar.MyUserInfo //YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
+        DrawData(userData)
     }
     
     func AddEmail(email: String) {
-        EMail.text = email
         
-        if(!YMValueValidator.IsEmail(email)) {
+        if(YMValueValidator.IsEmptyString(email)) {
+            //Do Nothing
+            EmailUpdateFlag = false
+        } else if(!YMValueValidator.IsEmail(email)) {
             YMPageModalMessage.ShowErrorInfo("无效的邮箱", nav: self.NavController!)
+            EmailUpdateFlag = false
             return
+        } else {
+            EMail.text = email
+            EmailUpdateFlag = true
         }
         
-        EmailUpdateFlag = true
 //        AppendExtInfo(EMail, parent: bindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+        FullPageLoading.Show()
         SettingActions!.SettingApi.YMChangeUserInfo(["email": email])
     }
     
-    private func LoadData(data: AnyObject?, mainQueue: NSOperationQueue) -> Bool {
-        let userData = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
+    func LoadData() {
+        let userData = YMVar.MyUserInfo //YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
         
-        if(nil == userData) {
-            return false
-        } else {
-            mainQueue.addOperationWithBlock({ 
-                self.Loading?.Hide()
-                self.DrawData(userData!)
-            })
-
-            return true
-        }
+        self.Loading?.Hide()
+        self.DrawData(userData)
     }
+    
+//    private func LoadData(data: AnyObject?, mainQueue: NSOperationQueue) -> Bool {
+//        let userData = YMVar.MyUserInfo //YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
+//        
+//        self.Loading?.Hide()
+//        self.DrawData(userData)
+//
+//        return true
+
+//        if(nil == userData) {
+//            return false
+//        } else {
+//            mainQueue.addOperationWithBlock({ 
+//                self.Loading?.Hide()
+//                self.DrawData(userData!)
+//            })
+//
+//            return true
+//        }
+//    }
     
     private func DrawData(data: AnyObject) {
         let realData = data as! [String: AnyObject]

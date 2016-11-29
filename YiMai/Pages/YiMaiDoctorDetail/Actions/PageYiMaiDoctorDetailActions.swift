@@ -83,6 +83,7 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
         
         let userData = sender.UserObjectData as! [String: AnyObject]
         chat.ViewTitle = userData["name"] as! String
+        chat.UserData = userData
         
         chat.automaticallyAdjustsScrollViewInsets = false
         chat.prefersStatusBarHidden()

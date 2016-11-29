@@ -158,7 +158,7 @@ public class PageIndexBodyView {
         DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
     }
     
-    private func GetContactButton(image: UIImage, name: String, desc: String) -> YMTouchableView {
+    private func GetContactButton(image: UIImage, name: String, desc: String, isDoc: Bool = false) -> YMTouchableView {
         let buttonView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoChat:".Sel())
         buttonView.frame = CGRect(x: 0,y: 0,width: 190.LayoutVal(), height: 260.LayoutVal())
         buttonView.backgroundColor = YMColors.PanelBackgroundGray
@@ -185,7 +185,7 @@ public class PageIndexBodyView {
         contactName.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 174.LayoutVal(), width: buttonView.width, height: 26.LayoutVal())
         contactDesc.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 204.LayoutVal(), width: buttonView.width, height: 22.LayoutVal())
         
-        buttonView.UserObjectData = ["img": buttonImage, "name": name]
+        buttonView.UserObjectData = ["img": buttonImage, "name": name, "isDoc": isDoc]
         
         return buttonView
     }
@@ -214,8 +214,8 @@ public class PageIndexBodyView {
         let yiImage = UIImage(named: "IndexButtonYi")
         let maiImage = UIImage(named: "IndexButtonMai")
         
-        let yiButton = GetContactButton(yiImage!, name: "小医", desc: "智能客服")
-        let maiButton = GetContactButton(maiImage!, name: "小脉", desc: "智能客服")
+        let yiButton = GetContactButton(yiImage!, name: "小医", desc: "智能客服", isDoc: false)
+        let maiButton = GetContactButton(maiImage!, name: "小脉", desc: "智能客服", isDoc: false)
         
         YMLayout.ClearView(view: ContactPanel)
         ContactArray.removeAll()

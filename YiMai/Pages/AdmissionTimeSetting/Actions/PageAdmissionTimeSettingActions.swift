@@ -202,7 +202,6 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         self.NavController!.presentViewController(alertController, animated: true, completion: nil)    }
     
     public func SaveSetting(sender: UIGestureRecognizer) {
-        print(YMVar.MyUserInfo)
         targetController.LoadingView?.Show()
         let jsonData = try! NSJSONSerialization.dataWithJSONObject(targetController.FixedSettingBodyView!.SettingData, options: NSJSONWritingOptions.PrettyPrinted)
         let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String

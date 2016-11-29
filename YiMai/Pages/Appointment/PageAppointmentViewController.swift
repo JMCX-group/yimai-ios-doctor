@@ -20,6 +20,7 @@ public class PageAppointmentViewController: PageViewController {
     public static var SelectedTimeForUpload: [String]? = nil
     
     public static var DoctorIsPreSelected = false
+    public static var FromIM = false
     
     public static var NewAppointment = true
 
@@ -50,6 +51,7 @@ public class PageAppointmentViewController: PageViewController {
             BodyView?.BodyView.removeFromSuperview()
             TopView?.TopViewPanel.removeFromSuperview()
             
+            BodyView?.Actions = nil
             BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
             TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
             PageAppointmentViewController.NewAppointment = false

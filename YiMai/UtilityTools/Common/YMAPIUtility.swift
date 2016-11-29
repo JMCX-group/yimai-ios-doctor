@@ -98,6 +98,8 @@ public class YMAPIInterfaceURL {
     
     static let WalletInfo = YMAPIInterfaceURL.ApiBaseUrl + "/wallet/info"
     static let WalletRecord = YMAPIInterfaceURL.ApiBaseUrl + "/wallet/record"
+    
+    static let RequirePaperCard = YMAPIInterfaceURL.ApiBaseUrl + "/card/submit"
 }
 
 public class YMAPICommonVariable {
@@ -831,6 +833,10 @@ public class YMAPIUtility {
     
     public func YMGetAllNewAppointmentMsg() {
         YMAPIGet(YMAPIInterfaceURL.GetAllNewAppointmentMsg, param: nil, progressHandler: nil)
+    }
+    
+    public func YMRequirePaperCard() {
+        YMAPIGet(YMAPIInterfaceURL.RequirePaperCard, param: nil, progressHandler: nil)
     }
 }
 

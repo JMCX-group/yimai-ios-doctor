@@ -10,7 +10,7 @@ import UIKit
 
 public class PagePersonalViewController: PageViewController {
     private var PersonalTopView: PagePersonalTopView? = nil
-    private var PersonalBodyView: PagePersonalBodyView? = nil
+    var PersonalBodyView: PagePersonalBodyView? = nil
     private var Actions: PagePersonalActions? = nil
     private var UserInfo: AnyObject? = nil
     

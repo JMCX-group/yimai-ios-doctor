@@ -64,6 +64,8 @@ public class PageIndexActions: PageJumpActions {
         
         let userData = sender.UserObjectData as! [String: AnyObject]
         chat.ViewTitle = userData["name"] as! String
+        chat.UserData = userData
+        chat.ShowAppointment = userData["isDoc"] as! Bool
         
         chat.automaticallyAdjustsScrollViewInsets = false
         chat.prefersStatusBarHidden()

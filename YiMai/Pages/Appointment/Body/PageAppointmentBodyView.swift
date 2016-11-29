@@ -333,8 +333,12 @@ public class PageAppointmentBodyView: PageBodyView {
         SelectDoctorPanel?.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 60.LayoutVal())
         
+        var jumpSel = PageJumpActions.PageJumpToByViewSenderSel
+        if(PageAppointmentViewController.FromIM) {
+            jumpSel = PageJumpActions.DoNothingSel
+        }
         SelectDoctorButton = YMLayout.GetTouchableView(useObject: Actions!,
-            useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+            useMethod: jumpSel,
             userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME)
         
         SelectDoctorPanel?.addSubview(SelectDoctorButton!)

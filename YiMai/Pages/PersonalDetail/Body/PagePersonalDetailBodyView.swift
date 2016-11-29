@@ -184,7 +184,7 @@ public class PagePersonalDetailBodyView: NSObject {
             }
         }
 
-        return lastLine!
+        return lastLine
     }
     
     private func DrawDoctorIntroduction(info: String?, alignView: UIView) {

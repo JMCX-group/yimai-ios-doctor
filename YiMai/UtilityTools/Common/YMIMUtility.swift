@@ -14,7 +14,7 @@ class YMIMUtility: NSObject {
         var idList = [String]()
         
         
-        var conversationList = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
+        let conversationList = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
 
         var i: Int = 0
         for conversation in conversationList {

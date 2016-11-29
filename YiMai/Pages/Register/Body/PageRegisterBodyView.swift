@@ -38,7 +38,7 @@ public class PageRegisterBodyView: NSObject {
     private let VerifyButtonFrame = CGRect(x: 550.LayoutVal(), y: 248.LayoutVal(), width: 160.LayoutVal(), height: 50.LayoutVal())
     private let NextStepButtonFrame = CGRect(x: 40.LayoutVal(), y: 463.LayoutVal(), width: 670.LayoutVal(), height: 90.LayoutVal())
     
-    private let AgreeButtonFrame = CGRect(x: 84.LayoutVal(), y: 585.LayoutVal(), width: 330.LayoutVal(), height: 24.LayoutVal())
+    private let AgreeButtonFrame = CGRect(x: 84.LayoutVal(), y: 585.LayoutVal(), width: 380.LayoutVal(), height: 24.LayoutVal())
     
     public var AgreeChecked = true
     

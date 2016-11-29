@@ -18,7 +18,15 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
         SettingApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_USER + "-fromAccountSetting", success: SettingSuccess, error: SettingError)
     }
     
-    func SettingSuccess(_: NSDictionary?) {}
+    func SettingSuccess(data: NSDictionary?) {
+        if(nil != data) {
+            YMVar.MyUserInfo = data!["data"] as! [String: AnyObject]
+        }
+        
+        let targetView = Target as! PagePersonalAccountSettingBodyView
+        targetView.FullPageLoading.Hide()
+        targetView.LoadData()
+    }
     func SettingError(_: NSError) {}
     
     func GoToAuthPage(gr: UIGestureRecognizer) {
