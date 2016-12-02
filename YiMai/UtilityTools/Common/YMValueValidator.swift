@@ -9,16 +9,20 @@
 import Foundation
 
 public class YMValueValidator {
-    private static let MaxCellPhoneNum: Int64 = 20000000000
-    private static let MinCellPhoneNum: Int64 = 10000000000
+    private static let MaxCellPhoneNum: Int64 = 19000000000
+    private static let MinCellPhoneNum: Int64 = 13000000000
 
     public static func IsCellPhoneNum(str: String?) -> Bool {
         if (YMValueValidator.IsEmptyString(str)) {
             return false
         }
-        
+
         let phoneNum = Int64(str!)
-        return (phoneNum < MaxCellPhoneNum && phoneNum > MinCellPhoneNum)
+        if(phoneNum > 13000000000 && phoneNum < 14000000000) { return true }
+        if(phoneNum > 15000000000 && phoneNum < 16000000000) { return true }
+        if(phoneNum > 17000000000 && phoneNum < 19000000000) { return true }
+        
+        return false
     }
     
     public static func IsEmptyString(str: String?) -> Bool {

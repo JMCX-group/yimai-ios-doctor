@@ -42,11 +42,9 @@ public class PageYiMaiViewController: PageViewController {
     override func PagePreRefresh() {
         if (!RecentContactList!.BodyView.hidden) {
             ShowRecentContactPage()
-        } else if (!YiMaiR1Body!.BodyView.hidden) {
-            YiMaiR1Body?.Reload()
-        } else {
-            
         }
+        
+        YiMaiR1Body?.Reload()
     }
     
     public func ShowYiMaiR1Page(){

@@ -9,7 +9,7 @@
 import Foundation
 import Neon
 
-public class PageRegisterBodyView: NSObject {
+public class PageRegisterBodyView: NSObject, UITextFieldDelegate {
     private var ParentView : UIView? = nil
     private var NavController : UINavigationController? = nil
     private var Actions : PageRegisterActions? = nil
@@ -90,6 +90,7 @@ public class PageRegisterBodyView: NSObject {
         
         CellPhoneInput = YMLayout.GetCellPhoneField(inputParam)
         CellPhoneInput?.placeholder = YMRegisterStrings.CS_USERNAME_PLACEHOLDER
+        CellPhoneInput?.EditEndCallback = VerifyPhoneWhenBlur
         
         PasswordInput = YMLayout.GetPasswordField(inputParam)
         PasswordInput?.placeholder = YMRegisterStrings.CS_PASSWORD_PLACEHOLDER
@@ -245,6 +246,17 @@ public class PageRegisterBodyView: NSObject {
             "password": password!,
             "verify_code": verifyCode!
         ]
+    }
+    
+    func VerifyPhoneWhenBlur(phoneInput: YMTextField) {
+        let phone = phoneInput.text
+        if(!YMValueValidator.IsCellPhoneNum(phone)) {
+            YMPageModalMessage.ShowErrorInfo("请输入有效的手机号。", nav: self.NavController!, callback: FocusOnCellPhoneInput)
+        }
+    }
+    
+    func FocusOnCellPhoneInput(act: UIAlertAction) {
+        CellPhoneInput?.becomeFirstResponder()
     }
 }
 
