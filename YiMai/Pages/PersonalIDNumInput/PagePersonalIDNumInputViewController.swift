@@ -17,4 +17,10 @@ class PagePersonalIDNumInputViewController: PageViewController {
         BodyView = PagePersonalIDNumInputBodyView(parentView: self.SelfView!, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "身份证号码", navController: self.NavController!)
     }
+    
+    override func PagePreRefresh() {
+        super.PagePreRefresh()
+        
+        BodyView?.IDInput?.text = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "ID_number")
+    }
 }

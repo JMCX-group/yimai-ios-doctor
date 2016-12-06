@@ -12,7 +12,7 @@ import MWIDCardValidate
 
 public class PagePersonalIDNumInputBodyView: PageBodyView {
     private var InputActions: PagePersonalIDNumInputActions? = nil
-    private var IDInput: YMTextField? = nil
+    var IDInput: YMTextField? = nil
     private let ErrorInfo = UILabel()
     private let SubmitButton = YMButton()
     

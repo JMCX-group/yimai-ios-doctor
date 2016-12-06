@@ -134,9 +134,7 @@ public class RequirePaperCardBodyView: PageBodyView {
         PreviewButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 98.LayoutVal())
         
         PreviewButton.addTarget(RequireActions, action: "GoPreview:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        print(YMVar.MyUserInfo)
-        
+
         let required = "\(YMVar.MyUserInfo["application_card"]!)"
         if("1" == required) {
             PreviewButton.setTitle("已申请", forState: UIControlState.Normal)

@@ -40,9 +40,7 @@ public class PageIndexViewController: PageViewController {
         if(nil == jobTitle) {
             YMVar.MyUserInfo["job_title"] = "医生"
         }
-        
-        print(YMVar.MyUserInfo)
-        
+
         YMBackgroundRefresh.Start()
     }
 

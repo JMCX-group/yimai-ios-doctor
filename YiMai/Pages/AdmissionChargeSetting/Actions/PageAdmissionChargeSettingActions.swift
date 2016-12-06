@@ -36,9 +36,6 @@ public class PageAdmissionChargeSettingActions: PageJumpActions {
     
     public func UpadteSetting() {
         TargetView?.UpdateVar()
-        print("\(YMVar.MyUserInfo["fee_switch"])")
-        print("\(YMVar.MyUserInfo["fee"])")
-        print("\(YMVar.MyUserInfo["fee_face_to_face"])")
         SettingApi.YMChangeUserInfo(
             [
                 "fee_switch": "\(YMVar.MyUserInfo["fee_switch"]!)",

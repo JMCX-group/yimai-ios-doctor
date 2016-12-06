@@ -72,6 +72,10 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         LoadingTextLine2 = buildTextLine("为了更好的与医生好友互动")
         LoadingTextLine3 = buildTextLine("请稍后去完善您的个人资料")
         
+        LoadingTextLine1.hidden = true
+        LoadingTextLine2.hidden = true
+        LoadingTextLine3.hidden = true
+        
         BodyView.addSubview(LoadingTextLine1)
         BodyView.addSubview(LoadingTextLine2)
         BodyView.addSubview(LoadingTextLine3)
@@ -86,6 +90,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         
         LoadingAniPanel.addSubview(loadBkg)
         LoadingAniPanel.addSubview(LoadingProgressBar)
+        
+        LoadingAniPanel.hidden = true
 
         BodyView.addSubview(LoadingAniPanel)
         LoadingAniPanel.align(Align.UnderCentered, relativeTo: LoadingTextLine3, padding: 70.LayoutVal(), width: 600.LayoutVal(), height: 16.LayoutVal())
@@ -95,14 +101,27 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         LoadingProgressBar.layer.cornerRadius = LoadingProgressBar.height / 2
         LoadingProgressBar.layer.masksToBounds = true
 
-        YMAddressBookTools.AllContacts.removeAll()
-        let a = YMAddressBookTools()
-        a.ReadAddressBook()
+//        YMAddressBookTools.AllContacts.removeAll()
+//        let a = YMAddressBookTools()
+//        a.ReadAddressBook()
         
         DirectAddButton.hidden = true
-        UIView.animateWithDuration(2.3, animations: { () -> Void in
+        let prevContact  = YMLocalData.GetData("YMLoaclContactAddressBook") as? [[String: String]]
+        if(nil == prevContact) {
+            LoadingTextLine1.hidden = false
+            LoadingTextLine2.hidden = false
+            LoadingTextLine3.hidden = false
+            LoadingAniPanel.hidden = false
+            
+            UIView.animateWithDuration(2.3, animations: { () -> Void in
                 self.LoadingProgressBar.frame = CGRect(x: 0,y: 0,width: 600.LayoutVal(), height: self.LoadingProgressBar.height)
-            }, completion: self.ClearLoadingAndShowResult)
+                }, completion: self.ClearLoadingAndShowResult)
+        } else {
+            YMDelay(0.1, closure: { 
+                self.ClearLoadingAndShowResult(true)
+
+            })
+        }
     }
     
     private func ClearLoadingAndShowResult(ani: Bool) {
@@ -116,7 +135,6 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
         
         controller.LoadingView?.Show()
-        print(YMAddressBookTools.AllContacts)
         action.UploadAddressBook()
     }
     

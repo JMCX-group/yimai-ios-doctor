@@ -36,14 +36,12 @@ public class PageMyAdmissionsListViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-//        print(self)
         Loading?.Show()
         BodyView?.Clear()
         Actions?.GetAdmissionInfo()
     }
     
     public func HideLoading() {
-//        print(self)
         Loading?.Hide()
     }
 }

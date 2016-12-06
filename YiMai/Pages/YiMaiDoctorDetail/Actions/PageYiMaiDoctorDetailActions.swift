@@ -34,7 +34,7 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     }
     
     public func GetInfoError(error: NSError) {
-        print(error)
+        YMAPIUtility.PrintErrorInfo(error)
     }
     
     public func AddFriendSuccess(_: NSDictionary?) {

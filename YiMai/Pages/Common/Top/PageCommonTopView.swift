@@ -9,21 +9,25 @@
 import Foundation
 import Neon
 
+typealias YMBeforeTopGoBack = (() -> Bool)
+
 public class PageCommonTopView : NSObject {
     public let TopViewPanel : UIView = UIView()
     private var TopBackground = UIImageView()
     private var TopTitle = UILabel()
     private var TopGoBackBtn = UIImageView()
     
+    var BeforeGoBack: YMBeforeTopGoBack?
+    
     var ParentView:UIView? = nil
     private var TitleString = ""
     private var CommonActions : YMCommonActions? = nil
 
-    convenience init(parentView:UIView, titleString:String, navController:UINavigationController? = nil) {
+    convenience init(parentView:UIView, titleString:String, navController:UINavigationController? = nil, before: YMBeforeTopGoBack? = nil) {
         self.init()
         self.ParentView = parentView
         self.TitleString = titleString
-        
+        BeforeGoBack = before
         self.ViewLayout(navController)
     }
     
@@ -65,6 +69,7 @@ public class PageCommonTopView : NSObject {
         TopViewPanel.addSubview(backgroundPanel)
         backgroundPanel.anchorInCorner(Corner.TopLeft, xPad: 12.LayoutVal(), yPad: 45.LayoutVal(), width: 60.LayoutVal(), height: 60.LayoutVal())
         backgroundPanel.addSubview(TopGoBackBtn)
+        backgroundPanel.UserObjectData = self
         TopGoBackBtn.anchorToEdge(Edge.Bottom, padding: 4.LayoutVal(), width: TopGoBackBtn.width, height: TopGoBackBtn.height)
     }
 }

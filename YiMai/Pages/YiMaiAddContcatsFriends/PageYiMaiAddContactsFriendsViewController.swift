@@ -19,6 +19,8 @@ public class PageYiMaiAddContatsFriendsViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
+        LoadingView?.Hide()
+
         if(self.isMovingToParentViewController()) {
             DrawViews()
         }

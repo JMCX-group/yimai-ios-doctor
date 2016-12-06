@@ -59,8 +59,7 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
     }
     
     public func UpdateError(error: NSError) {
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
+        YMAPIUtility.PrintErrorInfo(error)
         YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
         TargetView?.Loading?.Hide()
     }

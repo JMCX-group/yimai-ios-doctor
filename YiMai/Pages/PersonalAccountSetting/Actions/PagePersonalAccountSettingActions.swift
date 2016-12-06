@@ -46,7 +46,9 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
         YMBackgroundRefresh.Stop()
 //        YMAPICommonVariable.ClearCallbackMap()
         PagePersonalIntroEditViewController.IntroText = ""
+        PagePersonalNameEditViewController.UserName = ""
         PageRegisterPersonalInfoViewController.NeedInit = true
+        PagePersonalIDNumInputBodyView.IDNum = ""
         self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
     }
     

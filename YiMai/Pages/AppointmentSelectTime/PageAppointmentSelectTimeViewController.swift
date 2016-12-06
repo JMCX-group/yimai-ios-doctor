@@ -26,7 +26,24 @@ public class PageAppointmentSelectTimeViewController: PageViewController {
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "期望就诊时间", navController: self.NavController!)
     }
     
+    override func PagePreRefresh() {
+        print(PageAppointmentViewController.SelectedDoctor)
+    }
+    
     public func GetSelectedTime() {
         
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

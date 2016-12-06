@@ -49,10 +49,7 @@ public class PageYiMaiSameAreasActions: PageJumpActions, UIScrollViewDelegate{
     }
     
     private func GetListError(error: NSError) {
-        if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
-            let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-            print(errInfo)
-        }
+        YMAPIUtility.PrintErrorInfo(error)
         TargetView?.Loading?.Hide()
         ThisCacheKey = nil
     }

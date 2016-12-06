@@ -191,9 +191,7 @@ public class PageAdmissionChargeSettingBodyView: PageBodyView {
         }
         
         YMVar.MyUserInfo["fee"] = CommonCharge?.text!
-        YMVar.MyUserInfo["fee_face_to_face"] = Face2FaceCharge?.text!
-        
-        print(YMVar.MyUserInfo)
+        YMVar.MyUserInfo["fee_face_to_face"] = Face2FaceCharge?.text!        
     }
     
     

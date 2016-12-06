@@ -37,7 +37,6 @@ class PageDoctorAuthActions: PageJumpActions {
     }
     
     func UploadSuccess(data: NSDictionary?) {
-//        print(data)
         TargetView.FullPageLoading.Hide()
         self.NavController!.popViewControllerAnimated(true)
     }

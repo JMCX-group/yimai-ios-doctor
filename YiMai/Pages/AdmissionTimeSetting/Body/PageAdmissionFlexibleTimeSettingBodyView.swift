@@ -354,7 +354,6 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         
         let jsonData = try! NSJSONSerialization.dataWithJSONObject(ret, options: NSJSONWritingOptions.PrettyPrinted)
         let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
-        print(strJson)
         return strJson
     }
     

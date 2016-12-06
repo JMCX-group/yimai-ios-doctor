@@ -20,8 +20,8 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     private var InviteAllOtherApi: YMAPIUtility? = nil
 
     private func InviteOtherError(error: NSError){
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
+        YMAPIUtility.PrintErrorInfo(error)
+
 //        TargetController!.LoadingView?.Hide()
     }
     
@@ -32,14 +32,12 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
             print("no result!!!")
         }
         
-//        TargetController?.LoadingView?.Hide()
+        TargetController?.LoadingView?.Hide()
     }
     
     private func AddFriendError(error: NSError){
-//        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-//        print(errInfo)
         YMAPIUtility.PrintErrorInfo(error)
-//        TargetController?.LoadingView?.Hide()
+        TargetController?.LoadingView?.Hide()
     }
     
     private func AddFriendSuccessed(data: NSDictionary?) {
@@ -48,13 +46,12 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         } else {
             print("no result!!!")
         }
-//        TargetController?.LoadingView?.Hide()
+        TargetController?.LoadingView?.Hide()
     }
     
     private func AddAllFriendsError(error: NSError){
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
-//        TargetController?.LoadingView?.Hide()
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetController?.LoadingView?.Hide()
     }
     
     private func AddAllFriendsSuccessed(data: NSDictionary?) {
@@ -67,8 +64,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     }
     
     private func InviteAllOthersError(error: NSError){
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
+        YMAPIUtility.PrintErrorInfo(error)
         TargetController?.LoadingView?.Hide()
     }
     
@@ -105,8 +101,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     }
     
     private func GetContactsApiError(error: NSError){
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
+        YMAPIUtility.PrintErrorInfo(error)
         TargetController!.LoadingView?.Hide()
     }
     
@@ -125,7 +120,16 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     }
 
     public func UploadAddressBook() {
-        GetContactsApi?.YMUploadAddressBook(YMAddressBookTools.AllContacts)
+//        GetContactsApi?.YMUploadAddressBook(YMAddressBookTools.AllContacts)
+        TargetController!.LoadingView?.Show()
+        if(0 == YMBackgroundRefresh.ContactNew.count) {
+            YMDelay(0.1, closure: { 
+                self.UploadAddressBook()
+            })
+        } else {
+            TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
+            TargetController!.LoadingView?.Hide()
+        }
     }
     
     public func ShowFriendInfo(sender: UIGestureRecognizer) {

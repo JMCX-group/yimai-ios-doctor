@@ -41,7 +41,6 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
     }
     
     public func UploadSuccess(data: NSDictionary?) {
-        print("image \(PhotoIndex) uploaded")
         PhotoIndex += 1
         if(PhotoIndex < TargetController!.BodyView!.PhotoArray.count) {
             ImageForUpload = TargetController!.BodyView!.PhotoArray[PhotoIndex]
@@ -144,8 +143,7 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
     }
     
     public func ShowPhotos(gr: UIGestureRecognizer) {
-        let cellOptView = gr.view as! YMTouchableView
-        print(cellOptView.UserObjectData)
+        let _ = gr.view as! YMTouchableView
     }
     
 }

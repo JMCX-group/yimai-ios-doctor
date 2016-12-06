@@ -36,6 +36,8 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
     private var CityTable: YMTableView? = nil
     private var HosTable: YMTableView? = nil
     
+    var BlankContentPanel = UIView()
+    
     override func ViewLayout() {
         super.ViewLayout()
         
@@ -218,6 +220,8 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
         let userInfo = YMVar.MyUserInfo
         let department = userInfo["department"] as? [String: AnyObject]
         
+        BlankContentPanel.removeFromSuperview()
+
         if(nil == department) {
             DrawBlankContent()
         } else {
@@ -330,8 +334,12 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
     
     public func DrawBlankContent(){
         let bigIcon = YMLayout.GetSuitableImageView("PageYiMaiSameAreasBigIcon")
+
+        YMLayout.ClearView(view: BlankContentPanel)
+        BodyView.addSubview(BlankContentPanel)
+        BlankContentPanel.fillSuperview()
         
-        BodyView.addSubview(bigIcon)
+        BlankContentPanel.addSubview(bigIcon)
         bigIcon.anchorToEdge(Edge.Top, padding: 260.LayoutVal(), width: bigIcon.width, height: bigIcon.height)
         
         let titleLabel = UILabel()

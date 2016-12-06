@@ -102,7 +102,7 @@ public class PageAppLoadingActions: PageJumpActions {
     }
     
     private func LoginError(error: NSError) {
-        print(error)
+        YMAPIUtility.PrintErrorInfo(error)
         DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
     }
     

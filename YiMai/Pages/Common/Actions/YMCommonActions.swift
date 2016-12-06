@@ -32,6 +32,16 @@ public class YMCommonActions : PageJumpActions {
     ]
 
     public func GoBack(sender : UITapGestureRecognizer){
+        let view = sender.view as! YMTouchableView
+        let topView = view.UserObjectData as? PageCommonTopView
+        if(nil != topView) {
+            if(nil != topView!.BeforeGoBack){
+                if(!topView!.BeforeGoBack!()) {
+                    return
+                }
+            }
+        }
+        
         NavController?.popViewControllerAnimated(true)
     }
     

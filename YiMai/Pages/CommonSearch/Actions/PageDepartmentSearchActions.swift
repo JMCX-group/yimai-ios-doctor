@@ -38,9 +38,7 @@ public class PageDepartmentSearchActions: PageJumpActions {
         self.NavController?.popViewControllerAnimated(true)
     }
 
-    public func StartSearch(text: YMTextField) {
-        print(targetView?.DepartmentData)
-        
+    public func StartSearch(text: YMTextField) {        
         let searchKey = text.text!
         if(YMValueValidator.IsEmptyString(searchKey)) {
             targetView?.DrawDepartments()

@@ -33,6 +33,8 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
     public var CurrentCity: [String: AnyObject]? = nil
     public var CurrentHospital: [String: AnyObject]? = nil
     
+    var BlankContentPanel = UIView()
+    
     override func ViewLayout() {
         super.ViewLayout()
         
@@ -214,7 +216,7 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
     public func LoadData() {
         let userInfo = YMVar.MyUserInfo
         let school = userInfo["college"] as? [String: AnyObject]
-        
+        BlankContentPanel.removeFromSuperview()
         if(nil == school) {
             DrawBlankContent()
         } else {
@@ -317,8 +319,11 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
     
     private func DrawBlankContent(){
         let bigIcon = YMLayout.GetSuitableImageView("PageYiMaiSameSchoolBigIcon")
+        YMLayout.ClearView(view: BlankContentPanel)
+        BodyView.addSubview(BlankContentPanel)
+        BlankContentPanel.fillSuperview()
         
-        BodyView.addSubview(bigIcon)
+        BlankContentPanel.addSubview(bigIcon)
         bigIcon.anchorToEdge(Edge.Top, padding: 260.LayoutVal(), width: bigIcon.width, height: bigIcon.height)
         
         let titleLabel = UILabel()
@@ -327,7 +332,7 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
         titleLabel.font = YMFonts.YMDefaultFont(30.LayoutVal())
         titleLabel.sizeToFit()
         
-        BodyView.addSubview(titleLabel)
+        BlankContentPanel.addSubview(titleLabel)
         titleLabel.align(Align.UnderCentered, relativeTo: bigIcon, padding: 50.LayoutVal(), width: titleLabel.width, height: titleLabel.height)
         
         let inviteButton = YMLayout.GetTouchableView(useObject: SameSchoolActions!,
@@ -346,7 +351,7 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
         
         inviteButton.addSubview(buttonTitle)
         
-        BodyView.addSubview(inviteButton)
+        BlankContentPanel.addSubview(inviteButton)
         inviteButton.align(Align.UnderCentered, relativeTo: titleLabel, padding: 30.LayoutVal(), width: inviteButton.width, height: inviteButton.height)
         buttonTitle.fillSuperview()
         buttonTitle.layer.cornerRadius = buttonTitle.height / 2

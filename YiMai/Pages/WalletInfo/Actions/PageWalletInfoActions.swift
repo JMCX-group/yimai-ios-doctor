@@ -27,14 +27,12 @@ class PageWalletInfoActions: PageJumpActions {
             return
         }
 
-        print("success!")
         let realData = data!["data"] as! [String: AnyObject]
 
         TargetView.LoadData(realData)
     }
     
     func GetInfoError(error: NSError) {
-        print("error!")
         TargetView.FullPageLoading.Hide()
         YMAPIUtility.PrintErrorInfo(error)
     }

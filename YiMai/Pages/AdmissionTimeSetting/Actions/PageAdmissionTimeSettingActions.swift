@@ -38,8 +38,8 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
     
     public func SaveError(error: NSError) {
         targetController.LoadingView?.Hide()
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
+        
+        YMAPIUtility.PrintErrorInfo(error)
     }
     
     public func TabTouched(sender: UISegmentedControl) {
@@ -54,7 +54,7 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
     
     public func AMorPMCellTouched(sender: YMButton) {
         let userData = sender.UserObjectData as! [String: AnyObject]
-        let weekday = userData["weekDay"] as! Int
+//        let weekday = userData["weekDay"] as! Int
 //        if(0 == weekday || 6 == weekday) {
 //            return
 //        }

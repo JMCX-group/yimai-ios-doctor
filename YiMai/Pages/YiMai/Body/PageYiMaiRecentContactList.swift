@@ -34,8 +34,8 @@ class PageYiMaiRecentContactList: PageBodyView {
 //            "name": 呵呵哒]
         let name = "\(docInfo["name"]!)"
         let jobTitle = "\(docInfo["job_title"]!)"
-        let dept = docInfo["department"] as! [String: AnyObject]
-        let deptStr = dept["name"] as? String
+//        let dept = docInfo["department"] as! [String: AnyObject]
+//        let deptStr = dept["name"] as? String
         let time = "\(docInfo["time"]!)"
         let lastMsg = "\(docInfo["lastMsg"]!)"
         
@@ -45,7 +45,7 @@ class PageYiMaiRecentContactList: PageBodyView {
         let nameLabel = YMLayout.GetNomalLabel(name, textColor: YMColors.FontBlue, fontSize: 30.LayoutVal())
         let divder = UIView()
         let jobTitleLabel = YMLayout.GetNomalLabel(jobTitle, textColor: YMColors.FontGray, fontSize: 22.LayoutVal())
-        let deptLabel = YMLayout.GetNomalLabel(deptStr, textColor: YMColors.FontBlue, fontSize: 22.LayoutVal())
+//        let deptLabel = YMLayout.GetNomalLabel(deptStr, textColor: YMColors.FontBlue, fontSize: 22.LayoutVal())
         let userHead = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
         let msgLabel = YMLayout.GetNomalLabel(lastMsg, textColor: YMColors.FontLightGray, fontSize: 26.LayoutVal())
         let timeLabel = YMLayout.GetNomalLabel(YMIMUtility.TimestampToString(timestamp), textColor: YMColors.FontLighterGray, fontSize: 22.LayoutVal())
@@ -65,7 +65,7 @@ class PageYiMaiRecentContactList: PageBodyView {
         cell.addSubview(nameLabel)
         cell.addSubview(divder)
         cell.addSubview(jobTitleLabel)
-        cell.addSubview(deptLabel)
+//        cell.addSubview(deptLabel)
         cell.addSubview(userHead)
         cell.addSubview(msgLabel)
         cell.addSubview(timeLabel)
@@ -76,8 +76,8 @@ class PageYiMaiRecentContactList: PageBodyView {
         divder.backgroundColor = YMColors.FontBlue
         divder.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 14.LayoutVal(), width: YMSizes.OnPx, height: 20.LayoutVal())
         jobTitleLabel.align(Align.ToTheRightCentered, relativeTo: divder, padding: 14.LayoutVal(), width: jobTitleLabel.width, height: jobTitleLabel.height)
-        deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 20.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
-        msgLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 10.LayoutVal(), width: msgLabel.width, height: msgLabel.height)
+//        deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 20.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
+        msgLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 10.LayoutVal(), width: msgLabel.width, height: msgLabel.height)
         timeLabel.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: timeLabel.width, height: timeLabel.height)
         bottomBorder.backgroundColor = YMColors.DividerLineGray
         bottomBorder.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)

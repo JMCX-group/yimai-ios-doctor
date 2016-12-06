@@ -58,9 +58,7 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
     
     public func QueryError(error: NSError) {
         if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
-            let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-            
-            print(errInfo)
+            YMAPIUtility.PrintErrorInfo(error)
             let viewController = Target as! PageYiMaiManualAddFriendViewController
             viewController.BodyView?.ShowAlertPage()
         } else {

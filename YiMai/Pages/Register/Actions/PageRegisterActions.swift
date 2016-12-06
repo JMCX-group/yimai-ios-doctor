@@ -47,7 +47,6 @@ public class PageRegisterActions: PageJumpActions {
     
     private func DoRegisterError(error: NSError){
         let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        print(errInfo)
         YMPageModalMessage.ShowErrorInfo(errInfo["message"].stringValue, nav: self.NavController!, callback: ClearAfterAlert)
     }
     

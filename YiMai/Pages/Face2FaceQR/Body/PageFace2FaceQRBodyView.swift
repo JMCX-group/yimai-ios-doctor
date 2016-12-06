@@ -155,7 +155,6 @@ public class PageFace2FaceQRBodyView: PageBodyView {
         tipTitleLine.font = YMFonts.YMDefaultFont(34.LayoutVal())
         
         let fee = "\(YMVar.MyUserInfo["fee_face_to_face"]!)"
-print(YMVar.MyUserInfo)
         tipFirstLine.text = "医脉平台为您提供预约咨询及相关支付服务"
   
         tipFirstLine.textColor = YMColors.FontGray

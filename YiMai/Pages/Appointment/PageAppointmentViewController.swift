@@ -23,12 +23,33 @@ public class PageAppointmentViewController: PageViewController {
     public static var FromIM = false
     
     public static var NewAppointment = true
+    static var SavedAppointment = false
+    
+    func BeforeGoBack() -> Bool {
+        if(0 == BodyView!.PhotoArray.count
+        && nil == PageAppointmentViewController.PatientBasicInfo
+        && "" == PageAppointmentViewController.PatientCondition
+        && "" == PageAppointmentViewController.SelectedTime
+        && nil == PageAppointmentViewController.SelectedDoctor
+            ) {
+            return true
+        }
+        YMPageModalMessage.ShowConfirmInfo("是否保存记录", nav: self.NavController!, ok: { (_) in
+            self.NavController?.popViewControllerAnimated(true)
+            PageAppointmentViewController.SavedAppointment = true
+            }, cancel: { (_) in
+                PageAppointmentViewController.SavedAppointment = false
+                self.NavController?.popViewControllerAnimated(true)
+        })
+        
+        return false
+    }
 
     override func PageLayout() {
         super.PageLayout()
         Actions = PageAppointmentActions(navController: self.NavController, target: self)
         BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
-        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
+        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!, before: BeforeGoBack)
         
         Loading = YMPageLoadingView(parentView: self.view)
     }
@@ -53,7 +74,7 @@ public class PageAppointmentViewController: PageViewController {
             
             BodyView?.Actions = nil
             BodyView = PageAppointmentBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
-            TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
+            TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!, before: BeforeGoBack)
             PageAppointmentViewController.NewAppointment = false
             BodyView?.Reload()
         } else {

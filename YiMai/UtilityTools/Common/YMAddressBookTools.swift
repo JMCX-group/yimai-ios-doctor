@@ -59,6 +59,7 @@ public class YMAddressBookTools: NSObject {
     
     public func ReadAddressBook() {
         APAB.loadContacts { (apc, err) in
+            YMAddressBookTools.AllContacts.removeAll()
             if(nil == apc) {
                 YMAddressBookTools.GetContactsStatus = true
                 return
@@ -78,3 +79,31 @@ public class YMAddressBookTools: NSObject {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

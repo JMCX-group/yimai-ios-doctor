@@ -38,7 +38,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     }
 
     public func UploadSuccess(data: NSDictionary?) {
-        print("upload success")
+        YMVar.MyUserInfo = data!["data"] as! [String: AnyObject]
         TargetController?.BodyView?.UserHeadImg.image = Toucan(image: ImageForUpload!).maskWithEllipse().image
         TargetController?.BodyView?.FullPageLoading.Hide()
     }
@@ -122,7 +122,6 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     private func UpdateSuccess(data: NSDictionary?) {
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_INFO, data: data!["data"]!)
         YMVar.MyUserInfo = data!["data"]! as! [String : AnyObject]
-        print(YMVar.MyUserInfo)
         let jobTitle = YMVar.MyUserInfo["job_title"] as? String
         if(nil == jobTitle) {
             YMVar.MyUserInfo["job_title"] = "医生"
@@ -139,7 +138,6 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     var CamSelect: CameraViewController!
     public func HeadImagesSelected(_: [PHAsset]?) {
         CamSelect = CameraViewController(croppingEnabled: true) {(img, pha) in
-            print("abc")
             if(nil != img) {
                 self.TargetController?.BodyView?.FullPageLoading.Show()
                 self.ImageForUpload = img!
@@ -148,8 +146,6 @@ public class PagePersonalDetailEditActions: PageJumpActions {
             }
             
             self.CamSelect!.navigationController?.popViewControllerAnimated(true)
-            print("def")
-
         }
         
         self.NavController!.pushViewController(CamSelect, animated: true)

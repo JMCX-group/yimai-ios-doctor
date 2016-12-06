@@ -26,7 +26,6 @@ public class PageAddFriendInfoCardActions: PageJumpActions {
     }
     
     func GetDocInfoSuccess(data: NSDictionary?) {
-        print(data)
         if(nil == data) {
             YMPageModalMessage.ShowNormalInfo("网络通讯故障，请稍后再试。", nav: self.NavController!, callback: GoBack)
             return

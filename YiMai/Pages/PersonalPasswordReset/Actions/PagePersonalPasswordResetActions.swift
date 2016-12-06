@@ -30,13 +30,9 @@ public class PagePersonalPasswordResetActions: PageJumpActions {
     }
     
     private func ChangePwdError(error: NSError) {
-        if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
-            let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-            print(errInfo)
-        } else {
-            YMPageModalMessage.ShowErrorInfo("网络故障，请稍后再试！", nav: self.NavController!)
-        }
+        YMAPIUtility.PrintErrorInfo(error)
         
+        YMPageModalMessage.ShowErrorInfo("网络故障，请稍后再试！", nav: self.NavController!)
         targetView?.Loading?.Hide()
     }
     

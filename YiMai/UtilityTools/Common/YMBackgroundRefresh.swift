@@ -8,8 +8,11 @@
 
 import Foundation
 import UIKit
+import Proposer
 
 class YMBackgroundRefresh: NSObject {
+    static var ContactNew = [String: AnyObject]()
+    
     private static var StartFlag = false
     private static var GetBroadcastFirstPage: YMAPIUtility!
     private static var GetNewAdmissionList: YMAPIUtility!
@@ -21,6 +24,11 @@ class YMBackgroundRefresh: NSObject {
 
     private static let SuccessDelay: Double = 30.0
     private static let ErrorDelay: Double = 10.0
+    
+    private static var GetContactsApi: YMAPIUtility! = nil
+    
+    private static let BackgroundQueue = dispatch_queue_create("com.YiMai.Background.Queue", DISPATCH_QUEUE_SERIAL)
+
     
     static func Start() {
         if(YMBackgroundRefresh.StartFlag) {
@@ -38,15 +46,96 @@ class YMBackgroundRefresh: NSObject {
                                              success: GetAppointmentSuccess, error: GetAppointmentError)
         
         L1RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL1_RELATION + "-l1",
-                                          success: self.Level1RelationSuccess, error: L1Err)
+                                          success: Level1RelationSuccess, error: L1Err)
         
         L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION + "-l2",
-                                          success: self.Level2RelationSuccess, error: L2Err)
+                                          success: Level2RelationSuccess, error: L2Err)
         
-        NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "newf",
-                                                  success: self.NewFriendsSuccess, error: NFErr)
+        NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-newf",
+                                                  success: NewFriendsSuccess, error: NFErr)
+        
+        GetContactsApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-gct",
+                                      success: GetContactsApiSuccessed, error: GetContactsApiError)
         
         DoApi()
+    }
+    
+    static func DoContactCompare(prev: [[String: String]], cur: [[String: String]]) -> [[String: String]] {
+        var ret = [[String: String]]()
+        
+        for curV in cur {
+            var isNewPhone = true
+            let phone = curV["phone"]!
+            let name = curV["name"]!
+            for prevV in prev {
+                let prevPhone = prevV["phone"]!
+                if(prevPhone == phone) {
+                   isNewPhone = false
+                    break
+                }
+            }
+            
+            if(isNewPhone) {
+                ret.append(["phone": phone, "name": name])
+            }
+        }
+        
+        return ret
+    }
+    
+    static private func GetContactsApiError(error: NSError){
+        YMAPIUtility.PrintErrorInfo(error)
+    }
+    
+    static private func GetContactsApiSuccessed(data: NSDictionary?) {
+        if(nil == data) {
+            print("no result!!!")
+        } else {
+            ContactNew = data!["data"] as! [String: AnyObject]
+        }
+        
+        ReCompareContactBook()
+        YMLocalData.SaveData(YMAddressBookTools.AllContacts, key: "YMLoaclContactAddressBook")
+    }
+    
+    static func ReCompareContactBook(sec: Double = 10) {
+        dispatch_after(dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(sec * Double(NSEC_PER_SEC))
+        ), YMBackgroundRefresh.BackgroundQueue) {
+            YMBackgroundRefresh.CompareContactBook()
+            
+        }
+    }
+    
+    static func CompareContactBook() {
+        let contacts: PrivateResource = PrivateResource.Contacts
+//        YMAddressBookTools
+        
+        if(!contacts.isNotDeterminedAuthorization) {
+            if(contacts.isAuthorized) {
+//                let prevContact  = YMLocalData.GetData("YMLoaclContactAddressBook") as? [[String: String]]
+                YMAddressBookTools().ReadAddressBook()
+
+                if(0 != YMAddressBookTools.AllContacts.count) {
+                    GetContactsApi.YMUploadAddressBook(YMAddressBookTools.AllContacts)
+                } else {
+                    ReCompareContactBook(0.5)
+                }
+//                if(nil != prevContact) {
+//                    if(0 != prevContact!.count) {
+//                        let someOneNew = DoContactCompare(prevContact!, cur: YMAddressBookTools.AllContacts)
+//                        if(0 != someOneNew.count) {
+//                            GetContactsApi.YMUploadAddressBook(YMAddressBookTools.AllContacts)
+//                        }
+//                    }
+//                }
+            } else {
+                ReCompareContactBook()
+            }
+        } else  {
+            ReCompareContactBook()
+        }
     }
     
     
@@ -57,6 +146,8 @@ class YMBackgroundRefresh: NSObject {
         L1RelationApi.YMGetLevel2Relation()
         L2RelationApi.YMGetLevel2Relation()
         NewFriendsRelationApi.YMGetRelationNewFriends()
+        
+        CompareContactBook()
     }
     
     static func Stop() {

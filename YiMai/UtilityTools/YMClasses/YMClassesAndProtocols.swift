@@ -316,7 +316,6 @@ public class PageBodyView: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print("return UITableViewCell")
         BodyView.contentSize = BodyView.BodyViewContentSize
         
         let cell = UITableViewCell()
