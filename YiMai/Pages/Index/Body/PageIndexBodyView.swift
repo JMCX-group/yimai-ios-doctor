@@ -104,14 +104,14 @@ public class PageIndexBodyView {
             useMethod: "PageJumpToByViewSender:".Sel(),
             userStringData: YMCommonStrings.CS_PAGE_APPOINTMENT_RECORD_NAME)
         
-        OperatorPanel.addSubview(Face2FaceButton!)
+//        OperatorPanel.addSubview(Face2FaceButton!)
         OperatorPanel.addSubview(DoctorAppointmentButton!)
         OperatorPanel.addSubview(AdmissionsButton!)
         OperatorPanel.addSubview(RecordsButton!)
         
-        OperatorPanel.groupAndFill(group: Group.Horizontal, views: [Face2FaceButton!, DoctorAppointmentButton!, AdmissionsButton!, RecordsButton!], padding: 1)
+        OperatorPanel.groupAndFill(group: Group.Horizontal, views: [DoctorAppointmentButton!, AdmissionsButton!, RecordsButton!], padding: 1)
         
-        SetOperatorContent(Face2FaceButton!,imageName:  "IndexButtonFace2Face",text:  "当面咨询")
+//        SetOperatorContent(Face2FaceButton!,imageName:  "IndexButtonFace2Face",text:  "当面咨询")
         SetOperatorContent(DoctorAppointmentButton!,imageName:  "IndexButtonDoctorAppointment",text:  "预约医生")
         SetOperatorContent(AdmissionsButton!,imageName:  "IndexButtonAdmissions",text:  "我的接诊")
         SetOperatorContent(RecordsButton!,imageName:  "IndexButtonRecords",text:  "预约记录")
@@ -128,6 +128,10 @@ public class PageIndexBodyView {
             DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
                                                               useMethod: "JumpToAuthPage:".Sel(),
                                                               imageName: "IndexButtonAuthed")
+        } else if("processing" == authStatus) {
+            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                              useMethod: "JumpToAuthPage:".Sel(),
+                                                              imageName: "IndexButtonAuthing")
         } else {
             DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
                                                               useMethod: "JumpToAuthPage:".Sel(),
@@ -155,6 +159,33 @@ public class PageIndexBodyView {
         
         authHeadline.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 25.LayoutVal(), width: YMSizes.PageWidth, height: 30.LayoutVal())
         authSubline.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 64.LayoutVal(), width: YMSizes.PageWidth, height: 24.LayoutVal())
+        DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
+    }
+    
+    func HideAuthInfo() {
+        DoctorAuthButton?.hidden = true
+    }
+    
+    func UpdateAuthStatus() {
+        let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
+        DoctorAuthButton?.removeFromSuperview()
+        DoctorAuthButton?.hidden = false
+
+        if("completed" == authStatus) {
+            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                              useMethod: "JumpToAuthPage:".Sel(),
+                                                              imageName: "IndexButtonAuthed")
+        } else if("processing" == authStatus) {
+            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                              useMethod: "JumpToAuthPage:".Sel(),
+                                                              imageName: "IndexButtonAuthing")
+        } else {
+            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+                                                              useMethod: "JumpToAuthPage:".Sel(),
+                                                              imageName: "IndexButtonGoAuth")
+        }
+        
+        DoDoctorAuthPanel.addSubview(DoctorAuthButton!)
         DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
     }
     
@@ -212,16 +243,16 @@ public class PageIndexBodyView {
     
     func LoadContactList(data: [[String: AnyObject]]) {
         let yiImage = UIImage(named: "IndexButtonYi")
-        let maiImage = UIImage(named: "IndexButtonMai")
+//        let maiImage = UIImage(named: "IndexButtonMai")
         
         let yiButton = GetContactButton(yiImage!, name: "小医", desc: "智能客服", isDoc: false)
-        let maiButton = GetContactButton(maiImage!, name: "小脉", desc: "智能客服", isDoc: false)
+//        let maiButton = GetContactButton(maiImage!, name: "小脉", desc: "智能客服", isDoc: false)
         
         YMLayout.ClearView(view: ContactPanel)
         ContactArray.removeAll()
         
         ContactArray.append(yiButton)
-        ContactArray.append(maiButton)
+//        ContactArray.append(maiButton)
         
         let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
 

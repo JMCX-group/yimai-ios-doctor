@@ -17,12 +17,12 @@ public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
         if(!textField.isKindOfClass(YMTextField)) { return true }
         
-//        let realTextField = textField as! YMTextField
-//        
-//        textField.resignFirstResponder()
-//        if(nil != realTextField.EditEndCallback) {
-//            realTextField.EditEndCallback!(realTextField)
-//        }
+        let realTextField = textField as! YMTextField
+        
+        textField.resignFirstResponder()
+        if(nil != realTextField.EditEndCallback) {
+            realTextField.EditEndCallback!(realTextField)
+        }
         
         return true;
     }

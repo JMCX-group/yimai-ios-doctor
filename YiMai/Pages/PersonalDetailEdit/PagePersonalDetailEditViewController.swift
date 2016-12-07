@@ -11,6 +11,9 @@ import UIKit
 public class PagePersonalDetailEditViewController: PageViewController {
     private var Actions: PagePersonalDetailEditActions? = nil
     public var BodyView: PagePersonalDetailEditBodyView? = nil
+    
+    static var BackEndApi: LoginBackendProgress = LoginBackendProgress(key: "fromPersonalEdit")
+
 
     override func PageLayout() {
         super.PageLayout()

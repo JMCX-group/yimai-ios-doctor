@@ -58,7 +58,7 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
-        let jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as! String
+        let jobTitle = YMVar.GetStringByKey(data, key: YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE, defStr: "医生")
         let userId = data[YMYiMaiStrings.CS_DATA_KEY_USER_ID] as! String
         
         let nameLabel = UILabel()

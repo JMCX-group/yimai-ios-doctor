@@ -86,7 +86,7 @@ public class PageMyInfoCardBodyView: PageBodyView {
         let tipHighLight = ActiveType.Custom(pattern: "医脉")
         tipLabel.enabledTypes = [tipHighLight]
         tipLabel.customColor[tipHighLight] = YMColors.FontBlue
-        tipLabel.text = "使用医脉医生端或患者端扫码添加"
+        tipLabel.text = "使用医者脉连医生端或患者端扫码添加"
         tipLabel.sizeToFit()
         
         

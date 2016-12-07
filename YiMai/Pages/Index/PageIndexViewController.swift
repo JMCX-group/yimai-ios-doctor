@@ -40,7 +40,7 @@ public class PageIndexViewController: PageViewController {
         if(nil == jobTitle) {
             YMVar.MyUserInfo["job_title"] = "医生"
         }
-
+        BodyView?.UpdateAuthStatus()
         YMBackgroundRefresh.Start()
     }
 
@@ -49,6 +49,16 @@ public class PageIndexViewController: PageViewController {
             return
         }
         super.PageLayout()
+        
+        if(0 == YMVar.MyUserInfo.count) {
+            YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)! as! [String: AnyObject]
+            YMVar.MyDoctorId = "\(YMVar.MyUserInfo["id"]!)"
+        }
+        
+        if(0 == YMVar.MySysInfo.count) {
+            YMVar.MySysInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_SYSTEM_INFO)! as! [String: AnyObject]
+        }
+
 
         Actions = PageIndexActions(navController: self.navigationController!, target: self)
 
@@ -70,5 +80,7 @@ public class PageIndexViewController: PageViewController {
         ]
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
         IndexTopView!.UpdateMsgNotifyStatus()
+        
+        BodyView?.HideAuthInfo()
     }
 }

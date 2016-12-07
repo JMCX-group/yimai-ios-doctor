@@ -157,21 +157,22 @@ public class PageYiMaiR1BodyView: PageBodyView {
         BodyView.addSubview(NewFriendsPanel)
         NewFriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: OperationPanel, padding: 0, height: 130.LayoutVal())
 
-        var newFriends = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as? [[String:AnyObject]]
+//        var newFriends = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as? [[String:AnyObject]]
+//        
+//        if(nil == newFriends) {
+//            newFriends = [[String:AnyObject]]()
+//        }
+//        
+//        var i = 0
+//        for f in newFriends! {
+//            let status = "\(f["status"]!)"
+//            
+//            if("isFriend" != status){
+//                i += 1
+//            }
+//        }
         
-        if(nil == newFriends) {
-            newFriends = [[String:AnyObject]]()
-        }
-        
-        var i = 0
-        for f in newFriends! {
-            let status = "\(f["status"]!)"
-            
-            if("isFriend" == status){
-                i += 1
-            }
-        }
-        
+        let i = YMBackgroundRefresh.ShowNewFriendCount
         let titleLabel = UILabel()
         if(0 != i) {
             titleLabel.text = "我的新朋友（新增\(i)人）"
@@ -215,7 +216,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         dividerLine.anchorToEdge(Edge.Left, padding: 102.LayoutVal(), width: YMSizes.OnPx, height: 30.LayoutVal())
         buttonText.anchorToEdge(Edge.Left, padding: 124.LayoutVal(), width: buttonText.width, height: buttonText.height)
         
-        if(i > 0) {
+        if(YMBackgroundRefresh.ShowNewFriendFlag) {
             newFriendsButton.addSubview(notifyPoint)
             notifyPoint.anchorToEdge(Edge.Left, padding: 225.LayoutVal(), width: notifyPoint.width, height: notifyPoint.height)
         }
@@ -226,7 +227,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
-        var jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as! String
+        var jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as? String
         let userId = data[YMYiMaiStrings.CS_DATA_KEY_USER_ID] as! String
         
         
@@ -245,6 +246,9 @@ public class PageYiMaiR1BodyView: PageBodyView {
         divider.backgroundColor = YMColors.FontBlue
         
         if("<null>" == jobTitle) {
+            jobTitle = "医生"
+        }
+        if(nil == jobTitle) {
             jobTitle = "医生"
         }
         jobTitleLabel.text = jobTitle

@@ -15,6 +15,7 @@ public class PageNewFriendActions: PageJumpActions {
     private var TargetView: PageNewFriendBodyView? = nil
     private var GetFriendListApi: YMAPIUtility? = nil
     private var AgreeFriendApi: YMAPIUtility? = nil
+    private var AddFriendApi: YMAPIUtility!
     
     override func ExtInit() {
         super.ExtInit()
@@ -27,6 +28,24 @@ public class PageNewFriendActions: PageJumpActions {
         AgreeFriendApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_AGREE_FRIEND_APPLY,
                                       success: AgreeSuccess, error: AgreeError)
         
+        AddFriendApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_ADD_FRIEND + "fromDoctorDetail",
+                                    success: AddFriendSuccess, error: AddFriendError)
+        
+    }
+    
+    public func AddFriendSuccess(_: NSDictionary?) {
+        //YMPageModalMessage.ShowNormalInfo("添加好友成功，等待对方验证。", nav: self.NavController!)
+        
+    }
+    
+    public func AddFriendError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        
+        if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
+//            YMPageModalMessage.ShowNormalInfo("添加好友成功，等待对方验证。", nav: self.NavController!)
+        } else {
+            YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
+        }
     }
     
     func JumpToContactPage(sender: YMButton) {
@@ -131,15 +150,20 @@ public class PageNewFriendActions: PageJumpActions {
     public func GetNewFriendSuccess(data: NSDictionary?) {
         let friends = data?["friends"] as? [[String: AnyObject]]
         if(nil == friends) {
+            TargetView?.FullPageLoading.Hide()
+            TargetView?.LoadData([[String: AnyObject]]())
             return
         }
         
+        TargetView?.FullPageLoading.Hide()
+
         TargetView?.AllFriendsList = friends!
         TargetView?.LoadData(friends!)
     }
     
     public func GetNewFriendError(error: NSError) {
-        
+        TargetView?.FullPageLoading.Hide()
+        TargetView?.LoadData([[String: AnyObject]]())
     }
     
     public func AgreeSuccess(_: NSDictionary?) {
@@ -155,6 +179,10 @@ public class PageNewFriendActions: PageJumpActions {
     
     
     public func GetList() {
+        TargetView?.FullPageLoading.Show()
+        YMBackgroundRefresh.ShowNewFriendFlag = false
+        YMBackgroundRefresh.LastNewFriends.removeAll()
+        YMBackgroundRefresh.ShowNewFriendCount = 0
         GetFriendListApi?.YMGetRelationNewFriends()
     }
     
@@ -184,6 +212,18 @@ public class PageNewFriendActions: PageJumpActions {
             TargetView?.DrawFriendsList(friendsFilted)
         }
 //        DrawFriendsList()
+    }
+    
+    
+    func Apply(sender: YMButton) {
+        let data = sender.UserObjectData as! [String: AnyObject]
+        
+        print(data)
+        let userId = "\(data["id"]!)"
+        AddFriendApi?.YMAddFriendById(userId)
+        sender.backgroundColor = YMColors.None
+        sender.enabled = false
+        sender.sizeToFit()
     }
 }
 

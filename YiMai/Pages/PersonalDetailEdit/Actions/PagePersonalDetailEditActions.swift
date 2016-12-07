@@ -128,6 +128,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
         }
         
         TargetController?.BodyView?.LoadData()
+        PagePersonalDetailEditViewController.BackEndApi.DoApi()
         TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     

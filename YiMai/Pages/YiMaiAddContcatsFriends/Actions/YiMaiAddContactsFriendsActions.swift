@@ -25,7 +25,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
 //        TargetController!.LoadingView?.Hide()
     }
     
-    private func InviteOtherErrorSuccessed(data: NSDictionary?) {
+    private func InviteOtherSuccessed(data: NSDictionary?) {
         if(nil != data) {
             print(JSON(data!))
         } else {
@@ -89,7 +89,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
                                             success: self.AddFriendSuccessed, error: self.AddFriendError)
         
         InviteOtherApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_INVITE_OTHERS_REGISTER_YIMAI + "-addContactsFriends",
-                                      success: self.InviteOtherErrorSuccessed, error: self.InviteOtherError)
+                                      success: self.InviteOtherSuccessed, error: self.InviteOtherError)
         
         AddAllFriendsApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_ADD_ALL_CONTACTS_FRIEND + "-addContactsFriends",
                                       success: self.AddAllFriendsSuccessed, error: self.AddAllFriendsError)

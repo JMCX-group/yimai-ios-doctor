@@ -45,9 +45,9 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     }
     
     public func AddFriendError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+
         if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
-//            let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
-//            let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
             TargetView?.AddFriendBtn?.setTitleColor(YMColors.FontGray, forState: UIControlState.Disabled)
             TargetView?.AddFriendBtn?.backgroundColor = YMColors.CommonBottomGray
             TargetView?.AddFriendBtn?.enabled = false

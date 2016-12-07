@@ -41,6 +41,7 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
     }
     
     public func UploadSuccess(data: NSDictionary?) {
+        print(data)
         PhotoIndex += 1
         if(PhotoIndex < TargetController!.BodyView!.PhotoArray.count) {
             ImageForUpload = TargetController!.BodyView!.PhotoArray[PhotoIndex]

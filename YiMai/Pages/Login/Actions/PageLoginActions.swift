@@ -82,6 +82,8 @@ public class LoginBackendProgress: NSObject {
             let realData = data!
             YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: realData["friends"]!)
         }
+        
+        YMBackgroundRefresh.CheckHasUnreadNewFriends()
     }
     
     init(key: String) {

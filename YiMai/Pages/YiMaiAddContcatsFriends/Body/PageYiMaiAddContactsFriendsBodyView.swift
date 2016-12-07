@@ -26,7 +26,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     
     var FullList = [String: AnyObject]()
     
-    private var ListType: String = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_FRIENDS
+    private var ListType: String = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS
     
     private let ShowFriendsListBtn = YMButton()
     private let ShowOthersListBtn = YMButton()
@@ -200,7 +200,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         FriendsListPanel.hidden = true
         OthersListPanel.hidden = false
         
-        ShowFriendsListBtn.hidden = false
+        ShowFriendsListBtn.hidden = true
         ShowOthersListBtn.hidden = true
         
         YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: OthersListPanel)

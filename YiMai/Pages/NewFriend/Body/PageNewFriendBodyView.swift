@@ -42,7 +42,23 @@ public class PageNewFriendBodyView: PageBodyView {
     func DrawFriendsList(data: [[String: AnyObject]], hightlight: ActiveType = ActiveType.URL) {
         FriendsListToShow = data
         func DrawStatus(status: String, cell: YMTouchableView) {
-            if("waitForFriendAgree" == status) {
+            if("apply" == status) {
+                let agreeButton = YMButton()
+                agreeButton.addTarget(NewFriendActions!, action: "Apply:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+                
+                agreeButton.setTitle("加为好友", forState: UIControlState.Normal)
+                agreeButton.setTitle("等待同意", forState: UIControlState.Disabled)
+                agreeButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+                agreeButton.setTitleColor(YMColors.FontLightGray, forState: UIControlState.Disabled)
+                agreeButton.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+                agreeButton.backgroundColor = YMColors.FontBlue
+                agreeButton.layer.cornerRadius = 8.LayoutVal()
+                agreeButton.layer.masksToBounds = true
+                
+                cell.addSubview(agreeButton)
+                agreeButton.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 28.LayoutVal(), width: 100.LayoutVal(), height: 40.LayoutVal())
+                agreeButton.UserObjectData = cell.UserObjectData
+            } else if("waitForFriendAgree" == status) {
                 let label = UILabel()
                 label.text = "等待验证"
                 label.textColor = YMColors.FontLightGray
@@ -84,15 +100,43 @@ public class PageNewFriendBodyView: PageBodyView {
         
         YMLayout.ClearView(view: ListPanel)
         LastCell = nil
-        for v in FriendsListToShow {
-            LastCell = PageSearchResultCell.LayoutACell(ListPanel, info: v, prev: LastCell,
-                                                        act: NewFriendActions!, sel: PageJumpActions.PageJumpToByViewSenderSel, highlight: ActiveType.URL)
-            
-            DrawStatus(v["status"]! as! String, cell: LastCell!)
-            
+        
+        let friendsData = YMBackgroundRefresh.ContactNew["friends"] as? [[String: AnyObject]]
+
+        if(nil != friendsData) {
+            for var v in friendsData! {
+                v["status"] = "apply"
+                let isAdded = "\(v["is_add_friend"]!)"
+                let id = YMVar.GetStringByKey(v, key: "id")
+                var repeated = false
+                
+//                for v2 in FriendsListToShow {
+//                    let id2 = YMVar.GetStringByKey(v2, key: "id")
+//                    if(id == id2) {
+//                        repeated = true
+//                        break
+//                    }
+//                }
+
+                if("0" == isAdded &&  !repeated) {
+                    LastCell = PageSearchResultCell.LayoutACell(ListPanel, info: v, prev: LastCell,
+                                                                act: NewFriendActions!, sel: PageJumpActions.PageJumpToByViewSenderSel, highlight: ActiveType.URL)
+                    DrawStatus(v["status"]! as! String, cell: LastCell!)
+                }
+            }
         }
         
-        YMLayout.SetVScrollViewContentSize(ListPanel, lastSubView: LastCell, padding: 130.LayoutVal())
+        for v in FriendsListToShow {
+            if("isFriend" != "\(v["status"]!)") {
+                LastCell = PageSearchResultCell.LayoutACell(ListPanel, info: v, prev: LastCell,
+                                                            act: NewFriendActions!, sel: PageJumpActions.PageJumpToByViewSenderSel, highlight: ActiveType.URL)
+                DrawStatus(v["status"]! as! String, cell: LastCell!)
+            }
+        }
+        
+        if(nil != LastCell) {
+            YMLayout.SetVScrollViewContentSize(ListPanel, lastSubView: LastCell, padding: 130.LayoutVal())
+        }
     }
     
     private func DrawSearchPanel() {

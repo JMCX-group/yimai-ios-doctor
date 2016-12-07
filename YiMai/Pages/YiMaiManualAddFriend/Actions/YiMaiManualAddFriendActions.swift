@@ -33,10 +33,28 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
     }
     
     public func AddSuccess(_: NSDictionary? ){
+        let alertController = UIAlertController(title: "添加成功", message: "等待对方验证", preferredStyle: .Alert)
+        let goBack = UIAlertAction(title: "返回", style: .Default,
+                                   handler: {
+                                    action in
+                                    self.NavController?.popViewControllerAnimated(true)
+        })
         
+        let goOn = UIAlertAction(title: "继续添加", style: .Default,
+                                 handler: {
+                                    action in
+        })
+        
+        goBack.setValue(YMColors.FontGray, forKey: "titleTextColor")
+        goOn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        
+        alertController.addAction(goBack)
+        alertController.addAction(goOn)
+        self.NavController!.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    public func AddError(_: NSError) {
+    public func AddError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
         YMPageModalMessage.ShowErrorInfo("服务器繁忙，请稍后再试", nav: self.NavController!)
     }
     
@@ -90,28 +108,9 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
         let btn = sender.view as! YMTouchableView
         
         let data = btn.UserObjectData as! [String: AnyObject]
-        let userId = "\(data["id"])"
+        let userId = "\(data["id"]!)"
         
         AddFriendApi?.YMAddFriendById(userId)
-
-        let alertController = UIAlertController(title: "添加成功", message: "等待对方验证", preferredStyle: .Alert)
-        let goBack = UIAlertAction(title: "返回", style: .Default,
-            handler: {
-                action in
-                self.NavController?.popViewControllerAnimated(true)
-        })
-        
-        let goOn = UIAlertAction(title: "继续添加", style: .Default,
-            handler: {
-                action in
-        })
-        
-        goBack.setValue(YMColors.FontGray, forKey: "titleTextColor")
-        goOn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
-        
-        alertController.addAction(goBack)
-        alertController.addAction(goOn)
-        self.NavController!.presentViewController(alertController, animated: true, completion: nil)
     }
     
     public func InvitFriend(sender: UIGestureRecognizer) {

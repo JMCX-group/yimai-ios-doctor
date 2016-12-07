@@ -45,9 +45,10 @@ public class PageGlobalSearchActions: PageJumpActions {
     }
     
     public func SearchError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
         if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
-            let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
-            let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
+//            let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
+//            let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
             
             YMPageModalMessage.ShowNormalInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
 

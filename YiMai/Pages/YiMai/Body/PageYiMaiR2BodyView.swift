@@ -61,7 +61,7 @@ public class PageYiMaiR2BodyView: PageBodyView {
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
-        let jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as! String
+        let jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as? String
         let userId = data[YMYiMaiStrings.CS_DATA_KEY_USER_ID] as! String
         
         let nameLabel = UILabel()
@@ -78,7 +78,7 @@ public class PageYiMaiR2BodyView: PageBodyView {
         
         divider.backgroundColor = YMColors.FontBlue
         
-        jobTitleLabel.text = jobTitle
+        jobTitleLabel.text = jobTitle ?? "医生"
         jobTitleLabel.textColor = YMColors.FontGray
         jobTitleLabel.font = YMFonts.YMDefaultFont(22.LayoutVal())
         jobTitleLabel.sizeToFit()

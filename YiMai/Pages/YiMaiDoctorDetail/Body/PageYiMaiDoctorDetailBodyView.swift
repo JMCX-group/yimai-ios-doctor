@@ -345,7 +345,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         introPanel.backgroundColor = YMColors.White
         
         let title = UILabel()
-        title.text = "医生简介"
+        title.text = "医生简介："
         title.textColor = YMColors.FontBlue
         title.font = YMFonts.YMDefaultFont(30.LayoutVal())
         title.sizeToFit()
@@ -378,7 +378,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         collegePanel.backgroundColor = YMColors.White
         
         let title = UILabel()
-        title.text = "毕业院校"
+        title.text = "毕业院校："
         title.textColor = YMColors.FontBlue
         title.font = YMFonts.YMDefaultFont(30.LayoutVal())
         title.sizeToFit()

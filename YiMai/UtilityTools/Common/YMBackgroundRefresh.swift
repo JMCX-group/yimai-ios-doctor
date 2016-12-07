@@ -11,7 +11,37 @@ import UIKit
 import Proposer
 
 class YMBackgroundRefresh: NSObject {
+    static var ShowNewFriendFlag = false
+    static var ShowNewFriendCount: Int = 0
     static var ContactNew = [String: AnyObject]()
+    
+    static var LastNewFriends = [String: [String:AnyObject]]()
+    
+    static func CheckHasUnreadNewFriends() {
+        var newFriends = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as? [[String:AnyObject]]
+        
+        if(nil == newFriends) {
+            newFriends = [[String:AnyObject]]()
+        }
+
+        for f in newFriends! {
+            let status = "\(f["status"]!)"
+            let readStatus = "\(f["unread"]!)"
+            let friendId = "\(f["id"]!)"
+            
+            let last = LastNewFriends[friendId]
+            if(nil == last) {
+                if("1" != readStatus && "isFriend" == status) {
+                    ShowNewFriendCount += 1
+                }
+            }
+            
+            LastNewFriends[friendId] = f
+            if("1" != readStatus){
+                ShowNewFriendFlag = true
+            }
+        }
+    }
     
     private static var StartFlag = false
     private static var GetBroadcastFirstPage: YMAPIUtility!
@@ -143,7 +173,7 @@ class YMBackgroundRefresh: NSObject {
         GetBroadcastFirstPage.YMGetAllRadio("1")
         GetNewAdmissionList.YMGetNewAdmissionList()
         GetNewAppointmentList.YMGetNewAppointmentList()
-        L1RelationApi.YMGetLevel2Relation()
+        L1RelationApi.YMGetLevel1Relation()
         L2RelationApi.YMGetLevel2Relation()
         NewFriendsRelationApi.YMGetRelationNewFriends()
         
@@ -186,7 +216,10 @@ class YMBackgroundRefresh: NSObject {
         } else {
             let realData = data!
             YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: realData["friends"]!)
+            CheckHasUnreadNewFriends()
         }
+        
+        YMBackgroundRefresh.CheckHasUnreadNewFriends()
         
         YMDelay(YMBackgroundRefresh.SuccessDelay) {
             NewFriendsRelationApi.YMGetRelationNewFriends()
