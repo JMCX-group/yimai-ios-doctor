@@ -29,9 +29,10 @@ class PageDoctorAuthActions: PageJumpActions {
     func UploadBlockBuilder(formData: AFMultipartFormData) {
         var i: Int = 1
         for photo in TargetView.PhotoArray {
+            let paramName = "img-\(i)"
             let filename = "img-\(i).jpg"
             let imgData = YMLayout.GetScaledImageData(photo)
-            formData.appendPartWithFileData(imgData, name: filename, fileName: filename, mimeType: "image/jpeg")
+            formData.appendPartWithFileData(imgData, name: paramName, fileName: filename, mimeType: "image/jpeg")
             i += 1
         }
     }

@@ -44,6 +44,8 @@ public class YMPageLoading: NSObject {
     }
     
     public func Show(){
+        MaskBackground.removeFromSuperview()
+        ParentView?.addSubview(self.MaskBackground)
         self.MaskBackground.hidden = false
         UIView.animateWithDuration(AnimateDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: self.DoShowAnimate, completion: nil)
     }

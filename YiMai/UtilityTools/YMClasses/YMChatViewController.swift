@@ -17,7 +17,12 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
     var UserData: [String: AnyObject]? = nil
     var ShowAppointment: Bool = true
     
+    var AddToBlackList = YMButton()
+    var FullPageLoading: YMPageLoadingView!
+
     static var SendMsg: [String: String]? = nil
+    
+    var UpdateApi: YMAPIUtility!
     
     var JumpAction: PageJumpActions!
     override public func viewDidLoad() {
@@ -31,6 +36,57 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
         RCIM.sharedRCIM().receiveMessageDelegate = self
         
         JumpAction = PageJumpActions(navController: self.navigationController!)
+        
+        TopView?.TopViewPanel.addSubview(AddToBlackList)
+        AddToBlackList.setTitle("加入黑名单", forState: UIControlState.Normal)
+        AddToBlackList.titleLabel?.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        AddToBlackList.sizeToFit()
+        AddToBlackList.anchorInCorner(Corner.BottomRight, xPad: 40.LayoutVal(), yPad: 30.LayoutVal(),
+                                      width: AddToBlackList.width, height: 30.LayoutVal())
+        
+        AddToBlackList.addTarget(self, action: "AddToBlackListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        FullPageLoading = YMPageLoadingView(parentView: self.view!)
+        
+        UpdateApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_BLACKLIST, success: UpdateBlacklistSuccess, error: UpdateBlacklistError)
+        
+        if(nil != UserData) {
+            let hos = UserData!["hospital"] as? [String: AnyObject]
+            if(nil != hos) {
+                UserData!["hospital"] = YMVar.GetStringByKey(hos, key: "name")
+            }
+            
+            let dept = UserData!["department"] as? [String: AnyObject]
+            if(nil != dept) {
+                UserData!["department"] = YMVar.GetStringByKey(dept, key: "name")
+            }
+        }
+    }
+    
+    func UpdateBlacklistSuccess(data: NSDictionary?) {
+        JumpAction.DoJump(YMCommonStrings.CS_PAGE_INDEX_NAME)
+    }
+    
+    func UpdateBlacklistError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        JumpAction.DoJump(YMCommonStrings.CS_PAGE_INDEX_NAME)
+    }
+    
+    func AddToBlackListTouched(sender: YMButton) {
+        FullPageLoading.Show()
+        var orgBlacklist = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "blacklist")
+        let newUser = YMVar.GetStringByKey(UserData!, key: "id")
+        
+        if("" == orgBlacklist) {
+            orgBlacklist = newUser
+        } else {
+            var orgListArr = orgBlacklist.componentsSeparatedByString(",")
+            orgListArr.append(newUser)
+            orgBlacklist = orgListArr.joinWithSeparator(",")
+        }
+        
+        UpdateApi.YMChangeUserInfo(["blacklist": orgBlacklist])
+        YMVar.MyUserInfo["blacklist"] = orgBlacklist
     }
     
     override public func viewWillAppear(animated: Bool) {

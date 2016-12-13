@@ -52,14 +52,13 @@ class YMBackgroundRefresh: NSObject {
     private static var L2RelationApi: YMAPIUtility!
     private static var NewFriendsRelationApi: YMAPIUtility!
 
-    private static let SuccessDelay: Double = 30.0
+    private static let SuccessDelay: Double = 1.0
     private static let ErrorDelay: Double = 10.0
-    
+
     private static var GetContactsApi: YMAPIUtility! = nil
-    
+
     private static let BackgroundQueue = dispatch_queue_create("com.YiMai.Background.Queue", DISPATCH_QUEUE_SERIAL)
 
-    
     static func Start() {
         if(YMBackgroundRefresh.StartFlag) {
             return

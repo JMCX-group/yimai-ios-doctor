@@ -169,7 +169,6 @@ public class PageIndexBodyView {
     func UpdateAuthStatus() {
         let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
         DoctorAuthButton?.removeFromSuperview()
-        DoctorAuthButton?.hidden = false
 
         if("completed" == authStatus) {
             DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
@@ -189,7 +188,8 @@ public class PageIndexBodyView {
         DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
     }
     
-    private func GetContactButton(image: UIImage, name: String, desc: String, isDoc: Bool = false) -> YMTouchableView {
+    private func GetContactButton(image: UIImage, name: String, desc: String,
+                                  isDoc: Bool = false, userData: [String: AnyObject]? = nil) -> YMTouchableView {
         let buttonView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoChat:".Sel())
         buttonView.frame = CGRect(x: 0,y: 0,width: 190.LayoutVal(), height: 260.LayoutVal())
         buttonView.backgroundColor = YMColors.PanelBackgroundGray
@@ -216,7 +216,10 @@ public class PageIndexBodyView {
         contactName.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 174.LayoutVal(), width: buttonView.width, height: 26.LayoutVal())
         contactDesc.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 204.LayoutVal(), width: buttonView.width, height: 22.LayoutVal())
         
-        buttonView.UserObjectData = ["img": buttonImage, "name": name, "isDoc": isDoc]
+        var btnData = userData
+        btnData?["img"] = buttonImage
+        btnData?["isDoc"] = isDoc
+        buttonView.UserObjectData = btnData//["img": buttonImage, "name": name, "isDoc": isDoc]
         
         return buttonView
     }
@@ -261,7 +264,7 @@ public class PageIndexBodyView {
                 if("\(docImInfo.targetId!)" == "\(doc["id"]!)" || "\(docImInfo.senderUserId!)" == "\(doc["id"]!)") {
                     
                     let img = UIImage(named: "IndexButtonContactBackground")
-                    let cell = GetContactButton(img!, name: "\(doc["name"]!)", desc: "\(doc["job_title"]!)")
+                    let cell = GetContactButton(img!, name: "\(doc["name"]!)", desc: "\(doc["job_title"]!)", isDoc: true, userData: doc)
                     
                     let cellData = cell.UserObjectData as! [String: AnyObject]
                     let cellImage = cellData["img"] as! UIImageView

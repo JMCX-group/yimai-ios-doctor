@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Page Auth Processing View Controller-->
+        <!--Page Auth Complete View Controller-->
         <scene sceneID="5c0-LI-ony">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="P4b-m9-ECp" customClass="PageAuthProcessingViewController" customModule="YiMai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="P4b-m9-ECp" customClass="PageAuthCompleteViewController" customModule="YiMai" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Znn-Cc-Agj"/>
                         <viewControllerLayoutGuide type="bottom" id="aov-jl-lhC"/>

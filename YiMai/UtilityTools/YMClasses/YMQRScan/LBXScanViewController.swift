@@ -215,7 +215,8 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         }
     }
 
-    deinit {}
+    deinit {
+    }
     
 }
 

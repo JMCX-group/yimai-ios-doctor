@@ -129,6 +129,7 @@ public class YMLayout {
     
     public static func GetStoryboardControllerByName(storyboardName: String) -> UIViewController? {
         let newStroyboard = UIStoryboard(name: storyboardName, bundle: nil)
+
         return newStroyboard.instantiateInitialViewController()
     }
     
@@ -169,10 +170,13 @@ public class YMLayout {
         }
     }
     
-    public static func SetViewHeightByLastSubview(view: UIView, lastSubView: UIView, bottomPadding: CGFloat = 0) {
+    public static func SetViewHeightByLastSubview(view: UIView, lastSubView: UIView?, bottomPadding: CGFloat = 0) {
+        if(nil == lastSubView) {
+            return
+        }
         let viewPoint = view.frame.origin
         view.frame = CGRectMake(viewPoint.x, viewPoint.y, view.width,
-                                lastSubView.height + lastSubView.frame.origin.y + bottomPadding)
+                                lastSubView!.height + lastSubView!.frame.origin.y + bottomPadding)
     }
     
     public static func SetViewWidthBySubview(view: UIView, subView: UIView, padding: CGFloat = 0) {
@@ -354,7 +358,7 @@ public class YMLayout {
         if(nil != fullUrl) {
             url = fullUrl!
         } else {
-            url = YMAPIInterfaceURL.Server + url
+//            url = YMAPIInterfaceURL.Server + url
         }
 
         if(refresh) {
@@ -494,12 +498,15 @@ public class YMLayout {
             return nameA.characters.count > nameB.characters.count
         }
         
+        var debug = [String]()
+        
         for tag in tagSorted {
             let tagName = tag as! String
             if(YMValueValidator.IsEmptyString(tagName)) {continue}
             let tagLabel = tagBuilder(tagText: tagName, tagInnerPadding: tagInnerPadding, tagHeight: lineHeight, userData: tag)
             labelArray.append(tagLabel)
             widthArray.append(GetTagFullWidth(tagLabel))
+            debug.append(tag as! String)
         }
         
         for (idx, val) in widthArray.enumerate() {
@@ -511,10 +518,11 @@ public class YMLayout {
                     allTagWidth += widthArray[tagIdx]
                 }
                 
-                if((allTagWidth + val + CGFloat(lineArray.count) * tagSpace) < listLineWidth) {
+                if((allTagWidth + val + CGFloat(lineArray[lIdx].count - 1) * tagSpace) < listLineWidth) {
                     if(maxTagsInLine > lineArray[lIdx].count) {
                         newLineFlag = false
                         lineArray[lIdx].append(idx)
+                        break
                     }
                 }
             }

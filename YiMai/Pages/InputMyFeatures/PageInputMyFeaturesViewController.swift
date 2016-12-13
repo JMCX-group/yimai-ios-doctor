@@ -24,6 +24,13 @@ class PageInputMyFeaturesViewController: PageViewController {
         BodyView.Clear()
         BodyView.DrawFullBody()
         BodyView.SwapDelBtnStatus()
+        
+        if(0 == BodyView.AllTagsFromServer.count) {
+            BodyView.FullPageLoading.Show()
+            BodyView.FeaturesActions.GetAllTags.YMGetAllTagList()
+        } else {
+            BodyView.LoadOtherTags(BodyView.AllTagsFromServer)
+        }
     }
     
 //    override func viewWillDisappear(animated: Bool) {

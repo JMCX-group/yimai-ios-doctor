@@ -99,6 +99,8 @@ public class YMCommonStrings {
     public static let CS_PAGE_AUTH_PROCESSING = "PageAuthProcessing"
     
     public static let CS_PAGE_GET_APPOINMENT_MSG_LIST = "PageAppointmentReplyList"
+    public static let CS_PAGE_AUTH_COMPLETE = "PageAuthComplete"
+    public static let CS_PAGE_BLACKLIST_NAME = "PageBlacklist"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

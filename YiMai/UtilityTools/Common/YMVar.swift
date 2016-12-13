@@ -27,8 +27,11 @@ public class YMVar:NSObject {
         YMVar.MyNewAppointmentInfo.removeAll()
     }
     
-    public static func GetStringByKey(dict: [String: AnyObject], key: String, defStr: String = "") -> String {
-        let ret = dict[key]
+    public static func GetStringByKey(dict: [String: AnyObject]?, key: String, defStr: String = "") -> String {
+        if(nil == dict) {
+            return defStr
+        }
+        let ret = dict![key]
         if(nil == ret) {
             return defStr
         }

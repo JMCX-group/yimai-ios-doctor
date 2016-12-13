@@ -83,7 +83,7 @@ public class PageMyInfoCardBodyView: PageBodyView {
         let tipLabel = YMLayout.GetNomalLabel("", textColor: YMColors.FontGray,
                                               fontSize: 28.LayoutVal())
         
-        let tipHighLight = ActiveType.Custom(pattern: "医脉")
+        let tipHighLight = ActiveType.Custom(pattern: "医者脉连")
         tipLabel.enabledTypes = [tipHighLight]
         tipLabel.customColor[tipHighLight] = YMColors.FontBlue
         tipLabel.text = "使用医者脉连医生端或患者端扫码添加"

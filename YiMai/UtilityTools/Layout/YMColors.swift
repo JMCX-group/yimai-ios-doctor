@@ -40,4 +40,5 @@ public class YMColors {
     public static let WeekdayLineColor = UIColor(red: 0xb8.RGBVal(), green: 0xb8.RGBVal(), blue: 0xb8.RGBVal(), alpha: 1)
     public static let WeekdayDisabledFontColor = UIColor(red: 0xb8.RGBVal(), green: 0xb8.RGBVal(), blue: 0xb8.RGBVal(), alpha: 1)
     public static let WeekdaySelectedColor = UIColor(red: 0xdf.RGBVal(), green: 0xf4.RGBVal(), blue: 0xfc.RGBVal(), alpha: 1)
+    public static let OpacityBlackMask = UIColor(red: 0x00.RGBVal(), green: 0x00.RGBVal(), blue: 0x00.RGBVal(), alpha: 0.7)
 }

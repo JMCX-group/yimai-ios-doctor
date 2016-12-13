@@ -13,7 +13,8 @@ class YMIMUtility: NSObject {
     static func GetRecentContactDoctorsIdList() -> [String] {
         var idList = [String]()
         
-        
+        let blacklistStr = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "blacklist")
+        let blacklist = blacklistStr.componentsSeparatedByString(",")
         let conversationList = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
 
         var i: Int = 0
@@ -22,8 +23,14 @@ class YMIMUtility: NSObject {
             let fromId = "\(conversation.userId)"
             
             if(targetId == YMVar.MyDoctorId) {
+                if(blacklist.contains(fromId)) {
+                    continue
+                }
                 idList.append(fromId)
             } else {
+                if(blacklist.contains(targetId)) {
+                    continue
+                }
                 idList.append(targetId)
             }
             

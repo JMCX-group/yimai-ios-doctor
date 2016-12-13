@@ -12,13 +12,30 @@ import UIKit
 class PageInputMyFeaturesActions: PageJumpActions {
     var TargetView: PageInputMyFeaturesBodyView!
     var FeaturesApi: YMAPIUtility!
+    var GetAllTags: YMAPIUtility!
     
     override func ExtInit() {
         super.ExtInit()
         
         FeaturesApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_CHANGE_USER_TAGS,
                                    success: TagChangeSuccess, error: TagChangeError)
+        
+        GetAllTags = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_ALL_TAGS,
+                                  success: GetAllTagSuccess, error: GetAllTagError)
         TargetView = Target as! PageInputMyFeaturesBodyView
+    }
+    
+    func GetAllTagSuccess(data: NSDictionary?) {
+//        print(data)
+        let realData = data!["data"] as! [[String: AnyObject]]
+        TargetView.AllTagsFromServer = realData
+        TargetView.LoadOtherTags(realData)
+        TargetView.FullPageLoading.Hide()
+    }
+    
+    func GetAllTagError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetView.FullPageLoading.Hide()
     }
     
     func TagChangeSuccess(data: NSDictionary?) {
@@ -70,5 +87,9 @@ class PageInputMyFeaturesActions: PageJumpActions {
     
     func DelTags(sender: YMButton) {
         TargetView.DoDelete()
+    }
+    
+    func SaveAllTags(sender: YMButton) {
+        TargetView.DoSave()
     }
 }

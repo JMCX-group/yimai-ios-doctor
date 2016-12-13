@@ -406,6 +406,10 @@ public class PageAppointmentSelectTimeBodyView: PageBodyView {
         
         LastView = autoLabel
     }
+    
+    func ShowAvailableDate(docInfo: [String: AnyObject]) {
+        
+    }
 }
 
 

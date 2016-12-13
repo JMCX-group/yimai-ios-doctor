@@ -55,7 +55,7 @@ class PageYiMaiRecentContactList: PageBodyView {
         
         BodyView.addSubview(cell)
         cell.UserStringData = "\(docInfo["id"]!)"
-        cell.UserObjectData = ["name": name]
+        cell.UserObjectData = docInfo//["name": name]
         if (nil == prev) {
             cell.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 150.LayoutVal())
         } else {
@@ -88,6 +88,9 @@ class PageYiMaiRecentContactList: PageBodyView {
     }
     
     func LoadData(doctors: [[String: AnyObject]]) {
+        if(0 == doctors.count) {
+            return
+        }
         let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
 
         YMLayout.ClearView(view: BodyView)

@@ -23,6 +23,10 @@ public class PagePersonalPrivateSettingBodyView: PageBodyView {
         var prev = DrawSwitchPanel("加我为好友时需要验证", switchBtn: FriendVerifySwitch, prev: nil)
         prev = DrawSwitchPanel("好友的好友可向我发起约诊", switchBtn: AllowAppointment, prev: prev)
         
+        let btn = YMLayout.GetCommonFullWidthTouchableView(BodyView, useObject: privateActions!, useMethod: "BlacklistTouched:".Sel(),
+                                                 label: UILabel(), text: "黑名单")
+        btn.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: btn.height)
+        
         FriendVerifySwitch.addTarget(privateActions!, action: "SaveVerifyStatus:".Sel(), forControlEvents: UIControlEvents.ValueChanged)
         AllowAppointment.addTarget(privateActions!, action: "SaveAllowStatus:".Sel(), forControlEvents: UIControlEvents.ValueChanged)
     }

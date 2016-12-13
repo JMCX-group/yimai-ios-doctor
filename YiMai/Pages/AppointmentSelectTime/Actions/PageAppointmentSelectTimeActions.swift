@@ -10,6 +10,25 @@ import Foundation
 import UIKit
 
 public class PageAppointmentSelectTimeActions: PageJumpActions {
+    var DocInfoApi: YMAPIUtility!
+    var TargetCtrl: PageAppointmentSelectTimeViewController!
+    
+    override func ExtInit() {
+        super.ExtInit()
+        
+        TargetCtrl = Target as! PageAppointmentSelectTimeViewController
+        DocInfoApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_DOCTOR_BY_ID+"-fromAppointment",
+                                  success: GetInfoSuccess, error: GetInfoError)
+    }
+    
+    func GetInfoSuccess(data: NSDictionary?) {
+        TargetCtrl.BodyView?.FullPageLoading.Hide()
+    }
+    
+    func GetInfoError(error: NSError) {
+        TargetCtrl.BodyView?.FullPageLoading.Hide()
+    }
+    
     public func DateSelected(sender: UIGestureRecognizer) {
         let pageController = self.Target as! PageAppointmentSelectTimeViewController
         
@@ -33,3 +52,10 @@ public class PageAppointmentSelectTimeActions: PageJumpActions {
 
     }
 }
+
+
+
+
+
+
+

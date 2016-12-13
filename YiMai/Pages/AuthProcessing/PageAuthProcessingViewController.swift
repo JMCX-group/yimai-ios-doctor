@@ -19,6 +19,5 @@ class PageAuthProcessingViewController: PageViewController {
     }
 
     override func PagePreRefresh() {
-         
     }
 }

@@ -170,7 +170,7 @@ public class PageAppointmentDetailBodyView: PageBodyView {
                       padding: 12.LayoutVal(),
                       width: docName.width, height: docName.height)
         
-        jobTitle.text = data["job_title"] as? String
+        jobTitle.text = YMVar.GetStringByKey(data, key: "job_title", defStr: "医生")
         jobTitle.textColor = YMColors.FontGray
         jobTitle.font = YMFonts.YMDefaultFont(20.LayoutVal())
         jobTitle.sizeToFit()
@@ -436,6 +436,10 @@ public class PageAppointmentDetailBodyView: PageBodyView {
     private func DrawTimelineTimelabel(time: String, icon: UIImageView) {
         let timeArr = time.componentsSeparatedByString(" ")
         
+        
+        if(timeArr.count < 2) {
+            return
+        }
         let day = timeArr[0]
         let time = timeArr[1]
         

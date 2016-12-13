@@ -81,6 +81,6 @@ public class PageIndexViewController: PageViewController {
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
         IndexTopView!.UpdateMsgNotifyStatus()
         
-        BodyView?.HideAuthInfo()
+//        BodyView?.HideAuthInfo()
     }
 }

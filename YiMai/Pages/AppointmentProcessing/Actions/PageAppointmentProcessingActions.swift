@@ -22,13 +22,13 @@ public class PageAppointmentProcessingActions: PageJumpActions {
     override func ExtInit() {
         super.ExtInit()
         
-        DetailApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_APPOINTMENT_DETAIL,
+        DetailApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_APPOINTMENT_DETAIL + "fromProcessing",
                                  success: DetailGetSuccess, error: DetailGetError)
         
-        CompleteApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_APPOINTMENT_COMPLETE,
+        CompleteApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_APPOINTMENT_COMPLETE + "fromProcessing",
                                  success: CompleteSuccess, error: CompleteError)
         
-        RescheduleApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_ACCEPT_APPOINTMENT,
+        RescheduleApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_RESCHEDULE_APPOINTMENT + "fromProcessing",
                                    success: RescheduleSuccess, error: RescheduleError)
         
         TargetView = self.Target as? PageAppointmentProcessingBodyView
@@ -101,7 +101,7 @@ public class PageAppointmentProcessingActions: PageJumpActions {
     public func AdmissionTimeSelected(sender: YMButton) {
         let formatter = NSDateFormatter()
         //日期样式
-        formatter.dateFormat = "yyyy年MM月dd日 a"
+        formatter.dateFormat = "yyyy-MM-dd hh:00:00"
         let dateStr = formatter.stringFromDate(TargetView!.AdmissionDatePicker.date)
         
         TargetView?.HideAdmissionTime()

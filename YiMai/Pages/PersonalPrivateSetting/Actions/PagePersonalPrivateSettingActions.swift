@@ -21,4 +21,8 @@ public class PagePersonalPrivateSettingActions: PageJumpActions {
     public func SaveAllowStatus(sender: UISwitch) {
         YMLocalData.SavePrivateInfo(YMPersonalPrivateStrings.ALLOW_APPOINTMENT_KEY, data: sender.on)
     }
+    
+    func BlacklistTouched(sender: UIGestureRecognizer) {
+        DoJump(YMCommonStrings.CS_PAGE_BLACKLIST_NAME)
+    }
 }

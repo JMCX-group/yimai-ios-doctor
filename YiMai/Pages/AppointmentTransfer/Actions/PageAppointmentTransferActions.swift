@@ -21,7 +21,7 @@ public class PageAppointmentTransferActions: PageJumpActions, UINavigationContro
 
     override func ExtInit() {
         super.ExtInit()
-        ApiUtility = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_CREATE_NEW_APPOINTMENT,
+        ApiUtility = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_TRANS_APPOINTMENT,
                                   success: AppointmentTransferSuccess,
                                   error: AppointmentTransferError)
         
@@ -37,12 +37,15 @@ public class PageAppointmentTransferActions: PageJumpActions, UINavigationContro
     }
     
     public func AppointmentTransferSuccess(data: NSDictionary?) {
+        TargetController?.Loading?.Hide()
+        NavController?.popViewControllerAnimated(true)
     }
     
     public func AppointmentTransferError(err: NSError) {
         YMAPIUtility.PrintErrorInfo(err)
         TargetController?.Loading?.Hide()
-        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
+        NavController?.popViewControllerAnimated(true)
+//        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
     }
     
     public func DoAppointment(_: YMButton) {
@@ -52,8 +55,7 @@ public class PageAppointmentTransferActions: PageJumpActions, UINavigationContro
             TargetController?.Loading?.Show()
             ApiUtility?.YMAppointmentTransfer([
                     "id": PageAppointmentAcceptBodyView.AppointmentID,
-                    "doctor_id": uploadData!["doctor"]!,
-                    "reason": "转诊"
+                    "doctor_id": "\(uploadData!["doctor"]!)"
                 ])
         }
     }

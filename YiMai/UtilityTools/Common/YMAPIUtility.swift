@@ -100,6 +100,8 @@ public class YMAPIInterfaceURL {
     static let WalletRecord = YMAPIInterfaceURL.ApiBaseUrl + "/wallet/record"
     
     static let RequirePaperCard = YMAPIInterfaceURL.ApiBaseUrl + "/card/submit"
+    
+    static let GetAllTagList = YMAPIInterfaceURL.ApiBaseUrl + "/tag/all"
 }
 
 public class YMAPICommonVariable {
@@ -837,6 +839,10 @@ public class YMAPIUtility {
     
     public func YMRequirePaperCard() {
         YMAPIGet(YMAPIInterfaceURL.RequirePaperCard, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetAllTagList() {
+        YMAPIGet(YMAPIInterfaceURL.GetAllTagList, param: nil, progressHandler: nil)
     }
 }
 

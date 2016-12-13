@@ -17,4 +17,24 @@ public class ApointmentAcceptDetailViewController: PageViewController {
         BodyView = ApointmentAcceptDetailBodyView(parentView: self.SelfView!, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "接受约诊请求", navController: self.NavController!)
     }
+    
+    override func PagePreRefresh() {
+        if(isMovingToParentViewController()) {
+            BodyView?.BodyView.removeFromSuperview()
+            TopView?.TopViewPanel.removeFromSuperview()
+            
+            BodyView = ApointmentAcceptDetailBodyView(parentView: self.SelfView!, navController: self.NavController!)
+            TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "接受约诊请求", navController: self.NavController!)
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 //
-//  PageAuthProcessingBodyView.swift
+//  PageAuthCompleteBodyView.swift
 //  YiMai
 //
 //  Created by old-king on 16/11/6.
@@ -11,8 +11,8 @@ import Neon
 import Toucan
 import ImageViewer
 
-class PageAuthProcessingBodyView: PageBodyView, ImageProvider {
-    var ProcessingActions: PageAuthProcessingActions!
+class PageAuthCompleteBodyView: PageBodyView, ImageProvider {
+    var ProcessingActions: PageAuthCompleteActions!
     
     var ImageList = [UIImageView]()
     let AuthPanel = UIScrollView()
@@ -20,13 +20,13 @@ class PageAuthProcessingBodyView: PageBodyView, ImageProvider {
     override func ViewLayout() {
         super.ViewLayout()
         
-        ProcessingActions = PageAuthProcessingActions(navController: self.NavController, target: self)
+        ProcessingActions = PageAuthCompleteActions(navController: self.NavController, target: self)
         DrawFullBody()
     }
     
     func DrawLabel() {
         let label = ActiveLabel()
-        label.text = "认证中"
+        label.text = "已认证"
         label.textColor = YMColors.FontBlue
         label.font = YMFonts.YMDefaultFont(30.LayoutVal())
         label.sizeToFit()

@@ -74,7 +74,9 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_AUTH_PROCESSING: true,
         YMCommonStrings.CS_PAGE_MY_WALLET_NAME: true,
         YMCommonStrings.CS_PAGE_MY_WALLET_RECORD: true,
-        YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST: true
+        YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST: true,
+        YMCommonStrings.CS_PAGE_AUTH_COMPLETE: true,
+        YMCommonStrings.CS_PAGE_BLACKLIST_NAME: true
     ]
 }
 

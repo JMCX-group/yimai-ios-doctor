@@ -14,7 +14,7 @@ typealias YMBeforeTopGoBack = (() -> Bool)
 public class PageCommonTopView : NSObject {
     public let TopViewPanel : UIView = UIView()
     private var TopBackground = UIImageView()
-    private var TopTitle = UILabel()
+    var TopTitle = UILabel()
     private var TopGoBackBtn = UIImageView()
     
     var BeforeGoBack: YMBeforeTopGoBack?

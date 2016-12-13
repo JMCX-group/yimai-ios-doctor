@@ -34,6 +34,7 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_GET_LEVEL2_RELATION = "apiGetLevel2Relation"
     public static let CS_API_ACTION_GET_NEW_FRIENDS = "apiGetNewFriends"
     
+    public static let CS_API_ACTION_TRANS_APPOINTMENT = "apiTransAppointment"
     public static let CS_API_ACTION_CREATE_NEW_APPOINTMENT = "apiCreateNewAppointment"
     public static let CS_API_ACTION_UPLOAD_PHOTO_APPOINTMENT = "apiUploadAppointmentPhoto"
     public static let CS_API_ACTION_GET_APPOINTMENT_LIST = "apiGetAppointmentList"
@@ -92,6 +93,9 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_SUBMIT_PAPER_CARD_REQUIRE = "apiSubmitPaperCardRequire"
     public static let CS_API_ACTION_PAPER_CARD_REQUIRE = "apiPaperCardRequire"
+    
+    public static let CS_API_ACTION_GET_ALL_TAGS = "apiGetAllTags"
+    public static let CS_API_ACTION_UPDATE_BLACKLIST = "apiUpdateBlackList"
 }
 
 

@@ -27,11 +27,15 @@ public class PageAppointmentSelectTimeViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        print(PageAppointmentViewController.SelectedDoctor)
+//        print(PageAppointmentViewController.SelectedDoctor)
     }
     
     public func GetSelectedTime() {
         
+    }
+    
+    deinit {
+        print("this????")
     }
 }
 
