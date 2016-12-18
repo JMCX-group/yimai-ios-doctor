@@ -92,6 +92,13 @@ public class PageIndexActions: PageJumpActions {
         }
     }
     
+    func IndexScrollImageTouched(sender: UIGestureRecognizer) {
+        let img = sender.view! as! YMTouchableImageView
+
+        PageShowWebViewController.TargetUrl = img.UserStringData
+        DoJump(YMCommonStrings.CS_PAGE_SHOW_WEB_PAGE)
+    }
+    
     public func DoSearch(editor: YMTextField) {
         let searchKey = editor.text
         if(YMValueValidator.IsEmptyString(searchKey)) {

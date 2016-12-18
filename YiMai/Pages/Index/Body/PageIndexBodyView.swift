@@ -16,7 +16,8 @@ public class PageIndexBodyView {
     
     private var BodyView: UIScrollView = UIScrollView()
     
-    private var ScrollImageView: UIScrollView = UIScrollView()
+//    private var ScrollImageView: UIView = UIView()
+    private var ScrollImageView: YMImageHScrollView = YMImageHScrollView(interval: 5)
     private var OperatorPanel: UIView = UIView()
     
     private var Face2FaceButton: UIView? = nil
@@ -31,7 +32,7 @@ public class PageIndexBodyView {
     
     private var ContactArray: [UIView] = [UIView]()
     private var MoreContactButton: UIImageView? = nil
-    
+
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: PageIndexActions){
         self.init()
         self.ParentView = parentView
@@ -51,20 +52,41 @@ public class PageIndexBodyView {
         
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: ContactPanel, padding: 10.LayoutVal())
     }
+
+    func RefreshScrollImage() {
+        if(0 == YMBackgroundRefresh.BroadcastFirstPage.count) {
+            ScrollImageView.SetImages([YMLayout.GetSuitableImageView("IndexScrollPhoto")]).StartAutoScroll()
+            YMDelay(0.5, closure: {
+                self.RefreshScrollImage()
+            })
+        } else {
+            var imageList = [YMTouchableImageView]()
+            for article in YMBackgroundRefresh.BroadcastFirstPage {
+                let imgUrl = YMVar.GetStringByKey(article, key: "img_url")
+                let articleUrl = YMVar.GetStringByKey(article, key: "url")
+                
+                let newImage = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "IndexScrollImageTouched:".Sel(), imageName: "IndexScrollPhoto")
+                YMLayout.LoadImageFromServer(newImage, url: imgUrl)
+                newImage.UserStringData = articleUrl
+                imageList.append(newImage)
+            }
+            
+            ScrollImageView.SetImages(imageList).StartAutoScroll()
+
+            YMDelay(3600 * 24, closure: {
+                self.RefreshScrollImage()
+            })
+        }
+    }
     
     private func DrawScrollPanel() {
-        //TODO: 此处应该显示轮播图
         let tempScrollImage = YMLayout.GetSuitableImageView("IndexScrollPhoto")
-//        BodyView.addSubview(tempScrollImage)
-//        tempScrollImage.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: tempScrollImage.height)
-        
-        let scrollView = JMCarouselScrollView(
-            frame: CGRect(x: 0, y: 0, width:UIScreen.mainScreen().bounds.width, height: tempScrollImage.height),
-            imageArray: [UIImage(named: "IndexScrollPhoto")!, UIImage(named: "IndexScrollPhoto")!],
-            pagePointColor: UIColor.whiteColor(),
-            stepTime: 3.0)
-        BodyView.addSubview(scrollView)
-        scrollView.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: tempScrollImage.height)
+
+        ScrollImageView.removeFromSuperview()
+        BodyView.addSubview(ScrollImageView)
+        ScrollImageView.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: tempScrollImage.height)
+        ScrollImageView.SetImages([YMLayout.GetSuitableImageView("IndexScrollPhoto")]).StartAutoScroll()
+        RefreshScrollImage()
     }
     
     private func SetOperatorContent(operatorButton: UIView, imageName: String, text: String) {
@@ -187,7 +209,7 @@ public class PageIndexBodyView {
         DoDoctorAuthPanel.addSubview(DoctorAuthButton!)
         DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
     }
-    
+
     private func GetContactButton(image: UIImage, name: String, desc: String,
                                   isDoc: Bool = false, userData: [String: AnyObject]? = nil) -> YMTouchableView {
         let buttonView = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoChat:".Sel())

@@ -431,6 +431,7 @@ public class YMAPIUtility {
     }
     
     private func YMGetInitDataError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_LOGIN_STATUS, data: false)
         //self.YMGetAPPInitData()
     }

@@ -43,7 +43,7 @@ public class PageMyPatientListBodyView: PageBodyView {
             label.textColor = YMColors.FontGray
             
             parent.addSubview(cell)
-            cell.anchorToEdge(Edge.Left, padding: 0, width: 250.LayoutVal(), height: 200.LayoutVal())
+            cell.anchorToEdge(Edge.Left, padding: 0, width: 375.LayoutVal(), height: 200.LayoutVal())
             
             cell.addSubview(icon)
             cell.addSubview(titleLabel)
@@ -59,9 +59,9 @@ public class PageMyPatientListBodyView: PageBodyView {
         
         let patientCell = GetCell("PageMyPatientListIconPatient", label: PatientCountLabel, title: "患者", parent: CountView)
         let appointmentCell = GetCell("PageMyPatientListIconAppointment", label: AppointmentCountLabel, title: "约诊", parent: CountView)
-        let f2cCell = GetCell("PageMyPatientListIconF2F", label: Face2FaceCountLabel, title: "当面咨询", parent: CountView)
+//        let f2cCell = GetCell("PageMyPatientListIconF2F", label: Face2FaceCountLabel, title: "当面咨询", parent: CountView)
         
-        CountView.groupAndFill(group: Group.Horizontal, views: [patientCell, appointmentCell, f2cCell], padding: 0)
+        CountView.groupAndFill(group: Group.Horizontal, views: [patientCell, appointmentCell], padding: 0)
         
         let divider1 = UIView()
         let divider2 = UIView()
@@ -69,10 +69,11 @@ public class PageMyPatientListBodyView: PageBodyView {
         divider2.backgroundColor = YMColors.DividerLineGray
         
         CountView.addSubview(divider1)
-        CountView.addSubview(divider2)
+//        CountView.addSubview(divider2)
         
-        divider1.anchorToEdge(Edge.Left, padding: 250.LayoutVal(), width: YMSizes.OnPx, height: CountView.height)
-        divider2.anchorToEdge(Edge.Right, padding: 250.LayoutVal(), width: YMSizes.OnPx, height: CountView.height)
+        divider1.anchorInCenter(width: YMSizes.OnPx, height: divider1.height)
+//        divider1.anchorToEdge(Edge.Left, padding: 250.LayoutVal(), width: YMSizes.OnPx, height: CountView.height)
+//        divider2.anchorToEdge(Edge.Right, padding: 250.LayoutVal(), width: YMSizes.OnPx, height: CountView.height)
     }
     
     func Clear() {
@@ -95,11 +96,11 @@ public class PageMyPatientListBodyView: PageBodyView {
         patientListPanel.align(Align.UnderMatchingLeft, relativeTo: CountView, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 0)
         
         let appointmentCount = "\(data["appointment_count"]!)次"
-        let f2fCount = "\(data["face_to_face_count"]!)次"
+//        let f2fCount = "\(data["face_to_face_count"]!)次"
         let patientCount = "\(data["patient_count"]!)人"
         
         ShowNumbers(appointmentCount, label: AppointmentCountLabel)
-        ShowNumbers(f2fCount, label: Face2FaceCountLabel)
+//        ShowNumbers(f2fCount, label: Face2FaceCountLabel)
         ShowNumbers(patientCount, label: PatientCountLabel)
         
         func GetPatientCell(patientInfo: [String: AnyObject], parent: UIView, prev: UIView?) -> UIView {
@@ -132,7 +133,7 @@ public class PageMyPatientListBodyView: PageBodyView {
             let phone = UILabel()
             let admissionIcon = YMLayout.GetSuitableImageView("PageMyPatientListIconAdmission")
             let appointmentCount = UILabel()
-            let f2fCount = UILabel()
+//            let f2fCount = UILabel()
             let border = UIView()
             border.backgroundColor = YMColors.DividerLineGray
             
@@ -146,7 +147,7 @@ public class PageMyPatientListBodyView: PageBodyView {
             cell.addSubview(phone)
             cell.addSubview(admissionIcon)
             cell.addSubview(appointmentCount)
-            cell.addSubview(f2fCount)
+//            cell.addSubview(f2fCount)
             cell.addSubview(border)
             
             if("<null>" != "\(patientInfo["avatar"]!)") {
@@ -189,12 +190,12 @@ public class PageMyPatientListBodyView: PageBodyView {
                 appointmentCount.sizeToFit()
             }
             
-            if("0" != "\(patientInfo["face_to_face_count"])") {
-                f2fCount.text = "当面咨询 (\(patientInfo["face_to_face_count"]!)次)"
-                f2fCount.textColor = YMColors.FontGray
-                f2fCount.font = YMFonts.YMDefaultFont(22.LayoutVal())
-                f2fCount.sizeToFit()
-            }
+//            if("0" != "\(patientInfo["face_to_face_count"])") {
+//                f2fCount.text = "当面咨询 (\(patientInfo["face_to_face_count"]!)次)"
+//                f2fCount.textColor = YMColors.FontGray
+//                f2fCount.font = YMFonts.YMDefaultFont(22.LayoutVal())
+//                f2fCount.sizeToFit()
+//            }
             
             patientHead.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: patientHead.width, height: patientHead.height)
             name.anchorInCorner(Corner.TopLeft, xPad: 180.LayoutVal(), yPad: 32.LayoutVal(), width: name.width, height: name.height)
@@ -206,7 +207,7 @@ public class PageMyPatientListBodyView: PageBodyView {
             phone.align(Align.ToTheRightCentered, relativeTo: age, padding: 6.LayoutVal(), width: phone.width, height: phone.height)
             admissionIcon.align(Align.UnderMatchingLeft, relativeTo: infoIcon, padding: 14.LayoutVal(), width: admissionIcon.width, height: admissionIcon.height)
             appointmentCount.align(Align.ToTheRightCentered, relativeTo: admissionIcon, padding: 6.LayoutVal(), width: appointmentCount.width, height: appointmentCount.height)
-            f2fCount.align(Align.ToTheRightCentered, relativeTo: appointmentCount, padding: 6.LayoutVal(), width: f2fCount.width, height: f2fCount.height)
+//            f2fCount.align(Align.ToTheRightCentered, relativeTo: appointmentCount, padding: 6.LayoutVal(), width: f2fCount.width, height: f2fCount.height)
             border.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: YMSizes.OnPx)
             return cell
         }

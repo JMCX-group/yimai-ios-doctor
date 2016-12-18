@@ -14,6 +14,7 @@ class YMBackgroundRefresh: NSObject {
     static var ShowNewFriendFlag = false
     static var ShowNewFriendCount: Int = 0
     static var ContactNew = [String: AnyObject]()
+    static var BroadcastFirstPage = [[String: AnyObject]]()
     
     static var LastNewFriends = [String: [String:AnyObject]]()
     
@@ -169,7 +170,7 @@ class YMBackgroundRefresh: NSObject {
     
     
     static func DoApi() {
-        GetBroadcastFirstPage.YMGetAllRadio("1")
+        GetBroadcastFirstPage.YMGetAllRadio()
         GetNewAdmissionList.YMGetNewAdmissionList()
         GetNewAppointmentList.YMGetNewAppointmentList()
         L1RelationApi.YMGetLevel1Relation()
@@ -260,13 +261,14 @@ class YMBackgroundRefresh: NSObject {
     
     static func GetBroadcastSuccess(data: NSDictionary?) {
         YMDelay(YMBackgroundRefresh.SuccessDelay) {
-            GetBroadcastFirstPage.YMGetAllRadio("1")
+            GetBroadcastFirstPage.YMGetAllRadio()
         }
         
         if(nil == data) {
             return
         }
         let broadcastArr = data!["data"] as! [[String: AnyObject]]
+        BroadcastFirstPage = broadcastArr
         if(0 == broadcastArr.count) {
             YMVar.MyNewBroadcastInfo.removeAll()
         } else {
@@ -295,7 +297,7 @@ class YMBackgroundRefresh: NSObject {
 
     static func GetBroadcastError(_: NSError) {
         YMDelay(YMBackgroundRefresh.ErrorDelay) {
-            GetBroadcastFirstPage.YMGetAllRadio("1")
+            GetBroadcastFirstPage.YMGetAllRadio()
         }
     }
     

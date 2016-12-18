@@ -88,8 +88,10 @@ public class PageAdmissionChargeSettingBodyView: PageBodyView {
         
         let switchCell = UIView()
         panel.addSubview(switchCell)
-        switchCell.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 80.LayoutVal())
+//        switchCell.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 80.LayoutVal())
+        switchCell.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 0)
         switchCell.backgroundColor = YMColors.White
+        switchCell.hidden = true
         
         let chargeSwitchLabel = UILabel()
         chargeSwitchLabel.text = "接诊收费"
@@ -130,6 +132,7 @@ public class PageAdmissionChargeSettingBodyView: PageBodyView {
         CommonCharge?.layer.borderWidth = YMSizes.OnPx
         CommonCharge?.layer.masksToBounds = true
         CommonCharge?.keyboardType = UIKeyboardType.NumberPad
+        CommonCharge?.EditEndCallback = CommonChargeChange
         
         
         let chargeLeftLabel = UILabel()
@@ -155,6 +158,23 @@ public class PageAdmissionChargeSettingBodyView: PageBodyView {
         YMLayout.SetViewHeightByLastSubview(panel, lastSubView: chargeCell)
     }
     
+    func CommonChargeChange(input: YMTextField) {
+        let v = input.text
+        
+        if(YMValueValidator.IsEmptyString(v)) {
+            input.text = "1"
+            return
+        }
+        
+        let iv = Int32(v!)
+        if(iv < 1) {
+            input.text = "1"
+            return
+        }
+        
+        input.text = "\(iv!)"
+    }
+    
     func SetChargeOn(on: Bool) {
         if(on) {
             CommonChargeLabel.textColor = YMColors.FontGray
@@ -170,7 +190,7 @@ public class PageAdmissionChargeSettingBodyView: PageBodyView {
     }
 
     func LoadData() {
-        let chargeSwitch = "\(YMVar.MyUserInfo["fee_switch"]!)"
+        let chargeSwitch = "1" //"\(YMVar.MyUserInfo["fee_switch"]!)"
         let commonCarge = "\(YMVar.MyUserInfo["fee"]!)"
         let f2fCarge = "\(YMVar.MyUserInfo["fee_face_to_face"]!)"
         
