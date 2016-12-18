@@ -127,6 +127,7 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
     public func DoAppointment(_: YMButton) {
         let uploadData = TargetController!.VerifyInput()
         
+        print(uploadData)
         if(nil != uploadData) {
             TargetController?.Loading?.Show()
             ApiUtility?.YMCreateNewAppointment(uploadData!)
@@ -139,6 +140,7 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
                 self.DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME)
             })
         } else {
+            PageAppointmentSelectTimeViewController.SelectedDoctor = PageAppointmentViewController.SelectedDoctor
             self.DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME)
         }
     }

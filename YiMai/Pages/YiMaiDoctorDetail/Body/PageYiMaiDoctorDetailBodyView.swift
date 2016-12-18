@@ -13,7 +13,9 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
     private var DetailActions: PageYiMaiDoctorDetailActions? = nil
     public var Loading: YMPageLoadingView? = nil
     public var AddFriendBtn: YMButton? = nil
+    public var AgreeFriendBtn: YMButton? = nil
     public static var DocId: String = ""
+    public static var IsFromNewFriendToAgree: Bool = false
     
     var DoctorInfo: [String: AnyObject]? = nil
     
@@ -112,6 +114,14 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         let addFirendBtn = YMButton()
         let appointmentBtn = YMButton()
         let chatBtn = YMButton()
+        let agreeBtn = YMButton()
+        
+        agreeBtn.backgroundColor = YMColors.FontBlue
+        agreeBtn.layer.cornerRadius = 10.LayoutVal()
+        agreeBtn.layer.masksToBounds = true
+        agreeBtn.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        agreeBtn.setTitle("通过验证", forState: UIControlState.Normal)
+        agreeBtn.titleLabel?.font = YMFonts.YMDefaultFont(32.LayoutVal())
         
         addFirendBtn.backgroundColor = YMColors.FontBlue
         addFirendBtn.layer.cornerRadius = 10.LayoutVal()
@@ -136,8 +146,23 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         chatBtn.titleLabel?.font = YMFonts.YMDefaultFont(32.LayoutVal())
         
         AddFriendBtn = addFirendBtn
+        AgreeFriendBtn = agreeBtn
         
-        if(0 == friendFlag) {
+        if(PageYiMaiDoctorDetailBodyView.IsFromNewFriendToAgree) {
+            PageYiMaiDoctorDetailBodyView.IsFromNewFriendToAgree = false
+            buttonPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: 0)
+
+            
+//            buttonPanel.addSubview(agreeBtn)
+//            buttonPanel.addSubview(appointmentBtn)
+//            
+//            agreeBtn.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 320.LayoutVal(), height: 70.LayoutVal())
+//            appointmentBtn.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: 320.LayoutVal(), height: 70.LayoutVal())
+//            appointmentBtn.backgroundColor = YMColors.CommonBottomGray
+//            appointmentBtn.enabled = false
+//            
+//            agreeBtn.addTarget(DetailActions!, action: "Agree:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        } else if(0 == friendFlag) {
             buttonPanel.addSubview(addFirendBtn)
             buttonPanel.addSubview(appointmentBtn)
             

@@ -206,7 +206,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         }
     }
     
-    private func DrawAdmissionList(data: [String: AnyObject], prevView: UIView?, parent: UIView, actionMethod: Selector) -> UIView {
+    private func DrawAdmissionList(data: [String: AnyObject], prevView: UIView?, parent: UIView, actionMethod: Selector) -> UIView? {
         let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: actionMethod)
         cell.UserObjectData = data
 
@@ -223,6 +223,10 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
 //    "status": 待确认,
 //    "doctor_is_auth": 0]
         
+        let docId = YMVar.GetStringByKey(data, key: "doctor_id")
+        if(docId != YMVar.MyDoctorId) {
+            return prevView
+        }
         
         parent.addSubview(cell)
         if(nil == prevView) {

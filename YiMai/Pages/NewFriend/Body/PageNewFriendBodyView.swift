@@ -21,6 +21,9 @@ public class PageNewFriendBodyView: PageBodyView {
     
     var FriendsListToShow = [[String: AnyObject]]()
     var AllFriendsList = [[String: AnyObject]]()
+    
+    var Loading: Bool = true
+    var Searching: Bool = false
 
     override func ViewLayout() {
         super.ViewLayout()
@@ -29,6 +32,22 @@ public class PageNewFriendBodyView: PageBodyView {
         
         DrawSearchPanel()
         DrawQuickLinkPanel()
+        
+        Refresh(true)
+    }
+    
+    override func BodyViewEndDragging() {
+        super.BodyViewEndDragging()
+        let yOffset = self.BodyView.contentOffset.y
+        if(yOffset < -5.0) {
+            FullPageLoading.Show()
+            YMDelay(1, closure: { 
+                let data = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as? [[String : AnyObject]]
+                self.DrawFriendsList(data!)
+                self.FullPageLoading.Hide()
+            })
+            
+        }
     }
 
     public func GetList() {
@@ -36,10 +55,12 @@ public class PageNewFriendBodyView: PageBodyView {
     }
     
     public func LoadData(data: [[String: AnyObject]]) {
+        Loading = true
         DrawFriendsList(data)
+        Loading = false
     }
     
-    func DrawFriendsList(data: [[String: AnyObject]], hightlight: ActiveType = ActiveType.URL) {
+    func DrawFriendsList(data: [[String: AnyObject]], key: String = "", highlight: ActiveType = ActiveType.URL) {
         FriendsListToShow = data
         func DrawStatus(status: String, cell: YMTouchableView) {
             if("apply" == status) {
@@ -107,8 +128,8 @@ public class PageNewFriendBodyView: PageBodyView {
             for var v in friendsData! {
                 v["status"] = "apply"
                 let isAdded = "\(v["is_add_friend"]!)"
-                let id = YMVar.GetStringByKey(v, key: "id")
-                var repeated = false
+//                let id = YMVar.GetStringByKey(v, key: "id")
+                let repeated = false
                 
 //                for v2 in FriendsListToShow {
 //                    let id2 = YMVar.GetStringByKey(v2, key: "id")
@@ -117,10 +138,22 @@ public class PageNewFriendBodyView: PageBodyView {
 //                        break
 //                    }
 //                }
+                
+                if("" != key) {
+                    let name = YMVar.GetStringByKey(v, key: "name")
+                    if(!name.containsString(key)) {
+                        continue
+                    }
+                }
+                
+                let id = YMVar.GetStringByKey(v, key: "id")
+                if(id == YMVar.MyDoctorId) {
+                    continue
+                }
 
                 if("0" == isAdded &&  !repeated) {
                     LastCell = PageSearchResultCell.LayoutACell(ListPanel, info: v, prev: LastCell,
-                                                                act: NewFriendActions!, sel: PageJumpActions.PageJumpToByViewSenderSel, highlight: ActiveType.URL)
+                                                                act: NewFriendActions!, sel: "GoToFriendCardInfoPanel:".Sel(), highlight: highlight)
                     DrawStatus(v["status"]! as! String, cell: LastCell!)
                 }
             }
@@ -129,7 +162,7 @@ public class PageNewFriendBodyView: PageBodyView {
         for v in FriendsListToShow {
             if("isFriend" != "\(v["status"]!)") {
                 LastCell = PageSearchResultCell.LayoutACell(ListPanel, info: v, prev: LastCell,
-                                                            act: NewFriendActions!, sel: PageJumpActions.PageJumpToByViewSenderSel, highlight: ActiveType.URL)
+                                                            act: NewFriendActions!, sel: "GoToFriendCardInfoPanel:".Sel(), highlight: highlight)
                 DrawStatus(v["status"]! as! String, cell: LastCell!)
             }
         }
@@ -190,6 +223,19 @@ public class PageNewFriendBodyView: PageBodyView {
     public func Clear() {
         YMLayout.ClearView(view: ListPanel)
         LastCell = nil
+        Searching = false
+        Loading = true
+    }
+    
+    func Refresh(first: Bool = false) {
+//        if(!first && !Loading && !Searching) {
+//            let data = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as? [[String : AnyObject]]
+//            DrawFriendsList(data!)
+//        }
+//
+//        YMDelay(2.0) { 
+//            self.Refresh()
+//        }
     }
 }
 

@@ -29,7 +29,7 @@ public class PageAdmissionChargeSettingBodyView: PageBodyView {
     
     func DrawFace2FaceChargeSettingPanel() {
         let panel = UIView()
-        
+        panel.hidden = true
         BodyView.addSubview(panel)
         panel.anchorToEdge(Edge.Top, padding: 340.LayoutVal(), width: YMSizes.PageWidth, height: 80.LayoutVal())
         

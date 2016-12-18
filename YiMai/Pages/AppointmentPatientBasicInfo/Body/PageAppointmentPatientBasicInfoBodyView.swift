@@ -50,12 +50,14 @@ public class PageAppointmentPatientBasicInfoBodyView: PageBodyView{
                                    handler: {
                                     action in
                                     self.PatientGenderInput?.text = "男"
+                                    self.PatientAgeInput?.becomeFirstResponder()
         })
         
         let goOn = UIAlertAction(title: "女", style: .Default,
                                  handler: {
                                     action in
                                     self.PatientGenderInput?.text = "女"
+                                    self.PatientAgeInput?.becomeFirstResponder()
 
         })
         

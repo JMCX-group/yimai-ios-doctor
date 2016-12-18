@@ -64,4 +64,24 @@ public class YMCommonActions : PageJumpActions {
             }
         }
     }
+    
+    override public func PageJumpToByViewSender(sender : UITapGestureRecognizer) {
+        
+        
+        let targetView = sender.view!
+        if(targetView.isKindOfClass(YMTouchableView)){
+            let touchableView = targetView as! YMTouchableView
+            let targetPageName = touchableView.UserStringData
+            
+            if(nil != self.PageBottomIconByCurrentPage[targetPageName]){
+                PageCommonBottomView.BottomButtonImage = self.PageBottomIconByCurrentPage[targetPageName]!
+            }
+            
+            if((StoryboardThatExist.StoryboardMap[targetPageName]) != nil){
+                DoJump(targetPageName)
+            } else {
+                print("page \(targetPageName) not exist")
+            }
+        }
+    }
 }

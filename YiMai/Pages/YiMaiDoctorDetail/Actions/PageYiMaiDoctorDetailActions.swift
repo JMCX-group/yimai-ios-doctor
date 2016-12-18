@@ -14,6 +14,7 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     private var TargetView: PageYiMaiDoctorDetailBodyView? = nil
     private var GetInfoApi: YMAPIUtility? = nil
     private var AddFriendApi: YMAPIUtility? = nil
+    private var AgreeApi: YMAPIUtility!
     
     override func ExtInit() {
         super.ExtInit()
@@ -23,8 +24,21 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
         AddFriendApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_ADD_FRIEND + "fromDoctorDetail",
                                     success: AddFriendSuccess, error: AddFriendError)
         
+        AgreeApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_AGREE_FRIEND_APPLY, success: AgreeSuccess, error: AgreeError)
         
         self.TargetView = self.Target as? PageYiMaiDoctorDetailBodyView
+    }
+    
+    func AgreeSuccess(data: NSDictionary?) {
+        TargetView?.FullPageLoading.Hide()
+        NavController!.popViewControllerAnimated(true)
+    }
+    
+    func AgreeError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        
+        YMPageModalMessage.ShowErrorInfo("网络繁忙，请稍后再试", nav: NavController!)
+        TargetView?.FullPageLoading.Hide()
     }
     
     public func GetInfoSuccess(data: NSDictionary?) {
@@ -90,6 +104,11 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
         
         //显示聊天会话界面
         self.NavController?.pushViewController(chat, animated: true)
+    }
+    
+    func Agree(sender: YMButton) {
+        TargetView?.FullPageLoading.Show()
+        AgreeApi.YMAgreeFriendById(PageYiMaiDoctorDetailBodyView.DocId)
     }
 }
 

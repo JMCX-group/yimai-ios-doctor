@@ -8,9 +8,11 @@
 
 import Foundation
 import Neon
+import Toucan
+import ImageViewer
 import ChameleonFramework
 
-public class PageAppointmentProcessingBodyView: PageBodyView {
+public class PageAppointmentProcessingBodyView: PageBodyView, ImageProvider {
     private var AcceptActions: PageAppointmentProcessingActions? = nil
     private let DPPanel = UIView()
     private let DocCell = UIView()
@@ -31,6 +33,32 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
     let AdmissionDatePicker = UIDatePicker()
     private let TimeSelectBtn = YMButton()
     private let CancelBtn = YMButton()
+    
+    let bottomPanel = UIView()
+    
+    var ImageList = [YMTouchableImageView]()
+    var TachedImageIdx: Int = 0
+    public var imageCount: Int { get { return ImageList.count } }
+    public func provideImage(completion: UIImage? -> Void) {
+        if(0 == ImageList.count) {
+            completion(nil)
+        } else {
+            completion(ImageList[0].UserObjectData as? UIImage)
+        }
+    }
+    public func provideImage(atIndex index: Int, completion: UIImage? -> Void) {
+        completion(ImageList[index].UserObjectData as? UIImage)
+    }
+    
+    
+    public func ImageTouched(gr: UITapGestureRecognizer) {
+        let img = gr.view as! YMTouchableImageView
+        let imgIdx = Int(img.UserStringData)
+        let galleryViewController = GalleryViewController(imageProvider: self, displacedView: ParentView!,
+                                                          imageCount: ImageList.count, startIndex: imgIdx!, configuration: YMLayout.DefaultGalleryConfiguration())
+        NavController!.presentImageGallery(galleryViewController)
+    }
+
     
     override func ViewLayout() {
         super.ViewLayout()
@@ -148,7 +176,6 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
     }
 
     public func DrawConfirmButton(parent: UIView) {
-        let bottomPanel = UIView()
         let denyButton = YMLayout.GetTouchableView(useObject: AcceptActions!,
                                                    useMethod: "AppointmentRescheduleTouched:".Sel())
         let acceptButton = YMButton()
@@ -391,8 +418,8 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
     
     public func ShowImage(list: UIScrollView, imgUrl: String, prev: UIImageView?) -> YMTouchableImageView {
         let img = YMTouchableImageView()
-        let url = NSURL(string: "\(YMAPIInterfaceURL.ApiBaseUrl)/\(imgUrl)")
-        img.setImageWithURL(url!, placeholderImage: nil)
+        let url = NSURL(string: imgUrl)
+//        img.setImageWithURL(url!, placeholderImage: nil)
         img.backgroundColor = YMColors.DividerLineGray
         
         list.addSubview(img)
@@ -404,10 +431,27 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
                       width: list.height, height: list.height)
         }
         
+        img.kf_setImageWithURL(url, placeholderImage: nil, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
+            if(nil != image) {
+                img.UserObjectData = image
+                img.image = Toucan(image: image!)
+                    .resize(CGSize(width: img.width, height: img.height), fitMode: Toucan.Resize.FitMode.Crop).image
+            }
+        })
+        
+        let tapGR = UITapGestureRecognizer(target: self, action: "ImageTouched:".Sel())
+        
+        img.userInteractionEnabled = true
+        img.addGestureRecognizer(tapGR)
+        img.UserStringData = "\(ImageList.count)"
+        ImageList.append(img)
+        
         return img
     }
     
     private func DrawImageList(data: [String: AnyObject]) {
+        ImageList.removeAll()
+
         BodyView.addSubview(ImagePanel)
         ImagePanel.backgroundColor = YMColors.White
         ImagePanel.align(Align.UnderMatchingLeft, relativeTo: TextInfoPanel,
@@ -631,6 +675,13 @@ public class PageAppointmentProcessingBodyView: PageBodyView {
     public func LoadData(data: NSDictionary) {
         let doc = data["doctor_info"] as! [String: AnyObject]
         let patient = data["patient_info"] as! [String: AnyObject]
+        let other = data["other_info"] as! [String: AnyObject]
+        let status = YMVar.GetStringByKey(other, key: "status_code")
+        if("wait-4" == status) {
+            bottomPanel.hidden = true
+        } else {
+            bottomPanel.hidden = false
+        }
         DrawDoctor(doc)
         DrawPatient(patient)
         AppointmentNum.text = "预约号 " + PageAppointmentProcessingBodyView.AppointmentID

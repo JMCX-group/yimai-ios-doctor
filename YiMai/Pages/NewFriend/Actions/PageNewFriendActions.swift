@@ -17,6 +17,9 @@ public class PageNewFriendActions: PageJumpActions {
     private var AgreeFriendApi: YMAPIUtility? = nil
     private var AddFriendApi: YMAPIUtility!
     
+    var AgreeBtn: YMButton? = nil
+    var AddBtn: YMButton? = nil
+    
     override func ExtInit() {
         super.ExtInit()
         
@@ -34,6 +37,10 @@ public class PageNewFriendActions: PageJumpActions {
     }
     
     public func AddFriendSuccess(_: NSDictionary?) {
+        AddBtn?.backgroundColor = YMColors.None
+        AddBtn?.enabled = false
+        AddBtn?.sizeToFit()
+        TargetView?.FullPageLoading.Hide()
         //YMPageModalMessage.ShowNormalInfo("添加好友成功，等待对方验证。", nav: self.NavController!)
         
     }
@@ -46,6 +53,10 @@ public class PageNewFriendActions: PageJumpActions {
         } else {
             YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
         }
+        
+        YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
+        TargetView?.FullPageLoading.Hide()
+
     }
     
     func JumpToContactPage(sender: YMButton) {
@@ -167,14 +178,26 @@ public class PageNewFriendActions: PageJumpActions {
     }
     
     public func AgreeSuccess(_: NSDictionary?) {
+        AgreeBtn?.backgroundColor = YMColors.None
+        AgreeBtn?.enabled = false
+        AgreeBtn?.sizeToFit()
+        TargetView?.FullPageLoading.Hide()
+
     }
     
     public func AgreeError(error: NSError) {
+        TargetView?.FullPageLoading.Hide()
+
         if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
-//            YMPageModalMessage.ShowErrorInfo("服务器繁忙，请稍后再试。", nav: self.NavController!)
+            YMPageModalMessage.ShowErrorInfo("服务器繁忙，请稍后再试。", nav: self.NavController!)
         } else {
-//            YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
+            YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
         }
+        
+        YMAPIUtility.PrintErrorInfo(error)
+//        AgreeBtn?.backgroundColor = YMColors.None
+//        AgreeBtn?.enabled = false
+        TargetView?.FullPageLoading.Hide()
     }
     
     
@@ -190,8 +213,8 @@ public class PageNewFriendActions: PageJumpActions {
         let data = button.UserObjectData as! [String: AnyObject]
         
         let userId = "\(data["id"]!)"
-        button.backgroundColor = YMColors.None
-        button.enabled = false
+        AgreeBtn = button
+        TargetView?.FullPageLoading.Show()
         AgreeFriendApi?.YMAgreeFriendById(userId)
     }
     
@@ -200,7 +223,9 @@ public class PageNewFriendActions: PageJumpActions {
         
         if(YMValueValidator.IsEmptyString(key)) {
             TargetView?.DrawFriendsList(TargetView!.AllFriendsList)
+            TargetView?.Searching = false
         } else {
+            TargetView?.Searching = true
             var friendsFilted = [[String: AnyObject]]()
             for f in TargetView!.FriendsListToShow {
                 let name = f["name"] as! String
@@ -209,21 +234,26 @@ public class PageNewFriendActions: PageJumpActions {
                 }
             }
             
-            TargetView?.DrawFriendsList(friendsFilted)
+            TargetView?.DrawFriendsList(friendsFilted, key: key!, highlight: ActiveType.Custom(pattern: key!))
         }
-//        DrawFriendsList()
     }
     
     
     func Apply(sender: YMButton) {
         let data = sender.UserObjectData as! [String: AnyObject]
         
-        print(data)
         let userId = "\(data["id"]!)"
+        TargetView?.FullPageLoading.Show()
+        AddBtn = sender
         AddFriendApi?.YMAddFriendById(userId)
-        sender.backgroundColor = YMColors.None
-        sender.enabled = false
-        sender.sizeToFit()
+    }
+    
+    func GoToFriendCardInfoPanel(sender: UIGestureRecognizer) {
+        let cell = sender.view as! YMTouchableView
+        let docInfo = cell.UserObjectData as! [String: AnyObject]
+        PageYiMaiDoctorDetailBodyView.IsFromNewFriendToAgree = true
+        PageYiMaiDoctorDetailBodyView.DocId = "\(docInfo["id"]!)"
+        DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME)
     }
 }
 

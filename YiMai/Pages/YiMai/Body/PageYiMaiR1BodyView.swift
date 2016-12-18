@@ -22,6 +22,8 @@ public class PageYiMaiR1BodyView: PageBodyView {
     
     private let OperationSelector:Selector = "PageJumpToByViewSender:".Sel()
     private let FriendCellTouched: Selector = "FriendCellTouched:".Sel()
+    
+    private var Reloading = false
 
     override func ViewLayout() {
         super.ViewLayout()
@@ -34,9 +36,30 @@ public class PageYiMaiR1BodyView: PageBodyView {
         DrawNewFriendsPanel()
         DrawFriendsPanel()
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
+//        LoopRefresh()
+    }
+    
+    override func BodyViewEndDragging() {
+        super.BodyViewEndDragging()
+        let y = BodyView.contentOffset.y
+        if(y < -5.0) {
+            YMDelay(2.0) {
+                self.FullPageLoading.Show()
+                YMLayout.ClearView(view: self.FriendsPanel)
+                self.DrawFriendsPanel()
+                
+                YMLayout.ClearView(view: self.NewFriendsPanel)
+                self.DrawNewFriendsPanel()
+                
+                YMLayout.SetVScrollViewContentSize(self.BodyView, lastSubView: self.FriendsPanel, padding: YMSizes.NormalBottomSize.height)
+                self.FullPageLoading.Hide()
+
+            }
+        }
     }
     
     func Reload() {
+        Reloading = true
         YMLayout.ClearView(view: BodyView)
         YMLayout.ClearView(view: SearchPanel)
         YMLayout.ClearView(view: OperationPanel)
@@ -48,6 +71,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         DrawNewFriendsPanel()
         DrawFriendsPanel()
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
+        Reloading = false
     }
 
     public func SetBodyScroll() {
@@ -296,6 +320,8 @@ public class PageYiMaiR1BodyView: PageBodyView {
         return cell
     }
     
+    private var PrevL1Doc = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L1_FRIENDS) as! [[String:AnyObject]]
+    
     private func DrawFriendsPanel() {
         BodyView.addSubview(FriendsPanel)
         FriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: NewFriendsPanel, padding: 0, height: 0)
@@ -313,7 +339,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 50.LayoutVal())
         
         var cellView:YMTouchableView? = nil
-        for doc in l1Doc {
+        for doc in l1Doc.reverse() {
             cellView = DrawFriendsCell(
                 [
                     YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"\(doc["head_url"])",
@@ -331,45 +357,20 @@ public class PageYiMaiR1BodyView: PageBodyView {
             YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: cellView!)
         }
     }
+    
+    func LoopRefresh(firstStart: Bool = false) {
+        
+//        if(!firstStart && !Reloading) {
+//            YMLayout.ClearView(view: FriendsPanel)
+//            DrawFriendsPanel()
+//            
+//            YMLayout.ClearView(view: NewFriendsPanel)
+//            DrawNewFriendsPanel()
+//            
+//            YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
+//        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

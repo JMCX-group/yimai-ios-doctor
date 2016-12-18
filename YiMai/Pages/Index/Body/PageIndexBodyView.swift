@@ -217,8 +217,14 @@ public class PageIndexBodyView {
         contactDesc.anchorInCorner(Corner.TopLeft, xPad: 0, yPad: 204.LayoutVal(), width: buttonView.width, height: 22.LayoutVal())
         
         var btnData = userData
+        if(nil == btnData) {
+            btnData = [String: AnyObject]()
+        }
         btnData?["img"] = buttonImage
         btnData?["isDoc"] = isDoc
+        if(!isDoc) {
+            btnData?["name"] = "小医"
+        }
         buttonView.UserObjectData = btnData//["img": buttonImage, "name": name, "isDoc": isDoc]
         
         return buttonView
@@ -264,7 +270,8 @@ public class PageIndexBodyView {
                 if("\(docImInfo.targetId!)" == "\(doc["id"]!)" || "\(docImInfo.senderUserId!)" == "\(doc["id"]!)") {
                     
                     let img = UIImage(named: "IndexButtonContactBackground")
-                    let cell = GetContactButton(img!, name: "\(doc["name"]!)", desc: "\(doc["job_title"]!)", isDoc: true, userData: doc)
+                    let jobTitle = YMVar.GetStringByKey(doc, key: "job_title", defStr: "医生")
+                    let cell = GetContactButton(img!, name: "\(doc["name"]!)", desc: jobTitle, isDoc: true, userData: doc)
                     
                     let cellData = cell.UserObjectData as! [String: AnyObject]
                     let cellImage = cellData["img"] as! UIImageView

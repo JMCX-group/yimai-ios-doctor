@@ -40,7 +40,7 @@ public class PageAdmissionChargeSettingActions: PageJumpActions {
             [
                 "fee_switch": "\(YMVar.MyUserInfo["fee_switch"]!)",
                 "fee": "\(YMVar.MyUserInfo["fee"]!)",
-                "fee_face_to_face": "\(YMVar.MyUserInfo["fee_face_to_face"]!)",
+                "fee_face_to_face": "\(YMVar.MyUserInfo["fee_face_to_face"]!)"
             ]
         )
     }

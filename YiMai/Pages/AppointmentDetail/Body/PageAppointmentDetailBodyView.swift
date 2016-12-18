@@ -8,8 +8,10 @@
 
 import Foundation
 import Neon
+import Toucan
+import ImageViewer
 
-public class PageAppointmentDetailBodyView: PageBodyView {
+public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
     private let Breadcrumbs = YMTouchableView()
     private let DPPanel = UIView()
     private let DocCell = UIView()
@@ -21,6 +23,29 @@ public class PageAppointmentDetailBodyView: PageBodyView {
     
     private var TimelineIconMap = [String: String]()
     
+    var ImageList = [YMTouchableImageView]()
+    var TachedImageIdx: Int = 0
+    public var imageCount: Int { get { return ImageList.count } }
+    public func provideImage(completion: UIImage? -> Void) {
+        if(0 == ImageList.count) {
+            completion(nil)
+        } else {
+            completion(ImageList[0].UserObjectData as? UIImage)
+        }
+    }
+    public func provideImage(atIndex index: Int, completion: UIImage? -> Void) {
+        completion(ImageList[index].UserObjectData as? UIImage)
+    }
+    
+    
+    public func ImageTouched(gr: UITapGestureRecognizer) {
+        let img = gr.view as! YMTouchableImageView
+        let imgIdx = Int(img.UserStringData)
+        let galleryViewController = GalleryViewController(imageProvider: self, displacedView: ParentView!,
+                                                          imageCount: ImageList.count, startIndex: imgIdx!, configuration: YMLayout.DefaultGalleryConfiguration())
+        NavController!.presentImageGallery(galleryViewController)
+    }
+
     private var DetailActions: PageAppointmentDetailActions? = nil
 
     public var Loading: YMPageLoadingView? = nil
@@ -343,8 +368,8 @@ public class PageAppointmentDetailBodyView: PageBodyView {
     
     public func ShowImage(list: UIScrollView, imgUrl: String, prev: UIImageView?) -> YMTouchableImageView {
         let img = YMTouchableImageView()
-        let url = NSURL(string: "\(YMAPIInterfaceURL.ApiBaseUrl)/\(imgUrl)")
-        img.setImageWithURL(url!, placeholderImage: nil)
+        let url = NSURL(string: imgUrl)
+//        img.setImageWithURL(url!, placeholderImage: nil)
         img.backgroundColor = YMColors.DividerLineGray
         
         list.addSubview(img)
@@ -356,10 +381,27 @@ public class PageAppointmentDetailBodyView: PageBodyView {
                       width: list.height, height: list.height)
         }
         
+        img.kf_setImageWithURL(url, placeholderImage: nil, optionsInfo: nil, progressBlock: nil,  completionHandler: { (image, error, cacheType, imageURL) in
+            if(nil != image) {
+                img.UserObjectData = image
+                img.image = Toucan(image: image!)
+                    .resize(CGSize(width: img.width, height: img.height), fitMode: Toucan.Resize.FitMode.Crop).image
+            }
+        })
+        
+        let tapGR = UITapGestureRecognizer(target: self, action: "ImageTouched:".Sel())
+        
+        img.userInteractionEnabled = true
+        img.addGestureRecognizer(tapGR)
+        img.UserStringData = "\(ImageList.count)"
+        ImageList.append(img)
+        
         return img
     }
     
     private func DrawImageList(data: [String: AnyObject]) {
+        ImageList.removeAll()
+
         BodyView.addSubview(ImagePanel)
         ImagePanel.backgroundColor = YMColors.White
         ImagePanel.align(Align.UnderMatchingLeft, relativeTo: TextInfoPanel,
@@ -684,7 +726,7 @@ public class PageAppointmentDetailBodyView: PageBodyView {
         DrawImageList(patient)
         DrawTimeline(timeLine)
         
-        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: TimeLinePanel)
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: TimeLinePanel, padding: 128.LayoutVal())
         Loading?.Hide()
     }
     

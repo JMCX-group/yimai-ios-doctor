@@ -22,10 +22,23 @@ public class PageAppointmentSelectTimeActions: PageJumpActions {
     }
     
     func GetInfoSuccess(data: NSDictionary?) {
+        let docs = data!["data"] as? [[String: AnyObject]]
+        if(nil == docs) {
+            TargetCtrl.BodyView?.FullPageLoading.Hide()
+            return
+        }
+        
+        if(0 == docs!.count) {
+            TargetCtrl.BodyView?.FullPageLoading.Hide()
+            return
+        }
+        PageAppointmentSelectTimeViewController.SelectedDoctor = docs![0]
         TargetCtrl.BodyView?.FullPageLoading.Hide()
+        TargetCtrl.BodyView?.Reload()
     }
     
     func GetInfoError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
         TargetCtrl.BodyView?.FullPageLoading.Hide()
     }
     

@@ -12,6 +12,7 @@ import Neon
 import Toucan
 import Photos
 import Kingfisher
+import ImageViewer
 
 public class TextFieldCreateParam {
     public var Placholder : String = ""
@@ -357,7 +358,8 @@ public class YMLayout {
         
         if(nil != fullUrl) {
             url = fullUrl!
-        } else {
+        } else if(!url.containsString("http")) {
+            url = YMAPIInterfaceURL.Server + url
 //            url = YMAPIInterfaceURL.Server + url
         }
 
@@ -588,6 +590,37 @@ public class YMLayout {
 //        YMLayout.SetViewHeightByLastSubview(tagPanel, lastSubView: lastLine!)
 //        YMLayout.SetViewWidthBySubview(tagPanel, subView: lastLine!, padding: firstLineXPos / 2)
         return lastLine
+    }
+    
+    static func DefaultGalleryConfiguration() -> GalleryConfiguration {
+        
+        let dividerWidth = GalleryConfigurationItem.ImageDividerWidth(10)
+        let spinnerColor = GalleryConfigurationItem.SpinnerColor(UIColor.whiteColor())
+        let spinnerStyle = GalleryConfigurationItem.SpinnerStyle(UIActivityIndicatorViewStyle.White)
+        
+        let closeButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 40.LayoutVal(), height: 40.LayoutVal())))
+        closeButton.setImage(UIImage(named: "YMIconCloseBtn"), forState: UIControlState.Normal)
+        closeButton.setImage(UIImage(named: "YMIconCloseBtn"), forState: UIControlState.Highlighted)
+        let closeButtonConfig = GalleryConfigurationItem.CloseButton(closeButton)
+        
+        //        let seeAllButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: 50)))
+        //        seeAllButton.setTitle("显示全部", forState: .Normal)
+        //        let seeAllButtonConfig = GalleryConfigurationItem.SeeAllButton(seeAllButton)
+        
+        let pagingMode = GalleryConfigurationItem.PagingMode(GalleryPagingMode.Standard)
+        
+        let closeLayout = GalleryConfigurationItem.CloseLayout(ButtonLayout.PinRight(40, 40))
+        //        let seeAllLayout = GalleryConfigurationItem.CloseLayout(ButtonLayout.PinLeft(8, 16))
+        let headerLayout = GalleryConfigurationItem.HeaderViewLayout(HeaderLayout.Center(25))
+        let footerLayout = GalleryConfigurationItem.FooterViewLayout(FooterLayout.Center(25))
+        
+        let statusBarHidden = GalleryConfigurationItem.StatusBarHidden(true)
+        
+        let hideDecorationViews = GalleryConfigurationItem.HideDecorationViewsOnLaunch(false)
+        
+        let backgroundColor = GalleryConfigurationItem.BackgroundColor(YMColors.OpacityBlackMask)
+        
+        return [dividerWidth, spinnerStyle, spinnerColor, closeButtonConfig, pagingMode, headerLayout, footerLayout, closeLayout, statusBarHidden, hideDecorationViews, backgroundColor]
     }
 }
 

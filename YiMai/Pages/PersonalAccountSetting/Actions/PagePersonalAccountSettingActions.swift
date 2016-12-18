@@ -10,11 +10,13 @@ import Foundation
 import UIKit
 
 public class PagePersonalAccountSettingActions: PageJumpActions {
+    var TargetView: PagePersonalAccountSettingBodyView!
     var SettingApi: YMAPIUtility!
     
     override func ExtInit() {
         super.ExtInit()
         
+        TargetView = Target as! PagePersonalAccountSettingBodyView
         SettingApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_USER + "-fromAccountSetting", success: SettingSuccess, error: SettingError)
     }
     
@@ -40,6 +42,8 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
     }
     
     public func Logout(_: UIGestureRecognizer) {
+        TargetView.FullPageLoading.Show()
+        
         YMCoreDataEngine.Clear()
         YMLocalData.ClearLogin()
         YMVar.Clear()
@@ -49,6 +53,8 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
         PagePersonalNameEditViewController.UserName = ""
         PageRegisterPersonalInfoViewController.NeedInit = true
         PagePersonalIDNumInputBodyView.IDNum = ""
+        TargetView.FullPageLoading.Hide()
+
         self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
     }
     
