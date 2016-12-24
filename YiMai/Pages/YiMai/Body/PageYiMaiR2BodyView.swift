@@ -61,7 +61,7 @@ public class PageYiMaiR2BodyView: PageBodyView {
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = data[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
-        let jobTitle = data[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as? String
+        let jobTitle = YMVar.GetStringByKey(data, key: YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE, defStr: "医生")
         let userId = data[YMYiMaiStrings.CS_DATA_KEY_USER_ID] as! String
         
         let nameLabel = UILabel()
@@ -78,7 +78,7 @@ public class PageYiMaiR2BodyView: PageBodyView {
         
         divider.backgroundColor = YMColors.FontBlue
         
-        jobTitleLabel.text = jobTitle ?? "医生"
+        jobTitleLabel.text = jobTitle
         jobTitleLabel.textColor = YMColors.FontGray
         jobTitleLabel.font = YMFonts.YMDefaultFont(22.LayoutVal())
         jobTitleLabel.sizeToFit()
@@ -160,6 +160,28 @@ public class PageYiMaiR2BodyView: PageBodyView {
         if(nil != cellView) {
             YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: cellView!)
         }
+    }
+    
+    override func BodyViewEndDragging() {
+        super.BodyViewEndDragging()
+        let y = BodyView.contentOffset.y
+        if(y < -5.0) {
+            YMDelay(0.1) {
+                self.FullPageLoading.Show()
+                self.Reload()
+                self.FullPageLoading.Hide()
+                
+            }
+        }
+    }
+    
+    func Reload() {
+        YMLayout.ClearView(view: SearchPanel)
+        YMLayout.ClearView(view: FriendsPanel)
+        
+        DrawSearchPanel()
+        DrawFriendsPanel()
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
     }
 
 }

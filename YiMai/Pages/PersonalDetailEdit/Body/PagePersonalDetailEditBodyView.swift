@@ -265,7 +265,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         }
         
         let userName = userInfo["name"] as? String
-        if(userName != PagePersonalNameEditViewController.UserName) {
+        if(userName != PagePersonalNameEditViewController.UserName && !YMValueValidator.IsBlankString(PagePersonalNameEditViewController.UserName)) {
             showLoadingFlag = true
             editActions!.UpdateUserInfo(["name": PagePersonalNameEditViewController.UserName])
         }

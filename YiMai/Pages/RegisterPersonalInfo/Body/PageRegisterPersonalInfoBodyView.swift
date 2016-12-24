@@ -164,7 +164,7 @@ public class PageRegisterPersonalInfoBodyView: NSObject {
     }
     
     public func CheckInfoComplete() {
-        if (!YMValueValidator.IsEmptyString(UserRealnameInput?.text)
+        if (!YMValueValidator.IsBlankString(UserRealnameInput?.text)
             && "" != HospitalId
             && "" != HospitalDepartmentId) {
             OKButton?.enabled = true

@@ -43,15 +43,9 @@ public class PageYiMaiR1BodyView: PageBodyView {
         super.BodyViewEndDragging()
         let y = BodyView.contentOffset.y
         if(y < -5.0) {
-            YMDelay(2.0) {
+            YMDelay(0.1) {
                 self.FullPageLoading.Show()
-                YMLayout.ClearView(view: self.FriendsPanel)
-                self.DrawFriendsPanel()
-                
-                YMLayout.ClearView(view: self.NewFriendsPanel)
-                self.DrawNewFriendsPanel()
-                
-                YMLayout.SetVScrollViewContentSize(self.BodyView, lastSubView: self.FriendsPanel, padding: YMSizes.NormalBottomSize.height)
+                self.Reload()
                 self.FullPageLoading.Hide()
 
             }
@@ -246,7 +240,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         }
     }
     
-    private func DrawFriendsCell(data: [String: AnyObject], prevCell: YMTouchableView?) -> YMTouchableView {
+    private func DrawFriendsCell(data: [String: AnyObject], prevCell: YMScrollCell?) -> YMScrollCell {
         let head = data[YMYiMaiStrings.CS_DATA_KEY_USERHEAD] as! String
         let name = data[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = data[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
@@ -291,7 +285,8 @@ public class PageYiMaiR1BodyView: PageBodyView {
         hosLabel.sizeToFit()
         hosLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         
-        let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: FriendCellTouched, userStringData: userId)
+//        let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: FriendCellTouched, userStringData: userId)
+        let cell = YMLayout.GetScrollCell(useObject: Actions!, useMethod: FriendCellTouched, userStringData: userId)
         
         cell.addSubview(userHeadBackground)
         cell.addSubview(nameLabel)
@@ -317,6 +312,13 @@ public class PageYiMaiR1BodyView: PageBodyView {
 
         YMLayout.LoadImageFromServer(userHeadBackground, url: head, fullUrl: nil, makeItRound: true)
         
+        cell.SetCellBtn("删除", titleColor: UIColor.whiteColor(), bkgColor: UIColor.redColor(), fontSize: 40.LayoutVal(), padding: 40.LayoutVal()) { (str, obj) in
+            YMPageModalMessage.ShowConfirmInfo("确认要删除此好友？", nav: self.NavController!, ok: { (_) in
+                    let actions = self.Actions as! PageYiMaiActions
+                    self.FullPageLoading.Show()
+                    actions.DeleteFriend.YMDeleteRelation(str!)
+                }, cancel: nil)
+        }
         return cell
     }
     
@@ -338,7 +340,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         FriendsPanel.addSubview(titleLabel)
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 50.LayoutVal())
         
-        var cellView:YMTouchableView? = nil
+        var cellView:YMScrollCell? = nil
         for doc in l1Doc.reverse() {
             cellView = DrawFriendsCell(
                 [

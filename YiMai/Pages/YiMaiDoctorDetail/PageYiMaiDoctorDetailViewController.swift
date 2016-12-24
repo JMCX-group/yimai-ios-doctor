@@ -18,6 +18,7 @@ public class PageYiMaiDoctorDetailViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
+        BodyView?.FullPageLoading.Show()
         BodyView?.GetDocInfo()
     }
     

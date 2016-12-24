@@ -17,6 +17,7 @@ public class PageIndexActions: PageJumpActions {
     var TargetController: PageIndexViewController!
     
     var ContactApi: YMAPIUtility!
+    var BannerApi: YMAPIUtility!
     
     override func ExtInit() {
         ApiUtility = YMAPIUtility(key: self.ApiSearchActionKey,
@@ -26,6 +27,7 @@ public class PageIndexActions: PageJumpActions {
         ContactApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_RECENTLY_CONTACT,
                                   success: GetRecentContactSuccess,
                                   error: GetRecentContactFailed)
+        BannerApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_INDEX_BANNER, success: GetBannerSuccess, error: GetBannerError)
         
         TargetController = Target as! PageIndexViewController
     }
@@ -50,6 +52,15 @@ public class PageIndexActions: PageJumpActions {
         } else {
             print("no result!!!")
         }
+    }
+    
+    func GetBannerSuccess(data: NSDictionary?) {
+        let realData = data?["data"] as? [[String: String]]
+        TargetController.BodyView?.RefreshScrollImage(realData)
+    }
+    
+    func GetBannerError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
     }
     
     public func DoChat(gr: UIGestureRecognizer) {
@@ -107,12 +118,7 @@ public class PageIndexActions: PageJumpActions {
             PageGlobalSearchViewController.InitSearchKey = editor.text!
             DoJump(YMCommonStrings.CS_PAGE_GLOBAL_SEARCH_NAME)
         }
-        
-        
-        
-        
-        
-        
+
 //        ApiUtility?.YMGetSearchResult(["field":editor.text!], progressHandler: nil)
 //        ApiUtility?.YMQueryUserInfo()
 //        ApiUtility?.YMQueryUserInfoById("23976")

@@ -95,6 +95,8 @@ class PageInputMyFeaturesBodyView: PageBodyView {
     }
     
     func DoSave() {
+        FullPageLoading.Show()
+
         var tagStringArray = [String]()
         for tag in AllTags {
             let tagData = tag.UserObjectData as! [String: AnyObject]
@@ -111,7 +113,6 @@ class PageInputMyFeaturesBodyView: PageBodyView {
         YMVar.MyUserInfo["tags"] = tagString
         DrawFullBody()
         LoadOtherTags(AllTagsFromServer)
-        FullPageLoading.Show()
         FeaturesActions.FeaturesApi.YMChangeUserInfo(["tags": tagString])
     }
     
@@ -274,6 +275,7 @@ class PageInputMyFeaturesBodyView: PageBodyView {
  
     func Clear() {
         YMLayout.ClearView(view: BodyView)
+        AllTagsFromServer.removeAll()
     }
 }
 

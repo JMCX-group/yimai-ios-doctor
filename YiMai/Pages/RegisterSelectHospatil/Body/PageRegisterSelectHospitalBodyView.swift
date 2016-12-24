@@ -56,18 +56,18 @@ public class PageRegisterSelectHospitalBodyView: NSObject {
 
         SearchText?.SetLeftPadding(searchFieldLeftPadding)
         TopInputPanel?.addSubview(SearchText!)
-        SearchText?.anchorInCorner(Corner.BottomLeft, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: 570.LayoutVal(), height: 60.LayoutVal())
+        SearchText?.anchorInCorner(Corner.BottomLeft, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: 690.LayoutVal(), height: 60.LayoutVal())
         
         NotFoundButton = YMButton()
         NotFoundButton?.UserStringData = YMCommonStrings.CS_PAGE_REGISTER_INPUT_HOSPITAL_NAME
         
-        TopInputPanel?.addSubview(NotFoundButton!)
-        NotFoundButton?.anchorInCorner(Corner.BottomRight, xPad: 0, yPad: 0, width: 150.LayoutVal(), height: 120.LayoutVal())
-        NotFoundButton?.setTitle(YMRegisterSelectHospitalStrings.CS_REGISTER_HOSPITAL_NOT_FOUND_BUTTON_TITLE, forState: UIControlState.Normal)
-        NotFoundButton?.titleLabel?.font = UIFont.systemFontOfSize(26.LayoutVal())
-        NotFoundButton?.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
-        
-        NotFoundButton?.addTarget(Actions, action: "PageJumpTo:".Sel(),
-                                  forControlEvents: UIControlEvents.TouchUpInside)
+//        TopInputPanel?.addSubview(NotFoundButton!)
+//        NotFoundButton?.anchorInCorner(Corner.BottomRight, xPad: 0, yPad: 0, width: 150.LayoutVal(), height: 120.LayoutVal())
+//        NotFoundButton?.setTitle(YMRegisterSelectHospitalStrings.CS_REGISTER_HOSPITAL_NOT_FOUND_BUTTON_TITLE, forState: UIControlState.Normal)
+//        NotFoundButton?.titleLabel?.font = UIFont.systemFontOfSize(26.LayoutVal())
+//        NotFoundButton?.setTitleColor(YMColors.FontGray, forState: UIControlState.Normal)
+//        
+//        NotFoundButton?.addTarget(Actions, action: "PageJumpTo:".Sel(),
+//                                  forControlEvents: UIControlEvents.TouchUpInside)
     }
 }

@@ -55,6 +55,7 @@ public class YMAPIInterfaceURL {
     static let RelationUploadAddressBook = YMAPIInterfaceURL.ApiBaseUrl + "/relation/upload-address-book"
     
     static let RelationInviteOthers = YMAPIInterfaceURL.ApiBaseUrl + "/relation/send-invite"
+    static let RelationDelete = YMAPIInterfaceURL.ApiBaseUrl + "/relation/del"
     
     static let GetAllRadio = YMAPIInterfaceURL.ApiBaseUrl + "/radio"
     static let SetRadioHaveRead = YMAPIInterfaceURL.ApiBaseUrl + "/radio/read"
@@ -102,6 +103,8 @@ public class YMAPIInterfaceURL {
     static let RequirePaperCard = YMAPIInterfaceURL.ApiBaseUrl + "/card/submit"
     
     static let GetAllTagList = YMAPIInterfaceURL.ApiBaseUrl + "/tag/all"
+    static let GetTagGroupList = YMAPIInterfaceURL.ApiBaseUrl + "/tag/group"
+    static let GetIndexBanner = YMAPIInterfaceURL.ApiBaseUrl + "/get-banner-url"
 }
 
 public class YMAPICommonVariable {
@@ -808,6 +811,11 @@ public class YMAPIUtility {
         YMAPIPost(YMAPIInterfaceURL.GetDoctorInfoByYMCode, param: ["dp_code": param], progressHandler: nil)
     }
     
+    public func YMDeleteRelation(param: String) {
+        print(param)
+        YMAPIPost(YMAPIInterfaceURL.RelationDelete, param: ["friend_id": param], progressHandler: nil)
+    }
+    
     public func YMGetNewAdmissionList() {
         YMAPIGet(YMAPIInterfaceURL.GetAllNewAdmission, param: nil, progressHandler: nil)
     }
@@ -844,6 +852,14 @@ public class YMAPIUtility {
     
     public func YMGetAllTagList() {
         YMAPIGet(YMAPIInterfaceURL.GetAllTagList, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetTagGroupList() {
+        YMAPIGet(YMAPIInterfaceURL.GetTagGroupList, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetIndexBanner() {
+        YMAPIGet(YMAPIInterfaceURL.GetIndexBanner, param: nil, progressHandler: nil)
     }
 }
 

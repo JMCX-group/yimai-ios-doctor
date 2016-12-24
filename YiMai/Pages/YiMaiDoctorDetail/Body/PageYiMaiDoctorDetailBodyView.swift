@@ -81,7 +81,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         divider.align(Align.ToTheRightCentered, relativeTo: name,
                       padding: 12.LayoutVal(), width: YMSizes.OnPx, height: 20.LayoutVal())
         
-        jobTitle.text = data["job_title"] as? String
+        jobTitle.text = YMVar.GetStringByKey(data, key: "job_title", defStr: "医生")
         jobTitle.textColor = YMColors.FontGray
         jobTitle.font = YMFonts.YMDefaultFont(20.LayoutVal())
         jobTitle.sizeToFit()
@@ -293,6 +293,8 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
                 }
                 prevLabel = tagLabel
             }
+            
+            YMLayout.SetViewHeightByLastSubview(panel, lastSubView: lineView, bottomPadding: 20.LayoutVal())
         }
         return
     }

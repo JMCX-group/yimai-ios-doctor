@@ -27,7 +27,7 @@ class PageInputMyFeaturesViewController: PageViewController {
         
         if(0 == BodyView.AllTagsFromServer.count) {
             BodyView.FullPageLoading.Show()
-            BodyView.FeaturesActions.GetAllTags.YMGetAllTagList()
+            BodyView.FeaturesActions.GetAllTags.YMGetTagGroupList()
         } else {
             BodyView.LoadOtherTags(BodyView.AllTagsFromServer)
         }

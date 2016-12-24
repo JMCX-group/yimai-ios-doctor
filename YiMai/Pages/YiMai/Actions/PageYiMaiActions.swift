@@ -12,6 +12,10 @@ import UIKit
 public class PageYiMaiActions: PageJumpActions{
     var TargetController: PageYiMaiViewController!
     var ContactApi: YMAPIUtility!
+    var DeleteFriend: YMAPIUtility!
+    
+    var L1RelationApi: YMAPIUtility!
+    var L2RelationApi: YMAPIUtility!
     
     override func ExtInit() {
         super.ExtInit()
@@ -19,6 +23,64 @@ public class PageYiMaiActions: PageJumpActions{
         ContactApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_RECENTLY_CONTACT,
                                   success: GetRecentContactSuccess,
                                   error: GetRecentContactFailed)
+        
+        DeleteFriend = YMAPIUtility(key: YMAPIStrings.CS_API_DELETE_FRIEND, success: DeleteFriendSuccess, error: DeleteFriendError)
+        
+        L1RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL1_RELATION + "-yimai-r1",
+                                     success: Level1RelationSuccess, error: L1Err)
+        
+        L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION + "-yimai-r1",
+                                     success: Level2RelationSuccess, error: L2Err)
+    }
+    
+    func YiMaiReload() {
+        TargetController.YiMaiR1Body?.Reload()
+        TargetController.YiMaiR2Body?.Reload()
+        TargetController.YiMaiR1Body?.FullPageLoading.Hide()
+    }
+    
+    func Level1RelationSuccess(data: NSDictionary?) {
+        let realData = data!
+        let count = realData["count"] as! [String:AnyObject]
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_L1_FRIENDS_COUNT_INFO, data: count)
+        
+        let friends = realData["friends"] as! [AnyObject]
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_L1_FRIENDS, data: friends)
+        
+        L2RelationApi.YMGetLevel2Relation()
+    }
+    
+    func Level2RelationSuccess(data: NSDictionary?) {
+        let realData = data!
+        let count = realData["count"] as! [String:AnyObject]
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_L2_FRIENDS_COUNT_INFO, data: count)
+        
+        let friends = realData["friends"] as! [AnyObject]
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_L2_FRIENDS, data: friends)
+        
+        YiMaiReload()
+    }
+    
+    func L1Err(error: NSError){
+        YMAPIUtility.PrintErrorInfo(error)
+        YMPageModalMessage.ShowErrorInfo("自动更新医脉信息失败，请手动刷新", nav: NavController!)
+        YiMaiReload()
+    }
+    
+    func L2Err(error: NSError){
+        YMAPIUtility.PrintErrorInfo(error)
+        YMPageModalMessage.ShowErrorInfo("自动更新医脉信息失败，请手动刷新", nav: NavController!)
+        YiMaiReload()
+    }
+    
+    func DeleteFriendSuccess(data: NSDictionary?) {
+        L1RelationApi.YMGetLevel1Relation()
+    }
+    
+    func DeleteFriendError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetController.YiMaiR1Body?.FullPageLoading.Hide()
+        YMPageModalMessage.ShowErrorInfo("网络繁忙，请稍后再试", nav: NavController!)
     }
     
     func GetRecentContactSuccess(data: NSDictionary?) {
@@ -101,8 +163,19 @@ public class PageYiMaiActions: PageJumpActions{
     }
 
     public func FriendCellTouched(sender : UITapGestureRecognizer) {
-        let cell = sender.view as! YMTouchableView
-        PageYiMaiDoctorDetailBodyView.DocId = cell.UserStringData
+        let cell = sender.view as? YMScrollCell
+        let touchableCell = sender.view as? YMTouchableView
+        if(nil != cell) {
+            let cellOffset = cell?.contentOffset.x
+            if(0 < cellOffset) {
+                return
+            }
+            PageYiMaiDoctorDetailBodyView.DocId = cell!.UserStringData
+        }
+        
+        if(nil != touchableCell) {
+            PageYiMaiDoctorDetailBodyView.DocId = touchableCell!.UserStringData
+        }
         DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME)
     }
     

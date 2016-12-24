@@ -210,6 +210,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: actionMethod)
         cell.UserObjectData = data
 
+        print(data)
 //    ["doctor_job_title": 副主任医师,
 //    "doctor_head_url": /uploads/avatar/2.jpg,
 //    "doctor_name": test, "time": 2016-06-09 上午,
@@ -246,7 +247,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         let headImage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
         let name = UILabel()
         let basicInfo = UILabel()
-        let locationIcon = YMLayout.GetSuitableImageView("YMIconLocationBlue")
+        let locationIcon = YMLayout.GetSuitableImageView("YMIconTimelineNotepadBlue")
         let timeIcon = YMLayout.GetSuitableImageView("YMIconClockBlue")
         let location = UILabel()
         let time = UILabel()
@@ -265,11 +266,12 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             age = "\(age!)岁"
         }
         if(nil != genderIdx) {
-            basicInfo.text = "\(genderMap[genderIdx!]!) \(age!)"
+            location.text = "\(genderMap[genderIdx!]!) \(age!)"
         } else {
-            basicInfo.text = "\(age)"
+            location.text = "\(age)"
         }
-        location.text = data["hospital"] as? String
+        basicInfo.text = "患者"
+//        location.text = data["hospital"] as? String
         time.text = "\(data["time"]!)"
         status.text = "\(data["status"]!)"
         type.text = "\(data["who"]!)"
@@ -321,7 +323,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
                                padding: 41.LayoutVal(),
                                width: headImage.width,
                                height: headImage.height)
-        let head = data["doctor_head_url"] as? String
+        let head = data["patient_head_url"] as? String
         if(nil != head) {
             YMLayout.LoadImageFromServer(headImage, url: head!, fullUrl: nil, makeItRound: true)
         }
@@ -350,8 +352,8 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         locationIcon.align(Align.UnderMatchingLeft,
                            relativeTo: name,
                            padding: 10.LayoutVal(),
-                           width: locationIcon.width,
-                           height: locationIcon.height)
+                           width: timeIcon.width,
+                           height: timeIcon.height)
         
         location.align(Align.ToTheRightCentered,
                        relativeTo: locationIcon,

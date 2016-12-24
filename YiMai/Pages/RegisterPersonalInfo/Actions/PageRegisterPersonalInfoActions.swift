@@ -29,6 +29,9 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
         YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_NAME_INIT_DATA+"fromRegister").YMGetAPPInitData("fromRegister")
         BackEndApi.DoApi()
         
+        PageHospitalSearchBodyView.HospitalSelected = nil
+        PageDepartmentSearchBodyView.DepartmentSelected = nil
+
         let handler = YMCoreMemDataOnceHandler(handler: StartLogin)
         YMCoreDataEngine.SetDataOnceHandler(YMModuleStrings.MODULE_NAME_REGISTER_COMPLETE_INFO, handler: handler)
 
@@ -86,7 +89,7 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
         TargetView?.Loading?.Show()
         CompleteInfoApi?.YMChangeUserInfo(
             [
-                "name": TargetView!.UserRealnameInput!.text!,
+                "name": TargetView!.UserRealnameInput!.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()),
                 "hospital": TargetView!.HospitalId,
                 "department": TargetView!.HospitalDepartmentId,
             ]

@@ -53,30 +53,47 @@ public class PageIndexBodyView {
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: ContactPanel, padding: 10.LayoutVal())
     }
 
-    func RefreshScrollImage() {
-        if(0 == YMBackgroundRefresh.BroadcastFirstPage.count) {
-            ScrollImageView.SetImages([YMLayout.GetSuitableImageView("IndexScrollPhoto")]).StartAutoScroll()
-            YMDelay(0.5, closure: {
-                self.RefreshScrollImage()
-            })
-        } else {
-            var imageList = [YMTouchableImageView]()
-            for article in YMBackgroundRefresh.BroadcastFirstPage {
-                let imgUrl = YMVar.GetStringByKey(article, key: "img_url")
-                let articleUrl = YMVar.GetStringByKey(article, key: "url")
-                
-                let newImage = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "IndexScrollImageTouched:".Sel(), imageName: "IndexScrollPhoto")
-                YMLayout.LoadImageFromServer(newImage, url: imgUrl)
-                newImage.UserStringData = articleUrl
-                imageList.append(newImage)
-            }
-            
-            ScrollImageView.SetImages(imageList).StartAutoScroll()
-
-            YMDelay(3600 * 24, closure: {
-                self.RefreshScrollImage()
-            })
+    func RefreshScrollImage(data: [[String: String]]?) {
+        if(nil == data) {
+            return
         }
+        
+        let list = data!
+        var imageList = [YMTouchableImageView]()
+        for banner in list {
+            let imgUrl = YMVar.GetStringByKey(banner, key: "focus_img_url")
+            let articleUrl = YMVar.GetStringByKey(banner, key: "content_url")
+            
+            let newImage = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "IndexScrollImageTouched:".Sel(), imageName: "IndexScrollPhoto")
+            YMLayout.LoadImageFromServer(newImage, url: imgUrl)
+            newImage.UserStringData = articleUrl
+            imageList.append(newImage)
+        }
+        
+        ScrollImageView.SetImages(imageList).StartAutoScroll()
+//        if(0 == YMBackgroundRefresh.BroadcastFirstPage.count) {
+//            ScrollImageView.SetImages([YMLayout.GetSuitableImageView("IndexScrollPhoto")]).StartAutoScroll()
+//            YMDelay(0.5, closure: {
+//                self.RefreshScrollImage()
+//            })
+//        } else {
+//            var imageList = [YMTouchableImageView]()
+//            for article in YMBackgroundRefresh.BroadcastFirstPage {
+//                let imgUrl = YMVar.GetStringByKey(article, key: "img_url")
+//                let articleUrl = YMVar.GetStringByKey(article, key: "url")
+//                
+//                let newImage = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "IndexScrollImageTouched:".Sel(), imageName: "IndexScrollPhoto")
+//                YMLayout.LoadImageFromServer(newImage, url: imgUrl)
+//                newImage.UserStringData = articleUrl
+//                imageList.append(newImage)
+//            }
+//            
+//            ScrollImageView.SetImages(imageList).StartAutoScroll()
+//
+//            YMDelay(3600 * 24, closure: {
+//                self.RefreshScrollImage()
+//            })
+//        }
     }
     
     private func DrawScrollPanel() {
@@ -86,7 +103,7 @@ public class PageIndexBodyView {
         BodyView.addSubview(ScrollImageView)
         ScrollImageView.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: tempScrollImage.height)
         ScrollImageView.SetImages([YMLayout.GetSuitableImageView("IndexScrollPhoto")]).StartAutoScroll()
-        RefreshScrollImage()
+//        RefreshScrollImage()
     }
     
     private func SetOperatorContent(operatorButton: UIView, imageName: String, text: String) {

@@ -29,6 +29,15 @@ public class YMValueValidator {
         return ("" == str) || (nil == str)
     }
     
+    public static func IsBlankString(str: String?) -> Bool {
+        if(nil == str) {
+            return true
+        }
+        
+        let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        let cleanStr = str!.stringByTrimmingCharactersInSet(whitespace)
+        return YMValueValidator.IsEmptyString(cleanStr)
+    }
     
     static func IsEmail(email:String) -> Bool {
         if email.characters.count == 0 {

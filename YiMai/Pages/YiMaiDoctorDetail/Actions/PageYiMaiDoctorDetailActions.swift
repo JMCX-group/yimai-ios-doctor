@@ -45,10 +45,13 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
         let userInfo = data!["user"] as! [String: AnyObject]
         TargetView?.DoctorInfo = userInfo
         TargetView?.LoadData(userInfo)
+        TargetView?.FullPageLoading.Hide()
     }
     
     public func GetInfoError(error: NSError) {
         YMAPIUtility.PrintErrorInfo(error)
+        TargetView?.FullPageLoading.Hide()
+        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试", nav: NavController!)
     }
     
     public func AddFriendSuccess(_: NSDictionary?) {

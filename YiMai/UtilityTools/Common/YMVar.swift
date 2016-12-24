@@ -40,6 +40,11 @@ public class YMVar:NSObject {
             return defStr
         }
         
+        let retStr = "\(ret!)"
+        if(YMValueValidator.IsBlankString(retStr)) {
+            return defStr
+        }
+        
         return "\(ret!)"
     }
     

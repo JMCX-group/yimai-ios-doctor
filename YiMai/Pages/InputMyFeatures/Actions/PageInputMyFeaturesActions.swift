@@ -26,10 +26,25 @@ class PageInputMyFeaturesActions: PageJumpActions {
     }
     
     func GetAllTagSuccess(data: NSDictionary?) {
-//        print(data)
+        print(data)
         let realData = data!["data"] as! [[String: AnyObject]]
-        TargetView.AllTagsFromServer = realData
-        TargetView.LoadOtherTags(realData)
+        var tagArr = [[String: AnyObject]]()
+        
+        for tags in realData {
+            let tagsList = tags["tags"] as! [[String: AnyObject]]
+            for tag in tagsList {
+                let tagDept = YMVar.GetStringByKey(tag, key: "dept")
+                print(tagDept)
+                let tagName = YMVar.GetStringByKey(tag, key: "name")
+                if(YMValueValidator.IsBlankString(tagName)) {
+                    continue
+                }
+                
+                tagArr.append(tag)
+            }
+        }
+        TargetView.AllTagsFromServer = tagArr
+        TargetView.LoadOtherTags(tagArr)
         TargetView.FullPageLoading.Hide()
     }
     

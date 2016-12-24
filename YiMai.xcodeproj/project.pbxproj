@@ -3190,7 +3190,7 @@
 				TargetAttributes = {
 					9619EF4C1CC1DB9600F69CBC = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 55C33Y6K36;
+						DevelopmentTeam = 6HV8LR8T36;
 					};
 				};
 			};
@@ -4387,12 +4387,12 @@
 			baseConfigurationReference = 10E9D28A8810C7853E71C76B /* Pods-YiMai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd (55C33Y6K36)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd (55C33Y6K36)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.medilink.doctor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
@@ -4404,12 +4404,12 @@
 			baseConfigurationReference = 35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd (55C33Y6K36)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wisdom Hospital & Healthcare Management Co.Ltd (55C33Y6K36)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YiMai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.medilink.doctor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";

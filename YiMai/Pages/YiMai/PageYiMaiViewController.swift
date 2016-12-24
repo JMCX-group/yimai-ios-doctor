@@ -9,10 +9,10 @@
 import UIKit
 
 public class PageYiMaiViewController: PageViewController {
-    private var YiMaiTopView: PageYiMaiTopView? = nil
-    private var YiMaiActions: PageYiMaiActions? = nil
-    private var YiMaiR1Body: PageYiMaiR1BodyView? = nil
-    private var YiMaiR2Body: PageYiMaiR2BodyView? = nil
+    var YiMaiTopView: PageYiMaiTopView? = nil
+    var YiMaiActions: PageYiMaiActions? = nil
+    var YiMaiR1Body: PageYiMaiR1BodyView? = nil
+    var YiMaiR2Body: PageYiMaiR2BodyView? = nil
     
     var RecentContactList: PageYiMaiRecentContactList!
     
@@ -45,6 +45,7 @@ public class PageYiMaiViewController: PageViewController {
         }
         
         YiMaiR1Body?.Reload()
+        YiMaiR2Body?.Reload()
     }
     
     public func ShowYiMaiR1Page(){

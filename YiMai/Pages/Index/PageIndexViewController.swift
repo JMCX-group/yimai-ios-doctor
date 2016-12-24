@@ -68,7 +68,7 @@ public class PageIndexViewController: PageViewController {
         
         IndexTopView!.ShowNewMsgNotifyPoint()
     }
-    
+
     override func PagePreRefresh() {
         BottomView!.BottomViewPanel.removeFromSuperview()
         IndexTopView?.TopSearchInput?.text = ""
@@ -81,6 +81,20 @@ public class PageIndexViewController: PageViewController {
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
         IndexTopView!.UpdateMsgNotifyStatus()
         
+        Actions?.BannerApi.YMGetIndexBanner()
+        
 //        BodyView?.HideAuthInfo()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

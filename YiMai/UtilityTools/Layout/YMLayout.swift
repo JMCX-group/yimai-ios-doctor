@@ -69,7 +69,8 @@ public class YMLayout {
         return newImageView
     }
     
-    public static func GetTouchableView(useObject actionTarget: AnyObject, useMethod actionFunc: Selector, userStringData: String = "", backgroundColor: UIColor = YMColors.White) -> YMTouchableView {
+    public static func GetTouchableView(useObject actionTarget: AnyObject, useMethod actionFunc: Selector,
+                                                  userStringData: String = "", backgroundColor: UIColor = YMColors.White) -> YMTouchableView {
         let newView = YMTouchableView()
 
         newView.UserStringData = userStringData
@@ -79,6 +80,20 @@ public class YMLayout {
         newView.addGestureRecognizer(tapGR)
         newView.backgroundColor = backgroundColor
 
+        return newView
+    }
+    
+    static func GetScrollCell(useObject actionTarget: AnyObject, useMethod actionFunc: Selector,
+                                                  userStringData: String = "", backgroundColor: UIColor = YMColors.White) -> YMScrollCell {
+        let newView = YMScrollCell()
+        
+        newView.UserStringData = userStringData
+        let tapGR = UITapGestureRecognizer(target: actionTarget, action: actionFunc)
+        
+        newView.userInteractionEnabled = true
+        newView.addGestureRecognizer(tapGR)
+        newView.backgroundColor = backgroundColor
+        
         return newView
     }
     
