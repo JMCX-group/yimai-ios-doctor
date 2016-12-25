@@ -43,6 +43,8 @@ public class PageAppointmentTransferBodyView: PageBodyView {
     private var AllowedSelection: UInt = 10
     public var PhotoArray = [UIImage]()
     
+    var ImageUrlArr = [String]()
+    
     public func DeleteImage() {
         AllowedSelection += 1
     }
@@ -68,12 +70,16 @@ public class PageAppointmentTransferBodyView: PageBodyView {
         }
     }
 
-    
     func ParseData() {
         let patientInfo = PageAppointmentTransferViewController.AppointmentData!["patient_info"] as! [String: AnyObject]
         PageAppointmentTransferViewController.SelectedTime = PageAppointmentAcceptBodyView.TimeInfo
         PageAppointmentTransferViewController.PatientBasicInfo = ["name": "\(patientInfo["name"]!)"]
         PageAppointmentTransferViewController.PatientCondition = patientInfo["history"] as! String
+        ImageUrlArr.removeAll()
+        let imgUrls = YMVar.GetStringByKey(patientInfo, key: "img_url")
+        if(!YMValueValidator.IsBlankString(imgUrls)) {
+            ImageUrlArr = imgUrls.componentsSeparatedByString(",")
+        }
     }
     
     public func Reload() {
@@ -82,6 +88,16 @@ public class PageAppointmentTransferBodyView: PageBodyView {
         self.UpdateSelectedTime()
         self.UpdateBasicInfo()
         self.UpdateCondition()
+        
+        if(0 == ImageUrlArr.count) {
+            GetTooltipCell("无图片")
+        } else {
+            for url in ImageUrlArr {
+                let imgView = UIImageView()
+                AddImage(imgView)
+                YMLayout.LoadImageFromServer(imgView, url: url)
+            }
+        }
     }
 
     override func ViewLayout() {
@@ -224,13 +240,13 @@ public class PageAppointmentTransferBodyView: PageBodyView {
         scrollLeftIcon.anchorToEdge(Edge.Right, padding: 0, width: scrollLeftIcon.width, height: scrollLeftIcon.height)
         scrollRightIcon.anchorToEdge(Edge.Left, padding: 0, width: scrollRightIcon.width, height: scrollRightIcon.height)
         
-        var cell = GetTooltipCell("病例资料", prevCell: nil)
-        cell = GetTooltipCell("病例资料", prevCell: cell)
-        cell = GetTooltipCell("病例资料", prevCell: cell)
-        cell = GetTooltipCell("其他", prevCell: cell)
-        MorePhotoButton = GetTooltipCell("更多资料", prevCell: cell)
-        
-        MorePhotoButton?.hidden = true
+//        var cell = GetTooltipCell("病例资料", prevCell: nil)
+//        cell = GetTooltipCell("病例资料", prevCell: cell)
+//        cell = GetTooltipCell("病例资料", prevCell: cell)
+//        cell = GetTooltipCell("其他", prevCell: cell)
+//        MorePhotoButton = GetTooltipCell("更多资料", prevCell: cell)
+//        
+//        MorePhotoButton?.hidden = true
     }
     
     private func DrawDocCell(data: [String: AnyObject]?) {
@@ -405,7 +421,7 @@ public class PageAppointmentTransferBodyView: PageBodyView {
     }
     
     public func AddImage(image: UIImageView) {
-        self.LastImage = GetTooltipCell("病例资料", prevCell: LastImage, background: image)
+        self.LastImage = GetTooltipCell("", prevCell: LastImage, background: image)
         
         ImageCount = ImageCount + 1
         

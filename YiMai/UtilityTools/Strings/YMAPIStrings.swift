@@ -98,6 +98,8 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_GET_ALL_TAGS = "apiGetAllTags"
     public static let CS_API_ACTION_UPDATE_BLACKLIST = "apiUpdateBlackList"
+    
+    public static let CS_API_ACTION_GET_COMMON_FRIENDS_INFO = "apiGetCommonFriendsInfo"
 }
 
 

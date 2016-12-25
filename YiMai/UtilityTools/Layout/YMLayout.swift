@@ -402,8 +402,8 @@ public class YMLayout {
         }
     }
     
-    public static func GetNomalLabel(text: String?, textColor: UIColor, fontSize: CGFloat) -> ActiveLabel {
-        let label = ActiveLabel()
+    public static func GetNomalLabel(text: String?, textColor: UIColor, fontSize: CGFloat) -> YMLabel {
+        let label = YMLabel()
         label.text = text
         label.textColor = textColor
         label.font = YMFonts.YMDefaultFont(fontSize)

@@ -11,7 +11,7 @@ import UIKit
 import Proposer
 
 public class YiMaiAddFriendsActions: PageJumpActions{
-    public func NextStep(sender : UITapGestureRecognizer) {
+    public func NextStep(_ : UITapGestureRecognizer) {
 
         let contacts: PrivateResource = PrivateResource.Contacts
         
@@ -43,3 +43,6 @@ public class YiMaiAddFriendsActions: PageJumpActions{
         
     }
 }
+
+
+

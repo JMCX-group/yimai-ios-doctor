@@ -10,22 +10,26 @@ import Foundation
 import Neon
 
 public class PageYiMaiDoctorDetailBodyView: PageBodyView {
-    private var DetailActions: PageYiMaiDoctorDetailActions? = nil
+    var DetailActions: PageYiMaiDoctorDetailActions? = nil
     public var Loading: YMPageLoadingView? = nil
     public var AddFriendBtn: YMButton? = nil
     public var AgreeFriendBtn: YMButton? = nil
     public static var DocId: String = ""
     public static var IsFromNewFriendToAgree: Bool = false
     
+    var FromCommonFriendsBtn = true
+    var FromCommonFriendsUserId = ""
+    var ButtonPanel = UIView()
     var DoctorInfo: [String: AnyObject]? = nil
+    var CommonFriendNameLabelArr = [String: YMLabel]()
     
     override func ViewLayout() {
         super.ViewLayout()
         DetailActions = PageYiMaiDoctorDetailActions(navController: self.NavController, target: self)
     }
     
-    public func GetDocInfo(){
-        DetailActions!.GetInfo()
+    public func GetDocInfo(id: String? = nil){
+        DetailActions!.GetInfo(id)
     }
     
     public func LoadData(data: [String: AnyObject]) {
@@ -92,12 +96,14 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         dept.text = data["department"] as? String
         dept.textColor = YMColors.FontBlue
         dept.font = YMFonts.YMDefaultFont(20.LayoutVal())
+        dept.sizeToFit()
         dept.align(Align.UnderMatchingLeft, relativeTo: name,
                    padding: 8.LayoutVal(), width: dept.width, height: dept.height)
         
         hos.text = data["hospital"] as? String
-        hos.textColor = YMColors.FontBlue
+        hos.textColor = YMColors.FontGray
         hos.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        hos.sizeToFit()
         hos.align(Align.UnderMatchingLeft, relativeTo: name,
                   padding: 36.LayoutVal(), width: hos.width, height: hos.height)
         
@@ -105,9 +111,13 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
     }
     
     private func DrawButtonGroup(data: [String: AnyObject], prev: UIView) -> UIView {
-        let buttonPanel = UIView()
-        BodyView.addSubview(buttonPanel)
-        buttonPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: 140.LayoutVal())
+        BodyView.addSubview(ButtonPanel)
+        if(!FromCommonFriendsBtn) {
+            ButtonPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: 140.LayoutVal())
+        } else {
+            ButtonPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: 0.LayoutVal())
+            return ButtonPanel
+        }
         
         let friendFlag = data["is_friend"] as! Int
         
@@ -150,9 +160,8 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         
         if(PageYiMaiDoctorDetailBodyView.IsFromNewFriendToAgree) {
             PageYiMaiDoctorDetailBodyView.IsFromNewFriendToAgree = false
-            buttonPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: 0)
+            ButtonPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: 0)
 
-            
 //            buttonPanel.addSubview(agreeBtn)
 //            buttonPanel.addSubview(appointmentBtn)
 //            
@@ -163,8 +172,8 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
 //            
 //            agreeBtn.addTarget(DetailActions!, action: "Agree:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         } else if(0 == friendFlag) {
-            buttonPanel.addSubview(addFirendBtn)
-            buttonPanel.addSubview(appointmentBtn)
+            ButtonPanel.addSubview(addFirendBtn)
+            ButtonPanel.addSubview(appointmentBtn)
             
             addFirendBtn.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 320.LayoutVal(), height: 70.LayoutVal())
             appointmentBtn.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: 320.LayoutVal(), height: 70.LayoutVal())
@@ -173,8 +182,8 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
             
             addFirendBtn.addTarget(DetailActions!, action: "AddFriend:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         } else {
-            buttonPanel.addSubview(chatBtn)
-            buttonPanel.addSubview(appointmentBtn)
+            ButtonPanel.addSubview(chatBtn)
+            ButtonPanel.addSubview(appointmentBtn)
             
             chatBtn.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 320.LayoutVal(), height: 70.LayoutVal())
             appointmentBtn.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: 320.LayoutVal(), height: 70.LayoutVal())
@@ -185,7 +194,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
             chatBtn.UserObjectData = data
             chatBtn.addTarget(DetailActions!, action: "DoChat:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         }
-        return buttonPanel
+        return ButtonPanel
     }
     
     private func DrawTagPanel(data: [String: AnyObject], prev: UIView) -> UIView {
@@ -316,9 +325,27 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         return tag
     }
     
+    func UpdateCommonFriendsName(firendsInfo: [[String: AnyObject]]) {
+        for doc in firendsInfo {
+            let docName = YMVar.GetStringByKey(doc, key: "name")
+            let docId = YMVar.GetStringByKey(doc, key: "id")
+            let label = CommonFriendNameLabelArr[docId]
+            
+            if(nil != label) {
+                let userData = label!.UserObjectData as! [String: AnyObject]
+                let headImg = userData["headimg"] as! UIImageView
+                
+                label?.text = docName
+                label?.sizeToFit()
+                label?.align(Align.UnderCentered, relativeTo: headImg, padding: 10.LayoutVal(), width: label!.width, height: label!.height)
+            }
+        }
+    }
+    
     private func DrawCommonFriends(data: [String: AnyObject], prev: UIView) -> UIView {
         let commonFriendList = data["common_friend_list"] as? [[String: AnyObject]]
-        
+        print(commonFriendList)
+        CommonFriendNameLabelArr.removeAll()
         if(nil == commonFriendList) {
             return prev
         }
@@ -330,7 +357,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         let commonFriendPanel = UIView()
         BodyView.addSubview(commonFriendPanel)
         commonFriendPanel.backgroundColor = YMColors.White
-        commonFriendPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 200.LayoutVal())
+        commonFriendPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 240.LayoutVal())
         
         let label = UILabel()
         label.text = "共同好友（\(commonFriendList!.count)个）"
@@ -343,26 +370,43 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
         
         let friendsList = UIScrollView()
         commonFriendPanel.addSubview(friendsList)
-        friendsList.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 130.LayoutVal())
+        friendsList.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 170.LayoutVal())
         
         var lastHeadImg: UIImageView? = nil
+        var lastNameLabel: YMLabel? = nil
+        var idList = [String]()
         for friend in commonFriendList! {
-            let headImg = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
+            let head = YMVar.GetStringByKey(friend, key: "head_url")
+            let userId = YMVar.GetStringByKey(friend, key: "id")
+
+            let headImg = YMLayout.GetTouchableImageView(useObject: DetailActions!, useMethod: "CommonFriendsTouched:".Sel(), imageName: "CommonHeadImageBorder")
+            let name = YMLayout.GetNomalLabel("", textColor: YMColors.FontGray, fontSize: 20.LayoutVal())
+            
+            headImg.UserStringData = userId
+            idList.append(userId)
+
+            name.textAlignment = NSTextAlignment.Center
+            name.UserObjectData = ["headimg": headImg]
             friendsList.addSubview(headImg)
+            friendsList.addSubview(name)
             if(nil == lastHeadImg) {
                 headImg.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: headImg.width, height: headImg.height)
             } else {
                 headImg.align(Align.ToTheRightCentered, relativeTo: lastHeadImg!, padding: 40.LayoutVal(), width: headImg.width, height: headImg.height)
             }
+            
+            name.align(Align.UnderCentered, relativeTo: headImg, padding: 10.LayoutVal(), width: name.width, height: name.height)
 
-            let head = friend["head_url"] as! String
             YMLayout.LoadImageFromServer(headImg, url: head, fullUrl: nil, makeItRound: true)
             
+            CommonFriendNameLabelArr[userId] = name
             lastHeadImg = headImg
+            lastNameLabel = name
         }
         
-        YMLayout.SetHScrollViewContentSize(friendsList, lastSubView: lastHeadImg)
+        YMLayout.SetHScrollViewContentSize(friendsList, lastSubView: lastNameLabel)
         
+        DetailActions?.GetCommonFriendsName(idList.joinWithSeparator(","))
         return commonFriendPanel
     }
     

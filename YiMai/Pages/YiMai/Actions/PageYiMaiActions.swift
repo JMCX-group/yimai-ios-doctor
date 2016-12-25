@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Proposer
 
 public class PageYiMaiActions: PageJumpActions{
     var TargetController: PageYiMaiViewController!
@@ -31,6 +32,20 @@ public class PageYiMaiActions: PageJumpActions{
         
         L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION + "-yimai-r1",
                                      success: Level2RelationSuccess, error: L2Err)
+    }
+    
+    func AddFriendButtonTouched(gr: UIGestureRecognizer) {
+        let contacts: PrivateResource = PrivateResource.Contacts
+        if(contacts.isNotDeterminedAuthorization) {
+            DoJump(YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME)
+        } else {
+            if(!contacts.isAuthorized) {
+                DoJump(YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME)
+            } else {
+                self.DoJump(YMCommonStrings.CS_PAGE_YIMAI_ADD_CONTCATS_FRIENDS_NAME)
+            }
+        }
+
     }
     
     func YiMaiReload() {

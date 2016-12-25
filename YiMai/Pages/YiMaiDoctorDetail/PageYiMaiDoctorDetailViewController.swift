@@ -19,10 +19,20 @@ public class PageYiMaiDoctorDetailViewController: PageViewController {
     
     override func PagePreRefresh() {
         BodyView?.FullPageLoading.Show()
-        BodyView?.GetDocInfo()
+        if(nil == self.UserData) {
+            BodyView?.GetDocInfo()
+        } else {
+            BodyView?.FromCommonFriendsBtn = true
+            BodyView?.FromCommonFriendsUserId = UserData as! String
+            BodyView?.GetDocInfo(BodyView?.FromCommonFriendsUserId)
+        }
     }
     
     override func PageDisapeared() {
         BodyView?.Clear()
+        if(nil != self.UserData) {
+            BodyView?.Actions = nil
+            BodyView?.DetailActions = nil
+        }
     }
 }

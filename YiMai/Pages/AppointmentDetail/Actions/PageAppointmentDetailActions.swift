@@ -16,17 +16,18 @@ public class PageAppointmentDetailActions: PageJumpActions {
     override func ExtInit() {
         super.ExtInit()
         
-        DetailApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_APPOINTMENT_DETAIL,
+        DetailApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_APPOINTMENT_DETAIL + "fromDetail",
                                  success: DetailGetSuccess, error: DetailGetError)
         TargetView = self.Target as? PageAppointmentDetailBodyView
     }
     
     private func DetailGetSuccess(data: NSDictionary?) {
+        print(self)
         TargetView?.LoadData(data!)
     }
     
     private func DetailGetError(error: NSError) {
-        
+        YMAPIUtility.PrintErrorInfo(error)
     }
     
     public func GetDetail() {

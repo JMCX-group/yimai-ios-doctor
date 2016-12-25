@@ -60,8 +60,8 @@ public class PageYiMaiTopView: NSObject {
                                                   image: qrImage!)
         
         let addFriendImage = UIImage(named: "PageYiMaiAddFriendButton")
-        AddFriendButton = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: PageJumpActions.PageJumpToByImageViewSenderSel, image: addFriendImage!)
-        AddFriendButton?.UserStringData = YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME
+        AddFriendButton = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: AddFriendsSelector, image: addFriendImage!)
+//        AddFriendButton?.UserStringData = YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME
         
         TopView.addSubview(QRButton!)
         TopView.addSubview(AddFriendButton!)

@@ -79,11 +79,23 @@ public class PageAppointmentRecordBodyView: PageBodyView {
     }
     
     private func DrawAppointmentCell(parent: UIView, data: [String: AnyObject], prev: YMTouchableView? = nil) -> YMTouchableView? {
-        let docNameString = data["doctor_name"] as? String
-        let appointmentTime = data["time"] as? String
-        if(nil == docNameString || nil == appointmentTime) {
+        let docNameString = YMVar.GetStringByKey(data, key: "doctor_name", defStr: "请您代选")
+        let appointmentTime = YMVar.GetStringByKey(data, key: "time")
+        let userHead = YMVar.GetStringByKey(data, key: "doctor_head_url")
+        let jobTitleStr = YMVar.GetStringByKey(data, key: "doctor_job_title", defStr: "医生")
+        let statusCode = YMVar.GetStringByKey(data, key: "status_code")
+        let statusString = YMVar.GetStringByKey(data, key:"status")
+        
+        if("wait-0" != statusCode) {
+            if(YMValueValidator.IsBlankString(docNameString)) {
+                return prev
+            }
+        }
+        
+        if(YMValueValidator.IsBlankString(appointmentTime)) {
             return prev
         }
+        
         let cell = YMLayout.GetTouchableView(useObject: RecordActions!, useMethod: "RecordSelected:".Sel())
         parent.addSubview(cell)
         if(nil != prev) {
@@ -126,10 +138,9 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         headImage.anchorInCorner(Corner.TopLeft,
             xPad: 40.LayoutVal(), yPad: 20.LayoutVal(),
             width: headImage.width, height: headImage.height)
-        let head = data["doctor_head_url"] as! String
-        YMLayout.LoadImageFromServer(headImage, url: head, fullUrl: nil, makeItRound: true)
+        YMLayout.LoadImageFromServer(headImage, url: userHead, fullUrl: nil, makeItRound: true)
         
-        name.text = data["doctor_name"] as? String
+        name.text = docNameString
         name.textColor = YMColors.FontBlue
         name.font = YMFonts.YMDefaultFont(30.LayoutVal())
         name.sizeToFit()
@@ -141,7 +152,7 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         divider.align(Align.ToTheRightCentered, relativeTo: name, padding: 14.LayoutVal(),
             width: YMSizes.OnPx, height: 20.LayoutVal())
         
-        jobTitle.text = data["doctor_job_title"] as? String
+        jobTitle.text = jobTitleStr
         jobTitle.textColor = YMColors.FontGray
         jobTitle.font = YMFonts.YMDefaultFont(20.LayoutVal())
         jobTitle.sizeToFit()
@@ -152,7 +163,7 @@ public class PageAppointmentRecordBodyView: PageBodyView {
             padding: 12.LayoutVal(),
             width: patientIcon.width, height: patientIcon.height)
         
-        let patientNameString = "\(data["patient_name"]!)"
+        let patientNameString = YMVar.GetStringByKey(data, key: "patient_name")
         patient.text = "患者 \(patientNameString)"
         patient.textColor = YMColors.FontBlue
         patient.font = YMFonts.YMDefaultFont(20.LayoutVal())
@@ -163,14 +174,13 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         timeIcon.align(Align.UnderCentered, relativeTo: patientIcon,
             padding: 12.LayoutVal(), width: timeIcon.width, height: timeIcon.height)
         
-        time.text = data["time"] as? String
+        time.text = appointmentTime//data["time"] as? String
         time.textColor = YMColors.FontLightGray
         time.font = YMFonts.YMDefaultFont(20.LayoutVal())
         time.sizeToFit()
         time.align(Align.UnderMatchingLeft, relativeTo: patient,
             padding: 8.LayoutVal(), width: time.width, height: time.height)
         
-        let statusString = data["status"] as! String
         status.text = statusString
         if("医生关闭" == statusString) {
             status.textColor = YMColors.FontGray

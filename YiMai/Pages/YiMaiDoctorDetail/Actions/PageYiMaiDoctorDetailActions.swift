@@ -16,6 +16,8 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     private var AddFriendApi: YMAPIUtility? = nil
     private var AgreeApi: YMAPIUtility!
     
+    var CommonFriendsApi: YMAPIUtility!
+    
     override func ExtInit() {
         super.ExtInit()
         GetInfoApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_DOCTOR_DETAIL,
@@ -26,7 +28,23 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
         
         AgreeApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_AGREE_FRIEND_APPLY, success: AgreeSuccess, error: AgreeError)
         
+        
+        CommonFriendsApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_COMMON_FRIENDS_INFO, success: GetCommonFriendsSuccess, error: GetCommonFriendsError)
         self.TargetView = self.Target as? PageYiMaiDoctorDetailBodyView
+    }
+    
+    func GetCommonFriendsSuccess(data: NSDictionary?) {
+        let realData = data!["data"] as! [[String: AnyObject]]
+        
+        TargetView?.UpdateCommonFriendsName(realData)
+    }
+    
+    func GetCommonFriendsError(error: NSError) {
+        YMPageModalMessage.ShowErrorInfo("载入共同好友姓名出错", nav: NavController!)
+    }
+    
+    func GetCommonFriendsName(idList: String) {
+        CommonFriendsApi.YMGetDoctorsByIdList(idList)
     }
     
     func AgreeSuccess(data: NSDictionary?) {
@@ -43,6 +61,9 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     
     public func GetInfoSuccess(data: NSDictionary?) {
         let userInfo = data!["user"] as! [String: AnyObject]
+        
+        print("------")
+        print(userInfo)
         TargetView?.DoctorInfo = userInfo
         TargetView?.LoadData(userInfo)
         TargetView?.FullPageLoading.Hide()
@@ -74,8 +95,12 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
         }
     }
     
-    public func GetInfo() {
-        GetInfoApi?.YMQueryUserInfoById(PageYiMaiDoctorDetailBodyView.DocId)
+    public func GetInfo(id: String? = nil) {
+        if(nil == id) {
+            GetInfoApi?.YMQueryUserInfoById(PageYiMaiDoctorDetailBodyView.DocId)
+        } else {
+            GetInfoApi?.YMQueryUserInfoById(id!)
+        }
     }
     
     public func AddFriend(sender: YMButton) {
@@ -112,6 +137,11 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     func Agree(sender: YMButton) {
         TargetView?.FullPageLoading.Show()
         AgreeApi.YMAgreeFriendById(PageYiMaiDoctorDetailBodyView.DocId)
+    }
+    
+    func CommonFriendsTouched(gr: UIGestureRecognizer) {
+        let img = gr.view as! YMTouchableImageView
+        DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME, ignoreExists: true, userData: img.UserStringData)
     }
 }
 

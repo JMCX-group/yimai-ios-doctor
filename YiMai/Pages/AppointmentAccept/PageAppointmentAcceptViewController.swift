@@ -25,6 +25,7 @@ public class PageAppointmentAcceptViewController: PageViewController {
     override func PagePreRefresh() {
         if(self.isMovingToParentViewController()) {
             BodyView?.Clear()
+            BodyView?.FullPageLoading.Show()
             BodyView?.GetDetail()
         }
     }

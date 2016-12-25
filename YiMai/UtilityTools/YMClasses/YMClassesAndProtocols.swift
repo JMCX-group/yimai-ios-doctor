@@ -128,7 +128,7 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
     
     public func DoNothingActions(param: AnyObject) {}
     
-    public func DoJump(targetPageName: String) {
+    public func DoJump(targetPageName: String, ignoreExists: Bool = false, userData: AnyObject? = nil) {
         var targetPage: UIViewController? = nil
         
         if(nil == PageJumpActions.ControllersDict) {
@@ -136,11 +136,18 @@ public class PageJumpActions: NSObject, PageJumpActionsProtocol{
         }
         
         if(nil != PageJumpActions.ControllersDict?.indexForKey(targetPageName)){
-            targetPage = PageJumpActions.ControllersDict![targetPageName]!
+            if(ignoreExists) {
+                targetPage = YMLayout.GetStoryboardControllerByName(targetPageName)!
+            } else {
+                targetPage = PageJumpActions.ControllersDict![targetPageName]!
+            }
         } else {
             targetPage = YMLayout.GetStoryboardControllerByName(targetPageName)!
             PageJumpActions.ControllersDict?[targetPageName] = targetPage
         }
+        
+        let tempPage = targetPage as? PageViewController
+        tempPage?.UserData = userData
         
         YMCurrentPage.CurrentPage = targetPageName
         
@@ -207,6 +214,8 @@ public class PageViewController: UIViewController, UIGestureRecognizerDelegate{
     internal var NavController: UINavigationController? = nil
     internal var SelfView: UIView? = nil
     public var LoadingView: YMPageLoadingView? = nil
+    
+    var UserData: AnyObject? = nil
 
     internal func GestureRecognizerEnable() -> Bool {return true}
 

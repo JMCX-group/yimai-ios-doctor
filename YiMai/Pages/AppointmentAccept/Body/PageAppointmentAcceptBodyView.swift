@@ -21,7 +21,6 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
     private let ImagePanel = UIView()
     private let TimePanel = UIView()
     
-    public var Loading: YMPageLoadingView? = nil
     public static var AppointmentID: String = ""
     public static var TimeInfo: String = ""
     
@@ -71,9 +70,6 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
         
         DrawDP()
         DrawAppointmentNum()
-        
-        Loading = YMPageLoadingView(parentView: self.BodyView)
-        Loading?.Show()
     }
 
     public func DrawTransferButton(top: UIView) {
@@ -618,6 +614,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
     public func LoadData(data: NSDictionary) {
         let doc = data["doctor_info"] as! [String: AnyObject]
         let patient = data["patient_info"] as! [String: AnyObject]
+
         DrawDoctor(doc)
         DrawPatient(patient)
         AppointmentNum.text = PageAppointmentAcceptBodyView.AppointmentID
@@ -628,7 +625,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
         TransferBtn!.UserObjectData = data
 
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: TimePanel, padding: 120.LayoutVal())
-        Loading?.Hide()
+        FullPageLoading.Hide()
     }
     
     public func GetDetail() {

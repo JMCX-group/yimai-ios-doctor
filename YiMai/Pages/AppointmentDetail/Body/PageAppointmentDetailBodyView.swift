@@ -48,19 +48,16 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
 
     private var DetailActions: PageAppointmentDetailActions? = nil
 
-    public var Loading: YMPageLoadingView? = nil
-
     override func ViewLayout() {
         super.ViewLayout()
         
         DetailActions = PageAppointmentDetailActions(navController: self.NavController!, target: self)
-        Loading = YMPageLoadingView(parentView: self.BodyView)
         
         CreateTimelineIconMap()
         DrawBreadcrumbs()
         DrawDP()
         DrawAppointmentNum()
-        Loading?.Show()
+        FullPageLoading.Show()
     }
     
     private func CreateTimelineIconMap() {
@@ -727,7 +724,7 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
         DrawTimeline(timeLine)
         
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: TimeLinePanel, padding: 128.LayoutVal())
-        Loading?.Hide()
+        FullPageLoading.Hide()
     }
     
     public func GetDetail() {

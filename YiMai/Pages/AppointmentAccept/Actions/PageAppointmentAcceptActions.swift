@@ -31,6 +31,8 @@ public class PageAppointmentAcceptActions: PageJumpActions {
     }
     
     private func DetailGetError(error: NSError) {
+        TargetView?.FullPageLoading.Hide()
+        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试", nav: NavController!)
         
     }
     

@@ -206,7 +206,10 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: OthersListPanel)
         YMLayout.SetViewHeightByLastSubview(FriendsPanel, lastSubView: ShowFriendsListBtn)
 
-        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 10.LayoutVal(), width: OthersPanel.width, height: OthersPanel.height)
+        let friendsPanelPoint = FriendsPanel.frame.origin
+        FriendsPanel.frame = CGRect(x: friendsPanelPoint.x, y: friendsPanelPoint.y, width: FriendsPanel.width, height: 0)
+        FriendsPanel.layer.masksToBounds = true
+        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0.LayoutVal(), width: OthersPanel.width, height: OthersPanel.height)
         
 //        BodyView.contentOffset = CGPoint()
         UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
@@ -250,7 +253,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         let searchKey = SearchInput!.text
         
         if(YMValueValidator.IsEmptyString(searchKey)) {
-            ShowResult(FullList, drawSearch: false, listType: ListType)
+            ShowResult(FullList, drawSearch: false, listType: YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS)
             return
         }
         
@@ -319,11 +322,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
                 }
             }
         }
-        
-        
-        
-        ShowResult(["friends": friendsData, "others": othersData], drawSearch: false, listType: ListType)
-        
+
+        ShowResult(["friends": friendsData, "others": othersData], drawSearch: false, listType: YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS)
     }
     
     private func DrawOtherList(data: [[String: AnyObject]]) {

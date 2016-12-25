@@ -119,13 +119,22 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         TargetController!.BodyView!.ShowResult(resultData)
     }
 
+    var ReTryCount: Int = 0
     public func UploadAddressBook() {
 //        GetContactsApi?.YMUploadAddressBook(YMAddressBookTools.AllContacts)
         TargetController!.LoadingView?.Show()
         if(0 == YMBackgroundRefresh.ContactNew.count) {
-            YMDelay(0.1, closure: { 
-                self.UploadAddressBook()
-            })
+            if(ReTryCount < 3) {
+                YMDelay(1.0, closure: {
+                    self.UploadAddressBook()
+                })
+                ReTryCount += 1
+            } else {
+                ReTryCount = 0
+                TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
+                TargetController!.LoadingView?.Hide()
+            }
+            
         } else {
             TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
             TargetController!.LoadingView?.Hide()

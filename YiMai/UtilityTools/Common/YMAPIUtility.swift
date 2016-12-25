@@ -27,6 +27,7 @@ public class YMAPIInterfaceURL {
     static let QueryUserInfo = YMAPIInterfaceURL.ApiBaseUrl + "/user/me"
     static let QueryUserInfoById = YMAPIInterfaceURL.ApiBaseUrl + "/user"
     static let GetUserPassowrdBack = YMAPIInterfaceURL.ApiBaseUrl + "/user/reset-pwd"
+    static let ResetUserPhone = YMAPIInterfaceURL.ApiBaseUrl + "/user/reset-phone"
 
     static let ChangeUserInfo = YMAPIInterfaceURL.ApiBaseUrl + "/user"
     static let QueryUserByPhone = YMAPIInterfaceURL.ApiBaseUrl + "/user/phone"
@@ -172,6 +173,11 @@ public class YMAPICommonVariable {
 
 public class YMAPIUtility {
     public static func PrintErrorInfo(error: NSError) {
+        print("")
+        
+        print("debug print from : [\(NSThread.callStackSymbols()[1])] : -------->")
+        
+        print("")
         if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
             let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
             let errInfo = error.userInfo["com.alamofire.serialization.response.error.data"] as? NSData
@@ -803,6 +809,10 @@ public class YMAPIUtility {
         YMAPIGet(YMAPIInterfaceURL.GetAllCollege, param: nil, progressHandler: nil)
     }
     
+    public func YMGetDoctorsByIdList(ids: String) {
+        YMAPIPost(YMAPIInterfaceURL.GetDoctorsByIdList, param: ["id_list": ids], progressHandler: nil)
+    }
+    
     public func YMGetRecentContactedDocList(param: [String: String]) {
         YMAPIPost(YMAPIInterfaceURL.GetDoctorsByIdList, param: param, progressHandler: nil)
     }
@@ -812,7 +822,6 @@ public class YMAPIUtility {
     }
     
     public func YMDeleteRelation(param: String) {
-        print(param)
         YMAPIPost(YMAPIInterfaceURL.RelationDelete, param: ["friend_id": param], progressHandler: nil)
     }
     
@@ -860,6 +869,10 @@ public class YMAPIUtility {
     
     public func YMGetIndexBanner() {
         YMAPIGet(YMAPIInterfaceURL.GetIndexBanner, param: nil, progressHandler: nil)
+    }
+    
+    public func YMResetUserPhone(param: [String: String]) {
+        YMAPIPost(YMAPIInterfaceURL.ResetUserPhone, param: param, progressHandler: nil)
     }
 }
 
