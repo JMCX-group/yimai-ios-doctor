@@ -47,7 +47,7 @@ public class PageAppointmentAcceptActions: PageJumpActions {
     }
     
     public func GetDetail() {
-        DetailApi?.YMGetAppointmentDetail(PageAppointmentAcceptBodyView.AppointmentID)
+        DetailApi?.YMGetAdmissionDetail(PageAppointmentAcceptBodyView.AppointmentID)
     }
     
     public func TextDetailTouched(sender: UIGestureRecognizer) {

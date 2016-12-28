@@ -22,6 +22,8 @@ class PageDoctorAuthBodyView: PageBodyView {
     
     let SubmitButton = YMButton()
     
+    static var IsReAuth = false
+    
     func ImagesSelected(selectedPhotos: [PHAsset]) {
 //        let photo = selectedPhotos[0]
         
@@ -113,9 +115,15 @@ class PageDoctorAuthBodyView: PageBodyView {
         BodyView.addSubview(tipLabel)
         tipLabel.align(Align.UnderCentered, relativeTo: PhotoImagePanel, padding: 30.LayoutVal(), width: tipLabel.width, height: tipLabel.height)
         
-        let tooltipImg = YMLayout.GetSuitableImageView("YMAuthTooltip")
-        BodyView.addSubview(tooltipImg)
-        tooltipImg.align(Align.UnderCentered, relativeTo: tipLabel, padding: 80.LayoutVal(), width: tooltipImg.width, height: tooltipImg.height)
+//        let tooltipImg = YMLayout.GetSuitableImageView("YMAuthTooltip")
+        var tooltip: UIView!
+        if(PageDoctorAuthBodyView.IsReAuth) {
+            tooltip = DrawTooltip("认证失败", line1: "请再次上传证件原件照片", line2: "或手持胸牌半身照片", color: YMColors.WarningFontColor, width: 420.LayoutVal())
+        } else {
+            tooltip = DrawTooltip("提示", line1: "请上传清晰无遮挡的照片以便后台审核", line2: "我们将对您的信息严格保密", color: YMColors.FontBlue, width: 460.LayoutVal())
+        }
+        BodyView.addSubview(tooltip)
+        tooltip.align(Align.UnderCentered, relativeTo: tipLabel, padding: 80.LayoutVal(), width: tooltip.width, height: tooltip.height)
         
         ParentView?.addSubview(SubmitButton)
         SubmitButton.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: 98.LayoutVal())
@@ -127,6 +135,28 @@ class PageDoctorAuthBodyView: PageBodyView {
         SubmitButton.enabled = false
         
         SubmitButton.addTarget(AuthActions, action: "DoSubmit:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func DrawTooltip(title: String, line1: String, line2: String, color: UIColor, width: CGFloat) -> UIView {
+        let titleLabel = YMLayout.GetNomalLabel(title, textColor: color, fontSize: 30.LayoutVal())
+        let line1Label = YMLayout.GetNomalLabel(line1, textColor: color, fontSize: 24.LayoutVal())
+        let line2Label = YMLayout.GetNomalLabel(line2, textColor: color, fontSize: 24.LayoutVal())
+        
+        let tooltip = UIView()
+        tooltip.frame = CGRect(x: 0, y: 0, width: width, height: 150.LayoutVal())
+        tooltip.layer.borderColor = color.CGColor
+        tooltip.layer.cornerRadius = 10.LayoutVal()
+        tooltip.layer.borderWidth = 1
+        tooltip.layer.masksToBounds = true
+        
+        tooltip.addSubview(titleLabel)
+        tooltip.addSubview(line1Label)
+        tooltip.addSubview(line2Label)
+        
+        titleLabel.anchorToEdge(Edge.Top, padding: 10.LayoutVal(), width: titleLabel.width, height: titleLabel.height)
+        line1Label.align(Align.UnderCentered, relativeTo: titleLabel, padding: 10.LayoutVal(), width: line1Label.width, height: line1Label.height)
+        line2Label.align(Align.UnderCentered, relativeTo: line1Label, padding: 10.LayoutVal(), width: line2Label.width, height: line2Label.height)
+        return tooltip
     }
 
     func PhotoLayout() {

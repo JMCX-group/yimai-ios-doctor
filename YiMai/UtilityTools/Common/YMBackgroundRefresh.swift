@@ -14,6 +14,7 @@ class YMBackgroundRefresh: NSObject {
     static var ShowNewFriendFlag = false
     static var ShowNewFriendCount: Int = 0
     static var ContactNew = [String: AnyObject]()
+    static var IsGetContactNewFailed = false
     static var BroadcastFirstPage = [[String: AnyObject]]()
     
     static var LastNewFriends = [String: [String:AnyObject]]()
@@ -52,6 +53,8 @@ class YMBackgroundRefresh: NSObject {
     private static var L1RelationApi: YMAPIUtility!
     private static var L2RelationApi: YMAPIUtility!
     private static var NewFriendsRelationApi: YMAPIUtility!
+    
+    private static var MyInfoApi: YMAPIUtility!
 
     private static let SuccessDelay: Double = 1.0
     private static let ErrorDelay: Double = 10.0
@@ -87,6 +90,8 @@ class YMBackgroundRefresh: NSObject {
         GetContactsApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-gct",
                                       success: GetContactsApiSuccessed, error: GetContactsApiError)
         
+        MyInfoApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_QUERY_USER_BY_ID + "-me", success: MESuccess, error: MEError)
+        
         DoApi()
     }
     
@@ -115,6 +120,9 @@ class YMBackgroundRefresh: NSObject {
     
     static private func GetContactsApiError(error: NSError){
         YMAPIUtility.PrintErrorInfo(error)
+        IsGetContactNewFailed = true
+        
+        ReCompareContactBook(0.5)
     }
     
     static private func GetContactsApiSuccessed(data: NSDictionary?) {
@@ -123,6 +131,8 @@ class YMBackgroundRefresh: NSObject {
         } else {
             ContactNew = data!["data"] as! [String: AnyObject]
         }
+        
+        IsGetContactNewFailed = false
         
         ReCompareContactBook()
         YMLocalData.SaveData(YMAddressBookTools.AllContacts, key: "YMLoaclContactAddressBook")
@@ -134,7 +144,6 @@ class YMBackgroundRefresh: NSObject {
             Int64(sec * Double(NSEC_PER_SEC))
         ), YMBackgroundRefresh.BackgroundQueue) {
             YMBackgroundRefresh.CompareContactBook()
-            
         }
     }
     
@@ -176,7 +185,7 @@ class YMBackgroundRefresh: NSObject {
         L1RelationApi.YMGetLevel1Relation()
         L2RelationApi.YMGetLevel2Relation()
         NewFriendsRelationApi.YMGetRelationNewFriends()
-        
+        MyInfoApi.YMQueryUserInfoById(YMVar.MyDoctorId)
         CompareContactBook()
     }
     
@@ -316,6 +325,23 @@ class YMBackgroundRefresh: NSObject {
     static func NFErr(error: NSError){
         YMDelay(YMBackgroundRefresh.ErrorDelay) {
             NewFriendsRelationApi.YMGetRelationNewFriends()
+        }
+    }
+    
+    static func MESuccess(data: NSDictionary?) {
+        let userInfo = data?["user"] as? [String: AnyObject]
+        if(1 < YMVar.MyUserInfo.count) {
+            YMVar.MyUserInfo["is_auth"] = YMVar.GetStringByKey(userInfo, key: "is_auth")
+        }
+        YMDelay(2.0) {
+            MyInfoApi.YMQueryUserInfoById(YMVar.MyDoctorId)
+        }
+    }
+    
+    static func MEError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        YMDelay(2.0) {
+            MyInfoApi.YMQueryUserInfoById(YMVar.MyDoctorId)
         }
     }
 }

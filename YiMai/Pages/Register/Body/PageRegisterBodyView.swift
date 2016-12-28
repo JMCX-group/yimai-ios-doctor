@@ -222,18 +222,9 @@ public class PageRegisterBodyView: NSObject, UITextFieldDelegate {
             return nil
         }
         
-        let curVerifyCode = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_REG_VERIFY_CODE)
-        if(nil == curVerifyCode) {
+        if(YMValueValidator.IsBlankString(verifyCode)) {
             if(showAlarm) {
-                YMPageModalMessage.ShowErrorInfo("请先获取验证码！", nav: self.NavController!)
-            }
-            return nil
-        }
-        
-        let verifyCodeInString = "\(curVerifyCode!)"
-        if(verifyCodeInString != verifyCode) {
-            if(showAlarm) {
-                YMPageModalMessage.ShowErrorInfo("验证码错误！", nav: self.NavController!)
+                YMPageModalMessage.ShowErrorInfo("请先填写验证码！", nav: self.NavController!)
             }
             return nil
         }

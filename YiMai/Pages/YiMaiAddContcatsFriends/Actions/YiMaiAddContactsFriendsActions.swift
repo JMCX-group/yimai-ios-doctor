@@ -131,11 +131,13 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
                 ReTryCount += 1
             } else {
                 ReTryCount = 0
+                TargetController!.BodyView!.FullList = YMBackgroundRefresh.ContactNew
                 TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
                 TargetController!.LoadingView?.Hide()
             }
             
         } else {
+            TargetController!.BodyView!.FullList = YMBackgroundRefresh.ContactNew
             TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
             TargetController!.LoadingView?.Hide()
         }

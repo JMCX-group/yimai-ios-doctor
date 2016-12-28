@@ -19,7 +19,13 @@ public class PageAppointmentDetailViewController: PageViewController {
     }
 
     override func PagePreRefresh() {
-        BodyView?.GetDetail()
+        BodyView?.FullPageLoading.Show()
+        if(nil != UserData) {
+            BodyView?.FromAppointmentRecord = true
+            BodyView?.GetAppointmentDetail()
+        } else {
+            BodyView?.GetAdmissionDetail()
+        }
     }
     
     override func PageDisapeared() {

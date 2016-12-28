@@ -38,8 +38,10 @@ class PageDoctorAuthActions: PageJumpActions {
     }
     
     func UploadSuccess(data: NSDictionary?) {
-        print(data)
         TargetView.FullPageLoading.Hide()
+        YMVar.MyUserInfo["is_auth"] = "processing"
+        let realData = data as? [String: String]
+        YMVar.MyUserInfo["auth_img"] = YMVar.GetStringByKey(realData, key: "url")
         self.NavController!.popViewControllerAnimated(true)
     }
     

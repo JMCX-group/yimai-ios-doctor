@@ -16,6 +16,7 @@ class PageWalletInfoBodyView: PageBodyView {
     let BalancePanel = UIView()
     let BalanceDetailPanel = UIView()
     let PiePanel = UIView()
+    let DetailButton = YMButton()
 
     override func ViewLayout() {
         super.ViewLayout()
@@ -33,6 +34,17 @@ class PageWalletInfoBodyView: PageBodyView {
         BalancePanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 240.LayoutVal())
         BalanceDetailPanel.align(Align.UnderMatchingLeft, relativeTo: BalancePanel, padding: 0, width: YMSizes.PageWidth, height: 256.LayoutVal())
         PiePanel.align(Align.UnderMatchingLeft, relativeTo: BalanceDetailPanel, padding: 40.LayoutVal(), width: YMSizes.PageWidth, height: 500.LayoutVal())
+    }
+    
+    func DrawRecordButton(topPanel: UIView) {
+        topPanel.addSubview(DetailButton)
+        DetailButton.setTitle("收支明细", forState: UIControlState.Normal)
+        DetailButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        DetailButton.titleLabel?.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        DetailButton.sizeToFit()
+        DetailButton.anchorInCorner(Corner.BottomRight, xPad: 40.LayoutVal(), yPad: 20.LayoutVal(), width: DetailButton.width, height: DetailButton.height)
+        
+        DetailButton.addTarget(WalletActions, action: "ShowCashDetail:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func LoadData(data: [String: AnyObject]) {
@@ -58,6 +70,12 @@ class PageWalletInfoBodyView: PageBodyView {
         let totalLabel = YMLayout.GetNomalLabel(total, textColor: YMColors.FontGray, fontSize: 90.LayoutVal())
         let totalTitle = YMLayout.GetNomalLabel("总余额（元）", textColor: YMColors.FontBlue, fontSize: 26.LayoutVal())
         
+        if("0" == total) {
+            DetailButton.hidden = true
+        } else {
+            DetailButton.hidden = false
+        }
+        
         BalancePanel.addSubview(totalLabel)
         BalancePanel.addSubview(totalTitle)
         totalLabel.anchorToEdge(Edge.Top, padding: 50.LayoutVal(), width: totalLabel.width, height: totalLabel.height)
@@ -72,8 +90,8 @@ class PageWalletInfoBodyView: PageBodyView {
         //            "refunded": "已提现"
         //        }
         
-        let billableCell = YMLayout.GetTouchableView(useObject: WalletActions, useMethod: "ShowCashDetail:".Sel())
-        let pendingCell = YMLayout.GetTouchableView(useObject: WalletActions, useMethod: "ShowCashDetail:".Sel())
+        let billableCell = YMLayout.GetTouchableView(useObject: WalletActions, useMethod: PageJumpActions.DoNothingSel)
+        let pendingCell = YMLayout.GetTouchableView(useObject: WalletActions, useMethod: PageJumpActions.DoNothingSel)
         
         BalanceDetailPanel.addSubview(billableCell)
         BalanceDetailPanel.addSubview(pendingCell)
@@ -114,18 +132,30 @@ class PageWalletInfoBodyView: PageBodyView {
         PiePanel.addSubview(pieChart)
         pieChart.fillSuperview()
         
-        var billable = YMVar.GetStringByKey(data, key: "billable").DoubleVal
-        var pending = YMVar.GetStringByKey(data, key: "pending").DoubleVal
+        let billableStr = YMVar.GetStringByKey(data, key: "billable")
+        let pendingStr = YMVar.GetStringByKey(data, key: "pending")
+        let totalStr = YMVar.GetStringByKey(data, key: "total")
+    
+        let billable = billableStr.DoubleVal
+        var pending = pendingStr.DoubleVal
+        
+        if("0" == billableStr && "0" == pendingStr) {
+            pending = totalStr.DoubleVal
+        }
         
         var pieDataArr = [ChartDataEntry]()
-        if((billable / pending) * 100 < 1.0){
-            pieDataArr.append(ChartDataEntry(value: pending, xIndex: 0))
-        } else if((pending / billable) * 100 < 1.0) {
-            pieDataArr.append(ChartDataEntry(value: billable, xIndex: 0))
-        } else {
-            pieDataArr.append(ChartDataEntry(value: pending, xIndex: 0))
-            pieDataArr.append(ChartDataEntry(value: billable, xIndex: 0))
-        }
+        
+        pieDataArr.append(ChartDataEntry(value: pending, xIndex: 0))
+        pieDataArr.append(ChartDataEntry(value: billable, xIndex: 0))
+
+//        if((billable / pending) * 100 < 1.0){
+//            pieDataArr.append(ChartDataEntry(value: pending, xIndex: 0))
+//        } else if((pending / billable) * 100 < 1.0) {
+//            pieDataArr.append(ChartDataEntry(value: billable, xIndex: 0))
+//        } else {
+//            pieDataArr.append(ChartDataEntry(value: pending, xIndex: 0))
+//            pieDataArr.append(ChartDataEntry(value: billable, xIndex: 0))
+//        }
 
         let pieDataSet = PieChartDataSet(yVals: pieDataArr, label: "")
         let pieData = PieChartData(xVals: ["待结算", "可提取"], dataSet: pieDataSet)
@@ -137,6 +167,8 @@ class PageWalletInfoBodyView: PageBodyView {
         pieChart.data = pieData
         
         let fmt = NSNumberFormatter()
+        fmt.maximumFractionDigits = 2
+        fmt.multiplier = 1.0
         fmt.percentSymbol = "%"
         fmt.usesGroupingSeparator = true
         fmt.groupingSeparator = "."

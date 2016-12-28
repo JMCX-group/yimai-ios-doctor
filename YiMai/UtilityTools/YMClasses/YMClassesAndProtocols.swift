@@ -34,6 +34,7 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_APPOINTMENT_PATIENT_CONDITION_NAME: true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_DOCTOR_NAME: true,
         YMCommonStrings.CS_PAGE_APPOINTMENT_SELECT_TIME_NAME: true,
+        YMCommonStrings.CS_PAGE_APPOINTMENT_UPDATE_NAME: true,
         YMCommonStrings.CS_PAGE_PERSONAL_SETTING_NAME: true,
         YMCommonStrings.CS_PAGE_ACCOUNT_SETTING_NAME: true,
         YMCommonStrings.CS_PAGE_PERSONAL_PASSWORD_RESET_NAME: true,
@@ -76,7 +77,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_MY_WALLET_RECORD: true,
         YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST: true,
         YMCommonStrings.CS_PAGE_AUTH_COMPLETE: true,
-        YMCommonStrings.CS_PAGE_BLACKLIST_NAME: true
+        YMCommonStrings.CS_PAGE_BLACKLIST_NAME: true,
+        YMCommonStrings.CS_PAGE_PERSONAL_CHANGE_PHONE_NAME: true
     ]
 }
 

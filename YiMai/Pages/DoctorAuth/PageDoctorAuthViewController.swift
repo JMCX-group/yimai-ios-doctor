@@ -9,21 +9,32 @@
 import UIKit
 
 class PageDoctorAuthViewController: PageViewController {
-    var BodyView: PageDoctorAuthBodyView!
+    var BodyView: PageDoctorAuthBodyView? = nil
     
     override func PageLayout() {
         super.PageLayout()
-        
-        BodyView = PageDoctorAuthBodyView(parentView: self.view, navController: self.NavController!)
-        TopView = PageCommonTopView(parentView: self.view, titleString: "认证资料", navController: self.NavController!)
+        DrawBody()
     }
 
     override func PagePreRefresh() {
-        let authFlag = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
-        if("1" == authFlag) {
-            //TODO: Show
-        } else {
-            
+        if(isMovingToParentViewController()) {
+            DrawBody()
         }
+        
+    }
+    
+    func DrawBody() {
+        let isFailedStatus = UserData as? String
+        if(YMValueValidator.IsBlankString(isFailedStatus)) {
+            PageDoctorAuthBodyView.IsReAuth = false
+        } else {
+            PageDoctorAuthBodyView.IsReAuth = true
+        }
+        
+        
+        YMLayout.ClearView(view: view)
+        
+        BodyView = PageDoctorAuthBodyView(parentView: self.view, navController: self.NavController!)
+        TopView = PageCommonTopView(parentView: self.view, titleString: "认证资料", navController: self.NavController!)
     }
 }

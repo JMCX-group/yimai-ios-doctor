@@ -17,6 +17,8 @@ public class PageAppointmentSelectDoctorAcitons: PageJumpActions {
         let prevCtrl = controllers[controllers.count - 2]
         if(prevCtrl.isKindOfClass(PageAppointmentViewController)){
             PageAppointmentViewController.SelectedDoctor = cell.UserObjectData as? [String: AnyObject]
+        } else if(prevCtrl.isKindOfClass(PageAppointmentUpdateViewController)) {
+            PageAppointmentUpdateViewController.SelectedDoctor = cell.UserObjectData as? [String: AnyObject]
         } else {
             PageAppointmentTransferViewController.SelectedDoctor = cell.UserObjectData as? [String: AnyObject]
         }

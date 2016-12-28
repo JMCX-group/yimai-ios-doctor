@@ -124,7 +124,7 @@ public class RequirePaperCardBodyView: PageBodyView {
         PreviewButton.setTitle("预览", forState: UIControlState.Normal)
         PreviewButton.setTitleColor(YMColors.FontGray, forState: UIControlState.Disabled)
         PreviewButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
-        PreviewButton.enabled = false
+//        PreviewButton.enabled = false
         PreviewButton.backgroundColor = YMColors.White
         PreviewButton.titleLabel?.font = YMFonts.YMDefaultFont(32.LayoutVal())
         
@@ -135,7 +135,7 @@ public class RequirePaperCardBodyView: PageBodyView {
         
         PreviewButton.addTarget(RequireActions, action: "GoPreview:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
 
-        let required = "\(YMVar.MyUserInfo["application_card"]!)"
+        let required = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "application_card")
         if("1" == required) {
             PreviewButton.setTitle("已申请", forState: UIControlState.Normal)
             DisablePreview()
@@ -151,26 +151,30 @@ public class RequirePaperCardBodyView: PageBodyView {
             AddresseeAddrCell = GetCell("地址", text: AddresseeAddr, prev: cell)
             AddresseeNameCell = GetCell("收件人姓名", text: AddresseeName, prev: AddresseeAddrCell)
             AddresseePhoneCell = GetCell("收件手机号", text: AddresseePhone, prev: AddresseeNameCell)
+        } else if("2" == required){
+            let expressNo = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "express_no")
+            DisablePreview()
+            PreviewButton.setTitle("已申请（快递单号：\(expressNo)）", forState: UIControlState.Normal)
         }
     }
-    
+
     func VerifyAddresseeInfo() {
-        if(YMValueValidator.IsEmptyString(AddresseeAddr)) {
-            DisablePreview()
-            return
-        }
-        
-        if(YMValueValidator.IsEmptyString(AddresseeName)) {
-            DisablePreview()
-            return
-        }
-        
-        if(YMValueValidator.IsEmptyString(AddresseePhone)) {
-            DisablePreview()
-            return
-        }
-        
-        EnablePreview()
+//        if(YMValueValidator.IsEmptyString(AddresseeAddr)) {
+//            DisablePreview()
+//            return
+//        }
+//
+//        if(YMValueValidator.IsEmptyString(AddresseeName)) {
+//            DisablePreview()
+//            return
+//        }
+//
+//        if(YMValueValidator.IsEmptyString(AddresseePhone)) {
+//            DisablePreview()
+//            return
+//        }
+//
+//        EnablePreview()
     }
 }
 

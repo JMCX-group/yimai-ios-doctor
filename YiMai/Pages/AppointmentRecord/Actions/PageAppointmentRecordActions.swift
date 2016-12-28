@@ -38,7 +38,7 @@ public class PageAppointmentRecordActions: PageJumpActions {
         let cell = sender.view as! YMTouchableView
         let cellData = cell.UserObjectData as! [String:AnyObject]
         PageAppointmentDetailViewController.AppointmentID = "\(cellData["id"]!)"
-        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME, ignoreExists: false, userData: NSObject())
     }
     
     public func GetAppointmentList() {

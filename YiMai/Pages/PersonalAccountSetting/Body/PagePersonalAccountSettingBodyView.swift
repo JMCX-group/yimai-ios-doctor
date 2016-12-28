@@ -102,7 +102,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
     private func DrawData(data: AnyObject) {
         let realData = data as! [String: AnyObject]
         AccountPhone.text = "\(realData["phone"]!)"
-        AccountBindPhone.text = "\(realData["phone"]!)"
+        AccountBindPhone.text = "需要重新登录"
         
         let email = YMVar.GetStringByKey(realData, key: "email")
 
@@ -171,8 +171,8 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
     private func DrawExtInfo(){
         let bindPhoneButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
-            label: UILabel(), text: "绑定手机号")
-        AppendExtInfo(AccountBindPhone, parent: bindPhoneButton, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+            label: UILabel(), text: "绑定新手机号", userStringData: YMCommonStrings.CS_PAGE_PERSONAL_CHANGE_PHONE_NAME)
+        AppendExtInfo(AccountBindPhone, parent: bindPhoneButton, fontColor: YMColors.FontGray, fontSize: 24.LayoutVal())
         
         bindEmailButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: "EmailCellTouched:".Sel(),

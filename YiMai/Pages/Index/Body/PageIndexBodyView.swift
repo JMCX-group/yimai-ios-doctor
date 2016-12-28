@@ -71,29 +71,6 @@ public class PageIndexBodyView {
         }
         
         ScrollImageView.SetImages(imageList).StartAutoScroll()
-//        if(0 == YMBackgroundRefresh.BroadcastFirstPage.count) {
-//            ScrollImageView.SetImages([YMLayout.GetSuitableImageView("IndexScrollPhoto")]).StartAutoScroll()
-//            YMDelay(0.5, closure: {
-//                self.RefreshScrollImage()
-//            })
-//        } else {
-//            var imageList = [YMTouchableImageView]()
-//            for article in YMBackgroundRefresh.BroadcastFirstPage {
-//                let imgUrl = YMVar.GetStringByKey(article, key: "img_url")
-//                let articleUrl = YMVar.GetStringByKey(article, key: "url")
-//                
-//                let newImage = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "IndexScrollImageTouched:".Sel(), imageName: "IndexScrollPhoto")
-//                YMLayout.LoadImageFromServer(newImage, url: imgUrl)
-//                newImage.UserStringData = articleUrl
-//                imageList.append(newImage)
-//            }
-//            
-//            ScrollImageView.SetImages(imageList).StartAutoScroll()
-//
-//            YMDelay(3600 * 24, closure: {
-//                self.RefreshScrollImage()
-//            })
-//        }
     }
     
     private func DrawScrollPanel() {

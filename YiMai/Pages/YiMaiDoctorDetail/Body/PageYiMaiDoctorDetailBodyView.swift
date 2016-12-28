@@ -17,7 +17,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
     public static var DocId: String = ""
     public static var IsFromNewFriendToAgree: Bool = false
     
-    var FromCommonFriendsBtn = true
+    var FromCommonFriendsBtn = false
     var FromCommonFriendsUserId = ""
     var ButtonPanel = UIView()
     var DoctorInfo: [String: AnyObject]? = nil

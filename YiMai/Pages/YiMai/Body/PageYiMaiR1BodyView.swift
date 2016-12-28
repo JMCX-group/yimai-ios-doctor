@@ -341,7 +341,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         titleLabel.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 0, width: titleLabel.width, height: 50.LayoutVal())
         
         var cellView:YMScrollCell? = nil
-        for doc in l1Doc.reverse() {
+        for doc in l1Doc {
             cellView = DrawFriendsCell(
                 [
                     YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"\(doc["head_url"])",

@@ -56,7 +56,7 @@ class PageAppointmentReplyListActions: PageJumpActions {
         //    }
         
         PageAppointmentDetailViewController.AppointmentID = id
-        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME, ignoreExists: false, userData: NSObject())
     }
 }
 

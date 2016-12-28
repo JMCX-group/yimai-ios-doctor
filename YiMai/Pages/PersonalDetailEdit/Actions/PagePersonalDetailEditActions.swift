@@ -39,6 +39,12 @@ public class PagePersonalDetailEditActions: PageJumpActions {
 
     public func UploadSuccess(data: NSDictionary?) {
         YMVar.MyUserInfo = data!["data"] as! [String: AnyObject]
+        YMVar.MyDoctorId = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "id")
+        
+        print("http://d.medi-link.cn/uploads/avatar/\(YMVar.MyDoctorId).jpg?\(NSDate().timeIntervalSince1970)" )
+        RCIM.sharedRCIM().refreshUserInfoCache(RCUserInfo(userId: YMVar.MyDoctorId, name: "",
+            portrait: "http://d.medi-link.cn/uploads/avatar/\(YMVar.MyDoctorId).jpg?\(NSDate().timeIntervalSince1970)"),
+                                               withUserId: YMVar.MyDoctorId)
         TargetController?.BodyView?.UserHeadImg.image = Toucan(image: ImageForUpload!).maskWithEllipse().image
         TargetController?.BodyView?.FullPageLoading.Hide()
     }

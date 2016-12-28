@@ -149,7 +149,7 @@ public class PageForgetPasswordBodyView: PageBodyView {
             return nil
         }
         
-        let curVerifyCode = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_FORGET_VERIFY_CODE)
+        let curVerifyCode = VerifyInput?.text //YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_FORGET_VERIFY_CODE)
         if(nil == curVerifyCode) {
             if(showInfo) {
                 YMPageModalMessage.ShowErrorInfo("请先获取验证码！", nav: self.NavController!)

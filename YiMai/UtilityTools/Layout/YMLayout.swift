@@ -515,15 +515,12 @@ public class YMLayout {
             return nameA.characters.count > nameB.characters.count
         }
         
-        var debug = [String]()
-        
         for tag in tagSorted {
             let tagName = tag as! String
             if(YMValueValidator.IsEmptyString(tagName)) {continue}
             let tagLabel = tagBuilder(tagText: tagName, tagInnerPadding: tagInnerPadding, tagHeight: lineHeight, userData: tag)
             labelArray.append(tagLabel)
             widthArray.append(GetTagFullWidth(tagLabel))
-            debug.append(tag as! String)
         }
         
         for (idx, val) in widthArray.enumerate() {

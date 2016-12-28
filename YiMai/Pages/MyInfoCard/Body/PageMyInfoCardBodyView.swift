@@ -119,7 +119,7 @@ public class PageMyInfoCardBodyView: PageBodyView {
         codeLabel.anchorInCenter(width: codeLabel.width + 48.LayoutVal(), height: codeLabel.height)
         codeBkg.anchorInCenter(width: 566.LayoutVal(), height: YMSizes.OnPx)
         
-        let jsonString = YMQRRecognizer.GenQRJsonString(["id": id])
+        let jsonString = YMQRRecognizer.GenQRJsonString(id)
         
         if(nil != jsonString) {
             let img = YMQRCode.generateImage(jsonString!, avatarImage: nil)

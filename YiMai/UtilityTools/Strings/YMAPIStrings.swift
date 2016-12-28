@@ -41,6 +41,7 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_UPLOAD_PHOTO_APPOINTMENT = "apiUploadAppointmentPhoto"
     public static let CS_API_ACTION_GET_APPOINTMENT_LIST = "apiGetAppointmentList"
     public static let CS_API_ACTION_GET_APPOINTMENT_DETAIL = "apiGetAppointmentDetail"
+    public static let CS_API_ACTION_UPDATE_APPOINTMENT_DETAIL = "apiUpdateAppointmentDetail"
     public static let CS_API_ACTION_DENY_APPOINTMENT = "apiDenyAppointment"
     public static let CS_API_ACTION_ACCEPT_APPOINTMENT = "apiAcceptAppointment"
     public static let CS_API_ACTION_APPOINTMENT_COMPLETE = "apiAppointmentComplete"
@@ -70,6 +71,7 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_QUERY_USER_BY_PHONE = "apiQueryUserByPhone"
     public static let CS_API_ACTION_QUERY_USER_BY_CODE = "apiQueryUserByCode"
+    public static let CS_API_ACTION_QUERY_USER_BY_ID = "apiQueryUserById"
     
     public static let CS_API_ACTION_GLOBAL_SEARCH = "apiGlobalSearch"
     
@@ -100,6 +102,7 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_UPDATE_BLACKLIST = "apiUpdateBlackList"
     
     public static let CS_API_ACTION_GET_COMMON_FRIENDS_INFO = "apiGetCommonFriendsInfo"
+    public static let CS_API_ACTION_CHANGE_PHONE = "apiChangePhone"
 }
 
 

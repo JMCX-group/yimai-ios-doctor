@@ -31,11 +31,14 @@ public class PageRegisterActions: PageJumpActions {
     }
     
     private func GetVerifyCodeSuccess(data: NSDictionary?) {
+        if(nil == data) {
+            return
+        }
         let realData = data! as! [String: AnyObject]
-        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_REG_VERIFY_CODE, data: realData["debug"]!)
+//        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_REG_VERIFY_CODE, data: realData["debug"]!)
         
         //TODO: this is a debug line
-        TargetBodyView!.VerifyCodeInput?.text = "\(realData["debug"]!)"
+        TargetBodyView!.VerifyCodeInput?.text =  YMVar.GetStringByKey(realData, key: "debug")
         
         CheckWhenInputChanged(TargetBodyView!.VerifyCodeInput!)
     }
@@ -125,6 +128,7 @@ public class PageRegisterActions: PageJumpActions {
     }
     
     func ShowAgreementTouched(sender: UIButton) {
+        PageShowWebViewController.TitleString = "协议"
         PageShowWebViewController.TargetUrl = "/agreement/doctor"
         DoJump(YMCommonStrings.CS_PAGE_SHOW_WEB_PAGE)
     }

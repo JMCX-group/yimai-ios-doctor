@@ -14,8 +14,14 @@ import ImageViewer
 public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
     private var AcceptActions: PageAppointmentAcceptActions? = nil
     private let DPPanel = UIView()
+    
     private let DocCell = UIView()
+    private let PlatformCell = UIView()
     private let PatientCell = UIView()
+    private let PatientOnlyCell = UIView()
+    
+    private let DPDivider = UIView()
+    
     private let AppointmentNum = UILabel()
     private let TextInfoPanel = UIView()
     private let ImagePanel = UIView()
@@ -292,14 +298,26 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
         
         DocCell.backgroundColor = YMColors.White
         PatientCell.backgroundColor = YMColors.White
+        PlatformCell.backgroundColor = YMColors.White
+        PatientOnlyCell.backgroundColor = YMColors.White
         
         DPPanel.addSubview(DocCell)
         DPPanel.addSubview(PatientCell)
+        DPPanel.addSubview(PlatformCell)
+        DPPanel.addSubview(DPDivider)
+        DPPanel.addSubview(PatientOnlyCell)
+        
+        DocCell.hidden = true
+        PatientCell.hidden = true
+        PlatformCell.hidden = true
+        PatientOnlyCell.hidden = true
+
         DPPanel.groupAndFill(group: Group.Horizontal, views: [DocCell, PatientCell], padding: 0)
-        let divider = UIView()
-        DPPanel.addSubview(divider)
-        divider.backgroundColor = YMColors.DividerLineGray
-        divider.anchorInCenter(width: YMSizes.OnPx, height: DPPanel.height)
+        PlatformCell.anchorToEdge(Edge.Left, padding: 0, width: DPPanel.width / 2, height: DPPanel.height)
+        PatientOnlyCell.fillSuperview()
+
+        DPDivider.backgroundColor = YMColors.DividerLineGray
+        DPDivider.anchorInCenter(width: YMSizes.OnPx, height: DPPanel.height)
     }
     
     private func DrawDoctor(data: [String: AnyObject]) {
@@ -361,6 +379,94 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
                        relativeTo: dept,
                        padding: 8.LayoutVal(),
                        width: hospital.width, height: hospital.height)
+    }
+    
+    private func DrawPlatformPanel() {
+        let headImage = YMLayout.GetSuitableImageView("YiMaiDefaultHead")
+        let docName = UILabel()
+        
+        PlatformCell.addSubview(headImage)
+        PlatformCell.addSubview(docName)
+        
+        headImage.anchorToEdge(Edge.Top, padding: 30.LayoutVal(),
+                               width: headImage.width, height: headImage.height)
+
+        docName.text = "医者脉连平台代约"
+        docName.textColor = YMColors.FontBlue
+        docName.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        docName.sizeToFit()
+        docName.align(Align.UnderCentered, relativeTo: headImage,
+                      padding: 20.LayoutVal(), width: docName.width, height: 30.LayoutVal())
+    }
+    
+    private func DrawPatientOnly(data: [String: AnyObject]) {
+        let headImage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
+        let patientName = UILabel()
+        let gender = UILabel()
+        let age = UILabel()
+        let phone = UILabel()
+        let divider = UIView()
+        let phoneIcon = YMLayout.GetSuitableImageView("YMIconPhone")
+        
+        PatientOnlyCell.addSubview(headImage)
+        PatientOnlyCell.addSubview(patientName)
+        PatientOnlyCell.addSubview(gender)
+        PatientOnlyCell.addSubview(age)
+        PatientOnlyCell.addSubview(phone)
+        PatientOnlyCell.addSubview(divider)
+        PatientOnlyCell.addSubview(phoneIcon)
+        
+        headImage.anchorToEdge(Edge.Top, padding: 30.LayoutVal(),
+                               width: headImage.width, height: headImage.height)
+        let head = data["head_url"] as? String
+        if(nil != head) {
+            YMLayout.LoadImageFromServer(headImage, url: head!, fullUrl: nil, makeItRound: true)
+        }
+        
+        patientName.text = "\(data["name"]!)"
+        patientName.textColor = YMColors.FontBlue
+        patientName.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        patientName.sizeToFit()
+        patientName.align(Align.UnderCentered, relativeTo: headImage,
+                          padding: 12.LayoutVal(),
+                          width: patientName.width, height: patientName.height)
+        
+        divider.backgroundColor = YMColors.FontBlue
+        divider.align(Align.UnderCentered, relativeTo: patientName,
+                      padding: 12.LayoutVal(), width: YMSizes.OnPx, height: 20.LayoutVal())
+        
+        let genderMap = ["0":"女", "1":"男"]
+        gender.text = genderMap["\(data["sex"]!)"]
+        gender.textColor = YMColors.FontGray
+        gender.font = YMFonts.YMDefaultFont(20.LayoutVal())
+        gender.sizeToFit()
+        gender.align(Align.ToTheLeftCentered, relativeTo: divider,
+                     padding: 12.LayoutVal(),
+                     width: gender.width, height: gender.height)
+        
+        
+        
+        age.text = "\(data["age"]!) 岁"
+        age.textColor = YMColors.FontGray
+        age.font = YMFonts.YMDefaultFont(20.LayoutVal())
+        age.sizeToFit()
+        age.align(Align.ToTheRightCentered, relativeTo: divider,
+                  padding: 12.LayoutVal(),
+                  width: age.width, height: age.height)
+        
+        phone.text = data["phone"] as? String
+        phone.textColor = YMColors.FontLightGray
+        phone.font = YMFonts.YMDefaultFont(20.LayoutVal())
+        phone.sizeToFit()
+        phone.align(Align.UnderCentered, relativeTo: headImage,
+                    padding: 92.LayoutVal(),
+                    width: phone.width, height: phone.height)
+        
+        phoneIcon.align(Align.ToTheLeftCentered, relativeTo: phone,
+                        padding: -10.LayoutVal(),
+                        width: phoneIcon.width, height: phoneIcon.height)
+        
+        phone.align(Align.ToTheRightCentered, relativeTo: phoneIcon, padding: 8.LayoutVal(), width: phone.width, height: phone.height)
     }
     
     private func DrawPatient(data: [String: AnyObject]) {
@@ -427,8 +533,10 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
                     width: phone.width, height: phone.height)
         
         phoneIcon.align(Align.ToTheLeftCentered, relativeTo: phone,
-                        padding: 8.LayoutVal(),
+                        padding: -10.LayoutVal(),
                         width: phoneIcon.width, height: phoneIcon.height)
+        
+        phone.align(Align.ToTheRightCentered, relativeTo: phoneIcon, padding: 8.LayoutVal(), width: phone.width, height: phone.height)
     }
     
     private func DrawTextInfo(data: [String: AnyObject]) {
@@ -614,9 +722,35 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
     public func LoadData(data: NSDictionary) {
         let doc = data["doctor_info"] as! [String: AnyObject]
         let patient = data["patient_info"] as! [String: AnyObject]
+        
+        let docId = YMVar.GetStringByKey(doc, key: "id")
+        
 
-        DrawDoctor(doc)
-        DrawPatient(patient)
+        if(YMValueValidator.IsBlankString(docId)) {
+            DrawPatientOnly(patient)
+            DocCell.hidden = true
+            PatientCell.hidden = true
+            PlatformCell.hidden = true
+            PatientOnlyCell.hidden = false
+        } else if("1" == docId) {
+            DrawPlatformPanel()
+            DrawPatient(patient)
+            
+            DocCell.hidden = true
+            PatientCell.hidden = false
+            PlatformCell.hidden = false
+            PatientOnlyCell.hidden = true
+        } else {
+            DrawDoctor(doc)
+            DrawPatient(patient)
+            DocCell.hidden = false
+            PatientCell.hidden = false
+            PlatformCell.hidden = true
+            PatientOnlyCell.hidden = true
+        }
+
+//        DrawDoctor(doc)
+//        DrawPatient(patient)
         AppointmentNum.text = PageAppointmentAcceptBodyView.AppointmentID
         DrawTextInfo(patient)
         DrawImageList(patient)
@@ -636,9 +770,16 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
     public func Clear() {
         YMLayout.ClearView(view: DocCell)
         YMLayout.ClearView(view: PatientCell)
+        YMLayout.ClearView(view: PatientOnlyCell)
+        YMLayout.ClearView(view: PlatformCell)
         YMLayout.ClearView(view: TextInfoPanel)
         YMLayout.ClearView(view: ImagePanel)
         YMLayout.ClearView(view: TimePanel)
+        
+        DocCell.hidden = true
+        PatientCell.hidden = true
+        PlatformCell.hidden = true
+        PatientOnlyCell.hidden = true
         
         TransferBtn?.UserObjectData = nil
     }

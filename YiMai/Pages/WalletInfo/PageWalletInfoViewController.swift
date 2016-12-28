@@ -16,6 +16,7 @@ class PageWalletInfoViewController: PageViewController {
         
         BodyView = PageWalletInfoBodyView(parentView: self.view, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.view, titleString: "余额", navController: self.NavController!)
+        BodyView.DrawRecordButton(TopView!.TopViewPanel)
     }
     
     override func PagePreRefresh() {
@@ -24,3 +25,9 @@ class PageWalletInfoViewController: PageViewController {
         BodyView.WalletActions.InfoApi.YMGetWalletInfo()
     }
 }
+
+
+
+
+
+

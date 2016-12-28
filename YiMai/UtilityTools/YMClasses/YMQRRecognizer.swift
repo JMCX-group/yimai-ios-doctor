@@ -14,20 +14,23 @@ class YMQRRecognizer: NSObject {
 
     static func RecognizFromQRJson(json: String, qrRecognizedFunc: YMQRCallback, qrUnrecognizedFunc: YMQRCallback? = nil) {
         let jsonDict = YMVar.TryToGetDictFromJsonStringData(json)
-        
-        if(nil != jsonDict) {
-            let data = jsonDict!["YMQRData"]
-            if(nil != data) {
-                qrRecognizedFunc(qrData: data!)
-                return
-            }
-        }
+        let data = jsonDict!["YMQRData"]
+
+        qrRecognizedFunc(qrData: data!)
+
+//        if(nil != jsonDict) {
+//            let data = jsonDict!["YMQRData"]
+//            if(nil != data) {
+//                qrRecognizedFunc(qrData: data!)
+//                return
+//            }
+//        }
         
         qrUnrecognizedFunc?(qrData: json)
     }
     
-    static func GenQRJsonString(data: AnyObject, opt: String = "") -> String? {
-        let qrData = ["YMQRData": data, "YMOperation": opt]
+    static func GenQRJsonString(data: AnyObject, opt: String = "add_friend") -> String? {
+        let qrData = ["data": data, "operation": opt]
         
         if(NSJSONSerialization.isValidJSONObject(qrData)) {
             let jsonData = try! NSJSONSerialization.dataWithJSONObject(qrData, options: NSJSONWritingOptions.PrettyPrinted)
@@ -36,5 +39,4 @@ class YMQRRecognizer: NSObject {
             return nil
         }
     }
-
 }

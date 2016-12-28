@@ -89,7 +89,7 @@ public class PageIndexActions: PageJumpActions {
         if(!PageAppointmentViewController.SavedAppointment) {
             PageAppointmentViewController.NewAppointment = true
         }
-        
+
         DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_NAME)
     }
     
@@ -98,6 +98,10 @@ public class PageIndexActions: PageJumpActions {
         
         if("processing" == authStatus) {
             DoJump(YMCommonStrings.CS_PAGE_AUTH_PROCESSING)
+        } else if("completed" == authStatus) {
+            DoJump(YMCommonStrings.CS_PAGE_AUTH_COMPLETE)
+        } else if("fail" == authStatus) {
+            DoJump(YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME, ignoreExists: false, userData: "fail")
         } else {
             DoJump(YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME)
         }

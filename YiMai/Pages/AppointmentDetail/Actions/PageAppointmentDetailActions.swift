@@ -22,15 +22,20 @@ public class PageAppointmentDetailActions: PageJumpActions {
     }
     
     private func DetailGetSuccess(data: NSDictionary?) {
-        print(self)
         TargetView?.LoadData(data!)
+        TargetView?.FullPageLoading.Hide()
     }
     
     private func DetailGetError(error: NSError) {
+        TargetView?.FullPageLoading.Hide()
         YMAPIUtility.PrintErrorInfo(error)
     }
     
-    public func GetDetail() {
+    public func GetAdmissionDetailDetail() {
+        DetailApi?.YMGetAdmissionDetail(PageAppointmentDetailViewController.AppointmentID)
+    }
+    
+    public func GetAppointmentDetail() {
         DetailApi?.YMGetAppointmentDetail(PageAppointmentDetailViewController.AppointmentID)
     }
     
@@ -45,4 +50,19 @@ public class PageAppointmentDetailActions: PageJumpActions {
     public func ImageScrollRight (_: UIGestureRecognizer) {
         
     }
+    
+    func AcceptAppointment(btn: YMButton) {
+        PageAppointmentUpdateViewController.AppointmentData = btn.UserObjectData as? [String: AnyObject]
+        DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_UPDATE_NAME)
+    }
 }
+
+
+
+
+
+
+
+
+
+

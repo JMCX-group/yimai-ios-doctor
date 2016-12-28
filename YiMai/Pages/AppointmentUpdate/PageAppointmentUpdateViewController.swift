@@ -1,5 +1,5 @@
 //
-//  PageAppointmentTransferViewController.swift
+//  PageAppointmentUpdateViewController.swift
 //  YiMai
 //
 //  Created by why on 16/5/27.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class PageAppointmentTransferViewController: PageViewController {
-    private var Actions: PageAppointmentTransferActions? = nil
-    public var BodyView: PageAppointmentTransferBodyView? = nil
+public class PageAppointmentUpdateViewController: PageViewController {
+    private var Actions: PageAppointmentUpdateActions? = nil
+    public var BodyView: PageAppointmentUpdateBodyView? = nil
     public var Loading: YMPageLoadingView? = nil
     
     public static var SelectedDoctor:[String: AnyObject]? = nil
@@ -23,23 +23,23 @@ public class PageAppointmentTransferViewController: PageViewController {
 
     override func PageLayout() {
         super.PageLayout()
-        Actions = PageAppointmentTransferActions(navController: self.NavController, target: self)
-        BodyView = PageAppointmentTransferBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
-        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "预约", navController: self.NavController!)
+        Actions = PageAppointmentUpdateActions(navController: self.NavController, target: self)
+        BodyView = PageAppointmentUpdateBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
+        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "代约", navController: self.NavController!)
         
         Loading = YMPageLoadingView(parentView: self.view)
     }
 
     override func PagePreRefresh() {
-        PageAppointmentTransferViewController.PatientBasicInfo = nil
-        PageAppointmentTransferViewController.PatientCondition = ""
-        PageAppointmentTransferViewController.SelectedTime = ""
+        PageAppointmentUpdateViewController.PatientBasicInfo = nil
+        PageAppointmentUpdateViewController.PatientCondition = ""
+        PageAppointmentUpdateViewController.SelectedTime = ""
         
         BodyView?.BodyView.removeFromSuperview()
         TopView?.TopViewPanel.removeFromSuperview()
         
-        BodyView = PageAppointmentTransferBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
-        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "转诊", navController: self.NavController!)
+        BodyView = PageAppointmentUpdateBodyView(parentView: self.SelfView!, navController: self.NavController!, pageActions: Actions!)
+        TopView = PageCommonTopView(parentView: self.SelfView!, titleString: "代约", navController: self.NavController!)
         
         BodyView?.Reload()
         if(nil != VerifyInput(false)) {
@@ -50,21 +50,21 @@ public class PageAppointmentTransferViewController: PageViewController {
     }
 
     public func VerifyInput(showAlarm: Bool = true) -> [String:String]? {
-        if(nil == PageAppointmentTransferViewController.PatientBasicInfo) {
+        if(nil == PageAppointmentUpdateViewController.PatientBasicInfo) {
             if(showAlarm) {
                 YMPageModalMessage.ShowErrorInfo("请填写病人基本信息！", nav: self.NavController!)
             }
             return nil
         }
         
-        if(nil == PageAppointmentTransferViewController.SelectedDoctor) {
+        if(nil == PageAppointmentUpdateViewController.SelectedDoctor) {
             if(showAlarm) {
                 YMPageModalMessage.ShowErrorInfo("请选择医生！", nav: self.NavController!)
             }
             return nil
         }
 
-        let doctor = PageAppointmentTransferViewController.SelectedDoctor!
+        let doctor = PageAppointmentUpdateViewController.SelectedDoctor!
         
         let ret =
             [

@@ -84,6 +84,21 @@ public class RequirePaperCardActions: PageJumpActions {
         PaperCardPreviewBodyView.AddressInfo["address"] = TargetView!.AddresseeAddr
         PaperCardPreviewBodyView.AddressInfo["addressee"] = TargetView!.AddresseeName
         PaperCardPreviewBodyView.AddressInfo["receive_phone"] = TargetView!.AddresseePhone
+        
+                if(YMValueValidator.IsEmptyString(TargetView!.AddresseeAddr)) {
+                    YMPageModalMessage.ShowErrorInfo("请输入收件人地址", nav: NavController!)
+                    return
+                }
+        
+                if(YMValueValidator.IsEmptyString(TargetView!.AddresseeAddr)) {
+                    YMPageModalMessage.ShowErrorInfo("请输入收件人姓名", nav: NavController!)
+                    return
+                }
+        
+                if(YMValueValidator.IsEmptyString(TargetView!.AddresseeAddr)) {
+                    YMPageModalMessage.ShowErrorInfo("请输入收件人手机号", nav: NavController!)
+                    return
+                }
 
         DoJump(YMCommonStrings.CS_PAGE_PAPER_CARD_PREVIEW)
     }

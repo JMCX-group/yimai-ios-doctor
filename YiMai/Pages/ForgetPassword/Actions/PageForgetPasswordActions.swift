@@ -61,11 +61,14 @@ public class PageForgetPasswordActions: PageJumpActions {
     }
     
     private func GetVerifyCodeSuccess(data: NSDictionary?) {
+        if(nil == data) {
+            return
+        }
         let realData = data! as! [String: AnyObject]
-        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_FORGET_VERIFY_CODE, data: realData["debug"]!)
+//        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_FORGET_VERIFY_CODE, data: realData["debug"]!)
         
         //TODO: this is a debug line
-        TargetView!.VerifyInput?.text = "\(realData["debug"]!)"
+        TargetView!.VerifyInput?.text = YMVar.GetStringByKey(realData, key: "debug")
         CheckOnInputChanged(TargetView!.VerifyInput!)
     }
     

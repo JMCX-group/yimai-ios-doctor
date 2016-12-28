@@ -11,15 +11,33 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
 
     var window: UIWindow?
+    
+    func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
+        completion(RCUserInfo(userId: userId, name: "", portrait: "http://d.medi-link.cn/uploads/avatar/\(userId).jpg"))
+    }
+    
+    func RegisterNotification(app: UIApplication) {
+        let types = UIUserNotificationType(rawValue: UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Sound.rawValue | UIUserNotificationType.Alert.rawValue)
+        let notificationSetting = UIUserNotificationSettings(forTypes: types, categories: nil)
+        
+        app.registerUserNotificationSettings(notificationSetting)
+//        (forTypes: UIUserNotificationType.Badge)
+        
+//        notification
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         YMCoreDataEngine.EngineInitialize()
-        
+        RCIM.sharedRCIM().clearUserInfoCache()
+        RCIM.sharedRCIM().userInfoDataSource = self
         RCIM.sharedRCIM().initWithAppKey("sfci50a7c75di")
+        
+        RegisterNotification(application)
+
         return true
     }
 
