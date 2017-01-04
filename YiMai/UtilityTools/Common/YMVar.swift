@@ -74,6 +74,15 @@ public class YMVar:NSObject {
         return ret
     }
     
+    static func TryToGetDictFromJsonData(data: NSData?) -> NSDictionary? {
+        if(nil == data) {
+            return nil
+        }
+        
+        guard let ret = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary else { return nil }
+        return ret
+    }
+    
     static func TransObjectToString(obj: AnyObject) -> String {
         let jsonData = try! NSJSONSerialization.dataWithJSONObject(obj, options: NSJSONWritingOptions.PrettyPrinted)
         let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String

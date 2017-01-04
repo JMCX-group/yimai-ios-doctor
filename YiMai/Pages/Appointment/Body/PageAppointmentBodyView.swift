@@ -40,6 +40,7 @@ public class PageAppointmentBodyView: PageBodyView {
     public static var PatientBasicInfoString: String = ""
     public static var PatientConditionString: String = ""
     public static var AppointmentTimeString: String = "点击此处选择时间"
+    
     private var AllowedSelection: UInt = 10
     public var PhotoPikcer: YMPhotoSelector? = nil
     public var PhotoArray = [UIImage]()

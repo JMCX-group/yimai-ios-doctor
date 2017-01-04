@@ -94,7 +94,7 @@ public class PageAppLoadingActions: PageJumpActions {
                     return
                 }
 
-                self.DoJump(YMCommonStrings.CS_PAGE_INDEX_NAME)
+                self.DoJump(YMCommonStrings.CS_PAGE_INDEX_NAME, ignoreExists: false, userData: true)
             })
         }
 

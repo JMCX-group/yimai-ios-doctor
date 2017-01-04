@@ -54,7 +54,7 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
             queue.addOperationWithBlock({ () -> Void in
                 YMVar.MyUserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO) as! [String: AnyObject]
                 self.TargetView?.Loading?.Hide()
-                self.DoJump(YMCommonStrings.CS_PAGE_INDEX_NAME)
+                self.DoJump(YMCommonStrings.CS_PAGE_INDEX_NAME, ignoreExists: false, userData: true)
             })
         }
         

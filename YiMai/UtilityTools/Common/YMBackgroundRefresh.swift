@@ -30,6 +30,16 @@ class YMBackgroundRefresh: NSObject {
             let status = "\(f["status"]!)"
             let readStatus = "\(f["unread"]!)"
             let friendId = "\(f["id"]!)"
+
+            if("1" != readStatus) {
+                let docName = YMVar.GetStringByKey(f, key: "name")
+
+                if("waitForSure" == status) {
+                    YMNotification.DoLocalNotification("医生\(docName)申请加您为好友", userData: YMNotificationType.NewFriendApply)
+                } else if ("isFriend" == status) {
+                    YMNotification.DoLocalNotification("医生\(docName)通过了您的好友申请", userData: YMNotificationType.YiMaiR1Changed)
+                }
+            }
             
             let last = LastNewFriends[friendId]
             if(nil == last) {
@@ -239,8 +249,7 @@ class YMBackgroundRefresh: NSObject {
         YMDelay(YMBackgroundRefresh.SuccessDelay) {
             GetNewAdmissionList.YMGetNewAdmissionList()
         }
-        
-        
+
         if(nil == data) {
             return
         }
@@ -248,6 +257,11 @@ class YMBackgroundRefresh: NSObject {
         if(0 == admissionArr.count) {
             YMVar.MyNewAdmissionInfo.removeAll()
         } else {
+            let prevId = YMVar.GetStringByKey(YMVar.MyNewAdmissionInfo, key: "id")
+            let curId = YMVar.GetStringByKey(admissionArr[0], key: "id")
+            if(prevId != curId) {
+                YMNotification.DoLocalNotification("您有一条新的约诊请求", userData: YMNotificationType.NewAddmission)
+            }
             YMVar.MyNewAdmissionInfo = admissionArr[0]
         }
     }
@@ -264,6 +278,12 @@ class YMBackgroundRefresh: NSObject {
         if(0 == appointmentArr.count) {
             YMVar.MyNewAppointmentInfo.removeAll()
         } else {
+            let prevId = YMVar.GetStringByKey(YMVar.MyNewAppointmentInfo, key: "id")
+            let curId = YMVar.GetStringByKey(appointmentArr[0], key: "id")
+            if(prevId != curId) {
+                YMNotification.DoLocalNotification("您有一条新的约诊请求", userData: YMNotificationType.NewAppointment)
+            }
+            
             YMVar.MyNewAppointmentInfo = appointmentArr[0]
         }
     }

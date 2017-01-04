@@ -843,9 +843,11 @@ public class YMAPIUtility {
         YMAPIGet(YMAPIInterfaceURL.ClearAllNewBroadcast, param: nil, progressHandler: nil)
     }
     public func YMClearAllNewAdmission() {
+        print("clear all admission")
         YMAPIGet(YMAPIInterfaceURL.ClearAllNewAdmission, param: nil, progressHandler: nil)
     }
     public func YMClearAllNewAppointment() {
+        print("clear all appointment")
         YMAPIGet(YMAPIInterfaceURL.ClearAllNewAppointment, param: nil, progressHandler: nil)
     }
     

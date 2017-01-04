@@ -24,6 +24,9 @@ class PageMessageListViewController: PageViewController {
     }
     
     override func PageRefresh() {
+        YMLayout.ClearView(view: self.view)
         
+        BodyView = PageMessageListBodyView(parentView: SelfView!, navController: NavController!, pageActions: Actions!)
+        TopView = PageCommonTopView(parentView: SelfView!, titleString: "消息", navController: NavController)
     }
 }

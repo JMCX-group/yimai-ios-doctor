@@ -11,7 +11,7 @@ target 'YiMai' do
   pod 'SwiftDate', '~> 3.0.8'
   pod 'MWIDCardValidate', '~> 1.0.0'
   pod 'Graph', '~> 1.1.1'
-  pod 'RongCloudIMKit', '~> 2.4.0'
+  pod 'RongCloudIMKit', '~> 2.5.0'
   pod 'APAddressBook', '~> 0.2.3'
   pod 'MBProgressHUD', '~> 0.9.2'
   pod 'KMPlaceholderTextView', '~> 1.2.1'

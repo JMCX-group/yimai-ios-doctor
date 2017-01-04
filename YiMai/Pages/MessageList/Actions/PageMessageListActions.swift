@@ -49,3 +49,4 @@ public class PageMessageListActions: PageJumpActions{
         DoJump(YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST)
     }
 }
+

@@ -8,6 +8,39 @@
 
 import Foundation
 
+class YMNotificationType: NSObject {
+    static let NewAppointment = "NewAppointment"
+    static let NewAddmission = "NewAddmission"
+    static let NewFriendApply = "NewFriend"
+    static let YiMaiR1Changed = "YiMaiR1Changed"
+}
+
+typealias YMNotificationHandlerFunc = ((UINavigationController) -> Void)
+class YMNotificationHandler: NSObject {
+    static var HandlerMap: [String: YMNotificationHandlerFunc] = [
+        YMNotificationType.NewAppointment: YMNotificationHandler.NewAppointment,
+        YMNotificationType.NewAddmission: YMNotificationHandler.NewAddmission,
+        YMNotificationType.NewFriendApply: YMNotificationHandler.NewFriendApply,
+        YMNotificationType.YiMaiR1Changed: YMNotificationHandler.YiMaiR1Changed
+    ]
+    
+    static func NewAppointment(nav: UINavigationController) {
+        PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST)
+    }
+    
+    static func NewAddmission(nav: UINavigationController) {
+        PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME)
+    }
+    
+    static func NewFriendApply(nav: UINavigationController) {
+        PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_NEW_FRIEND_NAME)
+    }
+    
+    static func YiMaiR1Changed(nav: UINavigationController) {
+        PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_YIMAI_NAME)
+    }
+}
+
 class YMNotification: NSObject {
     static func DoLocalNotification(content: String, userData: AnyObject?) {
         let localNotification: UILocalNotification = UILocalNotification()
@@ -33,6 +66,8 @@ class YMNotification: NSObject {
         // 2.9.设置额外信息
         if(nil != userData) {
             localNotification.userInfo = ["data": userData!]
+        } else {
+            localNotification.userInfo = ["data": ""]
         }
         
         UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)

@@ -23,6 +23,7 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
     private let TextInfoPanel = UIView()
     private let ImagePanel = UIView()
     private let TimeLinePanel = UIView()
+    private let DemandPanel = UIView()
     
     private var TimelineIconMap = [String: String]()
     
@@ -687,10 +688,37 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
                    width: YMSizes.OnPx, height: detailCell.frame.origin.y - icon.frame.origin.y + 45.LayoutVal())
         return line
     }
+    
+    private func DrawExpectPanel(data: [String: AnyObject]?) {
+        BodyView.addSubview(DemandPanel)
+        if(nil == data) {
+            DemandPanel.align(Align.UnderMatchingLeft, relativeTo: ImagePanel, padding: 0, width: YMSizes.PageWidth, height: 0)
+            return
+        }
+
+        DemandPanel.align(Align.UnderMatchingLeft, relativeTo: ImagePanel, padding: YMSizes.OnPx, width: YMSizes.PageWidth, height: 0)
+        let expectDoc = YMVar.GetStringByKey(data, key: "doctor_name", defStr: "无")
+        let expectDept = YMVar.GetStringByKey(data, key: "department", defStr: "无")
+        let expectJobtitle = YMVar.GetStringByKey(data, key: "department", defStr: "无")
+        let expectHos = YMVar.GetStringByKey(data, key: "hospital", defStr: "无")
+        
+        let expectStr = "期望就诊医院：\(expectHos)\r\n期望就诊科室：\(expectDept)\r\n期望接诊医生职称：\(expectJobtitle)\r\n期望接诊医生姓名：\(expectDoc)"
+        
+        let label = YMLayout.GetNomalLabel(expectStr, textColor: YMColors.FontGray, fontSize: 26.LayoutVal())
+        label.numberOfLines = 0
+        label.frame = CGRect(x: 0, y: 0, width: 670.LayoutVal(), height: 0)
+        label.sizeToFit()
+        
+        DemandPanel.addSubview(label)
+        DemandPanel.backgroundColor = YMColors.White
+        label.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 20.LayoutVal(), width: 670.LayoutVal(), height: label.height)
+        
+        YMLayout.SetViewHeightByLastSubview(DemandPanel, lastSubView: label, bottomPadding: 20.LayoutVal())
+    }
 
     private func DrawTimeline(data: [[String: AnyObject]]) {
         BodyView.addSubview(TimeLinePanel)
-        TimeLinePanel.align(Align.UnderMatchingLeft, relativeTo: ImagePanel,
+        TimeLinePanel.align(Align.UnderMatchingLeft, relativeTo: DemandPanel,
                             padding: 0, width: YMSizes.PageWidth, height: 0)
         
         if(0 == data.count) {
@@ -814,6 +842,8 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
         let doc = data["doctor_info"] as! [String: AnyObject]
         let patient = data["patient_info"] as! [String: AnyObject]
         
+        let patientDemand = data["patient_demand"] as? [String: AnyObject]
+
         AcceptAppointmentBtn.UserObjectData = data
         
         let docId = YMVar.GetStringByKey(doc, key: "id")
@@ -841,6 +871,7 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
         AppointmentNum.text = PageAppointmentDetailViewController.AppointmentID
         DrawTextInfo(patient)
         DrawImageList(patient)
+        DrawExpectPanel(patientDemand)
         DrawTimeline(timeLine)
         
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: TimeLinePanel, padding: 128.LayoutVal())
@@ -869,6 +900,7 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
         YMLayout.ClearView(view: TextInfoPanel)
         YMLayout.ClearView(view: ImagePanel)
         YMLayout.ClearView(view: TimeLinePanel)
+        YMLayout.ClearView(view: DemandPanel)
     }
 }
 

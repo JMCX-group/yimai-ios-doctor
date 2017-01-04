@@ -71,8 +71,9 @@ public class PageAppointmentUpdateBodyView: PageBodyView {
     }
 
     func ParseData() {
+        let basicInfo = PageAppointmentUpdateViewController.AppointmentData!["basic_info"] as! [String: AnyObject]
         let patientInfo = PageAppointmentUpdateViewController.AppointmentData!["patient_info"] as! [String: AnyObject]
-        PageAppointmentUpdateViewController.SelectedTime = PageAppointmentAcceptBodyView.TimeInfo
+        PageAppointmentUpdateViewController.SelectedTime = YMVar.GetStringByKey(basicInfo, key: "date", defStr: "专家决定")//PageAppointmentAcceptBodyView.TimeInfo
         PageAppointmentUpdateViewController.PatientBasicInfo = ["name": "\(patientInfo["name"]!)"]
         PageAppointmentUpdateViewController.PatientCondition = patientInfo["history"] as! String
         ImageUrlArr.removeAll()

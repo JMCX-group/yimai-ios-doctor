@@ -96,8 +96,13 @@ public class PageIndexViewController: PageViewController {
         ]
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
         IndexTopView!.UpdateMsgNotifyStatus()
-        
         Actions?.BannerApi.YMGetIndexBanner()
+        
+        let fromLogin = UserData as? Bool
+        if(nil != fromLogin) {
+            UserData = nil
+            BodyView?.ClearContactList()
+        }
         
 //        BodyView?.HideAuthInfo()
     }

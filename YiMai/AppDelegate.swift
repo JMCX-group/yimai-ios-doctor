@@ -35,10 +35,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
         RCIM.sharedRCIM().clearUserInfoCache()
         RCIM.sharedRCIM().userInfoDataSource = self
         RCIM.sharedRCIM().initWithAppKey("sfci50a7c75di")
-        
+        RCIM.sharedRCIM().enableMessageAttachUserInfo = true
         RegisterNotification(application)
-
+        
+        RCIM.sharedRCIM().registerMessageType(YMIMMessageContent.self)
+        application.applicationIconBadgeNumber = 0
         return true
+    }
+
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        application.applicationIconBadgeNumber = 0
+        if(application.applicationState != UIApplicationState.Active) {
+            let userData = notification.userInfo?["data"] as? String
+            if(nil != userData) {
+                let ctrl = window?.rootViewController as? UINavigationController
+
+                if(nil != ctrl) {
+                    YMNotificationHandler.HandlerMap[userData!]?(ctrl!)
+                }
+            }
+        } else {
+            //Do Nothing
+            //print("application active")
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -57,6 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(application: UIApplication) {

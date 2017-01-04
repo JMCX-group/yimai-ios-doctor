@@ -90,10 +90,10 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
         let code = viewController.BodyView?.GetInputCode()
         
         if(!YMValueValidator.IsCellPhoneNum(code!)) {
-            if(code?.characters.count != 8) {
-                viewController.BodyView?.ShowAlertPage()
-                return
-            }
+//            if(code?.characters.count != 8) {
+//                viewController.BodyView?.ShowAlertPage()
+//                return
+//            }
             QueryByCodeApi?.YMGetDoctorInfoByYMCode(code!)
         } else {
             QueryByPhoneApi?.YMQueryUserByPhone(code!)

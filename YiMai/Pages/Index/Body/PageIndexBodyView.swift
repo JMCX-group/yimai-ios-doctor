@@ -266,6 +266,10 @@ public class PageIndexBodyView {
         ContactPanel.align(Align.UnderMatchingLeft, relativeTo: DoDoctorAuthPanel, padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 260.LayoutVal())
     }
     
+    func ClearContactList() {
+        YMLayout.ClearView(view: ContactPanel)
+    }
+    
     func LoadContactList(data: [[String: AnyObject]]) {
         let yiImage = UIImage(named: "IndexButtonYi")
 //        let maiImage = UIImage(named: "IndexButtonMai")
