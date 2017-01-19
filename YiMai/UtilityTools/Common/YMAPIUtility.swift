@@ -101,12 +101,21 @@ public class YMAPIInterfaceURL {
     
     static let WalletInfo = YMAPIInterfaceURL.ApiBaseUrl + "/wallet/info"
     static let WalletRecord = YMAPIInterfaceURL.ApiBaseUrl + "/wallet/record"
+    static let RequireCashOut = YMAPIInterfaceURL.ApiBaseUrl + "/wallet/withdraw"
     
     static let RequirePaperCard = YMAPIInterfaceURL.ApiBaseUrl + "/card/submit"
     
     static let GetAllTagList = YMAPIInterfaceURL.ApiBaseUrl + "/tag/all"
     static let GetTagGroupList = YMAPIInterfaceURL.ApiBaseUrl + "/tag/group"
     static let GetIndexBanner = YMAPIInterfaceURL.ApiBaseUrl + "/get-banner-url"
+    
+    static let GetYiMaiCountInfo = YMAPIInterfaceURL.ApiBaseUrl + "/data/auth-column"
+    
+    static let GetBankcardList = YMAPIInterfaceURL.ApiBaseUrl + "/bank/info"
+    static let AddBankcard = YMAPIInterfaceURL.ApiBaseUrl + "/bank/new"
+    static let DelBankcard = YMAPIInterfaceURL.ApiBaseUrl + "/bank/delete"
+    
+    static let GetDocSchedulingInfo = YMAPIInterfaceURL.ApiBaseUrl + "/data/scheduling"
 }
 
 public class YMAPICommonVariable {
@@ -682,7 +691,7 @@ public class YMAPIUtility {
     
     public func YMInviteOthers(ids: String) {
         YMAPIPost(YMAPIInterfaceURL.RelationInviteOthers,
-                  param: [YMCommonStrings.CS_API_PARAM_KEY_ID: ids],
+                  param: [YMCommonStrings.CS_API_PARAM_KEY_PHONE: ids],
                   progressHandler: nil)
     }
     
@@ -881,6 +890,31 @@ public class YMAPIUtility {
     
     public func YMResetUserPhone(param: [String: String]) {
         YMAPIPost(YMAPIInterfaceURL.ResetUserPhone, param: param, progressHandler: nil)
+    }
+    
+    public func YMGetYiMaiCountInfo() {
+        YMAPIGet(YMAPIInterfaceURL.GetYiMaiCountInfo, param: nil, progressHandler: nil)
+    }
+    
+    public func YMGetBankcardList() {
+        YMAPIGet(YMAPIInterfaceURL.GetBankcardList, param: nil, progressHandler: nil)
+    }
+    
+    public func YMAddBankcard(param: [String: AnyObject]) {
+        YMAPIPost(YMAPIInterfaceURL.AddBankcard, param: param, progressHandler: nil)
+    }
+
+    public func YMDelBankcard(id: String) {
+        YMAPIPost(YMAPIInterfaceURL.DelBankcard, param: ["id": id], progressHandler: nil)
+    }
+    
+    public func YMRequireCashOut(param: AnyObject) {
+        YMAPIPost(YMAPIInterfaceURL.RequireCashOut, param: param, progressHandler: nil)
+    }
+    
+    public func YMGetDocSchedulingInfo(id: String) {
+        print(["id": id])
+        YMAPIPost(YMAPIInterfaceURL.GetDocSchedulingInfo, param: ["id": id], progressHandler: nil)
     }
 }
 

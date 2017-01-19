@@ -10,9 +10,9 @@ import Foundation
 import Neon
 
 public class PageIndexBodyView {
-    private weak var ParentView : UIView? = nil
-    private weak var NavController : UINavigationController? = nil
-    private weak var Actions: PageIndexActions? = nil
+    private var ParentView : UIView? = nil
+    private var NavController : UINavigationController? = nil
+    var Actions: PageIndexActions? = nil
     
     private var BodyView: UIScrollView = UIScrollView()
     
@@ -27,7 +27,14 @@ public class PageIndexBodyView {
     
     private var DoDoctorAuthPanel = UIView()
     private var DoctorAuthButton: YMTouchableImageView? = nil
+    private var DocAuthProcessing: YMLabel? = nil
     
+    private var AuthedTitle: ActiveLabel? = nil
+    private var AuthedSubTitle: ActiveLabel? = nil
+    private let AuthedBkg = YMLayout.GetSuitableImageView("IndexDoctorAuthedBackground")
+    
+    let AuthHintBkg = UIView()
+
     private var ContactPanel = UIScrollView()
     
     private var ContactArray: [UIView] = [UIView]()
@@ -45,8 +52,21 @@ public class PageIndexBodyView {
     private func ViewLayout() {
         YMLayout.BodyLayoutWithTopAndBottom(ParentView!, bodyView: BodyView)
 
+        AuthHintBkg.hidden = true
+        AuthHintBkg.backgroundColor = YMColors.None
+
+        
+
         DrawScrollPanel()
         DrawOperatorPanel()
+        
+        
+        BodyView.addSubview(DoDoctorAuthPanel)
+        DoDoctorAuthPanel.backgroundColor = YMColors.White
+        DoDoctorAuthPanel.align(Align.UnderMatchingLeft, relativeTo: OperatorPanel,
+                                padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 110.LayoutVal())
+        DrawAuthHint()
+
         DrawDoctorAuthPanel()
         DrawContactPanel()
         
@@ -133,49 +153,108 @@ public class PageIndexBodyView {
         SetOperatorContent(RecordsButton!,imageName:  "IndexButtonRecords",text:  "预约记录")
     }
     
+    func SetAuthPanelGoAuth() {
+        AuthedTitle?.hidden = true
+        AuthedBkg.hidden = true
+        AuthedSubTitle?.hidden = true
+        
+        DocAuthProcessing?.hidden = true
+        DoctorAuthButton?.hidden = false
+        AuthHintBkg.hidden = false
+    }
+    
+    func SetAuthPanelProcessing() {
+        AuthedTitle?.hidden = true
+        AuthedBkg.hidden = true
+        AuthedSubTitle?.hidden = true
+        
+        DocAuthProcessing?.hidden = false
+        DoctorAuthButton?.hidden = true
+        AuthHintBkg.hidden = false
+    }
+    
+    func SetAuthPanelComplete() {
+        AuthedTitle?.hidden = false
+        AuthedBkg.hidden = false
+        AuthedSubTitle?.hidden = false
+        
+        DocAuthProcessing?.hidden = true
+        DoctorAuthButton?.hidden = true
+        AuthHintBkg.hidden = true
+    }
+
     private func DrawDoctorAuthPanel() {
-        BodyView.addSubview(DoDoctorAuthPanel)
-        DoDoctorAuthPanel.backgroundColor = YMColors.White
-        DoDoctorAuthPanel.align(Align.UnderMatchingLeft, relativeTo: OperatorPanel,
-                                padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 110.LayoutVal())
+        
         
         let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
         if("completed" == authStatus) {
-            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
-                                                              useMethod: "JumpToAuthPage:".Sel(),
-                                                              imageName: "IndexButtonAuthed")
+//            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+//                                                              useMethod: "JumpToAuthPage:".Sel(),
+//                                                              imageName: "IndexButtonAuthed")
+            
+            if(nil == AuthedTitle) {
+                AuthedTitle?.removeFromSuperview()
+                AuthedTitle = ActiveLabel()
+                AuthedTitle?.font = UIFont.systemFontOfSize(24.LayoutVal())
+                AuthedTitle?.text = "医脉助力每位医生打造个人品牌"
+                AuthedTitle?.textAlignment = NSTextAlignment.Left
+                AuthedTitle?.textColor = YMColors.FontLightGray
+                
+                DoDoctorAuthPanel.addSubview(AuthedBkg)
+                DoDoctorAuthPanel.addSubview(AuthedTitle!)
+                AuthedBkg.fillSuperview()
+                AuthedTitle!.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 25.LayoutVal(), width: YMSizes.PageWidth, height: 24.LayoutVal())
+                Actions?.GetYiMaiCountApi.YMGetYiMaiCountInfo()
+            }
+            
+            DrawYiMaiCountInfo([String: AnyObject]())
+
+            SetAuthPanelComplete()
+            return
         } else if("processing" == authStatus) {
             DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
                                                               useMethod: "JumpToAuthPage:".Sel(),
                                                               imageName: "IndexButtonAuthing")
+            DrawProcessingButton()
+            SetAuthPanelProcessing()
         } else {
             DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
                                                               useMethod: "JumpToAuthPage:".Sel(),
                                                               imageName: "IndexButtonGoAuth")
+            
+            SetAuthPanelGoAuth()
         }
 
+        AuthHintBkg.hidden = false
         
         DoctorAuthButton?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME
+
+        
+        DoDoctorAuthPanel.addSubview(DoctorAuthButton!)
+        DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
+    }
+    
+    func DrawAuthHint() {
+        DoDoctorAuthPanel.addSubview(AuthHintBkg)
+        AuthHintBkg.fillSuperview()
 
         let authHeadline = UILabel()
         authHeadline.font = UIFont.systemFontOfSize(30.LayoutVal())
         authHeadline.text = "医脉助力每位医生打造个人品牌"
         authHeadline.textAlignment = NSTextAlignment.Left
         authHeadline.textColor = YMColors.FontBlue
-
+        
         let authSubline = UILabel()
         authSubline.font = UIFont.systemFontOfSize(24.LayoutVal())
         authSubline.text = "添加认证是您专业和信用的标志"
         authSubline.textAlignment = NSTextAlignment.Left
         authSubline.textColor = YMColors.FontGray
-
-        DoDoctorAuthPanel.addSubview(authHeadline)
-        DoDoctorAuthPanel.addSubview(authSubline)
-        DoDoctorAuthPanel.addSubview(DoctorAuthButton!)
+        
+        AuthHintBkg.addSubview(authHeadline)
+        AuthHintBkg.addSubview(authSubline)
         
         authHeadline.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 25.LayoutVal(), width: YMSizes.PageWidth, height: 30.LayoutVal())
         authSubline.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 64.LayoutVal(), width: YMSizes.PageWidth, height: 24.LayoutVal())
-        DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
     }
     
     func HideAuthInfo() {
@@ -187,21 +266,71 @@ public class PageIndexBodyView {
         DoctorAuthButton?.removeFromSuperview()
 
         if("completed" == authStatus) {
-            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
-                                                              useMethod: "JumpToAuthPage:".Sel(),
-                                                              imageName: "IndexButtonAuthed")
+//            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+//                                                              useMethod: "JumpToAuthPage:".Sel(),
+//                                                              imageName: "IndexButtonAuthed")
+            
+            if(nil == AuthedTitle) {
+                AuthedTitle?.removeFromSuperview()
+                AuthedTitle = ActiveLabel()
+                AuthedTitle?.font = UIFont.systemFontOfSize(24.LayoutVal())
+                AuthedTitle?.text = "医脉助力每位医生打造个人品牌"
+                AuthedTitle?.textAlignment = NSTextAlignment.Left
+                AuthedTitle?.textColor = YMColors.FontLightGray
+                
+                DoDoctorAuthPanel.addSubview(AuthedBkg)
+                DoDoctorAuthPanel.addSubview(AuthedTitle!)
+                AuthedBkg.fillSuperview()
+                AuthedTitle!.anchorInCorner(Corner.TopLeft, xPad: 40.LayoutVal(), yPad: 25.LayoutVal(), width: YMSizes.PageWidth, height: 24.LayoutVal())
+                Actions?.GetYiMaiCountApi.YMGetYiMaiCountInfo()
+                
+                DrawYiMaiCountInfo([String: AnyObject]())
+            }
+            
+            SetAuthPanelComplete()
+            return
+
         } else if("processing" == authStatus) {
-            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
-                                                              useMethod: "JumpToAuthPage:".Sel(),
-                                                              imageName: "IndexButtonAuthing")
+//            DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
+//                                                              useMethod: "JumpToAuthPage:".Sel(),
+//                                                              imageName: "IndexButtonAuthing")
+            DrawProcessingButton()
+            SetAuthPanelProcessing()
+            return
         } else {
             DoctorAuthButton = YMLayout.GetTouchableImageView(useObject: Actions!,
                                                               useMethod: "JumpToAuthPage:".Sel(),
                                                               imageName: "IndexButtonGoAuth")
+            SetAuthPanelGoAuth()
         }
         
+        AuthHintBkg.hidden = false
         DoDoctorAuthPanel.addSubview(DoctorAuthButton!)
         DoctorAuthButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
+    }
+    
+    func DrawProcessingButton() {
+        if(nil == DocAuthProcessing) {
+            DocAuthProcessing = YMLabel()
+            DoDoctorAuthPanel.addSubview(DocAuthProcessing!)
+        } else {
+            DocAuthProcessing?.hidden = false
+            return
+        }
+
+        DocAuthProcessing?.text = "审核中"
+        DocAuthProcessing?.textAlignment = NSTextAlignment.Center
+        DocAuthProcessing?.textColor = YMColors.FontBlue
+        DocAuthProcessing?.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        DocAuthProcessing?.sizeToFit()
+        
+        DocAuthProcessing?.layer.borderWidth = 3.LayoutVal()
+        DocAuthProcessing?.layer.borderColor = YMColors.FontBlue.CGColor
+        DocAuthProcessing?.layer.cornerRadius = 8.LayoutVal()
+        
+        DocAuthProcessing?.SetTouchable(withObject: Actions!, useMethod: "JumpToAuthPage:".Sel())
+        DocAuthProcessing?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: (DoctorAuthButton?.width)!, height: (DoctorAuthButton?.height)!)
+        
     }
 
     private func GetContactButton(image: UIImage, name: String, desc: String,
@@ -270,6 +399,16 @@ public class PageIndexBodyView {
         YMLayout.ClearView(view: ContactPanel)
     }
     
+    func ClearAuthPanel() {
+        AuthedTitle?.hidden = true
+        AuthedSubTitle?.hidden = true
+        AuthedBkg.hidden = true
+        
+        AuthHintBkg.hidden = true
+        DoctorAuthButton?.hidden = true
+    }
+
+    
     func LoadContactList(data: [[String: AnyObject]]) {
         let yiImage = UIImage(named: "IndexButtonYi")
 //        let maiImage = UIImage(named: "IndexButtonMai")
@@ -292,9 +431,20 @@ public class PageIndexBodyView {
                     let img = UIImage(named: "IndexButtonContactBackground")
                     let jobTitle = YMVar.GetStringByKey(doc, key: "job_title", defStr: "医生")
                     let cell = GetContactButton(img!, name: "\(doc["name"]!)", desc: jobTitle, isDoc: true, userData: doc)
-                    
                     let cellData = cell.UserObjectData as! [String: AnyObject]
-                    let cellImage = cellData["img"] as! UIImageView
+                    let cellImage = cellData["img"] as! YMTouchableImageView
+                    let authStatus = YMVar.GetStringByKey(doc, key: "is_auth")
+
+                    if("completed" == authStatus) {
+                        YMLayout.SetHeadImageVFlag(cellImage)
+                    }
+                    
+                    let unreadCount = docImInfo.unreadMessageCount as Int
+                    if(unreadCount > 0) {
+                        let unreadLabel = YMLayout.GetUnreadCountLabel(unreadCount)
+                        cellImage.addSubview(unreadLabel)
+                        unreadLabel.anchorInCorner(Corner.TopRight, xPad: 0, yPad: 0, width: unreadLabel.width, height: unreadLabel.height)
+                    }
                     YMLayout.LoadImageFromServer(cellImage, url: "\(doc["head_url"]!)", fullUrl: nil, makeItRound: true)
                     cell.UserStringData = "\(doc["id"]!)"
                     ContactArray.append(cell)
@@ -302,9 +452,27 @@ public class PageIndexBodyView {
                 }
             }
         }
-        
-        
+
         LayoutContactButtons()
+    }
+    
+    func DrawYiMaiCountInfo(data: [String: AnyObject]) {
+        let hosCount = YMVar.GetStringByKey(data, key: "hospital_count", defStr: "0")
+        let docCount = YMVar.GetStringByKey(data, key: "doctor_count", defStr: "0")
+        let appCount = YMVar.GetStringByKey(data, key: "appointment_count", defStr: "0")
+        
+        let labelTitle = "医院（\(hosCount)） | 医生（\(docCount)） | 预约（\(appCount)）"
+
+        if(nil == AuthedSubTitle) {
+            AuthedSubTitle = YMLayout.GetNomalLabel(labelTitle, textColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+            DoDoctorAuthPanel.addSubview(AuthedSubTitle!)
+        } else {
+            AuthedSubTitle?.text = labelTitle
+            AuthedSubTitle?.sizeToFit()
+        }
+    
+        AuthedSubTitle?.align(Align.UnderMatchingLeft, relativeTo: AuthedTitle!, padding: 10.LayoutVal(), width: AuthedSubTitle!.width, height: AuthedSubTitle!.height)
+        AuthedSubTitle?.hidden = false
     }
 }
 

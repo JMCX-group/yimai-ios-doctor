@@ -15,6 +15,7 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
     private var CompleteInfoApi: YMAPIUtility? = nil
     private var GetUserInfoApi: YMAPIUtility? = nil
     private var BackEndApi: LoginBackendProgress = LoginBackendProgress(key: "fromCompleteInfo")
+    var GetCityInfoApi: YMAPIUtility? = nil
     
     convenience public init(navController: UINavigationController, bodyView: PageRegisterPersonalInfoBodyView) {
         self.init()
@@ -22,6 +23,24 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
         TargetView = bodyView
         CompleteInfoApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_USER + "fromRegister",
                                        success: UpdateSuccess, error: UpdateError)
+        
+        GetCityInfoApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_CITYS_BY_PROV, success: GetCitySuccess, error: GetCityError)
+    }
+    
+    public func GetCitySuccess(data: NSDictionary?) {
+        if(nil == data){
+            TargetView?.Loading?.Hide()
+            return
+        }
+        
+        let realData = data as! [String: AnyObject]
+        TargetView?.CityPicker.LoadData(realData)
+        TargetView?.Loading?.Hide()
+    }
+    
+    public func GetCityError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetView?.Loading?.Hide()
     }
     
     public func UpdateSuccess(_: NSDictionary?) {
@@ -68,13 +87,32 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
     }
     
     public func ShowHospital(sender: UIGestureRecognizer) {
+        if(!TargetView!.CityPicker.DataLoaded) {
+            JumpToHosSelect()
+        } else {
+            TargetView!.UserRealnameInput?.resignFirstResponder()
+            TargetView!.CityPicker.Show()
+        }
+    }
+    
+    func CitySelected(sender: YMButton) {
+        PageHospitalSearchBodyView.CitySelected = TargetView!.CityPicker!.GetSelectedCityId()
+        JumpToHosSelect()
+        TargetView!.CityPicker!.Hide()
+    }
+    
+    func HideCityPicker(sender: YMButton) {
+        TargetView!.CityPicker!.Hide()
+    }
+    
+    func JumpToHosSelect() {
         PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE
         PageCommonSearchViewController.InitPageTitle = "选择医院"
         PageCommonSearchViewController.InitSearchKey = ""
         DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
     }
     
-    public func ShowCity(sender: UIGestureRecognizer) {
+    public func ShowDept(sender: UIGestureRecognizer) {
         PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE
         PageCommonSearchViewController.InitPageTitle = "选择科室"
         PageCommonSearchViewController.InitSearchKey = ""
@@ -92,7 +130,47 @@ public class PageRegisterPersonalInfoActions: PageJumpActions {
                 "name": TargetView!.UserRealnameInput!.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()),
                 "hospital": TargetView!.HospitalId,
                 "department": TargetView!.HospitalDepartmentId,
+                "job_title": TargetView!.Jobtitle
             ]
         )
     }
+    
+    func UpdateJobTitle(act: UIAlertAction) {
+        let title = act.title!
+
+        TargetView!.Jobtitle = title
+        TargetView!.JobtitleLabel.text = title
+        TargetView!.CheckInfoComplete()
+        
+    }
+    
+    func ShowJobTitle(_: UIGestureRecognizer) {
+        YMJobtitleSelectModal.ShowSelectModal(self.NavController!, callback: UpdateJobTitle)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

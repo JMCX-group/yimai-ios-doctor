@@ -21,10 +21,15 @@ public class PageYiMaiSameAreasViewController: PageViewController{
     }
     
     override func PagePreRefresh() {
-        BodyView?.LoadData()
+        if(isMovingToParentViewController()) {
+            BodyView?.LoadData()
+        }
     }
 
     override func PageDisapeared() {
-        BodyView?.Clear()
+        if(isMovingFromParentViewController()) {
+            BodyView?.Clear()
+            BodyView?.ClearFilters()
+        }
     }
 }

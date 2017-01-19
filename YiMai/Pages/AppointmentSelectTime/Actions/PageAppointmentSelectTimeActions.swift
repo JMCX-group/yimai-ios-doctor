@@ -22,17 +22,19 @@ public class PageAppointmentSelectTimeActions: PageJumpActions {
     }
     
     func GetInfoSuccess(data: NSDictionary?) {
-        let docs = data!["data"] as? [[String: AnyObject]]
-        if(nil == docs) {
+        let schedulingInfo = data!["data"] as? [[String: AnyObject]]
+        if(nil == schedulingInfo) {
             TargetCtrl.BodyView?.FullPageLoading.Hide()
             return
         }
         
-        if(0 == docs!.count) {
+        if(0 == schedulingInfo!.count) {
             TargetCtrl.BodyView?.FullPageLoading.Hide()
             return
         }
-        PageAppointmentSelectTimeViewController.SelectedDoctor = docs![0]
+//        PageAppointmentSelectTimeViewController.SelectedDoctor = docs![0]
+        
+        TargetCtrl.BodyView?.DocScheduling = schedulingInfo
         TargetCtrl.BodyView?.FullPageLoading.Hide()
         TargetCtrl.BodyView?.Reload()
     }

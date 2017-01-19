@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import SwiftDate
 
 public class PageAdmissionTimeSettingActions: PageJumpActions {
     private var targetController: PageAdmissionTimeSettingViewController!
@@ -117,37 +118,59 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
     
     public func PrevFixedMonth(sender: UIGestureRecognizer) {
         let newDay = GetPrevMonthDay(targetController!.FixedSettingBodyView!.CurrentDay)
+        let today = NSDate()
+
+        let showLeftArrow = (newDay.month != today.month)
         targetController!.FixedSettingBodyView!.CurrentDay = newDay
-        targetController!.FixedSettingBodyView!.DrawCalendar(newDay)
+        targetController!.FixedSettingBodyView!.DrawCalendar(newDay, showLeftArrow: showLeftArrow)
     }
     
     public func NextFixedMonth(sender: UIGestureRecognizer) {
+        let today = NSDate()
+        let threeMonthLatter = today.add(0, months: 2, weeks: 0, days: 0, hours: 0, minutes: 0, seconds: 0, nanoseconds: 0).month
         let newDay = GetNextMonthDay(targetController!.FixedSettingBodyView!.CurrentDay)
+        
+        let showRightArrow = (threeMonthLatter != newDay.month)
         targetController!.FixedSettingBodyView!.CurrentDay = newDay
-        targetController!.FixedSettingBodyView!.DrawCalendar(newDay)
+        targetController!.FixedSettingBodyView!.DrawCalendar(newDay, showLeftArrow: true, showRightArrow: showRightArrow)
     }
     
-    public func PrevFlexibleMonth(sender: UIGestureRecognizer) {
-        let newDay = GetPrevMonthDay(targetController!.FlexibleSettingBodyView!.CurrentDay)
-        targetController!.FlexibleSettingBodyView!.CurrentDay = newDay
-        targetController!.FlexibleSettingBodyView!.DrawCalendar(newDay)
-    }
-    
-    public func NextFlexibleMonth(sender: UIGestureRecognizer) {
-        let newDay = GetNextMonthDay(targetController!.FlexibleSettingBodyView!.CurrentDay)
-        targetController!.FlexibleSettingBodyView!.CurrentDay = newDay
-        targetController!.FlexibleSettingBodyView!.DrawCalendar(newDay)
-    }
+//    public func PrevFlexibleMonth(sender: UIGestureRecognizer) {
+//        let newDay = GetPrevMonthDay(targetController!.FlexibleSettingBodyView!.CurrentDay)
+//        targetController!.FlexibleSettingBodyView!.CurrentDay = newDay
+//        targetController!.FlexibleSettingBodyView!.DrawCalendar(newDay)
+//    }
+//    
+//    public func NextFlexibleMonth(sender: UIGestureRecognizer) {
+//        let newDay = GetNextMonthDay(targetController!.FlexibleSettingBodyView!.CurrentDay)
+//        targetController!.FlexibleSettingBodyView!.CurrentDay = newDay
+//        targetController!.FlexibleSettingBodyView!.DrawCalendar(newDay)
+//    }
     
     public func SetFlexibleCellStatus(cell: YMTouchableView, status: String) {
-        if("am" == status) {
-            targetController.FlexibleSettingBodyView?.SetDayCellAMSelected(cell)
+//        if("am" == status) {
+//            targetController.FlexibleSettingBodyView?.SetDayCellAMSelected(cell)
+//        } else if("pm" == status) {
+//            targetController.FlexibleSettingBodyView?.SetDayCellPMSelected(cell)
+//        } else if("day" == status) {
+//            targetController.FlexibleSettingBodyView?.SetDaySelected(cell)
+//        } else {
+//            targetController.FlexibleSettingBodyView?.SetDayUnSelected(cell)
+//        }
+        
+        let cellData = cell.UserObjectData
+        let date = cellData!["date"] as! NSDate
+        if("auto" == status) {
+            targetController!.FixedSettingBodyView?.ClearFlexibleSetting(date, cell: cell)
+//            targetController!.FixedSettingBodyView?.DrawCalendar(targetController!.FixedSettingBodyView!.CurrentDay, clearMap: false)
+        } else if("am" == status) {
+            targetController.FixedSettingBodyView?.SetDayCellAMSelected(cell, ignorePrev: true)
         } else if("pm" == status) {
-            targetController.FlexibleSettingBodyView?.SetDayCellPMSelected(cell)
+            targetController.FixedSettingBodyView?.SetDayCellPMSelected(cell, ignorePrev: true)
         } else if("day" == status) {
-            targetController.FlexibleSettingBodyView?.SetDaySelected(cell)
+            targetController.FixedSettingBodyView?.SetDaySelected(cell, setByFlexible: true)
         } else {
-            targetController.FlexibleSettingBodyView?.SetDayUnSelected(cell)
+            targetController.FixedSettingBodyView?.SetDayUnSelected(cell, setByFlexible: true)
         }
     }
     
@@ -158,6 +181,7 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         let cellData = cell.UserObjectData as! [String: AnyObject]
 
         let weekdayIdx = cellData["weekdayIdx"] as! Int
+        let date = cellData["date"] as! NSDate
 //        if(0 == weekdayIdx || 6 == weekdayIdx) {
 //            return
 //        }
@@ -165,7 +189,15 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
             return
         }
         
-        let alertController = UIAlertController(title: "选择时间段", message: nil, preferredStyle: .Alert)
+        let title = date.toString(DateFormat.Custom("YYYY-MM-dd 排班"))!
+        
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
+        let auto = UIAlertAction(title: "固定排班", style: .Default,
+                                 handler: {
+                                    action in
+                                    self.SetFlexibleCellStatus(cell, status: "auto")
+        })
+
         let am = UIAlertAction(title: "上午", style: .Default,
                                    handler: {
                                     action in
@@ -183,18 +215,20 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
                                 action in
                                 self.SetFlexibleCellStatus(cell, status: "day")
         })
-        
+
         let cancel = UIAlertAction(title: "不出诊", style: .Default,
                                 handler: {
                                     action in
                                     self.SetFlexibleCellStatus(cell, status: "none")
         })
         
+        auto.setValue(YMColors.FontBlue, forKey: "titleTextColor")
         am.setValue(YMColors.FontBlue, forKey: "titleTextColor")
         pm.setValue(YMColors.FontBlue, forKey: "titleTextColor")
         day.setValue(YMColors.FontBlue, forKey: "titleTextColor")
         cancel.setValue(YMColors.WarningFontColor, forKey: "titleTextColor")
         
+        alertController.addAction(auto)
         alertController.addAction(am)
         alertController.addAction(pm)
         alertController.addAction(day)
@@ -207,7 +241,8 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
         
         
-        let flexibleSetting = targetController.FlexibleSettingBodyView!.GetSettingData()
+        let flexibleSetting = targetController.FixedSettingBodyView!.GetFlexibleSetting() //targetController.FlexibleSettingBodyView!.GetSettingData()
+        print(flexibleSetting)
         SaveApi?.YMChangeUserInfo(["admission_set_fixed": strJson, "admission_set_flexible": flexibleSetting])
     }
 }

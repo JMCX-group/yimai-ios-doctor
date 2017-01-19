@@ -329,7 +329,7 @@ public class PageAdmissionFlexibleTimeSettingBodyView: PageBodyView {
         DrawDateTitleLabel()
         DrawCalendar(CurrentDay)
     }
-    
+        
     func GetSettingData() -> String {
         var ret = [[String: AnyObject]]()
         for (k, v) in SelectDict {

@@ -71,7 +71,7 @@ public class PageYiMaiSameHospitalBodyView: PageBodyView {
         if(nil == hospital) {
             DrawBlankContent()
         } else {
-            Loading?.Show()
+//            Loading?.Show()
             SameHospitalActions!.GetSameHospitalList(nil)
         }
     }

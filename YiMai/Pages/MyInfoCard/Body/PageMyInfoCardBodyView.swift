@@ -14,6 +14,7 @@ public class PageMyInfoCardBodyView: PageBodyView {
     var AddActions: PageMyInfoCardActions!
     var UserHead = YMLayout.GetSuitableImageView("PersonalDefaultUserhead")
     var UserQR = YMLayout.GetSuitableImageView("Face2FaceTempQR")
+    var ShareBtn = YMButton()
 
     var Loading: YMPageLoadingView!
     
@@ -27,6 +28,23 @@ public class PageMyInfoCardBodyView: PageBodyView {
         DrawRequirePaperCardButton()
         Loading = YMPageLoadingView(parentView: ParentView!)
         Loading.Show()
+    }
+    
+    func DrawShareButton(topView: UIView) {
+        if(!UMSocialManager.defaultManager().isInstall(UMSocialPlatformType.WechatSession)
+            && !UMSocialManager.defaultManager().isInstall(UMSocialPlatformType.Sina)) {
+            return
+        }
+    
+        ShareBtn.setTitle("分享", forState: UIControlState.Normal)
+        ShareBtn.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        ShareBtn.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
+        ShareBtn.sizeToFit()
+        
+        topView.addSubview(ShareBtn)
+        ShareBtn.anchorInCorner(Corner.BottomRight, xPad: 40.LayoutVal(), yPad: 20.LayoutVal(), width: ShareBtn.width, height: ShareBtn.height)
+        
+        ShareBtn.addTarget(AddActions, action: "ShareTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func DrawRequirePaperCardButton() {
@@ -89,7 +107,7 @@ public class PageMyInfoCardBodyView: PageBodyView {
         tipLabel.text = "使用医者脉连医生端或患者端扫码添加"
         tipLabel.sizeToFit()
         
-        
+        YMLayout.SetSelfHeadImageVFlag(UserHead)
         if(nil != head) {
             YMLayout.LoadImageFromServer(UserHead, url: head!, fullUrl: nil, makeItRound: true)
         }

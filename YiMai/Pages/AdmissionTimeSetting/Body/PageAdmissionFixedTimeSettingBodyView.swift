@@ -9,6 +9,7 @@
 import Foundation
 import Neon
 import SwiftyJSON
+import SwiftDate
 
 public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
     var SettingActions: PageAdmissionTimeSettingActions!
@@ -25,6 +26,12 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
     
     private var SelectDict = [Int: String]()
     private var DayCellMapByWeek = [Int: [YMTouchableView]]()
+    
+    var FlexibleSetting = [String: [String: String]]()
+    var FlexibleSettingFlag = [String: Bool]()
+    
+    var PrevMonthArrow: YMTouchableView? = nil
+    var NextMonthArrow: YMTouchableView? = nil
     
     public var SettingData: [[String: AnyObject]] = [
         ["week":"sun", "am": false, "pm": false],
@@ -45,13 +52,13 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
     public func LoadData() {
         let settingString = YMVar.MyUserInfo["admission_set_fixed"] as? String
         if (nil == settingString) {
-            UnselectAll()
+//            UnselectAll()
             return
         }
         
         let setting = JSON.parse(settingString!)
         if (nil == setting) {
-            UnselectAll()
+//            UnselectAll()
             return
         }
 
@@ -73,7 +80,7 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
                 amBtnSelectedStatus = true
                 pmBtnSelectedStatus = true
             }
-            ToggleWeekdayStatus(targetStatus, weekdayIdx: idx)
+//            ToggleWeekdayStatus(targetStatus, weekdayIdx: idx)
             SelectDict[idx] = targetStatus
             
             SettingData[idx] = [
@@ -238,12 +245,18 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         BodyView.addSubview(FixedTitleLabel)
         FixedTitleLabel.align(Align.UnderMatchingLeft, relativeTo: WeekdayPanel, padding: 0, width: YMSizes.PageWidth, height: 80.LayoutVal())
     }
+    
+    func ClearDayCellMap() {
+        for (k, _) in DayCellMapByWeek {
+            DayCellMapByWeek[k]?.removeAll()
+        }
+    }
 
-    public func DrawCalendar(curDate: NSDate) {
+    public func DrawCalendar(curDate: NSDate, showLeftArrow: Bool = false, showRightArrow: Bool = true) {
         YMLayout.ClearView(view: CalendarPanel)
         BodyView.addSubview(CalendarPanel)
         CalendarPanel.align(Align.UnderMatchingLeft, relativeTo: FixedTitleLabel, padding: 0, width: YMSizes.PageWidth, height: 744.LayoutVal())
-        
+
         let monthPanel = YMTouchableView()
         let leftArrow = YMLayout.GetSuitableImageView("CommonLeftArrowIcon")
         let rightArrow = YMLayout.GetSuitableImageView("CommonRightArrowIcon")
@@ -269,21 +282,30 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         leftArrow.anchorInCenter(width: leftArrow.width, height: leftArrow.height)
         rightArrow.anchorInCenter(width: rightArrow.width, height: rightArrow.height)
         
+        leftArrowBtn.hidden = !showLeftArrow
+        rightArrowBtn.hidden = !showRightArrow
+        
         monthPanel.addSubview(monthLabel)
         monthLabel.font = YMFonts.YMDefaultFont(26.LayoutVal())
         monthLabel.textColor = YMColors.FontBlue
         monthLabel.text = YMDatetimeString.YYYYMMinChinese(curDate)
         monthLabel.sizeToFit()
         monthLabel.anchorInCenter(width: monthLabel.width, height: monthLabel.height)
+
         
         DrawCalendarGrid(curDate, parent: CalendarPanel, prev: monthPanel)
     }
     
-    private func BuildDisabledDayCell(day: Int, weekdayIdx: Int) -> YMTouchableView {
+    private func BuildDisabledDayCell(day: Int, weekdayIdx: Int, showDay: Bool = false) -> YMTouchableView {
         let cell = YMTouchableView()
         
         let dayLabel = UILabel()
-        dayLabel.text = "\(day)"
+
+        if(showDay) {
+            dayLabel.text = "\(day)"
+        } else {
+            dayLabel.text = ""
+        }
         dayLabel.textColor = YMColors.WeekdayDisabledFontColor
         dayLabel.font = YMFonts.YMDefaultFont(32.LayoutVal())
         dayLabel.sizeToFit()
@@ -295,8 +317,14 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         return cell
     }
     
-    private func BuildNormalDayCell(day: Int, weekdayIdx: Int) -> YMTouchableView {
-        let cell = YMTouchableView()
+    private func BuildNormalDayCell(day: Int, weekdayIdx: Int, initFlexible: Bool = false) -> YMTouchableView {
+        let cellDate = NSDate(year: CurrentDay.year, month: CurrentDay.month, day: day)
+        let today = NSDate()
+        if (cellDate.timeIntervalSince1970 < today.timeIntervalSince1970) {
+            return BuildDisabledDayCell(day, weekdayIdx: weekdayIdx, showDay: true)
+        }
+
+        let cell = YMLayout.GetTouchableView(useObject: SettingActions, useMethod: "FlexibleCellTouched:".Sel()) //YMTouchableView()
         
         let dayLabel = UILabel()
         dayLabel.text = "\(day)"
@@ -305,12 +333,14 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         dayLabel.sizeToFit()
         
         cell.addSubview(dayLabel)
-        if(0 == weekdayIdx || 6 == weekdayIdx) {
-            cell.backgroundColor = YMColors.None
-        } else {
-            cell.backgroundColor = YMColors.White
-        }
+//        if(0 == weekdayIdx || 6 == weekdayIdx) {
+//            cell.backgroundColor = YMColors.None
+//        } else {
+//            cell.backgroundColor = YMColors.White
+//        }
         
+        cell.backgroundColor = YMColors.White
+
         let amIcon = YMLayout.GetSuitableImageView("PageAdmissionTimeSettingAMIcon")
         let pmIcon = YMLayout.GetSuitableImageView("PageAdmissionTimeSettingPMIcon")
       
@@ -320,72 +350,236 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         cell.addSubview(amIcon)
         cell.addSubview(pmIcon)
         
-        cell.UserObjectData = ["label": dayLabel, "weekdayIdx": weekdayIdx, "amIcon": amIcon, "pmIcon": pmIcon, "status": "none"]
-        cell.UserStringData = "1"
+        let cellDateStr = GetDayKey(cellDate)
+        let month = GetMonthKey(cellDate)
 
         DayCellMapByWeek[weekdayIdx]?.append(cell)
-        
-        let status = SelectDict[weekdayIdx]
-        
-        if("day" == status) {
-            SetDaySelected(cell)
-        } else if("am" == status) {
-            SetDayCellAMSelected(cell)
-        } else if("pm" == status) {
-            SetDayCellPMSelected(cell)
+        cell.UserObjectData = ["label": dayLabel, "weekdayIdx": weekdayIdx, "amIcon": amIcon, "pmIcon": pmIcon, "status": "none", "date": cellDate]
+        cell.UserStringData = "1"
+
+        var status = SelectDict[weekdayIdx]
+        var flexibleStatus: String? = nil
+        let flexible = IsFlexible(cellDate)
+
+        if(initFlexible) {
+            if("none" != status) {
+                FlexibleSetting[month]![cellDateStr] = status
+            }
+        } else {
+            flexibleStatus = FlexibleSetting[month]![cellDateStr]
         }
+
+        if(flexible && nil != flexibleStatus) {
+            status = flexibleStatus!
+        } else {
+            if(status != flexibleStatus && nil != flexibleStatus) {
+                if("none" != flexibleStatus!) {
+                    status = flexibleStatus!
+                }
+            }
+        }
+
+        if("day" == status) {
+            SetDaySelected(cell, setByFlexible: flexible)
+        } else if("am" == status) {
+            SetDayCellAMSelected(cell, ignorePrev: flexible)
+        } else if("pm" == status) {
+            SetDayCellPMSelected(cell, ignorePrev: flexible)
+        } else {
+            SetDayUnSelected(cell, setByFlexible: flexible)
+        }
+        
         return cell
     }
     
-    private func SetDayCellAMSelected(cell: YMTouchableView) {
+    func GetMonthKey(date: NSDate) -> String {
+        return  date.toString(DateFormat.Custom("YYYY-MM"))!
+    }
+    
+    func GetDayKey(date: NSDate) -> String {
+        return  date.toString(DateFormat.Custom("YYYY-MM-dd"))!
+    }
+    
+    func GetCurrentDayFlexibleSetting(date: NSDate) -> String? {
+        let dateStr = GetDayKey(date)
+        let currentMonth = GetMonthKey(date)
+        
+        let setting =  FlexibleSetting[currentMonth]
+        if(nil == setting) {
+            return nil
+        }
+
+        return setting![dateStr]
+    }
+    
+    func SetCurrentDayFlexibleSetting(date: NSDate, status: String?) {
+        let dateStr = GetDayKey(date)
+        let currentMonth = GetMonthKey(date)
+
+        FlexibleSetting[currentMonth]?[dateStr] = status
+    }
+    
+    func IsFlexible(date: NSDate) -> Bool {
+        let key = GetDayKey(date)
+        
+        let ret = FlexibleSettingFlag[key]
+        if(nil != ret) {
+            return ret!
+        } else {
+            return false
+        }
+    }
+    
+    func SetFlexibleFlag(date: NSDate) {
+        let key = GetDayKey(date)
+        FlexibleSettingFlag[key] = true
+    }
+    
+    func ClearFlexibleFlag(date: NSDate) {
+        let key = GetDayKey(date)
+        FlexibleSettingFlag.removeValueForKey(key)
+    }
+
+    func ClearFlexibleSetting(date: NSDate, cell: YMTouchableView) {
+        ClearFlexibleFlag(date)
+        let month = GetMonthKey(date)
+        let dateStr = GetDayKey(date)
+        FlexibleSetting[month]?.removeValueForKey(dateStr)
+        
+        let weekdayIdx = date.weekday - 1
+        let setting = SettingData[weekdayIdx]
+        let pm = setting["pm"] as! Bool
+        let am = setting["am"] as! Bool
+        
+        if(pm && am) {
+            SetDaySelected(cell)
+        } else if(!pm && !am){
+            SetDayUnSelected(cell)
+        } else {
+            if(pm) {
+                SetDayCellPMSelected(cell)
+            } else {
+                SetDayCellAMSelected(cell)
+            }
+        }
+    }
+    
+    func SetDayCellAMSelected(cell: YMTouchableView, ignorePrev: Bool = false) {
         var cellData = cell.UserObjectData as! [String: AnyObject]
         let amIcon = cellData["amIcon"] as! UIImageView
         let pmIcon = cellData["pmIcon"] as! UIImageView
-        
-        amIcon.hidden = false
-        pmIcon.hidden = true
-        
-        cell.backgroundColor = YMColors.WeekdaySelectedColor
-        cellData["status"] = "am"
+        let date = cellData["date"] as! NSDate
+
+        let flexibled = IsFlexible(date)
+
+        if(ignorePrev) {
+            amIcon.hidden = false
+            pmIcon.hidden = true
+            cellData["status"] = "am"
+            SetCurrentDayFlexibleSetting(date, status: "am")
+            SetFlexibleFlag(date)
+            cell.backgroundColor = YMColors.WeekdaySelectedColor
+        } else {
+            if(flexibled) {
+            } else {
+                amIcon.hidden = false
+                pmIcon.hidden = true
+                cellData["status"] = "am"
+                SetCurrentDayFlexibleSetting(date, status: "am")
+                cell.backgroundColor = YMColors.WeekdaySelectedColor
+            }
+        }
+
         cell.UserObjectData = cellData
     }
     
-    private func SetDayCellPMSelected(cell: YMTouchableView) {
+    func SetDayCellPMSelected(cell: YMTouchableView, ignorePrev: Bool = false) {
         var cellData = cell.UserObjectData as! [String: AnyObject]
         let amIcon = cellData["amIcon"] as! UIImageView
         let pmIcon = cellData["pmIcon"] as! UIImageView
+        let date = cellData["date"] as! NSDate
+
+        let flexibled = IsFlexible(date)
+
+        if(ignorePrev) {
+            amIcon.hidden = true
+            pmIcon.hidden = false
+            cellData["status"] = "pm"
+            cell.backgroundColor = YMColors.FontLightBlue
+            SetCurrentDayFlexibleSetting(date, status: "pm")
+            SetFlexibleFlag(date)
+            cell.backgroundColor = YMColors.WeekdaySelectedColor
+        } else {
+            if(flexibled) {
+            } else {
+                amIcon.hidden = true
+                pmIcon.hidden = false
+                cellData["status"] = "pm"
+                SetCurrentDayFlexibleSetting(date, status: "pm")
+                cell.backgroundColor = YMColors.WeekdaySelectedColor
+            }
+        }
         
-        amIcon.hidden = true
-        pmIcon.hidden = false
-        
-        cell.backgroundColor = YMColors.WeekdaySelectedColor
-        cellData["status"] = "pm"
         cell.UserObjectData = cellData
     }
     
-    private func SetDaySelected(cell: YMTouchableView) {
+    func SetDaySelected(cell: YMTouchableView, setByFlexible: Bool = false) {
         var cellData = cell.UserObjectData as! [String: AnyObject]
         let amIcon = cellData["amIcon"] as! UIImageView
         let pmIcon = cellData["pmIcon"] as! UIImageView
-        
-        amIcon.hidden = false
-        pmIcon.hidden = false
-        
-        cell.backgroundColor = YMColors.WeekdaySelectedColor
-        cellData["status"] = "day"
+        let date = cellData["date"] as! NSDate
+
+        let flexibled = IsFlexible(date)
+
+        if(setByFlexible) {
+            amIcon.hidden = false
+            pmIcon.hidden = false
+            SetCurrentDayFlexibleSetting(date, status: "day")
+            SetFlexibleFlag(date)
+            cell.backgroundColor = YMColors.WeekdaySelectedColor
+        } else {
+            if(flexibled) {
+            } else {
+                amIcon.hidden = false
+                pmIcon.hidden = false
+                cellData["status"] = "day"
+                SetCurrentDayFlexibleSetting(date, status: "day")
+                cell.backgroundColor = YMColors.WeekdaySelectedColor
+            }
+        }
+
         cell.UserObjectData = cellData
     }
     
-    private func SetDayUnSelected(cell: YMTouchableView) {
+    func SetDayUnSelected(cell: YMTouchableView, setByFlexible: Bool = false) {
         var cellData = cell.UserObjectData as! [String: AnyObject]
         let amIcon = cellData["amIcon"] as! UIImageView
         let pmIcon = cellData["pmIcon"] as! UIImageView
         
-        amIcon.hidden = true
-        pmIcon.hidden = true
+        let date = cellData["date"] as! NSDate
+        let flexibled = IsFlexible(date)
         
-        cell.backgroundColor = YMColors.White
-        cellData["status"] = "none"
+        if("0" == cell.UserStringData) {
+            return
+        }
+        
+        if(setByFlexible) {
+            amIcon.hidden = true
+            pmIcon.hidden = true
+            SetCurrentDayFlexibleSetting(date, status: "none")
+            cell.backgroundColor = YMColors.White
+            SetFlexibleFlag(date)
+        } else {
+            if(flexibled) {
+            } else {
+                amIcon.hidden = true
+                pmIcon.hidden = true
+                cellData["status"] = "none"
+                SetCurrentDayFlexibleSetting(date, status: "none")
+                cell.backgroundColor = YMColors.White
+            }
+        }
+        
         cell.UserObjectData = cellData
     }
     
@@ -506,6 +700,14 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         
         var weekLineArr = [YMTouchableView]()
 
+        let month = GetMonthKey(CurrentDay)
+        let flexible = FlexibleSetting[month]
+        var flexibleInit = false
+        if(nil == flexible) {
+            FlexibleSetting[month] = [String: String]()
+            flexibleInit = true
+        }
+
         for week in daysInWeek {
             let weekLine = YMTouchableView()
             gridPanel.addSubview(weekLine)
@@ -522,7 +724,7 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
                     let realDay = day / 100
                     cell = BuildDisabledDayCell(realDay, weekdayIdx: weekdayIdx)
                 } else {
-                    cell = BuildNormalDayCell(day, weekdayIdx: weekdayIdx)
+                    cell = BuildNormalDayCell(day, weekdayIdx: weekdayIdx, initFlexible: flexibleInit)
                 }
                 
                 weekdayIdx += 1
@@ -558,9 +760,131 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         DrawCalendarGridDividerLine(gridPanel, weekLineCount: daysInWeek.count)
     }
     
+    func FillFlexibleSetting(date: NSDate) {
+        let month = GetMonthKey(date)
+        let monthSetting = FlexibleSetting[month]
+        if(nil == monthSetting) {
+            FlexibleSetting[month] = [String: String]()
+        }
+        
+        print(FlexibleSetting[month]?.count)
+        if(0 == FlexibleSetting[month]!.count){
+            
+            for i in 1 ... date.monthDays {
+                let thisDay = NSDate(year: date.year, month: date.month, day: i)
+                let dateKey = GetDayKey(thisDay)
+                let weekdayIdx = date.weekday - 1
+                let setting = SettingData[weekdayIdx]
+                let pm = setting["pm"] as! Bool
+                let am = setting["am"] as! Bool
+                
+                let flexible = IsFlexible(thisDay)
+                if(!flexible) {
+                    if(pm && am) {
+                        FlexibleSetting[month]![dateKey] = "day"
+                    } else if(!pm && !am){
+                        FlexibleSetting[month]![dateKey] = "none"
+                    } else {
+                        if(pm) {
+                            FlexibleSetting[month]![dateKey] = "pm"
+                        } else {
+                            FlexibleSetting[month]![dateKey] = "am"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    func GetFlexibleSetting() -> String {
+        var ret = [[String: AnyObject]]()
+        
+        let today = NSDate()
+        let firstMonthDay = NSDate(year: today.year, month: today.month, day: 1)
+        let nextMonthDay = firstMonthDay.add(0, months: 1, weeks: 0, days: 0, hours: 0, minutes: 0, seconds: 0, nanoseconds: 0)
+        let dayAfterNextMonthDay = nextMonthDay.add(0, months: 1, weeks: 0, days: 0, hours: 0, minutes: 0, seconds: 0, nanoseconds: 0)
+
+        FillFlexibleSetting(firstMonthDay)
+        FillFlexibleSetting(nextMonthDay)
+        FillFlexibleSetting(dayAfterNextMonthDay)
+
+        for (_, setting) in FlexibleSetting {
+            for (k, v) in setting {
+                
+                var entry = [String: AnyObject]()
+                entry["date"] = k
+                entry["am"] = false
+                entry["pm"] = false
+                let status = v
+                if("am" == status) {
+                    entry["am"] = true
+                } else if("pm" == status) {
+                    entry["pm"] = true
+                } else if("day" == status) {
+                    entry["am"] = true
+                    entry["pm"] = true
+                }
+                
+                ret.append(entry)
+            }
+        }
+        
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(ret, options: NSJSONWritingOptions.PrettyPrinted)
+        let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
+        return strJson
+    }
+    
+//    func GetFlexibleSettingKey(date: NSDate) -> String {
+//        return "\(date.year)-\(date.month)"
+//    }
+    
+    func TransformFlexibleData() {
+        let settingString = YMVar.MyUserInfo["admission_set_flexible"] as? String
+        let firstMonthDay = NSDate(year: CurrentDay.year, month: CurrentDay.month, day: 1)
+        let nextMonthDay = firstMonthDay.add(0, months: 1, weeks: 0, days: 0, hours: 0, minutes: 0, seconds: 0, nanoseconds: 0)
+        let dayAfterNextMonthDay = nextMonthDay.add(0, months: 1, weeks: 0, days: 0, hours: 0, minutes: 0, seconds: 0, nanoseconds: 0)
+        
+        FlexibleSetting[GetMonthKey(firstMonthDay)] = [String: String]()
+        FlexibleSetting[GetMonthKey(nextMonthDay)] = [String: String]()
+        FlexibleSetting[GetMonthKey(dayAfterNextMonthDay)] = [String: String]()
+        
+        if(nil != settingString) {
+            let setting = JSON.parse(settingString!)
+            
+            for (_, setting) in setting.arrayValue.enumerate() {
+                let date = setting["date"].stringValue
+                let pm = setting["pm"].boolValue
+                let am = setting["am"].boolValue
+                
+                if(YMValueValidator.IsBlankString(date)) {
+                    continue
+                }
+                
+                let dateComponent = date.componentsSeparatedByString("-")
+                
+                let monthStr = dateComponent[0] + "-" + dateComponent[1]
+                if(nil == FlexibleSetting[monthStr]) {
+                    FlexibleSetting[monthStr] = [String: String]()
+                }
+
+                if(pm && am) {
+                    FlexibleSetting[monthStr]![date] = "day"
+                } else if(pm && !am) {
+                    FlexibleSetting[monthStr]![date] = "pm"
+                } else if(!pm && am) {
+                    FlexibleSetting[monthStr]![date] = "am"
+                } else {
+                    FlexibleSetting[monthStr]![date] = "none"
+                }
+            }
+        }
+    }
+    
     private func DrawFixedSchedule() {
         DrawWeekdayPanel()
         DrawDateTitleLabel()
+        TransformFlexibleData()
+        LoadData()
         DrawCalendar(CurrentDay)
     }
 }

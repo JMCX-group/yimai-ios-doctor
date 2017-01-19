@@ -9,24 +9,92 @@
 
 import UIKit
 import CoreData
+import UMSocialCore
+import UMSocialNetwork
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
 
     var window: UIWindow?
+    var NotifyCationProcession = false
     
     func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
-        completion(RCUserInfo(userId: userId, name: "", portrait: "http://d.medi-link.cn/uploads/avatar/\(userId).jpg"))
+        let targetHeadurl = YMVar.GetLocalUserHeadurl(userId)
+        completion(RCUserInfo(userId: userId, name: "", portrait: targetHeadurl))
     }
     
     func RegisterNotification(app: UIApplication) {
         let types = UIUserNotificationType(rawValue: UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Sound.rawValue | UIUserNotificationType.Alert.rawValue)
         let notificationSetting = UIUserNotificationSettings(forTypes: types, categories: nil)
-        
+
         app.registerUserNotificationSettings(notificationSetting)
-//        (forTypes: UIUserNotificationType.Badge)
+        app.registerForRemoteNotifications()
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        YMVar.DeviceToken = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
+        YMVar.DeviceToken = YMVar.DeviceToken.stringByReplacingOccurrencesOfString(" ", withString: "")
+        RCIMClient.sharedRCIMClient().setDeviceToken(YMVar.DeviceToken)
+        UMessage.registerDeviceToken(deviceToken)
+        print("remote push register success \(YMVar.DeviceToken)")
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("remote push register failed")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+                     fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
-//        notification
+        UMessage.setAutoAlert(false)
+        
+        let action = userInfo["action"] as? String
+        
+        if(nil == action) {
+            application.applicationIconBadgeNumber = 0
+            return
+        }
+        
+        let ctrl = window?.rootViewController as? UINavigationController
+
+        if(nil == ctrl) {
+            application.applicationIconBadgeNumber = 0
+            return
+        }
+        
+        if(0 == YMVar.MyUserInfo.count) {
+            application.applicationIconBadgeNumber = 0
+            return
+        }
+        
+        if(application.applicationState != UIApplicationState.Active) {
+            YMNotificationHandler.HandlerMap[action!]?(ctrl!, userInfo)
+            completionHandler(UIBackgroundFetchResult.NewData)
+        } else {
+            completionHandler(UIBackgroundFetchResult.NoData)
+        }
+
+        application.applicationIconBadgeNumber = 0
+    }
+
+    func GoToBroadCast() {
+//        if(NotifyCationProcession) {
+//            return
+//        }
+
+        if(0 == YMVar.MyUserInfo.count) {
+            return
+        }
+//        NotifyCationProcession = true
+//        if(YMCommonStrings.CS_PAGE_INDEX_NAME != YMCurrentPage.CurrentPage) {
+//            YMDelay(0.5, closure: { 
+//                self.GoToBroadCast()
+//            })
+//        }
+//        NotifyCationProcession = false
+        let ctrl = window?.rootViewController as? UINavigationController
+        PageJumpActions(navController: ctrl).DoJump(YMCommonStrings.CS_PAGE_SYS_BROADCAST)
+
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -35,25 +103,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
         RCIM.sharedRCIM().clearUserInfoCache()
         RCIM.sharedRCIM().userInfoDataSource = self
         RCIM.sharedRCIM().initWithAppKey("sfci50a7c75di")
-        RCIM.sharedRCIM().enableMessageAttachUserInfo = true
-        RegisterNotification(application)
+//        RCIM.sharedRCIM().enableMessageAttachUserInfo = true
         
+        
+        UMessage.startWithAppkey("58073c2ae0f55a4ac00023e4", launchOptions: launchOptions)
+        UMessage.registerForRemoteNotifications()
+        UMessage.setLogEnabled(true)
+//        RegisterNotification(application)
+
         RCIM.sharedRCIM().registerMessageType(YMIMMessageContent.self)
         application.applicationIconBadgeNumber = 0
+        
+        WXApi.registerApp("wx2097e8b109f9dc35", withDescription: "YiMaiPatient-1.0")
+        
+        UMSocialManager.defaultManager().openLog(true)
+        UMSocialManager.defaultManager().umSocialAppkey = "58073c2ae0f55a4ac00023e4"
+        UMSocialManager.defaultManager().setPlaform(UMSocialPlatformType.WechatSession,
+                                                    appKey: "wx1a4ce4a82bbd1da5", appSecret: "555d4062c619451b884267c46ab85ca3",
+                                                    redirectURL: "https://www.medi-link.cn")
+        UMSocialManager.defaultManager().setPlaform(UMSocialPlatformType.Sina,
+                                                    appKey: "1075290971", appSecret: "ebd03c962864546d7b5e854f2b4a8dc1",
+                                                    redirectURL: "https://www.medi-link.cn")
+        
         return true
+    }
+
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        let ret = UMSocialManager.defaultManager().handleOpenURL(url)
+        if(!ret) {
+            print("from other call")
+        }
+        
+        return ret
     }
 
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         application.applicationIconBadgeNumber = 0
         if(application.applicationState != UIApplicationState.Active) {
-            let userData = notification.userInfo?["data"] as? String
-            if(nil != userData) {
-                let ctrl = window?.rootViewController as? UINavigationController
 
-                if(nil != ctrl) {
-                    YMNotificationHandler.HandlerMap[userData!]?(ctrl!)
-                }
-            }
         } else {
             //Do Nothing
             //print("application active")

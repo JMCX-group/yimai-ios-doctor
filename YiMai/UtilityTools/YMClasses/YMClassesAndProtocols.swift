@@ -78,7 +78,11 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST: true,
         YMCommonStrings.CS_PAGE_AUTH_COMPLETE: true,
         YMCommonStrings.CS_PAGE_BLACKLIST_NAME: true,
-        YMCommonStrings.CS_PAGE_PERSONAL_CHANGE_PHONE_NAME: true
+        YMCommonStrings.CS_PAGE_PERSONAL_CHANGE_PHONE_NAME: true,
+        YMCommonStrings.CS_PAGE_ACCEPET_COMMON_TEXT: true,
+        YMCommonStrings.CS_PAGE_COMMON_TEXT_AREA: true,
+        YMCommonStrings.CS_PAGE_BANK_CARD_LIST_NAME: true,
+        YMCommonStrings.CS_PAGE_ADD_BANKCARD_NAME: true
     ]
 }
 
@@ -291,12 +295,13 @@ class YMBodyTableView: UITableView {
     var BodyViewContentSize = CGSize.zero
 }
 
-public class PageBodyView: NSObject, UITableViewDelegate, UITableViewDataSource {
+public class PageBodyView: NSObject, UIScrollViewDelegate {
     internal var ParentView: UIView? = nil
     internal var NavController: UINavigationController? = nil
     internal var Actions: AnyObject? = nil
     var FullPageLoading: YMPageLoadingView!
-    var BodyView: YMBodyTableView = YMBodyTableView()
+//    var BodyView: YMBodyTableView = YMBodyTableView()
+    var BodyView: UIScrollView = UIScrollView()
     
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: AnyObject? = nil) {
         self.init()
@@ -305,12 +310,14 @@ public class PageBodyView: NSObject, UITableViewDelegate, UITableViewDataSource 
         self.Actions = pageActions
         
         FullPageLoading = YMPageLoadingView(parentView: parentView)
+        BodyView.alwaysBounceVertical = true
         
-        BodyView.delegate = self
-        BodyView.dataSource = self
+//        BodyView.delegate = self
+//        BodyView.dataSource = self
         
-        BodyView.separatorStyle = UITableViewCellSeparatorStyle.None
+//        BodyView.separatorStyle = UITableViewCellSeparatorStyle.None
 
+        BodyView.delegate = self
         self.ViewLayout()
     }
     
@@ -321,20 +328,20 @@ public class PageBodyView: NSObject, UITableViewDelegate, UITableViewDataSource 
     
     func BodyViewEndDragging() {
 //        BodyView.contentSize = BodyView.BodyViewContentSize
-        print(self.BodyView.contentOffset)
+//        print(self.BodyView.contentOffset)
     }
     
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        BodyView.contentSize = BodyView.BodyViewContentSize
+//    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        BodyView.contentSize = BodyView.BodyViewContentSize
         
-        let cell = UITableViewCell()
-        cell.backgroundColor = YMColors.None
-        return cell
-    }
+//        let cell = UITableViewCell()
+//        cell.backgroundColor = YMColors.None
+//        return cell
+//    }
     
     public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         BodyViewEndDragging()

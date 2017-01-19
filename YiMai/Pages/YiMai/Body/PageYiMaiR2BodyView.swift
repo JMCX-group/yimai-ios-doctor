@@ -118,6 +118,7 @@ public class PageYiMaiR2BodyView: PageBodyView {
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
         
+        YMLayout.SetDocfHeadImageVFlag(userHeadBackground, docInfo: data)
         YMLayout.LoadImageFromServer(userHeadBackground, url: head, fullUrl: nil, makeItRound: true)
 
         return cell
@@ -152,7 +153,8 @@ public class PageYiMaiR2BodyView: PageBodyView {
                     YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"\(doc["hospital"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"\(doc["department"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"\(doc["job_title"]!)",
-                    YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)"
+                    YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)",
+                    "is_auth": YMVar.GetStringByKey(doc, key: "is_auth")
                 ], prevCell: cellView
             )
         }
@@ -166,8 +168,8 @@ public class PageYiMaiR2BodyView: PageBodyView {
         super.BodyViewEndDragging()
         let y = BodyView.contentOffset.y
         if(y < -5.0) {
-            YMDelay(0.1) {
-                self.FullPageLoading.Show()
+            self.FullPageLoading.Show()
+            YMDelay(1.0) {
                 self.Reload()
                 self.FullPageLoading.Hide()
                 

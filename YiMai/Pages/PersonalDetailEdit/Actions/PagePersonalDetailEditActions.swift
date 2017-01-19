@@ -17,6 +17,7 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     private var TargetController: PagePersonalDetailEditViewController? = nil
     private var UpdateApi: YMAPIUtility? = nil
     var UploadApi: YMAPIUtility? = nil
+    var GetCityInfoApi: YMAPIUtility? = nil
     
     var ImageForUpload: UIImage? = nil
 
@@ -27,7 +28,27 @@ public class PagePersonalDetailEditActions: PageJumpActions {
                                  success: UploadSuccess,
                                  error: UploadError)
         
+        GetCityInfoApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_CITYS_BY_PROV, success: GetCitySuccess, error: GetCityError)
+        
         TargetController = self.Target as? PagePersonalDetailEditViewController
+    }
+    
+    public func GetCitySuccess(data: NSDictionary?) {
+        if(nil == data){
+            TargetController!.BodyView?.Loading?.Hide()
+            return
+        }
+        
+        let realData = data as! [String: AnyObject]
+        TargetController!.BodyView?.CityPicker.LoadData(realData)
+        TargetController!.BodyView?.FullPageLoading?.Hide()
+        TargetController!.BodyView?.CityPicker.Show()
+    }
+    
+    public func GetCityError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetController!.BodyView?.FullPageLoading?.Hide()
+        JumpToHosSelect()
     }
 
     public func UploadBlockBuilder(formData: AFMultipartFormData) {
@@ -41,11 +62,13 @@ public class PagePersonalDetailEditActions: PageJumpActions {
         YMVar.MyUserInfo = data!["data"] as! [String: AnyObject]
         YMVar.MyDoctorId = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "id")
         
+        let headUrl = "http://d.medi-link.cn/uploads/avatar/\(YMVar.MyDoctorId).jpg?\(NSDate().timeIntervalSince1970)"
         print("http://d.medi-link.cn/uploads/avatar/\(YMVar.MyDoctorId).jpg?\(NSDate().timeIntervalSince1970)" )
         RCIM.sharedRCIM().refreshUserInfoCache(RCUserInfo(userId: YMVar.MyDoctorId, name: "",
             portrait: "http://d.medi-link.cn/uploads/avatar/\(YMVar.MyDoctorId).jpg?\(NSDate().timeIntervalSince1970)"),
                                                withUserId: YMVar.MyDoctorId)
-        TargetController?.BodyView?.UserHeadImg.image = Toucan(image: ImageForUpload!).maskWithEllipse().image
+//        TargetController?.BodyView?.UserHeadImg.image = Toucan(image: ImageForUpload!).maskWithEllipse().image
+        YMLayout.LoadImageFromServer(TargetController!.BodyView!.UserHeadImg, url: headUrl, fullUrl: nil, makeItRound: true)
         TargetController?.BodyView?.FullPageLoading.Hide()
     }
     
@@ -87,15 +110,40 @@ public class PagePersonalDetailEditActions: PageJumpActions {
         
     }
     
-    public func SelectHospital(_: UIGestureRecognizer) {
+    func CitySelected(sender: YMButton) {
+        PageHospitalSearchBodyView.CitySelected = TargetController!.BodyView!.CityPicker!.GetSelectedCityId()
+        JumpToHosSelect()
+        TargetController!.BodyView!.CityPicker.Hide()
+    }
+    
+    func HideCityPicker(sender: YMButton) {
+        TargetController!.BodyView?.CityPicker.Hide()
+    }
+    
+    public func JumpToHosSelect() {
         PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE
         PageCommonSearchViewController.InitPageTitle = "选择医院"
+        PageCommonSearchViewController.InitSearchKey = ""
         DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
+    }
+    
+    public func SelectHospital(_: UIGestureRecognizer) {
+//        PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_HOSPITAL_SEARCH_PAGE_TYPE
+//        PageCommonSearchViewController.InitPageTitle = "选择医院"
+//        PageCommonSearchViewController.InitSearchKey = ""
+//        DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
+        if(!TargetController!.BodyView!.CityPicker.DataLoaded) {
+            TargetController!.BodyView?.FullPageLoading.Show()
+            GetCityInfoApi?.YMGetCityGroupByProvince()
+        } else {
+            TargetController!.BodyView?.CityPicker.Show()
+        }
     }
     
     public func SelectDepartment(_: UIGestureRecognizer) {
         PageCommonSearchViewController.SearchPageTypeName = YMCommonSearchPageStrings.CS_DEPARTMENT_SEARCH_PAGE_TYPE
         PageCommonSearchViewController.InitPageTitle = "选择科室"
+        PageCommonSearchViewController.InitSearchKey = ""
         DoJump(YMCommonStrings.CS_PAGE_COMMON_SEARCH_NAME)
     }
     
@@ -144,17 +192,22 @@ public class PagePersonalDetailEditActions: PageJumpActions {
     
     var CamSelect: CameraViewController!
     public func HeadImagesSelected(_: [PHAsset]?) {
-        CamSelect = CameraViewController(croppingEnabled: true) {(img, pha) in
+        CamSelect = CameraViewController(croppingEnabled: true) {[weak self] (img, pha) in
             if(nil != img) {
-                self.TargetController?.BodyView?.FullPageLoading.Show()
-                self.ImageForUpload = img!
-//                self.TargetController?.BodyView?.UpdateUserHead(img!)
-                self.UploadApi?.YMUploadUserHead(["head_img": "head_img.jpg"], blockBuilder: self.UploadBlockBuilder)
+                self!.TargetController?.BodyView?.FullPageLoading.Show()
+                YMDelay(0.1, closure: {
+                    self!.ImageForUpload = Toucan.init(image: img!).resize(CGSize(width: img!.size.width, height: img!.size.height)).image
+                    self!.UploadApi?.YMUploadUserHead(["head_img": "head_img.jpg"], blockBuilder: self!.UploadBlockBuilder)
+                    self!.CamSelect = nil
+                })
             }
-            
-            self.CamSelect!.navigationController?.popViewControllerAnimated(true)
+//
+//            self!.CamSelect!.dismissViewControllerAnimated(true, completion: nil)
+//            self!.CamSelect = nil
+            self!.CamSelect!.navigationController?.popViewControllerAnimated(true)
         }
         
+//        self.NavController!.presentViewController(CamSelect, animated: true, completion: nil)
         self.NavController!.pushViewController(CamSelect, animated: true)
 
         

@@ -22,11 +22,24 @@ class PageAuthCompleteBodyView: PageBodyView, ImageProvider {
         
         ProcessingActions = PageAuthCompleteActions(navController: self.NavController, target: self)
         DrawFullBody()
+        DrawBottomButton()
     }
     
+    func DrawBottomButton() {
+        let panel = UIView()
+        panel.backgroundColor = YMColors.CommonBottomGray
+        
+        ParentView?.addSubview(panel)
+        panel.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 98.LayoutVal())
+        
+        let label = YMLayout.GetNomalLabel("认证通过", textColor: YMColors.FontGray, fontSize: 34.LayoutVal())
+        panel.addSubview(label)
+        label.anchorInCenter(width: label.width, height: label.height)
+    }
+
     func DrawLabel() {
         let label = ActiveLabel()
-        label.text = "已认证"
+        label.text = "认证成功"
         label.textColor = YMColors.FontBlue
         label.font = YMFonts.YMDefaultFont(30.LayoutVal())
         label.sizeToFit()
@@ -39,20 +52,19 @@ class PageAuthCompleteBodyView: PageBodyView, ImageProvider {
         label.layer.masksToBounds = true
         
         BodyView.addSubview(label)
-        label.anchorToEdge(Edge.Top, padding: 440.LayoutVal(), width: label.width, height: label.height)
+        label.align(Align.UnderCentered, relativeTo: AuthPanel, padding: 100.LayoutVal(), width: label.width, height: label.height)
     }
     
     func DrawFullBody() {
-//        let info = YMLayout.GetNomalLabel("您的信息正在认证中！", textColor: YMColors.FontGray, fontSize: 48.LayoutVal())
-        
-//        BodyView.addSubview(info)
-//        info.anchorToEdge(Edge.Top, padding: 70.LayoutVal(), width: info.width, height: info.height)
-        
         YMLayout.ClearView(view: BodyView)
         YMLayout.ClearView(view: AuthPanel)
         
+        let example = YMLayout.GetSuitableImageView("YMAuthExample")
+        BodyView.addSubview(example)
+        example.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 90.LayoutVal(), otherSize: example.height)
+        
         BodyView.addSubview(AuthPanel)
-        AuthPanel.anchorToEdge(Edge.Top, padding: 200.LayoutVal(), width: YMSizes.PageWidth, height: 200.LayoutVal())
+        AuthPanel.align(Align.UnderCentered, relativeTo: example, padding: 145.LayoutVal(), width: YMSizes.PageWidth, height: 200.LayoutVal())
         
         let authImg = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "auth_img")
         
@@ -84,8 +96,7 @@ class PageAuthCompleteBodyView: PageBodyView, ImageProvider {
             ImageList.append(img)
         }
         
-        AuthPanel.groupAgainstEdge(group: Group.Horizontal, views: ImageList.map({$0 as UIImageView}),
-                                   againstEdge: Edge.Left, padding: 10.LayoutVal(), width: 180.LayoutVal(), height: 180.LayoutVal())
+        AuthPanel.groupInCenter(group: Group.Horizontal, views: ImageList.map({$0 as UIImageView}), padding: 10.LayoutVal(), width: 180.LayoutVal(), height: 180.LayoutVal())
         YMLayout.SetHScrollViewContentSize(AuthPanel, lastSubView: ImageList.last, padding: 10.LayoutVal())
         
         DrawLabel()

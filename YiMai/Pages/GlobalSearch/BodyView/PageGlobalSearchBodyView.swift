@@ -480,7 +480,7 @@ public class PageGlobalSearchBodyView: PageBodyView {
         if(nil != prov && nil != citys) {
             YMLayout.ClearView(view: CityList)
             CityList.hidden = true
-            prov?.insert(["id": "clear", "name": "重置过滤条件"], atIndex: 0)
+            prov?.insert(["id": "clear", "name": "重置城市"], atIndex: 0)
             citys?["clear"] = [[String:AnyObject]]()
             PageSearchResultCell.GetCityTablView(prov!, citys: citys!,
                                                  parent: CityList,
@@ -489,12 +489,23 @@ public class PageGlobalSearchBodyView: PageBodyView {
         }
     }
     
+    func FilterHosByCity() {
+        
+    }
+    
+    func FilterDeptByHos() {
+        
+    }
+
     public func LoadHosList(data: [String: AnyObject]) {
-        let hospitals = data["hospitals"] as? [String: [ String: [ [String: AnyObject] ] ] ]
+        var hospitals = data["hospitals"] as? [String: [ String: [ [String: AnyObject] ] ] ]
         
         if(nil != hospitals) {
             YMLayout.ClearView(view: HosList)
             HosList.hidden = true
+            
+            hospitals!["clear"] = ["clear": [["id": "clear", "name": "重置医院"]]]
+//            hospitals!["a"]!["b"]! = [["id": "clear", "name": "重置医院"]]
             PageSearchResultCell.GetHospitalSearchView(hospitals!,
                                                        parent: HosList,
                                                        hospitalTouched: SearchActions!.HosTouched)
@@ -502,11 +513,12 @@ public class PageGlobalSearchBodyView: PageBodyView {
     }
     
     public func LoadDeptList(data: [String: AnyObject]) {
-        let dept = data["departments"] as? [[String: AnyObject]]
+        var dept = data["departments"] as? [[String: AnyObject]]
         
         if(nil != dept) {
             YMLayout.ClearView(view: DeptList)
             DeptList.hidden = true
+            dept?.insert(["id": "clear", "name": "重置科室"], atIndex: 0)
             PageSearchResultCell.GetDeptSearchView(dept!,
                                                        parent: DeptList,
                                                        hospitalTouched: SearchActions!.DeptTouched)
@@ -519,7 +531,10 @@ public class PageGlobalSearchBodyView: PageBodyView {
         Lv2Data = users["friends-friends"] as? [[String: AnyObject]]
         Lv3Data = users["other"] as? [[String: AnyObject]]
         
-        LoadData(nil, l1: Lv2Data, l2: Lv2Data, l3: Lv3Data)
+        HosFilterKey = ""
+        CityFilterKey = ""
+        
+        LoadData(nil, l1: Lv1Data, l2: Lv2Data, l3: Lv3Data)
         
         DrawFilterButton(CityFilterButton!, text: "城市")
         DrawFilterButton(HosFilterButton!, text: "医院")
@@ -527,12 +542,39 @@ public class PageGlobalSearchBodyView: PageBodyView {
     }
     
     public func FilterResultByCity(cityName: String) {
+        var filtedHos = [[String: AnyObject]]()
+        var filtedDept = [[String: AnyObject]]()
+        
+        var filtedHosIds = [String]()
+        var filtedDeptIds = [String]()
+        
+        HosFilterKey = ""
+        CityFilterKey = cityName
+
         func GetFilteredArray(org: [[String: AnyObject]], key: String) -> [[String: AnyObject]] {
             var ret = [[String: AnyObject]]()
             for v in org {
                 let city = v["city"] as? String
                 if(nil != city){
                     if(cityName == city) {
+                        let hos = v["hospital"] as? [String: AnyObject]
+                        let dept = v["department"] as? [String: AnyObject]
+                        if(nil != hos) {
+                            let hosId = YMVar.GetStringByKey(hos, key: "id")
+                            if(!filtedHosIds.contains(hosId)) {
+                                filtedHos.append(hos!)
+                                filtedHosIds.append(hosId)
+                            }
+                        }
+                        
+                        if(nil != dept) {
+                            let deptId = YMVar.GetStringByKey(dept, key: "id")
+                            if(!filtedDeptIds.contains(deptId)) {
+                                filtedDept.append(dept!)
+                                filtedDeptIds.append(deptId)
+                            }
+                        }
+
                         ret.append(v)
                     }
                 }
@@ -553,22 +595,38 @@ public class PageGlobalSearchBodyView: PageBodyView {
         LoadData(nil, l1: l1, l2: l2, l3: l3)
         
         DrawFilterButton(CityFilterButton!, text: cityName)
-
-//        let btnData = CityFilterButton!.UserObjectData as! [String: AnyObject]
-//        let label = btnData["label"] as! UILabel
-//        label.text = cityName
-//        public var HosFilterButton: YMTouchableView? = nil
-//        public var DeptFilterButton: YMTouchableView? = nil
+        
+        LoadHosList(["hospitals": ["a": ["b": filtedHos]]])
+        LoadDeptList(["departments": filtedDept])
+        
+        DrawFilterButton(HosFilterButton!, text: "医院")
+        DrawFilterButton(DeptFilterButton!, text: "科室")
     }
     
-    public func FilterResultByHos(hosId: String, hosName: String) {
+    public func FilterResultByHos(_: String, hosName: String) {
+        var filtedDept = [[String: AnyObject]]()
+        var filtedDeptIds = [String]()
+        
+        HosFilterKey = hosName
+
         func GetFilteredArray(org: [[String: AnyObject]], key: String) -> [[String: AnyObject]] {
             var ret = [[String: AnyObject]]()
             for v in org {
                 let hos = v["hospital"] as? [String: AnyObject]
                 if(nil != hos){
-                    let thisHosId = "\(hos!["id"]!)"
-                    if(thisHosId == hosId) {
+                    let thisHosName = YMVar.GetStringByKey(hos, key: "name") //"\(hos!["id"]!)"
+                    if(thisHosName == hosName) {
+                        
+                        let dept = v["department"] as? [String: AnyObject]
+
+                        if(nil != dept) {
+                            let deptId = YMVar.GetStringByKey(dept, key: "id")
+                            if(!filtedDeptIds.contains(deptId)) {
+                                filtedDept.append(dept!)
+                                filtedDeptIds.append(deptId)
+                            }
+                        }
+                        
                         ret.append(v)
                     }
                 }
@@ -582,29 +640,42 @@ public class PageGlobalSearchBodyView: PageBodyView {
         Lv2Data = users["friends-friends"] as? [[String: AnyObject]]
         Lv3Data = users["other"] as? [[String: AnyObject]]
         
-        let l1 = GetFilteredArray(Lv1Data!, key: hosId)
-        let l2 = GetFilteredArray(Lv2Data!, key: hosId)
-        let l3 = GetFilteredArray(Lv3Data!, key: hosId)
+        let l1 = GetFilteredArray(Lv1Data!, key: hosName)
+        let l2 = GetFilteredArray(Lv2Data!, key: hosName)
+        let l3 = GetFilteredArray(Lv3Data!, key: hosName)
         
         LoadData(nil, l1: l1, l2: l2, l3: l3)
         
 
         DrawFilterButton(HosFilterButton!, text: hosName)
-//        let btnData = HosFilterButton!.UserObjectData as! [String: AnyObject]
-//        let label = btnData["label"] as! UILabel
-//        label.text = hosName
-        //        public var HosFilterButton: YMTouchableView? = nil
-        //        public var DeptFilterButton: YMTouchableView? = nil
+        
+        LoadDeptList(["departments": filtedDept])
+        DrawFilterButton(DeptFilterButton!, text: "科室")
+
     }
     
-    public func FilterResultByDept(deptId: String, deptName: String) {
+    public func FilterResultByDept(_: String, deptName: String) {
         func GetFilteredArray(org: [[String: AnyObject]], key: String) -> [[String: AnyObject]] {
             var ret = [[String: AnyObject]]()
             for v in org {
                 let dept = v["department"] as? [String: AnyObject]
+                let hos = v["hospital"] as? [String: AnyObject]
+                if("" != HosFilterKey) {
+                    if(HosFilterKey != YMVar.GetStringByKey(hos, key: "name")) {
+                        continue
+                    }
+                }
+                
+                if("" != CityFilterKey) {
+                    let cityName = YMVar.GetStringByKey(v, key: "city")
+                    if(cityName != CityFilterKey) {
+                        continue
+                    }
+                }
+
                 if(nil != dept){
-                    let thisDeptId = "\(dept!["id"]!)"
-                    if(thisDeptId == deptId) {
+                    let thisDeptName = YMVar.GetStringByKey(dept, key: "name")
+                    if(thisDeptName == deptName) {
                         ret.append(v)
                     }
                 }
@@ -618,9 +689,9 @@ public class PageGlobalSearchBodyView: PageBodyView {
         Lv2Data = users["friends-friends"] as? [[String: AnyObject]]
         Lv3Data = users["other"] as? [[String: AnyObject]]
         
-        let l1 = GetFilteredArray(Lv1Data!, key: deptId)
-        let l2 = GetFilteredArray(Lv2Data!, key: deptId)
-        let l3 = GetFilteredArray(Lv3Data!, key: deptId)
+        let l1 = GetFilteredArray(Lv1Data!, key: deptName)
+        let l2 = GetFilteredArray(Lv2Data!, key: deptName)
+        let l3 = GetFilteredArray(Lv3Data!, key: deptName)
         
         LoadData(nil, l1: l1, l2: l2, l3: l3)
         

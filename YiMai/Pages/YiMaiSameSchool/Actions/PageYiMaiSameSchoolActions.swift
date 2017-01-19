@@ -17,6 +17,8 @@ public class PageYiMaiSameSchoolActions: PageJumpActions, UIScrollViewDelegate{
     
     private var SearchByCityFlag = false
     private var SearchByKeyFlag = false
+    private var SearchWord = ""
+    private var SearchCity = ""
     
     override func ExtInit() {
         self.TargetView = self.Target as? PageYiMaiSameSchoolBodyView
@@ -25,16 +27,22 @@ public class PageYiMaiSameSchoolActions: PageJumpActions, UIScrollViewDelegate{
     }
     
     private func GetListSuccess(data: NSDictionary?) {
-        TargetView?.Loading?.Hide()
         
-        if(nil != ThisCacheKey) {
-            YMCoreDataEngine.SaveData(ThisCacheKey!, data: data!)
-            TargetView?.LoadHospitalList(data! as! [String : AnyObject])
-        } else {
-            YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SAME_SAMECOLLEGE, data: data!)
-            TargetView?.LoadCityList(data! as! [String : AnyObject])
-            TargetView?.LoadHospitalList(data! as! [String : AnyObject])
+        if(SearchByKeyFlag) {
+            if("" == SearchWord) {
+                YMLocalData.SaveData(data!, key: YMLocalDataStrings.SAME_SCHOOL_CACHE + YMVar.MyDoctorId)
+            }
         }
+
+//        if(nil != ThisCacheKey) {
+//            YMCoreDataEngine.SaveData(ThisCacheKey!, data: data!)
+//            TargetView?.LoadHospitalList(data! as! [String : AnyObject])
+//        } else {
+//            YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SAME_SAMECOLLEGE, data: data!)
+        TargetView?.LoadCityList(data! as! [String : AnyObject])
+        TargetView?.LoadHospitalList(data! as! [String : AnyObject])
+//        }
+        TargetView?.PrevData = data! as? [String: AnyObject]
         
         if(SearchByCityFlag || SearchByKeyFlag) {
             TargetView?.LoadHospitalList(data! as! [String : AnyObject])
@@ -46,6 +54,7 @@ public class PageYiMaiSameSchoolActions: PageJumpActions, UIScrollViewDelegate{
         
         let userInfo = data!["users"] as? [[String: AnyObject]]
         TargetView?.DrawList(userInfo)
+        TargetView?.Loading?.Hide()
     }
     
     private func GetListError(error: NSError) {
@@ -55,6 +64,11 @@ public class PageYiMaiSameSchoolActions: PageJumpActions, UIScrollViewDelegate{
     }
     
     public func GetSameSchoolList(data: [String:AnyObject]?) {
+        if(nil == data) {
+            SearchByCityFlag = false
+            SearchByKeyFlag = true
+            SearchWord = ""
+        }
         SameApi?.YMGetSameCollegeList(data)
     }
     
@@ -72,16 +86,26 @@ public class PageYiMaiSameSchoolActions: PageJumpActions, UIScrollViewDelegate{
         SearchByCityFlag = false
         SearchByKeyFlag = true
         
+        SearchWord = keyWord
+        if(YMValueValidator.IsBlankString(keyWord)) {
+            SearchWord = ""
+            input.text = ""
+        }
+        
+        SearchCity = ""
+        
         TargetView?.ClearList()
         TargetView?.ClearFilters()
         TargetView?.Loading?.Show()
-        GetSameSchoolList(["field": keyWord])
+        TargetView?.FilterByKey(SearchWord)
+        TargetView?.Loading?.Hide()
+//        GetSameSchoolList(["field": SearchWord])
     }
-    
+
     public func DoParamSearch(param: [String: AnyObject]) {
-        TargetView?.ClearList()
-        TargetView?.Loading?.Show()
-        GetSameSchoolList(param)
+//        TargetView?.ClearList()
+//        TargetView?.Loading?.Show()
+//        GetSameSchoolList(param)
     }
     
     public func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -103,28 +127,61 @@ public class PageYiMaiSameSchoolActions: PageJumpActions, UIScrollViewDelegate{
         TargetView?.CityFilterList.hidden = true
     }
     
+    public func ProvTouched(cell: YMTableViewCell) {
+        let data = cell.CellData as! [String: AnyObject]
+        let provData = data["prov"] as! [String: AnyObject]
+        
+        let provId = "\(provData["id"]!)"
+        
+        if("clear" == provId) {
+            TargetView?.ClearList()
+            TargetView?.FilterByKey(SearchWord)
+        }
+    }
+    
     public func CityTouched(cell: YMTableViewCell) {
-        let key = TargetView?.SearchInput?.text
+//        let key = TargetView?.SearchInput?.text
         let cityData = cell.CellData as! [String: AnyObject]
         let cityId = "\(cityData["id"]!)"
         let cityName = "\(cityData["name"]!)"
         
-        SearchByCityFlag = true
-        SearchByKeyFlag = false
+        TargetView?.ClearList()
+        if("clear" == cityId) {
+            TargetView?.FilterByKey(SearchWord)
+        } else {
+            SearchByCityFlag = true
+            SearchByKeyFlag = false
+            
+            SearchCity = cityName
+            
+            TargetView?.SetCity(cityName)
+            TargetView?.FilterByCity(cityName)
+        }
         
-        TargetView?.SetCity(cityName)
-        DoParamSearch(["field": key!, "city": cityId])
+//        DoParamSearch(["field": key!, "city": cityId])
     }
     
     public func HospitalTouched(cell: YMTableViewCell) {
-        let key = TargetView?.SearchInput?.text
+//        let key = TargetView?.SearchInput?.text
         let hodpitalData = cell.CellData as! [String: AnyObject]
         let hospitalId = "\(hodpitalData["id"]!)"
         let hospitalName = "\(hodpitalData["name"]!)"
+
+        TargetView?.ClearList()
+        if("clear" == hospitalId) {
+            if("" != SearchCity) {
+                TargetView?.FilterByCity(SearchCity)
+            } else {
+                TargetView?.FilterByKey(SearchWord)
+            }
+        } else {
+            SearchByCityFlag = false
+            SearchByKeyFlag = false
+            
+            TargetView?.SetHospital(hospitalName)
+            TargetView?.FilterByHos(hospitalName)
+        }
         
-        SearchByCityFlag = false
-        SearchByKeyFlag = false
-        TargetView?.SetHospital(hospitalName)
-        DoParamSearch(["field": key!, "hospital": hospitalId])
+//        DoParamSearch(["field": key!, "hospital": hospitalId])
     }
 }

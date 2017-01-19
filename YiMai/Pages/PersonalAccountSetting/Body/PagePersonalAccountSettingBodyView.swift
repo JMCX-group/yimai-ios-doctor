@@ -18,7 +18,8 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
     
     private var AuthButton: YMTouchableView? = nil
     private var IDNumButton: YMTouchableView? = nil
-    private var bindEmailButton: YMTouchableView? = nil
+    private var BindEmailButton: YMTouchableView? = nil
+    private var BindBankCard: YMTouchableView? = nil
     
     private var SettingActions: PagePersonalAccountSettingActions? = nil
     private let DefaultButtonGroupPadding = 70.LayoutVal()
@@ -67,7 +68,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
             EmailUpdateFlag = true
         }
         
-//        AppendExtInfo(EMail, parent: bindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+//        AppendExtInfo(EMail, parent: BindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
         FullPageLoading.Show()
         SettingActions!.SettingApi.YMChangeUserInfo(["email": email])
     }
@@ -106,7 +107,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         
         let email = YMVar.GetStringByKey(realData, key: "email")
 
-        let authTextMap = ["0":"已认证", "1":"尚未认证"]
+        let authTextMap = ["0":"认证成功", "1":"尚未认证"]
         
         let isAuth = realData["is_auth"]! as! String
         let authString = authTextMap[realData["is_auth"]! as! String]
@@ -132,7 +133,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
             } else {
                 EMail.text = email
             }
-//            AppendExtInfo(EMail, parent: bindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+//            AppendExtInfo(EMail, parent: BindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
         } else {
             EmailUpdateFlag = false
         }
@@ -174,28 +175,36 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
             label: UILabel(), text: "绑定新手机号", userStringData: YMCommonStrings.CS_PAGE_PERSONAL_CHANGE_PHONE_NAME)
         AppendExtInfo(AccountBindPhone, parent: bindPhoneButton, fontColor: YMColors.FontGray, fontSize: 24.LayoutVal())
         
-        bindEmailButton = YMLayout.GetCommonFullWidthTouchableView(
+        BindEmailButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: "EmailCellTouched:".Sel(),
             label: UILabel(), text: "邮箱地址")
-        AppendExtInfo(EMail, parent: bindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+        AppendExtInfo(EMail, parent: BindEmailButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
         
         IDNumButton = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
             label: UILabel(), text: "身份证号码", userStringData: YMCommonStrings.CS_PAGE_PERSONAL_ID_NUM_INPUT_NAME)
         AppendExtInfo(IDNum, parent: IDNumButton!, fontColor: YMColors.FontBlue, fontSize: 24.LayoutVal())
+        
+        BindBankCard = YMLayout.GetCommonFullWidthTouchableView(
+            BodyView, useObject: SettingActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+            label: UILabel(), text: "提现银行卡", userStringData: YMCommonStrings.CS_PAGE_BANK_CARD_LIST_NAME)
 
         BodyView.addSubview(bindPhoneButton)
-        BodyView.addSubview(bindEmailButton!)
+        BodyView.addSubview(BindEmailButton!)
         BodyView.addSubview(IDNumButton!)
+        BodyView.addSubview(BindBankCard!)
         
         bindPhoneButton.align(Align.UnderMatchingLeft, relativeTo: AuthButton!,
                           padding: DefaultButtonGroupPadding, width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
         
-        bindEmailButton!.align(Align.UnderMatchingLeft, relativeTo: bindPhoneButton,
+        BindEmailButton!.align(Align.UnderMatchingLeft, relativeTo: bindPhoneButton,
                           padding: 0, width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
         
-        IDNumButton?.align(Align.UnderMatchingLeft, relativeTo: bindEmailButton!,
+        IDNumButton?.align(Align.UnderMatchingLeft, relativeTo: BindEmailButton!,
                           padding: 0, width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
+        
+        BindBankCard?.align(Align.UnderMatchingLeft, relativeTo: IDNumButton!,
+                           padding: 0, width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
     }
     
     private func DrawLoginOperating(){
@@ -211,7 +220,7 @@ public class PagePersonalAccountSettingBodyView: PageBodyView {
         BodyView.addSubview(changePassword)
         BodyView.addSubview(logoutButton)
         
-        changePassword.align(Align.UnderMatchingLeft, relativeTo: IDNumButton!,
+        changePassword.align(Align.UnderMatchingLeft, relativeTo: BindBankCard!,
                               padding: DefaultButtonGroupPadding, width: YMSizes.PageWidth, height: YMSizes.CommonTouchableViewHeight)
         
         logoutButton.align(Align.UnderMatchingLeft, relativeTo: changePassword,

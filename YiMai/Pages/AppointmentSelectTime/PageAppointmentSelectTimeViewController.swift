@@ -35,7 +35,8 @@ public class PageAppointmentSelectTimeViewController: PageViewController {
         
         BodyView?.FullPageLoading.Show()
         let docId = YMVar.GetStringByKey(PageAppointmentSelectTimeViewController.SelectedDoctor, key: "id")
-        Actions?.DocInfoApi.YMGetRecentContactedDocList(["id_list": docId])
+//        Actions?.DocInfoApi.YMGetRecentContactedDocList(["id_list": docId])
+        Actions?.DocInfoApi.YMGetDocSchedulingInfo(docId)
     }
     
     override func PageDisapeared() {

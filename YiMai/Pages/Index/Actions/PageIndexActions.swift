@@ -13,6 +13,8 @@ import SwiftyJSON
 public class PageIndexActions: PageJumpActions {
     private var ApiUtility: YMAPIUtility? = nil
     private let ApiSearchActionKey = YMAPIStrings.CS_API_ACTION_NAME_COMMON_SEARCH + "-indexCommonSearch"
+    var GetYiMaiCountApi: YMAPIUtility!
+    var UpdateDeviceToken: YMAPIUtility!
     
     var TargetController: PageIndexViewController!
     
@@ -24,12 +26,34 @@ public class PageIndexActions: PageJumpActions {
                                   success: self.SearchSuccessed,
                                   error: self.GotSearchError)
         
+        GetYiMaiCountApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_YIMAI_COUNT, success: GetYiMaiCountSuccess, error: GetYiMaiCountError)
+        
         ContactApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_RECENTLY_CONTACT,
                                   success: GetRecentContactSuccess,
                                   error: GetRecentContactFailed)
         BannerApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_INDEX_BANNER, success: GetBannerSuccess, error: GetBannerError)
         
+        UpdateDeviceToken = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_USER + "UpdateDeviceToken",
+                                         success: UpdateDeviceTokenSuccess, error: UpdateDeviceTokenError)
+        
         TargetController = Target as! PageIndexViewController
+    }
+    
+    func UpdateDeviceTokenSuccess(data: NSDictionary?) {
+    }
+    
+    func UpdateDeviceTokenError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+    }
+    
+    func GetYiMaiCountSuccess(data: NSDictionary?) {
+        let realData = data!["data"] as! [String: AnyObject]
+        TargetController.BodyView?.DrawYiMaiCountInfo(realData)
+    }
+    
+    func GetYiMaiCountError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetController.BodyView?.DrawYiMaiCountInfo([String: AnyObject]())
     }
     
     func GetRecentContactSuccess(data: NSDictionary?) {

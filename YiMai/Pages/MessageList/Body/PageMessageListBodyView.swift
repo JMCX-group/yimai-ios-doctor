@@ -101,7 +101,8 @@ public class PageMessageListBodyView: PageBodyView {
         
         var text = "暂无新的接诊信息"
         if(0 != YMVar.MyNewAdmissionInfo.count) {
-            text = YMVar.MyNewAdmissionInfo["text"] as! String
+            print(YMVar.MyNewAdmissionInfo)
+            text = YMVar.GetStringByKey(YMVar.MyNewAdmissionInfo, key: "text")// YMVar.MyNewAdmissionInfo["text"] as! String
         }
         MyAdmissionPanel = GetMessageTouchablePanel("MessageListIconMyAdmissions",
                                                     title: "我的接诊信息", subtitle: text,

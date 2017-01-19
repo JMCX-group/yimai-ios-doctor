@@ -115,6 +115,7 @@ class PageBlacklistBodyView: PageBodyView {
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
         removeBtn.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: removeBtn.width, height: removeBtn.height)
         
+        YMLayout.SetDocfHeadImageVFlag(userHeadBackground, docInfo: data)
         YMLayout.LoadImageFromServer(userHeadBackground, url: head, fullUrl: nil, makeItRound: true)
         
         return cell

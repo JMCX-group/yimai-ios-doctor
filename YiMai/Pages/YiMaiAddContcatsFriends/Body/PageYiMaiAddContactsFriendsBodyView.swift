@@ -26,6 +26,11 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     
     var FullList = [String: AnyObject]()
     
+    var FullAllOtherList = [[String: AnyObject]]()
+    var OtherListPos: Int = 0
+    let ShowStep: Int = 50
+    var LastOtherCell: UIView? = nil
+    
     private var ListType: String = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS
     
     private let ShowFriendsListBtn = YMButton()
@@ -143,6 +148,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
             DrawSearchPanel()
         }
         
+        OtherListPos = 0
         let friendsData = data["friends"] as? [[String: AnyObject]]
         let othersData = data["others"] as? [[String: AnyObject]]
         if(nil != friendsData) {
@@ -151,18 +157,54 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
             DrawFriendsList([[String: AnyObject]]())
             ListType = listType
         }
-        
+
         if(nil != othersData) {
-            DrawOtherList(othersData!)
+            FullAllOtherList = othersData!
+            DrawOtherList(FullAllOtherList)
         } else {
+            FullAllOtherList = [[String: AnyObject]]()
             DrawOtherList([[String: AnyObject]]())
         }
-        
+
         if(YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_FRIENDS == ListType) {
             ShowFriendsList()
         } else if(YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS == ListType) {
             ShowOthersList()
         }
+    }
+    
+    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//        super.scrollViewDidEndDecelerating(scrollView)
+        //
+        //        print(self.BodyView.contentOffset)
+        //        print(self.BodyView.contentSize)
+        //        print(BodyView.height)
+        
+        let offsetHeight = self.BodyView.contentOffset.y
+        if(offsetHeight + self.BodyView.height > self.BodyView.contentSize.height - 98.LayoutVal()) {
+//            FullPageLoading.Show()
+            YMDelay(0.1) {
+                self.DrawOtherList(self.FullAllOtherList, loadMore: true)
+                YMLayout.SetVScrollViewContentSize(self.BodyView, lastSubView: self.OthersListPanel, padding: 128.LayoutVal() + self.SearchPanel.height - 98.LayoutVal())
+//                self.FullPageLoading.Hide()
+            }
+        }
+        
+        
+    }
+    override func BodyViewEndDragging() {
+//        super.BodyViewEndDragging()
+//
+//        print(self.BodyView.contentOffset)
+//        print(self.BodyView.contentSize)
+//        print(BodyView.height)
+        
+//        let offsetHeight = BodyView.contentOffset.y
+//        if(offsetHeight + BodyView.height > BodyView.contentSize.height - 98.LayoutVal()) {
+//            DrawOtherList(FullAllOtherList, loadMore: true)
+//        }
+//        
+//        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: OthersListPanel, padding: 128.LayoutVal() + SearchPanel.height - 98.LayoutVal())
     }
     
     public func ShowFriendsList() {
@@ -194,8 +236,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
     }
     
     public func ShowOthersList() {
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.2)
+//        UIView.beginAnimations(nil, context: nil)
+//        UIView.setAnimationDuration(0.2)
         
         FriendsListPanel.hidden = true
         OthersListPanel.hidden = false
@@ -212,8 +254,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0.LayoutVal(), width: OthersPanel.width, height: OthersPanel.height)
         
 //        BodyView.contentOffset = CGPoint()
-        UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
-        UIView.commitAnimations()
+//        UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
+//        UIView.commitAnimations()
         
         let action: YiMaiAddContactsFriendsActions = self.Actions as! YiMaiAddContactsFriendsActions
         let controller: PageYiMaiAddContatsFriendsViewController = action.Target as! PageYiMaiAddContatsFriendsViewController
@@ -222,7 +264,7 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
         
         ListType = YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS
         
-        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: OthersListPanel, padding: 128.LayoutVal() + SearchPanel.height)
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: OthersListPanel, padding: 128.LayoutVal() + SearchPanel.height - 98.LayoutVal())
     }
     
     private func DrawSearchPanel() {
@@ -325,61 +367,94 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
 
         ShowResult(["friends": friendsData, "others": othersData], drawSearch: false, listType: YiMaiAddContactsFriendsStrings.CS_LIST_TYPE_OTHERS)
     }
-    
-    private func DrawOtherList(data: [[String: AnyObject]]) {
-        BodyView.addSubview(OthersPanel)
-        OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
+
+    private func DrawOtherList(data: [[String: AnyObject]], loadMore: Bool = false) {
+        if(!loadMore) {
+            LastOtherCell = nil
+            BodyView.addSubview(OthersPanel)
+            OthersPanel.align(Align.UnderMatchingLeft, relativeTo: FriendsPanel, padding: 0, width: YMSizes.PageWidth, height: 0)
+            
+            YMLayout.ClearView(view: OthersPanel)
+        }
         
-        YMLayout.ClearView(view: OthersPanel)
         if(0 == data.count) {
             return
         }
         
-        OthersPanel.addSubview(ShowOthersListBtn)
-        ShowOthersListBtn.setTitle("邀请好友加入医脉", forState: UIControlState.Normal)
-        ShowOthersListBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
-        ShowOthersListBtn.backgroundColor = YMColors.PanelBackgroundGray
-        ShowOthersListBtn.titleLabel?.font = YMFonts.YMDefaultFont(30.LayoutVal())
-        ShowOthersListBtn.addTarget(self.Actions!, action: "ShowOthersListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
-        ShowOthersListBtn.anchorToEdge(Edge.Top, padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 60.LayoutVal())
+        if(!loadMore) {
+            OthersPanel.addSubview(ShowOthersListBtn)
+            ShowOthersListBtn.setTitle("邀请好友加入医脉", forState: UIControlState.Normal)
+            ShowOthersListBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
+            ShowOthersListBtn.backgroundColor = YMColors.PanelBackgroundGray
+            ShowOthersListBtn.titleLabel?.font = YMFonts.YMDefaultFont(30.LayoutVal())
+            ShowOthersListBtn.addTarget(self.Actions!, action: "ShowOthersListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+            ShowOthersListBtn.anchorToEdge(Edge.Top, padding: 10.LayoutVal(), width: YMSizes.PageWidth, height: 60.LayoutVal())
+            
+            OthersPanel.addSubview(OthersListPanel)
+            OthersListPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 0)
+            YMLayout.ClearView(view: OthersListPanel)
+            
+            let titleLabel = UILabel()
+            
+            titleLabel.text = "您可以邀请以下\(data.count)位好友加入医脉"
+            titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
+            titleLabel.textColor = YMColors.FontGray
+            
+            let topLine = UIView()
+            OthersListPanel.addSubview(topLine)
+            topLine.backgroundColor = YMColors.DividerLineGray
+            topLine.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
+            
+            OthersListPanel.addSubview(titleLabel)
+            titleLabel.anchorAndFillEdge(Edge.Top, xPad: 40.LayoutVal(), yPad: YMSizes.OnPx, otherSize: 51.LayoutVal())
+            
+            ContactsInOtherResult.removeAll()
+        }
 
-        OthersPanel.addSubview(OthersListPanel)
-        OthersListPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 0)
-        YMLayout.ClearView(view: OthersListPanel)
+//        for other in data {
+//            let name = other["name"] as! String
+//            let phone = other["phone"] as! String
+//            
+//            let smsStatus = other["sms_status"] as! String
+//            
+//            ContactsInOtherResult.append(phone)
+//            
+//            cell = self.DrawOtherCell([
+//                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: name,
+//                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_PHONE: phone,
+//                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_SMS_STATUS: smsStatus
+//                ], prevCell: cell)
+//            
+//            LastOtherCell = cell
+//        }
 
-        let titleLabel = UILabel()
-        
-        titleLabel.text = "您可以邀请以下\(data.count)位好友加入医脉"
-        titleLabel.font = YMFonts.YMDefaultFont(24.LayoutVal())
-        titleLabel.textColor = YMColors.FontGray
-        
-        let topLine = UIView()
-        OthersListPanel.addSubview(topLine)
-        topLine.backgroundColor = YMColors.DividerLineGray
-        topLine.anchorAndFillEdge(Edge.Top, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
-
-        OthersListPanel.addSubview(titleLabel)
-        titleLabel.anchorAndFillEdge(Edge.Top, xPad: 40.LayoutVal(), yPad: YMSizes.OnPx, otherSize: 51.LayoutVal())
-        
-        ContactsInOtherResult.removeAll()
-
-        var cell: UIView? = nil
-        for other in data {
+        var cell: UIView? = LastOtherCell
+        for i in OtherListPos ... OtherListPos + ShowStep {
+            if(i >= data.count) {
+                break
+            }
+            
+            var other = data[i]
             let name = other["name"] as! String
             let phone = other["phone"] as! String
             
             let smsStatus = other["sms_status"] as! String
-
+            
             ContactsInOtherResult.append(phone)
-
+            
             cell = self.DrawOtherCell([
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_NAME: name,
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_PHONE: phone,
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_SMS_STATUS: smsStatus
                 ], prevCell: cell)
+            
+            LastOtherCell = cell
         }
         
-        YMLayout.SetViewHeightByLastSubview(OthersListPanel, lastSubView: cell!)
+        OtherListPos += ShowStep
+        if(nil != cell) {
+            YMLayout.SetViewHeightByLastSubview(OthersListPanel, lastSubView: cell!)
+        }
         YMLayout.SetViewHeightByLastSubview(OthersPanel, lastSubView: OthersListPanel)
     }
     
@@ -456,7 +531,8 @@ public class PageYiMaiAddContactsFriendsBodyView: PageBodyView {
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_DEPARTMENT: deptName,
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_JOB_TITLE: title!,
                 YiMaiAddContactsFriendsStrings.CS_DATA_KEY_USER_ID: id,
-                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_FRIEND_ADDED: isAdded
+                YiMaiAddContactsFriendsStrings.CS_DATA_KEY_FRIEND_ADDED: isAdded,
+                "is_auth": YMVar.GetStringByKey(docotor, key: "is_auth")
                 ], prevCell: cell)
         }
         

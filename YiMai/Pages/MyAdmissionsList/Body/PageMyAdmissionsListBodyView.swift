@@ -18,6 +18,12 @@ public struct YMMyAdmissionsMessage {
     var datatime: String
 }
 
+enum AdmissionSelectedPanelType {
+    case WaitReply
+    case Complete
+    case WaitComplete
+}
+
 public class PageMyAdmissionsListBodyView: PageBodyView {
     private let timeFontSize = 22.LayoutVal()
     private let normalPadding = 20.LayoutVal()
@@ -41,6 +47,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
     private var WaitCompletePanelDrew = false
     private var WaitReplyPanelDrew = false
 
+    var CurrentPanel = AdmissionSelectedPanelType.WaitReply
     
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
@@ -123,6 +130,8 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             }
         }
         
+        CurrentPanel = AdmissionSelectedPanelType.Complete
+
         CompletePanelDrew = true
         
         CompleteTabTitle.textColor = YMColors.FontBlue
@@ -152,6 +161,8 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
             }
         }
         
+        CurrentPanel = AdmissionSelectedPanelType.WaitComplete
+
         WaitCompletePanelDrew = true
         
         CompleteTabTitle.textColor = YMColors.FontGray
@@ -180,6 +191,8 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
                 YMLayout.SetVScrollViewContentSize(WaitReplyPanel, lastSubView: lastView!)
             }
         }
+        
+        CurrentPanel = AdmissionSelectedPanelType.WaitReply
         
         WaitReplyPanelDrew = true
         
@@ -437,7 +450,14 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         WaitCompletePanelDrew = false
         WaitReplyPanelDrew = false
         
-        ShowWaitReplyPanel()
+        switch (CurrentPanel) {
+        case AdmissionSelectedPanelType.WaitReply:
+            ShowWaitReplyPanel()
+        case AdmissionSelectedPanelType.WaitComplete:
+            ShowWaitCompletePanel()
+        case AdmissionSelectedPanelType.Complete:
+            ShowCompletePanel()
+        }
     }
     
     public func Clear() {

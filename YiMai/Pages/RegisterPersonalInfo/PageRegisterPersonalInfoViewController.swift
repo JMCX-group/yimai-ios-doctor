@@ -23,10 +23,12 @@ public class PageRegisterPersonalInfoViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        
-
         if(isMovingToParentViewController()) {
             BodyView?.Reset()
+            if(!BodyView!.CityPicker.DataLoaded) {
+                BodyView?.Loading?.Show()
+                BodyView?.Actions!.GetCityInfoApi?.YMGetCityGroupByProvince()
+            }
             TopView?.TopViewPanel.removeFromSuperview()
             TopView = PageCommonTopView(parentView: self.view,
                                         titleString: YMRegisterInfoStrings.CS_REGISTER_INFO_PAGE_TITLE)

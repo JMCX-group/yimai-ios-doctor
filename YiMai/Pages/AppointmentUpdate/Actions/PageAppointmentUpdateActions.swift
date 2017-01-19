@@ -53,6 +53,10 @@ public class PageAppointmentUpdateActions: PageJumpActions, UINavigationControll
         
         if(nil != uploadData) {
             TargetController?.Loading?.Show()
+            print([
+                "id": PageAppointmentDetailViewController.AppointmentID,
+                "doctor": "\(uploadData!["doctor"]!)"
+                ])
             ApiUtility?.YMUpdateAppointmentDetail([
                     "id": PageAppointmentDetailViewController.AppointmentID,
                     "doctor": "\(uploadData!["doctor"]!)"

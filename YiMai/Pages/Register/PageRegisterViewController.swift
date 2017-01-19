@@ -24,6 +24,17 @@ public class PageRegisterViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        BodyView?.Clear()
+        if(isMovingToParentViewController()) {
+            BodyView?.Clear()
+        }
+    }
+    
+    override func PageRefresh() {
+        BodyView?.PageLoaded = true
+    }
+    
+    override public func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        BodyView?.PageLoaded = false
     }
 }

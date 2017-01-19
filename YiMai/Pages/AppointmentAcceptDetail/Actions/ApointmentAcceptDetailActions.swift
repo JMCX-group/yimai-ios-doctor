@@ -53,4 +53,65 @@ public class ApointmentAcceptDetailActions: PageJumpActions {
     public func AdmissionTimeSelected(sender: YMButton) {
         TargetBodyView?.SetAdmissionTime()
     }
+    
+    func ConfirmSaveCommonText(text: String?) {
+        let CommonTextDataIndex = "\(YMVar.MyDoctorId).CommonText"
+        
+        var commonTextArr = YMLocalData.GetData(CommonTextDataIndex) as? [String]
+        if(nil == commonTextArr) {
+            commonTextArr = [String]()
+        }
+        if(YMValueValidator.IsBlankString(text)) {
+            return
+        }
+        
+        YMPageModalMessage.ShowConfirmInfo("将以下文字保存至常用文本", info: text!, nav: NavController!, ok: { (_) in
+            if(!commonTextArr!.contains(text!)) {
+                commonTextArr!.append(text!)
+            }
+            YMLocalData.SaveData(commonTextArr!, key: CommonTextDataIndex)
+            }, cancel: nil)
+    }
+    
+    func SetDescFromCommonText(text: String) {
+        TargetBodyView?.DescInput.text = text
+        
+        TargetBodyView?.DescInput.resignFirstResponder()
+        TargetBodyView?.NeedToKnowInput.resignFirstResponder()
+    }
+    
+    func SetNeedToKnowFromCommonText(text: String) {
+        TargetBodyView?.NeedToKnowInput.text = text
+        
+        TargetBodyView?.DescInput.resignFirstResponder()
+        TargetBodyView?.NeedToKnowInput.resignFirstResponder()
+    }
+    
+    func SaveDescToCommonText(gr: UIGestureRecognizer) {
+        ConfirmSaveCommonText(TargetBodyView?.DescInput.text)
+    }
+    
+    func GetDescFromCommonText(gr: UIGestureRecognizer) {
+        DoJump(YMCommonStrings.CS_PAGE_ACCEPET_COMMON_TEXT, ignoreExists: false, userData: SetDescFromCommonText)
+    }
+    
+    func SaveNeedToKnowToCommonText(gr: UIGestureRecognizer) {
+        ConfirmSaveCommonText(TargetBodyView?.NeedToKnowInput.text)
+    }
+    
+    func GetNeedToKnowFromCommonText(gr: UIGestureRecognizer) {
+        DoJump(YMCommonStrings.CS_PAGE_ACCEPET_COMMON_TEXT, ignoreExists: false, userData: SetNeedToKnowFromCommonText)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+

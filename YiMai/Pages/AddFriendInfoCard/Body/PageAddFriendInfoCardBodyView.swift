@@ -40,7 +40,7 @@ public class PageAddFriendInfoCardBodyView: PageBodyView {
         let name = userInfo["name"] as? String
         let code = "\(userInfo["code"]!)"
         let head = userInfo["head_url"] as? String
-        let jobTitle = userInfo["job_title"] as? String
+        let jobTitle = YMVar.GetStringByKey(userInfo, key: "job_title", defStr: "医生")
         let hospital = userInfo["hospital"] as? String
         let dept = userInfo["department"] as? String
         let id = userInfo["id"] as! String
@@ -58,7 +58,7 @@ public class PageAddFriendInfoCardBodyView: PageBodyView {
         
         let codePanel = UIView()
         
-        
+        YMLayout.SetDocfHeadImageVFlag(UserHead, docInfo: userInfo)
         if(nil != head) {
             YMLayout.LoadImageFromServer(UserHead, url: head!, fullUrl: nil, makeItRound: true)
         }

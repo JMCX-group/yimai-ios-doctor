@@ -22,12 +22,16 @@ public class PageYiMaiSameSchoolViewController: PageViewController {
     
     
     override func PagePreRefresh() {
-        BodyView?.LoadData()
+        if(isMovingToParentViewController()) {
+            BodyView?.LoadData()
+        }
     }
     
     override func PageDisapeared() {
-        YMCoreDataEngine.RemoveData(YMCoreDataKeyStrings.CS_SAME_SAMECOLLEGE)
-        BodyView?.Clear()
+        if(isMovingFromParentViewController()) {
+            BodyView?.Clear()
+            BodyView?.ClearFilters()
+        }
     }
 }
 

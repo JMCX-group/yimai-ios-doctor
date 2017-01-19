@@ -14,9 +14,14 @@ class YMQRRecognizer: NSObject {
 
     static func RecognizFromQRJson(json: String, qrRecognizedFunc: YMQRCallback, qrUnrecognizedFunc: YMQRCallback? = nil) {
         let jsonDict = YMVar.TryToGetDictFromJsonStringData(json)
-        let data = jsonDict!["YMQRData"]
+        var data = [String: AnyObject]()
+        if(nil != jsonDict) {
+            data = jsonDict! as! [String: AnyObject]
+            qrRecognizedFunc(qrData: data)
+        } else {
+            qrUnrecognizedFunc?(qrData: json)
+        }
 
-        qrRecognizedFunc(qrData: data!)
 
 //        if(nil != jsonDict) {
 //            let data = jsonDict!["YMQRData"]
@@ -26,7 +31,6 @@ class YMQRRecognizer: NSObject {
 //            }
 //        }
         
-        qrUnrecognizedFunc?(qrData: json)
     }
     
     static func GenQRJsonString(data: AnyObject, opt: String = "add_friend") -> String? {

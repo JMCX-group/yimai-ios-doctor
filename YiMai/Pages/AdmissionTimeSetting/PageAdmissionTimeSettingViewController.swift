@@ -21,14 +21,14 @@ public class PageAdmissionTimeSettingViewController: PageViewController {
                                                                      navController: self.NavController!,
                                                                      pageActions: SettingActions)
         
-        FlexibleSettingBodyView = PageAdmissionFlexibleTimeSettingBodyView(parentView: self.SelfView!,
-                                                                        navController: self.NavController!,
-                                                                        pageActions: SettingActions)
+//        FlexibleSettingBodyView = PageAdmissionFlexibleTimeSettingBodyView(parentView: self.SelfView!,
+//                                                                        navController: self.NavController!,
+//                                                                        pageActions: SettingActions)
         TopView = PageCommonTopView(parentView: self.SelfView!,
-                                    titleString: "",
+                                    titleString: "接诊时间设置",
                                     navController: self.NavController!)
         
-        FixedSettingBodyView?.DrawTopTabButton(TopView!.TopViewPanel)
+//        FixedSettingBodyView?.DrawTopTabButton(TopView!.TopViewPanel)
         FixedSettingBodyView?.DrawTopConfirmButton(TopView!.TopViewPanel)
         
         FlexibleSettingBodyView?.BodyView.hidden = true
@@ -37,8 +37,24 @@ public class PageAdmissionTimeSettingViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
+        YMLayout.ClearView(view: view)
+        
+        FixedSettingBodyView = PageAdmissionFixedTimeSettingBodyView(parentView: self.SelfView!,
+                                                                     navController: self.NavController!,
+                                                                     pageActions: SettingActions)
+        
+        TopView = PageCommonTopView(parentView: self.SelfView!,
+                                    titleString: "接诊时间设置",
+                                    navController: self.NavController!)
+        
+        FixedSettingBodyView?.DrawTopConfirmButton(TopView!.TopViewPanel)
+
+        
+//        FlexibleSettingBodyView = PageAdmissionFlexibleTimeSettingBodyView(parentView: self.SelfView!,
+//                                                                           navController: self.NavController!,
+//                                                                           pageActions: SettingActions)
         FixedSettingBodyView!.LoadData()
-        FlexibleSettingBodyView!.LoadData()
+//        FlexibleSettingBodyView!.LoadData()
     }
 }
 

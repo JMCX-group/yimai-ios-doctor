@@ -59,6 +59,12 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
     }
     
     public func QuerySuccess(data: NSDictionary?) {
+        if(nil == data) {
+            let viewController = Target as! PageYiMaiManualAddFriendViewController
+            viewController.BodyView?.ShowAlertPage()
+            return
+        }
+
         var userInfo = data!["user"] as? [String: AnyObject]
         if(nil == userInfo) {
             userInfo = data!["data"] as? [String: AnyObject]
@@ -149,7 +155,7 @@ public class YiMaiManualAddFriendActions: PageJumpActions{
     public func QRRecongized(data: AnyObject) {
         let dataInfo = data as! [String: AnyObject]
         
-        let docId = "\(dataInfo["id"]!)"
+        let docId = YMVar.GetStringByKey(dataInfo, key: "data") //"\(dataInfo["id"]!)"
         PageAddFriendInfoCardBodyView.DoctorID = docId
         DoJump(YMCommonStrings.CS_PAGE_ADD_FRIEND_QR_CARD)
     }

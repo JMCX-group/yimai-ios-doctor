@@ -17,6 +17,8 @@ public class YMVar:NSObject {
     public static var MyNewAdmissionInfo: [String: AnyObject] = [String: AnyObject]()
     public static var MyNewAppointmentInfo: [String: AnyObject] = [String: AnyObject]()
     
+    public static var DeviceToken: String = ""
+    
     public static func Clear() {
         YMVar.MyUserInfo.removeAll()
         YMVar.MySysInfo.removeAll()
@@ -88,6 +90,25 @@ public class YMVar:NSObject {
         let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
         
         return strJson
+    }
+    
+    static func IsDocInBlacklist(userId: String) -> Bool {
+        let blacklist = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "blacklist").componentsSeparatedByString(",")
+        return blacklist.contains(userId)
+    }
+    
+    static func GetLocalUserHeadurl(userId: String) -> String {
+        var targetHeadurl: String? = ""
+        if(userId == YMVar.MyDoctorId) {
+            targetHeadurl = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "head_url")
+        } else {
+            targetHeadurl = YMLocalData.GetData(YMLocalDataStrings.DOC_HEAD_URL + userId) as? String
+            if(nil == targetHeadurl) {
+                targetHeadurl = "http://d.medi-link.cn/uploads/avatar/default.jpg"
+            }
+        }
+        
+        return targetHeadurl!
     }
 }
 

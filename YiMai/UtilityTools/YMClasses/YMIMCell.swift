@@ -12,6 +12,7 @@ import Neon
 class YMIMCellForCard: RCMessageBaseCell {
     var JumpActions: PageJumpActions!
     var TargetDoctorId: String = ""
+    var SenderId: String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,31 +21,53 @@ class YMIMCellForCard: RCMessageBaseCell {
     
     func CellTouched(_: UIGestureRecognizer) {
         PageYiMaiDoctorDetailBodyView.DocId = TargetDoctorId
-        JumpActions.DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME)
+        JumpActions.DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME, ignoreExists: true, userData: "IM")
+    }
+    
+    func getObjectName(_: AnyObject) -> String! {
+        return "YMIMCell"
+    }
+    
+    func CellHeaderTouched(_: AnyObject) {
+        if(SenderId != YMVar.MyDoctorId) {
+            PageYiMaiDoctorDetailBodyView.DocId = SenderId
+            JumpActions.DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME)
+        }
     }
     
     func CellLayout(model: RCMessageModel) {
         let data = model.content as! YMIMMessageContent
-        let headimg = YMLayout.GetSuitableImageView("YiMaiDefaultHead")
+        let headimg = YMLayout.GetTouchableImageView(useObject: self, useMethod: "CellHeaderTouched:".Sel(), imageName: "YiMaiDefaultHead")
         
         let msgSenderId = model.senderUserId
-        
         YMLayout.ClearView(view: baseContentView)
+
+        if(nil == msgSenderId) {
+            return
+        }
 
         baseContentView.fillSuperview()
         baseContentView.anchorToEdge(Edge.Top, padding: 10.LayoutVal(), width: baseContentView.width, height: baseContentView.height - 10.LayoutVal())
         baseContentView.addSubview(headimg)
 
-        if(msgSenderId == YMVar.MyDoctorId) {
-            headimg.anchorInCorner(Corner.TopRight, xPad: 20.LayoutVal(), yPad: 0, width: 92.LayoutVal(), height: 92.LayoutVal())
+        if(nil != msgSenderId) {
+            if(msgSenderId == YMVar.MyDoctorId) {
+                headimg.anchorInCorner(Corner.TopRight, xPad: 20.LayoutVal(), yPad: 0, width: 92.LayoutVal(), height: 92.LayoutVal())
+            } else {
+                headimg.anchorInCorner(Corner.TopLeft, xPad: 20.LayoutVal(), yPad: 0, width: 92.LayoutVal(), height: 92.LayoutVal())
+            }
         } else {
             headimg.anchorInCorner(Corner.TopLeft, xPad: 20.LayoutVal(), yPad: 0, width: 92.LayoutVal(), height: 92.LayoutVal())
         }
+        
 //        headimg.anchorInCorner(Corner.TopRight, xPad: 20.LayoutVal(), yPad: 0, width: 92.LayoutVal(), height: 92.LayoutVal())
-        headimg.backgroundColor = YMColors.FontBlue
+        headimg.backgroundColor = YMColors.None
         headimg.layer.masksToBounds = true
         headimg.layer.cornerRadius = 10.LayoutVal()
-        YMLayout.LoadImageFromServer(headimg, url: data.SenderHeadimgUrl)
+        
+        SenderId = model.senderUserId
+        let userHead = YMVar.GetLocalUserHeadurl(model.senderUserId)
+        YMLayout.LoadImageFromServer(headimg, url: userHead)
         
         
         TargetDoctorId = data.DoctorId
@@ -63,6 +86,7 @@ class YMIMCellForCard: RCMessageBaseCell {
         let cardHead = YMLayout.GetSuitableImageView("YiMaiDefaultHead")
         cardView.addSubview(cardHead)
         cardHead.anchorInCorner(Corner.TopLeft, xPad: 20.LayoutVal(), yPad: 20.LayoutVal(), width: cardHead.width, height: cardHead.height)
+        
         YMLayout.LoadImageFromServer(cardHead, url: data.HeadimgUrl, fullUrl: nil, makeItRound: true)
         
         let cardName = YMLayout.GetNomalLabel(data.DoctorName, textColor: YMColors.FontBlue, fontSize: 30.LayoutVal())

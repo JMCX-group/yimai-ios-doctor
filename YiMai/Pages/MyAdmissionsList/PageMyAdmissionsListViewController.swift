@@ -36,8 +36,8 @@ public class PageMyAdmissionsListViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        Loading?.Show()
-        BodyView?.Clear()
+//        Loading?.Show()
+//        BodyView?.Clear()
         Actions?.GetAdmissionInfo()
     }
     
@@ -45,3 +45,21 @@ public class PageMyAdmissionsListViewController: PageViewController {
         Loading?.Hide()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

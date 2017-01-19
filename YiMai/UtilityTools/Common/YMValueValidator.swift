@@ -77,4 +77,46 @@ public class YMValueValidator {
         
         return true
     }
+    
+    
+    static func IsBankCard(card: String) -> Bool {
+        if(card.characters.count != 16 && card.characters.count != 19) {
+            return false
+        }
+        
+        return true
+    }
+    
+    static func IsAuthed(authStatus: String) -> Bool {
+        return ("completed" == authStatus)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

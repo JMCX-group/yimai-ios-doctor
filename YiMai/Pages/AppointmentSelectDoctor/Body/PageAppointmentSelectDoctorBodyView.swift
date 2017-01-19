@@ -117,6 +117,7 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
         
+        YMLayout.SetDocfHeadImageVFlag(userHeadBackground, docInfo: data)
         YMLayout.LoadImageFromServer(userHeadBackground, url: head, fullUrl: nil, makeItRound: true)
         
         return cell
@@ -157,7 +158,8 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
                     YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"\(doc["hospital"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"\(doc["department"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"\(doc["job_title"]!)",
-                    YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)"
+                    YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)",
+                    "is_auth": YMVar.GetStringByKey(doc, key: "is_auth")
                     
                 ],  docPanel: Level1FriendsPanel, prevCell: cellView
             )
@@ -205,6 +207,10 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
         
         var cellView: UIView? = titlePanel
         for doc in l2Doc {
+            let allowed = YMVar.GetStringByKey(doc, key: "friends_friends_appointment_switch", defStr: "1")
+            if(allowed != "1") {
+                continue
+            }
             cellView = DrawFriendsCell(
                 [
                     YMYiMaiStrings.CS_DATA_KEY_USERHEAD:"\(doc["head_url"]!)",
@@ -212,7 +218,8 @@ public class PageAppointmentSelectDoctorBodyView: PageBodyView {
                     YMYiMaiStrings.CS_DATA_KEY_HOSPATIL:"\(doc["hospital"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT:"\(doc["department"]!)",
                     YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE:"\(doc["job_title"]!)",
-                    YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)"
+                    YMYiMaiStrings.CS_DATA_KEY_USER_ID:"\(doc["id"]!)",
+                    "is_auth": YMVar.GetStringByKey(doc, key: "is_auth")
                     
                 ],  docPanel: Level2FriendsPanel, prevCell: cellView
             )

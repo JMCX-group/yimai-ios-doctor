@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CLi-sH-le1">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Page Add Bankcard View Controller-->
+        <scene sceneID="wkm-qq-QnB">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="CLi-sH-le1" customClass="PageAddBankcardViewController" customModule="YiMai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="44G-Bm-tHg"/>
+                        <viewControllerLayoutGuide type="bottom" id="6mB-fZ-5Ee"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9un-bK-pl1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3q-Ep-HE0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="608" y="683"/>
+        </scene>
+    </scenes>
+</document>

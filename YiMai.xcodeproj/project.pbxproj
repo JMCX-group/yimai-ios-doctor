@@ -25,6 +25,7 @@
 		661A55AA1E00385300E7CE41 /* PageBlacklistActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661A55A91E00385300E7CE41 /* PageBlacklistActions.swift */; };
 		6622B3B81E1B5B7C00C14EC9 /* YMIMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622B3B71E1B5B7C00C14EC9 /* YMIMCell.swift */; };
 		6622B3BA1E1B5F7500C14EC9 /* YMIMMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622B3B91E1B5F7500C14EC9 /* YMIMMessageContent.swift */; };
+		662C58AC1E2784A500F9AB6B /* libUMessage_Sdk_1.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 662C58AA1E2784A500F9AB6B /* libUMessage_Sdk_1.3.0.a */; };
 		6685FD061E068A260037490D /* YMImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685FD051E068A260037490D /* YMImageScrollView.swift */; };
 		669F9D231E0FC3B300A81BB7 /* PageChangePhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669F9D251E0FC3B300A81BB7 /* PageChangePhone.storyboard */; };
 		669F9D271E0FC3D000A81BB7 /* PageChangePhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D261E0FC3D000A81BB7 /* PageChangePhone.swift */; };
@@ -35,6 +36,23 @@
 		669F9D361E1133AC00A81BB7 /* PageAppointmentUpdateBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D321E1133AC00A81BB7 /* PageAppointmentUpdateBodyView.swift */; };
 		669F9D371E1133AC00A81BB7 /* PageAppointmentUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D331E1133AC00A81BB7 /* PageAppointmentUpdateViewController.swift */; };
 		669F9D391E13B62100A81BB7 /* YMNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D381E13B62100A81BB7 /* YMNotification.swift */; };
+		66C92F0D1E24C7020014D170 /* PageBankCardList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C92F0F1E24C7020014D170 /* PageBankCardList.storyboard */; };
+		66C92F111E24C71E0014D170 /* PageBankCardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C92F101E24C71E0014D170 /* PageBankCardListViewController.swift */; };
+		66C92F131E24C7740014D170 /* PageBankCardListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C92F121E24C7740014D170 /* PageBankCardListBodyView.swift */; };
+		66C92F151E24C7E10014D170 /* PageBankCardListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C92F141E24C7E10014D170 /* PageBankCardListActions.swift */; };
+		66C92F1B1E24D6FE0014D170 /* PageAddBankcard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C92F1D1E24D6FE0014D170 /* PageAddBankcard.storyboard */; };
+		66C92F1F1E24D71A0014D170 /* PageAddBankcardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C92F1E1E24D71A0014D170 /* PageAddBankcardViewController.swift */; };
+		66C92F211E24D7B80014D170 /* PageAddBankcardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C92F201E24D7B80014D170 /* PageAddBankcardBodyView.swift */; };
+		66C92F231E24D8870014D170 /* PageAddBankcardActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C92F221E24D8870014D170 /* PageAddBankcardActions.swift */; };
+		66CDF73D1E1E4C3D007B876C /* PageAcceptCommonText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CDF73F1E1E4C3D007B876C /* PageAcceptCommonText.storyboard */; };
+		66CDF7411E1E4C8B007B876C /* PageAcceptCommonTextViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDF7401E1E4C8B007B876C /* PageAcceptCommonTextViewControler.swift */; };
+		66CDF7431E1E4CD6007B876C /* PageAcceptCommonTextBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDF7421E1E4CD6007B876C /* PageAcceptCommonTextBodyView.swift */; };
+		66CDF7451E1E4D1C007B876C /* PageAcceptCommonTextActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDF7441E1E4D1C007B876C /* PageAcceptCommonTextActions.swift */; };
+		66CDF74B1E1E5660007B876C /* PageCommonTextArea.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CDF74D1E1E5660007B876C /* PageCommonTextArea.storyboard */; };
+		66CDF74F1E1E5699007B876C /* PageCommonTextAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDF74E1E1E5699007B876C /* PageCommonTextAreaViewController.swift */; };
+		66F9E6E71E2351F5007565D4 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F9E6E11E2351F5007565D4 /* libWeChatSDK.a */; };
+		66F9E6E81E2351F5007565D4 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66F9E6E21E2351F5007565D4 /* read_me.txt */; };
+		66F9E6E91E2351F5007565D4 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66F9E6E31E2351F5007565D4 /* README.txt */; };
 		674EEDC634635DB13AEB3300 /* Pods_YiMai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A556489D24098750735AC565 /* Pods_YiMai.framework */; };
 		7307BFEC1D601159000F31E5 /* YMAddressBookTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */; };
 		730848271D0D9D38007E8940 /* YMTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730848261D0D9D38007E8940 /* YMTableView.swift */; };
@@ -421,6 +439,8 @@
 		661A55A91E00385300E7CE41 /* PageBlacklistActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBlacklistActions.swift; sourceTree = "<group>"; };
 		6622B3B71E1B5B7C00C14EC9 /* YMIMCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMIMCell.swift; sourceTree = "<group>"; };
 		6622B3B91E1B5F7500C14EC9 /* YMIMMessageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMIMMessageContent.swift; sourceTree = "<group>"; };
+		662C58AA1E2784A500F9AB6B /* libUMessage_Sdk_1.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.3.0.a; sourceTree = "<group>"; };
+		662C58AB1E2784A500F9AB6B /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		6685FD051E068A260037490D /* YMImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMImageScrollView.swift; sourceTree = "<group>"; };
 		669F9D241E0FC3B300A81BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageChangePhone.storyboard; sourceTree = "<group>"; };
 		669F9D261E0FC3D000A81BB7 /* PageChangePhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageChangePhone.swift; sourceTree = "<group>"; };
@@ -431,6 +451,26 @@
 		669F9D321E1133AC00A81BB7 /* PageAppointmentUpdateBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentUpdateBodyView.swift; sourceTree = "<group>"; };
 		669F9D331E1133AC00A81BB7 /* PageAppointmentUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentUpdateViewController.swift; sourceTree = "<group>"; };
 		669F9D381E13B62100A81BB7 /* YMNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMNotification.swift; sourceTree = "<group>"; };
+		66C92F0E1E24C7020014D170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageBankCardList.storyboard; sourceTree = "<group>"; };
+		66C92F101E24C71E0014D170 /* PageBankCardListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBankCardListViewController.swift; sourceTree = "<group>"; };
+		66C92F121E24C7740014D170 /* PageBankCardListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBankCardListBodyView.swift; sourceTree = "<group>"; };
+		66C92F141E24C7E10014D170 /* PageBankCardListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBankCardListActions.swift; sourceTree = "<group>"; };
+		66C92F1C1E24D6FE0014D170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAddBankcard.storyboard; sourceTree = "<group>"; };
+		66C92F1E1E24D71A0014D170 /* PageAddBankcardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAddBankcardViewController.swift; sourceTree = "<group>"; };
+		66C92F201E24D7B80014D170 /* PageAddBankcardBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAddBankcardBodyView.swift; sourceTree = "<group>"; };
+		66C92F221E24D8870014D170 /* PageAddBankcardActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAddBankcardActions.swift; sourceTree = "<group>"; };
+		66CDF73E1E1E4C3D007B876C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAcceptCommonText.storyboard; sourceTree = "<group>"; };
+		66CDF7401E1E4C8B007B876C /* PageAcceptCommonTextViewControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAcceptCommonTextViewControler.swift; sourceTree = "<group>"; };
+		66CDF7421E1E4CD6007B876C /* PageAcceptCommonTextBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAcceptCommonTextBodyView.swift; sourceTree = "<group>"; };
+		66CDF7441E1E4D1C007B876C /* PageAcceptCommonTextActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAcceptCommonTextActions.swift; sourceTree = "<group>"; };
+		66CDF74C1E1E5660007B876C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageCommonTextArea.storyboard; sourceTree = "<group>"; };
+		66CDF74E1E1E5699007B876C /* PageCommonTextAreaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCommonTextAreaViewController.swift; sourceTree = "<group>"; };
+		66F9E6E11E2351F5007565D4 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		66F9E6E21E2351F5007565D4 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		66F9E6E31E2351F5007565D4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		66F9E6E41E2351F5007565D4 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		66F9E6E51E2351F5007565D4 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		66F9E6E61E2351F5007565D4 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		7307BFEB1D601159000F31E5 /* YMAddressBookTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMAddressBookTools.swift; sourceTree = "<group>"; };
 		730848261D0D9D38007E8940 /* YMTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMTableView.swift; sourceTree = "<group>"; };
 		730848281D0D9D4B007E8940 /* YMModuleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMModuleStrings.swift; sourceTree = "<group>"; };
@@ -805,6 +845,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				662C58AC1E2784A500F9AB6B /* libUMessage_Sdk_1.3.0.a in Frameworks */,
+				66F9E6E71E2351F5007565D4 /* libWeChatSDK.a in Frameworks */,
 				674EEDC634635DB13AEB3300 /* Pods_YiMai.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -939,6 +981,15 @@
 			path = Body;
 			sourceTree = "<group>";
 		};
+		662C58A91E2784A500F9AB6B /* UMessage_Sdk_1.3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				662C58AA1E2784A500F9AB6B /* libUMessage_Sdk_1.3.0.a */,
+				662C58AB1E2784A500F9AB6B /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.3.0;
+			sourceTree = "<group>";
+		};
 		669F9D1E1E0FC38200A81BB7 /* ChangePhone */ = {
 			isa = PBXGroup;
 			children = (
@@ -991,6 +1042,125 @@
 				669F9D321E1133AC00A81BB7 /* PageAppointmentUpdateBodyView.swift */,
 			);
 			path = Body;
+			sourceTree = "<group>";
+		};
+		66C92F081E24C6D80014D170 /* BankCardList */ = {
+			isa = PBXGroup;
+			children = (
+				66C92F091E24C6D80014D170 /* Actions */,
+				66C92F0A1E24C6D80014D170 /* Body */,
+				66C92F0F1E24C7020014D170 /* PageBankCardList.storyboard */,
+				66C92F101E24C71E0014D170 /* PageBankCardListViewController.swift */,
+			);
+			path = BankCardList;
+			sourceTree = "<group>";
+		};
+		66C92F091E24C6D80014D170 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				66C92F141E24C7E10014D170 /* PageBankCardListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		66C92F0A1E24C6D80014D170 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				66C92F121E24C7740014D170 /* PageBankCardListBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		66C92F161E24D6CC0014D170 /* AddBankcard */ = {
+			isa = PBXGroup;
+			children = (
+				66C92F171E24D6CC0014D170 /* Actions */,
+				66C92F181E24D6CC0014D170 /* Body */,
+				66C92F1D1E24D6FE0014D170 /* PageAddBankcard.storyboard */,
+				66C92F1E1E24D71A0014D170 /* PageAddBankcardViewController.swift */,
+			);
+			path = AddBankcard;
+			sourceTree = "<group>";
+		};
+		66C92F171E24D6CC0014D170 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				66C92F221E24D8870014D170 /* PageAddBankcardActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		66C92F181E24D6CC0014D170 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				66C92F201E24D7B80014D170 /* PageAddBankcardBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		66CDF7381E1E4BFC007B876C /* AcceptCommonText */ = {
+			isa = PBXGroup;
+			children = (
+				66CDF7391E1E4BFC007B876C /* Actions */,
+				66CDF73A1E1E4BFC007B876C /* Body */,
+				66CDF73F1E1E4C3D007B876C /* PageAcceptCommonText.storyboard */,
+				66CDF7401E1E4C8B007B876C /* PageAcceptCommonTextViewControler.swift */,
+			);
+			path = AcceptCommonText;
+			sourceTree = "<group>";
+		};
+		66CDF7391E1E4BFC007B876C /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				66CDF7441E1E4D1C007B876C /* PageAcceptCommonTextActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		66CDF73A1E1E4BFC007B876C /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				66CDF7421E1E4CD6007B876C /* PageAcceptCommonTextBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		66CDF7461E1E5637007B876C /* CommonTextArea */ = {
+			isa = PBXGroup;
+			children = (
+				66CDF7471E1E5637007B876C /* Actions */,
+				66CDF7481E1E5637007B876C /* Body */,
+				66CDF74D1E1E5660007B876C /* PageCommonTextArea.storyboard */,
+				66CDF74E1E1E5699007B876C /* PageCommonTextAreaViewController.swift */,
+			);
+			path = CommonTextArea;
+			sourceTree = "<group>";
+		};
+		66CDF7471E1E5637007B876C /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		66CDF7481E1E5637007B876C /* Body */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		66F9E6E01E2351F5007565D4 /* WXPayLib */ = {
+			isa = PBXGroup;
+			children = (
+				66F9E6E11E2351F5007565D4 /* libWeChatSDK.a */,
+				66F9E6E21E2351F5007565D4 /* read_me.txt */,
+				66F9E6E31E2351F5007565D4 /* README.txt */,
+				66F9E6E41E2351F5007565D4 /* WechatAuthSDK.h */,
+				66F9E6E51E2351F5007565D4 /* WXApi.h */,
+				66F9E6E61E2351F5007565D4 /* WXApiObject.h */,
+			);
+			path = WXPayLib;
 			sourceTree = "<group>";
 		};
 		730EF5961D694270002A4DDB /* AppointmentAccept */ = {
@@ -1691,6 +1861,9 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				66C92F161E24D6CC0014D170 /* AddBankcard */,
+				66C92F081E24C6D80014D170 /* BankCardList */,
+				66CDF7381E1E4BFC007B876C /* AcceptCommonText */,
 				669F9D2C1E1133AC00A81BB7 /* AppointmentUpdate */,
 				669F9D1E1E0FC38200A81BB7 /* ChangePhone */,
 				661A55911DFFE2BC00E7CE41 /* AuthComplete */,
@@ -1771,6 +1944,7 @@
 		9619EF661CC1DE0C00F69CBC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				66CDF7461E1E5637007B876C /* CommonTextArea */,
 				961645FC1DB1DADE007BA360 /* ShowWebView */,
 				96C02FD21D968D240096E216 /* CommonTextInput */,
 				737F1F651D1F930400FFE573 /* PageSearchResultCell */,
@@ -2017,8 +2191,8 @@
 				9672FB4B1CD3439400BC7E40 /* YMDatetime.swift */,
 				7394F8541CF9ABCE00F05487 /* YMTextArea.swift */,
 				FD2981341D6E97BE006A48CA /* YMLabel.swift */,
-				FD113D871D7D521200628295 /* YMPhotoSelector.swift */,
 				FD1F57F41D9132A30039769D /* YMQRRecognizer.swift */,
+				FD113D871D7D521200628295 /* YMPhotoSelector.swift */,
 				6685FD051E068A260037490D /* YMImageScrollView.swift */,
 				6622B3B71E1B5B7C00C14EC9 /* YMIMCell.swift */,
 				6622B3B91E1B5F7500C14EC9 /* YMIMMessageContent.swift */,
@@ -2057,6 +2231,8 @@
 		96637A761CC22E6000DBD1CF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				662C58A91E2784A500F9AB6B /* UMessage_Sdk_1.3.0 */,
+				66F9E6E01E2351F5007565D4 /* WXPayLib */,
 				96A21BD91D8D9BFB00297AFA /* YMQRCode.swift */,
 				960606FF1CE97CC500AAFC07 /* YMModalView.swift */,
 				960606F71CE591CC00AAFC07 /* YMAPIUtility.swift */,
@@ -3320,6 +3496,7 @@
 				961646011DB1DB3C007BA360 /* PageShowWebView.storyboard in Resources */,
 				FD3A10231DD1ED83008C905B /* PageAuthProcessing.storyboard in Resources */,
 				FD1D7D441D9CA76B0006F190 /* PageDoctorAuth.storyboard in Resources */,
+				66F9E6E91E2351F5007565D4 /* README.txt in Resources */,
 				739011B21D2763AD00EAAA1B /* PageAddmissionReply.storyboard in Resources */,
 				96C02FD71D968D4A0096E216 /* PageCommonTextInput.storyboard in Resources */,
 				FD801DCD1D66F2990066198B /* PageAdmissionChargeSetting.storyboard in Resources */,
@@ -3328,7 +3505,9 @@
 				7394F8401CF9497600F05487 /* PageAppointmentBasicInfo.storyboard in Resources */,
 				FD2A99BE1D937DF8001953D6 /* PageMyInfoCard.storyboard in Resources */,
 				9672FB341CD1C2BE00BC7E40 /* PageMessageList.storyboard in Resources */,
+				66C92F1B1E24D6FE0014D170 /* PageAddBankcard.storyboard in Resources */,
 				96FCD1421D17D6F000A6E12D /* PagePersonalDetail.storyboard in Resources */,
+				66CDF73D1E1E4C3D007B876C /* PageAcceptCommonText.storyboard in Resources */,
 				96814A851D1A3E36002C8BD3 /* PagePersonalDetailEdit.storyboard in Resources */,
 				9672FB281CD0623100BC7E40 /* PageFace2FaceQR.storyboard in Resources */,
 				FD5D64231DE44322004C5286 /* CameraView.strings in Resources */,
@@ -3348,6 +3527,7 @@
 				736EBC561D1675A600C40AA7 /* PagePersonalSetting.storyboard in Resources */,
 				96D4517C1CF7D469006817CE /* PageYiMaiSameAreas.storyboard in Resources */,
 				736EBC721D16A75600C40AA7 /* PagePersonalPasswordReset.storyboard in Resources */,
+				66C92F0D1E24C7020014D170 /* PageBankCardList.storyboard in Resources */,
 				962076F01CC72598002083FA /* PageRegisterSelectHospital.storyboard in Resources */,
 				96D451661CF6D9DF006817CE /* PageYiMaiManualAddFriend.storyboard in Resources */,
 				669F9D231E0FC3B300A81BB7 /* PageChangePhone.storyboard in Resources */,
@@ -3355,9 +3535,11 @@
 				96661E861D97D876000692D0 /* PageAppointmentTransfer.storyboard in Resources */,
 				73622E531D1EE2FC0039E785 /* PageYiMaiIntro.storyboard in Resources */,
 				669F9D351E1133AC00A81BB7 /* PageAppointmentUpdate.storyboard in Resources */,
+				66F9E6E81E2351F5007565D4 /* read_me.txt in Resources */,
 				961FE8C41CEEF6D0002785B9 /* PageYiMai.storyboard in Resources */,
 				9619EF5B1CC1DB9600F69CBC /* Assets.xcassets in Resources */,
 				FDD1DB1B1D992BC700C289B1 /* PageLawyerInfo.storyboard in Resources */,
+				66CDF74B1E1E5660007B876C /* PageCommonTextArea.storyboard in Resources */,
 				FD54E0601D37777400F8E629 /* PageAdmissionTimeSetting.storyboard in Resources */,
 				9619EF561CC1DB9600F69CBC /* Main.storyboard in Resources */,
 				96814A931D1A788B002C8BD3 /* PagePersonalTagsEdit.storyboard in Resources */,
@@ -3502,6 +3684,7 @@
 			files = (
 				9612DB421CC8B7C500262D2E /* PageIndexTopView.swift in Sources */,
 				96814A8D1D1A3F20002C8BD3 /* PagePersonalDetailEditActions.swift in Sources */,
+				66C92F151E24C7E10014D170 /* PageBankCardListActions.swift in Sources */,
 				FD2A99BD1D937DF8001953D6 /* PageMyInfoCardActions.swift in Sources */,
 				FD54E05B1D3772B900F8E629 /* PageMyAdmissionSettingBodyView.swift in Sources */,
 				9612DB611CC9F71F00262D2E /* PageRegisterInputHospitalBodyView.swift in Sources */,
@@ -3516,6 +3699,7 @@
 				9619EF7C1CC1FF2400F69CBC /* YMIndexStrings.swift in Sources */,
 				FD5D64341DE44322004C5286 /* CameraView.swift in Sources */,
 				9612DB651CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift in Sources */,
+				66CDF74F1E1E5699007B876C /* PageCommonTextAreaViewController.swift in Sources */,
 				9672FB3C1CD1C35500BC7E40 /* PageMessageListBodyView.swift in Sources */,
 				FDF46D3B1D768B32007B9987 /* ApointmentAcceptDetailActions.swift in Sources */,
 				960606FB1CE591CC00AAFC07 /* YMCoreDataEngine.swift in Sources */,
@@ -3568,6 +3752,7 @@
 				669F9D391E13B62100A81BB7 /* YMNotification.swift in Sources */,
 				669F9D341E1133AC00A81BB7 /* PageAppointmentUpdateActions.swift in Sources */,
 				9672FB481CD2229100BC7E40 /* PageMyAdmissionsListBodyView.swift in Sources */,
+				66CDF7411E1E4C8B007B876C /* PageAcceptCommonTextViewControler.swift in Sources */,
 				96925A891D1BEBC50095432C /* PageAppLoadingActions.swift in Sources */,
 				FD5D642B1DE44322004C5286 /* UIButtonExtensions.swift in Sources */,
 				73622E4A1D1EE01B0039E785 /* PageAboutYiMaiActions.swift in Sources */,
@@ -3594,6 +3779,7 @@
 				96637A871CC24D3300DBD1CF /* PageCommonTopView.swift in Sources */,
 				739009261D1554E100989207 /* YMRegisterInfoString.swift in Sources */,
 				661A559C1DFFE2BC00E7CE41 /* PageAuthCompleteViewController.swift in Sources */,
+				66C92F1F1E24D71A0014D170 /* PageAddBankcardViewController.swift in Sources */,
 				FD77AF221D68484F00B8C73E /* LBXPermissions.swift in Sources */,
 				7394F8601D005E6B00F05487 /* PageAppointmentSelectTimeActions.swift in Sources */,
 				FD8642901DAF30CD00C93411 /* PageSYSBroadcastViewController.swift in Sources */,
@@ -3602,6 +3788,7 @@
 				96C02FD11D9670560096E216 /* RequirePaperCardActions.swift in Sources */,
 				FD8642941DAF31C700C93411 /* PageSYSBroadcastActions.swift in Sources */,
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
+				66C92F231E24D8870014D170 /* PageAddBankcardActions.swift in Sources */,
 				FD77AF231D68484F00B8C73E /* LBXScanLineAnimation.swift in Sources */,
 				2F2BDA591DD80C5900310385 /* PageWalletRecordActions.swift in Sources */,
 				FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */,
@@ -3626,6 +3813,7 @@
 				96C02FDB1D968D5D0096E216 /* PageCommonTextInputViewController.swift in Sources */,
 				FD5513031DAB76C700A84801 /* PageInputMyFeaturesViewController.swift in Sources */,
 				96814A891D1A3E4A002C8BD3 /* PagePersonalDetailEditViewController.swift in Sources */,
+				66CDF7451E1E4D1C007B876C /* PageAcceptCommonTextActions.swift in Sources */,
 				96C02FEB1D96B4E30096E216 /* PaperCardPreviewBodyView.swift in Sources */,
 				FD54E05D1D3774CE00F8E629 /* PageMyAdmissionSettingActions.swift in Sources */,
 				FD4E24C11DD16DB70079C07C /* PageWalletInfoBodyView.swift in Sources */,
@@ -3645,6 +3833,7 @@
 				739011B81D2763EA00EAAA1B /* PageAddmissionReplyBodyView.swift in Sources */,
 				FD54E0641D37779600F8E629 /* PageAdmissionTimeSettingViewController.swift in Sources */,
 				9616460B1DB1DCB9007BA360 /* PageShowWebViewActions.swift in Sources */,
+				66C92F211E24D7B80014D170 /* PageAddBankcardBodyView.swift in Sources */,
 				7394F8481CF94A2500F05487 /* PageAppointmentPatientBasicInfoActions.swift in Sources */,
 				9612DB751CC9F85900262D2E /* PagePersonalTopView.swift in Sources */,
 				736EBC5E1D16764D00C40AA7 /* PagePersonalSettingActions.swift in Sources */,
@@ -3672,6 +3861,7 @@
 				FD5D642E1DE44322004C5286 /* VolumeControl.swift in Sources */,
 				96814AA71D1A81B2002C8BD3 /* PagePersonalIntroEditBodyView.swift in Sources */,
 				73622E5E1D1EE5720039E785 /* PageYiMaiContactViewController.swift in Sources */,
+				66CDF7431E1E4CD6007B876C /* PageAcceptCommonTextBodyView.swift in Sources */,
 				9612DB481CC9D65C00262D2E /* PageCommonBottomView.swift in Sources */,
 				73622E2C1D1EA2880039E785 /* YMLoaclData.swift in Sources */,
 				661A55A81E00372100E7CE41 /* PageBlacklistBodyView.swift in Sources */,
@@ -3711,11 +3901,13 @@
 				9619EF7E1CC1FF3A00F69CBC /* YMRegisterStrings.swift in Sources */,
 				96C02FDF1D96A1F50096E216 /* PageCommonTextInputActions.swift in Sources */,
 				661A55AA1E00385300E7CE41 /* PageBlacklistActions.swift in Sources */,
+				66C92F111E24C71E0014D170 /* PageBankCardListViewController.swift in Sources */,
 				661A55991DFFE2BC00E7CE41 /* PageAuthCompleteActions.swift in Sources */,
 				9612DB441CC8B86400262D2E /* PageIndexBodyView.swift in Sources */,
 				96A21BDA1D8D9BFB00297AFA /* YMQRCode.swift in Sources */,
 				730848271D0D9D38007E8940 /* YMTableView.swift in Sources */,
 				730EF5AB1D694330002A4DDB /* PageAppointmentAcceptViewController.swift in Sources */,
+				66C92F131E24C7740014D170 /* PageBankCardListBodyView.swift in Sources */,
 				96A3D1C81CFD84C400518DCB /* PageAppointmentSelectDoctorBodyView.swift in Sources */,
 				FD3A10241DD1ED83008C905B /* PageAuthProcessingBodyView.swift in Sources */,
 				FD4E24BF1DD16C750079C07C /* PageWalletInfoViewController.swift in Sources */,
@@ -3864,6 +4056,38 @@
 				669F9D301E1133AC00A81BB7 /* Base */,
 			);
 			name = PageAppointmentUpdate.storyboard;
+			sourceTree = "<group>";
+		};
+		66C92F0F1E24C7020014D170 /* PageBankCardList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66C92F0E1E24C7020014D170 /* Base */,
+			);
+			name = PageBankCardList.storyboard;
+			sourceTree = "<group>";
+		};
+		66C92F1D1E24D6FE0014D170 /* PageAddBankcard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66C92F1C1E24D6FE0014D170 /* Base */,
+			);
+			name = PageAddBankcard.storyboard;
+			sourceTree = "<group>";
+		};
+		66CDF73F1E1E4C3D007B876C /* PageAcceptCommonText.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66CDF73E1E1E4C3D007B876C /* Base */,
+			);
+			name = PageAcceptCommonText.storyboard;
+			sourceTree = "<group>";
+		};
+		66CDF74D1E1E5660007B876C /* PageCommonTextArea.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66CDF74C1E1E5660007B876C /* Base */,
+			);
+			name = PageCommonTextArea.storyboard;
 			sourceTree = "<group>";
 		};
 		730EF5A91D6942A5002A4DDB /* PageAppointmentAccept.storyboard */ = {
@@ -4503,9 +4727,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = YiMai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YiMai/UtilityTools/Common/WXPayLib",
+					"$(PROJECT_DIR)/YiMai/UtilityTools/Common/UMessage_Sdk_1.3.0",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -4520,9 +4750,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = YiMai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YiMai/UtilityTools/Common/WXPayLib",
+					"$(PROJECT_DIR)/YiMai/UtilityTools/Common/UMessage_Sdk_1.3.0",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

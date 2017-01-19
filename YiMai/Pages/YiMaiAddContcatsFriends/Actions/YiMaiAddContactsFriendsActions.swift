@@ -22,7 +22,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     private func InviteOtherError(error: NSError){
         YMAPIUtility.PrintErrorInfo(error)
 
-//        TargetController!.LoadingView?.Hide()
+//        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func InviteOtherSuccessed(data: NSDictionary?) {
@@ -32,12 +32,12 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
             print("no result!!!")
         }
         
-        TargetController?.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func AddFriendError(error: NSError){
         YMAPIUtility.PrintErrorInfo(error)
-        TargetController?.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func AddFriendSuccessed(data: NSDictionary?) {
@@ -46,12 +46,12 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         } else {
             print("no result!!!")
         }
-        TargetController?.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func AddAllFriendsError(error: NSError){
         YMAPIUtility.PrintErrorInfo(error)
-        TargetController?.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func AddAllFriendsSuccessed(data: NSDictionary?) {
@@ -60,12 +60,12 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         } else {
             print("no result!!!")
         }
-        TargetController?.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func InviteAllOthersError(error: NSError){
         YMAPIUtility.PrintErrorInfo(error)
-        TargetController?.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func InviteAllOthersSuccessed(data: NSDictionary?) {
@@ -74,7 +74,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         } else {
             print("no result!!!")
         }
-        TargetController?.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     override func ExtInit() {
@@ -102,7 +102,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     
     private func GetContactsApiError(error: NSError){
         YMAPIUtility.PrintErrorInfo(error)
-        TargetController!.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
     }
     
     private func GetContactsApiSuccessed(data: NSDictionary?) {
@@ -112,7 +112,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
             print("no result!!!")
         }
         
-        TargetController!.LoadingView?.Hide()
+        TargetController?.BodyView?.FullPageLoading?.Hide()
         
         let resultData = data!["data"] as! [String: AnyObject]
         TargetController!.BodyView!.FullList = resultData
@@ -122,7 +122,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
     var ReTryCount: Int = 0
     public func UploadAddressBook() {
 //        GetContactsApi?.YMUploadAddressBook(YMAddressBookTools.AllContacts)
-        TargetController!.LoadingView?.Show()
+        TargetController?.BodyView?.FullPageLoading?.Show()
         if(0 == YMBackgroundRefresh.ContactNew.count) {
             if(ReTryCount < 3) {
                 YMDelay(1.0, closure: {
@@ -133,13 +133,13 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
                 ReTryCount = 0
                 TargetController!.BodyView!.FullList = YMBackgroundRefresh.ContactNew
                 TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
-                TargetController!.LoadingView?.Hide()
+                TargetController?.BodyView?.FullPageLoading?.Hide()
             }
             
         } else {
             TargetController!.BodyView!.FullList = YMBackgroundRefresh.ContactNew
             TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
-            TargetController!.LoadingView?.Hide()
+            TargetController?.BodyView?.FullPageLoading?.Hide()
         }
     }
     
@@ -156,14 +156,14 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         addBtn.hidden = true
         addLabel.hidden = false
         addBtn.UserObjectData = nil
-//        TargetController?.LoadingView?.Show()
+//        TargetController?.BodyView?.FullPageLoading?.Show()
     }
     
     public func AddAllContactsFriends(sender: UIGestureRecognizer) {
         
         let allFriendsList = TargetController?.BodyView!.ContactsInYiMaiResult.joinWithSeparator(",")
         AddAllFriendsApi?.YMAddMultiFriends(allFriendsList!)
-        TargetController?.LoadingView?.Show()
+        TargetController?.BodyView?.FullPageLoading?.Show()
     }
     
     public func InviteOthersRegisterYiMai(sender: UIGestureRecognizer) {
@@ -175,7 +175,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         invitedLabel.hidden = false
         addBtn.hidden = true
         
-//        TargetController?.LoadingView?.Show()
+//        TargetController?.BodyView?.FullPageLoading?.Show()
 
     }
     
@@ -184,7 +184,7 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
         let allOthersList = TargetController?.BodyView!.ContactsInOtherResult.joinWithSeparator(",")
         InviteAllOtherApi?.YMInviteOthers(allOthersList!)
         
-        TargetController?.LoadingView?.Show()
+        TargetController?.BodyView?.FullPageLoading?.Show()
 
     }
     

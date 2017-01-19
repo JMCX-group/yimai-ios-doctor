@@ -61,9 +61,18 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     
     public func GetInfoSuccess(data: NSDictionary?) {
         let userInfo = data!["user"] as! [String: AnyObject]
-        
-        print("------")
-        print(userInfo)
+
+        let userId =  YMVar.GetStringByKey(userInfo, key: "id")
+        YMLocalData.SaveData(userInfo, key: YMLocalDataStrings.DOC_INFO_IDX + userId + "-" + YMVar.MyDoctorId)
+//        if(nil == TargetView?.DoctorInfo) {
+//            TargetView?.DoctorInfo = userInfo
+//            TargetView?.LoadData(userInfo)
+//
+//        } else {
+//            TargetView?.DoctorInfo = userInfo
+//            TargetView?.LoadData(userInfo)
+//
+//        }
         TargetView?.DoctorInfo = userInfo
         TargetView?.LoadData(userInfo)
         TargetView?.FullPageLoading.Hide()
@@ -72,7 +81,7 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     public func GetInfoError(error: NSError) {
         YMAPIUtility.PrintErrorInfo(error)
         TargetView?.FullPageLoading.Hide()
-        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试", nav: NavController!)
+//        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试", nav: NavController!)
     }
     
     public func AddFriendSuccess(_: NSDictionary?) {
@@ -96,11 +105,21 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     }
     
     public func GetInfo(id: String? = nil) {
+        var targetId = id
         if(nil == id) {
-            GetInfoApi?.YMQueryUserInfoById(PageYiMaiDoctorDetailBodyView.DocId)
-        } else {
-            GetInfoApi?.YMQueryUserInfoById(id!)
+            targetId = PageYiMaiDoctorDetailBodyView.DocId
         }
+        
+        let docInfo = YMLocalData.GetData(YMLocalDataStrings.DOC_INFO_IDX + targetId! + "-" + YMVar.MyDoctorId) as? [String:AnyObject]
+        if(nil != docInfo) {
+            TargetView?.DoctorInfo = docInfo
+            TargetView?.LoadData(docInfo!)
+            TargetView?.FullPageLoading.Hide()
+        } else {
+            TargetView?.DoctorInfo = nil
+        }
+        
+        GetInfoApi?.YMQueryUserInfoById(targetId!)
     }
     
     public func AddFriend(sender: YMButton) {
@@ -140,8 +159,10 @@ public class PageYiMaiDoctorDetailActions: PageJumpActions {
     }
     
     func CommonFriendsTouched(gr: UIGestureRecognizer) {
-        let img = gr.view as! YMTouchableImageView
-        DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME, ignoreExists: true, userData: img.UserStringData)
+        if(!TargetView!.FromCommonFriendsBtn) {
+            let img = gr.view as! YMTouchableImageView
+            DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME, ignoreExists: true, userData: img.UserStringData)
+        }
     }
 }
 

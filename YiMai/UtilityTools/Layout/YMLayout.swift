@@ -359,6 +359,28 @@ public class YMLayout {
         return cell
     }
     
+    public static func SetHeadImageVFlag(imageView: YMTouchableImageView) {
+        let v = YMLayout.GetSuitableImageView("YiMaiGeneralVFlag")
+        imageView.addSubview(v)
+        v.anchorInCorner(Corner.BottomRight, xPad: 0, yPad: 0, width: v.width, height: v.height)
+    }
+    
+    public static func SetSelfHeadImageVFlag(headView: YMTouchableImageView) {
+        let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
+        YMLayout.ClearView(view: headView)
+        if(YMValueValidator.IsAuthed(authStatus)) {
+            YMLayout.SetHeadImageVFlag(headView)
+        }
+    }
+    
+    public static func SetDocfHeadImageVFlag(headView: YMTouchableImageView, docInfo: [String: AnyObject]) {
+        let authStatus = YMVar.GetStringByKey(docInfo, key: "is_auth")
+        YMLayout.ClearView(view: headView)
+        if(YMValueValidator.IsAuthed(authStatus)) {
+            YMLayout.SetHeadImageVFlag(headView)
+        }
+    }
+    
     public static func LoadImageFromServer(imageView: UIImageView, url urlSegment: String, fullUrl: String? = nil, makeItRound: Bool = false, refresh: Bool = false) {
         var url = urlSegment
         
@@ -402,13 +424,18 @@ public class YMLayout {
         }
     }
     
-    public static func GetNomalLabel(text: String?, textColor: UIColor, fontSize: CGFloat) -> YMLabel {
+    public static func GetNomalLabel(text: String?, textColor: UIColor, fontSize: CGFloat, maxWidth: CGFloat = 0) -> YMLabel {
         let label = YMLabel()
         label.text = text
         label.textColor = textColor
         label.font = YMFonts.YMDefaultFont(fontSize)
-        label.sizeToFit()
         
+        if(maxWidth > 0) {
+            label.numberOfLines = 0
+            label.frame = CGRect(x: 0, y: 0, width: maxWidth, height: 0)
+        }
+        label.sizeToFit()
+
         return label
     }
     
@@ -633,6 +660,26 @@ public class YMLayout {
         let backgroundColor = GalleryConfigurationItem.BackgroundColor(YMColors.OpacityBlackMask)
         
         return [dividerWidth, spinnerStyle, spinnerColor, closeButtonConfig, pagingMode, headerLayout, footerLayout, closeLayout, statusBarHidden, hideDecorationViews, backgroundColor]
+    }
+    
+    static func GetUnreadCountLabel(count: Int) -> YMLabel {
+        let label = YMLabel()
+        if(count < 1000) {
+            label.text = "\(count)"
+        } else {
+            label.text = "999+"
+        }
+        label.textColor = YMColors.White
+        label.backgroundColor = YMColors.WarningFontColor
+        label.font = YMFonts.YMDefaultFont(20.LayoutVal())
+        label.sizeToFit()
+        
+        label.textAlignment = NSTextAlignment.Center
+        
+        label.frame = CGRect(x: 0, y: 0, width: label.width + 20.LayoutVal(), height: 28.LayoutVal())
+        label.SetSemicircleBorder()
+        
+        return label
     }
 }
 

@@ -21,6 +21,8 @@ public class PageHospitalSearchBodyView: PageBodyView {
     
     public static var HospitalSelected: AnyObject? = nil
     
+    public static var CitySelected: String = "1"
+    
     public override func ViewLayout() {
         SearchActions = PageHospitalSearchActions(navController: self.NavController, target: self)
         SearchResultTable = YMTableView(builer: self.DrawHospitalCell, subBuilder: nil, touched: SearchActions!.HospitalSelected)

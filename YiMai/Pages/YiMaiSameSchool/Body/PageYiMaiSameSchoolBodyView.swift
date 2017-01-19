@@ -33,6 +33,9 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
     public var CurrentCity: [String: AnyObject]? = nil
     public var CurrentHospital: [String: AnyObject]? = nil
     
+    var PrevData: [String: AnyObject]? = nil
+    var FilterResult: [[String: AnyObject]]? = nil
+    
     var BlankContentPanel = UIView()
     
     override func ViewLayout() {
@@ -196,6 +199,189 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
         hosLabel.anchorInCenter(width: hosLabel.width, height: hosLabel.height)
     }
     
+    func FilterByCity(city: String) {
+//        if(nil == FilterResult) {
+//            FilterResult = PrevData!["users"] as? [[String: AnyObject]]
+//            if(nil == FilterResult) {
+//                return
+//            }
+//        }
+        
+        FilterResult = PrevData!["users"] as? [[String: AnyObject]]
+        if(nil == FilterResult) {
+            return
+        }
+
+        var hosFilterData = [[String: AnyObject]]()
+        
+        var hosFilted = [String]()
+        
+        var ret = [[String: AnyObject]]()
+        for user in FilterResult! {
+            let cityName = YMVar.GetStringByKey(user, key: "city")
+            let userHos = user["hospital"] as? [String: AnyObject]
+            var userHosName = ""
+            if(nil != userHos) {
+                userHosName = YMVar.GetStringByKey(userHos, key: "name")
+            }
+            
+            if(city == cityName) {
+                ret.append(user)
+                if(!hosFilted.contains(userHosName)) {
+                    hosFilterData.append(userHos!)
+                    hosFilted.append(userHosName)
+                }
+                
+            }
+        }
+        
+        SetHospital("医院")
+        LoadHospitalList(["hospitals": ["a": ["b": hosFilterData]]])
+        
+        FilterResult = ret
+        DrawList(ret)
+    }
+    
+    func FilterByHos(hos: String) {
+        if(nil == FilterResult) {
+            FilterResult = PrevData!["users"] as? [[String: AnyObject]]
+            if(nil == FilterResult) {
+                return
+            }
+        }
+        
+        var ret = [[String: AnyObject]]()
+        for user in FilterResult! {
+            let userHos = user["hospital"] as? [String: AnyObject]
+            var userHosName = ""
+            if(nil != userHos) {
+                userHosName = YMVar.GetStringByKey(userHos, key: "name")
+            }
+
+            if(hos == userHosName) {
+                ret.append(user)
+            }
+        }
+
+        DrawList(ret)
+    }
+    
+    func GetCityForKeyWordSearch(cityName: String) -> [String: AnyObject]? {
+        let cityList = PrevData!["citys"] as? [String: [ [String:AnyObject] ] ]
+        if(nil == cityList) {
+            return nil
+        }
+        
+        var ret: [String:AnyObject]? =  nil
+        for (provId, cityArr) in cityList! {
+            for city in cityArr {
+                let name = YMVar.GetStringByKey(city, key: "name")
+                if(name == cityName) {
+                    ret = city
+                    ret!["prov"] = provId
+                    break
+                }
+            }
+            
+            if(nil != ret) {
+                break
+            }
+        }
+        
+        return ret
+    }
+    
+    func GetProvForKeyWordSearch(city: [String: [[String: AnyObject]]]) -> [[String: AnyObject]] {
+        let provList = PrevData!["provinces"] as? [[String: AnyObject]]
+        
+        var ret = [[String: AnyObject]]()
+        
+        for (provId, _) in city {
+            for prov in provList! {
+                let provIdInList = YMVar.GetStringByKey(prov, key: "id")
+                if(provId == provIdInList) {
+                    ret.append(prov)
+                    break
+                }
+            }
+        }
+        
+        return ret
+    }
+    
+    func FilterByKey(key: String) {
+        if(nil == PrevData) {return}
+        let lastUserInfo = PrevData!["users"] as! [[String: AnyObject]]
+        
+        if("" == key) {
+            ClearFilters()
+            LoadCityList(PrevData!)
+            LoadHospitalList(PrevData!)
+            DrawList(lastUserInfo)
+            FilterResult = lastUserInfo
+            return
+        }
+        
+        var cityFilterData = [String: [[String: AnyObject]]]()
+        var provFilterData = [[String: AnyObject]]()
+        var hosFilterData = [[String: AnyObject]]()
+        
+        var cityFilted = [String]()
+        var hosFilted = [String]()
+
+        var ret = [[String: AnyObject]]()
+        for user in lastUserInfo {
+            let userName = YMVar.GetStringByKey(user, key: "name")
+            let userPhone = YMVar.GetStringByKey(user, key: "phone")
+            let cityName = YMVar.GetStringByKey(user, key: "city")
+            let userHos = user["hospital"] as? [String: AnyObject]
+            let userDept = user["department"] as? [String: AnyObject]
+            var userHosName = ""
+            var userDeptName = ""
+            if(nil != userHos) {
+                userHosName = YMVar.GetStringByKey(userHos, key: "name")
+            }
+            
+            if(nil != userDept) {
+                userDeptName = YMVar.GetStringByKey(userDept, key: "name")
+            }
+            
+            if(userName.containsString(key) ||
+                userPhone.containsString(key) ||
+                userHosName.containsString(key) ||
+                userDeptName.containsString(key) ||
+                cityName.containsString(key)) {
+                ret.append(user)
+                if(!hosFilted.contains(userHosName)) {
+                    hosFilterData.append(userHos!)
+                    hosFilted.append(userHosName)
+                }
+                
+                if(cityFilted.contains(cityName)) {
+                    continue
+                }
+                cityFilted.append(cityName)
+                let city = GetCityForKeyWordSearch(cityName)
+                if(nil != city) {
+                    let prov = YMVar.GetStringByKey(city, key: "prov")
+                    if(nil == cityFilterData[prov]) {
+                        cityFilterData[prov] = [[String: AnyObject]]()
+                    }
+                    
+                    cityFilterData[prov]?.append(city!)
+                }
+            }
+        }
+        
+        provFilterData = GetProvForKeyWordSearch(cityFilterData)
+        ClearFilters()
+        LoadCityList(["provinces": provFilterData, "citys": cityFilterData])
+        LoadHospitalList(["hospitals": ["a": ["b": hosFilterData]]])
+        
+        FilterResult = ret
+        DrawList(ret)
+    }
+    
     private func DrawCityList() {
         BodyView.addSubview(CityFilterList)
         CityFilterList.alignAndFill(align: Align.UnderMatchingLeft, relativeTo: FiltersPanel, padding: 0)
@@ -220,43 +406,53 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
         if(nil == school) {
             DrawBlankContent()
         } else {
-            Loading?.Show()
+//            Loading?.Show()
             
-            let sameInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_SAME_SAMECOLLEGE) as? NSDictionary
-            
+//            let sameInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_SAME_SAMECOLLEGE) as? NSDictionary
+            let sameInfo = YMLocalData.GetData(YMLocalDataStrings.SAME_SCHOOL_CACHE + YMVar.MyDoctorId)
+            PrevData = sameInfo as? [String: AnyObject]
             if(nil == sameInfo) {
+                Loading?.Show()
                 self.SameSchoolActions?.GetSameSchoolList(nil)
             } else {
-//                YMDelay(0.01, closure: {
+                YMDelay(0.01, closure: {
                     let userInfo = sameInfo!["users"] as? [[String: AnyObject]]
                     self.DrawList(userInfo)
                     self.LoadCityList(sameInfo! as! [String : AnyObject])
                     self.LoadHospitalList(sameInfo! as! [String : AnyObject])
                     self.Loading?.Hide()
-//                })
+                    self.SameSchoolActions?.GetSameSchoolList(nil)
+
+                })
             }
         }
     }
     
     public func LoadCityList(data: [String: AnyObject]) {
-        let prov = data["provinces"] as? [[String: AnyObject]]
-        let citys = data["citys"] as? [String: [ [String:AnyObject] ] ]
+        var prov = data["provinces"] as? [[String: AnyObject]]
+        var citys = data["citys"] as? [String: [ [String:AnyObject] ] ]
         
         if(nil != prov && nil != citys) {
             YMLayout.ClearView(view: CityFilterList)
             CityFilterList.hidden = true
+            
+            prov?.insert(["id": "clear", "name": "重置城市"], atIndex: 0)
+            citys?["clear"] = [[String:AnyObject]]()
             PageSearchResultCell.GetCityTablView(prov!, citys: citys!,
                                                  parent: CityFilterList,
-                                                 cityTouched: SameSchoolActions!.CityTouched)
+                                                 cityTouched: SameSchoolActions!.CityTouched,
+                                                 provTouched: SameSchoolActions!.ProvTouched)
         }
     }
     
     public func LoadHospitalList(data: [String: AnyObject]) {
-        let hospitals = data["hospitals"] as? [String: [ String: [ [String: AnyObject] ] ] ]
+        var hospitals = data["hospitals"] as? [String: [ String: [ [String: AnyObject] ] ] ]
         
         if(nil != hospitals) {
             YMLayout.ClearView(view: HospitalFilterList)
             HospitalFilterList.hidden = true
+
+            hospitals!["clear"] = ["clear": [["id": "clear", "name": "重置医院"]]]
             PageSearchResultCell.GetHospitalSearchView(hospitals!,
                                                        parent: HospitalFilterList,
                                                        hospitalTouched: SameSchoolActions!.HospitalTouched)
@@ -267,6 +463,8 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
         self.ClearList()
         self.SearchInput?.text = ""
         self.SameSchoolActions?.ThisCacheKey = nil
+        ListPos = 0
+        NextPos = 15
     }
     
     public func ClearList() {

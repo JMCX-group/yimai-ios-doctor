@@ -100,7 +100,7 @@ public class PageNewFriendActions: PageJumpActions {
     public func QRRecongized(data: AnyObject) {
         let dataInfo = data as! [String: AnyObject]
         
-        let docId = "\(dataInfo["id"]!)"
+        let docId = YMVar.GetStringByKey(dataInfo, key: "data") //"\(dataInfo["id"]!)"
         PageAddFriendInfoCardBodyView.DoctorID = docId
         DoJump(YMCommonStrings.CS_PAGE_ADD_FRIEND_QR_CARD)
     }
@@ -213,6 +213,7 @@ public class PageNewFriendActions: PageJumpActions {
         let data = button.UserObjectData as! [String: AnyObject]
         
         let userId = "\(data["id"]!)"
+        print(userId)
         AgreeBtn = button
         TargetView?.FullPageLoading.Show()
         AgreeFriendApi?.YMAgreeFriendById(userId)

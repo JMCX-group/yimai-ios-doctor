@@ -19,7 +19,7 @@ public class PagePersonalDetailTopView:NSObject {
     private let YiMaiTitleLabel = UILabel()
     private let YiMaiCodeLabel = UILabel()
     
-    private var HeadImage: UIImageView? = nil
+    private var HeadImage: YMTouchableImageView? = nil
     private var EditIcon: YMTouchableImageView? = nil
 
     init(parent: UIView, actions: PagePersonalDetailActions) {
@@ -72,6 +72,7 @@ public class PagePersonalDetailTopView:NSObject {
         HeadImage!.anchorToEdge(Edge.Top, padding: 165.LayoutVal(), width: HeadImage!.width, height: HeadImage!.height)
         
         let headUrl = YMVar.MyUserInfo["head_url"] as! String
+        YMLayout.SetSelfHeadImageVFlag(HeadImage!)
         YMLayout.LoadImageFromServer(HeadImage!, url: headUrl, fullUrl: nil, makeItRound: true, refresh: true)
         
         let goBackPanel = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "GoBack:".Sel())

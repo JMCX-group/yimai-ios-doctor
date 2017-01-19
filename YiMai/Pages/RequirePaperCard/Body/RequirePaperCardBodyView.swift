@@ -69,7 +69,7 @@ public class RequirePaperCardBodyView: PageBodyView {
     
     func DisablePreview() {
         PreviewButton.enabled = false
-        PreviewButton.backgroundColor = YMColors.White
+        PreviewButton.backgroundColor = YMColors.CommonBottomGray
     }
     
     func DrawFullBody() {
@@ -125,7 +125,7 @@ public class RequirePaperCardBodyView: PageBodyView {
         PreviewButton.setTitleColor(YMColors.FontGray, forState: UIControlState.Disabled)
         PreviewButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
 //        PreviewButton.enabled = false
-        PreviewButton.backgroundColor = YMColors.White
+        PreviewButton.backgroundColor = YMColors.CommonBottomBlue
         PreviewButton.titleLabel?.font = YMFonts.YMDefaultFont(32.LayoutVal())
         
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: cardExample, padding: 128.LayoutVal())

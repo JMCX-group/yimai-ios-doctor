@@ -31,6 +31,7 @@ public class PageYiMaiSameAreasActions: PageJumpActions, UIScrollViewDelegate{
             YMCoreDataEngine.SaveData(ThisCacheKey!, data: data!)
             TargetView?.LoadHospitalList(data! as! [String : AnyObject])
         } else {
+            YMLocalData.SaveData(data!, key: YMLocalDataStrings.SAME_DEPT_CACHE + YMVar.MyDoctorId)
             YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SAME_DEPARTMENT, data: data!)
             TargetView?.LoadCityList(data! as! [String : AnyObject])
             TargetView?.LoadHospitalList(data! as! [String : AnyObject])

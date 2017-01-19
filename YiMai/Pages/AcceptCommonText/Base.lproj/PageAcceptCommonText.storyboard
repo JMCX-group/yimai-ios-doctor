@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yk7-jr-0rt">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Page Accept Common Text View Controler-->
+        <scene sceneID="o95-zH-IS6">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="yk7-jr-0rt" customClass="PageAcceptCommonTextViewControler" customModule="YiMai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Hr-Vu-CQ9"/>
+                        <viewControllerLayoutGuide type="bottom" id="skC-S9-Yzi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iKu-Ex-Arp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d9i-Tt-4Uk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="670" y="351"/>
+        </scene>
+    </scenes>
+</document>

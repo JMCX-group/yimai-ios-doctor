@@ -55,6 +55,8 @@ public class PageFace2FaceQRBodyView: PageBodyView {
         BodyView.addSubview(Userhead)
         Userhead.anchorToEdge(Edge.Top, padding: 50.LayoutVal(), width: Userhead.width, height: Userhead.height)
         let userHeadUrl = YMVar.MyUserInfo["head_url"] as! String
+        
+        YMLayout.SetSelfHeadImageVFlag(Userhead)
         YMLayout.LoadImageFromServer(Userhead, url: userHeadUrl, fullUrl: nil, makeItRound: true)
     }
     

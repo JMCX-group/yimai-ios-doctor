@@ -38,9 +38,10 @@ public class PageRegisterBodyView: NSObject, UITextFieldDelegate {
     private let VerifyButtonFrame = CGRect(x: 550.LayoutVal(), y: 248.LayoutVal(), width: 160.LayoutVal(), height: 50.LayoutVal())
     private let NextStepButtonFrame = CGRect(x: 40.LayoutVal(), y: 463.LayoutVal(), width: 670.LayoutVal(), height: 90.LayoutVal())
     
-    private let AgreeButtonFrame = CGRect(x: 84.LayoutVal(), y: 585.LayoutVal(), width: 380.LayoutVal(), height: 24.LayoutVal())
+//    private let AgreeButtonFrame = CGRect(x: 84.LayoutVal(), y: 585.LayoutVal(), width: 380.LayoutVal(), height: 24.LayoutVal())
     
     public var AgreeChecked = true
+    public var PageLoaded = false
     
     convenience init(parentView: UIView, navController: UINavigationController) {
         self.init()
@@ -146,29 +147,31 @@ public class PageRegisterBodyView: NSObject, UITextFieldDelegate {
     }
     
     private func DrawAgreeCheckbox() {
-        AgreeButton = YMButton(frame: AgreeButtonFrame)
+        AgreeButton = YMButton()
         AgreeCheckbox = YMLayout.GetTouchableImageView(useObject: self.Actions!,
                                                        useMethod: "AgreementImageTouched:".Sel(),
                                                        imageName: "RegisterCheckboxAgreeChecked")
 
         ShowAgreementBtn.addTarget(Actions, action: "ShowAgreementTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         ShowAgreementBtn.setTitle("查看", forState: UIControlState.Normal)
-        ShowAgreementBtn.titleLabel?.font = YMFonts.YMDefaultFont(24.LayoutVal())
+        ShowAgreementBtn.titleLabel?.font = YMFonts.YMDefaultFont(26.LayoutVal())
         ShowAgreementBtn.setTitleColor(YMColors.FontBlue, forState: UIControlState.Normal)
         ShowAgreementBtn.sizeToFit()
         
         AgreeButton?.addTarget(self.Actions, action: "AgreementButtonTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
         AgreeButton?.setTitle(YMRegisterStrings.CS_AGREE_LABEL_BUTTON, forState: UIControlState.Normal)
-        AgreeButton?.titleLabel?.font = UIFont.systemFontOfSize(24.LayoutVal())
+        AgreeButton?.titleLabel?.font = UIFont.systemFontOfSize(26.LayoutVal())
         AgreeButton?.setTitleColor(YMColors.FontLightGray, forState: UIControlState.Normal)
         AgreeButton?.titleLabel?.textAlignment = NSTextAlignment.Left
+        AgreeButton?.sizeToFit()
 
         let checkboxFrame = CGRect(x: 40.LayoutVal(), y: 585.LayoutVal(), width: (AgreeCheckbox?.width)!, height: (AgreeCheckbox?.height)!)
         AgreeCheckbox?.frame = checkboxFrame
 
-        BodyView.addSubview(AgreeButton!)
         BodyView.addSubview(AgreeCheckbox!)
+        BodyView.addSubview(AgreeButton!)
         BodyView.addSubview(ShowAgreementBtn)
+        AgreeButton?.align(Align.ToTheRightCentered, relativeTo: AgreeCheckbox!, padding: 10.LayoutVal(), width: AgreeButton!.width, height: AgreeButton!.height)
         
         ShowAgreementBtn.align(Align.ToTheRightCentered, relativeTo: AgreeButton!, padding: 10.LayoutVal(),
                                width: ShowAgreementBtn.width, height: ShowAgreementBtn.height)
@@ -241,7 +244,8 @@ public class PageRegisterBodyView: NSObject, UITextFieldDelegate {
     
     func VerifyPhoneWhenBlur(phoneInput: YMTextField) {
         let phone = phoneInput.text
-        if(!YMValueValidator.IsCellPhoneNum(phone)) {
+
+        if(PageLoaded && !YMValueValidator.IsCellPhoneNum(phone)) {
             YMPageModalMessage.ShowErrorInfo("请输入有效的手机号。", nav: self.NavController!, callback: FocusOnCellPhoneInput)
         }
     }

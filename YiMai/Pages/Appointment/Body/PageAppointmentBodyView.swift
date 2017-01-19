@@ -316,6 +316,7 @@ public class PageAppointmentBodyView: PageBodyView {
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
         
+        YMLayout.SetDocfHeadImageVFlag(userHeadBackground, docInfo: data!)
         YMLayout.LoadImageFromServer(userHeadBackground, url: head!, fullUrl: nil, makeItRound: true)
     }
     

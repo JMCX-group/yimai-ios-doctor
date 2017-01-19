@@ -39,6 +39,8 @@ public class YMCommonStrings {
     public static let CS_PAGE_PERSONAL_CHANGE_PHONE_NAME = "PageChangePhone"
     public static let CS_PAGE_PERSONAL_PASSWORD_RESET_NAME = "PagePersonalPasswordReset"
     public static let CS_PAGE_PERSONAL_ID_NUM_INPUT_NAME = "PagePersonalIDNumInput"
+    public static let CS_PAGE_BANK_CARD_LIST_NAME = "PageBankCardList"
+    public static let CS_PAGE_ADD_BANKCARD_NAME = "PageAddBankcard"
     public static let CS_PAGE_PERSONAL_DETAIL_NAME = "PagePersonalDetail"
     public static let CS_PAGE_PERSONAL_DETAIL_EDIT_NAME = "PagePersonalDetailEdit"
     public static let CS_PAGE_PERSONAL_INTRO_EDIT_NAME = "PagePersonalIntroEdit"
@@ -103,6 +105,9 @@ public class YMCommonStrings {
     public static let CS_PAGE_GET_APPOINMENT_MSG_LIST = "PageAppointmentReplyList"
     public static let CS_PAGE_AUTH_COMPLETE = "PageAuthComplete"
     public static let CS_PAGE_BLACKLIST_NAME = "PageBlacklist"
+    
+    public static let CS_PAGE_ACCEPET_COMMON_TEXT = "PageAcceptCommonText"
+    public static let CS_PAGE_COMMON_TEXT_AREA = "PageCommonTextArea"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

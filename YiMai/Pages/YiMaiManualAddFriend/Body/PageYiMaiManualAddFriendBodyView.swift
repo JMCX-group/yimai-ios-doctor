@@ -22,8 +22,13 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
     override func ViewLayout() {
         YMLayout.BodyLayoutWithTop(ParentView!, bodyView: BodyView)
         BodyView.backgroundColor = YMColors.PanelBackgroundGray
-        
+
         DrawSearchPanel()
+
+        ResultPanel = UIView()
+        ResultPanel?.hidden = true
+        BodyView.addSubview(ResultPanel!)
+        ResultPanel!.align(Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 50.LayoutVal(), width: YMSizes.PageWidth, height: 150.LayoutVal())
     }
     
     public func DrawSpecialQRButton(topView: UIView) {
@@ -142,6 +147,7 @@ public class PageYiMaiManualAddFriendBodyView: PageBodyView {
         deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 6.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
         hosLabel.align(Align.UnderMatchingLeft, relativeTo: deptLabel, padding: 6.LayoutVal(), width: 540.LayoutVal(), height: hosLabel.height)
         
+        YMLayout.SetDocfHeadImageVFlag(userHeadBackground, docInfo: data)
         YMLayout.LoadImageFromServer(userHeadBackground, url: head, fullUrl: nil, makeItRound: true)
     }
     

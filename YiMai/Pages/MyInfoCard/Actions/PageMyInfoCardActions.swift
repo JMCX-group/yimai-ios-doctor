@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UShareUI
+import UMSocialNetwork
 import UIKit
 
 public class PageMyInfoCardActions: PageJumpActions {
@@ -54,4 +56,36 @@ public class PageMyInfoCardActions: PageJumpActions {
     func GoToRequirePaperCard(_: YMButton) {
         DoJump(YMCommonStrings.CS_PAGE_REAUIRE_PAPER_CARD)
     }
+    
+    func ShareTouched(_: YMButton) {
+        var plateforms = [AnyObject]()
+        
+        if(UMSocialManager.defaultManager().isInstall(UMSocialPlatformType.WechatSession)) {
+            plateforms.append(UMSocialPlatformType.WechatSession.rawValue)
+            plateforms.append(UMSocialPlatformType.WechatTimeLine.rawValue)
+        }
+        if(UMSocialManager.defaultManager().isInstall(UMSocialPlatformType.Sina)) {
+            plateforms.append(UMSocialPlatformType.Sina.rawValue)
+        }
+        UMSocialUIManager.setPreDefinePlatforms(plateforms)
+
+        UMSocialUIManager.showShareMenuViewInWindowWithPlatformSelectionBlock { (type, data) in
+            let msg = UMSocialMessageObject()
+            let shareObj = UMShareWebpageObject()
+            shareObj.title = "医者脉连"
+            shareObj.descr = "请关注我的个人医脉平台，医生找医生、患者看专家更方便。医者仁心脉脉相连。"
+            shareObj.thumbImage = self.TargetView.UserHead.image //YMVar.GetStringByKey(YMVar.MyUserInfo, key: "head_url")
+            shareObj.webpageUrl = "http://www.medi-link.cn"
+            msg.shareObject = shareObj
+            UMSocialManager.defaultManager().shareToPlatform(type, messageObject: msg, currentViewController: self.NavController!, completion: { (data, error) in
+                print(error)
+            })
+        }
+    }
 }
+
+
+
+
+
+

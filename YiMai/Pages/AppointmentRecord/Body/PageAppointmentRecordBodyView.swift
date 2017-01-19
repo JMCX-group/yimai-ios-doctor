@@ -138,6 +138,7 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         headImage.anchorInCorner(Corner.TopLeft,
             xPad: 40.LayoutVal(), yPad: 20.LayoutVal(),
             width: headImage.width, height: headImage.height)
+        YMLayout.SetDocfHeadImageVFlag(headImage, docInfo: data)
         YMLayout.LoadImageFromServer(headImage, url: userHead, fullUrl: nil, makeItRound: true)
         
         name.text = docNameString

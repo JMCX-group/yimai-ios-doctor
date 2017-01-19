@@ -34,11 +34,11 @@ class YMBackgroundRefresh: NSObject {
             if("1" != readStatus) {
                 let docName = YMVar.GetStringByKey(f, key: "name")
 
-                if("waitForSure" == status) {
-                    YMNotification.DoLocalNotification("医生\(docName)申请加您为好友", userData: YMNotificationType.NewFriendApply)
-                } else if ("isFriend" == status) {
-                    YMNotification.DoLocalNotification("医生\(docName)通过了您的好友申请", userData: YMNotificationType.YiMaiR1Changed)
-                }
+//                if("waitForSure" == status) {
+//                    YMNotification.DoLocalNotification("医生\(docName)申请加您为好友", userData: YMNotificationType.NewFriendApply)
+//                } else if ("isFriend" == status) {
+//                    YMNotification.DoLocalNotification("医生\(docName)通过了您的好友申请", userData: YMNotificationType.YiMaiR1Changed)
+//                }
             }
             
             let last = LastNewFriends[friendId]
@@ -260,7 +260,7 @@ class YMBackgroundRefresh: NSObject {
             let prevId = YMVar.GetStringByKey(YMVar.MyNewAdmissionInfo, key: "id")
             let curId = YMVar.GetStringByKey(admissionArr[0], key: "id")
             if(prevId != curId) {
-                YMNotification.DoLocalNotification("您有一条新的约诊请求", userData: YMNotificationType.NewAddmission)
+//                YMNotification.DoLocalNotification("您有一条新的约诊请求", userData: YMNotificationType.NewAddmission)
             }
             YMVar.MyNewAdmissionInfo = admissionArr[0]
         }

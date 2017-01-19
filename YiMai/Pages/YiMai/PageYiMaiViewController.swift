@@ -13,6 +13,7 @@ public class PageYiMaiViewController: PageViewController {
     var YiMaiActions: PageYiMaiActions? = nil
     var YiMaiR1Body: PageYiMaiR1BodyView? = nil
     var YiMaiR2Body: PageYiMaiR2BodyView? = nil
+    var FullPageLoading: YMPageLoadingView!
     
     var RecentContactList: PageYiMaiRecentContactList!
     
@@ -26,8 +27,8 @@ public class PageYiMaiViewController: PageViewController {
     }
 
     public override func PageLayout(){
-        if(PageLayoutFlag) {return}
-        PageLayoutFlag=true
+//        if(PageLayoutFlag) {return}
+//        PageLayoutFlag=true
         
         super.PageLayout()
 
@@ -37,6 +38,8 @@ public class PageYiMaiViewController: PageViewController {
         RecentContactList = PageYiMaiRecentContactList(parentView: self.SelfView!, navController: self.NavController!, pageActions: YiMaiActions!)
         YiMaiTopView = PageYiMaiTopView(parentView: self.SelfView!, navController: self.NavController!, pageActions: YiMaiActions!)
         BottomView = PageCommonBottomView(parentView: self.SelfView!, navController: self.NavController!)
+        
+        FullPageLoading = YMPageLoadingView(parentView: view)
     }
     
     override func PagePreRefresh() {
@@ -79,6 +82,7 @@ public class PageYiMaiViewController: PageViewController {
         YiMaiR2Body?.SetBodyScroll()
         
         let docList = YMIMUtility.GetRecentContactDoctorsIdList()
+        FullPageLoading.Show()
         YiMaiActions?.ContactApi.YMGetRecentContactedDocList(["id_list": docList.joinWithSeparator(",")])
     }
     

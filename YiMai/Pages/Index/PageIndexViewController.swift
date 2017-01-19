@@ -66,13 +66,18 @@ public class PageIndexViewController: PageViewController {
         BodyView = PageIndexBodyView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
         IndexTopView = PageIndexTopView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
-        
+
         IndexTopView!.ShowNewMsgNotifyPoint()
-        
+
         RefreshAuthInfo()
     }
     
     func RefreshAuthInfo() {
+        let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
+        if("completed" == authStatus) {
+            self.BodyView?.UpdateAuthStatus()
+            return
+        }
         if(0 != YMVar.MyUserInfo.count) {
             self.BodyView?.UpdateAuthStatus()
             YMDelay(2.0) {
@@ -88,7 +93,7 @@ public class PageIndexViewController: PageViewController {
     override func PagePreRefresh() {
         BottomView!.BottomViewPanel.removeFromSuperview()
         IndexTopView?.TopSearchInput?.text = ""
-        
+
         PageCommonBottomView.BottomButtonImage = [
             YMCommonStrings.CS_PAGE_INDEX_NAME:"IndexButtonHomeBlue",
             YMCommonStrings.CS_PAGE_YIMAI_NAME:"IndexButtonYiMaiGray",
@@ -102,9 +107,22 @@ public class PageIndexViewController: PageViewController {
         if(nil != fromLogin) {
             UserData = nil
             BodyView?.ClearContactList()
+            BodyView?.ClearAuthPanel()
+            BodyView?.UpdateAuthStatus()
+            UpdateDeviceToken()
         }
         
 //        BodyView?.HideAuthInfo()
+    }
+    
+    func UpdateDeviceToken() {
+        if(YMVar.DeviceToken.characters.count != 64) {
+            YMDelay(1.0, closure: { 
+                self.UpdateDeviceToken()
+            })
+            return
+        }
+        BodyView?.Actions?.UpdateDeviceToken.YMChangeUserInfo(["device_token": YMVar.DeviceToken])
     }
 }
 

@@ -31,7 +31,8 @@ public class PagePersonalTopView {
         self.Actions = pageActions
         
         UserHead = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "GoToPersonalDetail:".Sel(), imageName: "PersonalDefaultUserhead")
-        let userHeadUrl = YMVar.MyUserInfo["head_url"] as! String
+        let userHeadUrl = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "head_url") //YMVar.MyUserInfo["head_url"] as! String
+        YMLayout.SetSelfHeadImageVFlag(UserHead!)
         YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true, refresh: true)
         ViewLayout()
     }
@@ -45,6 +46,8 @@ public class PagePersonalTopView {
         
         
         let userHeadUrl = YMVar.MyUserInfo["head_url"] as! String
+        
+        YMLayout.SetDocfHeadImageVFlag(UserHead!, docInfo: YMVar.MyUserInfo)
         YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true, refresh: true)
 
         if(nil != dept && nil != jobTitle) {

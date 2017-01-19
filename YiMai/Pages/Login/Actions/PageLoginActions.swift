@@ -42,7 +42,10 @@ public class LoginBackendProgress: NSObject {
     }
     
     public func GetSameDepartmentSuccess(data: NSDictionary?) {
-        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SAME_DEPARTMENT, data: data!)
+        if(nil != data) {
+            YMLocalData.SaveData(data!, key: YMLocalDataStrings.SAME_DEPT_CACHE + YMVar.MyDoctorId)
+            YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SAME_DEPARTMENT, data: data!)
+        }
     }
     
     public func InitRelationSuccess(data: NSDictionary?) {

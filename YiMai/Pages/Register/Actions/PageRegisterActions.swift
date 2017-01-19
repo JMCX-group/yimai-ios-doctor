@@ -61,6 +61,7 @@ public class PageRegisterActions: PageJumpActions {
 
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_USER_ORG_PASSWORD, data: input!["password"]!)
         YMLocalData.SaveLogin(input!["phone"]!, pwd: input!["password"]!)
+        TargetBodyView?.Clear()
         DoJump(YMCommonStrings.CS_PAGE_REGISTER_PERSONAL_INFO_NAME)
     }
 

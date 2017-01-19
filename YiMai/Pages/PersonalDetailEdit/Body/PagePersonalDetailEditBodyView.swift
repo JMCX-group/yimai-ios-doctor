@@ -45,6 +45,7 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
     private let TagsLabel = UILabel()
     private let IntroLabel = UILabel()
     
+    var CityPicker: CityPickview!
     let UserHeadImg = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
     
     public var Loading: YMPageLoadingView? = nil
@@ -64,6 +65,8 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
         
         Loading = YMPageLoadingView(parentView: BodyView)
         
+        CityPicker = CityPickview(parent: ParentView!, actions: editActions!)
+
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: Intro)
     }
     
@@ -85,10 +88,19 @@ public class PagePersonalDetailEditBodyView: PageBodyView {
             BodyView, useObject: editActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
             label: UILabel(), text: "医脉码", userStringData: "", fontSize: CommonFontSize, showArrow: false)
         
-        Username = YMLayout.GetCommonFullWidthTouchableView(
-            BodyView, useObject: editActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
-            label: UILabel(), text: "姓名")
-        Username?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_NAME_EDIT_NAME
+        
+        
+        let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
+        if("completed" != authStatus) {
+            Username = YMLayout.GetCommonFullWidthTouchableView(
+                BodyView, useObject: editActions!, useMethod: PageJumpActions.PageJumpToByViewSenderSel,
+                label: UILabel(), text: "姓名")
+            Username?.UserStringData = YMCommonStrings.CS_PAGE_PERSONAL_NAME_EDIT_NAME
+        } else {
+            Username = YMLayout.GetCommonFullWidthTouchableView(
+                BodyView, useObject: editActions!, useMethod: PageJumpActions.DoNothingSel,
+                label: UILabel(), text: "姓名", userStringData: "", fontSize: 28.LayoutVal(), showArrow: false)
+        }
         
         Gender = YMLayout.GetCommonFullWidthTouchableView(
             BodyView, useObject: editActions!, useMethod: "SelectGender:".Sel(),

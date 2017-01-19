@@ -36,6 +36,10 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
         
         if("processing" == authStatus) {
             DoJump(YMCommonStrings.CS_PAGE_AUTH_PROCESSING)
+        } else if("completed" == authStatus) {
+            DoJump(YMCommonStrings.CS_PAGE_AUTH_COMPLETE)
+        } else if("fail" == authStatus) {
+            DoJump(YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME, ignoreExists: false, userData: "fail")
         } else {
             DoJump(YMCommonStrings.CS_PAGE_PERSONAL_DOCTOR_AUTH_NAME)
         }

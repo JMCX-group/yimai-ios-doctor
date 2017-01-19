@@ -18,21 +18,37 @@ public class PageYiMaiDoctorDetailViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        BodyView?.FullPageLoading.Show()
+        BodyView?.Clear()
+
+        if(nil == BodyView?.DoctorInfo) {
+            BodyView?.FullPageLoading.Show()
+        } else {
+            let userId = YMVar.GetStringByKey(BodyView!.DoctorInfo, key: "id")
+            if(userId != PageYiMaiDoctorDetailBodyView.DocId){
+                BodyView?.FullPageLoading.Show()
+            }
+        }
+//        BodyView?.FullPageLoading.Show()
         if(nil == self.UserData) {
             BodyView?.GetDocInfo()
         } else {
-            BodyView?.FromCommonFriendsBtn = true
-            BodyView?.FromCommonFriendsUserId = UserData as! String
-            BodyView?.GetDocInfo(BodyView?.FromCommonFriendsUserId)
+            let infoStr = UserData as! String
+            if("IM" == infoStr) {
+                BodyView?.FromIM = true
+                BodyView?.GetDocInfo()
+            } else {
+                BodyView?.FromCommonFriendsBtn = true
+                BodyView?.FromCommonFriendsUserId = UserData as! String
+                BodyView?.GetDocInfo(BodyView?.FromCommonFriendsUserId)
+            }
         }
     }
     
     override func PageDisapeared() {
-        BodyView?.Clear()
+//        BodyView?.Clear()
         if(nil != self.UserData) {
-            BodyView?.Actions = nil
-            BodyView?.DetailActions = nil
+//            BodyView?.Actions = nil
+//            BodyView?.DetailActions = nil
         }
     }
 }

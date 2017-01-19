@@ -20,7 +20,7 @@ public class PageHospitalSearchActions: PageJumpActions {
     }
     
     private func GetHospitalsError(error: NSError) {
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
+        YMAPIUtility.PrintErrorInfo(error)
     }
     
     private func GetHospitalsByKey(data: NSDictionary?) {
@@ -55,7 +55,7 @@ public class PageHospitalSearchActions: PageJumpActions {
     }
 
     public func InitHospitalList() {
-        HospitalsByCity?.YMGetHospitalsByCity("1")
+        HospitalsByCity?.YMGetHospitalsByCity(PageHospitalSearchBodyView.CitySelected)
     }
 }
 

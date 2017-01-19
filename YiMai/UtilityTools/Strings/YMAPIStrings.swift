@@ -50,6 +50,7 @@ public class YMAPIStrings {
 
     public static let CS_API_ACTION_GET_ADMISSIONS_LIST = "apiGetAdmissionsList"
     
+    public static let CS_API_ACTION_GET_CITYS_BY_PROV = "apiGetCitysByProv"
     public static let CS_API_ACTION_GET_HOSPITALS_BY_CITY_LIST = "apiGetHospitalsByCity"
     public static let CS_API_ACTION_GET_HOSPITALS_BY_KEY_LIST = "apiGetHospitalsByKey"
     public static let CS_API_ACTION_GET_DEPARTMENT_LIST = "apiGetDepartmentList"
@@ -91,6 +92,7 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_GET_WALLET_INFO = "apiGetWalletInfo"
     public static let CS_API_ACTION_GET_WALLET_RECORD = "apiGetWalletRecord"
+    public static let CS_API_ACTION_CASH_OUT = "apiCashOut"
     
     public static let CS_API_ACTION_GET_ALL_NEW_APPOINTMENT_MSG = "apiGetAllNewAppointmentMsg"
     public static let CS_API_ACTION_CLEAR_ALL_NEW_APPOINTMENT_MSG = "apiClearAllNewAppointmentMsg"
@@ -103,6 +105,11 @@ public class YMAPIStrings {
     
     public static let CS_API_ACTION_GET_COMMON_FRIENDS_INFO = "apiGetCommonFriendsInfo"
     public static let CS_API_ACTION_CHANGE_PHONE = "apiChangePhone"
+    
+    public static let CS_API_ACTION_GET_YIMAI_COUNT = "apiGetYiMaiCount"
+    public static let CS_API_ACTION_GET_BANKCARD_LIST = "apiGetBankCardList"
+    public static let CS_API_ACTION_ADD_BANKCARD = "apiAddBankcard"
+    public static let CS_API_ACTION_DEL_BANKCARD = "apiDelBankcard"
 }
 
 

@@ -7,3 +7,10 @@
 //
 
 #import <RongIMKit/RongIMKit.h>
+//#import "UMSocial.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialWechatHandler.h"
+#import "UMessage.h"
+//#import "UMSocialSinaSSOHandler.h"

@@ -19,7 +19,7 @@ public class PageYiMaiAddContatsFriendsViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        LoadingView?.Hide()
+//        LoadingView?.Hide()
 
         if(self.isMovingToParentViewController()) {
             DrawViews()
@@ -33,8 +33,10 @@ public class PageYiMaiAddContatsFriendsViewController: PageViewController {
         TopView = PageCommonTopView(parentView: SelfView!, titleString: "添加", navController: NavController)
         BottomButton = PageYiMaiAddContactsFriendsBootomView(action: Actions!, parent: self.SelfView!)
         
+        BodyView?.FullPageLoading.Show()
         BodyView?.DrawSpecialManualAddButton(TopView!.TopViewPanel)
         
-        LoadingView = YMPageLoadingView(parentView: self.SelfView!)
+//        LoadingView = YMPageLoadingView(parentView: self.SelfView!)
+//        LoadingView?.Show()
     }
 }

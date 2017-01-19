@@ -23,7 +23,7 @@ public class PageAppointmentRecordActions: PageJumpActions {
         if(nil == data) {
             TargetView?.Loading?.Hide()
             TargetView?.TabPanel.hidden = true
-            YMPageModalMessage.ShowNormalInfo("您尚未约诊过病人", nav: self.NavController!)
+            YMPageModalMessage.ShowNormalInfo("您尚未收到过代约请求", nav: self.NavController!)
             return
         }
         TargetView?.TabPanel.hidden = false

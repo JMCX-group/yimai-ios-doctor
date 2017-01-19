@@ -31,9 +31,15 @@ public class ApointmentAcceptDetailBodyView: PageBodyView {
     private let AdmissionDatePicker = UIDatePicker()
     private let TimeSelectBtn = YMButton()
     
+    private var SaveDescToCommonText: YMTouchableImageView!
+    private var GetDescFromCommonText: YMTouchableImageView!
+    private var SaveNeedToKnowToCommonText: YMTouchableImageView!
+    private var GetNeedToKnowFromCommonText: YMTouchableImageView!
+    
     public override func ViewLayout() {
         super.ViewLayout()
         AcceptActions = ApointmentAcceptDetailActions(navController: self.NavController!, target: self)
+        CreateCommonTextButton()
         DrawAdmissionTime()
         DrawHospital()
         DrawDesc()
@@ -47,6 +53,13 @@ public class ApointmentAcceptDetailBodyView: PageBodyView {
         YMLayout.SetVScrollViewContentSize(self.BodyView, lastSubView: NeedToKnowPanel)
         
         BlankToBottomHeight = (ParentView?.height)! - BodyView.contentSize.height
+    }
+    
+    func CreateCommonTextButton() {
+        SaveDescToCommonText = YMLayout.GetTouchableImageView(useObject: AcceptActions!, useMethod: "SaveDescToCommonText:".Sel(), imageName: "YMIconSaveCommonText")
+        GetDescFromCommonText = YMLayout.GetTouchableImageView(useObject: AcceptActions!, useMethod: "GetDescFromCommonText:".Sel(), imageName: "YMIconGetCommonText")
+        SaveNeedToKnowToCommonText = YMLayout.GetTouchableImageView(useObject: AcceptActions!, useMethod: "SaveNeedToKnowToCommonText:".Sel(), imageName: "YMIconSaveCommonText")
+        GetNeedToKnowFromCommonText = YMLayout.GetTouchableImageView(useObject: AcceptActions!, useMethod: "GetNeedToKnowFromCommonText:".Sel(), imageName: "YMIconGetCommonText")
     }
     
     private func DrawAdmissionDatePicker() {
@@ -147,8 +160,13 @@ public class ApointmentAcceptDetailBodyView: PageBodyView {
         DescInput.align(Align.UnderMatchingLeft, relativeTo: title, padding: 0, width: YMSizes.PageWidth, height: 200.LayoutVal())
         DescInput.placeholder = "请填写"
         DescInput.placeholderFont = YMFonts.YMDefaultFont(24.LayoutVal())
-        DescInput.SetPadding(40.LayoutVal(), right: 40.LayoutVal(), top: 10.LayoutVal(), bottom: 0)
+        DescInput.SetPadding(40.LayoutVal(), right: 126.LayoutVal(), top: 10.LayoutVal(), bottom: 0)
 
+        DescPanel.addSubview(GetDescFromCommonText)
+        DescPanel.addSubview(SaveDescToCommonText)
+        
+        GetDescFromCommonText.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 80.LayoutVal(), width: 66.LayoutVal(), height: 66.LayoutVal())
+        SaveDescToCommonText.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 22.LayoutVal(), width: 66.LayoutVal(), height: 66.LayoutVal())
         
         DescInput.EditEndCallback = self.EndInputInfo
     }
@@ -165,7 +183,13 @@ public class ApointmentAcceptDetailBodyView: PageBodyView {
         NeedToKnowInput.align(Align.UnderMatchingLeft, relativeTo: title, padding: 0, width: YMSizes.PageWidth, height: 200.LayoutVal())
         NeedToKnowInput.placeholder = "请填写"
         NeedToKnowInput.placeholderFont = YMFonts.YMDefaultFont(24.LayoutVal())
-        NeedToKnowInput.SetPadding(40.LayoutVal(), right: 40.LayoutVal(), top: 10.LayoutVal(), bottom: 0)
+        NeedToKnowInput.SetPadding(40.LayoutVal(), right: 126.LayoutVal(), top: 10.LayoutVal(), bottom: 0)
+        
+        NeedToKnowPanel.addSubview(GetNeedToKnowFromCommonText)
+        NeedToKnowPanel.addSubview(SaveNeedToKnowToCommonText)
+        
+        GetNeedToKnowFromCommonText.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 80.LayoutVal(), width: 66.LayoutVal(), height: 66.LayoutVal())
+        SaveNeedToKnowToCommonText.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 22.LayoutVal(), width: 66.LayoutVal(), height: 66.LayoutVal())
         
         NeedToKnowInput.EditEndCallback = self.EndInputInfo
     }

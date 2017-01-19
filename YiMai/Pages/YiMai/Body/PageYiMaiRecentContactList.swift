@@ -32,12 +32,12 @@ class PageYiMaiRecentContactList: PageBodyView {
 //                name = "<null>";
 //            },
 //            "name": 呵呵哒]
-        let name = "\(docInfo["name"]!)"
-        let jobTitle = "\(docInfo["job_title"]!)"
+        let name = YMVar.GetStringByKey(docInfo, key: "name")
+        let jobTitle = YMVar.GetStringByKey(docInfo, key: "job_title", defStr: "医生")
 //        let dept = docInfo["department"] as! [String: AnyObject]
 //        let deptStr = dept["name"] as? String
-        let time = "\(docInfo["time"]!)"
-        let lastMsg = "\(docInfo["lastMsg"]!)"
+        let time = YMVar.GetStringByKey(docInfo, key: "time")
+        let lastMsg = YMVar.GetStringByKey(docInfo, key: "lastMsg")
         
         let timestamp = (Double(time)! / 1000.0)
 
@@ -82,6 +82,14 @@ class PageYiMaiRecentContactList: PageBodyView {
         bottomBorder.backgroundColor = YMColors.DividerLineGray
         bottomBorder.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
         
+        let unreadCount = docInfo["unread"] as! Int
+        if(unreadCount > 0) {
+            let unreadLabel = YMLayout.GetUnreadCountLabel(unreadCount)
+            cell.addSubview(unreadLabel)
+            unreadLabel.align(Align.UnderMatchingRight, relativeTo: timeLabel, padding: 14.LayoutVal(), width: unreadLabel.width, height: unreadLabel.height)
+        }
+        
+        YMLayout.SetDocfHeadImageVFlag(userHead, docInfo: docInfo)
         YMLayout.LoadImageFromServer(userHead, url: "\(docInfo["head_url"]!)", fullUrl: nil, makeItRound: true)
         
         return cell
@@ -89,24 +97,35 @@ class PageYiMaiRecentContactList: PageBodyView {
     
     func LoadData(doctors: [[String: AnyObject]]) {
         if(0 == doctors.count) {
+            YMLayout.ClearView(view: BodyView)
             return
         }
         let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
 
         YMLayout.ClearView(view: BodyView)
-        var docInfo = [String: AnyObject]()
+        var docInfo: [String: AnyObject]? = nil
         var cell: YMTouchableView? = nil
         for docImInfo in imInfo {
             for doctor in doctors {
                 if("\(docImInfo.targetId!)" == "\(doctor["id"]!)" || "\(docImInfo.senderUserId!)" == "\(doctor["id"]!)") {
+                    if(YMVar.IsDocInBlacklist(docImInfo.targetId!) || YMVar.IsDocInBlacklist(docImInfo.senderUserId!)) {
+                        continue
+                    }
                     docInfo = doctor
                     break
                 }
             }
-            docInfo["lastMsg"] = YMIMUtility.GetLastMessageString(docImInfo.jsonDict)
-            docInfo["time"] = "\(docImInfo.sentTime)"
             
-            cell = DrawDoctorCell(docInfo, prev: cell)
+            if(nil != docInfo) {
+                docInfo!["lastMsg"] = YMIMUtility.GetLastMessageString(docImInfo.lastestMessage)
+                docInfo!["time"] = "\(docImInfo.sentTime)"
+                docInfo!["unread"] = docImInfo.unreadMessageCount
+                
+                cell = DrawDoctorCell(docInfo!, prev: cell)
+                
+                docInfo = nil
+            }
+            
         }
     }
 }

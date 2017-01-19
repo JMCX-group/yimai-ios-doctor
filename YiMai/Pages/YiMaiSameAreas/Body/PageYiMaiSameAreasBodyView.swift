@@ -225,11 +225,12 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
         if(nil == department) {
             DrawBlankContent()
         } else {
-            Loading?.Show()
+//            Loading?.Show()
             
-            let sameInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_SAME_DEPARTMENT) as? NSDictionary
+            let sameInfo = YMLocalData.GetData(YMLocalDataStrings.SAME_DEPT_CACHE + YMVar.MyDoctorId) as? NSDictionary
             
             if(nil == sameInfo) {
+                Loading?.Show()
                 self.SameAreasActions?.GetSameAreasList(nil)
             } else {
                 YMDelay(0.01, closure: {
@@ -238,6 +239,8 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
                     self.LoadCityList(sameInfo! as! [String : AnyObject])
                     self.LoadHospitalList(sameInfo! as! [String : AnyObject])
                     self.Loading?.Hide()
+                    self.SameAreasActions?.GetSameAreasList(nil)
+
                 })
             }
         }

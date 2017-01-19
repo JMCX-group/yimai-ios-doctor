@@ -43,11 +43,17 @@ class YMIMUtility: NSObject {
         return idList
     }
     
-    static func GetLastMessageString(msg: NSDictionary) -> String {
-        if (nil == msg["imageUri"] as? String) {
-            return "\(msg["content"]!)"
-        } else {
+    static func GetLastMessageString(lastMsg: RCMessageContent) -> String {
+        if(lastMsg is RCTextMessage) {
+            return (lastMsg as! RCTextMessage).content //"\(jsonDict!["content"]!)"
+        } else if(lastMsg is RCVoiceMessage) {
+            return "【语音】"
+        } else if(lastMsg is RCImageMessage) {
             return "【图片】"
+        } else if(lastMsg is YMIMMessageContent) {
+            return "【名片】"
+        } else {
+            return "未知消息"
         }
     }
     

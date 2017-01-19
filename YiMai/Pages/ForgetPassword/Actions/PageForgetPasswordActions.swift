@@ -37,7 +37,7 @@ public class PageForgetPasswordActions: PageJumpActions {
         if(nil != error.userInfo["com.alamofire.serialization.response.error.response"]) {
             let response = error.userInfo["com.alamofire.serialization.response.error.response"]!
             //let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-            
+            YMAPIUtility.PrintErrorInfo(error)
             if(response.statusCode >= 500) {
                 //显示服务器繁忙
                 YMPageModalMessage.ShowErrorInfo("服务器繁忙，请稍后再试。", nav: self.NavController!)

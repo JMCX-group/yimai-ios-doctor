@@ -14,10 +14,12 @@ class PageAuthCompleteViewController: PageViewController {
     override func PageLayout() {
         super.PageLayout()
         
-        BodyView = PageAuthCompleteBodyView(parentView: self.view, navController: self.NavController!)
-        TopView = PageCommonTopView(parentView: self.view, titleString: "已认证", navController: self.NavController!)
+        
     }
 
     override func PagePreRefresh() {
+        YMLayout.ClearView(view: view)
+        BodyView = PageAuthCompleteBodyView(parentView: self.view, navController: self.NavController!)
+        TopView = PageCommonTopView(parentView: self.view, titleString: "认证成功", navController: self.NavController!)
     }
 }

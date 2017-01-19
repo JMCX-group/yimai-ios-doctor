@@ -30,6 +30,8 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        RCIM.sharedRCIM().clearUserInfoCache()
+
         TopView = PageCommonTopView(parentView: self.view!, titleString: ViewTitle, navController: self.navigationController!)
         
         let messageListHeight = YMSizes.PageHeight - YMSizes.PageTopHeight - self.chatSessionInputBarControl.height
@@ -41,13 +43,19 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
         JumpAction = PageJumpActions(navController: self.navigationController!)
         
         TopView?.TopViewPanel.addSubview(AddToBlackList)
-        AddToBlackList.setTitle("加入黑名单", forState: UIControlState.Normal)
-        AddToBlackList.titleLabel?.font = YMFonts.YMDefaultFont(28.LayoutVal())
-        AddToBlackList.sizeToFit()
-        AddToBlackList.anchorInCorner(Corner.BottomRight, xPad: 40.LayoutVal(), yPad: 30.LayoutVal(),
-                                      width: AddToBlackList.width, height: 30.LayoutVal())
-        
-        AddToBlackList.addTarget(self, action: "AddToBlackListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+
+        let userHead = YMVar.GetStringByKey(UserData, key: "head_url", defStr: "http://d.medi-link.cn/uploads/avatar/default.jpg")
+        let userId = YMVar.GetStringByKey(UserData, key: "id")
+        YMLocalData.SaveData(userHead, key: YMLocalDataStrings.DOC_HEAD_URL + userId)
+        if(ShowAppointment) {
+            AddToBlackList.setTitle("加入黑名单", forState: UIControlState.Normal)
+            AddToBlackList.titleLabel?.font = YMFonts.YMDefaultFont(28.LayoutVal())
+            AddToBlackList.sizeToFit()
+            AddToBlackList.anchorInCorner(Corner.BottomRight, xPad: 40.LayoutVal(), yPad: 30.LayoutVal(),
+                                          width: AddToBlackList.width, height: 30.LayoutVal())
+            
+            AddToBlackList.addTarget(self, action: "AddToBlackListTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+        }
         
         FullPageLoading = YMPageLoadingView(parentView: self.view!)
         
@@ -66,6 +74,8 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
         }
 
         registerClass(YMIMCellForCard.self, forCellWithReuseIdentifier: "YMIMCell")
+        
+        ProposeMic()
     }
     
     override public func rcConversationCollectionView(collectionView: UICollectionView!, cellForItemAtIndexPath: NSIndexPath!) -> RCMessageBaseCell! {
@@ -73,10 +83,13 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
         
         let cellDataModel = self.conversationDataRepository[cellForItemAtIndexPath.row] as? RCMessageModel
         
-        let realCell = cell as! YMIMCellForCard
-        realCell.CellLayout(cellDataModel!)
-        realCell.JumpActions = JumpAction
-        return realCell
+        let realCell = cell as? YMIMCellForCard
+        if(nil != realCell) {
+            realCell!.CellLayout(cellDataModel!)
+            realCell!.JumpActions = JumpAction
+        }
+        
+        return cell as! RCMessageBaseCell
     }
     
     override public func rcConversationCollectionView(collectionView: UICollectionView!, layout: UICollectionViewLayout!, sizeForItemAtIndexPath: NSIndexPath!) -> CGSize {
@@ -148,9 +161,17 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
         }
     }
     
+    override public func didTapCellPortrait(userId: String) {
+        super.didTapCellPortrait(userId)
+        if(userId != YMVar.MyDoctorId) {
+            PageYiMaiDoctorDetailBodyView.DocId = userId
+            JumpAction.DoJump(YMCommonStrings.CS_PAGE_YIMAI_DOCTOR_DETAIL_NAME, ignoreExists: true, userData: "IM")
+        }
+    }
+    
     override public func didTapMessageCell(cellData: RCMessageModel) {
         let textMsg = cellData.content as? RCTextMessage
-        
+        super.didTapMessageCell(cellData)
         if(nil != textMsg) {
             let appointmentInfo = YMVar.TryToGetDictFromJsonStringData(textMsg!.extra!)
             if(nil == appointmentInfo) {
@@ -186,27 +207,27 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
     }
 
     func SetAppointmentFromIM() {
-        self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
+        self.chatSessionInputBarControl.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
         if(ShowAppointment) {
-            self.pluginBoardView.removeItemWithTag(Int(2016))
-            self.pluginBoardView.insertItemWithImage(UIImage(named: "YMIconAppointmentFromIM")!, title: "发起约诊", tag: 2016)
+            self.chatSessionInputBarControl.pluginBoardView.removeItemWithTag(Int(2016))
+            self.chatSessionInputBarControl.pluginBoardView.insertItemWithImage(UIImage(named: "YMIconAppointmentFromIM")!, title: "发起约诊", tag: 2016)
         }
     }
     
     func SetSendCardFromIM() {
-        self.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
+        self.chatSessionInputBarControl.pluginBoardView.removeItemWithTag(Int(PLUGIN_BOARD_ITEM_LOCATION_TAG))
         if(ShowAppointment) {
-            self.pluginBoardView.removeItemWithTag(Int(2017))
-            self.pluginBoardView.insertItemWithImage(UIImage(named: "YMIconSendCardFromIM")!, title: "发送名片", tag: 2017)
+            self.chatSessionInputBarControl.pluginBoardView.removeItemWithTag(Int(2017))
+            self.chatSessionInputBarControl.pluginBoardView.insertItemWithImage(UIImage(named: "YMIconSendCardFromIM")!, title: "发送名片", tag: 2017)
         }
     }
     
     public func onRCIMReceiveMessage(message: RCMessage!, left: Int32) {
         if(ShowAppointment) {
-            self.pluginBoardView.removeItemWithTag(Int(2016))
-            self.pluginBoardView.removeItemWithTag(Int(2017))
-            self.pluginBoardView.insertItemWithImage(UIImage(named: "YMIconAppointmentFromIM")!, title: "发起约诊", tag: 2016)
-            self.pluginBoardView.insertItemWithImage(UIImage(named: "YMIconSendCardFromIM")!, title: "发送名片", tag: 2017)
+            self.chatSessionInputBarControl.pluginBoardView.removeItemWithTag(Int(2016))
+            self.chatSessionInputBarControl.pluginBoardView.removeItemWithTag(Int(2017))
+            self.chatSessionInputBarControl.pluginBoardView.insertItemWithImage(UIImage(named: "YMIconAppointmentFromIM")!, title: "发起约诊", tag: 2016)
+            self.chatSessionInputBarControl.pluginBoardView.insertItemWithImage(UIImage(named: "YMIconSendCardFromIM")!, title: "发送名片", tag: 2017)
         }
     }
     
@@ -215,6 +236,29 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
         print("onRCIMCustomLocalNotification")
         
         return true
+    }
+    
+    
+    func ProposeMic() {
+        let contacts: PrivateResource = PrivateResource.Microphone
+        
+        if(contacts.isNotDeterminedAuthorization) {
+            proposeToAccess(contacts, agreed: {
+                    self.chatSessionInputBarControl.setInputBarType(RCChatSessionInputBarControlType.DefaultType,
+                        style: RCChatSessionInputBarControlStyle.CHAT_INPUT_BAR_STYLE_SWITCH_CONTAINER_EXTENTION)
+                }, rejected: {
+                    self.chatSessionInputBarControl.setInputBarType(RCChatSessionInputBarControlType.DefaultType,
+                        style: RCChatSessionInputBarControlStyle.CHAT_INPUT_BAR_STYLE_CONTAINER_EXTENTION)
+            })
+        } else {
+            if(!contacts.isAuthorized) {
+                self.chatSessionInputBarControl.setInputBarType(RCChatSessionInputBarControlType.DefaultType,
+                                                                style: RCChatSessionInputBarControlStyle.CHAT_INPUT_BAR_STYLE_CONTAINER_EXTENTION)
+            } else {
+                self.chatSessionInputBarControl.setInputBarType(RCChatSessionInputBarControlType.DefaultType,
+                                                                style: RCChatSessionInputBarControlStyle.CHAT_INPUT_BAR_STYLE_SWITCH_CONTAINER_EXTENTION)
+            }
+        }
     }
 }
 

@@ -59,15 +59,15 @@ class PageWalletRecordBodyView: PageBodyView {
             cell.align(Align.UnderMatchingLeft, relativeTo: prev!, padding: 0, width: YMSizes.PageWidth, height: 150.LayoutVal())
         }
         
-        var type = YMVar.GetStringByKey(entry, key: "type")
-        
-        var price = YMVar.GetStringByKey(entry, key: "price")
-        if("收入" == type) {
-            price = "+ " + price
-        } else {
-            type = "支出"
-            price = "- " + price
-        }
+        let type = YMVar.GetStringByKey(entry, key: "type", defStr: "收入")
+        let price = YMVar.GetStringByKey(entry, key: "price")
+
+//        if("收入" == type) {
+//            price = "+ " + price
+//        } else {
+//            type = "支出"
+//            price = "- " + price
+//        }
         
         let typeLabel = YMLayout.GetNomalLabel(type, textColor: YMColors.FontGray, fontSize: 30.LayoutVal())
         let priceLabel = YMLayout.GetNomalLabel(price, textColor: YMColors.FontBlue, fontSize: 34.LayoutVal())

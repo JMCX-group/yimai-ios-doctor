@@ -11,7 +11,7 @@ target 'YiMai' do
   pod 'SwiftDate', '~> 3.0.8'
   pod 'MWIDCardValidate', '~> 1.0.0'
   pod 'Graph', '~> 1.1.1'
-  pod 'RongCloudIMKit', '~> 2.5.0'
+  pod 'RongCloudIMKit', '~> 2.7.2'
   pod 'APAddressBook', '~> 0.2.3'
   pod 'MBProgressHUD', '~> 0.9.2'
   pod 'KMPlaceholderTextView', '~> 1.2.1'
@@ -22,5 +22,11 @@ target 'YiMai' do
   pod 'Charts', '~> 2.2.5'
   pod 'ImageViewer', '~> 2.1'
   #  pod 'ALCameraViewController', '~> 1.1.9'
+  
+  #umeng
+  pod 'UMengUShare/UI'
+  pod 'UMengUShare/Social'
+  #pod 'UMengUShare/Social/Sina'
+  #pod 'UMengUShare/Social/WeChat'
 end
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import Toucan
 
 public typealias SingleImageFetcherSuccess = (image: UIImage) -> Void
 public typealias SingleImageFetcherFailure = (error: NSError) -> Void
@@ -86,7 +87,8 @@ public class SingleImageFetcher {
         
         PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: targetSize, contentMode: .AspectFill, options: options) { image, _ in
             if let image = image {
-                self.success?(image: image)
+                let newImg = Toucan(image: image).resize(CGSize(width: 800, height: 800), fitMode: Toucan.Resize.FitMode.Clip).image
+                self.success?(image: newImg)
             } else {
                 let error = errorWithKey("error.cant-fetch-photo", domain: self.errorDomain)
                 self.failure?(error: error)

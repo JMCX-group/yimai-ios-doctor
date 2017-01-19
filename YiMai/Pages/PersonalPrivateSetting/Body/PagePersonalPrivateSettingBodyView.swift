@@ -25,7 +25,7 @@ public class PagePersonalPrivateSettingBodyView: PageBodyView {
         
         let btn = YMLayout.GetCommonFullWidthTouchableView(BodyView, useObject: privateActions!, useMethod: "BlacklistTouched:".Sel(),
                                                  label: UILabel(), text: "黑名单")
-        btn.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: btn.height)
+        btn.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 1, width: YMSizes.PageWidth, height: btn.height)
         
         FriendVerifySwitch.addTarget(privateActions!, action: "SaveVerifyStatus:".Sel(), forControlEvents: UIControlEvents.ValueChanged)
         AllowAppointment.addTarget(privateActions!, action: "SaveAllowStatus:".Sel(), forControlEvents: UIControlEvents.ValueChanged)
@@ -61,24 +61,45 @@ public class PagePersonalPrivateSettingBodyView: PageBodyView {
     }
     
     public func LoadData() {
-        let privateInfo = YMLocalData.GetPrivateInfo()
-        if(nil == privateInfo) {
+        let verifySetting = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "verify_switch", defStr: "1")
+        let allowSetting = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "friends_friends_appointment_switch", defStr: "1")
+        
+        if("1" == verifySetting) {
             FriendVerifySwitch.on = true
-            AllowAppointment.on = true
-            
-            YMLocalData.SavePrivateInfo(YMPersonalPrivateStrings.PRIVATE_FRIEND_VERIFY_KEY, data: true)
-            YMLocalData.SavePrivateInfo(YMPersonalPrivateStrings.ALLOW_APPOINTMENT_KEY, data: true)
         } else {
-            let verifyStatus = privateInfo?[YMPersonalPrivateStrings.PRIVATE_FRIEND_VERIFY_KEY] as? Bool
-            let allowStatus = privateInfo?[YMPersonalPrivateStrings.ALLOW_APPOINTMENT_KEY] as? Bool
-            
-            if(nil != verifyStatus) {
-                FriendVerifySwitch.on = verifyStatus!
-            }
-            
-            if(nil != allowStatus) {
-                AllowAppointment.on = allowStatus!
-            }
+            FriendVerifySwitch.on = false
         }
+        
+        if("1" == allowSetting) {
+            AllowAppointment.on = true
+        } else {
+            AllowAppointment.on = false
+        }
+//        let privateInfo = YMLocalData.GetPrivateInfo()
+//        if(nil == privateInfo) {
+//            FriendVerifySwitch.on = true
+//            AllowAppointment.on = true
+//            
+//            YMLocalData.SavePrivateInfo(YMPersonalPrivateStrings.PRIVATE_FRIEND_VERIFY_KEY, data: true)
+//            YMLocalData.SavePrivateInfo(YMPersonalPrivateStrings.ALLOW_APPOINTMENT_KEY, data: true)
+//        } else {
+//            let verifyStatus = privateInfo?[YMPersonalPrivateStrings.PRIVATE_FRIEND_VERIFY_KEY] as? Bool
+//            let allowStatus = privateInfo?[YMPersonalPrivateStrings.ALLOW_APPOINTMENT_KEY] as? Bool
+//            
+//            if(nil != verifyStatus) {
+//                FriendVerifySwitch.on = verifyStatus!
+//            }
+//            
+//            if(nil != allowStatus) {
+//                AllowAppointment.on = allowStatus!
+//            }
+//        }
     }
 }
+
+
+
+
+
+
+

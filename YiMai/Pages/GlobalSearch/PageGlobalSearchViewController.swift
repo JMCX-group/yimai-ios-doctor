@@ -20,8 +20,11 @@ public class PageGlobalSearchViewController: PageViewController {
     }
     
     override func PagePreRefresh() {
-        BodyView?.InitSearch(PageGlobalSearchViewController.InitSearchKey)
-        BodyView?.HighlightWord = ActiveType.Custom(pattern: PageGlobalSearchViewController.InitSearchKey)
+        if(isMovingToParentViewController()) {
+            BodyView?.FullPageLoading.Show()
+            BodyView?.InitSearch(PageGlobalSearchViewController.InitSearchKey)
+            BodyView?.HighlightWord = ActiveType.Custom(pattern: PageGlobalSearchViewController.InitSearchKey)
+        }
     }
     
     override func PageDisapeared() {

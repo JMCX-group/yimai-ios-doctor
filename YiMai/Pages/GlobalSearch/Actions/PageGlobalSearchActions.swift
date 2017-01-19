@@ -26,11 +26,11 @@ public class PageGlobalSearchActions: PageJumpActions {
     }
     
     public func SearchSuccess(data: NSDictionary?) {
-        TargetView?.LoadData(data! as? [String: AnyObject])
-        
         let realData = data as! [String: AnyObject]
-        
         TargetView?.LastSearchData = realData
+
+        TargetView?.ResetFilter()
+        TargetView?.LoadData(data! as? [String: AnyObject])
 
         if("key" == searchBy) {
             TargetView?.LoadCityList(realData)
@@ -42,6 +42,8 @@ public class PageGlobalSearchActions: PageJumpActions {
         } else if("hos" == searchBy) {
             TargetView?.LoadDeptList(realData)
         }
+        
+        TargetView?.FullPageLoading.Hide()
     }
     
     public func SearchError(error: NSError) {
@@ -55,6 +57,8 @@ public class PageGlobalSearchActions: PageJumpActions {
         } else {
             YMPageModalMessage.ShowErrorInfo("网络连接异常，请稍后再试。", nav: self.NavController!)
         }
+        
+        TargetView?.FullPageLoading.Hide()
     }
     
     public func DoSearch(param: [String: AnyObject]) {
@@ -65,6 +69,7 @@ public class PageGlobalSearchActions: PageJumpActions {
 //        } else {
 //            CacheKey = nil
 //        }
+        TargetView?.FullPageLoading.Show()
         SearchApi?.YMGetSearchResult(param, progressHandler: nil)
     }
     
@@ -72,11 +77,15 @@ public class PageGlobalSearchActions: PageJumpActions {
         let key = input.text
         searchBy = "key"
         
-        if(YMValueValidator.IsEmptyString(key)) {
-            input.text = TargetView?.LastSearchKey
-            return
+        if(YMValueValidator.IsBlankString(key)) {
+//            input.text = TargetView?.LastSearchKey
+            input.text = ""
+            PageGlobalSearchViewController.InitSearchKey = ""
+//            return
+        } else {
+            PageGlobalSearchViewController.InitSearchKey = key!
         }
-        
+
         TargetView?.LastSearchKey = key!
         TargetView?.HighlightWord = ActiveType.Custom(pattern: key!)
         DoSearch(["field": key!])
@@ -140,10 +149,18 @@ public class PageGlobalSearchActions: PageJumpActions {
         let data = cell.CellData as! [String: AnyObject]
         let id = "\(data["id"]!)"
         let name = "\(data["name"]!)"
+        
         TargetView?.CityList.hidden = true
         TargetView?.HosList.hidden = true
         TargetView?.DeptList.hidden = true
-        TargetView?.FilterResultByHos(id, hosName: name)
+        
+        if("clear" != id) {
+            TargetView?.FilterResultByHos(id, hosName: name)
+        } else {
+            if("" != TargetView!.CityFilterKey) {
+                TargetView?.FilterResultByCity(TargetView!.CityFilterKey)
+            }
+        }
     }
     
     public func DeptTouched(cell: YMTableViewCell) {
@@ -156,7 +173,14 @@ public class PageGlobalSearchActions: PageJumpActions {
         TargetView?.CityList.hidden = true
         TargetView?.HosList.hidden = true
         TargetView?.DeptList.hidden = true
-        TargetView?.FilterResultByDept(id, deptName: deptName)
+        
+        if("clear" != id) {
+            TargetView?.FilterResultByDept(id, deptName: deptName)
+        } else {
+            if("" != TargetView!.HosFilterKey) {
+                TargetView?.FilterResultByHos("", hosName: TargetView!.HosFilterKey)
+            }
+        }
     }
     
     public func CityFilterTouched(_: UIGestureRecognizer) {

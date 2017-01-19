@@ -15,7 +15,7 @@ class PageAuthProcessingViewController: PageViewController {
         super.PageLayout()
         
         BodyView = PageAuthProcessingBodyView(parentView: self.view, navController: self.NavController!)
-        TopView = PageCommonTopView(parentView: self.view, titleString: "认证中", navController: self.NavController!)
+        TopView = PageCommonTopView(parentView: self.view, titleString: "审核中", navController: self.NavController!)
     }
 
     override func PagePreRefresh() {

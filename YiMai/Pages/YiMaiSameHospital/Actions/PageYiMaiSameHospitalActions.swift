@@ -24,6 +24,8 @@ public class PageYiMaiSameHospitalActions: PageJumpActions{
         TargetView?.Loading?.Hide()
         
         let userInfo = data!["users"] as? [[String: AnyObject]]
+        
+        YMLocalData.SaveData(userInfo!, key: YMLocalDataStrings.SAME_HOS_CACHE + YMVar.MyDoctorId)
         TargetView?.DrawList(userInfo)
     }
     
@@ -33,7 +35,14 @@ public class PageYiMaiSameHospitalActions: PageJumpActions{
     }
     
     public func GetSameHospitalList(data: [String:AnyObject]?) {
-                SameApi?.YMGetSameHospitalList(data)
+        let cache = YMLocalData.GetData(YMLocalDataStrings.SAME_HOS_CACHE + YMVar.MyDoctorId)
+        if(nil != cache) {
+            let userInfo = cache as! [[String: AnyObject]]
+            TargetView?.DrawList(userInfo)
+        } else {
+            TargetView?.Loading?.Show()
+        }
+        SameApi?.YMGetSameHospitalList(data)
     }
     
     public func DocCellTouched(sender: UIGestureRecognizer) {

@@ -18,6 +18,8 @@ public class PageMyInfoCardViewController: PageViewController {
         
         BodyView = PageMyInfoCardBodyView(parentView: self.view, navController: self.NavController!)
         TopView = PageCommonTopView(parentView: self.view, titleString: "我的名片", navController: self.NavController)
+        
+        BodyView.DrawShareButton(TopView!.TopViewPanel)
     }
 
     override func PagePreRefresh() {

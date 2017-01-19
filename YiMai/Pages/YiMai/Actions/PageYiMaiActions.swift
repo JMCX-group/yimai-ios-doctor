@@ -101,11 +101,13 @@ public class PageYiMaiActions: PageJumpActions{
     func GetRecentContactSuccess(data: NSDictionary?) {
         let realData = data!["data"] as! [[String: AnyObject]]
         TargetController.RecentContactList.LoadData(realData)
+        TargetController.FullPageLoading.Hide()
     }
     
     func GetRecentContactFailed(error: NSError) {
         let realData = [[String: AnyObject]]()
         TargetController.RecentContactList.LoadData(realData)
+        TargetController.FullPageLoading.Hide()
     }
 
     public func QRScanSuccess(qrStr: String?) {
@@ -119,7 +121,7 @@ public class PageYiMaiActions: PageJumpActions{
     public func QRRecongized(data: AnyObject) {
         let dataInfo = data as! [String: AnyObject]
         
-        let docId = "\(dataInfo["id"]!)"
+        let docId = YMVar.GetStringByKey(dataInfo, key: "data") //"\(dataInfo["data"]!)"
         PageAddFriendInfoCardBodyView.DoctorID = docId
         DoJump(YMCommonStrings.CS_PAGE_ADD_FRIEND_QR_CARD)
     }

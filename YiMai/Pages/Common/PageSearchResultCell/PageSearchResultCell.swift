@@ -73,6 +73,8 @@ public class PageSearchResultCell {
                                  xPad: 40.LayoutVal(), yPad: 20.LayoutVal(),
                                  width: headimage.width, height: headimage.height)
         let head = info["head_url"] as! String
+        
+        YMLayout.SetDocfHeadImageVFlag(headimage, docInfo: info)
         YMLayout.LoadImageFromServer(headimage, url: head, fullUrl: nil, makeItRound: true)
         
         name.text = "\(info["name"]!)"
@@ -83,20 +85,18 @@ public class PageSearchResultCell {
                             xPad: 180.LayoutVal(), yPad: 30.LayoutVal(),
                             width: name.width, height: name.height)
         
-        let jobTitleString = info["job_title"] as? String
-        if(nil != jobTitleString) {
-            jobTitle.text = jobTitleString!
-            jobTitle.textColor = YMColors.FontGray
-            jobTitle.font = YMFonts.YMDefaultFont(20.LayoutVal())
-            jobTitle.sizeToFit()
-            
-            divider.backgroundColor = YMColors.FontBlue
-            divider.align(Align.ToTheRightCentered, relativeTo: name,
-                          padding: 14.LayoutVal(), width: YMSizes.OnPx, height: 20.LayoutVal())
-            
-            jobTitle.align(Align.ToTheRightCentered, relativeTo: divider,
-                           padding: 14.LayoutVal(), width: jobTitle.width, height: jobTitle.height)
-        }
+        let jobTitleString = YMVar.GetStringByKey(info, key: "job_title", defStr: "医生")
+        jobTitle.text = jobTitleString
+        jobTitle.textColor = YMColors.FontGray
+        jobTitle.font = YMFonts.YMDefaultFont(20.LayoutVal())
+        jobTitle.sizeToFit()
+        
+        divider.backgroundColor = YMColors.FontBlue
+        divider.align(Align.ToTheRightCentered, relativeTo: name,
+                      padding: 14.LayoutVal(), width: YMSizes.OnPx, height: 20.LayoutVal())
+        
+        jobTitle.align(Align.ToTheRightCentered, relativeTo: divider,
+                       padding: 14.LayoutVal(), width: jobTitle.width, height: jobTitle.height)
         
         let deptInfo = info["department"] as? [String: AnyObject]
         if(nil != deptInfo) {

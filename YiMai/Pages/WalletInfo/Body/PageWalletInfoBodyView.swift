@@ -11,12 +11,116 @@ import Neon
 import Charts
 import ChameleonFramework
 
+class BankPicker: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
+    var BankData: [[String: AnyObject]]!
+    
+    var Panel: YMTouchableView!
+    let ButtonPanel = UIView()
+    
+    let Picker = UIPickerView()
+    let ConfirmBtn = YMButton()
+    let CancelBtn = YMButton()
+    
+    var Actions: PageWalletInfoActions!
+    
+
+    init(parent: UIView, action: PageWalletInfoActions, data: [[String: AnyObject]]) {
+        super.init()
+        BankData = data
+        Actions = action
+        DrawPanel(parent)
+
+        Picker.delegate = self
+        Picker.dataSource = self
+        
+    }
+    
+    func Show() {
+        Panel.hidden = false
+    }
+    
+    func HidePicker(_: AnyObject) {
+        Panel.hidden = true
+    }
+    
+    func BankSelected(_: AnyObject) {
+        let selectedRow = Picker.selectedRowInComponent(0)
+        Actions.DoCashOut(BankData[selectedRow])
+    }
+    
+    func DrawButton(btn: YMButton, title: String, color: UIColor, sel: Selector) {
+        btn.setTitle(title, forState: UIControlState.Normal)
+        btn.setTitleColor(color, forState: UIControlState.Normal)
+        btn.sizeToFit()
+        btn.titleLabel?.font = YMFonts.YMDefaultFont(28.LayoutVal())
+        
+        btn.addTarget(self, action: sel, forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func DrawPanel(parent: UIView) {
+        Panel = YMLayout.GetTouchableView(useObject: self, useMethod: "HidePicker:".Sel())
+        Panel.backgroundColor = YMColors.OpacityBlackMask
+        Panel.hidden = true
+        
+        parent.addSubview(Panel)
+        Panel.fillSuperview()
+        
+        Panel.addSubview(ButtonPanel)
+        Panel.addSubview(Picker)
+        
+        ButtonPanel.addSubview(CancelBtn)
+        ButtonPanel.addSubview(ConfirmBtn)
+        
+        Picker.backgroundColor = YMColors.PanelBackgroundGray
+        ButtonPanel.backgroundColor = YMColors.BackgroundGray
+        
+        Picker.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: YMSizes.PageHeight / 3)
+        ButtonPanel.align(Align.AboveMatchingLeft, relativeTo: Picker, padding: 0, width: YMSizes.PageWidth, height: 60.LayoutVal())
+        
+        DrawButton(ConfirmBtn, title: "确定", color: YMColors.FontBlue, sel: "BankSelected:".Sel())
+        DrawButton(CancelBtn, title: "取消", color: YMColors.FontBlue, sel: "HidePicker:".Sel())
+        
+        ConfirmBtn.anchorToEdge(Edge.Right, padding: 40.LayoutVal(), width: CancelBtn.width, height: 60.LayoutVal())
+        CancelBtn.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: CancelBtn.width, height: 60.LayoutVal())
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let bankInfo = BankData[row]
+        let cardNum = YMVar.GetStringByKey(bankInfo, key: "no")
+        let bankName = YMVar.GetStringByKey(bankInfo, key: "name")
+        
+        let lastIdx = cardNum.startIndex.advancedBy(cardNum.characters.count - 5)
+        let ret = "\(bankName) 尾号：\(cardNum.substringFromIndex(lastIdx))"
+        
+        return ret
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return BankData?.count ?? 0
+    }
+    
+    func Dispose() {
+        Panel.hidden = true
+        Panel.removeFromSuperview()
+        Actions = nil
+        BankData = nil
+    }
+}
+
 class PageWalletInfoBodyView: PageBodyView {
     var WalletActions: PageWalletInfoActions!
     let BalancePanel = UIView()
     let BalanceDetailPanel = UIView()
     let PiePanel = UIView()
     let DetailButton = YMButton()
+    
+    var Bank: BankPicker?
+    
+    let CashOutButton = YMButton()
 
     override func ViewLayout() {
         super.ViewLayout()
@@ -24,6 +128,7 @@ class PageWalletInfoBodyView: PageBodyView {
         WalletActions = PageWalletInfoActions(navController: self.NavController!, target: self)
         
         DrawFullBody()
+        DrawCashOutButton()
     }
     
     func DrawFullBody() {
@@ -34,6 +139,28 @@ class PageWalletInfoBodyView: PageBodyView {
         BalancePanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 240.LayoutVal())
         BalanceDetailPanel.align(Align.UnderMatchingLeft, relativeTo: BalancePanel, padding: 0, width: YMSizes.PageWidth, height: 256.LayoutVal())
         PiePanel.align(Align.UnderMatchingLeft, relativeTo: BalanceDetailPanel, padding: 40.LayoutVal(), width: YMSizes.PageWidth, height: 500.LayoutVal())
+    }
+    
+    func DrawCashOutButton() {
+        CashOutButton.setTitle("申请提现", forState: UIControlState.Normal)
+        CashOutButton.setTitleColor(YMColors.White, forState: UIControlState.Normal)
+        CashOutButton.titleLabel?.font = YMFonts.YMDefaultFont(30.LayoutVal())
+        CashOutButton.backgroundColor = YMColors.CommonBottomBlue
+
+        ParentView?.addSubview(CashOutButton)
+        CashOutButton.anchorToEdge(Edge.Bottom, padding: 0, width: YMSizes.PageWidth, height: 98.LayoutVal())
+        
+        CashOutButton.addTarget(WalletActions, action: "CashOutTouched:".Sel(), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func EnableCashOut() {
+        CashOutButton.enabled = true
+        CashOutButton.backgroundColor = YMColors.CommonBottomBlue
+    }
+    
+    func DisableCashOut() {
+        CashOutButton.enabled = false
+        CashOutButton.backgroundColor = YMColors.CommonBottomGray
     }
     
     func DrawRecordButton(topPanel: UIView) {
@@ -60,6 +187,8 @@ class PageWalletInfoBodyView: PageBodyView {
     }
     
     func Clear() {
+        DisableCashOut()
+        Bank?.Dispose()
         YMLayout.ClearView(view: BalancePanel)
         YMLayout.ClearView(view: BalanceDetailPanel)
         YMLayout.ClearView(view: PiePanel)
@@ -139,6 +268,12 @@ class PageWalletInfoBodyView: PageBodyView {
         let billable = billableStr.DoubleVal
         var pending = pendingStr.DoubleVal
         
+        if(billable > 0.001) {
+            DisableCashOut()
+        } else {
+            EnableCashOut()
+        }
+
         if("0" == billableStr && "0" == pendingStr) {
             pending = totalStr.DoubleVal
         }
@@ -182,7 +317,13 @@ class PageWalletInfoBodyView: PageBodyView {
         pieChart.descriptionText = ""
         pieChart.holeRadiusPercent = 0.4
         pieChart.transparentCircleRadiusPercent = 0.45
-        
+    }
+    
+    func ShowBankPicker(data: [[String : AnyObject]]) {
+        Bank?.Dispose()
+        Bank = nil
+        Bank = BankPicker(parent: ParentView!, action: WalletActions!, data: data)
+        Bank?.Show()
     }
 }
 
