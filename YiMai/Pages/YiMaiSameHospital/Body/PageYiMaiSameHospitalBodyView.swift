@@ -17,6 +17,7 @@ public class PageYiMaiSameHospitalBodyView: PageBodyView {
     private var SearchPanel = UIView()
     
     var BlankContentPanel = UIView()
+    var PrevData = [[String: AnyObject]]()
     
     override func ViewLayout() {
         super.ViewLayout()
@@ -84,6 +85,37 @@ public class PageYiMaiSameHospitalBodyView: PageBodyView {
     public func ClearList() {
         YMLayout.ClearView(view: ResultList)
         ResultList.contentSize = CGSizeMake(YMSizes.PageWidth, 0)
+    }
+    
+    func Filter(key: String) {
+        var ret = [[String: AnyObject]]()
+        
+        for user in PrevData {
+            let userName = YMVar.GetStringByKey(user, key: "name")
+            let userPhone = YMVar.GetStringByKey(user, key: "phone")
+            let cityName = YMVar.GetStringByKey(user, key: "city")
+            let userHos = user["hospital"] as? [String: AnyObject]
+            let userDept = user["department"] as? [String: AnyObject]
+            var userHosName = ""
+            var userDeptName = ""
+            if(nil != userHos) {
+                userHosName = YMVar.GetStringByKey(userHos, key: "name")
+            }
+            
+            if(nil != userDept) {
+                userDeptName = YMVar.GetStringByKey(userDept, key: "name")
+            }
+            
+            if(userName.containsString(key) ||
+                userPhone.containsString(key) ||
+                userHosName.containsString(key) ||
+                userDeptName.containsString(key) ||
+                cityName.containsString(key)) {
+                ret.append(user)
+            }
+        }
+        
+        DrawList(ret)
     }
     
     public func DrawList(data: [[String: AnyObject]]?) {

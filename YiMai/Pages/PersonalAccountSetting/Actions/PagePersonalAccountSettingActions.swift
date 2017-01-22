@@ -12,12 +12,39 @@ import UIKit
 public class PagePersonalAccountSettingActions: PageJumpActions {
     var TargetView: PagePersonalAccountSettingBodyView!
     var SettingApi: YMAPIUtility!
+    var LogoutApi: YMAPIUtility!
     
     override func ExtInit() {
         super.ExtInit()
         
         TargetView = Target as! PagePersonalAccountSettingBodyView
         SettingApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_USER + "-fromAccountSetting", success: SettingSuccess, error: SettingError)
+        LogoutApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_UPDATE_USER + "-fromAccountLogout", success: LogoutSuccess, error: LogoutError)
+    }
+    
+    func LogoutSuccess(data: NSDictionary?) {
+        ClearCaches()
+    }
+    
+    func LogoutError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        ClearCaches()
+    }
+    
+    func ClearCaches() {
+        YMCoreDataEngine.Clear()
+        YMLocalData.ClearLogin()
+        YMVar.Clear()
+        YMBackgroundRefresh.Stop()
+        //        YMAPICommonVariable.ClearCallbackMap()
+        PagePersonalIntroEditViewController.IntroText = ""
+        PagePersonalNameEditViewController.UserName = ""
+        PageRegisterPersonalInfoViewController.NeedInit = true
+        PagePersonalIDNumInputBodyView.IDNum = ""
+        PageYiMaiRecentContactList.PrevData.removeAll()
+        TargetView.FullPageLoading.Hide()
+        
+        self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
     }
     
     func SettingSuccess(data: NSDictionary?) {
@@ -33,7 +60,7 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
     
     func GoToAuthPage(gr: UIGestureRecognizer) {
         let authStatus = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "is_auth")
-        
+
         if("processing" == authStatus) {
             DoJump(YMCommonStrings.CS_PAGE_AUTH_PROCESSING)
         } else if("completed" == authStatus) {
@@ -47,19 +74,7 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
     
     public func Logout(_: UIGestureRecognizer) {
         TargetView.FullPageLoading.Show()
-        
-        YMCoreDataEngine.Clear()
-        YMLocalData.ClearLogin()
-        YMVar.Clear()
-        YMBackgroundRefresh.Stop()
-//        YMAPICommonVariable.ClearCallbackMap()
-        PagePersonalIntroEditViewController.IntroText = ""
-        PagePersonalNameEditViewController.UserName = ""
-        PageRegisterPersonalInfoViewController.NeedInit = true
-        PagePersonalIDNumInputBodyView.IDNum = ""
-        TargetView.FullPageLoading.Hide()
-
-        self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)
+        LogoutApi.YMChangeUserInfo(["device_token": ""])
     }
     
     func EmailCellTouched(gr: UIGestureRecognizer) {

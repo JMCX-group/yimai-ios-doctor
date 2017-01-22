@@ -24,7 +24,7 @@ public class PageYiMaiSameHospitalActions: PageJumpActions{
         TargetView?.Loading?.Hide()
         
         let userInfo = data!["users"] as? [[String: AnyObject]]
-        
+        TargetView?.PrevData = userInfo!
         YMLocalData.SaveData(userInfo!, key: YMLocalDataStrings.SAME_HOS_CACHE + YMVar.MyDoctorId)
         TargetView?.DrawList(userInfo)
     }
@@ -38,6 +38,7 @@ public class PageYiMaiSameHospitalActions: PageJumpActions{
         let cache = YMLocalData.GetData(YMLocalDataStrings.SAME_HOS_CACHE + YMVar.MyDoctorId)
         if(nil != cache) {
             let userInfo = cache as! [[String: AnyObject]]
+            TargetView?.PrevData = userInfo
             TargetView?.DrawList(userInfo)
         } else {
             TargetView?.Loading?.Show()
@@ -56,8 +57,15 @@ public class PageYiMaiSameHospitalActions: PageJumpActions{
     public func DoSearch(input: YMTextField) {
         let keyWord = input.text!
         
-        TargetView?.ClearList()
-        TargetView?.Loading?.Show()
-        GetSameHospitalList(["field": keyWord])
+        if(YMValueValidator.IsBlankString(keyWord)) {
+            input.text = ""
+            TargetView?.DrawList(TargetView!.PrevData)
+        } else {
+            TargetView?.ClearList()
+//            TargetView?.Loading?.Show()
+            TargetView?.Filter(keyWord)
+//            GetSameHospitalList(["field": keyWord])
+        }
+        
     }
 }

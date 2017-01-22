@@ -59,7 +59,6 @@ public class PageYiMaiViewController: PageViewController {
         
         YiMaiR1Body?.SetBodyScroll()
         YiMaiR2Body?.SetBodyScroll()
-//        YiMaiR1Body
     }
     
     public func ShowYiMaiR2Page() {
@@ -82,7 +81,7 @@ public class PageYiMaiViewController: PageViewController {
         YiMaiR2Body?.SetBodyScroll()
         
         let docList = YMIMUtility.GetRecentContactDoctorsIdList()
-        FullPageLoading.Show()
+//        FullPageLoading.Show()
         YiMaiActions?.ContactApi.YMGetRecentContactedDocList(["id_list": docList.joinWithSeparator(",")])
     }
     

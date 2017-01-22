@@ -10,6 +10,7 @@ import Foundation
 import Neon
 
 class PageYiMaiRecentContactList: PageBodyView {
+    static var PrevData = [[String: AnyObject]]()
     override func ViewLayout() {
         super.ViewLayout()
         
@@ -127,6 +128,21 @@ class PageYiMaiRecentContactList: PageBodyView {
             }
             
         }
+    }
+    
+    func FilterDoc(idsInBlackList: [String]) {
+        var newData = [[String:AnyObject]]()
+        for doc in PageYiMaiRecentContactList.PrevData {
+            for blackId in idsInBlackList {
+                let id = YMVar.GetStringByKey(doc, key: "id")
+                if(id != blackId) {
+                    newData.append(doc)
+                }
+            }
+        }
+        
+//        PageYiMaiRecentContactList.PrevData = newData
+        LoadData(PageYiMaiRecentContactList.PrevData)
     }
 }
 

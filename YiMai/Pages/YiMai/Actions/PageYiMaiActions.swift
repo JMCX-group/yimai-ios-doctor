@@ -100,6 +100,7 @@ public class PageYiMaiActions: PageJumpActions{
     
     func GetRecentContactSuccess(data: NSDictionary?) {
         let realData = data!["data"] as! [[String: AnyObject]]
+        PageYiMaiRecentContactList.PrevData = realData
         TargetController.RecentContactList.LoadData(realData)
         TargetController.FullPageLoading.Hide()
     }

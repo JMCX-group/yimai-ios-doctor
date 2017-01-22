@@ -36,6 +36,9 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
     private var CityTable: YMTableView? = nil
     private var HosTable: YMTableView? = nil
     
+    var PrevData: [String: AnyObject]? = nil
+    var FilterResult: [[String: AnyObject]]? = nil
+    
     var BlankContentPanel = UIView()
     
     override func ViewLayout() {
@@ -247,28 +250,34 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
     }
     
     public func LoadCityList(data: [String: AnyObject]) {
-        let prov = data["provinces"] as? [[String: AnyObject]]
-        let citys = data["citys"] as? [String: [ [String:AnyObject] ] ]
+        var prov = data["provinces"] as? [[String: AnyObject]]
+        var citys = data["citys"] as? [String: [ [String:AnyObject] ] ]
         
         if(nil != prov && nil != citys) {
             YMLayout.ClearView(view: CityFilterList)
             CityFilterList.hidden = true
-            CityTable?.Clear()
-            YMLayout.ClearView(view: CityFilterList)
+//            CityTable?.Clear()
+            
+            prov?.insert(["id": "clear", "name": "重置城市"], atIndex: 0)
+            citys?["clear"] = [[String:AnyObject]]()
+//            YMLayout.ClearView(view: CityFilterList)
             CityTable = PageSearchResultCell.GetCityTablView(prov!, citys: citys!,
                                                  parent: CityFilterList,
-                                                 cityTouched: SameAreasActions!.CityTouched)
+                                                 cityTouched: SameAreasActions!.CityTouched,
+                                                 provTouched: SameAreasActions!.ProvTouched)
         }
     }
     
     public func LoadHospitalList(data: [String: AnyObject]) {
-        let hospitals = data["hospitals"] as? [String: [ String: [ [String: AnyObject] ] ] ]
+        var hospitals = data["hospitals"] as? [String: [ String: [ [String: AnyObject] ] ] ]
 
         if(nil != hospitals) {
             YMLayout.ClearView(view: HospitalFilterList)
             HospitalFilterList.hidden = true
-            HosTable?.Clear()
-            YMLayout.ClearView(view: HospitalFilterList)
+//            HosTable?.Clear()
+//            YMLayout.ClearView(view: HospitalFilterList)
+
+            hospitals!["clear"] = ["clear": [["id": "clear", "name": "重置医院"]]]
             HosTable = PageSearchResultCell.GetHospitalSearchView(hospitals!,
                                                        parent: HospitalFilterList,
                                                        hospitalTouched: SameAreasActions!.HospitalTouched)
@@ -279,15 +288,17 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
         self.ClearList()
         self.SearchInput?.text = ""
         self.SameAreasActions?.ThisCacheKey = nil
+        ListPos = 0
+        NextPos = 15
     }
     
     public func ClearList() {
-        CityTable?.Clear()
-        HosTable?.Clear()
+//        CityTable?.Clear()
+//        HosTable?.Clear()
 
         YMLayout.ClearView(view: ResultList)
-        YMLayout.ClearView(view: CityFilterList)
-        YMLayout.ClearView(view: HospitalFilterList)
+//        YMLayout.ClearView(view: CityFilterList)
+//        YMLayout.ClearView(view: HospitalFilterList)
 
         CityFilterList.hidden = true
         HospitalFilterList.hidden = true
@@ -375,6 +386,189 @@ public class PageYiMaiSameAreasBodyView: PageBodyView {
         buttonTitle.fillSuperview()
         buttonTitle.layer.cornerRadius = buttonTitle.height / 2
         buttonTitle.layer.masksToBounds = true
+    }
+    
+    func FilterByCity(city: String) {
+        //        if(nil == FilterResult) {
+        //            FilterResult = PrevData!["users"] as? [[String: AnyObject]]
+        //            if(nil == FilterResult) {
+        //                return
+        //            }
+        //        }
+        
+        FilterResult = PrevData!["users"] as? [[String: AnyObject]]
+        if(nil == FilterResult) {
+            return
+        }
+        
+        var hosFilterData = [[String: AnyObject]]()
+        
+        var hosFilted = [String]()
+        
+        var ret = [[String: AnyObject]]()
+        for user in FilterResult! {
+            let cityName = YMVar.GetStringByKey(user, key: "city")
+            let userHos = user["hospital"] as? [String: AnyObject]
+            var userHosName = ""
+            if(nil != userHos) {
+                userHosName = YMVar.GetStringByKey(userHos, key: "name")
+            }
+            
+            if(city == cityName) {
+                ret.append(user)
+                if(!hosFilted.contains(userHosName)) {
+                    hosFilterData.append(userHos!)
+                    hosFilted.append(userHosName)
+                }
+                
+            }
+        }
+        
+        SetHospital("医院")
+        LoadHospitalList(["hospitals": ["a": ["b": hosFilterData]]])
+        
+        FilterResult = ret
+        DrawList(ret)
+    }
+    
+    func FilterByHos(hos: String) {
+        if(nil == FilterResult) {
+            FilterResult = PrevData!["users"] as? [[String: AnyObject]]
+            if(nil == FilterResult) {
+                return
+            }
+        }
+        
+        var ret = [[String: AnyObject]]()
+        for user in FilterResult! {
+            let userHos = user["hospital"] as? [String: AnyObject]
+            var userHosName = ""
+            if(nil != userHos) {
+                userHosName = YMVar.GetStringByKey(userHos, key: "name")
+            }
+            
+            if(hos == userHosName) {
+                ret.append(user)
+            }
+        }
+        
+        DrawList(ret)
+    }
+    
+    func GetCityForKeyWordSearch(cityName: String) -> [String: AnyObject]? {
+        let cityList = PrevData!["citys"] as? [String: [ [String:AnyObject] ] ]
+        if(nil == cityList) {
+            return nil
+        }
+        
+        var ret: [String:AnyObject]? =  nil
+        for (provId, cityArr) in cityList! {
+            for city in cityArr {
+                let name = YMVar.GetStringByKey(city, key: "name")
+                if(name == cityName) {
+                    ret = city
+                    ret!["prov"] = provId
+                    break
+                }
+            }
+            
+            if(nil != ret) {
+                break
+            }
+        }
+        
+        return ret
+    }
+    
+    func GetProvForKeyWordSearch(city: [String: [[String: AnyObject]]]) -> [[String: AnyObject]] {
+        let provList = PrevData!["provinces"] as? [[String: AnyObject]]
+        
+        var ret = [[String: AnyObject]]()
+        
+        for (provId, _) in city {
+            for prov in provList! {
+                let provIdInList = YMVar.GetStringByKey(prov, key: "id")
+                if(provId == provIdInList) {
+                    ret.append(prov)
+                    break
+                }
+            }
+        }
+        
+        return ret
+    }
+    
+    func FilterByKey(key: String) {
+        if(nil == PrevData) {return}
+        let lastUserInfo = PrevData!["users"] as! [[String: AnyObject]]
+        
+        if("" == key) {
+            ClearFilters()
+            LoadCityList(PrevData!)
+            LoadHospitalList(PrevData!)
+            DrawList(lastUserInfo)
+            FilterResult = lastUserInfo
+            return
+        }
+        
+        var cityFilterData = [String: [[String: AnyObject]]]()
+        var provFilterData = [[String: AnyObject]]()
+        var hosFilterData = [[String: AnyObject]]()
+        
+        var cityFilted = [String]()
+        var hosFilted = [String]()
+        
+        var ret = [[String: AnyObject]]()
+        for user in lastUserInfo {
+            let userName = YMVar.GetStringByKey(user, key: "name")
+            let userPhone = YMVar.GetStringByKey(user, key: "phone")
+            let cityName = YMVar.GetStringByKey(user, key: "city")
+            let userHos = user["hospital"] as? [String: AnyObject]
+            let userDept = user["department"] as? [String: AnyObject]
+            var userHosName = ""
+            var userDeptName = ""
+            if(nil != userHos) {
+                userHosName = YMVar.GetStringByKey(userHos, key: "name")
+            }
+            
+            if(nil != userDept) {
+                userDeptName = YMVar.GetStringByKey(userDept, key: "name")
+            }
+            
+            if(userName.containsString(key) ||
+                userPhone.containsString(key) ||
+                userHosName.containsString(key) ||
+                userDeptName.containsString(key) ||
+                cityName.containsString(key)) {
+                ret.append(user)
+                if(!hosFilted.contains(userHosName)) {
+                    hosFilterData.append(userHos!)
+                    hosFilted.append(userHosName)
+                }
+                
+                if(cityFilted.contains(cityName)) {
+                    continue
+                }
+                cityFilted.append(cityName)
+                let city = GetCityForKeyWordSearch(cityName)
+                if(nil != city) {
+                    let prov = YMVar.GetStringByKey(city, key: "prov")
+                    if(nil == cityFilterData[prov]) {
+                        cityFilterData[prov] = [[String: AnyObject]]()
+                    }
+                    
+                    cityFilterData[prov]?.append(city!)
+                }
+            }
+        }
+        
+        provFilterData = GetProvForKeyWordSearch(cityFilterData)
+        ClearFilters()
+        LoadCityList(["provinces": provFilterData, "citys": cityFilterData])
+        LoadHospitalList(["hospitals": ["a": ["b": hosFilterData]]])
+        
+        FilterResult = ret
+        DrawList(ret)
     }
 }
 

@@ -26,6 +26,10 @@
 		6622B3B81E1B5B7C00C14EC9 /* YMIMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622B3B71E1B5B7C00C14EC9 /* YMIMCell.swift */; };
 		6622B3BA1E1B5F7500C14EC9 /* YMIMMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622B3B91E1B5F7500C14EC9 /* YMIMMessageContent.swift */; };
 		662C58AC1E2784A500F9AB6B /* libUMessage_Sdk_1.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 662C58AA1E2784A500F9AB6B /* libUMessage_Sdk_1.3.0.a */; };
+		66318E2F1E31EAD5003624FD /* PageMyAdmissionListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66318E291E31EAD5003624FD /* PageMyAdmissionListActions.swift */; };
+		66318E301E31EAD5003624FD /* PageMyAdmissionList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66318E2A1E31EAD5003624FD /* PageMyAdmissionList.storyboard */; };
+		66318E311E31EAD5003624FD /* PageMyAdmissionListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66318E2D1E31EAD5003624FD /* PageMyAdmissionListBodyView.swift */; };
+		66318E321E31EAD5003624FD /* PageMyAdmissionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66318E2E1E31EAD5003624FD /* PageMyAdmissionListViewController.swift */; };
 		6685FD061E068A260037490D /* YMImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685FD051E068A260037490D /* YMImageScrollView.swift */; };
 		669F9D231E0FC3B300A81BB7 /* PageChangePhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669F9D251E0FC3B300A81BB7 /* PageChangePhone.storyboard */; };
 		669F9D271E0FC3D000A81BB7 /* PageChangePhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D261E0FC3D000A81BB7 /* PageChangePhone.swift */; };
@@ -441,6 +445,10 @@
 		6622B3B91E1B5F7500C14EC9 /* YMIMMessageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMIMMessageContent.swift; sourceTree = "<group>"; };
 		662C58AA1E2784A500F9AB6B /* libUMessage_Sdk_1.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.3.0.a; sourceTree = "<group>"; };
 		662C58AB1E2784A500F9AB6B /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		66318E291E31EAD5003624FD /* PageMyAdmissionListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionListActions.swift; sourceTree = "<group>"; };
+		66318E2B1E31EAD5003624FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageMyAdmissionList.storyboard; sourceTree = "<group>"; };
+		66318E2D1E31EAD5003624FD /* PageMyAdmissionListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionListBodyView.swift; sourceTree = "<group>"; };
+		66318E2E1E31EAD5003624FD /* PageMyAdmissionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionListViewController.swift; sourceTree = "<group>"; };
 		6685FD051E068A260037490D /* YMImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMImageScrollView.swift; sourceTree = "<group>"; };
 		669F9D241E0FC3B300A81BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageChangePhone.storyboard; sourceTree = "<group>"; };
 		669F9D261E0FC3D000A81BB7 /* PageChangePhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageChangePhone.swift; sourceTree = "<group>"; };
@@ -988,6 +996,33 @@
 				662C58AB1E2784A500F9AB6B /* UMessage.h */,
 			);
 			path = UMessage_Sdk_1.3.0;
+			sourceTree = "<group>";
+		};
+		66318E271E31EAD5003624FD /* MyAdmissionList */ = {
+			isa = PBXGroup;
+			children = (
+				66318E2C1E31EAD5003624FD /* Body */,
+				66318E281E31EAD5003624FD /* Actions */,
+				66318E2A1E31EAD5003624FD /* PageMyAdmissionList.storyboard */,
+				66318E2E1E31EAD5003624FD /* PageMyAdmissionListViewController.swift */,
+			);
+			path = MyAdmissionList;
+			sourceTree = "<group>";
+		};
+		66318E281E31EAD5003624FD /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				66318E291E31EAD5003624FD /* PageMyAdmissionListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		66318E2C1E31EAD5003624FD /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				66318E2D1E31EAD5003624FD /* PageMyAdmissionListBodyView.swift */,
+			);
+			path = Body;
 			sourceTree = "<group>";
 		};
 		669F9D1E1E0FC38200A81BB7 /* ChangePhone */ = {
@@ -1861,6 +1896,7 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				66318E271E31EAD5003624FD /* MyAdmissionList */,
 				66C92F161E24D6CC0014D170 /* AddBankcard */,
 				66C92F081E24C6D80014D170 /* BankCardList */,
 				66CDF7381E1E4BFC007B876C /* AcceptCommonText */,
@@ -3495,6 +3531,7 @@
 				9620456B1D1B9B4100E18D88 /* PageAppointmentRecord.storyboard in Resources */,
 				961646011DB1DB3C007BA360 /* PageShowWebView.storyboard in Resources */,
 				FD3A10231DD1ED83008C905B /* PageAuthProcessing.storyboard in Resources */,
+				66318E301E31EAD5003624FD /* PageMyAdmissionList.storyboard in Resources */,
 				FD1D7D441D9CA76B0006F190 /* PageDoctorAuth.storyboard in Resources */,
 				66F9E6E91E2351F5007565D4 /* README.txt in Resources */,
 				739011B21D2763AD00EAAA1B /* PageAddmissionReply.storyboard in Resources */,
@@ -3696,6 +3733,7 @@
 				9620456F1D1B9B6500E18D88 /* PageAppointmentRecordViewController.swift in Sources */,
 				FD113D881D7D521200628295 /* YMPhotoSelector.swift in Sources */,
 				96D745B11CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift in Sources */,
+				66318E311E31EAD5003624FD /* PageMyAdmissionListBodyView.swift in Sources */,
 				9619EF7C1CC1FF2400F69CBC /* YMIndexStrings.swift in Sources */,
 				FD5D64341DE44322004C5286 /* CameraView.swift in Sources */,
 				9612DB651CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift in Sources */,
@@ -3731,6 +3769,7 @@
 				96FCD14B1D17D80D00A6E12D /* PagePersonalDetailActions.swift in Sources */,
 				737F1F5D1D1F56D800FFE573 /* PagePersonalPrivateSettingBodyView.swift in Sources */,
 				96D745BF1CF695E900E345E3 /* PageYiMaiAddContactsFriendsViewController.swift in Sources */,
+				66318E2F1E31EAD5003624FD /* PageMyAdmissionListActions.swift in Sources */,
 				9612DB771CC9F88600262D2E /* PagePersonalActions.swift in Sources */,
 				96814AB51D1A9833002C8BD3 /* PagePersonalNameEditBodyView.swift in Sources */,
 				96D451701CF6F3E9006817CE /* YMYiMaiManualAddFriendStrings.swift in Sources */,
@@ -3993,6 +4032,7 @@
 				736EBC761D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift in Sources */,
 				96834F1E1D0526C400E0C813 /* PageCommonSearchViewController.swift in Sources */,
 				9672FB381CD1C2EC00BC7E40 /* PageMessageListViewController.swift in Sources */,
+				66318E321E31EAD5003624FD /* PageMyAdmissionListViewController.swift in Sources */,
 				9612DB401CC8B75300262D2E /* PageIndexViewController.swift in Sources */,
 				FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */,
 				963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */,
@@ -4040,6 +4080,14 @@
 				661A55A31E0036D200E7CE41 /* Base */,
 			);
 			name = PageBlacklist.storyboard;
+			sourceTree = "<group>";
+		};
+		66318E2A1E31EAD5003624FD /* PageMyAdmissionList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66318E2B1E31EAD5003624FD /* Base */,
+			);
+			name = PageMyAdmissionList.storyboard;
 			sourceTree = "<group>";
 		};
 		669F9D251E0FC3B300A81BB7 /* PageChangePhone.storyboard */ = {

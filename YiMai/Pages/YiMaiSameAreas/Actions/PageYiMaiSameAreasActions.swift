@@ -17,6 +17,8 @@ public class PageYiMaiSameAreasActions: PageJumpActions, UIScrollViewDelegate{
     
     private var SearchByCityFlag = false
     private var SearchByKeyFlag = false
+    private var SearchWord = ""
+    private var SearchCity = ""
     
     override func ExtInit() {
         self.TargetView = self.Target as? PageYiMaiSameAreasBodyView
@@ -31,6 +33,7 @@ public class PageYiMaiSameAreasActions: PageJumpActions, UIScrollViewDelegate{
             YMCoreDataEngine.SaveData(ThisCacheKey!, data: data!)
             TargetView?.LoadHospitalList(data! as! [String : AnyObject])
         } else {
+            TargetView?.PrevData = data! as? [String: AnyObject]
             YMLocalData.SaveData(data!, key: YMLocalDataStrings.SAME_DEPT_CACHE + YMVar.MyDoctorId)
             YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SAME_DEPARTMENT, data: data!)
             TargetView?.LoadCityList(data! as! [String : AnyObject])
@@ -87,21 +90,40 @@ public class PageYiMaiSameAreasActions: PageJumpActions, UIScrollViewDelegate{
     }
 
     public func DoSearch(input: YMTextField) {
+//        let keyWord = input.text!
+//        
+//        SearchByCityFlag = false
+//        SearchByKeyFlag = true
+//
+//        TargetView?.ClearList()
+//        TargetView?.ClearFilters()
+//        TargetView?.Loading?.Show()
+//        GetSameAreasList(["field": keyWord])
+        
         let keyWord = input.text!
         
         SearchByCityFlag = false
         SearchByKeyFlag = true
-
+        
+        SearchWord = keyWord
+        if(YMValueValidator.IsBlankString(keyWord)) {
+            SearchWord = ""
+            input.text = ""
+        }
+        
+        SearchCity = ""
+        
         TargetView?.ClearList()
         TargetView?.ClearFilters()
         TargetView?.Loading?.Show()
-        GetSameAreasList(["field": keyWord])
+        TargetView?.FilterByKey(SearchWord)
+        TargetView?.Loading?.Hide()
     }
     
     public func DoParamSearch(param: [String: AnyObject]) {
-        TargetView?.ClearList()
-        TargetView?.Loading?.Show()
-        GetSameAreasList(param)
+//        TargetView?.ClearList()
+//        TargetView?.Loading?.Show()
+//        GetSameAreasList(param)
     }
     
     public func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -124,28 +146,76 @@ public class PageYiMaiSameAreasActions: PageJumpActions, UIScrollViewDelegate{
     }
     
     public func CityTouched(cell: YMTableViewCell) {
-        let key = TargetView?.SearchInput?.text
+//        let key = TargetView?.SearchInput?.text
+//        let cityData = cell.CellData as! [String: AnyObject]
+//        let cityId = "\(cityData["id"]!)"
+//        let cityName = "\(cityData["name"]!)"
+//
+//        SearchByCityFlag = true
+//        SearchByKeyFlag = false
+//
+//        TargetView?.SetCity(cityName)
+//        DoParamSearch(["field": key!, "city": cityId])
+        
         let cityData = cell.CellData as! [String: AnyObject]
         let cityId = "\(cityData["id"]!)"
         let cityName = "\(cityData["name"]!)"
-
-        SearchByCityFlag = true
-        SearchByKeyFlag = false
-
-        TargetView?.SetCity(cityName)
-        DoParamSearch(["field": key!, "city": cityId])
+        
+        TargetView?.ClearList()
+        if("clear" == cityId) {
+            TargetView?.FilterByKey(SearchWord)
+        } else {
+            SearchByCityFlag = true
+            SearchByKeyFlag = false
+            
+            SearchCity = cityName
+            
+            TargetView?.SetCity(cityName)
+            TargetView?.FilterByCity(cityName)
+        }
     }
     
     public func HospitalTouched(cell: YMTableViewCell) {
-        let key = TargetView?.SearchInput?.text
+//        let key = TargetView?.SearchInput?.text
+//        let hodpitalData = cell.CellData as! [String: AnyObject]
+//        let hospitalId = "\(hodpitalData["id"]!)"
+//        let hospitalName = "\(hodpitalData["name"]!)"
+//        
+//        SearchByCityFlag = false
+//        SearchByKeyFlag = false
+//        TargetView?.SetHospital(hospitalName)
+//        DoParamSearch(["field": key!, "hospital": hospitalId])
+        
         let hodpitalData = cell.CellData as! [String: AnyObject]
         let hospitalId = "\(hodpitalData["id"]!)"
         let hospitalName = "\(hodpitalData["name"]!)"
         
-        SearchByCityFlag = false
-        SearchByKeyFlag = false
-        TargetView?.SetHospital(hospitalName)
-        DoParamSearch(["field": key!, "hospital": hospitalId])
+        TargetView?.ClearList()
+        if("clear" == hospitalId) {
+            if("" != SearchCity) {
+                TargetView?.FilterByCity(SearchCity)
+            } else {
+                TargetView?.FilterByKey(SearchWord)
+            }
+        } else {
+            SearchByCityFlag = false
+            SearchByKeyFlag = false
+            
+            TargetView?.SetHospital(hospitalName)
+            TargetView?.FilterByHos(hospitalName)
+        }
+    }
+    
+    public func ProvTouched(cell: YMTableViewCell) {
+        let data = cell.CellData as! [String: AnyObject]
+        let provData = data["prov"] as! [String: AnyObject]
+        
+        let provId = "\(provData["id"]!)"
+        
+        if("clear" == provId) {
+            TargetView?.ClearList()
+            TargetView?.FilterByKey(SearchWord)
+        }
     }
 }
 

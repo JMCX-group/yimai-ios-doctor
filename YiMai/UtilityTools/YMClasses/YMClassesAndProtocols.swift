@@ -82,7 +82,8 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_ACCEPET_COMMON_TEXT: true,
         YMCommonStrings.CS_PAGE_COMMON_TEXT_AREA: true,
         YMCommonStrings.CS_PAGE_BANK_CARD_LIST_NAME: true,
-        YMCommonStrings.CS_PAGE_ADD_BANKCARD_NAME: true
+        YMCommonStrings.CS_PAGE_ADD_BANKCARD_NAME: true,
+        YMCommonStrings.CS_PAGE_GET_ADMISSSION_MSG_LIST: true
     ]
 }
 

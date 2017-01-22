@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Proposer
+import AudioToolbox
 
 class YMBackgroundRefresh: NSObject {
     static var ShowNewFriendFlag = false
@@ -260,6 +261,9 @@ class YMBackgroundRefresh: NSObject {
             let prevId = YMVar.GetStringByKey(YMVar.MyNewAdmissionInfo, key: "id")
             let curId = YMVar.GetStringByKey(admissionArr[0], key: "id")
             if(prevId != curId) {
+                AudioServicesPlaySystemSound(1003)
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                
 //                YMNotification.DoLocalNotification("您有一条新的约诊请求", userData: YMNotificationType.NewAddmission)
             }
             YMVar.MyNewAdmissionInfo = admissionArr[0]

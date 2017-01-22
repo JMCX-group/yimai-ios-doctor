@@ -39,7 +39,7 @@ public class PageMessageListActions: PageJumpActions{
     func AdmissionTouched(gr: UIGestureRecognizer) {
         ClearBroadcastApi.YMClearAllNewAdmission()
         YMVar.MyNewAdmissionInfo.removeAll()
-        DoJump(YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME)
+        DoJump(YMCommonStrings.CS_PAGE_GET_ADMISSSION_MSG_LIST)
     }
     
     func AppointmentTouched(gr: UIGestureRecognizer) {

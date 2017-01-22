@@ -236,8 +236,7 @@ public class ApointmentAcceptDetailBodyView: PageBodyView {
         cellLabel.text = formatter.stringFromDate(AdmissionDatePicker.date)
         cellLabel.sizeToFit()
         
-        formatter.dateFormat = "yyyy年MM月dd日 a"
-        AdmissionTimeString = formatter.stringFromDate(AdmissionDatePicker.date)
+        AdmissionTimeString = AdmissionDatePicker.date.toString(DateFormat.Custom("YYYY-MM-dd HH:mm:ss"))! //formatter.stringFromDate(AdmissionDatePicker.date)
         
         EnableSubmitButton()
     }

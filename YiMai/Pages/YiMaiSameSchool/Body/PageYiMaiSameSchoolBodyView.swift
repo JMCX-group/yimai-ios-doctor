@@ -200,13 +200,6 @@ public class PageYiMaiSameSchoolBodyView: PageBodyView {
     }
     
     func FilterByCity(city: String) {
-//        if(nil == FilterResult) {
-//            FilterResult = PrevData!["users"] as? [[String: AnyObject]]
-//            if(nil == FilterResult) {
-//                return
-//            }
-//        }
-        
         FilterResult = PrevData!["users"] as? [[String: AnyObject]]
         if(nil == FilterResult) {
             return

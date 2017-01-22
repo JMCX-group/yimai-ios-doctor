@@ -103,6 +103,7 @@ public class YMCommonStrings {
     public static let CS_PAGE_AUTH_PROCESSING = "PageAuthProcessing"
     
     public static let CS_PAGE_GET_APPOINMENT_MSG_LIST = "PageAppointmentReplyList"
+    public static let CS_PAGE_GET_ADMISSSION_MSG_LIST = "PageMyAdmissionList"
     public static let CS_PAGE_AUTH_COMPLETE = "PageAuthComplete"
     public static let CS_PAGE_BLACKLIST_NAME = "PageBlacklist"
     
