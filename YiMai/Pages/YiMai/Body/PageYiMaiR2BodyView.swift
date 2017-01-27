@@ -167,7 +167,7 @@ public class PageYiMaiR2BodyView: PageBodyView {
     override func BodyViewEndDragging() {
         super.BodyViewEndDragging()
         let y = BodyView.contentOffset.y
-        if(y < -5.0) {
+        if(y < -YMSizes.PagePullRefreshHeight) {
             self.FullPageLoading.Show()
             YMDelay(1.0) {
                 self.Reload()

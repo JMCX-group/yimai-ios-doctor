@@ -21,6 +21,7 @@ public class YMSizes {
     public static var ScreenWidth : CGFloat = UIScreen.mainScreen().bounds.width
     public static var PageWidth : CGFloat = UIScreen.mainScreen().bounds.width
     public static var PageHeight : CGFloat = UIScreen.mainScreen().bounds.height
+    public static let PagePullRefreshHeight: CGFloat = UIScreen.mainScreen().bounds.height / 6
     public static let DesignedWidth : CGFloat = 750.0
     public static let PageTopHeight : CGFloat = 128.0.LayoutVal()
     public static let PageBottomHeight : CGFloat = 98.0.LayoutVal()

@@ -30,6 +30,18 @@
 		66318E301E31EAD5003624FD /* PageMyAdmissionList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66318E2A1E31EAD5003624FD /* PageMyAdmissionList.storyboard */; };
 		66318E311E31EAD5003624FD /* PageMyAdmissionListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66318E2D1E31EAD5003624FD /* PageMyAdmissionListBodyView.swift */; };
 		66318E321E31EAD5003624FD /* PageMyAdmissionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66318E2E1E31EAD5003624FD /* PageMyAdmissionListViewController.swift */; };
+		663424F81E373AF700EF8C69 /* PageIMSearchConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663424F71E373AF700EF8C69 /* PageIMSearchConversationsViewController.swift */; };
+		663424F91E373B3F00EF8C69 /* PageIMSearchConversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 663424FB1E373B3F00EF8C69 /* PageIMSearchConversations.storyboard */; };
+		663424FD1E373B5B00EF8C69 /* PageIMSearchConversationsBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663424FC1E373B5B00EF8C69 /* PageIMSearchConversationsBodyView.swift */; };
+		663424FF1E373B6600EF8C69 /* PageIMSearchConversationsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663424FE1E373B6600EF8C69 /* PageIMSearchConversationsActions.swift */; };
+		665CB3F11E389541009093D0 /* PageIMHistoryList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 665CB3F31E389541009093D0 /* PageIMHistoryList.storyboard */; };
+		665CB3F51E389599009093D0 /* PageIMHistoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CB3F41E389599009093D0 /* PageIMHistoryListViewController.swift */; };
+		665CB3F71E3895BA009093D0 /* PageIMHistoryListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CB3F61E3895BA009093D0 /* PageIMHistoryListBodyView.swift */; };
+		665CB3F91E3895C7009093D0 /* PageIMHistoryListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CB3F81E3895C7009093D0 /* PageIMHistoryListActions.swift */; };
+		665CB3FE1E389E64009093D0 /* PageIMSearchMessage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 665CB3FD1E389E64009093D0 /* PageIMSearchMessage.storyboard */; };
+		665CB4001E389EAD009093D0 /* PageIMSearchMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CB3FF1E389EAD009093D0 /* PageIMSearchMessageViewController.swift */; };
+		665CB4021E389EB8009093D0 /* PageIMSearchMessageBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CB4011E389EB8009093D0 /* PageIMSearchMessageBodyView.swift */; };
+		665CB4041E38A182009093D0 /* PageIMSearchMessageActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CB4031E38A182009093D0 /* PageIMSearchMessageActions.swift */; };
 		6685FD061E068A260037490D /* YMImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685FD051E068A260037490D /* YMImageScrollView.swift */; };
 		669F9D231E0FC3B300A81BB7 /* PageChangePhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669F9D251E0FC3B300A81BB7 /* PageChangePhone.storyboard */; };
 		669F9D271E0FC3D000A81BB7 /* PageChangePhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D261E0FC3D000A81BB7 /* PageChangePhone.swift */; };
@@ -449,6 +461,18 @@
 		66318E2B1E31EAD5003624FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageMyAdmissionList.storyboard; sourceTree = "<group>"; };
 		66318E2D1E31EAD5003624FD /* PageMyAdmissionListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionListBodyView.swift; sourceTree = "<group>"; };
 		66318E2E1E31EAD5003624FD /* PageMyAdmissionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMyAdmissionListViewController.swift; sourceTree = "<group>"; };
+		663424F71E373AF700EF8C69 /* PageIMSearchConversationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMSearchConversationsViewController.swift; sourceTree = "<group>"; };
+		663424FA1E373B3F00EF8C69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageIMSearchConversations.storyboard; sourceTree = "<group>"; };
+		663424FC1E373B5B00EF8C69 /* PageIMSearchConversationsBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMSearchConversationsBodyView.swift; sourceTree = "<group>"; };
+		663424FE1E373B6600EF8C69 /* PageIMSearchConversationsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMSearchConversationsActions.swift; sourceTree = "<group>"; };
+		665CB3F21E389541009093D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageIMHistoryList.storyboard; sourceTree = "<group>"; };
+		665CB3F41E389599009093D0 /* PageIMHistoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMHistoryListViewController.swift; sourceTree = "<group>"; };
+		665CB3F61E3895BA009093D0 /* PageIMHistoryListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMHistoryListBodyView.swift; sourceTree = "<group>"; };
+		665CB3F81E3895C7009093D0 /* PageIMHistoryListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMHistoryListActions.swift; sourceTree = "<group>"; };
+		665CB3FD1E389E64009093D0 /* PageIMSearchMessage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PageIMSearchMessage.storyboard; sourceTree = "<group>"; };
+		665CB3FF1E389EAD009093D0 /* PageIMSearchMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMSearchMessageViewController.swift; sourceTree = "<group>"; };
+		665CB4011E389EB8009093D0 /* PageIMSearchMessageBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMSearchMessageBodyView.swift; sourceTree = "<group>"; };
+		665CB4031E38A182009093D0 /* PageIMSearchMessageActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMSearchMessageActions.swift; sourceTree = "<group>"; };
 		6685FD051E068A260037490D /* YMImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMImageScrollView.swift; sourceTree = "<group>"; };
 		669F9D241E0FC3B300A81BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageChangePhone.storyboard; sourceTree = "<group>"; };
 		669F9D261E0FC3D000A81BB7 /* PageChangePhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageChangePhone.swift; sourceTree = "<group>"; };
@@ -1021,6 +1045,87 @@
 			isa = PBXGroup;
 			children = (
 				66318E2D1E31EAD5003624FD /* PageMyAdmissionListBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		663424F21E373A7E00EF8C69 /* IMSearchConversations */ = {
+			isa = PBXGroup;
+			children = (
+				663424F31E373A7E00EF8C69 /* Actions */,
+				663424F41E373A7E00EF8C69 /* Body */,
+				663424FB1E373B3F00EF8C69 /* PageIMSearchConversations.storyboard */,
+				663424F71E373AF700EF8C69 /* PageIMSearchConversationsViewController.swift */,
+			);
+			path = IMSearchConversations;
+			sourceTree = "<group>";
+		};
+		663424F31E373A7E00EF8C69 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				663424FE1E373B6600EF8C69 /* PageIMSearchConversationsActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		663424F41E373A7E00EF8C69 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				663424FC1E373B5B00EF8C69 /* PageIMSearchConversationsBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		665CB3EC1E3894B5009093D0 /* IMHistoryList */ = {
+			isa = PBXGroup;
+			children = (
+				665CB3ED1E3894B5009093D0 /* Actions */,
+				665CB3EE1E3894B5009093D0 /* Body */,
+				665CB3F31E389541009093D0 /* PageIMHistoryList.storyboard */,
+				665CB3F41E389599009093D0 /* PageIMHistoryListViewController.swift */,
+			);
+			path = IMHistoryList;
+			sourceTree = "<group>";
+		};
+		665CB3ED1E3894B5009093D0 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				665CB3F81E3895C7009093D0 /* PageIMHistoryListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		665CB3EE1E3894B5009093D0 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				665CB3F61E3895BA009093D0 /* PageIMHistoryListBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		665CB3FA1E389B6F009093D0 /* IMSearchMessage */ = {
+			isa = PBXGroup;
+			children = (
+				665CB3FB1E389B6F009093D0 /* Actions */,
+				665CB3FC1E389B6F009093D0 /* Body */,
+				665CB3FD1E389E64009093D0 /* PageIMSearchMessage.storyboard */,
+				665CB3FF1E389EAD009093D0 /* PageIMSearchMessageViewController.swift */,
+			);
+			path = IMSearchMessage;
+			sourceTree = "<group>";
+		};
+		665CB3FB1E389B6F009093D0 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				665CB4031E38A182009093D0 /* PageIMSearchMessageActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		665CB3FC1E389B6F009093D0 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				665CB4011E389EB8009093D0 /* PageIMSearchMessageBodyView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -1896,6 +2001,9 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				665CB3FA1E389B6F009093D0 /* IMSearchMessage */,
+				665CB3EC1E3894B5009093D0 /* IMHistoryList */,
+				663424F21E373A7E00EF8C69 /* IMSearchConversations */,
 				66318E271E31EAD5003624FD /* MyAdmissionList */,
 				66C92F161E24D6CC0014D170 /* AddBankcard */,
 				66C92F081E24C6D80014D170 /* BankCardList */,
@@ -3527,6 +3635,7 @@
 				2F2BDA511DD80A7900310385 /* PageWalletRecord.storyboard in Resources */,
 				661A55A21E0036D200E7CE41 /* PageBlacklist.storyboard in Resources */,
 				96637A7D1CC24A6100DBD1CF /* PageLogin.storyboard in Resources */,
+				665CB3FE1E389E64009093D0 /* PageIMSearchMessage.storyboard in Resources */,
 				9612DB6D1CC9F75300262D2E /* PagePersonal.storyboard in Resources */,
 				9620456B1D1B9B4100E18D88 /* PageAppointmentRecord.storyboard in Resources */,
 				961646011DB1DB3C007BA360 /* PageShowWebView.storyboard in Resources */,
@@ -3556,6 +3665,7 @@
 				7394F84B1CF9A36800F05487 /* PageAppointmentPatientCondition.storyboard in Resources */,
 				FDD02E971DE5477C00118FC3 /* PageAppointmentReplyList.storyboard in Resources */,
 				FD5D64321DE44322004C5286 /* ConfirmViewController.xib in Resources */,
+				665CB3F11E389541009093D0 /* PageIMHistoryList.storyboard in Resources */,
 				FD86428C1DAF30B500C93411 /* PageSYSBroadcast.storyboard in Resources */,
 				FD5512FF1DAB76B400A84801 /* PageInputMyFeatures.storyboard in Resources */,
 				73622E5A1D1EE5660039E785 /* PageYiMaiContact.storyboard in Resources */,
@@ -3584,6 +3694,7 @@
 				962076D01CC5ECA9002083FA /* PageRegister.storyboard in Resources */,
 				9612DB641CC9F71F00262D2E /* PageRegisterPersonalInfo.storyboard in Resources */,
 				9612DB3C1CC8B5DB00262D2E /* PageIndex.storyboard in Resources */,
+				663424F91E373B3F00EF8C69 /* PageIMSearchConversations.storyboard in Resources */,
 				73622E421D1EDF790039E785 /* PageAboutYiMai.storyboard in Resources */,
 				FD2A99CA1D951D6B001953D6 /* PageAppointmentProcessing.storyboard in Resources */,
 				9672FB421CD2222200BC7E40 /* PageMyAdmissionsList.storyboard in Resources */,
@@ -3829,6 +3940,7 @@
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
 				66C92F231E24D8870014D170 /* PageAddBankcardActions.swift in Sources */,
 				FD77AF231D68484F00B8C73E /* LBXScanLineAnimation.swift in Sources */,
+				665CB3F71E3895BA009093D0 /* PageIMHistoryListBodyView.swift in Sources */,
 				2F2BDA591DD80C5900310385 /* PageWalletRecordActions.swift in Sources */,
 				FD54E0661D3777DF00F8E629 /* PageAdmissionFixedTimeSettingBodyView.swift in Sources */,
 				9672FB201CCF5E8400BC7E40 /* YMSelectors.swift in Sources */,
@@ -3851,6 +3963,7 @@
 				FD77AF241D68484F00B8C73E /* LBXScanNetAnimation.swift in Sources */,
 				96C02FDB1D968D5D0096E216 /* PageCommonTextInputViewController.swift in Sources */,
 				FD5513031DAB76C700A84801 /* PageInputMyFeaturesViewController.swift in Sources */,
+				663424F81E373AF700EF8C69 /* PageIMSearchConversationsViewController.swift in Sources */,
 				96814A891D1A3E4A002C8BD3 /* PagePersonalDetailEditViewController.swift in Sources */,
 				66CDF7451E1E4D1C007B876C /* PageAcceptCommonTextActions.swift in Sources */,
 				96C02FEB1D96B4E30096E216 /* PaperCardPreviewBodyView.swift in Sources */,
@@ -3880,6 +3993,7 @@
 				96FCD14D1D17D81A00A6E12D /* PagePersonalDetailTopView.swift in Sources */,
 				737F1F931D207C8200FFE573 /* PageGlobalSearchActions.swift in Sources */,
 				96637A8A1CC2515E00DBD1CF /* YMCommonActions.swift in Sources */,
+				665CB4021E389EB8009093D0 /* PageIMSearchMessageBodyView.swift in Sources */,
 				9672FB131CCF133C00BC7E40 /* PageFace2FaceInfoInputViewController.swift in Sources */,
 				6622B3B81E1B5B7C00C14EC9 /* YMIMCell.swift in Sources */,
 				9672FB1A1CCF22F300BC7E40 /* PageFace2FaceInfoInputActions.swift in Sources */,
@@ -3919,6 +4033,7 @@
 				9672FB461CD2225200BC7E40 /* PageMyAdmissionsListViewController.swift in Sources */,
 				96814AB31D1A9813002C8BD3 /* PagePersonalNameEditViewController.swift in Sources */,
 				FD7B4C271D9A6A980003BE0D /* PageMyPatientListViewController.swift in Sources */,
+				663424FF1E373B6600EF8C69 /* PageIMSearchConversationsActions.swift in Sources */,
 				FD5D64371DE44322004C5286 /* PermissionsView.swift in Sources */,
 				FD2A99CB1D951D6B001953D6 /* PageAppointmentProcessingBodyView.swift in Sources */,
 				96C02FCD1D9670200096E216 /* RequirePaperCardViewController.swift in Sources */,
@@ -3931,6 +4046,7 @@
 				962076EF1CC72583002083FA /* PageRegisterSelectHospitalViewController.swift in Sources */,
 				96B3E8A01D10EBB700C8B5C2 /* PageHospitalSearchBodyView.swift in Sources */,
 				FDF46D391D768A43007B9987 /* ApointmentAcceptDetailBodyView.swift in Sources */,
+				665CB4001E389EAD009093D0 /* PageIMSearchMessageViewController.swift in Sources */,
 				96B3E8A51D1146E200C8B5C2 /* PageHospitalSearchActions.swift in Sources */,
 				960606FC1CE591CC00AAFC07 /* YMNetworkUtility.swift in Sources */,
 				96D4519A1CF7D827006817CE /* PageYiMaiSameSchoolActions.swift in Sources */,
@@ -3971,6 +4087,7 @@
 				96D745C61CF6973200E345E3 /* YiMaiAddContactsFriendsActions.swift in Sources */,
 				96C6FB0E1D19304200738D02 /* YMVar.swift in Sources */,
 				96D4516A1CF6D9FA006817CE /* PageYiMaiManualAddFriendViewController.swift in Sources */,
+				663424FD1E373B5B00EF8C69 /* PageIMSearchConversationsBodyView.swift in Sources */,
 				961FE8C81CEEF6F7002785B9 /* PageYiMaiViewController.swift in Sources */,
 				96814AB71D1A9870002C8BD3 /* PagePersonalNameEditActions.swift in Sources */,
 				96331B091CC8762600E53125 /* YMButton.swift in Sources */,
@@ -3999,6 +4116,7 @@
 				73622E571D1EE30A0039E785 /* PageYiMaiIntroViewController.swift in Sources */,
 				96661E881D97D876000692D0 /* PageAppointmentTransferViewController.swift in Sources */,
 				962076D41CC5ECCA002083FA /* PageRegisterViewController.swift in Sources */,
+				665CB3F91E3895C7009093D0 /* PageIMHistoryListActions.swift in Sources */,
 				96814A971D1A78A9002C8BD3 /* PagePersonalTagsEditViewController.swift in Sources */,
 				96D451AB1CF7F1B5006817CE /* PageAppointmentActions.swift in Sources */,
 				FD5D64251DE44322004C5286 /* CameraGlobals.swift in Sources */,
@@ -4011,6 +4129,7 @@
 				960607001CE97CC500AAFC07 /* YMModalView.swift in Sources */,
 				FDD93EA31D923744003576D4 /* PageAddFriendInfoCardViewController.swift in Sources */,
 				9672FB4A1CD222C100BC7E40 /* PageMyAdmissionsListActions.swift in Sources */,
+				665CB3F51E389599009093D0 /* PageIMHistoryListViewController.swift in Sources */,
 				96FCD1491D17D7F800A6E12D /* PagePersonalDetailBodyView.swift in Sources */,
 				7394F8461CF949FD00F05487 /* PageAppointmentPatientBasicInfoBodyView.swift in Sources */,
 				9624936D1CED5CAA007A9556 /* YMValueValidator.swift in Sources */,
@@ -4029,6 +4148,7 @@
 				7394F85E1D005E3600F05487 /* PageAppointmentSelectTimeBodyView.swift in Sources */,
 				669F9D291E0FC43E00A81BB7 /* PageChangePhoneBodyView.swift in Sources */,
 				FD2A99CC1D951D6B001953D6 /* PageAppointmentProcessingViewController.swift in Sources */,
+				665CB4041E38A182009093D0 /* PageIMSearchMessageActions.swift in Sources */,
 				736EBC761D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift in Sources */,
 				96834F1E1D0526C400E0C813 /* PageCommonSearchViewController.swift in Sources */,
 				9672FB381CD1C2EC00BC7E40 /* PageMessageListViewController.swift in Sources */,
@@ -4088,6 +4208,22 @@
 				66318E2B1E31EAD5003624FD /* Base */,
 			);
 			name = PageMyAdmissionList.storyboard;
+			sourceTree = "<group>";
+		};
+		663424FB1E373B3F00EF8C69 /* PageIMSearchConversations.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				663424FA1E373B3F00EF8C69 /* Base */,
+			);
+			name = PageIMSearchConversations.storyboard;
+			sourceTree = "<group>";
+		};
+		665CB3F31E389541009093D0 /* PageIMHistoryList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				665CB3F21E389541009093D0 /* Base */,
+			);
+			name = PageIMHistoryList.storyboard;
 			sourceTree = "<group>";
 		};
 		669F9D251E0FC3B300A81BB7 /* PageChangePhone.storyboard */ = {

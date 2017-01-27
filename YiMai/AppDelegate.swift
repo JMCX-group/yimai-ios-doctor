@@ -67,8 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
             return
         }
         
+        YMNotificationHandler.HandlerMap[action!]?(ctrl!, userInfo, (application.applicationState == UIApplicationState.Active))
+        
         if(application.applicationState != UIApplicationState.Active) {
-            YMNotificationHandler.HandlerMap[action!]?(ctrl!, userInfo)
             completionHandler(UIBackgroundFetchResult.NewData)
         } else {
             completionHandler(UIBackgroundFetchResult.NoData)

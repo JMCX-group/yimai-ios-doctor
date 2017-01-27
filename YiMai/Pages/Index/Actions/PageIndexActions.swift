@@ -146,6 +146,8 @@ public class PageIndexActions: PageJumpActions {
             PageGlobalSearchViewController.InitSearchKey = editor.text!
             DoJump(YMCommonStrings.CS_PAGE_GLOBAL_SEARCH_NAME)
         }
+        
+//        DoJump(YMCommonStrings.CS_PAGE_IM_SEARCH)
 
 //        ApiUtility?.YMGetSearchResult(["field":editor.text!], progressHandler: nil)
 //        ApiUtility?.YMQueryUserInfo()

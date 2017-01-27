@@ -30,14 +30,14 @@ public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
     public func textFieldDidEndEditing(textField: UITextField) {
         if(!textField.isKindOfClass(YMTextField)) { return }
         
-        let realTextField = textField as! YMTextField
+//        let realTextField = textField as! YMTextField
         
         textField.resignFirstResponder()
-        if(nil != realTextField.EditEndCallback) {
-            realTextField.EditEndCallback!(realTextField)
-        }
+//        if(nil != realTextField.EditEndCallback) {
+//            realTextField.EditEndCallback!(realTextField)
+//        }
         
-        return;
+        return
     }
     
     public func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
@@ -86,9 +86,11 @@ public class YMTextFieldDelegate : NSObject, UITextFieldDelegate {
     
     public func DownButtonTouched(sender: YMButton) {
         let textField = sender.UserObjectData as! YMTextField
-        textField.resignFirstResponder()
-        if(nil != textField.EditEndCallback) {
-            textField.EditEndCallback!(textField)
+        if(textField.isFirstResponder()) {
+            textField.resignFirstResponder()
+            if(nil != textField.EditEndCallback) {
+                textField.EditEndCallback!(textField)
+            }
         }
     }
 }

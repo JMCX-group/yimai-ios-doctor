@@ -56,6 +56,8 @@ public class PageYiMaiViewController: PageViewController {
         RecentContactList?.BodyView.hidden = true
         YiMaiR2Body?.BodyView.hidden = true
         YiMaiR1Body?.BodyView.hidden = false
+        YiMaiTopView?.AddFriendButton?.hidden = false
+        YiMaiTopView?.IMSettingButton?.hidden = true
         
         YiMaiR1Body?.SetBodyScroll()
         YiMaiR2Body?.SetBodyScroll()
@@ -66,7 +68,8 @@ public class PageYiMaiViewController: PageViewController {
         RecentContactList?.BodyView.hidden = true
         YiMaiR1Body?.BodyView.hidden = true
         YiMaiR2Body?.BodyView.hidden = false
-        
+        YiMaiTopView?.AddFriendButton?.hidden = false
+        YiMaiTopView?.IMSettingButton?.hidden = true
         YiMaiR1Body?.SetBodyScroll()
         YiMaiR2Body?.SetBodyScroll()
     }
@@ -76,12 +79,15 @@ public class PageYiMaiViewController: PageViewController {
         RecentContactList?.BodyView.hidden = false
         YiMaiR1Body?.BodyView.hidden = true
         YiMaiR2Body?.BodyView.hidden = true
+        YiMaiTopView?.AddFriendButton?.hidden = true
+        YiMaiTopView?.IMSettingButton?.hidden = false
         
         YiMaiR1Body?.SetBodyScroll()
         YiMaiR2Body?.SetBodyScroll()
         
         let docList = YMIMUtility.GetRecentContactDoctorsIdList()
 //        FullPageLoading.Show()
+
         YiMaiActions?.ContactApi.YMGetRecentContactedDocList(["id_list": docList.joinWithSeparator(",")])
     }
     

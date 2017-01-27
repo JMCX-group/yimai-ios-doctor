@@ -39,7 +39,7 @@ public class PageNewFriendBodyView: PageBodyView {
     override func BodyViewEndDragging() {
         super.BodyViewEndDragging()
         let yOffset = self.BodyView.contentOffset.y
-        if(yOffset < -5.0) {
+        if(yOffset < -YMSizes.PagePullRefreshHeight) {
             FullPageLoading.Show()
             YMDelay(1, closure: { 
                 let data = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as? [[String : AnyObject]]

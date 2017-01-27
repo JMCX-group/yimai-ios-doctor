@@ -16,6 +16,7 @@ public class PageYiMaiTopView: NSObject {
     
     public var QRButton: YMTouchableImageView? = nil
     public var AddFriendButton: YMTouchableImageView? = nil
+    public var IMSettingButton: YMTouchableImageView? = nil
     public var PageContentTab: UIView? = nil
     
     public static var TabButtonIndex = YMYiMaiStrings.CS_TOP_TAB_R1_BUTTON_TITLE
@@ -24,9 +25,10 @@ public class PageYiMaiTopView: NSObject {
     private let R2TabSelector: Selector = "YiMaiR2TabTouched:".Sel()
     private let RecentTabSelector: Selector = "YiMaiRecentContact:".Sel()
     private let AddFriendsSelector: Selector = "AddFriendButtonTouched:".Sel()
+    private let IMSettingSelector: Selector = "IMSettingTouched:".Sel()
     
     private let TopView = UIView()
-    
+
     private let TabButtonMap = [
         YMYiMaiStrings.CS_TOP_TAB_COMM_BUTTON_TITLE: YMButton(),
         YMYiMaiStrings.CS_TOP_TAB_R1_BUTTON_TITLE: YMButton(),
@@ -61,15 +63,19 @@ public class PageYiMaiTopView: NSObject {
         
         let addFriendImage = UIImage(named: "PageYiMaiAddFriendButton")
         AddFriendButton = YMLayout.GetTouchableImageView(useObject: self.Actions!, useMethod: AddFriendsSelector, image: addFriendImage!)
-//        AddFriendButton?.UserStringData = YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME
+        
+        IMSettingButton = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: IMSettingSelector, imageName: "YMIconSetting")
+        IMSettingButton?.hidden = true
         
         TopView.addSubview(QRButton!)
         TopView.addSubview(AddFriendButton!)
+        TopView.addSubview(IMSettingButton!)
         
         QRButton!.anchorInCorner(Corner.BottomLeft, xPad: 28.LayoutVal(), yPad: 24.LayoutVal(), width: QRButton!.width, height: QRButton!.height)
         AddFriendButton!.anchorInCorner(Corner.BottomRight, xPad: 20.LayoutVal(), yPad: 24.LayoutVal(), width: AddFriendButton!.width, height: AddFriendButton!.height)
+        IMSettingButton!.anchorInCorner(Corner.BottomRight, xPad: 20.LayoutVal(), yPad: 24.LayoutVal(), width: IMSettingButton!.width, height: IMSettingButton!.height)
     }
-    
+
     private func DrawTopBackground() {
         let topBackground = YMLayout.GetSuitableImageView("TopViewBackgroundNormal")
         TopView.addSubview(topBackground)

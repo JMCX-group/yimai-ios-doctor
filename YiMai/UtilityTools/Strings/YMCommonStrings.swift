@@ -109,6 +109,9 @@ public class YMCommonStrings {
     
     public static let CS_PAGE_ACCEPET_COMMON_TEXT = "PageAcceptCommonText"
     public static let CS_PAGE_COMMON_TEXT_AREA = "PageCommonTextArea"
+    
+    public static let CS_PAGE_IM_SEARCH = "PageIMSearchConversations"
+    public static let CS_PAGE_IM_MSG_SEARCH = "PageIMSearchMessage"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

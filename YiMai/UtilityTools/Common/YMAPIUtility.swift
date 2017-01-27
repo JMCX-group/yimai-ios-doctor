@@ -209,7 +209,7 @@ public class YMAPIUtility {
         }
     }
 
-    private var Key: String = ""
+    var Key: String = ""
     
     private static func AppendTokenToUrl(url:String, token: String) -> String {
         return url + "?\(YMCommonStrings.CS_API_PARAM_KEY_TOKEN)=\(token)"

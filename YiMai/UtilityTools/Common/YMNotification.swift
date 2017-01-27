@@ -11,49 +11,47 @@ import Foundation
 class YMNotificationType: NSObject {
     static let NewAppointment = "appointment"
     static let NewBroadCast = "radio"
+    static let AddFriend = "add-friend"
 
 //    static let NewAddmission = "NewAddmission"
 //    static let NewFriendApply = "NewFriend"
 //    static let YiMaiR1Changed = "YiMaiR1Changed"
 }
 
-typealias YMNotificationHandlerFunc = ((UINavigationController, AnyObject) -> Void)
+typealias YMNotificationHandlerFunc = ((UINavigationController, AnyObject, Bool) -> Void)
 class YMNotificationHandler: NSObject {
     static var HandlerMap: [String: YMNotificationHandlerFunc] = [
         YMNotificationType.NewAppointment: YMNotificationHandler.NewAppointment,
-        YMNotificationType.NewBroadCast: YMNotificationHandler.NewBroadcast
-        
-//        YMNotificationType.NewAddmission: YMNotificationHandler.NewAddmission,
-//        YMNotificationType.NewFriendApply: YMNotificationHandler.NewFriendApply,
-//        YMNotificationType.YiMaiR1Changed: YMNotificationHandler.YiMaiR1Changed
+        YMNotificationType.NewBroadCast: YMNotificationHandler.NewBroadcast,
+        YMNotificationType.AddFriend: YMNotificationHandler.AddNewFriend
     ]
     
-    static func NewBroadcast(nav: UINavigationController, data: AnyObject) {
-        PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_SYS_BROADCAST)
-    }
-    
-    static func NewAppointment(nav: UINavigationController, data: AnyObject) {
-        let realData = data as! [NSObject: AnyObject]
-        let id = realData["data-id"] as? String
-        if(nil != id) {
-            PageAppointmentDetailViewController.AppointmentID = id!
-            PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
-        } else {
-            PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST)
+    static func AddNewFriend(nav: UINavigationController, data: AnyObject, isAppActive: Bool) {
+        YMBackgroundRefresh.ShowNewFriendFlag = true
+        if(!isAppActive) {
+            PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_NEW_FRIEND_NAME)
         }
     }
-    
-//    static func NewAddmission(nav: UINavigationController) {
-//        PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_MY_ADMISSIONS_LIST_NAME)
-//    }
-//    
-//    static func NewFriendApply(nav: UINavigationController) {
-//        PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_NEW_FRIEND_NAME)
-//    }
-//    
-//    static func YiMaiR1Changed(nav: UINavigationController) {
-//        PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_YIMAI_NAME)
-//    }
+
+    static func NewBroadcast(nav: UINavigationController, data: AnyObject, isAppActive: Bool) {
+        if(!isAppActive) {
+            PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_SYS_BROADCAST)
+        }
+    }
+
+    static func NewAppointment(nav: UINavigationController, data: AnyObject, isAppActive: Bool) {
+        if(!isAppActive) {
+            let realData = data as! [NSObject: AnyObject]
+            let id = realData["data-id"] as? String
+            if(nil != id) {
+                PageAppointmentDetailViewController.AppointmentID = id!
+                PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
+            } else {
+                PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST)
+            }
+        }
+    }
+
 }
 
 class YMNotification: NSObject {

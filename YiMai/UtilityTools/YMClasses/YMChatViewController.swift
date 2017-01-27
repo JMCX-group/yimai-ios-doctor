@@ -46,6 +46,10 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
 
         let userHead = YMVar.GetStringByKey(UserData, key: "head_url", defStr: "http://d.medi-link.cn/uploads/avatar/default.jpg")
         let userId = YMVar.GetStringByKey(UserData, key: "id")
+        let userName = ViewTitle
+        
+        
+        YMLocalData.SaveData(userName, key: YMLocalDataStrings.DOC_NAME + userId)
         YMLocalData.SaveData(userHead, key: YMLocalDataStrings.DOC_HEAD_URL + userId)
         if(ShowAppointment) {
             AddToBlackList.setTitle("加入黑名单", forState: UIControlState.Normal)

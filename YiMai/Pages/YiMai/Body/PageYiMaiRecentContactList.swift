@@ -56,7 +56,7 @@ class PageYiMaiRecentContactList: PageBodyView {
         
         BodyView.addSubview(cell)
         cell.UserStringData = "\(docInfo["id"]!)"
-        cell.UserObjectData = docInfo//["name": name]
+        cell.UserObjectData = docInfo
         if (nil == prev) {
             cell.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 150.LayoutVal())
         } else {
@@ -78,7 +78,7 @@ class PageYiMaiRecentContactList: PageBodyView {
         divder.align(Align.ToTheRightCentered, relativeTo: nameLabel, padding: 14.LayoutVal(), width: YMSizes.OnPx, height: 20.LayoutVal())
         jobTitleLabel.align(Align.ToTheRightCentered, relativeTo: divder, padding: 14.LayoutVal(), width: jobTitleLabel.width, height: jobTitleLabel.height)
 //        deptLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 20.LayoutVal(), width: deptLabel.width, height: deptLabel.height)
-        msgLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 10.LayoutVal(), width: msgLabel.width, height: msgLabel.height)
+        msgLabel.align(Align.UnderMatchingLeft, relativeTo: nameLabel, padding: 10.LayoutVal(), width: 550.LayoutVal(), height: msgLabel.height)
         timeLabel.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: timeLabel.width, height: timeLabel.height)
         bottomBorder.backgroundColor = YMColors.DividerLineGray
         bottomBorder.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
@@ -126,7 +126,6 @@ class PageYiMaiRecentContactList: PageBodyView {
                 
                 docInfo = nil
             }
-            
         }
     }
     

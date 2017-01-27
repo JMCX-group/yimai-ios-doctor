@@ -77,7 +77,7 @@ public class PageIndexBodyView {
         if(nil == data) {
             return
         }
-        
+
         let list = data!
         var imageList = [YMTouchableImageView]()
         for banner in list {
@@ -426,6 +426,7 @@ public class PageIndexBodyView {
 
         for docImInfo in imInfo {
             for doc in data {
+                print(doc)
                 if("\(docImInfo.targetId!)" == "\(doc["id"]!)" || "\(docImInfo.senderUserId!)" == "\(doc["id"]!)") {
                     
                     let img = UIImage(named: "IndexButtonContactBackground")

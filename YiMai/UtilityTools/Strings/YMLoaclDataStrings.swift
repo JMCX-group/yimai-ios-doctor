@@ -12,6 +12,7 @@ public class YMLocalDataStrings {
     public static let EN_LOGIN_INFO = "loginInfo"
     public static let DOC_INFO_IDX = "doctorInfoKey"
     public static let DOC_HEAD_URL = "doctorHeadUrl"
+    public static let DOC_NAME = "doctorName"
     public static let SAME_HOS_CACHE = "sameHospitalCache"
     public static let SAME_DEPT_CACHE = "sameDepartmentCache"
     public static let SAME_SCHOOL_CACHE = "sameSchoolCache"

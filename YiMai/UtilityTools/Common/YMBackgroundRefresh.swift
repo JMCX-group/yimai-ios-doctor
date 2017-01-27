@@ -33,7 +33,7 @@ class YMBackgroundRefresh: NSObject {
             let friendId = "\(f["id"]!)"
 
             if("1" != readStatus) {
-                let docName = YMVar.GetStringByKey(f, key: "name")
+//                let docName = YMVar.GetStringByKey(f, key: "name")
 
 //                if("waitForSure" == status) {
 //                    YMNotification.DoLocalNotification("医生\(docName)申请加您为好友", userData: YMNotificationType.NewFriendApply)
@@ -63,7 +63,7 @@ class YMBackgroundRefresh: NSObject {
     
     private static var L1RelationApi: YMAPIUtility!
     private static var L2RelationApi: YMAPIUtility!
-    private static var NewFriendsRelationApi: YMAPIUtility!
+//    private static var NewFriendsRelationApi: YMAPIUtility!
     
     private static var MyInfoApi: YMAPIUtility!
 
@@ -95,8 +95,8 @@ class YMBackgroundRefresh: NSObject {
         L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION + "-l2",
                                           success: Level2RelationSuccess, error: L2Err)
         
-        NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-newf",
-                                                  success: NewFriendsSuccess, error: NFErr)
+//        NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-newf",
+//                                                  success: NewFriendsSuccess, error: NFErr)
         
         GetContactsApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-gct",
                                       success: GetContactsApiSuccessed, error: GetContactsApiError)
@@ -195,7 +195,7 @@ class YMBackgroundRefresh: NSObject {
         GetNewAppointmentList.YMGetNewAppointmentList()
         L1RelationApi.YMGetLevel1Relation()
         L2RelationApi.YMGetLevel2Relation()
-        NewFriendsRelationApi.YMGetRelationNewFriends()
+//        NewFriendsRelationApi.YMGetRelationNewFriends()
         MyInfoApi.YMQueryUserInfoById(YMVar.MyDoctorId)
         CompareContactBook()
     }
@@ -242,7 +242,7 @@ class YMBackgroundRefresh: NSObject {
         YMBackgroundRefresh.CheckHasUnreadNewFriends()
         
         YMDelay(YMBackgroundRefresh.SuccessDelay) {
-            NewFriendsRelationApi.YMGetRelationNewFriends()
+//            NewFriendsRelationApi.YMGetRelationNewFriends()
         }
     }
 
@@ -348,7 +348,7 @@ class YMBackgroundRefresh: NSObject {
     
     static func NFErr(error: NSError){
         YMDelay(YMBackgroundRefresh.ErrorDelay) {
-            NewFriendsRelationApi.YMGetRelationNewFriends()
+//            NewFriendsRelationApi.YMGetRelationNewFriends()
         }
     }
     
@@ -369,6 +369,170 @@ class YMBackgroundRefresh: NSObject {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+//typealias YMBackgroundRefreshCallback = (AnyObject?, Bool) -> Void
+//
+//enum YMBackgroundCallbackFor {
+//    case SystemMessage
+//    case Relation
+//    case MyInfo
+//    
+//    static let AllType = [SystemMessage, Relation, MyInfo]
+//}
+//
+//class YMBkgRefreshRunner: NSObject {
+//        private var L1RelationApi: YMAPIUtility!
+//        private var L2RelationApi: YMAPIUtility!
+//        private var MyInfoApi: YMAPIUtility!
+//        private var GetContactsApi: YMAPIUtility! = nil
+//        private let BackgroundQueue = dispatch_queue_create("com.YiMai.Background.Queue", DISPATCH_QUEUE_SERIAL)
+//    
+//
+//    var CallbackList = [YMBackgroundCallbackFor: [YMBackgroundRefreshCallback]]()
+//    var RunningFlags = [String: Bool]()
+//    
+//    override init() {
+//        super.init()
+//        
+//        for type in YMBackgroundCallbackFor.AllType {
+//            CallbackList[type] = [YMBackgroundRefreshCallback]()
+//        }
+//        
+//        let keyPrefix = "BackgroundRefreshApi"
+//        
+//        L1RelationApi = YMAPIUtility(key: keyPrefix + "GetR1", success: GetR1Success, error: GetR1Error)
+//        L2RelationApi = YMAPIUtility(key: keyPrefix + "GetR2", success: GetR2Success, error: GetR2Error)
+//        MyInfoApi = YMAPIUtility(key: keyPrefix + "GetMyInfo", success: GetMyInfoSuccess, error: GetMyInfoError)
+//        GetContactsApi = YMAPIUtility(key: keyPrefix + "GetContact", success: GetContactSuccess, error: GetContactError)
+//
+//        
+//        InitRunningFlags()
+//    }
+//
+//    func InitRunningFlags() {
+//        RunningFlags[L1RelationApi.Key] = false
+//        RunningFlags[L2RelationApi.Key] = false
+//        RunningFlags[MyInfoApi.Key] = false
+//        RunningFlags[GetContactsApi.Key] = false
+//    }
+//    
+//    func CallHandler(type: YMBackgroundCallbackFor, data: AnyObject?, isSuccess: Bool) {
+//        let callbacks = CallbackList[type]
+//        for cb in callbacks! {
+//            cb(data, isSuccess)
+//        }
+//    }
+//    
+//    func CallMyInfoHandler(data: AnyObject?, isSuccess: Bool) {
+//        CallHandler(YMBackgroundCallbackFor.MyInfo, data: data, isSuccess: isSuccess)
+//    }
+//    
+//    func CallRelationHandler(data: AnyObject?, isSuccess: Bool) {
+//        CallHandler(YMBackgroundCallbackFor.Relation, data: data, isSuccess: isSuccess)
+//    }
+//    
+//    func CallSystemMessageHandler(data: AnyObject?, isSuccess: Bool) {
+//        CallHandler(YMBackgroundCallbackFor.SystemMessage, data: data, isSuccess: isSuccess)
+//    }
+//    
+//    func GetNewMsgSuccess(data: NSDictionary?) {
+//        CallSystemMessageHandler(data, isSuccess: true)
+//    }
+//    
+//    func GetNewMsgError(error: NSError) {
+//        CallSystemMessageHandler(error, isSuccess: false)
+//    }
+//    
+//    func GetR1Success(data: NSDictionary?) {
+//        CallSystemMessageHandler(data, isSuccess: true)
+//    }
+//    
+//    func GetR1Error(error: NSError) {
+//        CallSystemMessageHandler(error, isSuccess: false)
+//    }
+//    
+//    func GetR2Success(data: NSDictionary?) {
+//        CallSystemMessageHandler(data, isSuccess: true)
+//    }
+//    
+//    func GetR2Error(error: NSError) {
+//        CallSystemMessageHandler(error, isSuccess: false)
+//    }
+//    
+//    func GetMyInfoSuccess(data: NSDictionary?) {
+//        CallSystemMessageHandler(data, isSuccess: true)
+//    }
+//    
+//    func GetMyInfoError(error: NSError) {
+//        CallSystemMessageHandler(error, isSuccess: false)
+//    }
+//    
+//    func GetContactSuccess(data: NSDictionary?) {
+//        CallSystemMessageHandler(data, isSuccess: true)
+//    }
+//    
+//    func GetContactError(error: NSError) {
+//        CallSystemMessageHandler(error, isSuccess: false)
+//    }
+//    
+//    func DoRefresh() {
+//    }
+//    
+//    func RegisterCallback(type: YMBackgroundCallbackFor, cb: YMBackgroundRefreshCallback) {
+//        CallbackList[type]?.append(cb)
+//    }
+//    
+//    deinit {
+//        CallbackList.removeAll()
+//    }
+//}
+//
+//class YMBackgroundRefresh: NSObject {
+//    private static var RefreshTimer: NSTimer? = nil
+//    private static var Runner: YMBkgRefreshRunner!
+//    private static var Running = false
+//    
+//    static func Start() {
+//        if(YMBackgroundRefresh.Running) {
+//            return
+//        }
+//        YMBackgroundRefresh.Running = true
+//        Runner = YMBkgRefreshRunner()
+//        YMBackgroundRefresh.RefreshTimer = NSTimer.scheduledTimerWithTimeInterval(2.0,
+//                                                                                  target: YMBackgroundRefresh.Runner,
+//                                                                                  selector: "DoRefresh".Sel(),
+//                                                                                  userInfo: nil, repeats: true)
+//        let runloop = NSRunLoop.currentRunLoop()
+//        runloop.addTimer(YMBackgroundRefresh.RefreshTimer!, forMode: NSRunLoopCommonModes)
+//    }
+//    
+//    static func Stop() {
+//        YMBackgroundRefresh.Running = false
+//        YMBackgroundRefresh.RefreshTimer?.invalidate()
+//        YMBackgroundRefresh.RefreshTimer = nil
+//        Runner = nil
+//    }
+//    
+//    static func Now() {
+//        YMBackgroundRefresh.RefreshTimer?.fire()
+//    }
+//    
+//    static func RegisterCallback(type: YMBackgroundCallbackFor, cb: YMBackgroundRefreshCallback) {
+//        if(!YMBackgroundRefresh.Running) {
+//            return
+//        }
+//        
+//        YMBackgroundRefresh.Runner.RegisterCallback(type, cb: cb)
+//    }
+//}
 
 
 

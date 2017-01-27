@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Proposer
 
-public class PageYiMaiActions: PageJumpActions{
+public class PageYiMaiActions: PageJumpActions {
     var TargetController: PageYiMaiViewController!
     var ContactApi: YMAPIUtility!
     var DeleteFriend: YMAPIUtility!
@@ -34,6 +34,49 @@ public class PageYiMaiActions: PageJumpActions{
                                      success: Level2RelationSuccess, error: L2Err)
     }
     
+    func SearchIMHistory(_: UIAlertAction) {
+        DoJump(YMCommonStrings.CS_PAGE_IM_SEARCH)
+    }
+    
+    func CreateGroupConversationHistory(_: UIAlertAction) {
+        
+    }
+    
+    func GoToAddFriend(_: UIAlertAction) {
+        let contacts: PrivateResource = PrivateResource.Contacts
+        if(contacts.isNotDeterminedAuthorization) {
+            DoJump(YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME)
+        } else {
+            if(!contacts.isAuthorized) {
+                DoJump(YMCommonStrings.CS_PAGE_YIMAI_ADD_FRIENDS_NAME)
+            } else {
+                self.DoJump(YMCommonStrings.CS_PAGE_YIMAI_ADD_CONTCATS_FRIENDS_NAME)
+            }
+        }
+    }
+    
+    func IMSettingTouched(gr: UIGestureRecognizer) {
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let searchBtn = UIAlertAction(title: "会话搜索", style: .Default, handler: SearchIMHistory)
+        let groupIMBtn = UIAlertAction(title: "新建讨论组", style: .Default, handler: CreateGroupConversationHistory)
+        let addFriend = UIAlertAction(title: "添加联系人", style: .Default, handler: GoToAddFriend)
+        let cancelBtn = UIAlertAction(title: "取消", style: .Cancel) { (_) in
+            //DoNothing
+        }
+        searchBtn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        groupIMBtn.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        addFriend.setValue(YMColors.FontBlue, forKey: "titleTextColor")
+        cancelBtn.setValue(YMColors.FontGray, forKey: "titleTextColor")
+        
+        alertController.addAction(searchBtn)
+        alertController.addAction(groupIMBtn)
+        alertController.addAction(addFriend)
+        alertController.addAction(cancelBtn)
+        
+        NavController!.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     func AddFriendButtonTouched(gr: UIGestureRecognizer) {
         let contacts: PrivateResource = PrivateResource.Contacts
         if(contacts.isNotDeterminedAuthorization) {
@@ -45,7 +88,6 @@ public class PageYiMaiActions: PageJumpActions{
                 self.DoJump(YMCommonStrings.CS_PAGE_YIMAI_ADD_CONTCATS_FRIENDS_NAME)
             }
         }
-
     }
     
     func YiMaiReload() {

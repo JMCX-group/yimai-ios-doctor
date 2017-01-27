@@ -36,13 +36,13 @@ public class PageYiMaiR1BodyView: PageBodyView {
         DrawNewFriendsPanel()
         DrawFriendsPanel()
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
-//        LoopRefresh()
+        LoopRefresh(true)
     }
     
     override func BodyViewEndDragging() {
         super.BodyViewEndDragging()
         let y = BodyView.contentOffset.y
-        if(y < -5.0) {
+        if(y < -YMSizes.PagePullRefreshHeight) {
             self.FullPageLoading.Show()
             YMDelay(1.0) {
                 self.Reload()
@@ -317,9 +317,17 @@ public class PageYiMaiR1BodyView: PageBodyView {
             YMPageModalMessage.ShowConfirmInfo("确认要删除此好友？", nav: self.NavController!, ok: { (_) in
                     let actions = self.Actions as! PageYiMaiActions
                     self.FullPageLoading.Show()
+                    RCIMClient.sharedRCIMClient().deleteMessages(RCConversationType.ConversationType_PRIVATE,
+                        targetId: str!, success: { 
+                            print("delete success")
+                        }, error: { (err) in
+                            print("delete failed")
+                    })
+                    RCIMClient.sharedRCIMClient().removeConversation(RCConversationType.ConversationType_PRIVATE, targetId: str!)
                     actions.DeleteFriend.YMDeleteRelation(str!)
                 }, cancel: nil)
         }
+        
         return cell
     }
     
@@ -364,15 +372,18 @@ public class PageYiMaiR1BodyView: PageBodyView {
     
     func LoopRefresh(firstStart: Bool = false) {
         
-//        if(!firstStart && !Reloading) {
-//            YMLayout.ClearView(view: FriendsPanel)
-//            DrawFriendsPanel()
-//            
-//            YMLayout.ClearView(view: NewFriendsPanel)
-//            DrawNewFriendsPanel()
-//            
+        if(!firstStart && !Reloading) {
+            YMLayout.ClearView(view: NewFriendsPanel)
+            DrawNewFriendsPanel()
+            
 //            YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
-//        }
+        }
+        
+        YMDelay(1.0) {
+            self.LoopRefresh()
+//            self.FullPageLoading.Hide()
+            
+        }
     }
 }
 
