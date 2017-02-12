@@ -62,11 +62,10 @@ public class PagePersonalDetailEditActions: PageJumpActions {
         YMVar.MyUserInfo = data!["data"] as! [String: AnyObject]
         YMVar.MyDoctorId = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "id")
         
-        let headUrl = "http://d.medi-link.cn/uploads/avatar/\(YMVar.MyDoctorId).jpg?\(NSDate().timeIntervalSince1970)"
-        print("http://d.medi-link.cn/uploads/avatar/\(YMVar.MyDoctorId).jpg?\(NSDate().timeIntervalSince1970)" )
-        RCIM.sharedRCIM().refreshUserInfoCache(RCUserInfo(userId: YMVar.MyDoctorId, name: "",
-            portrait: "http://d.medi-link.cn/uploads/avatar/\(YMVar.MyDoctorId).jpg?\(NSDate().timeIntervalSince1970)"),
-                                               withUserId: YMVar.MyDoctorId)
+        let headUrl = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "head_url")
+        RCIM.sharedRCIM().refreshUserInfoCache(RCUserInfo(userId: YMVar.MyDoctorId,
+            name: YMVar.GetStringByKey(YMVar.MyUserInfo, key: "name"),
+            portrait: headUrl), withUserId: YMVar.MyDoctorId)
 //        TargetController?.BodyView?.UserHeadImg.image = Toucan(image: ImageForUpload!).maskWithEllipse().image
         YMLayout.LoadImageFromServer(TargetController!.BodyView!.UserHeadImg, url: headUrl, fullUrl: nil, makeItRound: true)
         TargetController?.BodyView?.FullPageLoading.Hide()

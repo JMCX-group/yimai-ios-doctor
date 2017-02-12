@@ -39,7 +39,7 @@ public class PageYiMaiActions: PageJumpActions {
     }
     
     func CreateGroupConversationHistory(_: UIAlertAction) {
-        
+        DoJump(YMCommonStrings.CS_PAGE_IM_DISCUSSION_INVITE_LIST, ignoreExists: false, userData: self.DoDiscussion)
     }
     
     func GoToAddFriend(_: UIAlertAction) {
@@ -264,6 +264,16 @@ public class PageYiMaiActions: PageJumpActions {
     public func DoChat(gr: UIGestureRecognizer) {
         let sender = gr.view as! YMTouchableView
         let chat = YMChatViewController()
+        
+        let userData = sender.UserObjectData as! [String: AnyObject]
+        
+        let isDiscussion = YMVar.GetStringByKey(userData, key: "isDiscussion")
+        if("1" == isDiscussion) {
+            let title = YMVar.GetStringByKey(userData, key: "title")
+            DoDiscussion(sender.UserStringData, title: title)
+            return
+        }
+
         //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
         chat.conversationType = RCConversationType.ConversationType_PRIVATE
         //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
@@ -271,9 +281,29 @@ public class PageYiMaiActions: PageJumpActions {
         //设置聊天会话界面要显示的标题
         chat.title = ""
         
-        let userData = sender.UserObjectData as! [String: AnyObject]
         chat.ViewTitle = userData["name"] as! String
         chat.UserData = userData
+        
+        chat.automaticallyAdjustsScrollViewInsets = false
+        chat.prefersStatusBarHidden()
+        
+        //显示聊天会话界面
+        self.NavController?.pushViewController(chat, animated: true)
+    }
+    
+    public func DoDiscussion(discussionId: String, title: String) {
+
+        let chat = YMDiscussionViewController()
+        //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
+        chat.conversationType = RCConversationType.ConversationType_DISCUSSION
+        //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
+        chat.targetId = discussionId
+        //设置聊天会话界面要显示的标题
+        chat.title = title
+        
+        print(discussionId)
+        
+        chat.ViewTitle = title
         
         chat.automaticallyAdjustsScrollViewInsets = false
         chat.prefersStatusBarHidden()

@@ -10,6 +10,7 @@ import Foundation
 
 class YMNotificationType: NSObject {
     static let NewAppointment = "appointment"
+    static let NewAdmissions = "admissions"
     static let NewBroadCast = "radio"
     static let AddFriend = "add-friend"
 
@@ -22,6 +23,7 @@ typealias YMNotificationHandlerFunc = ((UINavigationController, AnyObject, Bool)
 class YMNotificationHandler: NSObject {
     static var HandlerMap: [String: YMNotificationHandlerFunc] = [
         YMNotificationType.NewAppointment: YMNotificationHandler.NewAppointment,
+        YMNotificationType.NewAdmissions: YMNotificationHandler.NewAddmission,
         YMNotificationType.NewBroadCast: YMNotificationHandler.NewBroadcast,
         YMNotificationType.AddFriend: YMNotificationHandler.AddNewFriend
     ]
@@ -48,6 +50,27 @@ class YMNotificationHandler: NSObject {
                 PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME)
             } else {
                 PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST)
+            }
+        }
+    }
+    
+    static func NewAddmission(nav: UINavigationController, data: AnyObject, isAppActive: Bool) {
+        if(!isAppActive) {
+            let realData = data as! [NSObject: AnyObject]
+            let id = realData["data-id"] as? String
+            let status = realData["status"] as? String
+
+            if(nil != id) {
+                if("wait-2" == status) {
+                    PageAppointmentAcceptBodyView.AppointmentID = id!
+                    PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_ACCEPT_NAME)
+                } else {
+                    PageAppointmentProcessingBodyView.AppointmentID = id!
+                    PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_PROCESSING_NAME)
+                }
+                
+            } else {
+                PageJumpActions(navController: nav).DoJump(YMCommonStrings.CS_PAGE_GET_ADMISSSION_MSG_LIST)
             }
         }
     }

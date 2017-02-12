@@ -19,8 +19,8 @@ class PageAppointmentReplyListActions: PageJumpActions {
         
         TargetView = Target as! PageAppointmentReplyListBodyView
         
-        GetListApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_ALL_NEW_APPOINTMENT_MSG, success: GetListSuccess, error: GetListError)
-        ClearListApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_CLEAR_ALL_NEW_APPOINTMENT_MSG, success: ClearListSuccess, error: ClearListError)
+        GetListApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_ALL_NEW_APPOINTMENT_MSG + "fromMsg", success: GetListSuccess, error: GetListError)
+        ClearListApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_CLEAR_ALL_NEW_APPOINTMENT_MSG + "fromMsg", success: ClearListSuccess, error: ClearListError)
     }
     
     func GetListSuccess(data: NSDictionary?) {
@@ -38,13 +38,14 @@ class PageAppointmentReplyListActions: PageJumpActions {
     }
     
     func ClearListSuccess(_: NSDictionary?) {}
-    func ClearListError(_: NSError) {}
+    func ClearListError(error: NSError) {YMAPIUtility.PrintErrorInfo(error)}
     
     func CellTouched(gr: UIGestureRecognizer) {
         let cell = gr.view as! YMTouchableView
         
         let cellData = cell.UserObjectData as! [String: AnyObject]
         let id = "\(cellData["appointment_id"]!)"
+        let msgId = YMVar.GetStringByKey(cellData, key: "id")
         
         //        data": {
         //        "id": "消息ID",
@@ -55,8 +56,27 @@ class PageAppointmentReplyListActions: PageJumpActions {
         //        "time": "时间"
         //    }
         
+        for (idx, msg) in TargetView.PrevData.enumerate() {
+            let thisId = YMVar.GetStringByKey(msg, key: "id")
+            if(thisId == msgId) {
+                TargetView.PrevData[idx]["read"] = "1"
+                break
+            }
+        }
+        
+        ClearListApi.YMSetAppointmentRead(msgId)
         PageAppointmentDetailViewController.AppointmentID = id
         DoJump(YMCommonStrings.CS_PAGE_APPOINTMENT_DETAIL_NAME, ignoreExists: false, userData: NSObject())
+    }
+    
+    func SetAllReaden(_: AnyObject) {
+        TargetView.FullPageLoading.Show()
+        ClearListApi.YMClearAllNewAppointment()
+        for (idx, _) in TargetView.PrevData.enumerate() {
+            TargetView.PrevData[idx]["read"] = "1"
+        }
+        TargetView.LoadData(TargetView.PrevData)
+        TargetView.FullPageLoading.Hide()
     }
 }
 

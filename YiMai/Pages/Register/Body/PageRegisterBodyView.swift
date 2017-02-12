@@ -101,6 +101,7 @@ public class PageRegisterBodyView: NSObject, UITextFieldDelegate {
 
         InvitedCodeInput = YMLayout.GetTextFieldWithMaxCharCount(inputParam, maxCharCount: 20)
         InvitedCodeInput?.placeholder = YMRegisterStrings.CS_INVITED_CODE_PLACEHOLDER
+        InvitedCodeInput?.keyboardType = UIKeyboardType.NumberPad
 
         BodyView.addSubview(CellPhoneInput!)
         BodyView.addSubview(PasswordInput!)
@@ -202,6 +203,7 @@ public class PageRegisterBodyView: NSObject, UITextFieldDelegate {
         let phone = self.CellPhoneInput?.text
         let password = self.PasswordInput?.text
         let verifyCode = self.VerifyCodeInput?.text
+        let dpCode = self.InvitedCodeInput?.text
         
         //TODO: 医脉邀请码
         if(!self.AgreeChecked) {
@@ -232,13 +234,23 @@ public class PageRegisterBodyView: NSObject, UITextFieldDelegate {
             return nil
         }
         
+        if(!YMValueValidator.IsBlankString(dpCode)) {
+            if(dpCode?.characters.count != 6) {
+                if(showAlarm) {
+                    YMPageModalMessage.ShowErrorInfo("请输入正确的医脉邀请码！", nav: self.NavController!)
+                }
+                return nil
+            }
+        }
+        
         PageRegisterViewController.RegPhone = phone!
         PageRegisterViewController.RegPassword = password!
         
         return [
             "phone": phone!,
             "password": password!,
-            "verify_code": verifyCode!
+            "verify_code": verifyCode!,
+            "inviter_dp_code": dpCode!
         ]
     }
     

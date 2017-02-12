@@ -207,7 +207,8 @@ public class PageAppointmentRecordBodyView: PageBodyView {
     
     private func DrawWaitList() {
         BodyView.addSubview(WaitList)
-        WaitList.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: 0, width: YMSizes.PageWidth, height: BodyView.height - YMSizes.NormalTopSize.height - TabPanel.height)
+        WaitList.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: YMSizes.OnPx,
+                       width: YMSizes.PageWidth, height: BodyView.height - YMSizes.NormalTopSize.height - TabPanel.height)
 
         var noRecordIcon: UIImageView? = nil
         
@@ -235,18 +236,19 @@ public class PageAppointmentRecordBodyView: PageBodyView {
     
     private func DrawAlreadyList() {
         BodyView.addSubview(AlreadyList)
-        AlreadyList.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: 0, width: YMSizes.PageWidth, height: BodyView.height - YMSizes.NormalTopSize.height - TabPanel.height)
+        AlreadyList.align(Align.UnderMatchingLeft, relativeTo: TabPanel, padding: YMSizes.OnPx,
+                          width: YMSizes.PageWidth, height: BodyView.height - YMSizes.NormalTopSize.height - TabPanel.height)
         
         var noRecordIcon: UIImageView? = nil
         
-        if(nil == WaitRecord) {
+        if(nil == AlreadyRecord) {
             noRecordIcon = YMLayout.GetSuitableImageView("NoAppointmentRecord")
             AlreadyList.addSubview(noRecordIcon!)
             noRecordIcon!.anchorInCenter(width: noRecordIcon!.width, height: noRecordIcon!.height)
             return
         }
         
-        if(0 == WaitRecord!.count) {
+        if(0 == AlreadyRecord!.count) {
             noRecordIcon = YMLayout.GetSuitableImageView("NoAppointmentRecord")
             AlreadyList.addSubview(noRecordIcon!)
             noRecordIcon!.anchorInCenter(width: noRecordIcon!.width, height: noRecordIcon!.height)
@@ -271,13 +273,13 @@ public class PageAppointmentRecordBodyView: PageBodyView {
             waitControls[YMAppointmentRecordStrings.TAB_LABEL_BORDER_KEY]!.backgroundColor = YMColors.FontBlue
             waitControls[YMAppointmentRecordStrings.TAB_LABEL_TEXT_KEY]!.textColor = YMColors.FontBlue
             
-            TabAlreadyButton?.backgroundColor = YMColors.None
+            TabAlreadyButton?.backgroundColor = YMColors.White
             alreadyControls[YMAppointmentRecordStrings.TAB_LABEL_BORDER_KEY]!.backgroundColor = YMColors.None
             alreadyControls[YMAppointmentRecordStrings.TAB_LABEL_TEXT_KEY]!.textColor = YMColors.FontGray
             break
             
         case YMAppointmentRecordStrings.RECORD_ALREAD_STATUS:
-            TabWaitButton?.backgroundColor = YMColors.None
+            TabWaitButton?.backgroundColor = YMColors.White
             waitControls[YMAppointmentRecordStrings.TAB_LABEL_BORDER_KEY]!.backgroundColor = YMColors.None
             waitControls[YMAppointmentRecordStrings.TAB_LABEL_TEXT_KEY]!.textColor = YMColors.FontGray
             
@@ -319,9 +321,14 @@ public class PageAppointmentRecordBodyView: PageBodyView {
     }
     
     public func LoadData(data: NSDictionary?) {
-        WaitRecord = data!["wait"] as? [[String:AnyObject]]
-        AlreadyRecord = data!["already"] as? [[String:AnyObject]]
-        
+        if(nil == data) {
+            WaitRecord = [[String:AnyObject]]()
+            AlreadyRecord = [[String:AnyObject]]()
+        } else {
+            WaitRecord = data!["wait"] as? [[String:AnyObject]]
+            AlreadyRecord = data!["already"] as? [[String:AnyObject]]
+        }
+
         DrawWaitList()
         DrawAlreadyList()
         

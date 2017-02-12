@@ -12,6 +12,7 @@ import UIKit
 class PageSYSBroadcastActions: PageJumpActions {
     var TargetView: PageSYSBroadcastBodyView!
     var BroadcastApi: YMAPIUtility!
+    var ClearListApi: YMAPIUtility!
 
     override func ExtInit() {
         super.ExtInit()
@@ -19,8 +20,13 @@ class PageSYSBroadcastActions: PageJumpActions {
         TargetView = Target as! PageSYSBroadcastBodyView
         BroadcastApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_SYS_BORADCAST_LIST,
                                     success: GetBroadcastSuccess, error: GetBroadcastError)
+        
+        ClearListApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_ALL_NEW_BROADCAST_MSG + "fromMsg", success: ClearListSuccess, error: ClearListError)
     }
     
+    func ClearListSuccess(_: NSDictionary?) {}
+    func ClearListError(error: NSError) { YMAPIUtility.PrintErrorInfo(error) }
+
     func GetBroadcastSuccess(data: NSDictionary?) {
         if(nil == data) {
             return

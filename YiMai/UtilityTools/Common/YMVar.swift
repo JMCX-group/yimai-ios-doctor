@@ -18,11 +18,13 @@ public class YMVar:NSObject {
     public static var MyNewAppointmentInfo: [String: AnyObject] = [String: AnyObject]()
     
     public static var DeviceToken: String = ""
+    public static var RCLoginStatus = false
     
     public static func Clear() {
         YMVar.MyUserInfo.removeAll()
         YMVar.MySysInfo.removeAll()
         YMVar.MyDoctorId = ""
+        YMVar.RCLoginStatus = false
 
         YMVar.MyNewBroadcastInfo.removeAll()
         YMVar.MyNewAdmissionInfo.removeAll()

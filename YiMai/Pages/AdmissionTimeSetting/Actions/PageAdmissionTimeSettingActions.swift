@@ -227,7 +227,7 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         pm.setValue(YMColors.FontBlue, forKey: "titleTextColor")
         day.setValue(YMColors.FontBlue, forKey: "titleTextColor")
         cancel.setValue(YMColors.WarningFontColor, forKey: "titleTextColor")
-        
+
         alertController.addAction(auto)
         alertController.addAction(am)
         alertController.addAction(pm)
@@ -242,7 +242,7 @@ public class PageAdmissionTimeSettingActions: PageJumpActions {
         
         
         let flexibleSetting = targetController.FixedSettingBodyView!.GetFlexibleSetting() //targetController.FlexibleSettingBodyView!.GetSettingData()
-        print(flexibleSetting)
+//        print(flexibleSetting)
         SaveApi?.YMChangeUserInfo(["admission_set_fixed": strJson, "admission_set_flexible": flexibleSetting])
     }
 }

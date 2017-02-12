@@ -86,6 +86,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
         top.addSubview(TransferBtn!)
         TransferBtn!.anchorInCorner(Corner.BottomRight, xPad: 30.LayoutVal(), yPad: 24.LayoutVal(),
                                    width: TransferBtn!.width, height: TransferBtn!.height)
+        TransferBtn!.hidden = true
     }
     
     private func DrawReasonLabel(labelLine: YMTouchableView, labelText: String) {
@@ -401,12 +402,17 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
                       padding: 20.LayoutVal(), width: docName.width, height: 30.LayoutVal())
     }
     
+    func CallPhone(gr: UIGestureRecognizer) {
+        let sender = gr.view as! UILabel
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(sender.text!)")!)
+    }
+    
     private func DrawPatientOnly(data: [String: AnyObject]) {
         let headImage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
         let patientName = UILabel()
         let gender = UILabel()
         let age = UILabel()
-        let phone = UILabel()
+        let phone = YMLabel()
         let divider = UIView()
         let phoneIcon = YMLayout.GetSuitableImageView("YMIconPhone")
         
@@ -464,6 +470,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
         phone.align(Align.UnderCentered, relativeTo: headImage,
                     padding: 92.LayoutVal(),
                     width: phone.width, height: phone.height)
+        phone.SetTouchable(withObject: self, useMethod: "CallPhone:".Sel())
         
         phoneIcon.align(Align.ToTheLeftCentered, relativeTo: phone,
                         padding: -10.LayoutVal(),
@@ -477,7 +484,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
         let patientName = UILabel()
         let gender = UILabel()
         let age = UILabel()
-        let phone = UILabel()
+        let phone = YMLabel()
         let divider = UIView()
         let phoneIcon = YMLayout.GetSuitableImageView("YMIconPhone")
         
@@ -538,6 +545,7 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
         phoneIcon.align(Align.ToTheLeftCentered, relativeTo: phone,
                         padding: -10.LayoutVal(),
                         width: phoneIcon.width, height: phoneIcon.height)
+        phone.SetTouchable(withObject: self, useMethod: "CallPhone:".Sel())
         
         phone.align(Align.ToTheRightCentered, relativeTo: phoneIcon, padding: 8.LayoutVal(), width: phone.width, height: phone.height)
     }
@@ -725,6 +733,14 @@ public class PageAppointmentAcceptBodyView: PageBodyView, ImageProvider {
     public func LoadData(data: NSDictionary) {
         let doc = data["doctor_info"] as! [String: AnyObject]
         let patient = data["patient_info"] as! [String: AnyObject]
+        let otherInfo = data["other_info"] as! [String: AnyObject]
+        
+        let allowTransfer = YMVar.GetStringByKey(otherInfo, key: "is_transfer", defStr: "0")
+        if("0" == allowTransfer) {
+            TransferBtn!.hidden = false
+        } else {
+            TransferBtn!.hidden = true
+        }
         
         let docId = YMVar.GetStringByKey(doc, key: "id")
         

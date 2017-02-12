@@ -20,12 +20,16 @@ public class PageAppointmentProcessingViewController: PageViewController {
         BodyView!.DrawTransferButton(TopView!.TopViewPanel)
         BodyView!.DrawConfirmButton(self.SelfView!)
         BodyView!.DrawAdmissionDatePicker()
+        BodyView!.DrawCancelButton(TopView!.TopViewPanel)
+        
+        BodyView!.SetModalDialog(self.SelfView!)
     }
     
     override func PagePreRefresh() {
         if(self.isMovingToParentViewController()) {
             BodyView?.Clear()
             BodyView?.GetDetail()
+            BodyView?.FullPageLoading?.Show()
         }
     }
 }

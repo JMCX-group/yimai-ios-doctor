@@ -28,7 +28,7 @@ public class PageMessageListActions: PageJumpActions{
     }
     
     func IgnoredSuccess(_: NSDictionary?){}
-    func IgnoredError(_: NSError) {}
+    func IgnoredError(error: NSError) { YMAPIUtility.PrintErrorInfo(error) }
     
     func BroadcastTouched(gr: UIGestureRecognizer) {
         ClearBroadcastApi.YMClearAllNewBroadcast()
@@ -37,13 +37,13 @@ public class PageMessageListActions: PageJumpActions{
     }
     
     func AdmissionTouched(gr: UIGestureRecognizer) {
-        ClearBroadcastApi.YMClearAllNewAdmission()
+//        ClearBroadcastApi.YMClearAllNewAdmission()
         YMVar.MyNewAdmissionInfo.removeAll()
         DoJump(YMCommonStrings.CS_PAGE_GET_ADMISSSION_MSG_LIST)
     }
     
     func AppointmentTouched(gr: UIGestureRecognizer) {
-        ClearBroadcastApi.YMClearAllNewAppointment()
+//        ClearBroadcastApi.YMClearAllNewAppointment()
         YMVar.MyNewAppointmentInfo.removeAll()
         //TODO: reply list
         DoJump(YMCommonStrings.CS_PAGE_GET_APPOINMENT_MSG_LIST)

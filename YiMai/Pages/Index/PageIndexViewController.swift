@@ -67,6 +67,7 @@ public class PageIndexViewController: PageViewController {
         IndexTopView = PageIndexTopView(parentView: self.view, navController: self.navigationController!, pageActions: Actions!)
         BottomView = PageCommonBottomView(parentView: self.view, navController: self.navigationController!)
 
+        IndexTopView!.TargetBody = BodyView
         IndexTopView!.ShowNewMsgNotifyPoint()
 
         RefreshAuthInfo()

@@ -61,6 +61,9 @@ public class YMAPIInterfaceURL {
     static let GetAllRadio = YMAPIInterfaceURL.ApiBaseUrl + "/radio"
     static let SetRadioHaveRead = YMAPIInterfaceURL.ApiBaseUrl + "/radio/read"
     
+    static let SetAdmissionRead = YMAPIInterfaceURL.ApiBaseUrl + "/msg/admissions/read"
+    static let SetAppointmentRead = YMAPIInterfaceURL.ApiBaseUrl + "/msg/appointment/read"
+    
     static let CreateNewAppointment = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/new"
     static let UploadAppointmentPhoto = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/upload-img"
     static let GetAppointmentList = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/list"
@@ -437,15 +440,18 @@ public class YMAPIUtility {
             RCIM.sharedRCIM().connectWithToken(ryTonken,
                                                success: { (userId) -> Void in
                                                 print("登陆成功。当前登录的用户ID：\(userId)")
+                                                YMVar.RCLoginStatus = true
                                                 //                                        self.ShowChat(sender)
                                                 
                 }, error: { (status) -> Void in
+                    YMVar.RCLoginStatus = false
                     print("登陆的错误码为:\(status.rawValue)")
                 }, tokenIncorrect: {
                     //token过期或者不正确。
                     //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
                     //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
                     print("token错误")
+                    YMVar.RCLoginStatus = false
             })
         }
     }
@@ -920,6 +926,17 @@ public class YMAPIUtility {
     public func YMGetDocSchedulingInfo(id: String) {
         print(["id": id])
         YMAPIPost(YMAPIInterfaceURL.GetDocSchedulingInfo, param: ["id": id], progressHandler: nil)
+    }
+    
+//    static let SetAdmissionRead = YMAPIInterfaceURL.ApiBaseUrl + "/admissions/read"
+//    static let SetAppointmentRead = YMAPIInterfaceURL.ApiBaseUrl + "/appointment/read"
+    
+    func YMSetAdmissionRead(id: String) {
+        YMAPIPost(YMAPIInterfaceURL.SetAdmissionRead, param: ["id": id], progressHandler: nil)
+    }
+    
+    func YMSetAppointmentRead(id: String) {
+        YMAPIPost(YMAPIInterfaceURL.SetAppointmentRead, param: ["id": id], progressHandler: nil)
     }
 }
 

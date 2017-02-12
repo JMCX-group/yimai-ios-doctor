@@ -38,6 +38,15 @@ class CityPickview: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
         DrawPanel()
     }
     
+    func Reload() {
+        if(!DataLoaded) {
+            return
+        }
+        SelectedProv = "1"
+        CityPicker.selectRow(0, inComponent: 0, animated: true)
+        CityPicker.reloadAllComponents()
+    }
+    
     func GetSelectedCityId() -> String {
         let citys = CitysInProv[SelectedProv]
         

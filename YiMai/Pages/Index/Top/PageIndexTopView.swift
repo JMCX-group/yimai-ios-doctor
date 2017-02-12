@@ -14,6 +14,8 @@ public class PageIndexTopView: NSObject {
     private var NavController : UINavigationController? = nil
     private var Actions: PageIndexActions? = nil
     
+    var TargetBody: PageIndexBodyView? = nil
+    
     private var NameCardButton: YMTouchableImageView? = nil
     private var SysMessageButton: YMTouchableImageView? = nil
     public var TopSearchInput: YMTextField? = nil
@@ -94,6 +96,18 @@ public class PageIndexTopView: NSObject {
             SysMessageButton?.image = MsgWithoutNotifyPointIcon.image
         } else {
             SysMessageButton?.image = MsgWithNotifyPointIcon.image
+        }
+        
+        if(0 == YMVar.MyNewAdmissionInfo.count) {
+            TargetBody?.HideNewIconForAdmission()
+        } else {
+            TargetBody?.ShowNewIconForAdmission()
+        }
+        
+        if(0 == YMVar.MyNewAppointmentInfo.count) {
+            TargetBody?.HideNewIconForAppointment()
+        } else {
+            TargetBody?.ShowNewIconForAppointment()
         }
     }
 }

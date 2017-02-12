@@ -26,8 +26,11 @@ public class PageRegisterActions: PageJumpActions {
     }
     
     private func GetVerifyCodeError(error: NSError){
-        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
-        YMPageModalMessage.ShowErrorInfo("\(errInfo["message"])", nav: self.NavController!)
+        YMAPIUtility.PrintErrorInfo(error)
+//        let errInfo = JSON(data: error.userInfo["com.alamofire.serialization.response.error.data"] as! NSData)
+//        YMPageModalMessage.ShowErrorInfo("\(errInfo["message"])", nav: self.NavController!)
+        YMPageModalMessage.ShowErrorInfo("获取验证码失败，请稍后再试！", nav: self.NavController!)
+        VerifyCodeEnableCounter = 601
     }
     
     private func GetVerifyCodeSuccess(data: NSDictionary?) {

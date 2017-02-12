@@ -96,17 +96,105 @@ class PageYiMaiRecentContactList: PageBodyView {
         return cell
     }
     
-    func LoadData(doctors: [[String: AnyObject]]) {
-        if(0 == doctors.count) {
-            YMLayout.ClearView(view: BodyView)
-            return
+    func DrawDiscussionCell(id: String, title: String, lastMsg: String, lastMsgUsername: String, timestamp: Double, prev: YMTouchableView?) -> YMTouchableView {
+        let titleLabel = YMLayout.GetNomalLabel(title, textColor: YMColors.FontBlue, fontSize: 30.LayoutVal())
+        let msgLabel = YMLayout.GetNomalLabel(lastMsgUsername + " : " + lastMsg, textColor: YMColors.FontGray, fontSize: 26.LayoutVal())
+        let timeLabel = YMLayout.GetNomalLabel(YMIMUtility.TimestampToString(timestamp), textColor: YMColors.FontLighterGray, fontSize: 22.LayoutVal())
+        let headimgPanel = UIView()
+        let bottomBorder = UIView()
+        
+        let silentFlag = YMLocalData.GetData(YMLocalDataStrings.DISCUSSION_SILENT_FLAG + YMVar.MyDoctorId + id) as? Bool
+        
+        let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: "DoChat:".Sel())
+        
+        cell.UserObjectData = ["id": id, "title": title, "isDiscussion": "1"]
+        
+        BodyView.addSubview(cell)
+        cell.UserStringData = id
+        if (nil == prev) {
+            cell.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 150.LayoutVal())
+        } else {
+            cell.align(Align.UnderMatchingLeft, relativeTo: prev!, padding: 0, width: YMSizes.PageWidth, height: 150.LayoutVal())
         }
-        let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
+        
+        
+        cell.addSubview(titleLabel)
+        cell.addSubview(timeLabel)
+        cell.addSubview(msgLabel)
+        cell.addSubview(headimgPanel)
+        cell.addSubview(bottomBorder)
+        
+        headimgPanel.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: 110.LayoutVal(), height: 110.LayoutVal())
+        titleLabel.anchorInCorner(Corner.TopLeft, xPad: 180.LayoutVal(), yPad: 30.LayoutVal(), width: titleLabel.width, height: titleLabel.height)
+        timeLabel.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 30.LayoutVal(), width: timeLabel.width, height: timeLabel.height)
+        msgLabel.align(Align.UnderMatchingLeft, relativeTo: titleLabel, padding: 10.LayoutVal(), width: 550.LayoutVal(), height: msgLabel.height)
+        bottomBorder.backgroundColor = YMColors.DividerLineGray
+        bottomBorder.anchorAndFillEdge(Edge.Bottom, xPad: 0, yPad: 0, otherSize: YMSizes.OnPx)
+        
+        if(nil != silentFlag) {
+            if(silentFlag!) {
+                let silentFlagIcon = YMLayout.GetSuitableImageView("IMDiscussionSilentIconGray")
+
+                cell.addSubview(silentFlagIcon)
+                silentFlagIcon.anchorToEdge(Edge.Left, padding: 10.LayoutVal(), width: silentFlagIcon.width, height: silentFlagIcon.height)
+            }
+        }
+        
+        
+        let idList = YMLocalData.GetData(YMLocalDataStrings.DISCUSSION_ID + id)
+        
+        if(nil != idList) {
+            YMLayout.GetDiscussionHeadimg((idList as! [String]).joinWithSeparator(","), panel: headimgPanel)
+        }
+        
+        RCIMClient.sharedRCIMClient().getDiscussion(id, success: { (discussion) in
+            YMDelay(0.1, closure: {
+                let idList: [String] = discussion.memberIdList.map({($0 as! String)})
+                YMLocalData.SaveData(idList, key: YMLocalDataStrings.DISCUSSION_ID + id)
+                YMLayout.GetDiscussionHeadimg(idList.joinWithSeparator(","), panel: headimgPanel)
+            })
+            }, error: { (error) in
+                //DoNothing
+                print("get discussion failed \(error.rawValue)")
+        })
+
+        return cell
+    }
+    
+    func LoadData(doctors: [[String: AnyObject]]) {
+        
+        let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue, RCConversationType.ConversationType_DISCUSSION.rawValue])
 
         YMLayout.ClearView(view: BodyView)
         var docInfo: [String: AnyObject]? = nil
         var cell: YMTouchableView? = nil
         for docImInfo in imInfo {
+            let conversation = docImInfo as! RCConversation
+            if(conversation.conversationType == RCConversationType.ConversationType_DISCUSSION) {
+                var lastMsg = YMIMUtility.GetLastMessageString(docImInfo.lastestMessage)
+                if("未知消息" == lastMsg) {
+                    lastMsg = ""
+                }
+                
+                let userId = docImInfo.senderUserId
+                var lastMsgUserName = YMLocalData.GetData(YMLocalDataStrings.DOC_NAME + userId)
+
+                if(YMVar.MyDoctorId == userId) {
+                    lastMsgUserName = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "name")
+                } else {
+                    if(nil == lastMsgUserName) {
+                        lastMsgUserName = "医脉医生"
+                    }
+                }
+                
+                cell = DrawDiscussionCell(conversation.targetId,
+                                   title: conversation.conversationTitle,
+                                   lastMsg: lastMsg,
+                                   lastMsgUsername: lastMsgUserName! as! String,
+                                   timestamp: Double(conversation.sentTime) / 1000.0,
+                                   prev: cell)
+                continue
+            }
             for doctor in doctors {
                 if("\(docImInfo.targetId!)" == "\(doctor["id"]!)" || "\(docImInfo.senderUserId!)" == "\(doctor["id"]!)") {
                     if(YMVar.IsDocInBlacklist(docImInfo.targetId!) || YMVar.IsDocInBlacklist(docImInfo.senderUserId!)) {

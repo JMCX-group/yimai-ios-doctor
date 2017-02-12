@@ -89,6 +89,15 @@ public class PageIndexActions: PageJumpActions {
     
     public func DoChat(gr: UIGestureRecognizer) {
         let sender = gr.view as! YMTouchableView
+        let userData = sender.UserObjectData as! [String: AnyObject]
+
+        let isDiscussion = YMVar.GetStringByKey(userData, key: "isDiscussion")
+        if("1" == isDiscussion) {
+            let title = YMVar.GetStringByKey(userData, key: "title")
+            DoDiscussion(sender.UserStringData, title: title)
+            return
+        }
+        
         let chat = YMChatViewController()
         //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
         chat.conversationType = RCConversationType.ConversationType_PRIVATE
@@ -97,10 +106,45 @@ public class PageIndexActions: PageJumpActions {
         //设置聊天会话界面要显示的标题
         chat.title = ""
         
-        let userData = sender.UserObjectData as! [String: AnyObject]
         chat.ViewTitle = userData["name"] as! String
         chat.UserData = userData
         chat.ShowAppointment = userData["isDoc"] as! Bool
+        
+        if(!chat.ShowAppointment) {
+            chat.conversationType = RCConversationType.ConversationType_CUSTOMERSERVICE
+            chat.targetId = "KEFU147799483986438"
+        }
+        
+        chat.automaticallyAdjustsScrollViewInsets = false
+        chat.prefersStatusBarHidden()
+        
+        //显示聊天会话界面
+        self.NavController?.pushViewController(chat, animated: true)
+    }
+    
+    func CustomServiceChat() {
+//        let chatService: RCCustomerServiceInfo //RCDCustomerServiceViewController = RCDCustomerServiceViewController()
+//        #define SERVICE_ID @"您在融云后台开通的客服ID"
+//        chatService.userName = @"客服";
+//        chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+//        chatService.targetId = SERVICE_ID;
+//        chatService.title = chatService.userName;
+//        [self.navigationController pushViewController :chatService animated:YES];
+    }
+    
+    public func DoDiscussion(discussionId: String, title: String) {
+        print(discussionId)
+        let chat = YMDiscussionViewController()
+        //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
+        chat.conversationType = RCConversationType.ConversationType_DISCUSSION
+        //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
+        chat.targetId = discussionId
+        //设置聊天会话界面要显示的标题
+        chat.title = title
+        
+        print(discussionId)
+        
+        chat.ViewTitle = title
         
         chat.automaticallyAdjustsScrollViewInsets = false
         chat.prefersStatusBarHidden()

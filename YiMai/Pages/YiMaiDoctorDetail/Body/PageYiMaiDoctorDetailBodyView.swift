@@ -118,7 +118,7 @@ public class PageYiMaiDoctorDetailBodyView: PageBodyView {
     private func DrawButtonGroup(data: [String: AnyObject], prev: UIView) -> UIView {
         BodyView.addSubview(ButtonPanel)
         let docId = YMVar.GetStringByKey(data, key: "id")
-        if(!FromCommonFriendsBtn && !YMVar.IsDocInBlacklist(docId) && !FromIM) {
+        if(!YMVar.IsDocInBlacklist(docId)) {
             ButtonPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: 140.LayoutVal())
         } else {
             ButtonPanel.align(Align.UnderMatchingLeft, relativeTo: prev, padding: 0, width: YMSizes.PageWidth, height: 0.LayoutVal())

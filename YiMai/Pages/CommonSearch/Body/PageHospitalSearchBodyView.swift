@@ -23,6 +23,8 @@ public class PageHospitalSearchBodyView: PageBodyView {
     
     public static var CitySelected: String = "1"
     
+    var CurrentResult = [[String: AnyObject]]()
+    
     public override func ViewLayout() {
         SearchActions = PageHospitalSearchActions(navController: self.NavController, target: self)
         SearchResultTable = YMTableView(builer: self.DrawHospitalCell, subBuilder: nil, touched: SearchActions!.HospitalSelected)
@@ -85,7 +87,15 @@ public class PageHospitalSearchBodyView: PageBodyView {
         let cellInner = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.PageWidth,height: cellHeight))
         let hospitalName = realData[YMCommonStrings.CS_API_PARAM_KEY_NAME] as! String
         
-        let hospitalLabel = UILabel()
+        let hospitalLabel = YMLabel()
+        
+        let searchKey = SearchInput!.text
+        if(!YMValueValidator.IsBlankString(searchKey)) {
+            let highlight = ActiveType.Custom(pattern: searchKey!)
+            hospitalLabel.enabledTypes = [highlight]
+            hospitalLabel.customColor[highlight] = YMColors.FontBlue
+        }
+
         hospitalLabel.text = hospitalName
         hospitalLabel.textColor = YMColors.FontGray
         hospitalLabel.font = YMFonts.YMDefaultFont(28.LayoutVal())
@@ -103,8 +113,28 @@ public class PageHospitalSearchBodyView: PageBodyView {
         cell.addSubview(cellInner)
     }
     
+    func FilterResult(key: String) {
+        var result = [[String: AnyObject]]()
+        if(!YMValueValidator.IsBlankString(key)) {
+            for hos in CurrentResult {
+                let name = YMVar.GetStringByKey(hos, key: "name")
+                if(name.containsString(key)) {
+                    result.append(hos)
+                }
+            }
+        } else {
+            FullPageLoading.Show()
+            result = CurrentResult
+        }
+        
+
+        DrawSearchResult(result)
+        FullPageLoading.Hide()
+    }
+    
     public func DrawHospitals(data: NSDictionary?) {
-        let realData = data!["data"]! as! Array<AnyObject>
+        let realData = data!["data"]! as! [[String: AnyObject]]
+        CurrentResult = realData
         DrawSearchResult(realData)
     }
 
@@ -112,7 +142,7 @@ public class PageHospitalSearchBodyView: PageBodyView {
         SearchResultTable?.Clear()
     }
     
-    private func DrawSearchResult(data: Array<AnyObject>) {
+    private func DrawSearchResult(data: [[String: AnyObject]]) {
         Loading?.Hide()
         SearchResultTable?.Clear()
         
@@ -131,6 +161,7 @@ public class PageHospitalSearchBodyView: PageBodyView {
 
     public func ShowInitHospitals() {
         Loading?.Show()
+        CurrentResult.removeAll()
         SearchActions?.InitHospitalList()
     }
 }

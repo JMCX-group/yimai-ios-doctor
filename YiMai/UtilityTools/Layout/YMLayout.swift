@@ -681,6 +681,113 @@ public class YMLayout {
         
         return label
     }
+    
+    static func GetDiscussionImgLayoutIdxArr(idList: String) -> [Int] {
+        var ret = [Int]()
+        let ids = idList.componentsSeparatedByString(",")
+
+        switch ids.count {
+        case 0:
+            break
+        case 1:
+            break
+            
+        case 2:
+            ret.append(2)
+            
+        case 3:
+            ret.append(2)
+            ret.append(1)
+            
+        case 4:
+            ret.append(2)
+            ret.append(2)
+            
+        case 5:
+            ret.append(3)
+            ret.append(2)
+            
+        case 6:
+            ret.append(3)
+            ret.append(3)
+            
+        case 7:
+            ret.append(3)
+            ret.append(3)
+            ret.append(1)
+            
+        case 8:
+            ret.append(3)
+            ret.append(3)
+            ret.append(2)
+            
+        case 9:
+            fallthrough
+        default:
+            ret.append(3)
+            ret.append(3)
+            ret.append(3)
+        }
+        
+        return ret
+    }
+    
+    static func GetDiscussionHeadimg(idList: String, panel: UIView) {
+        
+        let imgArr = YMLayout.GetDiscussionImgLayoutIdxArr(idList)
+        if(0 == imgArr.count) {
+            return
+        }
+        
+        YMLayout.ClearView(view: panel)
+        
+        var rowList = [UIView]()
+
+        for _ in imgArr {
+            let rowPanel = UIView()
+            panel.addSubview(rowPanel)
+            rowList.append(rowPanel)
+        }
+        
+        panel.groupAndFill(group: Group.Vertical, views: rowList.map({$0}), padding: 2)
+        
+        panel.layer.cornerRadius = 10.LayoutVal()
+        panel.layer.masksToBounds = true
+        
+        var rowIdx: Int = 0
+        var imgIdx: Int = 0
+        var ids = idList.componentsSeparatedByString(",")
+        var prevColSize = panel.height
+        for colCnt in imgArr {
+            let rowPanel = rowList[rowIdx]
+            var colSize = (rowPanel.width / CGFloat(colCnt)) - 2
+            rowIdx += 1
+            
+            if(colSize > prevColSize) {
+                colSize = prevColSize
+            } else {
+                prevColSize = colSize
+            }
+            
+            var colList = [YMTouchableImageView]()
+            for _ in 1 ... colCnt {
+                let userId = ids[imgIdx]
+
+                let imgCell = YMLayout.GetSuitableImageView("YiMaiDefaultHead")
+                imgCell.frame = CGRect(x: 0, y: 0, width: colSize, height: colSize)
+                imgCell.UserStringData = YMVar.GetLocalUserHeadurl(userId)
+                rowPanel.addSubview(imgCell)
+                colList.append(imgCell)
+                imgIdx += 1
+            }
+            
+            rowPanel.groupInCenter(group: Group.Horizontal, views: colList.map({$0}), padding: 2, width: colSize, height: colSize)
+            
+            for img in colList {
+                YMLayout.LoadImageFromServer(img, url: img.UserStringData, fullUrl: nil, makeItRound: true)
+            }
+        }
+    }
 }
 
 

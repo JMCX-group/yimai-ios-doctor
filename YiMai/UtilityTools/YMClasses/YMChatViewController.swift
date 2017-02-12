@@ -166,6 +166,9 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
     }
     
     override public func didTapCellPortrait(userId: String) {
+        if(!ShowAppointment) {
+            return
+        }
         super.didTapCellPortrait(userId)
         if(userId != YMVar.MyDoctorId) {
             PageYiMaiDoctorDetailBodyView.DocId = userId
@@ -175,6 +178,9 @@ public class YMChatViewController: RCConversationViewController, RCIMReceiveMess
     
     override public func didTapMessageCell(cellData: RCMessageModel) {
         let textMsg = cellData.content as? RCTextMessage
+        if(!ShowAppointment) {
+            return
+        }
         super.didTapMessageCell(cellData)
         if(nil != textMsg) {
             let appointmentInfo = YMVar.TryToGetDictFromJsonStringData(textMsg!.extra!)

@@ -13,6 +13,10 @@ class YMIMUtility: NSObject {
     static func GetRecentContactDoctorsIdList() -> [String] {
         var idList = [String]()
         
+//        if(!YMVar.RCLoginStatus) {
+//            return idList
+//        }
+        
         let blacklistStr = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "blacklist")
         let blacklist = blacklistStr.componentsSeparatedByString(",")
         let conversationList = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
@@ -44,6 +48,7 @@ class YMIMUtility: NSObject {
     }
     
     static func GetLastMessageString(lastMsg: RCMessageContent) -> String {
+
         if(lastMsg is RCTextMessage) {
             return (lastMsg as! RCTextMessage).content //"\(jsonDict!["content"]!)"
         } else if(lastMsg is RCVoiceMessage) {
@@ -52,6 +57,8 @@ class YMIMUtility: NSObject {
             return "【图片】"
         } else if(lastMsg is YMIMMessageContent) {
             return "【名片】"
+        } else if(lastMsg is RCDiscussionNotificationMessage) {
+            return "【讨论组通知】"
         } else {
             return "未知消息"
         }

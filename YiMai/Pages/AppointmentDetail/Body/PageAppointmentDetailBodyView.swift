@@ -269,6 +269,8 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
         
         BtnPanel.groupAndFill(group: Group.Horizontal, views: [DenyAppointmentBtn, AcceptAppointmentBtn], padding: 0)
         divider.anchorInCenter(width: YMSizes.OnPx, height: 60.LayoutVal())
+        
+        BtnPanel.hidden = true
     }
     
     private func CreateTimelineIconMap() {
@@ -433,12 +435,17 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
                        width: hospital.width, height: hospital.height)
     }
     
+    func CallPhone(gr: UIGestureRecognizer) {
+        let sender = gr.view as! UILabel
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(sender.text!)")!)
+    }
+    
     private func DrawPatientOnly(data: [String: AnyObject]) {
         let headImage = YMLayout.GetSuitableImageView("CommonHeadImageBorder")
         let patientName = UILabel()
         let gender = UILabel()
         let age = UILabel()
-        let phone = UILabel()
+        let phone = YMLabel()
         let divider = UIView()
         let phoneIcon = YMLayout.GetSuitableImageView("YMIconPhone")
         
@@ -496,6 +503,8 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
                     padding: 92.LayoutVal(),
                     width: phone.width, height: phone.height)
         
+        phone.SetTouchable(withObject: self, useMethod: "CallPhone:".Sel())
+        
         phoneIcon.align(Align.ToTheLeftCentered, relativeTo: phone,
                         padding: -10.LayoutVal(),
                         width: phoneIcon.width, height: phoneIcon.height)
@@ -508,7 +517,7 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
         let patientName = UILabel()
         let gender = UILabel()
         let age = UILabel()
-        let phone = UILabel()
+        let phone = YMLabel()
         let divider = UIView()
         let phoneIcon = YMLayout.GetSuitableImageView("YMIconPhone")
         
@@ -549,8 +558,6 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
                       padding: 12.LayoutVal(),
                       width: gender.width, height: gender.height)
         
-        
-        
         age.text = "\(data["age"]!) 岁"
         age.textColor = YMColors.FontGray
         age.font = YMFonts.YMDefaultFont(20.LayoutVal())
@@ -566,6 +573,7 @@ public class PageAppointmentDetailBodyView: PageBodyView, ImageProvider {
         phone.align(Align.UnderCentered, relativeTo: headImage,
                     padding: 92.LayoutVal(),
                     width: phone.width, height: phone.height)
+        phone.SetTouchable(withObject: self, useMethod: "CallPhone:".Sel())
         
         phoneIcon.align(Align.ToTheLeftCentered, relativeTo: phone,
                         padding: -10.LayoutVal(),

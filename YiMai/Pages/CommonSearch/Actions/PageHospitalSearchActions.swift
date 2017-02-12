@@ -41,12 +41,14 @@ public class PageHospitalSearchActions: PageJumpActions {
     public func StartSearch(textEditor: YMTextField) {
         let searchKey = textEditor.text
         
-        if(YMValueValidator.IsEmptyString(searchKey!)) {
-            return
-        }
-        
         TargetView?.ClearList()
-        HospitalsByKey?.YMSearchHospital(searchKey!)
+        TargetView?.FilterResult(searchKey!)
+//        if(YMValueValidator.IsEmptyString(searchKey!)) {
+//            return
+//        }
+//        
+//        TargetView?.ClearList()
+//        HospitalsByKey?.YMSearchHospital(searchKey!)
     }
     
     public func HospitalSelected(cell: YMTableViewCell) {

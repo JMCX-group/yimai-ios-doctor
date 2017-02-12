@@ -75,7 +75,10 @@ public class PageMyInfoCardActions: PageJumpActions {
             shareObj.title = "医者脉连"
             shareObj.descr = "请关注我的个人医脉平台，医生找医生、患者看专家更方便。医者仁心脉脉相连。"
             shareObj.thumbImage = self.TargetView.UserHead.image //YMVar.GetStringByKey(YMVar.MyUserInfo, key: "head_url")
-            shareObj.webpageUrl = "http://www.medi-link.cn"
+            shareObj.webpageUrl = "http://d.medi-link.cn/YMShareiOS/?username=" +
+                YMVar.GetStringByKey(YMVar.MyUserInfo, key: "name") +
+                "&usercode=" + YMVar.GetStringByKey(YMVar.MyUserInfo, key: "code") +
+                "&userid=" + YMVar.MyDoctorId
             msg.shareObject = shareObj
             UMSocialManager.defaultManager().shareToPlatform(type, messageObject: msg, currentViewController: self.NavController!, completion: { (data, error) in
                 print(error)

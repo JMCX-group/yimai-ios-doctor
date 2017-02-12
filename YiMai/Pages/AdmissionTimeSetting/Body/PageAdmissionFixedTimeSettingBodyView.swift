@@ -61,6 +61,8 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
 //            UnselectAll()
             return
         }
+        
+        TransformFlexibleData()
 
         for (idx,daySet) in setting.arrayValue.enumerate() {
             var targetStatus = "none"
@@ -373,9 +375,9 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
             status = flexibleStatus!
         } else {
             if(status != flexibleStatus && nil != flexibleStatus) {
-                if("none" != flexibleStatus!) {
+//                if("none" != flexibleStatus!) {
                     status = flexibleStatus!
-                }
+//                }
             }
         }
 
@@ -773,11 +775,16 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
             for i in 1 ... date.monthDays {
                 let thisDay = NSDate(year: date.year, month: date.month, day: i)
                 let dateKey = GetDayKey(thisDay)
-                let weekdayIdx = date.weekday - 1
+                let weekdayIdx = thisDay.weekday - 1
                 let setting = SettingData[weekdayIdx]
                 let pm = setting["pm"] as! Bool
                 let am = setting["am"] as! Bool
-                
+
+//                print("!!!")
+//                print("\(date.year) - \(date.month) - \(i)")
+//                print("setting: \(setting) for \(weekdayIdx)")
+//                print("!!!")
+
                 let flexible = IsFlexible(thisDay)
                 if(!flexible) {
                     if(pm && am) {
@@ -850,7 +857,7 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         
         if(nil != settingString) {
             let setting = JSON.parse(settingString!)
-            
+
             for (_, setting) in setting.arrayValue.enumerate() {
                 let date = setting["date"].stringValue
                 let pm = setting["pm"].boolValue
@@ -880,10 +887,10 @@ public class PageAdmissionFixedTimeSettingBodyView: PageBodyView {
         }
     }
     
-    private func DrawFixedSchedule() {
+    func DrawFixedSchedule() {
         DrawWeekdayPanel()
         DrawDateTitleLabel()
-        TransformFlexibleData()
+//        TransformFlexibleData()
         LoadData()
         DrawCalendar(CurrentDay)
     }

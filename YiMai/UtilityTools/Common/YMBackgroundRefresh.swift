@@ -209,7 +209,13 @@ class YMBackgroundRefresh: NSObject {
         let count = realData["count"] as! [String:AnyObject]
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_L1_FRIENDS_COUNT_INFO, data: count)
         
-        let friends = realData["friends"] as! [AnyObject]
+        let friends = realData["friends"] as! [[String: AnyObject]]
+        
+        for doc in friends {
+            let userId = YMVar.GetStringByKey(doc, key: "id")
+            let headUrl = YMVar.GetStringByKey(doc, key: "head_url")
+            YMLocalData.SaveData(headUrl, key: YMLocalDataStrings.DOC_HEAD_URL + userId)
+        }
         YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_L1_FRIENDS, data: friends)
         
         YMDelay(YMBackgroundRefresh.SuccessDelay) {

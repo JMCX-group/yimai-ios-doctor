@@ -53,7 +53,8 @@ public class PageAdmissionTimeSettingViewController: PageViewController {
 //        FlexibleSettingBodyView = PageAdmissionFlexibleTimeSettingBodyView(parentView: self.SelfView!,
 //                                                                           navController: self.NavController!,
 //                                                                           pageActions: SettingActions)
-        FixedSettingBodyView!.LoadData()
+        
+//        FixedSettingBodyView!.LoadData()
 //        FlexibleSettingBodyView!.LoadData()
     }
 }

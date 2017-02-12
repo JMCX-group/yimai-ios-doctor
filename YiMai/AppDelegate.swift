@@ -20,7 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
     
     func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
         let targetHeadurl = YMVar.GetLocalUserHeadurl(userId)
-        completion(RCUserInfo(userId: userId, name: "", portrait: targetHeadurl))
+        var userName = YMLocalData.GetData(YMLocalDataStrings.DOC_NAME + userId) //"医脉用户"
+        if(YMVar.MyDoctorId == userId) {
+            userName = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "name")
+        } else {
+            if(nil == userName) {
+                userName = "医脉用户"
+            }
+        }
+        completion(RCUserInfo(userId: userId, name: userName! as! String, portrait: targetHeadurl))
     }
     
     func RegisterNotification(app: UIApplication) {
@@ -174,15 +182,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
         RCIM.sharedRCIM().connectWithToken(YMVar.GetStringByKey(YMVar.MyUserInfo, key: "rong_yun_token"),
                                            success: { (userId) -> Void in
                                             print("登陆成功。当前登录的用户ID：\(userId)")
+                                            YMVar.RCLoginStatus = true
                                             //                                        self.ShowChat(sender)
                                             
             }, error: { (status) -> Void in
                 print("登陆的错误码为:\(status.rawValue)")
+                YMVar.RCLoginStatus = false
             }, tokenIncorrect: {
                 //token过期或者不正确。
                 //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
                 //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
                 print("token错误")
+                YMVar.RCLoginStatus = false
         })
     }
 

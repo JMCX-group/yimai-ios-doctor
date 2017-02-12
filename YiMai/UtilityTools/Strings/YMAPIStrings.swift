@@ -46,6 +46,7 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_ACCEPT_APPOINTMENT = "apiAcceptAppointment"
     public static let CS_API_ACTION_APPOINTMENT_COMPLETE = "apiAppointmentComplete"
     public static let CS_API_ACTION_RESCHEDULE_APPOINTMENT = "apiRescheduleAppointment"
+    public static let CS_API_ACTION_CANCEL_APPOINTMENT = "apiCancelAppointment"
     
 
     public static let CS_API_ACTION_GET_ADMISSIONS_LIST = "apiGetAdmissionsList"
@@ -94,6 +95,7 @@ public class YMAPIStrings {
     public static let CS_API_ACTION_GET_WALLET_RECORD = "apiGetWalletRecord"
     public static let CS_API_ACTION_CASH_OUT = "apiCashOut"
     
+    public static let CS_API_ACTION_GET_ALL_NEW_BROADCAST_MSG = "apiGetAllNewBroadcastMsg"
     public static let CS_API_ACTION_GET_ALL_NEW_APPOINTMENT_MSG = "apiGetAllNewAppointmentMsg"
     public static let CS_API_ACTION_CLEAR_ALL_NEW_APPOINTMENT_MSG = "apiClearAllNewAppointmentMsg"
     

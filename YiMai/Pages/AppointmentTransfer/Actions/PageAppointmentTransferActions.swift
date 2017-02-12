@@ -38,14 +38,19 @@ public class PageAppointmentTransferActions: PageJumpActions, UINavigationContro
     
     public func AppointmentTransferSuccess(data: NSDictionary?) {
         TargetController?.Loading?.Hide()
-        NavController?.popViewControllerAnimated(true)
+        JumpBack()
     }
     
     public func AppointmentTransferError(err: NSError) {
         YMAPIUtility.PrintErrorInfo(err)
         TargetController?.Loading?.Hide()
-        NavController?.popViewControllerAnimated(true)
-//        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
+        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
+    }
+    
+    func JumpBack() {
+        let controllers = self.NavController!.viewControllers
+        let targetController = controllers[controllers.count - 3]
+        self.NavController?.popToViewController(targetController, animated: true)
     }
     
     public func DoAppointment(_: YMButton) {

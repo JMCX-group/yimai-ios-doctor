@@ -331,7 +331,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         return cell
     }
     
-    private var PrevL1Doc = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L1_FRIENDS) as! [[String:AnyObject]]
+//    private var PrevL1Doc = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_L1_FRIENDS) as! [[String:AnyObject]]
     
     private func DrawFriendsPanel() {
         BodyView.addSubview(FriendsPanel)

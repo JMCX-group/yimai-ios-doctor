@@ -172,8 +172,9 @@ public class PageMyPatientListBodyView: PageBodyView {
             gander.font = YMFonts.YMDefaultFont(22.LayoutVal())
             gander.sizeToFit()
             
+            let ageStr = YMVar.GetStringByKey(patientInfo, key: "age", defStr: "0")
             if("0" != "\(patientInfo["age"]!)") {
-                age.text = "\(patientInfo["age"]!)岁"
+                age.text = "\(ageStr)岁"
             }
             age.textColor = YMColors.FontBlue
             age.font = YMFonts.YMDefaultFont(22.LayoutVal())

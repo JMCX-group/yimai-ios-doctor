@@ -14,6 +14,9 @@ public class PageIndexBodyView {
     private var NavController : UINavigationController? = nil
     var Actions: PageIndexActions? = nil
     
+    private var NewAdmissionFlag = YMLayout.GetSuitableImageView("IndexIconNewMessageCornerFlag")
+    private var NewAppointmentFlag = YMLayout.GetSuitableImageView("IndexIconNewMessageCornerFlag")
+    
     private var BodyView: UIScrollView = UIScrollView()
     
 //    private var ScrollImageView: UIView = UIView()
@@ -37,7 +40,7 @@ public class PageIndexBodyView {
 
     private var ContactPanel = UIScrollView()
     
-    private var ContactArray: [UIView] = [UIView]()
+    private var ContactArray: [YMTouchableView] = [YMTouchableView]()
     private var MoreContactButton: UIImageView? = nil
 
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: PageIndexActions){
@@ -49,13 +52,27 @@ public class PageIndexBodyView {
         ViewLayout()
     }
     
+    func ShowNewIconForAdmission() {
+        NewAdmissionFlag.hidden = false
+    }
+    
+    func ShowNewIconForAppointment() {
+        NewAppointmentFlag.hidden = false
+    }
+    
+    func HideNewIconForAdmission() {
+        NewAdmissionFlag.hidden = true
+    }
+    
+    func HideNewIconForAppointment() {
+        NewAppointmentFlag.hidden = true
+    }
+    
     private func ViewLayout() {
         YMLayout.BodyLayoutWithTopAndBottom(ParentView!, bodyView: BodyView)
 
         AuthHintBkg.hidden = true
         AuthHintBkg.backgroundColor = YMColors.None
-
-        
 
         DrawScrollPanel()
         DrawOperatorPanel()
@@ -146,6 +163,16 @@ public class PageIndexBodyView {
         OperatorPanel.addSubview(RecordsButton!)
         
         OperatorPanel.groupAndFill(group: Group.Horizontal, views: [DoctorAppointmentButton!, AdmissionsButton!, RecordsButton!], padding: 1)
+        
+        NewAdmissionFlag.hidden = true
+        NewAppointmentFlag.hidden = true
+
+        AdmissionsButton?.addSubview(NewAdmissionFlag)
+        RecordsButton?.addSubview(NewAppointmentFlag)
+        
+        NewAdmissionFlag.anchorInCorner(Corner.BottomRight, xPad: 0, yPad: -1, width: NewAdmissionFlag.width, height: NewAdmissionFlag.height)
+        NewAppointmentFlag.anchorInCorner(Corner.BottomRight, xPad: 0, yPad: -1, width: NewAdmissionFlag.width, height: NewAdmissionFlag.height)
+        
         
 //        SetOperatorContent(Face2FaceButton!,imageName:  "IndexButtonFace2Face",text:  "当面咨询")
         SetOperatorContent(DoctorAppointmentButton!,imageName:  "IndexButtonDoctorAppointment",text:  "预约医生")
@@ -370,7 +397,7 @@ public class PageIndexBodyView {
         if(!isDoc) {
             btnData?["name"] = "小医"
         }
-        buttonView.UserObjectData = btnData//["img": buttonImage, "name": name, "isDoc": isDoc]
+        buttonView.UserObjectData = btnData
         
         return buttonView
     }
@@ -378,6 +405,20 @@ public class PageIndexBodyView {
     private func LayoutContactButtons() {
         for buttons in ContactArray {
             ContactPanel.addSubview(buttons)
+            
+//            let btnData = buttons.UserObjectData as! [String: AnyObject]
+//            
+//            let isDiscussion = YMVar.GetStringByKey(btnData, key: "isDiscussion")
+//            if("1" == isDiscussion) {
+//                let discussionId = buttons.UserStringData
+//                let idList = YMLocalData.GetData(YMLocalDataStrings.DISCUSSION_ID + discussionId)
+//                let imgPanel = btnData["img"] as! UIImageView
+//
+//                if(nil != idList) {
+//                    YMLayout.GetDiscussionHeadimg((idList as! [String]).joinWithSeparator(","), panel: imgPanel)
+//                }
+//                
+//            }
         }
         
         let baseButton = ContactArray[0]
@@ -422,11 +463,49 @@ public class PageIndexBodyView {
         ContactArray.append(yiButton)
 //        ContactArray.append(maiButton)
         
-        let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue])
+        let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue, RCConversationType.ConversationType_DISCUSSION.rawValue])
 
         for docImInfo in imInfo {
+//            if(!YMVar.RCLoginStatus) {
+//                break
+//            }
+            let conversation = docImInfo as! RCConversation
+            if(RCConversationType.ConversationType_DISCUSSION == docImInfo.conversationType) {
+                let title = conversation.conversationTitle
+                let img = UIImage(named: "ContactBackgroundForDiscussion")
+                
+                let cell = GetContactButton(img!, name: title, desc: "讨论组", isDoc: true, userData: nil)
+                cell.UserStringData = conversation.targetId
+                var userData = cell.UserObjectData as! [String: AnyObject]
+                userData["isDiscussion"] = "1"
+                userData["title"] = title
+                cell.UserObjectData = userData
+                
+                let imgPanel = userData["img"] as! UIView
+                
+                let idList = YMLocalData.GetData(YMLocalDataStrings.DISCUSSION_ID + conversation.targetId)
+                
+                if(nil != idList) {
+                    YMLayout.GetDiscussionHeadimg((idList as! [String]).joinWithSeparator(","), panel: imgPanel)
+                }
+                
+                RCIMClient.sharedRCIMClient().getDiscussion(conversation.targetId, success: { (discussion) in
+                    YMDelay(0.1, closure: {
+                        let idList: [String] = discussion.memberIdList.map({($0 as! String)})
+                        YMLocalData.SaveData(idList, key: YMLocalDataStrings.DISCUSSION_ID + conversation.targetId)
+                        YMLayout.GetDiscussionHeadimg(idList.joinWithSeparator(","), panel: imgPanel)
+                    })
+                    }, error: { (error) in
+                        //DoNothing
+                        print("get discussion failed \(error.rawValue)")
+                })
+                
+                ContactArray.append(cell)
+
+                continue
+            }
+
             for doc in data {
-                print(doc)
                 if("\(docImInfo.targetId!)" == "\(doc["id"]!)" || "\(docImInfo.senderUserId!)" == "\(doc["id"]!)") {
                     
                     let img = UIImage(named: "IndexButtonContactBackground")

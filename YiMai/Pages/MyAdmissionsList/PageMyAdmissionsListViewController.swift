@@ -11,7 +11,6 @@ import UIKit
 public class PageMyAdmissionsListViewController: PageViewController {
     private var Actions: PageMyAdmissionsListActions? = nil
     public var BodyView: PageMyAdmissionsListBodyView? = nil
-    private var Loading: YMPageLoadingView? = nil
     
     public static var CompletedAdmissions = [[String: AnyObject]]()
     public static var WaitCompletedAdmissions = [[String: AnyObject]]()
@@ -30,8 +29,7 @@ public class PageMyAdmissionsListViewController: PageViewController {
         TopView = PageCommonTopView(parentView: SelfView!, titleString: "我的接诊信息", navController: NavController)
 //        BodyView?.DrawSpecialClearButton()
         
-        Loading = YMPageLoadingView(parentView: SelfView!)
-        Loading?.Show()
+        BodyView?.FullPageLoading.Show()
         Actions?.GetAdmissionInfo()
     }
     
@@ -42,7 +40,7 @@ public class PageMyAdmissionsListViewController: PageViewController {
     }
     
     public func HideLoading() {
-        Loading?.Hide()
+        BodyView?.FullPageLoading.Hide()
     }
 }
 

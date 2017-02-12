@@ -112,6 +112,11 @@ public class YMCommonStrings {
     
     public static let CS_PAGE_IM_SEARCH = "PageIMSearchConversations"
     public static let CS_PAGE_IM_MSG_SEARCH = "PageIMSearchMessage"
+    
+    public static let CS_PAGE_IM_DISCUSSION_INVITE_LIST = "PageIMDiscussionInviteList"
+    public static let CS_PAGE_IM_DISCUSSION_INVITE_FOR_MEMBER = "PageIMDiscussionInviteListForMember"
+    public static let CS_PAGE_IM_DISCUSSION_SETTING = "PageIMDiscussionSetting"
+    public static let CS_PAGE_IM_DISCUSSION_MEMBER_LIST = "PageIMDiscussionMemberList"
 
     public static let CS_API_PARAM_KEY_TOKEN = "token"
     public static let CS_API_PARAM_KEY_PHONE = "phone"

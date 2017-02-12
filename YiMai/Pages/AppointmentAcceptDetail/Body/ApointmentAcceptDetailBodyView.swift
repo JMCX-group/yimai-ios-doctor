@@ -119,7 +119,7 @@ public class ApointmentAcceptDetailBodyView: PageBodyView {
     private func DrawAdmissionTime() {
         BodyView.addSubview(AdmissionTimePanel)
         AdmissionTimePanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 144.LayoutVal())
-        let title = YMLayout.GetYMPanelTitleLabel("期望就诊时间", fontColor: YMColors.FontGray, fontSize: 24.LayoutVal(),
+        let title = YMLayout.GetYMPanelTitleLabel("就诊时间", fontColor: YMColors.FontGray, fontSize: 24.LayoutVal(),
                                       backgroundColor: YMColors.BackgroundGray, height: 60.LayoutVal(),
                                       paddingLeft: 40.LayoutVal(), panel: AdmissionTimePanel)
         

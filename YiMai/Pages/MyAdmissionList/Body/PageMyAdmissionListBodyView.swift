@@ -11,6 +11,7 @@ import Neon
 
 class PageMyAdmissionListBodyView: PageBodyView {
     var ListActions: PageMyAdmissionListActions!
+    var PrevData = [[String: AnyObject]]()
     
     override func ViewLayout() {
         super.ViewLayout()
@@ -25,7 +26,7 @@ class PageMyAdmissionListBodyView: PageBodyView {
         let readen = "\(data["read"]!)"
         let dividerLine = UIView()
         var btnTextColor = YMColors.FontBlue
-        
+
         if("0" == readen) {
             dividerLine.backgroundColor = YMColors.FontLighterGray
         } else {
@@ -84,6 +85,8 @@ class PageMyAdmissionListBodyView: PageBodyView {
     func LoadData(data: [[String: AnyObject]]) {
         var prev: YMTouchableView? = nil
         
+        PrevData = data
+        
         YMLayout.ClearView(view: BodyView)
         BodyView.contentOffset = CGPoint(x: 0, y: -YMSizes.PageTopHeight)
         
@@ -92,6 +95,19 @@ class PageMyAdmissionListBodyView: PageBodyView {
         }
 
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: prev, padding: 40.LayoutVal())
+    }
+    
+    override func BodyViewEndDragging() {
+        super.BodyViewEndDragging()
+        let yOffset = self.BodyView.contentOffset.y
+        if(yOffset < -YMSizes.PagePullRefreshHeight) {
+            FullPageLoading.Show()
+            YMDelay(0.5, closure: {
+                self.FullPageLoading.Show()
+                self.ListActions.GetListApi.YMGetAllNewAdmissionMsg()
+            })
+            
+        }
     }
 }
 

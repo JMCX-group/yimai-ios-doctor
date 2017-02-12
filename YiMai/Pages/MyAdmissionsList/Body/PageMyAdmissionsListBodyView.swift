@@ -281,7 +281,7 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         if(nil != genderIdx) {
             location.text = "\(genderMap[genderIdx!]!) \(age!)"
         } else {
-            location.text = "\(age)"
+            location.text = "\(age!)"
         }
         basicInfo.text = "患者"
 //        location.text = data["hospital"] as? String
@@ -468,6 +468,19 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         CompletePanelDrew = false
         WaitCompletePanelDrew = false
         WaitReplyPanelDrew = false
+    }
+    
+    override func BodyViewEndDragging() {
+        super.BodyViewEndDragging()
+        let yOffset = self.BodyView.contentOffset.y
+        if(yOffset < -YMSizes.PagePullRefreshHeight) {
+            FullPageLoading.Show()
+            YMDelay(0.5, closure: {
+                self.FullPageLoading.Show()
+                (self.Actions as! PageMyAdmissionsListActions).GetAdmissionInfo()
+            })
+            
+        }
     }
 }
 

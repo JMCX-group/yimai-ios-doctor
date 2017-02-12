@@ -48,14 +48,14 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
             UploadApi?.YMUploadAddmissionPhotos(["id": AppointmentId], blockBuilder: self.UploadBlockBuilder)
         } else {
             TargetController?.Loading?.Hide()
-            self.NavController!.popViewControllerAnimated(true)
+//            self.NavController!.popViewControllerAnimated(true)
         }
     }
     
     public func UploadError(err: NSError) {
         YMAPIUtility.PrintErrorInfo(err)
         TargetController?.Loading?.Hide()
-        self.NavController!.popViewControllerAnimated(true)
+//        self.NavController!.popViewControllerAnimated(true)
 
 //        YMPageModalMessage.ShowErrorInfo("网络错误，请稍后再试！", nav: self.NavController!)
 //        self.NavController!.popViewControllerAnimated(true)

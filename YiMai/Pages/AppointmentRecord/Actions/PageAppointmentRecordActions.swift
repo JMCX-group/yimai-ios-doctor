@@ -21,13 +21,17 @@ public class PageAppointmentRecordActions: PageJumpActions {
     
     private func GetAppointmentListSuccess(data: NSDictionary?) {
         if(nil == data) {
-            TargetView?.Loading?.Hide()
-            TargetView?.TabPanel.hidden = true
-            YMPageModalMessage.ShowNormalInfo("您尚未收到过代约请求", nav: self.NavController!)
-            return
+//            TargetView?.Loading?.Hide()
+//            TargetView?.TabPanel.hidden = true
+//            YMPageModalMessage.ShowNormalInfo("您尚未收到过代约请求", nav: self.NavController!)
+//            return
+            
+            TargetView?.TabPanel.hidden = false
+            TargetView?.LoadData(nil)
+        } else {
+            TargetView?.TabPanel.hidden = false
+            TargetView?.LoadData(data!["data"] as? NSDictionary)
         }
-        TargetView?.TabPanel.hidden = false
-        TargetView?.LoadData(data!["data"] as? NSDictionary)
     }
     
     private func GetAppointmentListError(error: NSError) {

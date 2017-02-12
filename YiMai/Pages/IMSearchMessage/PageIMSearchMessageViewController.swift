@@ -25,13 +25,21 @@ class PageIMSearchMessageViewController: PageViewController {
             
             let targetId = YMVar.GetStringByKey(userInfo, key: "id")
             let key = YMVar.GetStringByKey(userInfo, key: "key")
+            let type = YMVar.GetStringByKey(userInfo, key: "isDiscussion")
             
-            let ret = RCIMClient.sharedRCIMClient().searchMessages(RCConversationType.ConversationType_PRIVATE,
-                                                         targetId: targetId,
-                                                         keyword: key, count: 100000, startTime: 0)
+            var ret: [RCMessage]? = nil
+            if("1" == type) {
+                ret = RCIMClient.sharedRCIMClient().searchMessages(RCConversationType.ConversationType_DISCUSSION,
+                                                                   targetId: targetId,
+                                                                   keyword: key, count: 100000, startTime: 0)
+            } else {
+                ret = RCIMClient.sharedRCIMClient().searchMessages(RCConversationType.ConversationType_PRIVATE,
+                                                                       targetId: targetId,
+                                                                       keyword: key, count: 100000, startTime: 0)
+            }
             
             if(nil != ret) {
-                BodyView.LoadData(ret, key: key)
+                BodyView.LoadData(ret!, key: key)
             }
         }
     }

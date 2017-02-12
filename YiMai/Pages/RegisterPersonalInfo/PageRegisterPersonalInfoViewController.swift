@@ -28,6 +28,8 @@ public class PageRegisterPersonalInfoViewController: PageViewController {
             if(!BodyView!.CityPicker.DataLoaded) {
                 BodyView?.Loading?.Show()
                 BodyView?.Actions!.GetCityInfoApi?.YMGetCityGroupByProvince()
+            } else {
+                BodyView!.CityPicker.Reload()
             }
             TopView?.TopViewPanel.removeFromSuperview()
             TopView = PageCommonTopView(parentView: self.view,
@@ -48,6 +50,14 @@ public class PageRegisterPersonalInfoViewController: PageViewController {
                 PageDepartmentSearchBodyView.DepartmentSelected = nil
                 YMCoreDataEngine.RemoveData(YMCoreDataKeyStrings.CS_USER_LOGIN_STATUS)
                 PageRegisterPersonalInfoViewController.NeedInit = false
+                
+                BodyView?.Reset()
+                if(!BodyView!.CityPicker.DataLoaded) {
+                    BodyView?.Loading?.Show()
+                    BodyView?.Actions!.GetCityInfoApi?.YMGetCityGroupByProvince()
+                } else {
+                    BodyView!.CityPicker.Reload()
+                }
             } else {
                 BodyView?.Refesh()
             }

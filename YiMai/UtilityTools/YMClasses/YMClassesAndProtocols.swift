@@ -85,7 +85,11 @@ public class StoryboardThatExist {
         YMCommonStrings.CS_PAGE_ADD_BANKCARD_NAME: true,
         YMCommonStrings.CS_PAGE_GET_ADMISSSION_MSG_LIST: true,
         YMCommonStrings.CS_PAGE_IM_SEARCH: true,
-        YMCommonStrings.CS_PAGE_IM_MSG_SEARCH: true
+        YMCommonStrings.CS_PAGE_IM_MSG_SEARCH: true,
+        YMCommonStrings.CS_PAGE_IM_DISCUSSION_INVITE_LIST: true,
+        YMCommonStrings.CS_PAGE_IM_DISCUSSION_INVITE_FOR_MEMBER: true,
+        YMCommonStrings.CS_PAGE_IM_DISCUSSION_SETTING: true,
+        YMCommonStrings.CS_PAGE_IM_DISCUSSION_MEMBER_LIST: true
     ]
 }
 

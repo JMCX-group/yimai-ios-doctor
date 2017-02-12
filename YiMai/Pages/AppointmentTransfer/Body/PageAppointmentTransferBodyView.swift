@@ -23,7 +23,7 @@ public class PageAppointmentTransferBodyView: PageBodyView {
     
     private var SelectDoctorPanel: UIView? = nil
     private var SelectDoctorButton: YMTouchableView? = nil
-    private let SelectDoctorButtonIcon = YMLayout.GetSuitableImageView("PageAppointmentTransferAddDoctorIcon")
+    private let SelectDoctorButtonIcon = YMLayout.GetSuitableImageView("PageAppointmentAddDoctorIcon")
     private let SelectDoctorButtonLabel = UILabel()
     private var SelectedDoctorCell: UIView? = nil
     
@@ -258,7 +258,7 @@ public class PageAppointmentTransferBodyView: PageBodyView {
         let name = dataObj[YMYiMaiStrings.CS_DATA_KEY_NAME] as! String
         let hospital = dataObj[YMYiMaiStrings.CS_DATA_KEY_HOSPATIL] as! String
         let department = dataObj[YMYiMaiStrings.CS_DATA_KEY_DEPARTMENT] as! String
-        let jobTitle = dataObj[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as? String
+        let jobTitle = YMVar.GetStringByKey(dataObj, key: "YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE", defStr: "医生")//dataObj[YMYiMaiStrings.CS_DATA_KEY_JOB_TITLE] as? String
         
         let nameLabel = UILabel()
         let divider = UIView(frame: CGRect(x: 0,y: 0,width: YMSizes.OnPx,height: 20.LayoutVal()))
@@ -274,7 +274,7 @@ public class PageAppointmentTransferBodyView: PageBodyView {
         
         divider.backgroundColor = YMColors.FontBlue
         
-        jobTitleLabel.text = jobTitle ?? "医生"
+        jobTitleLabel.text = jobTitle
         jobTitleLabel.textColor = YMColors.FontGray
         jobTitleLabel.font = YMFonts.YMDefaultFont(22.LayoutVal())
         jobTitleLabel.sizeToFit()

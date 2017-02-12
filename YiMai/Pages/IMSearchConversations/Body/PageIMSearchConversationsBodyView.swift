@@ -72,7 +72,9 @@ class PageIMSearchConversationsBodyView: PageBodyView {
         let key = SearchInput.text
         if(!YMValueValidator.IsBlankString(key)) {
             CurrentKey = key!
-            let ret = RCIMClient.sharedRCIMClient().searchConversations([RCConversationType.ConversationType_PRIVATE.rawValue],
+            let ret = RCIMClient.sharedRCIMClient().searchConversations(
+                [RCConversationType.ConversationType_PRIVATE.rawValue,
+                RCConversationType.ConversationType_DISCUSSION.rawValue],
                                                               messageType: [RCTextMessage.getObjectName()], keyword: key!)
             
             if(nil != ret) {
@@ -87,10 +89,11 @@ class PageIMSearchConversationsBodyView: PageBodyView {
     func CellTouched(gr: UIGestureRecognizer) {
         let cell = gr.view! as! YMTouchableView
         let targetId = cell.UserStringData
+        let isDiscussion = cell.UserObjectData as! String
         
         PageJumpActions(navController: NavController!)
             .DoJump(YMCommonStrings.CS_PAGE_IM_MSG_SEARCH,
-                    ignoreExists: false, userData: ["id": targetId, "key": CurrentKey])
+                    ignoreExists: false, userData: ["id": targetId, "key": CurrentKey, "isDiscussion": isDiscussion])
     }
 
     func DrawResultCell(data: RCSearchConversationResult, prev: UIView?) -> YMTouchableView {
@@ -100,6 +103,7 @@ class PageIMSearchConversationsBodyView: PageBodyView {
         let userHead = YMVar.GetLocalUserHeadurl(targetId)
         
         cell.UserStringData = targetId
+        cell.UserObjectData = "0"
         
         ResultPanel.addSubview(cell)
         if(nil != prev) {
@@ -107,10 +111,32 @@ class PageIMSearchConversationsBodyView: PageBodyView {
         } else {
             cell.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 150.LayoutVal())
         }
-        
+
         let headImg = YMLayout.GetSuitableImageView("YiMaiGeneralHeadImageBorder")
         var userName = YMLocalData.GetData(YMLocalDataStrings.DOC_NAME + targetId) as? String
         
+        if (RCConversationType.ConversationType_DISCUSSION == data.conversation.conversationType) {
+            headImg.image = UIImage(named: "ContactBackgroundForDiscussion")
+            userName = data.conversation.conversationTitle
+            cell.UserObjectData = "1"
+            
+            let idList = YMLocalData.GetData(YMLocalDataStrings.DISCUSSION_ID + data.conversation.targetId)
+            
+            if(nil != idList) {
+                YMLayout.GetDiscussionHeadimg((idList as! [String]).joinWithSeparator(","), panel: headImg)
+            }
+            
+            RCIMClient.sharedRCIMClient().getDiscussion(data.conversation.targetId, success: { (discussion) in
+                YMDelay(0.1, closure: {
+                    let idList: [String] = discussion.memberIdList.map({($0 as! String)})
+                    YMLocalData.SaveData(idList, key: YMLocalDataStrings.DISCUSSION_ID + data.conversation.targetId)
+                    YMLayout.GetDiscussionHeadimg(idList.joinWithSeparator(","), panel: headImg)
+                })
+                }, error: { (error) in
+                    //DoNothing
+                    print("get discussion failed \(error.rawValue)")
+            })
+        }
         
         if(nil == userName) {
             userName = " "
@@ -121,7 +147,9 @@ class PageIMSearchConversationsBodyView: PageBodyView {
         cell.addSubview(headImg)
         cell.addSubview(userLabel)
         headImg.anchorToEdge(Edge.Left, padding: 40.LayoutVal(), width: headImg.width, height: headImg.height)
-        YMLayout.LoadImageFromServer(headImg, url: userHead, fullUrl: nil, makeItRound: true)
+        if (RCConversationType.ConversationType_DISCUSSION != data.conversation.conversationType) {
+            YMLayout.LoadImageFromServer(headImg, url: userHead, fullUrl: nil, makeItRound: true)
+        }
         userLabel.align(Align.ToTheRightMatchingTop, relativeTo: headImg, padding: 20.LayoutVal(), width: userLabel.width, height: userLabel.height)
         
         let countLabel = YMLayout.GetNomalLabel("有\(count)条相关聊天记录", textColor: YMColors.FontLightGray, fontSize: 28.LayoutVal())

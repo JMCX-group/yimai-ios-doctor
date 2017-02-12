@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cqk-6y-3bn">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--PageIM Discussion Member List View Controller-->
+        <scene sceneID="xJQ-1g-Ziu">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Cqk-6y-3bn" customClass="PageIMDiscussionMemberListViewController" customModule="YiMai" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7KY-AL-MCD"/>
+                        <viewControllerLayoutGuide type="bottom" id="PFs-kw-QNE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kNl-r0-q0a">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2k6-4s-DKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="690" y="389"/>
+        </scene>
+    </scenes>
+</document>

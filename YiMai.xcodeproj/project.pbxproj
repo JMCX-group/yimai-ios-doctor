@@ -15,6 +15,10 @@
 		2F9332F71DA6893600637982 /* PageAllCollegeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332F61DA6893600637982 /* PageAllCollegeListViewController.swift */; };
 		2F9332F91DA689B800637982 /* PageAllCollegeListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */; };
 		2F9332FB1DA689C600637982 /* PageAllCollegeListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9332FA1DA689C600637982 /* PageAllCollegeListActions.swift */; };
+		660630961E444C890035DD60 /* PageIMDiscussionInviteListForMemberActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660630901E444C890035DD60 /* PageIMDiscussionInviteListForMemberActions.swift */; };
+		660630971E444C890035DD60 /* PageIMDiscussionInviteListForMember.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660630911E444C890035DD60 /* PageIMDiscussionInviteListForMember.storyboard */; };
+		660630981E444C890035DD60 /* PageIMDiscussionInviteListForMemberBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660630941E444C890035DD60 /* PageIMDiscussionInviteListForMemberBodyView.swift */; };
+		660630991E444C890035DD60 /* PageIMDiscussionInviteListForMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660630951E444C890035DD60 /* PageIMDiscussionInviteListForMemberViewController.swift */; };
 		661A55991DFFE2BC00E7CE41 /* PageAuthCompleteActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661A55931DFFE2BC00E7CE41 /* PageAuthCompleteActions.swift */; };
 		661A559A1DFFE2BC00E7CE41 /* PageAuthComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 661A55941DFFE2BC00E7CE41 /* PageAuthComplete.storyboard */; };
 		661A559B1DFFE2BC00E7CE41 /* PageAuthCompleteBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661A55971DFFE2BC00E7CE41 /* PageAuthCompleteBodyView.swift */; };
@@ -52,6 +56,19 @@
 		669F9D361E1133AC00A81BB7 /* PageAppointmentUpdateBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D321E1133AC00A81BB7 /* PageAppointmentUpdateBodyView.swift */; };
 		669F9D371E1133AC00A81BB7 /* PageAppointmentUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D331E1133AC00A81BB7 /* PageAppointmentUpdateViewController.swift */; };
 		669F9D391E13B62100A81BB7 /* YMNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F9D381E13B62100A81BB7 /* YMNotification.swift */; };
+		66AB6E141E44680200231061 /* PageIMDiscussionSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66AB6E161E44680200231061 /* PageIMDiscussionSetting.storyboard */; };
+		66AB6E181E44681E00231061 /* PageIMDiscussionSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB6E171E44681E00231061 /* PageIMDiscussionSettingViewController.swift */; };
+		66AB6E1A1E44686D00231061 /* PageIMDiscussionSettingBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB6E191E44686D00231061 /* PageIMDiscussionSettingBodyView.swift */; };
+		66AB6E1C1E446AE800231061 /* PageIMDiscussionSettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB6E1B1E446AE800231061 /* PageIMDiscussionSettingActions.swift */; };
+		66AB6E221E4485E100231061 /* PageIMDiscussionMemberList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66AB6E241E4485E100231061 /* PageIMDiscussionMemberList.storyboard */; };
+		66AB6E261E4485F200231061 /* PageIMDiscussionMemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB6E251E4485F200231061 /* PageIMDiscussionMemberListViewController.swift */; };
+		66AB6E281E44863400231061 /* PageIMDiscussionMemberListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB6E271E44863400231061 /* PageIMDiscussionMemberListBodyView.swift */; };
+		66AB6E2A1E44863F00231061 /* PageIMDiscussionMemberListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB6E291E44863F00231061 /* PageIMDiscussionMemberListActions.swift */; };
+		66BBF6C41E42D9FD00031F25 /* PageIMDiscussionInviteList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BBF6C61E42D9FD00031F25 /* PageIMDiscussionInviteList.storyboard */; };
+		66BBF6C81E42DA1B00031F25 /* PageIMDiscussionInviteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BBF6C71E42DA1B00031F25 /* PageIMDiscussionInviteListViewController.swift */; };
+		66BBF6CA1E42DA5D00031F25 /* PageIMDiscussionInviteListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BBF6C91E42DA5D00031F25 /* PageIMDiscussionInviteListBodyView.swift */; };
+		66BBF6CC1E42DA9800031F25 /* PageIMDiscussionInviteListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BBF6CB1E42DA9800031F25 /* PageIMDiscussionInviteListActions.swift */; };
+		66BBF6CE1E42EBA700031F25 /* YMDiscussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BBF6CD1E42EBA700031F25 /* YMDiscussionViewController.swift */; };
 		66C92F0D1E24C7020014D170 /* PageBankCardList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C92F0F1E24C7020014D170 /* PageBankCardList.storyboard */; };
 		66C92F111E24C71E0014D170 /* PageBankCardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C92F101E24C71E0014D170 /* PageBankCardListViewController.swift */; };
 		66C92F131E24C7740014D170 /* PageBankCardListBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C92F121E24C7740014D170 /* PageBankCardListBodyView.swift */; };
@@ -445,6 +462,10 @@
 		2F9332F81DA689B800637982 /* PageAllCollegeListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListBodyView.swift; sourceTree = "<group>"; };
 		2F9332FA1DA689C600637982 /* PageAllCollegeListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAllCollegeListActions.swift; sourceTree = "<group>"; };
 		35BFF39E026F446424476AF5 /* Pods-YiMai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiMai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiMai/Pods-YiMai.release.xcconfig"; sourceTree = "<group>"; };
+		660630901E444C890035DD60 /* PageIMDiscussionInviteListForMemberActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionInviteListForMemberActions.swift; sourceTree = "<group>"; };
+		660630921E444C890035DD60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageIMDiscussionInviteListForMember.storyboard; sourceTree = "<group>"; };
+		660630941E444C890035DD60 /* PageIMDiscussionInviteListForMemberBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionInviteListForMemberBodyView.swift; sourceTree = "<group>"; };
+		660630951E444C890035DD60 /* PageIMDiscussionInviteListForMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionInviteListForMemberViewController.swift; sourceTree = "<group>"; };
 		661A55931DFFE2BC00E7CE41 /* PageAuthCompleteActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAuthCompleteActions.swift; sourceTree = "<group>"; };
 		661A55951DFFE2BC00E7CE41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageAuthComplete.storyboard; sourceTree = "<group>"; };
 		661A55971DFFE2BC00E7CE41 /* PageAuthCompleteBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAuthCompleteBodyView.swift; sourceTree = "<group>"; };
@@ -483,6 +504,19 @@
 		669F9D321E1133AC00A81BB7 /* PageAppointmentUpdateBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentUpdateBodyView.swift; sourceTree = "<group>"; };
 		669F9D331E1133AC00A81BB7 /* PageAppointmentUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAppointmentUpdateViewController.swift; sourceTree = "<group>"; };
 		669F9D381E13B62100A81BB7 /* YMNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMNotification.swift; sourceTree = "<group>"; };
+		66AB6E151E44680200231061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageIMDiscussionSetting.storyboard; sourceTree = "<group>"; };
+		66AB6E171E44681E00231061 /* PageIMDiscussionSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionSettingViewController.swift; sourceTree = "<group>"; };
+		66AB6E191E44686D00231061 /* PageIMDiscussionSettingBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionSettingBodyView.swift; sourceTree = "<group>"; };
+		66AB6E1B1E446AE800231061 /* PageIMDiscussionSettingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionSettingActions.swift; sourceTree = "<group>"; };
+		66AB6E231E4485E100231061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageIMDiscussionMemberList.storyboard; sourceTree = "<group>"; };
+		66AB6E251E4485F200231061 /* PageIMDiscussionMemberListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionMemberListViewController.swift; sourceTree = "<group>"; };
+		66AB6E271E44863400231061 /* PageIMDiscussionMemberListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionMemberListBodyView.swift; sourceTree = "<group>"; };
+		66AB6E291E44863F00231061 /* PageIMDiscussionMemberListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionMemberListActions.swift; sourceTree = "<group>"; };
+		66BBF6C51E42D9FD00031F25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageIMDiscussionInviteList.storyboard; sourceTree = "<group>"; };
+		66BBF6C71E42DA1B00031F25 /* PageIMDiscussionInviteListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionInviteListViewController.swift; sourceTree = "<group>"; };
+		66BBF6C91E42DA5D00031F25 /* PageIMDiscussionInviteListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionInviteListBodyView.swift; sourceTree = "<group>"; };
+		66BBF6CB1E42DA9800031F25 /* PageIMDiscussionInviteListActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIMDiscussionInviteListActions.swift; sourceTree = "<group>"; };
+		66BBF6CD1E42EBA700031F25 /* YMDiscussionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMDiscussionViewController.swift; sourceTree = "<group>"; };
 		66C92F0E1E24C7020014D170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageBankCardList.storyboard; sourceTree = "<group>"; };
 		66C92F101E24C71E0014D170 /* PageBankCardListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBankCardListViewController.swift; sourceTree = "<group>"; };
 		66C92F121E24C7740014D170 /* PageBankCardListBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBankCardListBodyView.swift; sourceTree = "<group>"; };
@@ -957,6 +991,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6606308E1E444C890035DD60 /* IMDiscussionInviteListForMember */ = {
+			isa = PBXGroup;
+			children = (
+				6606308F1E444C890035DD60 /* Actions */,
+				660630931E444C890035DD60 /* Body */,
+				660630911E444C890035DD60 /* PageIMDiscussionInviteListForMember.storyboard */,
+				660630951E444C890035DD60 /* PageIMDiscussionInviteListForMemberViewController.swift */,
+			);
+			path = IMDiscussionInviteListForMember;
+			sourceTree = "<group>";
+		};
+		6606308F1E444C890035DD60 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				660630901E444C890035DD60 /* PageIMDiscussionInviteListForMemberActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		660630931E444C890035DD60 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				660630941E444C890035DD60 /* PageIMDiscussionInviteListForMemberBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
 		661A55911DFFE2BC00E7CE41 /* AuthComplete */ = {
 			isa = PBXGroup;
 			children = (
@@ -1180,6 +1241,87 @@
 			isa = PBXGroup;
 			children = (
 				669F9D321E1133AC00A81BB7 /* PageAppointmentUpdateBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		66AB6E0F1E4467D500231061 /* IMDiscussionSetting */ = {
+			isa = PBXGroup;
+			children = (
+				66AB6E101E4467D500231061 /* Actions */,
+				66AB6E111E4467D500231061 /* Body */,
+				66AB6E161E44680200231061 /* PageIMDiscussionSetting.storyboard */,
+				66AB6E171E44681E00231061 /* PageIMDiscussionSettingViewController.swift */,
+			);
+			path = IMDiscussionSetting;
+			sourceTree = "<group>";
+		};
+		66AB6E101E4467D500231061 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				66AB6E1B1E446AE800231061 /* PageIMDiscussionSettingActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		66AB6E111E4467D500231061 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				66AB6E191E44686D00231061 /* PageIMDiscussionSettingBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		66AB6E1D1E44854600231061 /* IMDiscussionMemberList */ = {
+			isa = PBXGroup;
+			children = (
+				66AB6E1E1E44854600231061 /* Actions */,
+				66AB6E1F1E44854600231061 /* Body */,
+				66AB6E241E4485E100231061 /* PageIMDiscussionMemberList.storyboard */,
+				66AB6E251E4485F200231061 /* PageIMDiscussionMemberListViewController.swift */,
+			);
+			path = IMDiscussionMemberList;
+			sourceTree = "<group>";
+		};
+		66AB6E1E1E44854600231061 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				66AB6E291E44863F00231061 /* PageIMDiscussionMemberListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		66AB6E1F1E44854600231061 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				66AB6E271E44863400231061 /* PageIMDiscussionMemberListBodyView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		66BBF6BF1E42D9D100031F25 /* IMDiscussionInviteList */ = {
+			isa = PBXGroup;
+			children = (
+				66BBF6C01E42D9D100031F25 /* Actions */,
+				66BBF6C11E42D9D100031F25 /* Body */,
+				66BBF6C61E42D9FD00031F25 /* PageIMDiscussionInviteList.storyboard */,
+				66BBF6C71E42DA1B00031F25 /* PageIMDiscussionInviteListViewController.swift */,
+			);
+			path = IMDiscussionInviteList;
+			sourceTree = "<group>";
+		};
+		66BBF6C01E42D9D100031F25 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				66BBF6CB1E42DA9800031F25 /* PageIMDiscussionInviteListActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		66BBF6C11E42D9D100031F25 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				66BBF6C91E42DA5D00031F25 /* PageIMDiscussionInviteListBodyView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -2001,6 +2143,10 @@
 		9619EF651CC1DE0C00F69CBC /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				66AB6E1D1E44854600231061 /* IMDiscussionMemberList */,
+				66AB6E0F1E4467D500231061 /* IMDiscussionSetting */,
+				6606308E1E444C890035DD60 /* IMDiscussionInviteListForMember */,
+				66BBF6BF1E42D9D100031F25 /* IMDiscussionInviteList */,
 				665CB3FA1E389B6F009093D0 /* IMSearchMessage */,
 				665CB3EC1E3894B5009093D0 /* IMHistoryList */,
 				663424F21E373A7E00EF8C69 /* IMSearchConversations */,
@@ -2341,6 +2487,7 @@
 				6622B3B71E1B5B7C00C14EC9 /* YMIMCell.swift */,
 				6622B3B91E1B5F7500C14EC9 /* YMIMMessageContent.swift */,
 				73EA65C21D444BE90050C12C /* YMChatViewController.swift */,
+				66BBF6CD1E42EBA700031F25 /* YMDiscussionViewController.swift */,
 			);
 			path = YMClasses;
 			sourceTree = "<group>";
@@ -3635,7 +3782,9 @@
 				2F2BDA511DD80A7900310385 /* PageWalletRecord.storyboard in Resources */,
 				661A55A21E0036D200E7CE41 /* PageBlacklist.storyboard in Resources */,
 				96637A7D1CC24A6100DBD1CF /* PageLogin.storyboard in Resources */,
+				66AB6E221E4485E100231061 /* PageIMDiscussionMemberList.storyboard in Resources */,
 				665CB3FE1E389E64009093D0 /* PageIMSearchMessage.storyboard in Resources */,
+				66BBF6C41E42D9FD00031F25 /* PageIMDiscussionInviteList.storyboard in Resources */,
 				9612DB6D1CC9F75300262D2E /* PagePersonal.storyboard in Resources */,
 				9620456B1D1B9B4100E18D88 /* PageAppointmentRecord.storyboard in Resources */,
 				961646011DB1DB3C007BA360 /* PageShowWebView.storyboard in Resources */,
@@ -3661,6 +3810,7 @@
 				96814AA11D1A815F002C8BD3 /* PagePersonalIntroEdit.storyboard in Resources */,
 				FD5D64241DE44322004C5286 /* CameraViewAssets.xcassets in Resources */,
 				96C02FE51D96B4C10096E216 /* PaperCardPreview.storyboard in Resources */,
+				66AB6E141E44680200231061 /* PageIMDiscussionSetting.storyboard in Resources */,
 				7394F85A1D005DF400F05487 /* PageAppointmentSelectTime.storyboard in Resources */,
 				7394F84B1CF9A36800F05487 /* PageAppointmentPatientCondition.storyboard in Resources */,
 				FDD02E971DE5477C00118FC3 /* PageAppointmentReplyList.storyboard in Resources */,
@@ -3683,6 +3833,7 @@
 				73622E531D1EE2FC0039E785 /* PageYiMaiIntro.storyboard in Resources */,
 				669F9D351E1133AC00A81BB7 /* PageAppointmentUpdate.storyboard in Resources */,
 				66F9E6E81E2351F5007565D4 /* read_me.txt in Resources */,
+				660630971E444C890035DD60 /* PageIMDiscussionInviteListForMember.storyboard in Resources */,
 				961FE8C41CEEF6D0002785B9 /* PageYiMai.storyboard in Resources */,
 				9619EF5B1CC1DB9600F69CBC /* Assets.xcassets in Resources */,
 				FDD1DB1B1D992BC700C289B1 /* PageLawyerInfo.storyboard in Resources */,
@@ -3846,6 +3997,7 @@
 				96D745B11CF5C1A700E345E3 /* PageYiMaiAddFriendsViewController.swift in Sources */,
 				66318E311E31EAD5003624FD /* PageMyAdmissionListBodyView.swift in Sources */,
 				9619EF7C1CC1FF2400F69CBC /* YMIndexStrings.swift in Sources */,
+				66BBF6CE1E42EBA700031F25 /* YMDiscussionViewController.swift in Sources */,
 				FD5D64341DE44322004C5286 /* CameraView.swift in Sources */,
 				9612DB651CC9F71F00262D2E /* PageRegisterPersonalInfoBodyView.swift in Sources */,
 				66CDF74F1E1E5699007B876C /* PageCommonTextAreaViewController.swift in Sources */,
@@ -3888,6 +4040,7 @@
 				FD07E5D11D9B67A900E33CE8 /* YMIMUtility.swift in Sources */,
 				9612DB711CC9F76600262D2E /* PagePersonalViewController.swift in Sources */,
 				96FCD1461D17D7C800A6E12D /* PagePersonalDetailViewController.swift in Sources */,
+				66AB6E261E4485F200231061 /* PageIMDiscussionMemberListViewController.swift in Sources */,
 				FD7B4C2B1D9A6B500003BE0D /* PageMyPatientListActions.swift in Sources */,
 				73EA65C51D4C4BCB0050C12C /* PageAdmissionFlexibleTimeSettingBodyView.swift in Sources */,
 				FD801DD51D66F3140066198B /* PageAdmissionChargeSettingActions.swift in Sources */,
@@ -3908,6 +4061,8 @@
 				73622E4A1D1EE01B0039E785 /* PageAboutYiMaiActions.swift in Sources */,
 				96814AA91D1A81BC002C8BD3 /* PagePersonalIntroEditActions.swift in Sources */,
 				FD5D64291DE44322004C5286 /* SingleImageFetcher.swift in Sources */,
+				66BBF6CA1E42DA5D00031F25 /* PageIMDiscussionInviteListBodyView.swift in Sources */,
+				66AB6E281E44863400231061 /* PageIMDiscussionMemberListBodyView.swift in Sources */,
 				96D451981CF7D815006817CE /* PageYiMaiSameSchoolBodyView.swift in Sources */,
 				669F9D271E0FC3D000A81BB7 /* PageChangePhone.swift in Sources */,
 				9619EF801CC1FF4E00F69CBC /* YMLayout.swift in Sources */,
@@ -3935,6 +4090,7 @@
 				FD8642901DAF30CD00C93411 /* PageSYSBroadcastViewController.swift in Sources */,
 				737F1F801D2048EE00FFE573 /* PageNewFriendActions.swift in Sources */,
 				9634CE371DB3055800CAC1DE /* YMBackgroundRefresh.swift in Sources */,
+				66BBF6C81E42DA1B00031F25 /* PageIMDiscussionInviteListViewController.swift in Sources */,
 				96C02FD11D9670560096E216 /* RequirePaperCardActions.swift in Sources */,
 				FD8642941DAF31C700C93411 /* PageSYSBroadcastActions.swift in Sources */,
 				736EBC5C1D16761200C40AA7 /* PagePersonalSettingBodyView.swift in Sources */,
@@ -3994,12 +4150,15 @@
 				737F1F931D207C8200FFE573 /* PageGlobalSearchActions.swift in Sources */,
 				96637A8A1CC2515E00DBD1CF /* YMCommonActions.swift in Sources */,
 				665CB4021E389EB8009093D0 /* PageIMSearchMessageBodyView.swift in Sources */,
+				66AB6E1A1E44686D00231061 /* PageIMDiscussionSettingBodyView.swift in Sources */,
 				9672FB131CCF133C00BC7E40 /* PageFace2FaceInfoInputViewController.swift in Sources */,
 				6622B3B81E1B5B7C00C14EC9 /* YMIMCell.swift in Sources */,
 				9672FB1A1CCF22F300BC7E40 /* PageFace2FaceInfoInputActions.swift in Sources */,
+				660630961E444C890035DD60 /* PageIMDiscussionInviteListForMemberActions.swift in Sources */,
 				96331B0B1CC8762600E53125 /* YMClassesAndProtocols.swift in Sources */,
 				FD3A10251DD1ED83008C905B /* PageAuthProcessingViewController.swift in Sources */,
 				96D4518B1CF7D733006817CE /* PageYiMaiSameHospitalViewController.swift in Sources */,
+				66AB6E2A1E44863F00231061 /* PageIMDiscussionMemberListActions.swift in Sources */,
 				96B3E8A31D10F94600C8B5C2 /* PageTopSearchInputPanel.swift in Sources */,
 				2F2BDA551DD80A9000310385 /* PageWalletRecordViewController.swift in Sources */,
 				736EBC6C1D16893000C40AA7 /* PagePersonalAccountSettingActions.swift in Sources */,
@@ -4022,6 +4181,7 @@
 				96D451A21CF7F14E006817CE /* PageAppointmentViewController.swift in Sources */,
 				963E74001CF3F8D400C10575 /* YMYiMaiStrings.swift in Sources */,
 				73622E2E1D1EA3810039E785 /* YMLoaclDataStrings.swift in Sources */,
+				66AB6E181E44681E00231061 /* PageIMDiscussionSettingViewController.swift in Sources */,
 				961FE8CA1CEEF768002785B9 /* PageYiMaiTopView.swift in Sources */,
 				737F1F731D20294600FFE573 /* PageYiMaiDoctorDetailViewController.swift in Sources */,
 				737F1F8F1D207C4B00FFE573 /* PageGlobalSearchViewController.swift in Sources */,
@@ -4086,6 +4246,7 @@
 				FD2A99C91D951D6B001953D6 /* PageAppointmentProcessingActions.swift in Sources */,
 				96D745C61CF6973200E345E3 /* YiMaiAddContactsFriendsActions.swift in Sources */,
 				96C6FB0E1D19304200738D02 /* YMVar.swift in Sources */,
+				66BBF6CC1E42DA9800031F25 /* PageIMDiscussionInviteListActions.swift in Sources */,
 				96D4516A1CF6D9FA006817CE /* PageYiMaiManualAddFriendViewController.swift in Sources */,
 				663424FD1E373B5B00EF8C69 /* PageIMSearchConversationsBodyView.swift in Sources */,
 				961FE8C81CEEF6F7002785B9 /* PageYiMaiViewController.swift in Sources */,
@@ -4151,9 +4312,12 @@
 				665CB4041E38A182009093D0 /* PageIMSearchMessageActions.swift in Sources */,
 				736EBC761D16A78000C40AA7 /* PagePersonalPasswordResetViewController.swift in Sources */,
 				96834F1E1D0526C400E0C813 /* PageCommonSearchViewController.swift in Sources */,
+				660630981E444C890035DD60 /* PageIMDiscussionInviteListForMemberBodyView.swift in Sources */,
 				9672FB381CD1C2EC00BC7E40 /* PageMessageListViewController.swift in Sources */,
 				66318E321E31EAD5003624FD /* PageMyAdmissionListViewController.swift in Sources */,
 				9612DB401CC8B75300262D2E /* PageIndexViewController.swift in Sources */,
+				660630991E444C890035DD60 /* PageIMDiscussionInviteListForMemberViewController.swift in Sources */,
+				66AB6E1C1E446AE800231061 /* PageIMDiscussionSettingActions.swift in Sources */,
 				FD801DD11D66F2C90066198B /* PageAdmissionChargeSettingViewController.swift in Sources */,
 				963E74021CF409B300C10575 /* PageYiMaiR1BodyView.swift in Sources */,
 				967676221D8ADF3400A07106 /* StringTrimExtension.swift in Sources */,
@@ -4184,6 +4348,14 @@
 				2F9332F41DA688F900637982 /* Base */,
 			);
 			name = PageAllCollegeList.storyboard;
+			sourceTree = "<group>";
+		};
+		660630911E444C890035DD60 /* PageIMDiscussionInviteListForMember.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				660630921E444C890035DD60 /* Base */,
+			);
+			name = PageIMDiscussionInviteListForMember.storyboard;
 			sourceTree = "<group>";
 		};
 		661A55941DFFE2BC00E7CE41 /* PageAuthComplete.storyboard */ = {
@@ -4240,6 +4412,30 @@
 				669F9D301E1133AC00A81BB7 /* Base */,
 			);
 			name = PageAppointmentUpdate.storyboard;
+			sourceTree = "<group>";
+		};
+		66AB6E161E44680200231061 /* PageIMDiscussionSetting.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66AB6E151E44680200231061 /* Base */,
+			);
+			name = PageIMDiscussionSetting.storyboard;
+			sourceTree = "<group>";
+		};
+		66AB6E241E4485E100231061 /* PageIMDiscussionMemberList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66AB6E231E4485E100231061 /* Base */,
+			);
+			name = PageIMDiscussionMemberList.storyboard;
+			sourceTree = "<group>";
+		};
+		66BBF6C61E42D9FD00031F25 /* PageIMDiscussionInviteList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66BBF6C51E42D9FD00031F25 /* Base */,
+			);
+			name = PageIMDiscussionInviteList.storyboard;
 			sourceTree = "<group>";
 		};
 		66C92F0F1E24C7020014D170 /* PageBankCardList.storyboard */ = {
