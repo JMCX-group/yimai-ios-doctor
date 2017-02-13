@@ -160,12 +160,6 @@ public class PageNewFriendActions: PageJumpActions {
     
     public func GetNewFriendSuccess(data: NSDictionary?) {
         let friends = data?["friends"] as? [[String: AnyObject]]
-        if(nil == friends) {
-            TargetView?.FullPageLoading.Hide()
-            TargetView?.LoadData([[String: AnyObject]]())
-            return
-        }
-        
         TargetView?.FullPageLoading.Hide()
 
         TargetView?.AllFriendsList = friends!
@@ -173,6 +167,7 @@ public class PageNewFriendActions: PageJumpActions {
     }
     
     public func GetNewFriendError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
         TargetView?.FullPageLoading.Hide()
         TargetView?.LoadData([[String: AnyObject]]())
     }
@@ -206,12 +201,23 @@ public class PageNewFriendActions: PageJumpActions {
         YMBackgroundRefresh.ShowNewFriendFlag = false
         YMBackgroundRefresh.LastNewFriends.removeAll()
         YMBackgroundRefresh.ShowNewFriendCount = 0
+        
+//        var friends = [[String: AnyObject]]()
+//        for (_,f) in YMBackgroundRefresh.LastNewFriends {
+//            friends.append(f)
+//        }
+//        
+//        YMBackgroundRefresh.LastNewFriends.removeAll()
+//        TargetView?.AllFriendsList = friends
+//        TargetView?.LoadData(friends)
+//        TargetView?.FullPageLoading.Hide()
+
         GetFriendListApi?.YMGetRelationNewFriends()
     }
     
     public func Agree(button: YMButton) {
         let data = button.UserObjectData as! [String: AnyObject]
-        
+
         let userId = "\(data["id"]!)"
         print(userId)
         AgreeBtn = button

@@ -11,6 +11,8 @@ import UIKit
 public class PageAppointmentRecordViewController: PageViewController {
     private var Actions: PageAppointmentRecordActions? = nil
     public var BodyView: PageAppointmentRecordBodyView? = nil
+    
+    var FirstLoading = true
 
     override func PageLayout() {
         super.PageLayout()
@@ -19,11 +21,12 @@ public class PageAppointmentRecordViewController: PageViewController {
     }
     
     override func PageDisapeared() {
-        BodyView?.Clear()
+//        BodyView?.Clear()
     }
     
     override func PagePreRefresh() {
-        BodyView?.GetAppointmentRecord()
+        BodyView?.GetAppointmentRecord(FirstLoading)
+        FirstLoading = false
     }
 }
 

@@ -223,7 +223,6 @@ public class PageMyAdmissionsListBodyView: PageBodyView {
         let cell = YMLayout.GetTouchableView(useObject: Actions!, useMethod: actionMethod)
         cell.UserObjectData = data
 
-        print(data)
 //    ["doctor_job_title": 副主任医师,
 //    "doctor_head_url": /uploads/avatar/2.jpg,
 //    "doctor_name": test, "time": 2016-06-09 上午,

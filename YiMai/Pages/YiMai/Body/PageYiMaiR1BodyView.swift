@@ -64,6 +64,9 @@ public class PageYiMaiR1BodyView: PageBodyView {
         DrawOptPanel()
         DrawNewFriendsPanel()
         DrawFriendsPanel()
+        
+//        let act = Actions as! PageYiMaiActions
+//        act.NewFriendsRelationApi.YMGetRelationNewFriends()
         YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
         Reloading = false
     }
@@ -78,6 +81,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         OperationPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: SearchPanel, padding: 0, height: 200.LayoutVal())
         
         func BuildOpertorCell(cell: YMTouchableView, imageName: String, targetPage: String, title: String, count: String?) {
+            YMLayout.ClearView(view: cell)
             let icon = YMLayout.GetSuitableImageView(imageName)
             let titleLabel = UILabel()
             
@@ -171,7 +175,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         SearchInput?.EditEndCallback = searchActions?.DoSearch
     }
     
-    private func DrawNewFriendsPanel() {
+    func DrawNewFriendsPanel() {
         BodyView.addSubview(NewFriendsPanel)
         NewFriendsPanel.alignAndFillWidth(align: Align.UnderMatchingLeft, relativeTo: OperationPanel, padding: 0, height: 130.LayoutVal())
 
@@ -375,6 +379,7 @@ public class PageYiMaiR1BodyView: PageBodyView {
         if(!firstStart && !Reloading) {
             YMLayout.ClearView(view: NewFriendsPanel)
             DrawNewFriendsPanel()
+            DrawOptPanel()
             
 //            YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: FriendsPanel, padding: YMSizes.NormalBottomSize.height)
         }

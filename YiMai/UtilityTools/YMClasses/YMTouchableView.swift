@@ -24,6 +24,7 @@ class YMScrollCell: UIScrollView, UIScrollViewDelegate {
         self.pagingEnabled = true
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
+        self.alwaysBounceHorizontal = false
     }
     
     required init?(coder aDecoder: NSCoder) {

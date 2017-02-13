@@ -26,7 +26,6 @@ class PageInputMyFeaturesActions: PageJumpActions {
     }
     
     func GetAllTagSuccess(data: NSDictionary?) {
-        print(data)
         let realData = data!["data"] as! [[String: AnyObject]]
         var tagArr = [[String: AnyObject]]()
         
@@ -34,7 +33,6 @@ class PageInputMyFeaturesActions: PageJumpActions {
             let tagsList = tags["tags"] as! [[String: AnyObject]]
             for tag in tagsList {
                 let tagDept = YMVar.GetStringByKey(tag, key: "dept")
-                print(tagDept)
                 let tagName = YMVar.GetStringByKey(tag, key: "name")
                 if(YMValueValidator.IsBlankString(tagName)) {
                     continue

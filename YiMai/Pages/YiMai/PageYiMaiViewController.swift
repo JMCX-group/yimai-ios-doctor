@@ -76,6 +76,12 @@ public class PageYiMaiViewController: PageViewController {
     
     public func ShowRecentContactPage() {
         YiMaiTopView?.SetSelectedTab(YMYiMaiStrings.CS_TOP_TAB_COMM_BUTTON_TITLE)
+
+        if(PageYiMaiRecentContactList.FirstLoad) {
+            YMLayout.ClearView(view: RecentContactList!.BodyView)
+            RecentContactList.FullPageLoading.Show()
+            RecentContactList!.BodyView.layer.opacity = 0.0
+        }
         RecentContactList?.BodyView.hidden = false
         YiMaiR1Body?.BodyView.hidden = true
         YiMaiR2Body?.BodyView.hidden = true

@@ -11,6 +11,7 @@ import Neon
 
 class PageYiMaiRecentContactList: PageBodyView {
     static var PrevData = [[String: AnyObject]]()
+    static var FirstLoad = true
     override func ViewLayout() {
         super.ViewLayout()
         
@@ -162,6 +163,9 @@ class PageYiMaiRecentContactList: PageBodyView {
     }
     
     func LoadData(doctors: [[String: AnyObject]]) {
+        if(PageYiMaiRecentContactList.FirstLoad) {
+            BodyView.layer.opacity = 0.0
+        }
         
         let imInfo = RCIMClient.sharedRCIMClient().getConversationList([RCConversationType.ConversationType_PRIVATE.rawValue, RCConversationType.ConversationType_DISCUSSION.rawValue])
 
@@ -195,6 +199,7 @@ class PageYiMaiRecentContactList: PageBodyView {
                                    prev: cell)
                 continue
             }
+
             for doctor in doctors {
                 if("\(docImInfo.targetId!)" == "\(doctor["id"]!)" || "\(docImInfo.senderUserId!)" == "\(doctor["id"]!)") {
                     if(YMVar.IsDocInBlacklist(docImInfo.targetId!) || YMVar.IsDocInBlacklist(docImInfo.senderUserId!)) {
@@ -215,8 +220,22 @@ class PageYiMaiRecentContactList: PageBodyView {
                 docInfo = nil
             }
         }
+
+        if(PageYiMaiRecentContactList.FirstLoad){
+            FullPageLoading.Hide()
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(0.2)
+            
+            BodyView.layer.opacity = 1.0
+            
+            UIView.setAnimationDelegate(self)
+            UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
+            UIView.commitAnimations()
+        }
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: cell, padding: 98.LayoutVal())
+        PageYiMaiRecentContactList.FirstLoad = false
     }
-    
+
     func FilterDoc(idsInBlackList: [String]) {
         var newData = [[String:AnyObject]]()
         for doc in PageYiMaiRecentContactList.PrevData {

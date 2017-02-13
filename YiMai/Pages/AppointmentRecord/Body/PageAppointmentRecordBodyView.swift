@@ -293,8 +293,10 @@ public class PageAppointmentRecordBodyView: PageBodyView {
         }
     }
     
-    public func GetAppointmentRecord() {
-        Loading?.Show()
+    public func GetAppointmentRecord(showLoading: Bool) {
+        if(showLoading) {
+            Loading?.Show()
+        }
         RecordActions?.GetAppointmentList()
     }
     

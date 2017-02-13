@@ -42,6 +42,8 @@ public class PageIndexBodyView {
     
     private var ContactArray: [YMTouchableView] = [YMTouchableView]()
     private var MoreContactButton: UIImageView? = nil
+    
+    var ReloadContactList = true
 
     convenience init(parentView: UIView, navController: UINavigationController, pageActions: PageIndexActions){
         self.init()
@@ -404,6 +406,9 @@ public class PageIndexBodyView {
     
     private func LayoutContactButtons() {
         for buttons in ContactArray {
+            if(ReloadContactList) {
+                buttons.layer.opacity = 0.0
+            }
             ContactPanel.addSubview(buttons)
             
 //            let btnData = buttons.UserObjectData as! [String: AnyObject]
@@ -428,6 +433,16 @@ public class PageIndexBodyView {
         ContactPanel.groupInCorner(group: Group.Horizontal, views: ContactArray.map({$0 as UIView}), inCorner: Corner.TopLeft, padding: 0, width: buttonWidth, height: buttonHeight)
         
         YMLayout.SetHScrollViewContentSize(ContactPanel, lastSubView: ContactArray.last!)
+        if(ReloadContactList) {
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(0.2)
+            for buttons in ContactArray {
+                buttons.layer.opacity = 1.0
+            }
+            UIView.setAnimationDelegate(self)
+            UIView.setAnimationCurve(UIViewAnimationCurve.EaseOut)
+            UIView.commitAnimations()
+        }
     }
 
     private func DrawContactPanel() {
@@ -438,6 +453,7 @@ public class PageIndexBodyView {
     
     func ClearContactList() {
         YMLayout.ClearView(view: ContactPanel)
+        ReloadContactList = true
     }
     
     func ClearAuthPanel() {
@@ -534,6 +550,8 @@ public class PageIndexBodyView {
         }
 
         LayoutContactButtons()
+        
+        ReloadContactList = false
     }
     
     func DrawYiMaiCountInfo(data: [String: AnyObject]) {

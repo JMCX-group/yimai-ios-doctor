@@ -3739,7 +3739,7 @@
 				TargetAttributes = {
 					9619EF4C1CC1DB9600F69CBC = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 6HV8LR8T36;
+						DevelopmentTeam = 55C33Y6K36;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -5116,7 +5116,7 @@
 					"$(PROJECT_DIR)/YiMai/UtilityTools/Common/WXPayLib",
 					"$(PROJECT_DIR)/YiMai/UtilityTools/Common/UMessage_Sdk_1.3.0",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.medilink.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";
@@ -5139,7 +5139,7 @@
 					"$(PROJECT_DIR)/YiMai/UtilityTools/Common/WXPayLib",
 					"$(PROJECT_DIR)/YiMai/UtilityTools/Common/UMessage_Sdk_1.3.0",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yimai.doctor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.medilink.doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YiMai/YiMai-Bridging-Header.h";

@@ -20,9 +20,10 @@ public class PagePersonalViewController: PageViewController {
         super.viewDidAppear(animated)
         YMCurrentPage.CurrentPage = YMCommonStrings.CS_PAGE_PERSONAL_NAME
     }
-    
+
     override public func viewWillAppear(animated: Bool) {
         YMCurrentPage.PagePersonalIsAnimatedShow = animated
+        PersonalTopView!.ReloadUserHead()
         UserInfo = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_USER_INFO)
         if(nil == UserInfo) {
             LoadingView?.Show()
@@ -31,6 +32,7 @@ public class PagePersonalViewController: PageViewController {
         } else {
             self.PersonalTopView?.Refresh(self.UserInfo! as! [String : AnyObject])
         }
+
     }
 
     override func PageLayout(){

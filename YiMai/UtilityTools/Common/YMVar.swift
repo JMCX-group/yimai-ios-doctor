@@ -103,6 +103,7 @@ public class YMVar:NSObject {
         var targetHeadurl: String? = ""
         if(userId == YMVar.MyDoctorId) {
             targetHeadurl = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "head_url")
+            print(targetHeadurl)
         } else {
             targetHeadurl = YMLocalData.GetData(YMLocalDataStrings.DOC_HEAD_URL + userId) as? String
             if(nil == targetHeadurl) {

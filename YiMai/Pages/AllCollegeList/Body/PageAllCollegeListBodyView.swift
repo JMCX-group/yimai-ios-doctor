@@ -19,10 +19,32 @@ class PageAllCollegeListBodyView: PageBodyView {
     var SearchInput: YMTextField!
     var SearchPanel = UIView()
     
+    var LastPrev: UIView? = nil
+    
+
+    var ListPos: Int = 0
+    var NextPos: Int = 15
+    let Step:Int = 15
+
     override func ViewLayout() {
         super.ViewLayout()
         CollegeActions = PageAllCollegeListActions(navController: self.NavController!, target: self)
         DrawSearchPanel()
+        BodyView.delegate = self
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let contentHeight = scrollView.contentSize.height
+        let offsetHeight = scrollView.contentOffset.y + scrollView.height
+        
+        if(offsetHeight > contentHeight) {
+            if(0 == CollegeData.count) {
+                return
+            }
+            if(!YMValueValidator.IsBlankString(SearchInput.text)) {
+                LoadData(CollegeData, fromSearch: false)
+            }
+        }
     }
     
     func DrawSearchPanel() {
@@ -76,17 +98,38 @@ class PageAllCollegeListBodyView: PageBodyView {
         return cell
     }
     
-    func LoadData(data: [[String: AnyObject]]) {
-        YMLayout.ClearView(view: BodyView)
-        BodyView.addSubview(SearchPanel)
-        SearchPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 120.LayoutVal())
-        
-        var prev: UIView = SearchPanel
-        for v in data {
-            prev = DrawCell(v, prev: prev)
+    func LoadData(data: [[String: AnyObject]], fromSearch: Bool = false) {
+
+        if(fromSearch) {
+            YMLayout.ClearView(view: BodyView)
+            BodyView.addSubview(SearchPanel)
+            SearchPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 120.LayoutVal())
+            LastPrev = SearchPanel
+            for v in data {
+                LastPrev = DrawCell(v, prev: LastPrev!)
+            }
+        } else {
+            if(0 == ListPos) {
+                YMLayout.ClearView(view: BodyView)
+                BodyView.addSubview(SearchPanel)
+                SearchPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: 120.LayoutVal())
+                LastPrev = SearchPanel
+                BodyView.contentOffset = CGPoint(x: 0, y: -BodyView.contentInset.top)
+            }
+            for i in ListPos ... NextPos {
+                if(i > (data.count - 1)) {
+                    break
+                }
+                
+                LastPrev = DrawCell(data[i], prev: LastPrev!)
+            }
+            print(ListPos)
+            ListPos += Step
+            NextPos += Step
+            
         }
         
-        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: prev)
+        YMLayout.SetVScrollViewContentSize(BodyView, lastSubView: LastPrev)
         FullPageLoading.Hide()
     }
     
@@ -94,6 +137,9 @@ class PageAllCollegeListBodyView: PageBodyView {
         YMLayout.ClearView(view: BodyView)
         FullPageLoading.Hide()
         SearchInput.text = ""
+        
+        ListPos = 0
+        NextPos = 15
     }
 }
 

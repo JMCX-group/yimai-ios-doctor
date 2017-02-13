@@ -33,7 +33,7 @@ public class PagePersonalTopView {
         UserHead = YMLayout.GetTouchableImageView(useObject: Actions!, useMethod: "GoToPersonalDetail:".Sel(), imageName: "PersonalDefaultUserhead")
         let userHeadUrl = YMVar.GetStringByKey(YMVar.MyUserInfo, key: "head_url") //YMVar.MyUserInfo["head_url"] as! String
         YMLayout.SetSelfHeadImageVFlag(UserHead!)
-        YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true, refresh: true)
+        YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true)
         ViewLayout()
     }
     
@@ -48,7 +48,7 @@ public class PagePersonalTopView {
         let userHeadUrl = YMVar.MyUserInfo["head_url"] as! String
         
         YMLayout.SetDocfHeadImageVFlag(UserHead!, docInfo: YMVar.MyUserInfo)
-        YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true, refresh: true)
+        YMLayout.LoadImageFromServer(UserHead!, url: userHeadUrl, fullUrl: nil, makeItRound: true)
 
         if(nil != dept && nil != jobTitle) {
             Desc.text = "\(dept!["name"]!) | \(jobTitle!)"
@@ -63,10 +63,6 @@ public class PagePersonalTopView {
         ParentView?.addSubview(TopViewPanel)
         TopViewPanel.backgroundColor = YMColors.White
         TopViewPanel.anchorToEdge(Edge.Top, padding: 0, width: YMSizes.PageWidth, height: YMSizes.PagePersonalTopHeight)
-        
-        DrawUserhead()
-        DrawQRButton()
-        DrawYiMaiCode()
     }
     
     private func DrawYiMaiCode() {
@@ -95,7 +91,14 @@ public class PagePersonalTopView {
         TopQRButton?.anchorInCorner(Corner.TopRight, xPad: 30.LayoutVal(), yPad: 64.LayoutVal(), width: (TopQRButton?.width)!, height: (TopQRButton?.height)!)
     }
     
-    private func DrawUserhead() {
+    func ReloadUserHead() {
+        YMLayout.ClearView(view: TopViewPanel)
+        DrawUserhead()
+        DrawQRButton()
+        DrawYiMaiCode()
+    }
+    
+    func DrawUserhead() {
         let topUserheadBackground = YMLayout.GetSuitableImageView("PersonalTopBackground")
         
         TopViewPanel.addSubview(topUserheadBackground)

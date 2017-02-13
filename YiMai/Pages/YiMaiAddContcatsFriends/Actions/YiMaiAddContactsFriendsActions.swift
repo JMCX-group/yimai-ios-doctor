@@ -131,9 +131,17 @@ public class YiMaiAddContactsFriendsActions: PageJumpActions{
                 ReTryCount += 1
             } else {
                 ReTryCount = 0
-                TargetController!.BodyView!.FullList = YMBackgroundRefresh.ContactNew
-                TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
-                TargetController?.BodyView?.FullPageLoading?.Hide()
+                YMPageModalMessage.ShowConfirmInfo("导入通讯录", info: "通讯录条目过多（共\(YMAddressBookTools.ContactsCount)条记录），是否继续导入？", nav: NavController!,
+                                                   ok: { (_) in
+                                                    self.ReTryCount = -100
+                                                    self.UploadAddressBook()
+                    }, cancel: { (_) in
+                        self.ReTryCount = 0
+                        self.NavController?.popViewControllerAnimated(true)
+                })
+//                TargetController!.BodyView!.FullList = YMBackgroundRefresh.ContactNew
+//                TargetController!.BodyView!.ShowResult(YMBackgroundRefresh.ContactNew)
+//                TargetController?.BodyView?.FullPageLoading?.Hide()
             }
             
         } else {

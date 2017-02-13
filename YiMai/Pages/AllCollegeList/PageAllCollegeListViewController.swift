@@ -27,7 +27,7 @@ class PageAllCollegeListViewController: PageViewController {
         } else {
             self.BodyView.FullPageLoading.Show()
             YMDelay(0.01, closure: {
-                self.BodyView.LoadData(self.BodyView.CollegeData)
+                self.BodyView.LoadData(self.BodyView.CollegeData, fromSearch: false)
             })
         }
     }

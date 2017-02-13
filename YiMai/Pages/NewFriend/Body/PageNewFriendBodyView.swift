@@ -160,11 +160,11 @@ public class PageNewFriendBodyView: PageBodyView {
         }
         
         for v in FriendsListToShow {
-            if("isFriend" != "\(v["status"]!)") {
+//            if("isFriend" != "\(v["status"]!)") {
                 LastCell = PageSearchResultCell.LayoutACell(ListPanel, info: v, prev: LastCell,
                                                             act: NewFriendActions!, sel: "GoToFriendCardInfoPanel:".Sel(), highlight: highlight)
                 DrawStatus(v["status"]! as! String, cell: LastCell!)
-            }
+//            }
         }
         
         if(nil != LastCell) {

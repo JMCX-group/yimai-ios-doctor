@@ -46,7 +46,7 @@ class PageAllCollegeListActions: PageJumpActions {
         
         let list = data!["data"] as! [[String: AnyObject]]
         TargetView.CollegeData = list
-        TargetView.LoadData(list)
+        TargetView.LoadData(list, fromSearch: false)
     }
     
     func GetCollegeError(error: NSError) {
@@ -57,8 +57,12 @@ class PageAllCollegeListActions: PageJumpActions {
         var result = [[String: AnyObject]]()
         let searchKey = text.text!
         
+        TargetView.FullPageLoading.Show()
+        
         if(YMValueValidator.IsEmptyString(searchKey)) {
-            TargetView.LoadData(TargetView.CollegeData)
+            TargetView.ListPos = 0
+            TargetView.NextPos = 15
+            TargetView.LoadData(TargetView.CollegeData, fromSearch: false)
         } else {
             for v in TargetView.CollegeData {
                 let name = v["name"] as! String
@@ -67,7 +71,7 @@ class PageAllCollegeListActions: PageJumpActions {
                 }
             }
             
-            TargetView.LoadData(result)
+            TargetView.LoadData(result, fromSearch: true)
         }
     }
     

@@ -41,7 +41,6 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
     }
     
     public func UploadSuccess(data: NSDictionary?) {
-        print(data)
         PhotoIndex += 1
         if(PhotoIndex < TargetController!.BodyView!.PhotoArray.count) {
             ImageForUpload = TargetController!.BodyView!.PhotoArray[PhotoIndex]
@@ -127,7 +126,6 @@ public class PageAppointmentActions: PageJumpActions, UINavigationControllerDele
     public func DoAppointment(_: YMButton) {
         let uploadData = TargetController!.VerifyInput()
         
-        print(uploadData)
         if(nil != uploadData) {
             TargetController?.Loading?.Show()
             ApiUtility?.YMCreateNewAppointment(uploadData!)

@@ -17,7 +17,8 @@ public class PageYiMaiActions: PageJumpActions {
     
     var L1RelationApi: YMAPIUtility!
     var L2RelationApi: YMAPIUtility!
-    
+    var NewFriendsRelationApi: YMAPIUtility!
+
     override func ExtInit() {
         super.ExtInit()
         TargetController = Target as! PageYiMaiViewController
@@ -32,6 +33,27 @@ public class PageYiMaiActions: PageJumpActions {
         
         L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION + "-yimai-r1",
                                      success: Level2RelationSuccess, error: L2Err)
+        
+        NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-fromYiMai",
+                                                  success: NewFriendsSuccess, error: NewFriendError)
+
+    }
+    
+    public func NewFriendsSuccess(data: NSDictionary?) {
+        if(nil == data) {
+            YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: [[String:AnyObject]]())
+        } else {
+            let realData = data!
+            YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: realData["friends"]!)
+        }
+
+        TargetController.YiMaiR1Body!.DrawNewFriendsPanel()
+//        YMBackgroundRefresh.CheckHasUnreadNewFriends()
+    }
+
+    func NewFriendError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        TargetController.YiMaiR1Body!.DrawNewFriendsPanel()
     }
     
     func SearchIMHistory(_: UIAlertAction) {

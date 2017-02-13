@@ -19,7 +19,7 @@ class YMBackgroundRefresh: NSObject {
     static var BroadcastFirstPage = [[String: AnyObject]]()
     
     static var LastNewFriends = [String: [String:AnyObject]]()
-    
+
     static func CheckHasUnreadNewFriends() {
         var newFriends = YMCoreDataEngine.GetData(YMCoreDataKeyStrings.CS_NEW_FRIENDS) as? [[String:AnyObject]]
         
@@ -28,29 +28,11 @@ class YMBackgroundRefresh: NSObject {
         }
 
         for f in newFriends! {
-            let status = "\(f["status"]!)"
             let readStatus = "\(f["unread"]!)"
             let friendId = "\(f["id"]!)"
 
-            if("1" != readStatus) {
-//                let docName = YMVar.GetStringByKey(f, key: "name")
-
-//                if("waitForSure" == status) {
-//                    YMNotification.DoLocalNotification("医生\(docName)申请加您为好友", userData: YMNotificationType.NewFriendApply)
-//                } else if ("isFriend" == status) {
-//                    YMNotification.DoLocalNotification("医生\(docName)通过了您的好友申请", userData: YMNotificationType.YiMaiR1Changed)
-//                }
-            }
-            
-            let last = LastNewFriends[friendId]
-            if(nil == last) {
-                if("1" != readStatus && "isFriend" == status) {
-                    ShowNewFriendCount += 1
-                }
-            }
-            
-            LastNewFriends[friendId] = f
             if("1" != readStatus){
+                LastNewFriends[friendId] = f
                 ShowNewFriendFlag = true
             }
         }
@@ -63,7 +45,8 @@ class YMBackgroundRefresh: NSObject {
     
     private static var L1RelationApi: YMAPIUtility!
     private static var L2RelationApi: YMAPIUtility!
-//    private static var NewFriendsRelationApi: YMAPIUtility!
+    private static var NewFriendsRelationApi: YMAPIUtility!
+    private static var RelationApi: YMAPIUtility!
     
     private static var MyInfoApi: YMAPIUtility!
 
@@ -79,6 +62,11 @@ class YMBackgroundRefresh: NSObject {
             return
         }
         YMBackgroundRefresh.StartFlag = true
+        let localContactNew = YMLocalData.GetData("YMLoaclContactNew") as? [String: AnyObject]
+        if(nil != localContactNew) {
+            ContactNew = localContactNew!
+        }
+
         
         GetBroadcastFirstPage = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_BACKGROUND_REFRESH + "-broadcast",
                                              success: GetBroadcastSuccess, error: GetBroadcastError)
@@ -95,13 +83,15 @@ class YMBackgroundRefresh: NSObject {
         L2RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_LEVEL2_RELATION + "-l2",
                                           success: Level2RelationSuccess, error: L2Err)
         
-//        NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-newf",
-//                                                  success: NewFriendsSuccess, error: NFErr)
+        NewFriendsRelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-newf",
+                                                  success: NewFriendsSuccess, error: NFErr)
         
         GetContactsApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_NEW_FRIENDS + "-gct",
                                       success: GetContactsApiSuccessed, error: GetContactsApiError)
         
         MyInfoApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_QUERY_USER_BY_ID + "-me", success: MESuccess, error: MEError)
+        
+        RelationApi = YMAPIUtility(key: YMAPIStrings.CS_API_ACTION_GET_INIT_RELATION + "-initrl", success: RelationSuccess, error: RelationError)
         
         DoApi()
     }
@@ -139,14 +129,18 @@ class YMBackgroundRefresh: NSObject {
     static private func GetContactsApiSuccessed(data: NSDictionary?) {
         if(nil == data) {
             print("no result!!!")
+            ReCompareContactBook()
+
+            return
         } else {
             ContactNew = data!["data"] as! [String: AnyObject]
         }
         
         IsGetContactNewFailed = false
         
-        ReCompareContactBook()
         YMLocalData.SaveData(YMAddressBookTools.AllContacts, key: "YMLoaclContactAddressBook")
+        YMLocalData.SaveData(ContactNew, key: "YMLoaclContactNew")
+        ReCompareContactBook()
     }
     
     static func ReCompareContactBook(sec: Double = 10) {
@@ -165,13 +159,15 @@ class YMBackgroundRefresh: NSObject {
         if(!contacts.isNotDeterminedAuthorization) {
             if(contacts.isAuthorized) {
 //                let prevContact  = YMLocalData.GetData("YMLoaclContactAddressBook") as? [[String: String]]
-                YMAddressBookTools().ReadAddressBook()
-
-                if(0 != YMAddressBookTools.AllContacts.count) {
-                    GetContactsApi.YMUploadAddressBook(YMAddressBookTools.AllContacts)
-                } else {
-                    ReCompareContactBook(0.5)
+                YMAddressBookTools().ReadAddressBook(){() in
+                    if(0 != YMAddressBookTools.AllContacts.count) {
+                        self.GetContactsApi.YMUploadAddressBook(YMAddressBookTools.AllContacts)
+                    } else {
+                        self.ReCompareContactBook(0.5)
+                    }
                 }
+
+                
 //                if(nil != prevContact) {
 //                    if(0 != prevContact!.count) {
 //                        let someOneNew = DoContactCompare(prevContact!, cur: YMAddressBookTools.AllContacts)
@@ -195,6 +191,7 @@ class YMBackgroundRefresh: NSObject {
         GetNewAppointmentList.YMGetNewAppointmentList()
         L1RelationApi.YMGetLevel1Relation()
         L2RelationApi.YMGetLevel2Relation()
+        RelationApi.YMGetInitRelation()
 //        NewFriendsRelationApi.YMGetRelationNewFriends()
         MyInfoApi.YMQueryUserInfoById(YMVar.MyDoctorId)
         CompareContactBook()
@@ -202,6 +199,23 @@ class YMBackgroundRefresh: NSObject {
     
     static func Stop() {
         YMBackgroundRefresh.StartFlag = false
+    }
+    
+    static func RelationError(error: NSError) {
+        YMAPIUtility.PrintErrorInfo(error)
+        YMDelay(YMBackgroundRefresh.ErrorDelay) {
+            RelationApi.YMGetInitRelation()
+        }
+    }
+    
+    static func RelationSuccess(data: NSDictionary?) {
+        let realData = data!
+        let same = realData["same"] as! [String:AnyObject]
+        YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_SAME_INFO, data: same)
+        
+        YMDelay(YMBackgroundRefresh.SuccessDelay) { 
+            RelationApi.YMGetInitRelation()
+        }
     }
     
     static func Level1RelationSuccess(data: NSDictionary?) {
@@ -242,13 +256,13 @@ class YMBackgroundRefresh: NSObject {
         } else {
             let realData = data!
             YMCoreDataEngine.SaveData(YMCoreDataKeyStrings.CS_NEW_FRIENDS, data: realData["friends"]!)
-            CheckHasUnreadNewFriends()
+//            CheckHasUnreadNewFriends()
         }
         
         YMBackgroundRefresh.CheckHasUnreadNewFriends()
         
         YMDelay(YMBackgroundRefresh.SuccessDelay) {
-//            NewFriendsRelationApi.YMGetRelationNewFriends()
+            NewFriendsRelationApi.YMGetRelationNewFriends()
         }
     }
 
@@ -354,7 +368,7 @@ class YMBackgroundRefresh: NSObject {
     
     static func NFErr(error: NSError){
         YMDelay(YMBackgroundRefresh.ErrorDelay) {
-//            NewFriendsRelationApi.YMGetRelationNewFriends()
+            NewFriendsRelationApi.YMGetRelationNewFriends()
         }
     }
     

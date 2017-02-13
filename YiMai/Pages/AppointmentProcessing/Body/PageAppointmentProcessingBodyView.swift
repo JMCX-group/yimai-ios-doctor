@@ -289,7 +289,7 @@ public class PageAppointmentProcessingBodyView: PageBodyView, ImageProvider {
                       padding: 12.LayoutVal(),
                       width: docName.width, height: docName.height)
         
-        jobTitle.text = data["job_title"] as? String
+        jobTitle.text = YMVar.GetStringByKey(data, key: "job_title", defStr: "医生")
         jobTitle.textColor = YMColors.FontGray
         jobTitle.font = YMFonts.YMDefaultFont(20.LayoutVal())
         jobTitle.sizeToFit()

@@ -42,6 +42,7 @@ public class PagePersonalAccountSettingActions: PageJumpActions {
         PageRegisterPersonalInfoViewController.NeedInit = true
         PagePersonalIDNumInputBodyView.IDNum = ""
         PageYiMaiRecentContactList.PrevData.removeAll()
+        PageYiMaiRecentContactList.FirstLoad = true
         TargetView.FullPageLoading.Hide()
         
         self.DoJump(YMCommonStrings.CS_PAGE_LOGIN_NAME)

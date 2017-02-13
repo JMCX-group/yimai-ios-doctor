@@ -59,6 +59,7 @@ public class PageAddFriendInfoCardActions: PageJumpActions {
     
     func AddFailed(error: NSError) {
         TargetView.Loading.Hide()
+        YMAPIUtility.PrintErrorInfo(error)
         YMPageModalMessage.ShowNormalInfo("网络通讯故障，请稍后再试。", nav: self.NavController!)
     }
     

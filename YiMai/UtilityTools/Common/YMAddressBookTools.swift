@@ -9,8 +9,13 @@
 import Foundation
 import APAddressBook
 
+public typealias ReadAddressbookCallback = (Void) -> Void
+
 public class YMAddressBookTools: NSObject {
     private let APAB = APAddressBook()
+    
+    static var ContactsReading = true
+    static var ContactsCount: Int = 0
 
     public static var AllContacts: [[String: String]] = [[String: String]]()
     public static var GetContactsStatus: Bool = false
@@ -57,13 +62,16 @@ public class YMAddressBookTools: NSObject {
     
     private let syncObj = NSObject()
     
-    public func ReadAddressBook() {
+    public func ReadAddressBook(cb: ReadAddressbookCallback) {
         APAB.loadContacts { (apc, err) in
             YMAddressBookTools.AllContacts.removeAll()
             if(nil == apc) {
                 YMAddressBookTools.GetContactsStatus = true
+                cb()
                 return
             }
+            
+            YMAddressBookTools.ContactsCount = apc!.count
 
             for c in apc!.enumerate() {
                 let phones = c.element.phones
@@ -76,6 +84,7 @@ public class YMAddressBookTools: NSObject {
             }
             
             YMAddressBookTools.GetContactsStatus = true
+            cb()
         }
     }
 }
